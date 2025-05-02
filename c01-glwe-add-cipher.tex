@@ -1,0 +1,81 @@
+\textbf{- Reference:} 
+\href{https://www.zama.ai/post/tfhe-deep-dive-part-2}{TFHE Deep Dive - Part II - Encodings and linear leveled operations}~\cite{tfhe-2}
+
+
+$ $
+
+Suppose we have two GLWE ciphertexts encrypting two different plaintexts $M^{\langle 1 \rangle}, M^{\langle 2 \rangle}$:
+
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = C^{\langle 1 \rangle} = ( A_1^{\langle 1 \rangle}, A_2^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = C^{\langle 2 \rangle} = ( A_1^{\langle 2 \rangle}, A_2^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+
+$ $
+
+\noindent Let's define the following TFHE ciphertext addition operation: 
+
+$C^{\langle 1 \rangle} + C^{\langle 2 \rangle} = ( A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
+
+$ $
+
+\noindent Then, the following is true:
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{sec:glwe-add-cipher}} GLWE Homomorphic Addition}}]
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) $
+
+$ = ( \{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle}) + (\{A_i^{\langle 2 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 2 \rangle}) $
+
+$ = ( \{A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} ) $
+
+$= \textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) )$
+\end{tcolorbox}
+
+
+This means that adding two TFHE ciphertexts and decrypting it gives the same effect as adding two original ($\Delta$-scaled) plaintexts: $\Delta M^{\langle 1 \rangle} + \Delta M^{\langle 2 \rangle} = \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle})$. 
+
+$ $
+
+\noindent \textbf{\underline{Proof}}
+\begin{enumerate}
+\item Define the following notations: \\
+$A_1^{\langle 3 \rangle} = A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}$ \\
+$A_2^{\langle 3 \rangle} = A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}$ \\
+... \\
+$A_{k-1}^{\langle 3 \rangle} = A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}$ \\
+$E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ \\
+$B^{\langle 3 \rangle} = B^{\langle 1 \rangle} + B^{\langle 2 \rangle}$
+\item Derive the following: \\
+$B^{\langle 3 \rangle} = B^{\langle 1 \rangle} + B^{\langle 2 \rangle}$ \\
+$ = \sum\limits_{i=0}^{k-1}{(A_i^{\langle 1 \rangle} \cdot S_i)} + \Delta \cdot M^{\langle 1 \rangle} + E^{\langle 1 \rangle} + \sum\limits_{i=0}^{k-1}{(A_i^{\langle 2 \rangle} \cdot S_i)} + \Delta \cdot M^{\langle 2 \rangle} + E^{\langle 2 \rangle}$ \\ 
+$= \sum\limits_{i=0}^{k-1}{((A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}) \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + (E^{\langle 1 \rangle} + E^{\langle 2 \rangle})$ \textcolor{red}{\# commutative and distributive rules} \\
+$= \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$ \\
+\item Since $B^{\langle 3 \rangle} = \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$, 
+
+this means that $(A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$. \\
+\item Thus, \\
+$= \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle}) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle})$ \\
+$ = ( A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
+$ = ( A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
+$ = ( \{A_i^{\langle 3 \rangle}\}_{i=0}^{k-1}, B^{\langle 3 \rangle})$ \\
+$= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$
+
+\begin{flushright}
+\qedsymbol{} 
+\end{flushright}
+
+\end{enumerate}
+
+\subsubsection{Discussion}
+\label{subsubsec:glwe-add-cipher-discuss} 
+
+\para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ get eliminated by rounding after decryption, regardless of whatever their randomly sampled values were during encryption.
+
+$ $
+
+\para{Noise Growth:} Note that after decryption, the original ciphertext $C$'s noise has increased from $E^{\langle 1 \rangle}$ and $E^{\langle 2 \rangle}$ to $E^{\langle 3 \rangle} = E^{\langle 2 \rangle} + E^{\langle 2 \rangle}$. However, if the noise is sampled from a Gaussian distribution with the mean $\mu = 0$, then the addition of multiple noises will converge to 0. Therefore, there is not much issue of noise growth in the homomorphic addition of two ciphertexts. 
+
+$ $
+
+\para{Hard Threshold on the Plaintext's Value Without Modulo Reduction $t$:} During homomorphic operations (e.g., addition or multiplication) and decryption, the $AS$ and $B$ terms in the $B = AS + \Delta M + E + kq$ relation are allowed to wrap around modulo $q$ indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always subtract $B$ by $AS$, outputting $\Delta M + E + k'q = \Delta M + E \pmod q$, and the $k'q$ term is always exactly eliminated by modulo reduction by $q$. After that, we can correctly recover $M$ by computing $\left\lceil \dfrac{\Delta M + E \bmod q}{\Delta}\right\rfloor$, eliminating the noise $E$. However, as we explained in Summary~\ref*{subsubsec:scaling-factor-computation} in \autoref{subsubsec:scaling-factor-computation}), if the error bound $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ breaks (where $e$ can be any coefficient of $E$), then modulo reduction by $q$ starts to contaminate the scaled plaintext bits. This violation of error bound occurs when the noise $e$ grows too much over homomorphic operations, or the ciphertext modulus $q$ is not sufficiently larger than the plaintext modulus $t$. If $q \gg t$, the scheme can take on a big $kt$ value (i.e., the plaintext value can wrap around the plaintext modulus $t$ many times across its homomorphic operations). The error bound constraint  $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is used in the BFV scheme.  %This requirement on the valid range of the plaintext term is needed also to accomplish correct modulus switch of FHE ciphertexts to be later explained in \autoref{sec:modulus-rescaling}.  
+
+ 

@@ -1,0 +1,50 @@
+\textbf{- Reference:} 
+\href{https://e.math.cornell.edu/people/belk/numbertheory/CyclotomicPolynomials.pdf}{Fields and Cyclotomic Polynomials}~\cite{cyclotomic-polynomial}
+
+\subsection{Definitions}
+\label{subsec:field-def}
+
+\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:field-def}} Field Definitions}}]
+\begin{itemize}
+\item \textbf{Ring:} A set of elements which is an abelian group under the + operator, and closed, associative, and distributive on the ($+, \cdot$) operators. 
+\item \textbf{Field:} A set of elements which is an abelian group under both the $(+, \cdot)$ operators (i.e., the set has an identity element and multiplicative inverses for all elements), and distributive on those operators.
+\item \textbf{Galois Field ($\text{GF}(p^n)$):} A field with a finite number of elements (whose number must be $p^n$ for some prime $p$ and a positive integer $n$).
+\item \textbf{$\mathbb{Z}_p$ ($\mathbb{Z}/p\mathbb{Z}$):} The finite field of integer modulo $p$, which is $\{0, 1, 2, \cdots... \text{ } p - 1\}$ where $p$ is a prime number. If $p$ is a prime number, $\mathbb{Z}_p$ is always a finite field. This is also called a quotient ring of $p$.
+\end{itemize}
+\end{tcolorbox}
+$ $
+
+\subsection{Examples}
+\label{subsec:field-ex}
+
+$\mathbb{Z}$ (a set of all integers) is a ring, but not a field, because not all of its elements have a multiplicative inverse (as shown in \autoref{subsec:group-ex}). 
+
+$ $
+
+\noindent $\mathbb{R}$ (a set of all real numbers) is a field. As shown in \autoref{subsec:group-ex}, it is an abelian group over the $(+)$ and $(\cdot)$ operators, and its elements are distributive over the $(+, \cdot)$ operators.
+
+
+$ $
+
+\noindent $\mathbb{Z}_7 = \{0, 1, 2, 3, 4, 5, 6\}$ is a finite field because:
+\begin{itemize}
+\item \textbf{Closed:} For any $a, b \in \mathbb{Z}_7$, there exists some $c_1 \in \mathbb{Z}_7$ such that $a + b \equiv c_1 \bmod 7$ and, some $c_2 \in \mathbb{Z}_7$ such that $a \cdot b \equiv c_2 \bmod 7$.
+\item \textbf{Associative:} For any $a, b, c \in \mathbb{Z}_7$, $ (a + b) + c = a + (b + c)$ and $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+\item \textbf{Commutative:} For any $a, b \in \mathbb{Z}_7$, $ a + b = b + a$, and $a \cdot b = b \cdot a$.
+\item \textbf{Distributive:} For any $a, b, c \in \mathbb{Z}_7$, $ (a + b) \cdot c = a \cdot c + b \cdot c$.
+\item \textbf{Identity:} For any $a \in \mathbb{Z}_7$, its additive identity is $0$, and its multiplicative identity is $1$.
+\item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists an additive inverse $a_1' \in \mathbb{Z}_7$ such that $a_1 + a_1' \equiv 0 \bmod 7$. For example, if $a_1 = 3$, then its additive inverse $a_1' = 4$, because $3 + 4 = 7 \equiv 0 \bmod 7$. Also, for any $a_2 \in \mathbb{Z}_7$ (except for 0), there exists a multiplicative inverse $a_2' \in \mathbb{Z}_7$ such that $a_2 \cdot a_2' \equiv 1 \bmod 7$. For example, if $a_2 = 3$, then its multiplicative inverse $a_2' = 5$, because $3 \cdot 5 = 15 \equiv 1 \bmod 7$. 
+\end{itemize}
+
+\subsection{Theorems}
+\label{subsec:field-theorem}
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:field-theorem}} Field Theorems}}]
+\begin{enumerate}
+\item \textbf{Size of Finite Field:} A finite field is called Galois field and always has $p^n$ elements (where $p$ is a prime and $n$ is a positive integer).
+\item \textbf{Isomorphic Fields:} Any two finite fields, $\mathbb{F}_1$ and $\mathbb{F}_2$ with the same number of elements are isomorphic (i.e., there exists a bi-jective one-to-one mapping function $f : \mathbb{F}_1 \rightarrow \mathbb{F}_2$ and the algebraic operations $(+, \cdot)$ preserve correctness among newly mapped elements). In other words, there exists a mapping function $f : \mathbb{F}_1 \rightarrow \mathbb{F}_2$ comprised of the field operators ($+$, $\cdot$). For such an isomorphic function $f$, for any $a, b \in \mathbb{F}_1$, $f(a+b) = f(a) + f(b)$ and $f(a \cdot b) = f(a) \cdot f(b)$
+\end{enumerate}
+\end{tcolorbox}
+
+
+

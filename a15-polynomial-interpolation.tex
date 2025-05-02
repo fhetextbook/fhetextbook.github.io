@@ -1,0 +1,35 @@
+Suppose we are given $n+1$ two-dimensional coordinates $(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)$, whereas all $x$ values are distinct but $y$ values are not necessarily distinct. Lagrange's polynomial interpolation is a technique to find a unique $n$-degree polynomial that passes through such $n+1$ coordinates. The domain of $X$ and $Y$ values is complex numbers (which include the real domain), or can be modulo prime.
+
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{sec:polynomial-interpolation}} Lagrange's Polynomial Interpolation}}]
+
+Suppose we are given $n+1$ two-dimensional coordinates $(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)$, whereas all $X$ values are distinct but the $Y$ values don't need to be distinct. The domain of $(X, Y$) can be either: $(x_i, y_i) \in \mathbb{C}^2$ (which includes the real domain) or $(x_i, y_i) \in \mathbb{Z}_p^2$ (where $p$ is a prime). Then, there exists a unique $n$-degree (or lesser degree) polynomial $f(X)$ that passes through these $n$ coordinates. Such a polynomial $f(X)$ is computed as follows:
+
+$f(X) = \sum\limits_{j=0}^{n}\dfrac{(X-x_0)\cdot(X-x_1)\cdots(X-x_{j-1})\cdot(X-x_{j+1})\cdots(X-x_{n})}{(x_j-x_0)\cdot(x_j-x_1)\cdots(x_j-x_{j-1})\cdot(x_j-x_{j+1})\cdots(x_j-x_{n})}\cdot y_j$
+
+
+\end{tcolorbox}
+
+\begin{myproof}
+\begin{enumerate}
+
+
+\item First, we will show that there exists an $n$-degree (or lesser degree) polynomial $f(X)$ that passes through the $n+1$ distinct coordinates: $(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)$. Such a polynomial $f(X)$ is designed as follows:
+
+$f(X) = \sum\limits_{j=0}^{n}\dfrac{(X-x_0)\cdot(X-x_1)\cdots(X-x_{j-1})\cdot(X-x_{j+1})\cdots(X-x_{n})}{(x_j-x_0)\cdot(x_j-x_1)\cdots(x_j-x_{j-1})\cdot(x_j-x_{j+1})\cdots(x_j-x_{n})}\cdot y_j$
+
+Given this design of $f(X)$, notice that for each of $(x_i, y_i) \in \{(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)\}$, \text{ } $f(x_i) = y_i$, specifically the $i+1$-th term of sigma summation being $y_i$ and all other terms being 0. 
+
+Such a satisfactory $f(X)$ can be computed in the case where the domain of $(X, Y$) is: $(x_i, y_i) \in \mathbb{C}^2$ (which includes the real domain) or $(x_i, y_i) \in \mathbb{Z}_p^2$ (where $p$ is a prime). Especially, a valid $f(X)$ can be computed also in the $\bmod p$ domain, because as we learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}), $a^{p - 1} \equiv 1 \bmod p$ if and only if $a$ and $p$ are co-prime, and this means that if $p$ is a prime, then $a^{p - 1} \equiv 1 \bmod p$ for all $a \in \mathbb{Z}_p^{\times}$ (i.e., $\mathbb{Z}_p$ without $\{0\}$). Since every value in $\mathbb{Z}_p^{\times}$ has an inverse, we can compute the denominator's division operation in $f(X) = \sum\limits_{j=0}^{n}\dfrac{(X-x_0)\cdot(X-x_1)\cdots(X-x_{j-1})\cdot(X-x_{j+1})\cdots(X-x_{n})}{(x_j-x_0)\cdot(x_j-x_1)\cdots(x_j-x_{j-1})\cdot(x_j-x_{j+1})\cdots(x_j-x_{n})}\cdot y_j$ by converting them into multiplication of their counter-part inverses, and thereby compute a validly defined $f(X) \bmod p$.
+ 
+\item Next, we will prove that no two distinct $n$-degree (or lesser degree) polynomials $f(X)_1$ and $f(X)_2$ can pass through the same $n+1$ distinct $(X, Y)$ coordinates. Suppose there exist such two polynomials $f(X)_1$ and $f(X)_2$. Then $f_{1-2}(X) = f_1(X) - f_2(X)$ will be a new $n$-degree (or lesser degree) polynomial that passes through $(x_0, 0), (x_1, 0), \cdots, (x_n, 0)$. This means that $f_{1-2}(X)$ has $n+1$ distinct roots. In other words, $f_{1-2}(X)$ is an $n+1$-degree (or higher-degree) polynomial. However, this contradicts the fact that $f_{1-2}(X)$ is an $n$-degree (or lesser degree) polynomial. Therefore, there exist no two polynomials $f_1(X)$ and $f_2(X)$ that pass through the same $n+1$ distinct $(X, Y)$ coordinates. 
+
+\item We have shown that there exists some $n$-degree (or lesser degree) polynomial $f(X)$ that passes through $n+1$ distinct $(X, Y)$ coordinates, and no such two or more distinct polynomials exists. Therefore, there exists only a unique polynomial that satisfies this requirement. 
+
+
+
+
+ 
+\end{enumerate}
+\end{myproof}
+

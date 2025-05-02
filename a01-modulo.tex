@@ -1,0 +1,162 @@
+\noindent \textbf{- Reference:} 
+\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube -- Extended Euclidean Algorithm Tutorial}
+
+
+\subsection{Overview}
+
+\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:group-def}} Integer Modulo}}]
+
+\begin{itemize}
+
+\item \textbf{modulo} is an operation of computing the remainder after dividing a number by another number. \textbf{modulo} is often abbreviated as \textbf{mod}.
+
+$ $
+
+\item \textbf{$\bm{a}$ mod $\bm{q}$ (i.e., $\bm{a} \bm{\text{ modulo } q}$)} is the remainder after dividing $a$ by $q$, which is always one element among $\{0, 1, 2, 3, \cdots, q-1\}$. For example, $7 \bmod 5 = 2$, because the remainder of dividing 7 by 5 is 2. 
+
+$ $
+
+\item \textbf{modulus:} Given $\bm{a}$ mod $\bm{q}$, we call the divider $q$ the modulus, whereas modulo is an operation.
+
+$ $
+
+\item \textbf{Modulo Congruence ($\bm{\equiv}$):} $a$ is congruent with $b$ modulo $a$ (i.e., $a \equiv b \textbf{ mod } q$) if they have the same remainder when divided by $a$. For example, $5 \equiv 12 \bmod 7$, because $5 \bmod 7 = 5$ and $12 \bmod 7 = 5$. In mathematics, the notation $a \equiv b \bmod q$ is identical to $a = b \pmod q$, meaning that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Note that this notation is different from $a = b \bmod q$, meaning that $a$ is identical to the remainder of $b$ divided by $q$, 
+
+$ $
+
+\item \textbf{Congruence \textit{v.s.} Equality:} 
+
+$a \equiv b \bmod q \Longleftrightarrow a = b + k\cdot q$ \text{ } (for some integer $k$)
+
+$ $
+
+This means that $a$ and $b$ are congruent modulo $q$ if and only if $a$ and $b$ are different by some multiple of $q$. For example, $5 \equiv 12 \bmod 7 \Longleftrightarrow 5 = 12 + (-1)\cdot 7$
+
+\end{itemize}
+
+\end{tcolorbox}
+
+
+\subsection{Modulo Arithmetic}
+\label{subsec:modulo-arithmetic}
+
+
+The supported modulo operations are addition, subtraction, and multiplication. The properties of these modulo operations are as follows:
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:group-def}.1} Properties of Modulo Operations}}]
+For any integer $x$, the following is true:
+
+\begin{enumerate}
+\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a + x\equiv b + x\bmod q$
+
+\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a - x\equiv b - x\bmod q$
+
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a \cdot x\equiv b \cdot x\bmod q$
+
+\end{enumerate}
+
+\end{tcolorbox}
+
+\begin{proof}
+
+$ $
+
+For any integer $x$,
+
+\begin{enumerate}
+
+
+\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$) \textcolor{red}{ \text{ } \# $a$ and $b$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a + x = b + k\cdot q + x$
+
+$\Longleftrightarrow a + x = b + x + k\cdot q$ \textcolor{red}{ \text{ }  \# $a+x$ and $b+x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a + x \equiv b + x \bmod q$
+
+$ $
+
+\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+
+$\Longleftrightarrow a - x = b + k\cdot q - x$
+
+$\Longleftrightarrow a - x = b - x + k\cdot q$  \textcolor{red}{ \text{ }  \# $a-x$ and $b-x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a - x \equiv b - x \bmod q$
+
+$ $
+
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+
+$\Longleftrightarrow a \cdot x = b \cdot x + k\cdot q \cdot x$
+
+$\Longleftrightarrow a \cdot x = b \cdot x + k_x\cdot q$ (where $k_x = k \cdot x$)  \textcolor{red}{ \text{ }  \# $a\cdot x$ and $b\cdot x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a \cdot x = b \cdot x \pmod q$
+
+\end{enumerate}
+\end{proof}
+
+Based on the modulo operations in Theorem\ref*{subsec:group-def}.1, we can also derive the following properties of modulo arithmetic. 
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:group-def}.2} Properties of Modulo Arithmetic}}]
+
+\begin{enumerate}
+\item \textbf{Associative:} $(a \cdot b) \cdot c \equiv a \cdot (b \cdot c) \bmod q$
+
+\item \textbf{Commutative:} $(a \cdot b) \equiv (b \cdot a) \bmod q$
+
+\item \textbf{Distributive:} $(a \cdot (b + c)) \equiv ((a \cdot b) + (a \cdot c))  \bmod q$
+
+\item \textbf{Interchangeable:} Congruent values are interchangeable in the modulo arithmetic. 
+
+For example, suppose $(a \equiv b \bmod q)$ and $(c \equiv d \bmod q)$. Then, $a$ and $c$ are interchangeable, and $b$ and $d$ are interchangeable in modulo arithmetic as follows:
+
+$(a + c) \equiv (c + d) \equiv (a + d) \equiv (b + c) \bmod q$
+
+$(a - c) \equiv (c - d) \equiv (a - d) \equiv (b - c) \bmod q$
+
+$(a \cdot c) \equiv (c \cdot d) \equiv (a \cdot d) \equiv (b \cdot c) \bmod q$
+
+\end{enumerate}
+
+\end{tcolorbox}
+
+The proof of Theorem~\ref*{subsec:group-def}.2 is similar to that of Theorem~\ref*{subsec:group-def}.1, which we leave as an exercise for the reader. 
+
+
+\subsubsection{Inverse}
+\label{subsec:modulo-inverse}
+
+\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:modulo-inverse}} Inverse in Modulo Arithmetic}}]
+
+
+In modulo $q$ (i.e., in the world of remainders where all numbers have been divided by $q$), for each $a \in \{0, 1, 2, \cdots, q-1\}$:
+
+\begin{itemize}
+
+\item \textbf{Additive Inverse} of $a$ is denoted as $a_+^{-1}$ that satisfies $a + a_+^{-1} \equiv 0 \bmod q$. For example, in modulo 11, $3_+^{-1} = 8$, because $3 + 8 \equiv 0 \bmod 11$.
+
+\item \textbf{Multiplicative Inverse} of $a$ is denoted as $a_*^{-1}$ that satisfies $a + a_*^{-1} \equiv 1 \bmod q$. For example, in modulo 11, $3_*^{-1} = 4$, because $3 \cdot 4 \equiv 1 \bmod 11$.
+
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsubsection{Modulo Division}
+\label{subsec:modulo-division}
+
+In modulo arithmetic, \textit{modulo division} is different from regular numeric division. In fact, there is no such thing as \textit{modulo division}, because modulo is already a division operation that outputs a remainder. \textit{modulo division} of $b$ by $a \bmod q$ is equivalent to computing the modulo multiplication $b \cdot a_*^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives some integer (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed by the extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial})
+
+\subsubsection{Centered Residue Representation}
+\label{subsec:modulo-centered}
+
+Throughout this section, we have assumed that the residues are positive integers. For example, the possible residues for $\bmod \text{ } q$ are assumed to be $\{0, 1, \cdots, q-1\}$. This system is called canonical (i.e., unsigned) residue representation. On the other hand, there is also a counterpart system that assumes signed (i.e., centered) residues $\left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$, where the residues are centered around $0$ and the number of total residues is the same: $q$. In both systems, a modulo operation changes a given value to another value within the system's residue range such that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the modulus $q$; (2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus $q$. The only difference between these two (canonical and centered) systems is their upper bounds and lower bounds: $0$ and $q-1$ in the canonical residue system, whereas $-\dfrac{q}{2}$ and $\dfrac{q}{2} - 1$ in the centered residue system. The canonical residue representation assumes that $\mathbb{Z}_q = \{0, 1, \cdots, q-1\}$, whereas the centered residue system assumes that $\mathbb{Z}_q = \left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$. 
+
+In both systems, the same modulo property of addition, subtraction, multiplication, and division holds, which can be proved by applying the same reasoning described in \autoref{subsec:modulo-arithmetic}: the same properties hold in both systems because any two congruent residues in the centered system are separated by the $kq$ gaps (for some integer $k$) in both systems. 
+
+Also, the same property holds for an inverse: an inverse of $a$ modulo $q$ is $a^{-1}$ such that $a \cdot a^{-1} \equiv 1 \bmod q$. 
+
+Using a signed residue representation is useful in certain cases. In an example of canonical (i.e., unsigned) residue representation, suppose we have the relation $a + b \bmod q$ and we know that in a given application, $a + b$ is guaranteed to be within the $[0, q-1]$ range (i.e., $0 \leq a + b \leq q-1$). Then, $(a + b \bmod q)$ = $a + b$, and thus we can remove the modulo operation, simplifying the relation. Now, suppose a different example of centered (i.e., signed) residue representation where we have the relation $a - b \bmod q$, and we know that in a given application, $a - b$ is guaranteed to be within the range $\left[-\dfrac{q}{2}, \dfrac{q}{2} - 1\right]$. Then, $(a - b \bmod q) = a - b$. However, notice that if the relation $a - b \bmod q$ were in a canonical residue representation, then we cannot remove the modulo operation, because if $a - b$ is negative, then this becomes smaller than the lower bound of the canonical residue system (i.e., $0$), and thus a modulo reduction (i.e., addition by one or more $q$) is needed. 
+
+In \autoref{subsec:rns-fastbconvex}, we design the \textsf{FastBConvEx} operation based on this beneficial property of centered residue representation: in this algorithm design, we can simplify $(\mu + u \bmod b_\alpha)$ to $\mu + u$, because we know that $\dfrac{b_\alpha}{2} \leq \mu + u < \dfrac{b_\alpha}{2}$.

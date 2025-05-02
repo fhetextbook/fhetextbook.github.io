@@ -1,0 +1,635 @@
+\PassOptionsToPackage{colorlinks=true,linkcolor=blue,urlcolor=blue}{hyperref}
+
+
+
+\documentclass[11pt]{article}
+
+%\usepackage[top=1in, bottom=1in, left=1cm, right=1cm]{geometry}
+%\usepackage{lipsum}
+%\usepackage{background}
+%\backgroundsetup{
+%  position=current page.east,
+%  angle=-90,
+%  nodeanchor=east,
+%  vshift=-5mm,
+%  opacity=1,
+%  scale=3,
+%  contents=Confidential
+%}
+
+
+\usepackage{rotating}
+
+\usepackage[margin=1cm, paperwidth=8.5in, paperheight=11in]{geometry}
+\usepackage[
+  hypertexnames=false
+]{hyperref}
+\usepackage{kotex}
+\usepackage{etex}
+\usepackage{fullpage}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{bm}
+\usepackage{afterpage}
+\usepackage{adjustbox}
+\usepackage{placeins}
+\usepackage{fixltx2e}
+\usepackage{supertabular} 
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\usepackage{relsize}
+\let\labelindent\relax
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{alltt}
+\usepackage{soul}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+%\usepackage[english,greek]{babel}
+%\usepackage{ucs} 
+%\usepackage[utf8x]{inputenc}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{tikz}
+%\usepackage{tkz-tab}
+%\usepackage{caption}
+%\usepackage{latexsym}
+%\usepackage{amssymb}
+\usepackage[margin=0.1cm]{subcaption}
+\usepackage{multicol}
+
+\usepackage{breakurl} % Break URL
+\usepackage{multirow}
+\usepackage[most]{tcolorbox}
+%\usepackage[breakable,skins]{tcolorbox}
+
+\tcbset{breakable}
+\usepackage{esvect}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{hyperref}
+\usepackage{mathdots}
+\usepackage{pifont} 
+\usepackage{booktabs}
+\usepackage{arydshln}
+\usepackage{xcolor,amssymb}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{mathtools}  
+\usepackage{array}
+\usepackage{hyperref}
+
+\usepackage{hyperref}
+\usepackage{mathtools, nccmath}
+%\usepackage[style=numeric,sorting=none]{biblatex}
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\DeclarePairedDelimiter{\nint}\lfloor\rceil
+
+\DeclarePairedDelimiter{\abs}\lvert\rvert
+\usepackage{tocloft}
+\usepackage{pdflscape}
+\usepackage[all=normal, floats, bibnotes, wordspacing, charwidths, indent]{savetrees}
+\makeatletter%
+\captionsetup{belowskip=0pt}
+
+\usepackage{enumitem}
+\setlist{nolistsep}
+%\setlist[itemize]{leftmargin=0.1}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+
+% align figures to the top margin
+\makeatletter
+\setlength{\@fptop}{0pt}
+
+\newcommand\bunderline{}% check for being undefined
+\DeclareRobustCommand\bunderline[1]{\mathord{\mathpalette\b@underline{#1}}}
+\newcommand{\b@underline}[2]{%
+  \sbox\z@{$\m@th#1\underline{#2}$}%
+  \raisebox{-\dp\z@}{\scalebox{.5}[.25]{$\m@th#1[$}}%
+  \copy\z@
+  \raisebox{-\dp\z@}{\scalebox{.5}[.25]{$\m@th#1]$}}%
+}
+
+\makeatother
+
+%\renewcommand{\figureautorefname}{foo}
+%\renewcommand{\tableautorefname}{bar}
+
+%\usepackage[all=normal, floats, bibnotes, wordspacing, charwidths, indent, lists]
+
+%\captionsetup{belowskip=0pt}
+
+\usepackage{graphicx}
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
+\usepackage{hyperref}
+\skip\footins 0.5\baselineskip %8.1pt plus 4pt minus 2pt
+\floatsep 0.5\baselineskip
+\textfloatsep 0.5\baselineskip
+\intextsep 0.5\baselineskip 
+\dbltextfloatsep 0.5\baselineskip  
+\dblfloatsep 0.5\baselineskip 
+
+%\raggedbottom
+
+\belowcaptionskip 0pt
+
+\everypar{\looseness=-1 }
+
+\setlength{\abovecaptionskip}{0pt} % 
+
+\newenvironment{myproof}[1][\proofname]{%
+  \begin{proof}[#1]$ $\par\nobreak\ignorespaces
+}{%
+  \end{proof}
+}
+\makeatletter
+\renewcommand{\sectionautorefname}{\S\@gobble}
+\renewcommand{\subsectionautorefname}{\S\@gobble}
+\renewcommand{\subsubsectionautorefname}{\S\@gobble}
+\renewcommand{\appendixautorefname}{\S\@gobble}
+\renewcommand{\appendixautorefname}{\S\@gobble}
+\makeatother
+\newcommand{\ignore}[1]{}
+
+% Add additional comma in the math mode
+%\DeclareMathSymbol{,}{\mathpunct}{letters}{"2C}
+%\newcommand{\comma}{\mathpunct{\mkern\thinmuskip}}
+%\mathcode`,=\string"8000
+%{\catcode`,=\active \gdef,{\comma}}
+
+
+\addtolength{\cftsecnumwidth}{15pt}
+\addtolength{\cftsubsecnumwidth}{10pt}
+\addtolength{\cftsubsubsecnumwidth}{10pt}
+
+\makeatletter%
+\usepackage{stackengine,xcolor}
+\input pdf-trans
+\newbox\qbox
+\def\usecolor#1{\csname\string\color@#1\endcsname\space}
+\newcommand\bordercolor[1]{\colsplit{1}{#1}}
+\newcommand\fillcolor[1]{\colsplit{0}{#1}}
+\newcommand\colsplit[2]{\colorlet{tmpcolor}{#2}\edef\tmp{\usecolor{tmpcolor}}%  
+  \def\tmpB{}\expandafter\colsplithelp\tmp\relax%
+  \ifnum0=#1\relax\edef\fillcol{\tmpB}\else\edef\bordercol{\tmpC}\fi}
+\def\colsplithelp#1#2 #3\relax{%
+  \edef\tmpB{\tmpB#1#2 }%
+  \ifnum `#1>`9\relax\def\tmpC{#3}\else\colsplithelp#3\relax\fi
+}
+\newcommand\outline[1]{\leavevmode%
+  \def\maltext{#1}%
+  \setbox\qbox=\hbox{\maltext}%
+  \boxgs{Q q 2 Tr \thickness\space w \fillcol\space \bordercol\space}{}%
+  \copy\qbox%
+}
+\newcommand\mathcalbb[2][1]{%
+  \stackengine{0pt}{\def\thickness{.55}\outline{$\mathcal{#2}$}}{\kern.1pt\outline{$\mathcal{#2}$}}{O}{l}{F}{F}{L}}
+\bordercolor{black}
+\fillcolor{white}
+\def\thickness{.1}% TO CHANGE THICKNESS OF SHADOW
+\usepackage{lmodern}
+\usepackage{lipsum}
+
+
+\makeatletter
+\DeclareRobustCommand{\ccong}{\mathrel{\mathpalette\@verequiv\sim}}
+\newcommand{\@verequiv}[2]{%
+  \lower.5\p@\vbox{
+    \lineskiplimit\maxdimen
+    \lineskip-.5\p@
+    \ialign{%
+      $\m@th#1\hfil##\hfil$\crcr
+      #2\crcr
+      \equiv\crcr
+    }%
+  }%
+}
+\renewcommand*\env@matrix[1][c]{\hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols #1}}
+
+
+\newcommand{\hathat}[1]{% 
+\begingroup%
+  \let\macc@kerna\z@%
+  \let\macc@kernb\z@%
+  \let\macc@nucleus\@empty%
+  \hat{\raisebox{.2ex}{\vphantom{\ensuremath{#1}}}\smash{\hat{#1}}}%
+\endgroup%
+}
+
+\makeatother
+
+% \title{**\vspace*{\fill}**The Beginner's Textbook for Fully Homomorphic Encryption}
+
+% \date{January 1, 2025}
+
+% \author{Ronny Ko**\vspace*{\fill}**}
+
+
+\begin{document}
+\title{\Huge{\textbf{The Beginner's Textbook}}\\ \Huge{\textbf{for Fully Homomorphic Encryption}}}
+\author{\textbf{Ronny Ko}\\{LG Electronics Inc.}}%\\\texttt{\small{hajoon.ko@lge.com}}}
+\date{January 1, 2025}
+
+
+
+\begin{titlingpage}
+\maketitle
+\end{titlingpage}
+
+
+\clearpage
+
+\begin{abstract}
+Fully Homomorphic Encryption (FHE) is a cryptographic scheme that enables computations to be performed directly on encrypted data, as if the data were in plaintext. After all computations are performed on the encrypted data, it can be decrypted to reveal the result. The decrypted value matches the result that would have been obtained if the same computations were applied to the plaintext data.
+
+FHE supports basic operations such as addition and multiplication on encrypted numbers. Using these fundamental operations, more complex computations can be constructed, including subtraction, division, logic gates (e.g., AND, OR, XOR, NAND, MUX), and even advanced mathematical functions such as ReLU, sigmoid, and trigonometric functions (e.g., sin, cos). These functions can be implemented either as exact formulas or as approximations, depending on the trade-off between computational efficiency and accuracy. 
+
+Fully Homomorphic Encryption (FHE) enables privacy-preserving machine learning by allowing a server to process the client’s data in its encrypted form through an ML model. With FHE, the server learns neither the plaintext version of the input features nor the inference results. Only the client, using their secret key, can decrypt and access the results at the end of the service protocol.
+FHE can also be applied to confidential blockchain services, ensuring that sensitive data in smart contracts remains encrypted and confidential while maintaining the transparency and integrity of the execution process.
+Other applications of FHE include secure outsourcing of data analytics, encrypted database queries, privacy-preserving searches, efficient multi-party computation for digital signatures, and more.
+
+This book is designed to help the reader understand how FHE works from the mathematical level. The book comprises the following four parts: 
+
+$ $
+
+\begin{itemize}
+\item \textbf{\autoref{part:basic-math}:~\nameref{part:basic-math}} explains necessary background concepts for FHE, such as Group, Field, Order, Polynomial Ring, Cyclotomic Polynomial, Vectors and Matrices, Chinese Remainder Theorem, Taylor Series, Polynomial Interpolation, and Fast Fourier Transform.
+
+\item \textbf{\autoref{part:pqc}:~\nameref{part:pqc}} explains well-known lattice-based cryptographic schemes, which are LWE, RLWE, GLWE, GLev, and GGSW cryptosystems.
+
+\item \textbf{\textbf{\autoref{part:generic-fhe}:~\nameref{part:generic-fhe}}} explains the generic techniques of FHE adopted by many existing schemes, such as homomorphic addition, multiplication, modulus switching, and key switching. 
+
+
+\item \textbf{\textbf{\autoref{part:fhe-schemes}:~\nameref{part:fhe-schemes}}} explains four widely used FHE schemes: TFHE, BFV, CKKS, and BGV, as well as their RNS-variant versions.
+\end{itemize}
+
+$ $
+
+These parts are designed in an incremental manner, and therefore understanding each part requires the understanding of its prior part(s). 
+
+$ $
+
+Please report any bugs or suggestions regarding the draft to the \href{https://github.com/gogo9th/fhe-textbook/issues}{\textbf{GitHub Issues Board}}. 
+
+\end{abstract}
+
+\subsubsection*{Acknowledgments}
+Special thanks are extended to Robin Geelen (KU Leuven) for his thoughtful and dedicated comments, and to Yongwoo Lee (Inha University) for his general advice.
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+
+
+
+%\newcommand{\subparagraph}{} % /usepackage{titlesec}
+\titleformat*{\section}{\LARGE\bfseries\scshape}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titleformat*{\paragraph}{\itshape\subsubsectionfont}
+\titleformat*{\subparagraph}{\large\bfseries}
+
+% page header foot 
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\lhead{Security and Privacy in Cyber-Physical Systems: Foundations and Applications}
+%\rfoot{Copyright \textcopyright 2016 by Wiley}
+% \thispagestyle{fancy}, after \maketitle
+\newcommand{\para}[1]{\vspace{0.05in}\noindent{\bf{#1}}}
+
+
+\newcommand{\white}[1]{{\textcolor{white}{#1}}} % phantom upgrade
+
+\newcommand{\gap}[1]{\text{ } \text{#1} \text{ }}
+
+\newcommand{\tboxlabel}[1]{$\bm{\langle}$Summary~{#1}$\bm{\rangle}$}
+
+\newcommand{\tboxdef}[1]{$\bm{\langle}$Definition~{#1}$\bm{\rangle}$}
+
+\newcommand{\tboxtheorem}[1]{$\bm{\langle}$Theorem~{#1}$\bm{\rangle}$}
+
+\newtheorem{proposition}{Proposition}
+
+
+
+\newtcolorbox[blend into=tables]{mytable}[2][]{float=htb, halign=center,  title={#2}, every float=\centering, #1}
+
+
+% $\hat Y = \frac{1}{1 + e^{-Z}}$.
+
+% $Z = {w_1 \cdot X_1 + w_2 \cdot X_2 + \dots + w_n \cdot X_n + b}$
+
+
+
+\clearpage
+
+%\section{Background}
+
+
+\part{Basic Math}
+\label{part:basic-math}
+
+\renewcommand{\thesection}{A-\arabic{section}}
+\setcounter{section}{0}
+
+This chapter explains the basic mathematical components of the Number theory: group, field, order, roots of unity, cyclotomic polynomial, polynomial ring, and decomposition. These are essential building blocks for post-quantum cryptography.
+
+\clearpage
+
+\section{Modulo Arithmetic}
+\label{sec:modulo}
+\input{a01-modulo}
+
+\clearpage
+
+\section{Group}
+\label{sec:group}
+\input{a02-group}
+
+
+\clearpage
+
+\section{Field}
+\label{sec:field}
+\input{a03-field}
+
+\clearpage
+
+\section{Order}
+\label{sec:order}
+\input{a04-order}
+
+\clearpage
+
+\section{Polynomial Ring}
+\label{sec:polynomial-ring}
+\input{a05-polynomial-ring}
+
+\clearpage
+
+\section{Decomposition}
+\label{sec:decomp}
+\input{a06-decomp}
+
+\clearpage
+
+\section{Roots of Unity}
+\label{sec:roots}
+\input{a07-roots-of-unity}
+
+\clearpage
+
+\section{Cyclotomic Polynomial}
+\label{sec:cyclotomic}
+\input{a08-cyclotomic-polynomial}
+
+\clearpage
+
+\section{Roots of Unity and Cyclotomic Polynomial over Integer Ring}
+\label{sec:cyclotomic-polynomial-integer-ring}
+\input{a11-cyclotomic-polynomial-integer-ring}
+
+\clearpage
+
+\section{Vector and Matrix}
+\label{sec:matrix}
+\input{a09-matrix}
+
+\clearpage
+
+\section{Euler's Formula}
+\label{sec:euler}
+\input{a10-euler}
+
+\clearpage
+
+\section{Modulo Rescaling}
+\label{sec:modulus-rescaling}
+\input{a12-modulus-rescaling}
+
+\clearpage
+
+\section{Chinese Remainder Theorem}
+\label{sec:chinese-remainder}
+\input{a13-chinese-remainder}
+
+\clearpage
+
+\section{Taylor Series}
+\label{sec:taylor-series}
+\input{a14-taylor-series}
+
+\clearpage
+
+\section{Lagrange's Polynomial Interpolation}
+\label{sec:polynomial-interpolation}
+\input{a15-polynomial-interpolation}
+
+\clearpage
+
+\section{Efficient Polynomial Multiplication by FFT and NTT}
+\label{sec:ntt}
+\input{a16-ntt}
+
+\clearpage
+
+
+
+
+
+\part{Post-quantum Cryptography}
+\label{part:pqc}
+
+\renewcommand{\thesection}{B-\arabic{section}}
+\setcounter{section}{0}
+
+This chapter explains lattice-base cryptographic schemes: LWE cryptosystem, RLWE cryptosystem, GLWE cryptosystem, GLev cryptosystem, and GGSW cryptosystem. These are the essential building blocks for FHE schemes. 
+
+
+$ $
+
+\noindent \textbf{\underline{Required Background}}
+
+\begin{itemize}
+\item \autoref{sec:group}: \nameref{sec:group}
+\item \autoref{sec:field}: \nameref{sec:field}
+\item \autoref{sec:polynomial-ring}: \nameref{sec:polynomial-ring}
+\end{itemize}
+
+$ $
+
+\clearpage
+
+\section{Lattice-based Cryptography}
+\label{sec:lattice}
+\input{b01-lattice}
+
+\clearpage
+
+\section{LWE Cryptosystem}
+\label{sec:lwe}
+\input{b02-lwe}
+
+\clearpage
+
+\section{RLWE Cryptosystem}
+\label{sec:rlwe}
+\input{b03-rlwe}
+
+\clearpage
+
+\section{GLWE Cryptosystem} 
+\label{sec:glwe}
+\input{b04-glwe}
+
+\clearpage
+
+\section{GLev}
+\label{sec:glev}
+\input{b05-glev}
+
+\clearpage
+
+\section{GGSW}
+\label{sec:ggsw}
+\input{b06-ggsw}
+
+\clearpage
+
+
+\part{Generic Fully Homomorphic Encryption}
+\label{part:generic-fhe}
+
+\renewcommand{\thesection}{C-\arabic{section}}
+\setcounter{section}{0}
+
+This chapter explains the generic techniques of homomorphic computation adopted by various FHE schemes such as TFHE, CKKS, BGV, and BFV,
+
+As we learned from \autoref{sec:glwe}, $\textsf{GLWE}_{S,\sigma}(\Delta M) = (A_0, A_1, \gap{$\cdots$} , A_{k-1}, B) \in \mathcal{R}_{\langle n, q \rangle }^{k + 1}$, where $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$, and $B$ is computed as $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$. Each $A_i$ is an $(n-1)$-degree polynomial as a public key, whose each coefficient is uniformly randomly sampled from $\mathcal{R}_{\langle n, q \rangle }$. $E$ is an $(n-1)$-degree polynomial as a noise, whose each coefficient is sampled from $\mathcal{R}_{\langle n, q \rangle }$ based on the Gaussian distribution $\chi_\sigma$. $S$ is a list of $k$ $(n-1)$-degree polynomials as a secret key, such that $S = (S_0, S_1, \gap{$\cdots$} S_{k-1} ) \in \mathcal{R}_{\langle n, q \rangle }^k$, and each polynomial $S_i$'s each coefficient is a randomly sampled binary number in $\mathbb{Z}_2$ (i.e., $\{0, 1\}$). 
+
+Based on this GLWE setup, this section will explain the following 5 homomorphic operations: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication, and key switching. 
+
+
+\clearpage
+
+
+\section{GLWE Ciphertext-to-Ciphertext Addition}
+\label{sec:glwe-add-cipher}
+\input{c01-glwe-add-cipher}
+
+\clearpage
+
+\section{GLWE Ciphertext-to-Plaintext Addition}
+\label{sec:glwe-add-plain}
+\input{c02-glwe-add-plain}
+
+\clearpage
+
+\section{GLWE Ciphertext-to-Plaintext Multiplication}
+\label{sec:glwe-mult-plain}
+\input{c03-glwe-mult-plain}
+
+\clearpage
+
+\section{GLWE Modulus Switching}
+\label{sec:modulus-switching}
+\input{c04-glwe-modulus-switch}
+
+\clearpage
+
+
+\section{GLWE Key Switching}
+\label{sec:glwe-key-switching}
+\input{c05-glwe-key-switching}
+
+
+
+\clearpage
+
+
+%\section{GLWE Input Vector Rotation}
+%\label{sec:glwe-input-rotation}
+%\input{c06-glwe-input-rotation}
+%\clearpage
+
+
+\part{Fully Homomorphic Encryption Schemes}
+\label{part:fhe-schemes}
+
+\renewcommand{\thesection}{D-\arabic{section}}
+\setcounter{section}{0}
+
+This chapter explains the four most well-known FHE schemes: TFHE, CKKS, BGV, and BFV, as well as their RNS-variant versions. 
+
+\newpage
+
+\section{TFHE Scheme}
+\label{sec:tfhe}
+\input{d01-tfhe}
+
+
+\newpage
+
+\section{BFV Scheme}
+\label{sec:bfv}
+\input{d02-bfv}
+
+\newpage
+
+\section{CKKS Scheme}
+\label{sec:ckks}
+\input{d03-ckks}
+
+
+\clearpage
+
+\section{BGV Scheme}
+\label{sec:bgv}
+\input{d04-bgv}
+
+\clearpage
+
+
+\section{RNS-variant FHE Schemes}
+\label{sec:rns}
+\input{d05-rns}
+
+\clearpage
+
+\section{FHE Scheme Comparison and Summary}
+\input{d06-scheme-summary}
+
+
+\clearpage
+
+\bibliographystyle{unsrt}
+\bibliography{z-bibfile}
+
+
+
+%\clearpage
+%\input{scratch-real}
+
+\end{document}
+
+
+%https://www.youtube.com/watch?v=vYKdh5oQ4Zw

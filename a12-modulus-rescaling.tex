@@ -1,0 +1,308 @@
+
+\subsection{Rescaling Modulo of Congruence Relations}
+\label{subsec:modulo-rescaling}
+
+Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $k$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differs by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
+
+In this section, we introduce another way of describing the relationship between numbers. We will describe two numbers $a$ and $b$ in terms of a different modulo $q'$ instead of the original modulo $q$. Such a change of modulo of a congruence relation is called modulo scaling. When we rescale the modulo of a congruence relation, we also need to rescale the numbers involved in the congruence relation. 
+
+Suppose we have the following congruence relations: 
+
+$a \equiv b \bmod q$
+
+$a + c \equiv b + d\bmod q$
+
+$a \cdot c \equiv b \cdot d\bmod q$
+
+Now, suppose we want to rescale the modulo of the above congruence relations from $q \rightarrow q'$, where $q' \gap{$|$} q$ (i.e., $q'$ divides all of $q$, or $q$ is a multiple of $q'$). Then, the accordingly updated congruence relations are as shown in \autoref{tab:rescaling}.
+
+
+
+\begin{table}[h!]
+{
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Congruence  & Rescaled Congruence Relation & Rescaled Congruence Relation\\
+Relation & -- Exact & -- Approximate \\
+\hline\hline
+$a \equiv b \bmod q$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$\\
+&(if $q$ divides all of: $aq', bq'$)&(if $q$ does not divide:  $aq' \text{ or } bq'$)\\
+\hline
+$a + c \equiv b + d \bmod q$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$\\
+&(if $q$ divides all of: $aq', bq', cq', dq'$)&(if $q$ does not divide:  $aq', bq', cq',$ or $dq'$)\\
+\hline
+$a \cdot c \equiv b \cdot d \bmod q$ & $\Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor  \equiv \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor  \cong \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor  \bmod q'$\\
+&(if $q$ divides both: $acq', bdq'$)&(if $q$ does not divide:  $acq'$ or $bdq'$)\\
+\hline
+\end{tabular} \par
+}
+\caption{Rescaling the congruence relations  from modulo $q\rightarrow q'$ (where $\lceil \rfloor$ rounds to the nearest integer)}
+\label{tab:rescaling}
+\end{table}
+
+
+\begin{proof}
+
+$ $
+
+\begin{enumerate}
+%\item Let $\hat{a} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $\hat{b} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$, $\hat{c} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $\hat{d} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, where 
+\item $a \equiv b \bmod q$ $\Longleftrightarrow$ $a = b + q\cdot k$ (for some integer $k$)
+
+$\Longleftrightarrow a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + q\cdot k \cdot \dfrac{q'}{q}$
+
+$\Longleftrightarrow a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
+
+
+
+\begin{enumerate}
+\item If $q$ divides all of $aq'$, $bq'$, $cq'$, and $dq'$, then $a \cdot \dfrac{q'}{q} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $b \cdot \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+
+$a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a \equiv b \bmod q)$
+
+$ $
+
+\item If $q$ does not divide any of $aq'$, $bq'$, $cq'$, or $dq'$, then $a \cdot \dfrac{q'}{q} \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \cdot \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+
+$a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a \equiv b \bmod q)$
+
+\end{enumerate}
+
+$ $
+
+\item $a + c\equiv b + d\bmod q$ $\Longleftrightarrow$ $a + c = b + d + q\cdot k$ (for some integer $q$)
+
+$\Longleftrightarrow a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + d \cdot \dfrac{q'}{q}  + q\cdot k \cdot \dfrac{q'}{q}$
+
+$\Longleftrightarrow a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q}  = b \cdot \dfrac{q'}{q} + d \cdot \dfrac{q'}{q} + k\cdot q'$
+
+\begin{enumerate}
+
+\item If $q$ divides all of $aq'$, $bq'$, $cq'$, and $dq'$, then 
+
+$a \dfrac{q'}{q} + c  \dfrac{q'}{q}  = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \dfrac{q'}{q} + d \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor$
+
+Therefore:
+
+$a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + d \cdot \dfrac{q'}{q} + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a \equiv b \bmod q)$
+
+$ $
+
+\item If $q$ does not divide any of $aq'$, $bq'$, $cq'$, or $dq'$, then
+
+$a \dfrac{q'}{q} + c  \dfrac{q'}{q}  \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \dfrac{q'}{q} + d \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor$
+
+Therefore:
+
+$a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + d \cdot \dfrac{q'}{q}  + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a + c \equiv b + d \bmod q)$
+
+\end{enumerate}
+
+$ $
+
+\item $a \cdot c\equiv b \cdot d\bmod q$ $\Longleftrightarrow$ $a \cdot c = b \cdot d + q\cdot k$ (for some integer $q$)
+
+$\Longleftrightarrow ac \cdot \dfrac{q'}{q}  = bd \cdot \dfrac{q'}{q} + q\cdot k \cdot \dfrac{q'}{q}$
+
+$\Longleftrightarrow ac \cdot \dfrac{q'}{q}  = bd \cdot \dfrac{q'}{q} + k\cdot q'$
+
+\begin{enumerate}
+
+\item If $q$ divides all of $aq'$, $bq'$, $cq'$, and $dq'$, then 
+
+$ac \cdot \dfrac{q'}{q} = \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $bd \cdot \dfrac{q'}{q} = \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor$
+
+Therefore:
+
+$ac \cdot \dfrac{q'}{q} = bd \cdot \dfrac{q'}{q} + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor = \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a\cdot c \equiv b\cdot d \bmod q)$
+
+$ $
+
+\item If $q$ does not divide any of $aq'$, $bq'$, $cq'$, or $dq'$, then
+
+$ac \cdot \dfrac{q'}{q} \approx \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $bd \cdot \dfrac{q'}{q} \approx \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor$
+
+Therefore:
+
+$ac \cdot \dfrac{q'}{q} = bd \cdot \dfrac{q'}{q} + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor \approx \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
+
+$\Longleftrightarrow \Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a\cdot c \equiv b\cdot d \bmod q)$
+
+\end{enumerate}
+
+$ $
+
+\end{enumerate}
+\end{proof}
+
+As shown in the proof, if all numbers in the congruence relations are exactly divisible by the rescaling factor during the modulo rescaling, then the rescaled result gives exact congruence relations in the new modulo. On the other hand, if any numbers in the congruence relations are not divisible by the rescaling factor during the modulo rescaling (i.e., we need to round some decimals), then the rescaled result gives approximate congruence relations in the new modulo.
+
+In a more complicated congruence relation that contain many $(+, -, \cdot)$ operations, the same principle of modulo rescaling explained above can be recursively applied to each pair of operands surrounding each operator. 
+
+\subsubsection{Example}
+\label{subsec:modulo-rescaling-ex}
+
+Suppose we have the following congruence relation:
+
+$b \equiv a\cdot s + \Delta \cdot m + e \bmod q$, \text{ } where: $q = 30$, \text{ } $s = 5$, \text{ } $a = 10$, \text{ } $\Delta = 10$, \text{ } $m = 1$, \text{ } $e = 10$, \text{ } $b = 40$
+
+$ $
+
+First, we can test if the above congruence relation is true by plugging in the given example values as follows: 
+
+$b \equiv a\cdot s + \Delta \cdot m + e \bmod 30$
+
+$40 \equiv 10 \cdot 5 + 10 \cdot 1 + 10 \bmod 30$
+
+$40 \equiv 70 \bmod 30$ 
+
+$ $
+
+This congruence relation is true. 
+
+$ $
+
+Now, suppose we want to rescale the modulo from $30 \rightarrow 3$. Then, based on the rescaling principles described in \autoref{tab:rescaling}, we compute the rescaled values as follows: 
+
+$q'= 3$, \text{ } $s = 5$, \text{ } $m = 1$
+
+$\hat{a} = \Bigg\lceil a\cdot\dfrac{3}{30} \Bigg\rfloor = \Bigg\lceil 10\cdot\dfrac{3}{30} \Bigg\rfloor = 1$
+
+$\hat{\Delta} = \Bigg\lceil \Delta\cdot\dfrac{3}{30} \Bigg\rfloor = \Bigg\lceil 10\cdot\dfrac{3}{30} \Bigg\rfloor = 1$
+
+
+
+$\hat{e} = \Bigg\lceil e\cdot\dfrac{3}{30} \Bigg\rfloor = \Bigg\lceil 10\cdot\dfrac{3}{30} \Bigg\rfloor = 1$
+
+$\hat{b} = \Bigg\lceil b\cdot\dfrac{3}{30} \Bigg\rfloor = \Bigg\lceil 40\cdot\dfrac{3}{30} \Bigg\rfloor = 4$
+
+$ $
+
+The rescaled congruence relation from modulo $30 \rightarrow 3$ is derived as follows:
+
+$\Bigg\lceil b\dfrac{3}{30} \Bigg\rfloor \equiv \Bigg\lceil s\cdot a \dfrac{3}{30} \Bigg\rfloor + \Bigg\lceil m \cdot \Delta \dfrac{3}{30} \Bigg\rfloor + \Bigg\lceil e \dfrac{3}{30} \Bigg\rfloor \bmod 3$
+
+$\hat{b} \equiv \hat{a} \cdot s + \hat{\Delta} \cdot m + \hat{e}  \bmod 3$
+ \text{ } (an exact congruence relation, as all rescaled values have no decimals)
+
+$4 \equiv 1 \cdot 5 + 1 \cdot 1 + 1 \bmod 3$
+
+$4 \equiv 7 \bmod 3$
+
+$ $
+
+As shown above, the rescaled congruence relation preserves correctness, because all rescaled values are divisible by the rescaling factor. By contract, if $\dfrac{q}{q'} = \dfrac{30}{3} = 10$ did not divide any of $a\cdot s$, $\Delta m$, or $e$, then the rescaled congruence relation would be an approximate (i.e., $\cong$) congruence relation. 
+
+
+
+
+
+%Modulo switching of a ciphertext is equivalent to rescaling a ciphertext. In the world of modulo arithmetic, when we rescale operands, we should also rescale their modulo in order to preserve their correctness in computation, and vice versa. If we rescale only operands without rescaling the modulo, this would not capture the correctness in the particular computations that wrap around the boundary of modulo. 
+
+\begin{comment}
+In the example of LWE rescaling, suppose that we keep the ciphertext's modulo $q$ as it is (instead of switching the modulo from $q \rightarrow q'$) and rescale the ciphertext's inner components: $\Delta \rightarrow \Delta\dfrac{\har{q}}{q}, a_i \rightarrow \Bigg\lceil a_i\dfrac{\hat{q}}{q} \in \mathbb{Z}_q, e \rightarrow \Bigg\lceil e\dfrac{\hat{q}}{q} \in \mathbb{Z}_q, b \rightarrow \Bigg\lceil b\dfrac{\hat{q}}{q} \in \mathbb{Z}_q$. Here is a toy example:
+$q = 30$
+
+$k = 1$
+
+$s = (5)$
+
+$A = (10)$
+
+$\Delta = 10$
+
+$m = 1$
+
+$e = 0$
+
+$b = A\cdot S + \Delta m + e = 10 \cdot 5 + 10 \cdot 1 + 0 = 60 \equiv 30$
+
+$ $
+
+We apply the rescaling of $\dfrac{1}{10}$ as follows: 
+
+$q = 30$ \textcolor{red}{ \# suppose we keep it as the same as before}
+
+$\hat{Delta} = \dfrac{1}{10}\dot\Delta = 1$
+
+$\hat{A} = \dfrac{1}{10}\cdot(A) = 1$
+
+$\hat{e} = \dfrac{1}{10}\cdot(e) = 0$
+
+$\hat{b} = \dfrac{1}{10}\cdot(b) = 3$
+
+$ $
+
+Then, these components do not form a valid LWE ciphertext anymore, because $\hat{b} \neq \hat{A}\cdot S + \hat{Delta}m + e$:
+
+$3 \neq 1 \cdot 5 + 1 \cdot 1 + 0 \bmod 30$
+
+$ $
+
+On the contrary, suppose we also rescaled the modulo $q \rightarrow \hat{q}$ as $30 \rightarrow 3$. Then, $\hat{b} = \hat{A}\cdot S + \hat{Delta}m + e$ holds, because: 
+
+$3 \equiv 1 \cdot 5 + 1 \cdot 1 + 0 = 6 \bmod 3$
+
+$ $
+
+This is why we need to rescale both the operands and their modulo in order to preserve correctness in modulo arithmetic. 
+
+The only case where the modulo arithmetic can preserve its correctness without rescaling the modulo is when the modulo arithmetic in the specific use case is guaranteed never to have the incidence of wrap around the modulo boundary. In the same above example, suppose that the original modulo were $q = 3000$, which is very large enough to guarantee that the specific use case's all modulo arithmetic will never touch this extremely high threshold. Then, after rescaling all operands by $\dfrac{1}{1000}$ without rescaling the modulo (i.e., $q$ remains as $3000$), the $\hat{b} = \hat{A}\cdot S + \hat{Delta}m + e$ relationship will still hold, because: 
+
+$b = A\cdot S + \Delta m + e = 10 \cdot 5 + 10 \cdot 1 + 0 = 60 \bmod 3000$
+
+$\hat{b} = \dfrac{1}{10}\cdot(b) = 6$
+
+$\hat{b} = \hat{A}\cdot S + \hat{Delta}m + e \bmod 3000$
+
+$6 \equiv 1 \cdot 5 + 1 \cdot 1 + 0 = 6 \bmod 3000$
+
+The following is the condition for preserving the correctness of rescaled modulo arithmetic:
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:modulo-rescaling}} RLWE Modulo Switching}}]
+
+\para{Definition of Rescaling:} Given a list of modulo equations, rescaling their arithmetic by $\dfrac{1}{d}$ is equivalent to switching their modulo from $q \rightarrow \dfrac{q}{d}$, which is rescaling all operands in the equations by $\dfrac{q}{d}$ as well as the modulo. 
+
+$ $
+
+\para{Correctness of Rescaling:} If we rescale only all operands in all modulo equations by $\dfrac{q}{d}$ without rescaling the modulo (i.e., keeping the modulo as $q$), the correctness of the modulo arithmetic in all rescaled modulo equations will hold only if their computations are guaranteed never to involve the incidence of wrapping around the modulo boundary in the both cases of: (i) applying the rescaling; and (ii) not applying the rescaling. 
+
+$ $
+
+\para{Error of Rescaling:} If the scaling factor $\dfrac{q}{d}$ is not an integer, then some rescaled operands in the modulo equations may not be an integer after rescaling, in which case their values should be rounded to the nearest integer. In such cases, the modulo equations after rescaling would not be exactly correct due to the rounding drift-- but in the case of GLWE decryption, such errors can be successfully eliminated given that the errors are smaller than a certain threshold.
+
+\end{tcolorbox}
+
+\end{comment}
+
+
+
+
+
+
+
+
+

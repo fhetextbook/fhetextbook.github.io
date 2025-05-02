@@ -1,0 +1,176 @@
+\textbf{- Reference 1:} 
+\href{https://brilliant.org/wiki/chinese-remainder-theorem/}{Brilliant -- Chinese Remainder Theorem}~\cite{crt}
+
+\noindent \textbf{- Reference 2:} 
+\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube -- Extended Euclidean Algorithm Tutorial}
+
+
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{sec:chinese-remainder}.1} Chinese Remainder Theorem}}]
+
+Suppose we have positive coprime integers $n_0, n_1, n_2, \cdots, n_k$. Let $N = n_1 n_2 \cdots n_k$. We sample $k + 1$ random integers $a_0, a_1, a_2, \cdots, a_k$ from each modulo domain $n_0, n_1, n_2, \dots, n_k$ (i.e., $a_0 \in \mathbb{Z}_{n_0}$, $a_1 \in \mathbb{Z}_{n_1}$, $\cdots$, $a_k \in \mathbb{Z}_{n_k}$). Then, there exists one and only one solution $x \bmod N$ such that $x$ is congruent with $a_0, a_1, a_2, \cdots, a_k$ in each modulo $n_0, n_1, n_2, \cdots, n_k$. That is: 
+
+\text{ } $x \equiv a_0 \bmod n_0$
+
+\text{ } $x \equiv a_1 \bmod n_1$
+
+\text{ } $x \equiv a_2 \bmod n_2$
+
+\text{ } \text{ } $\vdots$
+
+\text{ } $x \equiv a_k \bmod n_k$
+
+$ $
+
+To compute $x$, we first compute each $y_i$ and $z_i$ (for $0 \leq i \leq k$) as follows:
+
+$y_i = \dfrac{N}{n_i}, \text{ } z_i = y_i^{-1} \bmod n_i$
+
+$ $
+
+Note that each $y_i$'s inverse (i.e., $y_i^{-1}$) can be computed by using the Extended Euclidean algorithm (watch the \href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}). Then, the unique solution $x$ can be computed as follows:
+
+$x = \sum\limits_{i=0}^k a_i y_i z_i $ \textcolor{red}{ \# Alternatively, we can compute $ x = \sum\limits_{i=0}^k |a_i z_i|_{n_i} y_i$ (where $|a_i z_i|_{n_i} = a_i z_i \bmod n_i$)}
+
+$ $
+
+Since such $x$ is unique in $\bmod \text{ } N$, there are isomorphic mappings between $x \bmod N$ and $(a_0, a_1, a_2, \cdots, a_k)$.
+
+$ $
+
+Also, $y_iz_i \equiv (y_iz_i)^2 \bmod N$  \text{ } for all $0 \leq i \leq k$ 
+\end{tcolorbox}
+
+\begin{proof}
+
+$ $
+
+\begin{enumerate}
+\item Given $x = \sum\limits_{i=0}^k a_i y_i z_i$, let's compute $x \bmod n_i$ for each $i$ where $0 \leq i \leq k$: 
+
+$x \text{ } \text{mod } n_i = \sum\limits_{i=0}^k a_i y_i z_i \text{ } \text{mod } n_i$
+
+$= a_0 y_0 z_0 + a_1 y_1 z_1 + a_2 y_2 z_2 + \cdots + a_k y_k z_k \text{ } \text{mod } n_i$
+
+$= a_i y_i z_i \text{ } \text{mod } n_i$ \textcolor{red}{ \# because $y_j \equiv 0 \bmod n_i$ for all $j \neq i$, as they are a multiple of $n_i$}
+
+$= a_i$ \textcolor{red}{ \# because $y_i z_i = y_i y_i^{-1} = 1$}
+
+$ $
+
+Thus, the value of $x$ in each modulo $n_0, n_1, n_2, \cdots, n_k$ is congruent with $a_0, a_1, a_2, \cdots, a_k$.
+
+
+$ $
+
+Alternatively, note that the following is also true:
+
+$x \text{ } \text{mod } n_i = \sum\limits_{i=0}^k |a_i z_i|_{n_i} y_i \text{ } (\text{mod } n_i)$
+
+$= |a_0 z_0|_{n_0} y_0 + |a_1 z_1|_{n_1} y_1 + |a_2 z_2|_{n_2} y_2 + \cdots + |a_k y_k|_{n_k} y_k \text{ } \text{mod } n_i$
+
+$= |a_i z_i|_{n_i} y_i \text{ } \text{mod } n_i$ 
+
+$= a_i$ 
+
+$ $
+
+\item Now, we prove that $x$ is a unique solution in modulo $N$. Suppose there were two solutions: $x$ and $x'$ such that:
+
+$x \equiv x' \equiv a_0 \bmod n_0$
+
+$x \equiv x' \equiv a_1 \bmod n_1$
+
+$x \equiv x' \equiv a_2 \bmod n_2$
+
+\text{ } $\vdots$
+
+$x \equiv x' \equiv a_k \bmod n_k$
+
+$ $
+
+Then, by definition of modulo congruence, $ n_0 \gap{$|$} (x - x') , n_1 \gap{$|$} (x - x') , \text{ } n_2 \gap{$|$} (x - x'), \gap{$\cdots$}, \text{ } n_k \gap{$|$} (x - x')$.   
+
+Also, since $n_0, n_1, n_2, \cdots, n_k$ are coprime, it must be the case that $n_0n_1n_2n_3\cdots n_k \gap{$|$} (x - x')$, or $N \gap{$|$} (x - x')$. This means that $x \equiv x' \bmod N$. Therefore, $x$ is a unique solution in modulo $N$.
+
+$ $
+
+\item Now, we will prove that $y_iz_i \equiv (y_iz_i)^2 \bmod N$  \text{ } for all $0 \leq i \leq k$. 
+
+$ $
+
+In the case of modulo $n_i$, $y_iz_i \equiv 1 \bmod n_i$, since $z_i$ is an inverse of $y_i$ modulo $n_j$. In the case of all other modulo $n_j$ where $i \neq j$, $y_iz_i \equiv 0 \bmod n_j$, because $y_i = \dfrac{N}{n_i}$ and thus $n_j$ divides $y_i$. 
+
+$ $
+
+By squaring both sides of $(y_iz_i) \equiv 1 \bmod n_i$, we get $(y_iz_i)^2 \equiv 1 \bmod n_i$. Similarly, by squaring both sides of $(y_iz_i) \equiv 1 \bmod n_j$, we get $(y_iz_i)^2 \equiv 0 \bmod n_j$.
+
+$ $
+
+Therefore, $y_iz_i - (y_iz_i)^2 \equiv 0 \bmod n_i$, and $y_iz_i - (y_iz_i)^2 \equiv 0 \bmod n_j$. In other words, $y_iz_i - (y_iz_i)^2 \equiv 0 \bmod n_j$ for all $0 \leq j \leq k$. 
+
+$ $
+
+Then, we do the similar reasoning as step 2: since every co-prime $n_j$ divides $y_iz_i - (y_iz_i)^2$, $n_0n_1\cdots n_k = N$ divides $y_iz_i - (y_iz_i)^2$. Thus, $y_iz_i - (y_iz_i)^2 \equiv 0 \bmod N$, which is $y_iz_i \equiv (y_iz_i)^2 \bmod N$. This is true for all $0 \leq i \leq k$. 
+
+\end{enumerate}
+
+\end{proof}
+
+
+\subsection{Application: Number Residue System (RNS)} 
+\label{subsec:crt-application}
+
+In a modern processor, each data size is a maximum of 64 bits. If the data size exceeds 64 bits, its computations can be handled efficiently by using the Chinese remainder theorem such that each co-prime modulus $\log_2n_i \leq 64$ (where $N = n_0\cdot n_1\cdots\cdot n_k$) can be used to represent big value $a \bmod N$ as $\vec{a}_{\mathit{crt}} = (a_0, a_1, \cdots , a_k)$, where $a \equiv a_i \bmod n_i$. Then, for any pair of big numbers $a$ and $b \bmod N$, we can compute $a + b \bmod N$ and $a \cdot b \bmod N$ as follows: 
+
+\begin{itemize}
+\item $a + b  \equiv \sum\limits_{i=0}^k a_i y_i z_i + \sum\limits_{i=0}^k b_i y_i z_i \equiv \sum\limits_{i=0}^k a_i y_i z_i + b_i y_i z_i \equiv 
+ \sum\limits_{i=0}^k (a_i + b_i) y_i z_i \bmod N $
+
+$ $
+
+\item $a \cdot b \equiv \sum\limits_{i=0}^k a_i y_i z_i \cdot \sum\limits_{i=0}^k b_i y_i z_i \equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i)^2  + \sum\limits_{i\neq j}^k (a_i \cdot b_j) y_i z_iy_j z_j \equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i)^2$
+
+\textcolor{red}{\# Note that all terms $y_iz_iy_jz_j$ where $i \neq j$ are 0 modulo $N$, because $y_iy_j \bmod N \equiv 0$. \\
+This is because $y_i = n_0n_1\cdots n_{i-1}n_{i+1}\cdots$ and $y_j = n_0n_1\cdots n_{j-1}n_{j+1}\cdots$. \\
+Thus $y_iy_j$ is a multiple of $N$.}
+
+$ $
+
+$\equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i) \bmod N$
+
+\textcolor{red}{\# This is because $(y_i z_i) \equiv (y_i z_i)^2$ as shown in step 3 in the proof of Theorem~\ref*{sec:chinese-remainder}.1}
+
+
+\end{itemize}
+
+$ $
+
+Thus, the Chinese remainder theorem gives us the following useful formula: 
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{sec:chinese-remainder}.2} Application of the Chinese Remainder Theorem}}]
+
+Suppose there are two big numbers $a = \sum\limits_{i=0}^k a_i y_i z_i \bmod N$ and $b = \sum\limits_{i=0}^k b_i y_i z_i \bmod N$  where $N$ is a multiplication of co-primes $n_1n_2\cdots n_k$, we have an isomorphism as follows:
+
+$a \xrightarrow{\sigma} \vec{a}_{\mathit{crt}} = (a_0, a_1, \cdots, a_k)$
+
+$b \xrightarrow{\sigma} \vec{b}_{\mathit{crt}} = (b_0, b_1, \cdots, b_k)$
+
+$ $
+
+Based on the above isomorphism, the following is true:
+
+\begin{itemize}
+
+\item $a + b \equiv \sum\limits_{i=0}^k (a_i + b_i) y_i z_i \bmod N \Longleftrightarrow \vec{a}_{\mathit{crt}} + \vec{b}_{\mathit{crt}} \equiv (a_0 + b_0, \text{ } a_1 + b_1, \cdots, \text{ } a_k + b_k) \bmod N$ 
+
+\item $a \cdot b \equiv \sum\limits_{i=0}^k (a_i \cdot b_i) y_i z_i \bmod N \Longleftrightarrow \vec{a}_{\mathit{crt}} \odot \vec{b}_{\mathit{crt}} \equiv (a_0b_0, a_1 b_1, \cdots, a_k b_k)  \bmod N$ 
+
+
+\end{itemize}
+
+
+
+, where each element-wise addition/multiplication can be independently done modulo $n_i$
+
+\end{tcolorbox}

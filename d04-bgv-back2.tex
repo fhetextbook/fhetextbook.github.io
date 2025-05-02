@@ -1,0 +1,697 @@
+
+Similar to BFV, the BGV scheme is designed for homomorphic addition and multiplication of integers. Unlike CKKS, BGV guarantees exact encryption and decryption. From this view, BGV is similar to BFV. However, the major difference between these two schemes is that BFV stores the plaintext value in the MSBs (most significant bits) and the noise in the LSBs (least significant bits), while BGV stores them the other way around: the plaintext value in the LSBs and the noise in the MSBs. Technically, while BFV scales the plaintext polynomial by $\Delta$, BGV scales the noise polynomial by $\Delta$. Therefore, these two schemes use slightly different strategies to store and manage the plaintext and noise within a ciphertext. 
+
+BGV internally uses almost the same strategy as BFV for plaintext encoding, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication, and input vector rotation. 
+
+On the other hand, BGV's encryption and decryption are slightly different from BFV's scheme, because its scaling target is not the plaintext, but the noise. Also, unlike BFV where ciphertext-to-ciphertext multiplication has no limit on the number, BGV's ciphertext-to-ciphertext multiplication is leveled, switching the modulus to a lower level like CKKS, and thus it is limited. Furthermore, BGV's modulus switch and bootstrapping are partially different from BFV's. 
+
+
+
+
+$ $
+
+\noindent \textbf{\underline{Required Background}}
+
+\begin{itemize}
+\item \autoref{sec:modulo}: \nameref{sec:modulo}
+\item \autoref{sec:group}: \nameref{sec:group}
+\item \autoref{sec:field}: \nameref{sec:field}
+\item \autoref{sec:order}: \nameref{sec:order}
+\item \autoref{sec:polynomial-ring}: \nameref{sec:polynomial-ring}
+\item \autoref{sec:decomp}: \nameref{sec:decomp}
+\item \autoref{sec:roots}: \nameref{sec:roots}
+\item \autoref{sec:cyclotomic}: \nameref{sec:cyclotomic}
+\item \autoref{sec:cyclotomic-polynomial-integer-ring}: \nameref{sec:cyclotomic-polynomial-integer-ring}
+\item \autoref{sec:matrix}: \nameref{sec:matrix}
+\item \autoref{sec:euler}: \nameref{sec:euler}
+\item \autoref{sec:modulus-rescaling}: \nameref{sec:modulus-rescaling}
+\item \autoref{sec:chinese-remainder}: \nameref{sec:chinese-remainder}
+\item \autoref{sec:polynomial-interpolation}: \nameref{sec:polynomial-interpolation}
+\item \autoref{sec:ntt}: \nameref{sec:ntt}
+\item \autoref{sec:lattice}: \nameref{sec:lattice}
+\item \autoref{sec:rlwe}: \nameref{sec:rlwe}
+\item \autoref{sec:glwe}: \nameref{sec:glwe}
+\item \autoref{sec:glwe-add-cipher}: \nameref{sec:glwe-add-cipher}
+\item \autoref{sec:glwe-add-plain}: \nameref{sec:glwe-add-plain}
+\item \autoref{sec:glwe-mult-plain}: \nameref{sec:glwe-mult-plain}
+\item \autoref{subsec:modulus-switch-rlwe}: \nameref{subsec:modulus-switch-rlwe}
+\item \autoref{sec:glwe-key-switching}: \nameref{sec:glwe-key-switching}
+\item \autoref{sec:bfv}: \nameref{sec:bfv}
+\item \autoref{sec:ckks}: \nameref{sec:ckks}
+\end{itemize}
+
+
+\subsection{Encoding and Decoding}
+\label{subsec:bgv-encoding-decoding}
+
+BGV uses almost the same plaintext encoding scheme as BFV as described in Summary~\ref{subsubsec:bfv-encoding-summary} in \autoref{subsubsec:bfv-encoding-summary}, with the only difference that the scaling factor $\Delta = \dfrac{q_0}{t}$ is not applied to the plaintext polynomial $M(X)$ like BFV does. Instead, BGV applies its own scaling factor $\Delta = t$ to the noise polynomial $E(X)$ whenever it encrypts a new ciphertext (will be explained in \autoref{subsec:bgv-enc-dec}). 
+
+The following is BGV's encoding and decoding scheme. 
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-encoding-decoding}} BGV's Encoding and Decoding}}]
+
+
+
+\textbf{\underline{Input}:} An $n$-dimensional integer modulo $t$ vector $\vec{v} = (v_0, v_1, \cdots, v_{n-1}) \in \mathbb{Z}_t^n$
+
+$ $
+
+\textbf{\underline{Encoding}:} 
+
+ Convert $\vec{v} \in \mathbb{Z}_t^n$ into $\vec{m} \in \mathbb{Z}_t^n$ by applying the transformation $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}}{n}$
+
+, where $\hathat W$ is a basis of the $n$-dimensional vector space crafted as follows: 
+
+{\footnotesize{$\hathat W = \begin{bmatrix}
+1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
+(\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
+(\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
+\end{bmatrix}$}}
+
+\textcolor{red}{ \# where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)}
+
+The final output is $M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_t[X] / (X^n + 1)$, 
+which we can also treat as 
+
+$M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_q[X] / (X^n + 1)$ during encryption/decryption later, because the initial fresh coefficients $m_i$ are guaranteed to be smaller than any $q$ where $q = \{q_0, q_1, \cdots, q_L\}$.
+
+$ $
+
+\textbf{\underline{Decoding}:} For the plaintext polynomial $M = \sum\limits_{i=0}^{n-1} m_iX^i$, 
+compute $\vec{v} = \hathat W^* \cdot \vec{m}$, where 
+
+$\hathat{W}^* = \begin{bmatrix}
+1 & (\omega^{J(0)}) & (\omega^{J(0)})^2 & \cdots & (\omega^{J(0)})^{n-1}\\
+1 & (\omega^{J(1)}) & (\omega^{J(1)})^2 & \cdots & (\omega^{J(1)})^{n-1}\\
+1 & (\omega^{J(2)}) & (\omega^{J(2)})^2 & \cdots & (\omega^{J(2)})^{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & (\omega^{J(\frac{n}{2}-1)}) & (\omega^{J(\frac{n}{2}-1)})^2 & \cdots & (\omega^{J(\frac{n}{2}-1)})^{n-1}\\
+1 & (\omega^{J_*(0)}) & (\omega^{J_*(0)})^2 & \cdots & (\omega^{J_*(0)})^{n-1}\\
+1 & (\omega^{J_*(1)}) & (\omega^{J_*(1)})^2 & \cdots & (\omega^{J_*(1)})^{n-1}\\
+1 & (\omega^{J_*(2)}) & (\omega^{J_*(2)})^2 & \cdots & (\omega^{J_*(2)})^{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & (\omega^{J_*(\frac{n}{2}-1)}) & (\omega^{J_*(\frac{n}{2}-1)})^2 & \cdots & (\omega^{J_*(\frac{n}{2}-1)})^{n-1}\\
+\end{bmatrix}$
+
+\end{tcolorbox}
+
+
+\subsection{Encryption and Decryption}
+\label{subsec:bgv-enc-dec}
+
+BGV's encryption and decryption scheme is very similar to BFV's scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) with a small difference: while BFV scales the plaintext polynomial $M(X)$ by $\Delta$, BGV scales the noise polynomial $E(X)$ by $\Delta$. In BFV, each encoded plaintext polynomial $M(X)$ is scaled by $ \Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$. This strategy effectively shifts each plaintext coefficient value to the most significant bits while keeping the noise in the least significant bits. One the other hand, BGV does not scale the plaintext polynomial $M(X)$, but instead it scales each new noise $E(X)$ by $\Delta = t$, making the noise $\Delta E(X)$, which is newly generated upon each new ciphertext creation. This different scaling strategy effectively shifts the noise (i.e., $e_i$) to the most significant bits by scaling it by $\Delta = t$ while keeping the plaintext value (i.e., $m_i$) $M(X)$'s each coefficient in the least significant bits. 
+
+Also, in BGV, the ciphertext modulus $q$ is leveled like CKKS's one: $q \in \{q_0, q_1, \cdots, q_L\}$, where each $q_l = \prod\limits_{i=0}^l w_i$ (where each $w_i$ is a CRT modulus). 
+
+BGV's encryption decryption process is described as follows:
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-enc-dec}} BGV Encryption and Decryption}}]
+
+\textbf{\underline{Initial Setup}:} 
+
+\begin{itemize}
+\item The plaintext modulus $t = p$ (a prime)
+
+\item The ciphertext modulus $q$ is leveled like in CKKS: $q \in \{q_0, q_1, \cdots, q_L\}$, where each $q_l = \prod\limits_{i=0}^l w_i$ (each $w_i$ is a CRT modulus), and each $q_l \equiv 1 \bmod t$ (will be explained in \autoref{subsec:bgv-modulus-switch})
+
+\item The noise scaling factor $\Delta=t$ 
+\item The secret key $S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$. They coefficients of polynomial $S$ can be either binary (i.e., $\{0, 1\}$) or ternary (i.e., $\{-1, 0, 1\}$).
+
+\end{itemize}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, q \rangle}$, $A_i \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$, $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$
+
+
+\begin{enumerate}
+%\item Scale up $M \rightarrow \Delta M \text { } \in \mathcal{R}_{\langle n, q\rangle}$
+
+\item Compute $B = -A \cdot S + M + \Delta E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
+
+\item $\textsf{RLWE}_{S,\sigma}(M + \Delta E) = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$ 
+
+\end{enumerate}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\textbf{\underline{Decryption Input}:} $C = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$
+
+\begin{enumerate}
+\item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B + A \cdot S  = M + \Delta E \pmod q$
+
+\item $M = M + \Delta E \bmod t$ \textcolor{red}{ \# modulo reduction of $M + \Delta E$ by $t$}
+
+\end{enumerate}
+
+The final output is $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$
+
+$ $
+
+\textbf{\underline{Conditions for Correct Decryption}:}
+
+%\begin{enumerate}
+%\item 
+Each coefficient $\Delta e_i + m_i$ that contains the scaled noise and the plaintext should not overflow or underflow its ciphertext's any current moment's multiplicative level $l$'s ciphertext modulus $q_l$ (i.e., $\Delta e_i + m_i < q_l$)
+%\end{enumerate}
+
+\end{tcolorbox}
+
+When restoring the plaintext at the end of the decryption process, while BFV shifts down the plaintext and the noise to the lower bit area (which effectively rounds off the noise), BGV computes $\text{ mod } p$, which effectively modulo-reduces the accumulated noise because every coefficient of $E$ is a multiple of $t$ (i.e., $\Delta$). Finally, only the plaintext polynomial's each coefficient $m_i$ remains in the LSB area without any noise $e_i$. 
+
+
+\subsection{Ciphertext-to-Ciphertext Addition}
+\label{subsec:bgv-add-cipher}
+
+BGV's ciphertext-to-ciphertext addition scheme is exactly the same as BFV's scheme (Summary~\ref*{subsec:bfv-add-cipher} in \autoref{subsec:bfv-add-cipher}). 
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-add-cipher}} BGV Ciphertext-to-Ciphertext Addition}}]
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle} ) + \textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 1 \rangle}) $
+
+$ = ( A^{\langle 1 \rangle}, \text{ } B^{\langle 1 \rangle}) + (A^{\langle 2 \rangle}, \text{ } B^{\langle 2 \rangle}) $
+
+$ = ( A^{\langle 1 \rangle} + A^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} ) $
+
+$= \textsf{RLWE}_{S, \sigma}\bm((M^{\langle 1 \rangle} + M^{\langle 2 \rangle})  + \Delta E^{\langle 1 \rangle} + \Delta E^{\langle 2 \rangle} \bm)$
+\end{tcolorbox}
+
+\subsection{Ciphertext-to-Plaintext Addition}
+\label{subsec:bgv-add-plain}
+
+BGV's ciphertext-to-plaintext addition scheme is almost the same as BFV's scheme (Summary~\ref*{subsec:bfv-add-plain} in \autoref{subsec:bfv-add-plain}). However, one difference is that it's not the case that the plaintext polynomial $\Lambda(X)$ to be added is scaled up by $\Delta$, but it remains as $\Lambda(X)$.
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-add-plain}} BGV Ciphertext-to-Plaintext Addition}}]
+$\textsf{RLWE}_{S, \sigma}(M + \Delta E) + \Lambda $
+
+$=  (A, \text{ } B) + \Lambda$
+
+$=  (A, \text{ } B + \Lambda)$
+
+$= \textsf{RLWE}_{S, \sigma}\bm((M + \Lambda) + \Delta E \bm)$
+\end{tcolorbox}
+
+
+\subsection{Ciphertext-to-Plaintext Multiplication}
+\label{subsec:bgv-mult-plain}
+
+
+
+
+BGV's ciphertext-to-plaintext multiplication scheme is exactly the same as BFV's scheme (Summary~\ref*{subsec:bfv-mult-plain} in \autoref{subsec:bfv-mult-plain}). 
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-plain}} BGV Ciphertext-to-Plaintext Multiplication}}]
+$\textsf{RLWE}_{S, \sigma}(M + \Delta E) \cdot \Lambda$
+
+$= (A, \text{ } B) \cdot \Lambda$
+
+$= (A \cdot \Lambda, \text{ }  B \cdot \Lambda )$
+
+$= \textsf{RLWE}_{S, \sigma}((M \cdot \Lambda) + \Delta E\cdot \Lambda )$
+\end{tcolorbox}
+
+Notice that BGV's ciphertext-to-plaintext multiplication does not consume any multiplicative level. 
+
+\subsection{\textsf{ModDrop}}
+\label{subsec:bgv-moddrop}
+
+BGV's \textsf{ModDrop} works similar to that of CKKS's \textsf{ModDrop} (Summary~\ref*{subsec:ckks-moddrop} in \autoref{subsec:ckks-moddrop}). Remember that CKKS's ciphertext decryption relation is as follows:
+
+$M + \Delta E = A \cdot S + B \bmod q_l$
+
+$M + \Delta E = A \cdot S + B - K\cdot q_l$ \textcolor{red}{ \# where $K\cdot q_l$ represents a modulo reduction by $q_l$}
+
+BGV's \textsf{ModDrop} operation decreases its modulus from $q_l \rightarrow q_{l-1}$ is performed by updating the ciphertext $(A, B)$ to a new one: $\bm(A' = A \bmod q_{l-1}$, $B' = B \bmod q_{l-1})$. After the \textsf{ModDrop}, the ciphertext's modulus decreases from $q_l \rightarrow q_{l-1}$, yet its decryption relation still holds the same as follows:
+
+$A' \cdot S + B' - K\cdot q_l $
+
+$= (A \bmod q_{l-1}) \cdot S + (B \bmod q_{l-1}) - K\cdot q_l$
+
+$= (A - K_A\cdot q_{l-1}) \cdot S + (B - K_B\cdot q_{l-1}) - K\cdot q_l$ 
+
+$= A\cdot S + B - (K_A + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
+\textcolor{red}{ \# where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-the prime element of $q_L$)}
+
+$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ \# where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
+
+$= A\cdot S + B \bmod q_{l-1}$
+
+$= M + \Delta E$ \textcolor{red}{\# since $\Delta M + E < q_0 < q_{l-1}$}
+
+$ $
+
+As shown above, $(A', B') \bmod q_{l-1}$ decrypts to the same $M + \Delta E$, a plaintext with a scaled error. However, the noise budget (i.e., allowed threshold of the noise) decreases because the ciphertext modulus-to-noise ratio decreases. 
+
+$ $
+
+CKKS's \textsf{ModDrop} is summarized as follows:
+
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-plain}} BGV's \textsf{ModDrop}}}]
+
+Given a BGV ciphertext with the $l$-th multiplicative level $\textsf{RLWE}_{S, \sigma}(\Delta M) = (A, B) \bmod q_l$, a \textsf{ModDrop} operation is as follows: 
+
+$(A', B') \bmod q_{l-1} = (A \bmod q_{l-1}, B \bmod q_{l-1})$
+
+$ $
+
+After this, the ciphertext's multiplicative level decreases by 1, the noise's scaling factor $\Delta$ and the plaintext are unaffected, and the noise budget (i.e., allowed noise threshold) decreases. 
+
+\end{tcolorbox}
+
+
+
+\subsection{Modulus Switch}
+\label{subsec:bgv-modulus-switch}
+
+\noindent \textbf{- Reference 1:} 
+\href{https://eprint.iacr.org/2011/277.pdf}{Fully Homomorphic Encryption without Bootstrapping}
+
+
+\noindent \textbf{- Reference 2:} 
+\href{https://eprint.iacr.org/2012/099.pdf}{Homomorphic Evaluation of the AES Circuit}
+
+Remember that the requirement of modulus switch is that while we change the ciphertext modulus from $q$ to $\hat q$, it should decrypt to the same plaintext $M$. BGV's modulus switch is similar to that of RLWE modulus switch (\autoref{subsec:modulus-switch-rlwe}), but there are two additional requirements, because BGV applies the scaling factor $\Delta$ not to plaintext $M$, but to noise $E$. In the case of BFV or CKKS, their decryption process only needs to round off the noise in the LSB area. However, in the case of BGV, the plaintext is in the LSB area and its decryption process has to modulo off the noise in the higher-bit area by modulo reduction by $t$ (i.e., the plaintext modulus). More concretely, BGV's modulus switch from $(A, B \bmod q_{l}$ $\rightarrow$  $(\hat{A}, \hat{B} \bmod q_{l-1}$ should satisfy the decryption relation such that $(\hat{A} \cdot S + \hat{B} \bmod q_{l-1}) \bmod t = M$. 
+
+To find the satisfactory $\hat{A}$ and $\hat{B}$, BGV's first step is to compute $\alpha$ and $\beta$ as follows:
+
+$\alpha = t\cdot |(A \cdot t)^{-1}|_{\frac{q_l}{q_{l-1}}}$ \textcolor{red}{ \# $|(A\cdot t)^{-1}|_{\frac{q_l}{q_{l-1}}}$ is an inverse of $A\cdot t$ modulo $\frac{q_l}{q_{l-1}}$}
+
+$\beta = t\cdot |(B \cdot t)^{-1}|_{\frac{q_l}{q_{l-1}}}$
+
+$ $
+
+Then, $\alpha$ satisfies the following relation:
+
+$ \alpha \equiv 0 \bmod t$\textcolor{red}{ \# because $\alpha$ is a multiple of $t$}
+
+$\alpha \equiv A \bmod \dfrac{q_l}{q_{l-1}}$ \textcolor{red}{ \# since $\alpha \bmod \dfrac{q_l}{q_{l-1}} = t\cdot | (A \cdot t)^{-1}|_{\frac{q_l}{q_{l-1}}} \bmod \dfrac{q_l}{q_{l-1}} = A \bmod \dfrac{q_l}{q_{l-1}}$}
+
+
+$ $
+
+
+If the above two relations hold, then $A - \alpha$ becomes divisible by $\dfrac{q_l}{q_{l-1}}$ (since $A - \alpha \equiv 0 \bmod \dfrac{q_l}{q_{l-1}}$). Therefore, we can compute the following:
+
+$\hat{A} = \dfrac{A - \alpha}{\frac{q_l}{q_{l-1}}} \bmod q_{l-1}$
+
+$ = \left|\left(\dfrac{q_{l}}{q_{l-1}}\right)^{-1}\right|_{q_{l-1}} \cdot (A - \alpha) \bmod q_{l-1}$ 
+\textcolor{red}{ \# since $\dfrac{q_l}{q_{l-1}}$ divides $A - \alpha$, and $\dfrac{q_{l}}{q_{l-1}}$ and $q_{l-1}$ are co-prime}
+
+$ $
+
+$ $
+
+, where $\alpha$ is used as some small value (between $-t\cdot\dfrac{q_l}{2q_{l-1}}$ and $t\cdot\dfrac{q_l}{2q_{l-1}}$) to make $A$ divisible by $\dfrac{q_l}{q_{l-1}}$. Similarly, we compute $\hat{B}$ as follows:
+
+
+$\hat{B} = \dfrac{B - \beta}{\frac{q_l}{q_{l-1}}} \bmod q_{l-1}$
+
+$ = \left|\left(\dfrac{q_{l}}{q_{l-1}}\right)^{-1}\right|_{q_{l-1}} \cdot (B - \beta) \bmod q_{l-1}$ 
+\textcolor{red}{ \# since $\dfrac{q_l}{q_{l-1}}$ divides $B - \beta$, and $\dfrac{q_{l}}{q_{l-1}}$ and $q_{l-1}$ are co-prime}
+
+$ $
+
+$ $
+
+Next, we derive the following relation;
+
+$A \cdot S + B = M + \Delta E \pmod{q_l}$
+
+$A \cdot S + B = M + \Delta E + Kq_l$
+
+$(A - \alpha) \cdot S + (B - \beta) = M + \Delta E + Kq_l - \alpha S - \beta + Kq_l$
+
+$w^{-1} \cdot (A - \alpha) \cdot S + w^{-1} \cdot (B - \beta) = w^{-1} \cdot M + w^{-1}\cdot \Delta E + w^{-1}\cdot Kq_l - w^{-1}\alpha S - w^{-1}\beta$ \textcolor{red}{ \# multiplying both sides by $w^{-1}$, where $w = \dfrac{q_l}{q_{l-1}}$}
+
+$ $
+
+$w^{-1} \cdot (A - \alpha) \cdot S + w^{-1} \cdot (B - \beta) = w^{-1} \cdot M + w^{-1}\cdot \Delta E + Kq_{l-1} - w^{-1}\alpha S - w^{-1}\beta$ \textcolor{red}{ \# substitute $w^{-1}\cdot Kq_{l} = \dfrac{q_{l-1}}{q_{l}}\cdot Kq_{l} = Kq_{l-1}$}
+
+$ $
+
+$w^{-1} \cdot (A - \alpha) \cdot S + w^{-1} \cdot (B - \beta) = w^{-1} \cdot M + w^{-1}\cdot \Delta E - w^{-1}\alpha S - w^{-1}\beta \pmod{q_{l-1}} $ 
+
+\textcolor{red}{ \# we can do this since: (1) the left-hand side is guaranteed to be an integer, so the right-hand side must be an integer as well; (2) $w$ and $q_{l-1}$ are co-prime, so $w^{-1} \bmod q_{l-1}$ exists}
+
+$ $
+
+$\hat{A} \cdot S + \hat{B} = w^{-1} \cdot M + w^{-1}\cdot \Delta E \pmod{q_{l-1}} - w^{-1}\alpha S - w^{-1}\beta \pmod{q_{l-1}}$ \textcolor{red}{ \# by definition of $\hat{A}$ and $\hat{B}$}
+
+
+$ $
+
+Then, we get the following final decryption relation: 
+
+$w^{-1} \cdot M + w^{-1}\cdot \Delta E - w^{-1}\alpha S - w^{-1}\beta \bmod p = M$ 
+
+$ = M + \Delta E - \alpha - \beta \bmod p$ \textcolor{red}{ \# since $w^{-1} = \left(\dfrac{q_l}{q_{l-1}}\right)^{-1} \equiv 1 \bmod q$ (because $q_l \equiv q_{l-1} \equiv 1 \bmod p$)}
+
+$ = M $ \textcolor{red}{ \# since $\alpha \equiv \beta \equiv 0 \bmod p$}
+
+$ $
+
+In order for the above final decryption step to hold, it must be the  case that $|w^{-1} \cdot M + w^{-1}\cdot \Delta E| < \dfrac{q_l}{2}$, otherwise they will overflow the $q_l$ modulus boundary and corrupt the plaintext message $M$ during modulo-$q_{l-1}$ reductions. As far as this noise threshold is satisfied, $(\hat{A}, \hat{B}) \bmod q_{l-1}$ is a valid ciphertext that satisfies the decryption relation:
+
+$(\hat{A}\cdot S + \hat{B} \bmod q_{l-1}) \bmod p = M$
+
+$ $
+
+$\lfloor \frac{P}{Q} [x]_Q \rceil = \frac{P[x]_Q - t [P x t^{-1}]_Q}{Q} \equiv [- t [P x t^{-1}]_Q Q^{-1} ]_P$
+
+We summarize BGV's modulus switch as follows:
+
+I'd like to learn why $\textsf{ct}'(s) \bmod t = [m]_t$. Let's denote $\dfrac{q}{q'} = d$. Then, we can denote the prime number $\dfrac{q'}{q} \bmod q'$ as $d^{-1} \bmod q'$. 
+In your slide, $\textsf{ct}'(s)$ has the term $\dfrac{q'}{q}\cdot [m]_t \bmod q'$, which is $d^{-1} \cdot [m]_t \bmod q'$.
+I suppose that $( d^{-1} \cdot [m]_t \bmod q' ) \bmod t \neq [m]_t$, because $d^{-1} \bmod t \neq 1$.
+Therefore, it's not intuitive for me why $\textsf{ct}'(s) \bmod t = [m]_t$.
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-modulus-switch}} BGV's Modulus Switch}}]
+
+For a BGV ciphertext $(A, B)$ where $B = A\cdot S + M + p \cdot E$ ($t = \Delta$), we must design its ciphertext modulus chain for $L$ multiplicative levels based on CRT such that each $l$-th multiplicative level's ciphertext modulus is $q_l = \prod\limits_{m=0}^{l}w_m$, where each $w_i$ is a prime. Also, for all ciphertext moduli, the following should hold: $q_0 \equiv q_1 \equiv q_2 \equiv \cdots \equiv q_L \bmod t$. We also require $q_0 = w_0 \gg (p + 1)\cdot n$, and $w_0 \gg w_1 \approx w_2 \approx ... w_L$ (which reserves a sufficient noise budget to guarantee that $\hat A\cdot S + \hat B - K\cdot q_{l-1} = (\hat A\cdot S + \hat B) \bmod q_{l-1}$).
+
+$ $
+
+Given this setup, a modulus switch from $q_l \rightarrow q_{l-1}$ is equivalent to updating $(A, B) \bmod q_l$ to $(\hat A, \hat B) \bmod q_{l-1}$ as follows:
+
+
+$ \hat{A} = \left|\left(\dfrac{q_{l}}{q_{l-1}}\right)^{-1}\right|_{q_{l-1}} \cdot (A - \alpha) \bmod q_{l-1}$ \textcolor{red}{ \# where $\alpha = t\cdot  A \cdot |t^{-1}|_{\frac{q_l}{q_{l-1}}}$}
+
+$ \hat{B} = \left|\left(\dfrac{q_{l}}{q_{l-1}}\right)^{-1}\right|_{q_{l-1}} \cdot (B - \beta) \bmod q_{l-1}$ \textcolor{red}{ \# where $\beta = t\cdot  B \cdot |t^{-1}|_{\frac{q_l}{q_{l-1}}}$}
+
+$ $
+
+Once the new ciphertext $(\hat A, \hat B) \bmod q_{l-1}$ is derived, then it decrypts to the same original plaintext polynomial $M$ as follows:
+
+$((A\cdot S + B) \bmod q_{l}) \bmod t = ((\hat A \cdot S + \hat B) \bmod q_{l-1}) \bmod t = M$
+
+$ $
+
+After the modulus switch, the noise's scaling factor $\Delta = t$ stays the same as before. The secret key $S$ also stays the same as before. On the other hand, the noise $E$ decreases, but its relative magnitude to the ciphertext modulus stays about the same (i.e., the noise budget is about the same). 
+
+\end{tcolorbox}
+
+
+
+\subsubsection{Difference between Modulus Switch and \textsf{ModDrop}}
+\label{subsubsec:bgv-moddrop-vs-modswitch}
+
+In the case of CKKS (\autoref{subsubsec:ckks-mult-cipher-rescale}), the difference between modulus switch and \textsf{ModDrop} is that the former scales down the plaintext's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} does not affect the plaintext's scaling factor. 
+
+Similarly, in the case of BGV, modulus switch and \textsf{ModDrop} both lower a BFV ciphertext's modulus from $q_l \rightarrow q_{l-1}$. However, the key difference is that rescaling also decreases the noise's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} keeps the noise's scaling factor the same as it is. Therefore, rescaling is used only during ciphertext-to-ciphertext multiplication (to be explained in \autoref{subsec:bgv-mult-cipher}) when scaling down the plaintext's scaling factor in the intermediate ciphertext from $\Delta^2 \rightarrow \Delta$. Meanwhile, \textsf{ModDrop} is used to reduce the modulo computation time during an application's routine when it becomes certain that the ciphertext will not undergo any additional ciphertext-to-ciphertext multiplication (i.e., no need to further decrease the ciphertext's modulus). 
+
+The main difference in modulus switch between CKKS and BGV is that the former decreases the plaintext's scaling factor by approximately $\dfrac{1}{\Delta}$, whereas the latter decreases the noise's scaling factor by approximately $\dfrac{1}{\Delta}$. 
+
+
+\subsection{Ciphertext-to-Ciphertext Multiplication}
+\label{subsec:bgv-mult-cipher}
+
+\noindent \textbf{- Reference 1:} 
+\href{https://www.inferati.com/blog/fhe-schemes-bgv}{Introduction to the BGV encryption scheme}
+
+Since BGV uses a leveled ciphertext modulus chain like CKKS, BGV's ciphertext-to-ciphertext multiplication scheme is exactly the same as CKKS's scheme (Summary~\ref*{subsec:bfv-mult-cipher} in \autoref{subsec:bfv-mult-cipher}), except for the rescaling step which uses BGV's modulus switch (\autoref{subsec:bgv-modulus-switch}). 
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-cipher}} BGV Ciphertext-to-Ciphertext Multiplication}}]
+
+Suppose we have the following two RLWE ciphertexts:
+
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$, \text{ } where $B^{\langle 1 \rangle} = -A \cdot S +  M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}$
+
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}) = (A^{\langle 2 \rangle}, B^{\langle 2 \rangle})$, \text{ } where $B^{\langle 2 \rangle} = -A \cdot S +  M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}$
+
+$ $
+
+Multiplication between these two ciphertexts is performed as follows:
+
+$ $
+
+\begin{enumerate}
+\item \textbf{\underline{Basic Multiplication}}
+
+Compute the followings:
+
+$ $
+
+$D_0 = B^{\langle 1 \rangle}\cdot B^{\langle 2 \rangle}$
+
+$D_1 = A^{\langle 1 \rangle}\cdot B^{\langle 2 \rangle} + A^{\langle 2 \rangle}\cdot B^{\langle 1 \rangle}$
+
+$D_2 = A^{\langle 1 \rangle} \cdot A^{\langle 2 \rangle}$
+
+$ $
+
+, where $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle}$
+
+$ = \underbrace{B^{\langle 1 \rangle}\cdot B^{\langle 2 \rangle}}_{D_0}  + \underbrace{(B^{\langle 2 \rangle}\cdot A^{\langle 1 \rangle} + B^{\langle 1 \rangle}\cdot A^{\langle 2 \rangle})}_{D_1} \cdot S + \underbrace{(A^{\langle 1 \rangle} \cdot A^{\langle 2 \rangle})}_{D_2} \cdot \underbrace{S \cdot S}_{S^2}$
+
+$= D_0 + D_1\cdot S + D_2 \cdot S^2$
+
+$ $
+
+\item \textbf{\underline{Relinearization}} 
+
+$\textsf{RLWE}_{S, \sigma}\bm(M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle}\bm) $
+
+$= \textsf{RLWE}_{S, \sigma}\bm{(}\text{ }D_0 + D_1\cdot S + D_2\cdot S^2\text{ }\bm{)}$
+
+$  \approx C_\alpha + C_\beta, \text{ where } \text{ } C_\alpha = (D_1, D_0), \text{ }\text{ }\text{ } C_\beta = \bm{\langle}  \text{ } \textsf{Decomp}^{\beta, l}(D_2), \textsf{RLev}_{S, \sigma}^{\beta, l}(S^2)  \text{ } \bm{\rangle}$ 
+
+$ $
+
+\item \textbf{\underline{(Optional) Rescaling}}
+
+Switch the ciphertext's modulo from $q \rightarrow \hat q$ by updating $(A, B)$ to $(\hat A, \hat B)$ as follows: according to BGV's modulus switch explained in Summary~\ref*{subsec:bgv-modulus-switch} (\autoref{subsec:bgv-modulus-switch}):
+
+$ $
+
+$\textsf{RLWE}_{S, \sigma}(\text{ }C = (A, B)\text{ } \bm{)} \in \mathcal{R}_{\langle n, q \rangle} \rightarrow \textsf{RLWE}_{S, \sigma}(\text{ }\hat{C} = (\hat{A}, \hat{B})\text{ } \bm{)} \in \mathcal{R}_{\langle n, \hat q \rangle}^{2}$ 
+
+$q = \prod\limits_{m=0}^{l}w_m$ \textcolor{red}{ \text{ } \# where all $w_m$ are CRT moduli}
+
+$\hat{q} = \dfrac{q}{w_l}$
+
+\begin{itemize}
+\item \textbf{Updating $\bm A$ to $\bm{\hat{A}}$:} Find $\hat A$ such that among all possible $\hat A$ such that $\hat A \equiv A \bmod t$, choose the one whose each term's coefficient is the closest integer to that of polynomial $\dfrac{q_{l-1}}{q_l}\cdot A$. 
+\item \textbf{Updating $\bm B$ to $\bm{\hat{B}}$:} Likewise, find $\hat B$ such that among all possible $\hat B$ such that $\hat B \equiv A \bmod t$, choose the one whose each term's coefficient is the closest integer to that of polynomial $\dfrac{q_{l-1}}{q_l}\cdot B$
+\end{itemize}
+
+$ $
+
+After the above update of $(A, B)$ to $(\hat A, \hat B)$, the noise scaling factor $\Delta = t$ and the plaintext $M$ stay the same, as we proved in \autoref{subsec:bgv-modulus-switch} that $((\hat A \cdot S + B) \bmod \hat q) \bmod t = M$.
+
+$ $
+
+Unlike in CKKS, BGV's final noise can be further reduced than before the multiplication (i.e., the noise-to-ciphertext ratio can be reduced) if the following holds:
+
+$ \Delta^2 \cdot E^{\langle 1 \rangle} E_2^{\langle 2 \rangle}  < \dfrac{q_l}{q_{l-1}} = w_l$
+
+$ $
+
+The order of relinearization and rescaling is swapped. 
+
+\end{enumerate}
+\end{tcolorbox}
+
+\para{Details of the Optional Reduction:} Before rescaling, the contents of the ciphertext is $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle} + \epsilon$, where $\epsilon$ is a relinearization error. Therefore, after each ciphertext-to-ciphertext multiplication, the noise's scaling factor will become squared as $\Delta^2, \Delta^4, \Delta^8, \cdots$. To reduce such exponential noise growth rate, we can optionally rescale down the ciphertext by $w_l = \dfrac{q_l}{q_{l-1}} > \Delta$ at the end of each relinearization at multiplicative level $l$, which the noise's growth rate (effectively keeping the noise scaling factor as $\Delta$). After rescaling, the ciphertext gets scaled down by $w_l$ and then added by $\epsilon_2$ as follows: (1) we compute $\dfrac{1}{w_l}\cdot(A, B)$; and then (2) find the closest integer coefficient polynomial such that its modulo reduction by $t$ is the same as $(A, B) \bmod t$ (as explained in Summary~\ref*{subsec:bgv-modulus-switch} in \autoref{subsec:bgv-modulus-switch}), which generates a new noise $\epsilon_2$. Before the rescaling, the noise grew roughly by the factor of $\Delta = t$ (as the largest noise term is $\Delta^2 E^{\langle 1 \rangle} E^{\langle 2 \rangle}$), but the rescaling process reduces this growth rate by the factor of $w_l$ and then introduces a new constant noise $\epsilon_2$. Therefore, if $w_l$ is sufficiently bigger than $\Delta = t$, the resulting noise will decrease compared to both $\Delta E^{\langle 1 \rangle}$ ad $\Delta E^{\langle 2 \rangle}$. Due to this reason, when we design the modulus chain of BGV, we require each $w_l$ to be sufficiently bigger than $\Delta = t$ to effectively reduce the noise growth rate upon each ciphertext-to-ciphertext multiplication (while ensuring the property that its reduction modulo $t$ gives the plaintext $M$ as explained in \autoref{subsec:bgv-modulus-switch}). Meanwhile, the constant noise term $\epsilon_2$ gets newly added upon each rescaling, but this term becomes part of the rescaled ciphertext, which will be later reduced by the factor of $w_{l-1}$ in the future rescaling. Therefore, BGV's rescaling upon ciphertext-to-ciphertext multiplication effectively suppresses the noise growth. 
+
+On the other hand, the above design strategy of noise reduction is inapplicable to CKKS, because in CKKS, we use the scaling factor $\Delta$ to scale the message $M$ (not the noise $E$), and thus CKKS requires each $w_l \approx \Delta$ in order to preserve the plaintext's scaling factor $\Delta$ as the same value across ciphertext-to-ciphertext multiplications. Because of this difference in design, CKKS inevitably increases the noise after each ciphertext-to-ciphertext multiplication. 
+
+
+\subsection{Homomorphic Key Switching}
+\label{subsec:bgv-key-switching}
+
+BGV's homomorphic key switching scheme changes an RLWE ciphertext's secret key from $S$ to $S'$. This scheme is exactly the same as BFV's key switching scheme (Summary~\ref*{subsec:bfv-key-switching} in \autoref{subsec:bfv-key-switching}).
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-key-switching}} BGV's Key Switching}}]
+$\textsf{RLWE}_{S',\sigma}(M + \Delta E) = (0, B) + \bm{\langle} \textsf{Decomp}^{\beta, l}(A), \text{ } \textsf{RLev}_{S', \sigma}^{\beta, l}(S) \bm{\rangle}$
+\end{tcolorbox}
+
+
+
+\subsection{Homomorphic Rotation of Input Vector Slots}
+\label{subsec:bgv-rotation}
+
+
+BGV's homomorphic rotation scheme of input vector slots is exactly the same as BFV's rotation scheme (Summary~\ref*{subsec:bfv-rotation} in \autoref{subsec:bfv-rotation}). 
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-rotation}} BGV's Homomorphic Rotation of Input Vector Slots}}]
+
+
+Suppose we have a BGV ciphertext and a key-switching key as follows:
+
+$\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B)$, \text{ } $\textsf{RLev}_{S, \sigma}^{\beta, l}(S^{J(h)})$
+
+$ $
+
+Then, the procedure of rotating the first-half elements of the ciphertext's original input vector $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) and the second-half elements of $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) is as follows: 
+
+\begin{enumerate}
+\item Update $A(X)$, $B(X)$ to $A(X^{J(h)})$, $B(X^{J(h)})$. 
+\item Perform the following key switching (\autoref{subsec:ckks-key-switching}) from $S(X^{J(h)})$ to $S(X)$:
+
+$\textsf{RLWE}_{S(X),\sigma}\bm{(} M(X^{J(h)}) + \Delta E(X^{J(h)})\bm{)} $
+
+$= \bm{(} 0, B(X^{J(h)}) \bm{)} \text{ } + \text{ } \bm{\langle}  \textsf{Decomp}^{\beta, l}\bm{(}A(X^{J(h)})\bm{)}, \text{ } \textsf{RLev}_{S(X), \sigma}^{\beta, l}\bm{(}S(X^{J(h)})\bm{)} \bm{\rangle}$
+\end{enumerate}
+
+
+\end{tcolorbox}
+
+
+
+
+\subsection{Modulus Bootstrapping}
+\label{subsec:bgv-bootstrapping}
+
+\noindent \textbf{- Reference:} 
+\href{https://eprint.iacr.org/2022/1363.pdf}{Bootstrapping for BGV and BFV Revisited}
+
+BGV's bootstrapping shares some common aspects with both BFV and CKKS's bootstrapping. The goal of BGV's bootstrapping is the same as that of CKKS, but the internal technique is closer to that of BFV. Like CKKS, BGV's bootstrapping resets the depleted ciphertext modulus from $q_l \rightarrow q_L$ (strictly speaking, from $q_l \rightarrow q_{l'}$ such that $l < l' < L$ because the bootstrapping operation itself consumes some multiplicative levels). This modulus transition effectively not only resets the multiplicative level but also reduces the noise-to-ciphertext modulus ratio. To achieve this goal, one might think that BGV's bootstrapping can take the same \textsf{ModRaise} approach used by CKKS's bootstrapping. However, this is not a directly applicable solution, because CKKS uses the sine approximation technique to eliminate the $q_0$-overflows after the mod-raise. On the other hand, BGV is an exact encryption scheme which does not allow approximation of plaintext values. Therefore, BGV uses BFV's digit extraction approach to eliminate its modulus overflows. To use digit extraction, like in the case of BFV, BGV also has to modify the plaintext modulus to a specially prepared one, $p^\varepsilon$. To configure both the plaintext modulus and the ciphertext modulus to desired values (i.e., $p^\varepsilon$ and $q_L$), BGV uses the homomorphic decryption technique like BFV.  
+
+%However, to achieve this bootstrapping goal, BGV internally uses the digit extraction polynomial used for BFV's bootstrapping (not the sine approximation polynomial used for CKKS's bootstrapping). 
+
+The technical details of BGV's bootstrapping are as follows. 
+
+$ $
+
+Suppose that we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}(M) \bmod q_l$, where $A\cdot S + B = M + \Delta E$, \text{ } $\Delta = t = p$ (a prime), and $q_l$ is the ciphertext modulus of the current multiplicative level. 
+
+$ $
+
+\begin{enumerate}
+
+\item \textbf{\underline{Modulus Switch} from $\bm{q_l \rightarrow \hat{q}}$:} BFV's bootstrapping initially switches the ciphertext modulus from $q \rightarrow p^{\varepsilon-1}$ where $q \gg p^\varepsilon > t = p$. On the other hand, BGV's bootstrapping switches the ciphertext modulus to $\hat{q}$ that is a special modulus satisfying the relation: $\hat{q} \equiv 1 \bmod p^\varepsilon$ and $\hat{q} > p^\varepsilon$ (where $p^\varepsilon$ will be explained in the next step). In order for a modulus switch from $q_l \rightarrow \hat{q}$ (i.e., the special modulus) to be possible, the prime factor(s) comprising $\hat{q}$ have to be congruent with $q_{0}, \cdots, q_L \bmod t$, so that we can do \textsf{ModRaise} from $q_l \rightarrow q_l\cdot \hat{q}$ and then a modulus switch from $q_l\cdot \hat{q} \rightarrow \hat{q}$ (based on the technique learned in \autoref{subsec:bgv-modulus-switch}). Eventually, this step's modulus switch transforms the ciphertext $(A, B) \bmod q_l$ to $(\hat{A}, \hat{B}) \bmod \hat{q}$, during which the plaintext modulus (i.e., noise's scaling factor) stays the same. 
+
+$ $
+
+\item \textbf{\underline{Ciphertext Coefficient Multiplication by $\bm{p^{\varepsilon-1}}$}:} 
+The constant $p^{\varepsilon-1}$ is multiplied to each coefficient of the ciphertext polynomials, updating the ciphertext to $p^{\varepsilon-1} \cdot (\hat{A}, \hat{B}) = (A', B') \bmod \hat{q}$, where $A' = p^{\varepsilon-1}\hat{A}$ and $B' = p^{\varepsilon-1}\hat{B}$. This operation updates the original decryption relation $\hat{A}\cdot S + \hat{B} = M + p E + K\hat{q}$ to $A'\cdot S + B' = p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q}$ (where $K' = K \cdot p^{\varepsilon - 1}$). Notice that the plaintext modulus (i.e., noise's scaling factor) has been changed from $p \rightarrow p^\varepsilon$. When choosing $\varepsilon$, BGV enforces the following additional constraint: $\hat{q} > p^\varepsilon$ and $\hat{q}  \equiv 1 \bmod p^\varepsilon$.
+
+$ $
+
+\item \textbf{\underline{\textsf{ModRaise}}:} We mod-raise $(\hat{A}, \hat{B}) \bmod \hat{q}$ to $(\hat{A}, \hat{B}) \bmod q_L$, where $\hat{q} \ll q_L$. The mod-raised ciphertext's decryption relation is as follows:
+
+$\hat{A}\cdot S + \hat{B} = p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q} \bmod q_L$
+
+$ $
+
+Note that $K'\hat{q}$ is the $\hat{q}$-multiple overflow and does not get reduced modulo $q_L$, because $K'\hat{q} \ll q_L$. We saw the same situation in the CKKS bootstrapping's \textsf{ModRaise} (\autoref{subsubsec:ckks-bootstrapping-high-level}) which resets the ciphertext modulus from $q_0 \rightarrow q_L$ at the cost of incurring a $Kq_0$ overflow, which is to be removed by \textsf{EvalExp}'s homomorphic (approximate) sine graph evaluation (\autoref{subsubsec:ckks-bootstrapping-evalexp-details}). Likewise, BGV's mod-raised ciphertext $(\hat{A}, \hat{B}) \bmod q_L$ is $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}) \bmod q_L$, an encryption of $p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}$. In the later step, we will use digit extraction to homomorphically eliminate $K'\hat{q}$ like we did in BFV's bootstrapping. The reason BGV's bootstrapping uses digit extraction instead of approximated sine evaluation is that BGV is an exact encryption scheme like BFV (not an approximate scheme like CKKS). 
+
+%Suppose we have the bootstrapping key $\textsf{RLWE}_{S, \sigma}(S) \bmod q_L$ where $q_L$ is the highest multiplicative level's ciphertext modulus, noise scaling factor (i.e., the plaintext modulus) $\Delta = p^\varepsilon$. We homomorphically decrypt $(A', B') \bmod q_l$ with $\textsf{RLWE}_{S, \sigma}(S) \bmod q_L$ as follows:
+
+%$A' \cdot \textsf{RLWE}_{S, \sigma}(S) + B' = \textsf{RLWE}_{S, \sigma}(A'\cdot S + B') \bmod q_L$
+
+%$ = \textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K') \bmod q_L$
+
+%$ $
+
+%Note that $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K') = (A^{\langle L \rangle}, B^{\langle L \rangle}) \bmod q_L$ is a ciphertext that encrypts $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$. In other words, the following relation holds: 
+
+%$A^{\langle L \rangle} \cdot S + B^{\langle L \rangle} = p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' \bmod q_L$
+
+%$ $
+
+%, where $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' < q_L$. 
+%The above homomorphic decryption is almost the same as BFV's homomorphic decryption step. One difference is that BFV's homomorphic decryption outputs a ciphertext whose modulus is $q$ (i.e. BFV's original ciphertext modulus), whereas BGV's homomorphic decryption outputs a ciphertext whose modulus is $q_L$ (i.e., the highest multiplicative level's ciphertext modulus in BGV's modulus chain). Therefore, BGV's homomorphic decryption is equivalent to CKKS's \textsf{ModRaise} (\autoref{subsubsec:ckks-bootstrapping-high-level}) that changes the ciphertext modulus from $\hat{q} \rightarrow q_L$. 
+
+%Next, our goal is to convert the plaintext polynomial $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' \bmod p^\varepsilon$ into $p^{\varepsilon-1} M + p^\varepsilon K''$ (for some small $K''$) by using homomorphic digit extraction, the same technique used for BFV's digit extraction. Before applying this technique, we need to first move them to the input vector slots by applying the \textsf{CoeffToSlot} step as we did in CKKS and BFV's bootstrapping.  
+
+$ $
+
+\item \textbf{\textsf{\underline{CoeffToSlot}}:} This step works the same way as CKKS and BFV's \textsf{CoeffToSlot} step: move the coefficients of polynomial $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$ to the input vector slots of a new ciphertext. We denote polynomial $Z = p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$, and each $i$-th coefficient of $Z$ as $z_i$. For the \textsf{CoeffToSlot} step, we homomorphically compute $Z \cdot n^{-1} \cdot \hathat W \cdot I_n^R$. Then, each input vector slot of the resulting ciphertext ends up storing each $z_i$ of the polynomial $Z$. 
+
+$ $
+
+\item \textbf{\underline{Digit Extraction}:} At this point, each input vector slot contains each coefficient of $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$, which is $p^{\varepsilon-1} m_i + p^\varepsilon e_i + \hat{q}k'_i$. Recall that we designed the lowest multiplicative level's ciphertext modulus $\hat{q}$ and the homomorphic multiplication factor $p^\varepsilon$ such that $\hat{q} \equiv 1 \bmod p^\varepsilon$, or $\hat{q} = k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1$ for some positive integer $k^{\langle \hat{q} \rangle }$. Therefore, the following holds: 
+
+$p^{\varepsilon-1} m_i + p^\varepsilon e_i + \hat{q}k'_i$
+
+$ = p^{\varepsilon-1} m_i + p^\varepsilon e_i + k'_i\cdot(k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1) $  \textcolor{red}{ \# applying $\hat{q} = k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1$}
+
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon  \cdot (e_i + k'_i\cdot k^{\langle \hat{q} \rangle }) $ \textcolor{red}{ \# rearranging the terms}
+
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ \# where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k^{\langle \hat{q} \rangle } $}
+
+$ = p^{\varepsilon-1} m_i + k'_i \bmod p^\varepsilon$
+
+$ $
+
+To eliminate $k'_i$ from the above, we will use the same digit extraction polynomial $G_{\varepsilon, v}$ as in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}) :
+
+$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-1} d_* p^j\right)$ \textcolor{red}{ \# where $d_0 \in \mathbb{Z}_p$, \text{ } and $d_*$ can be any integer, \text{ } and $1 \leq \varepsilon' \leq w$}
+
+$F_\varepsilon(z_i) \equiv d_0 \bmod p^{\varepsilon'+1}$
+
+$G_{\varepsilon,v}(z_i) \equiv z_i - \underbrace{F_\varepsilon \circ F_\varepsilon \circ \cdots \circ F_\varepsilon}_{v \text{ times}} (z_i) \bmod p^\varepsilon$
+
+$ $
+
+We evaluate the digit extraction polynomial $G_{\varepsilon,v}$ for $v = \{\varepsilon-1, \varepsilon-2, \cdots, 1\}$ recursively total $\varepsilon-1$ times, at each coefficient $z_i$ of polynomial $Z$ stored at input vector slots. This operation finally zeros out the least significant (base-$p$) $\varepsilon-1$ digits of $z_i$ as follows:
+
+$G_{\varepsilon,1} \circ G_{\varepsilon,2} \circ \cdots \circ G_{\varepsilon,\varepsilon-2} \circ G_{\varepsilon,\varepsilon-1} (z_i) \bmod p^\varepsilon$
+
+$= p^{\varepsilon-1}m_i \bmod p^\varepsilon$
+
+$= p^{\varepsilon-1}m_i + k_i''p^\varepsilon$
+
+$ $
+
+, where $k_i''p^\varepsilon$ is some multiple of $p^\varepsilon$ to account for the original $p^\varepsilon$-overflow term plus an additional $p^\varepsilon$-overflows generated during the digit extraction. Note that the digit extraction step reduces the ciphertext modulus from $q_L \rightarrow q_{l'}$ (where $l'$ is an integer smaller than $L$), because the homomorphic evaluation of the polynomial $G_{\varepsilon, v}$ requires some ciphertext-to-ciphertext multiplications, which consume some multiplicative levels. 
+
+$ $
+
+\item \textbf{\underline{Homomorphic Multiplication by $\bm{p^{-(\varepsilon-1)}}$}:} 
+The output of the digit extraction step is $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ stored in each input vector slot. We homomorphically multiply $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to it, which is a modulo-$p^\varepsilon$ inverse of $p^{\varepsilon-1}$. 
+Note that $p^{-(\varepsilon-1)}$ is guaranteed to exist because $\mathbb{Z}_{p^\varepsilon}$ is a finite field (i.e., Galois field) whose every element is guaranteed to have its counterpart inverse (Theorem~\ref*{subsec:field-def} in \autoref{subsec:field-def}). Multiplying $p^{-(\varepsilon-1)}$ to $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is equivalent to an exact division of $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ by $p^{\varepsilon-1}$, because $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is exactly divisible by $p^{\varepsilon-1}$. We homomorphically compute the following:
+
+$|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) = m_i + k''_ip \pmod{p^\varepsilon}$ 
+
+$ $
+
+Note that the plaintext value $m_i + k''_ip \bmod p^\varepsilon$ is also equivalent to $m_i + k''_ip \bmod p$ (because $p$ divides $p^\varepsilon$), and is also equivalent to $m_i \bmod q$ (i.e., the message portion without the noise is $m_i$). Therefore, homomorphically multiplying $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to a ciphertext that encrypts $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ is equivalent to switching the plaintext modulus from $p^\varepsilon \rightarrow p$. 
+
+$ $
+
+In an alternative design, one can eliminate this step of homomorphic multiplication by $p^{-(\varepsilon-1)}$ by re-designing the digit extraction algorithm to gradually shift down the digits by total (base-$p$) $\varepsilon-1$ digits (by multiplying by $|p^{-1}|_{p^{\varepsilon}}$ at the end of each round of digit extraction). 
+
+
+$ $
+
+
+\item \textbf{\textsf{\underline{SlotToCoeff}}:} This step works the same way as BFV's \textsf{SlotToCoeff} step: move $m_i + k''_ip$ stored in the input vector slots back to the polynomial coefficient positions by homomorphically multiplying with $\hathat W^*$. 
+
+Meanwhile, the coefficient domain is in modulo $q_L$. From modulo-$q_L$'s perspective, the result of step 5 is $|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) \bmod q_L$. It is guaranteed that $|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) < q_L$, because $p^\varepsilon \ll q_L$. Therefore, result of \textsf{SlotToCoeff} is a set of polynomial coefficients whose noise is within the noise budget of $q_L$. 
+
+$ $
+
+\item \textbf{\textsf{\underline{Noise Term Re-interpretation}}:} The output of the \textsf{SlotToCoeff} step is $\textsf{RLWE}_{S, \sigma}(M + K''p)$, which also contains some noise term $E'p$ generated during the homomorphic operations of step $2 \sim 6$. Therefore, we can view the $K''p$ term in the plaintext as part of the noise of the ciphertext. In other words, we can view $\textsf{RLWE}_{S, \sigma}(M + K''p)$ with some noise term $E'p$ as a ciphertext $\textsf{RLWE}_{S, \sigma}(M)$ with the noise term $E'p + K''p = (E' + K'')\cdot p$. This step does not require any additional computation. The size of the coefficients of $K''$ is upper-bounded because the operations of the \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff} steps are fixed. With a proper setup of the cryptographic parameters of BGV, we can guarantee that the noise-to-ciphertext modulus ratio always gets decreased after BGV's bootstrapping (i.e., $\dfrac{||E + K'||_{\infty}}{q_L} < \dfrac{||E' + K''||_{\infty}}{q_l} < \dfrac{||E||_{\infty}}{\hat{q}}$, where $||P||_\infty$ denotes the maximum absolute coefficient value of polynomial $P$).
+
+\end{enumerate}
+
+
+
+\subsubsection{The Reason for Modulus Switch from $q_l \rightarrow \hat{q}$} 
+
+BGV switches the modulus from $q_l \rightarrow \hat{q}$ to eliminate the $q_l$-multiple overflows during bootstrapping. After switching the modulus $q_l \rightarrow \hat{q}$ and then \textsf{ModRaise}, the encrypted plaintext gets the $K'\hat{q}$ overflow term, which can be reduced to $K'$ from the plaintext modulus's perspective due to the special property $\hat{q} \equiv 1 \bmod p^\varepsilon$ (where $p^\varepsilon$ is the plaintext modulus).
+
+
+\subsubsection{\textsf{ModRaise} instead of Homomorphic Decryption} 
+
+In the case of BFV's bootstrapping, we need homomorphic decryption (\autoref{subsubsec:bfv-bootstrapping-homomorphic-decryption}) because we need to simultaneously change the ciphertext's plaintext scaling factor from $p^{\varepsilon-1} \rightarrow \left\lfloor\dfrac{q}{p}\right\rfloor$ and the ciphertext modulus from $p^\varepsilon \rightarrow q$. On the other hand, in the case of CKKS's bootstrapping, \textsf{ModRaise} instead of homomorphic decryption is sufficient because we only need to change the ciphertext modulus from $q_0 \rightarrow q_L$ while keeping the same plaintext scaling factor $\Delta \approx \dfrac{q_l}{q_{l-1}}$. Similarly, in the case of BGV's bootstrapping, \textsf{ModRaise} instead of homomorphic decryption is sufficient because we only need to change the ciphertext modulus from $\hat{q} \rightarrow q_L$ while keeping the noise scaling factor (i.e., the plaintext modulus) $\Delta = p^\varepsilon$. 
+
+
+\subsubsection{The Choice of $\varepsilon$} 
+
+The larger $\varepsilon$ is, the greater the (base-$p$) digit-wise gap between $p^{\varepsilon-1}M$ and $K'$ becomes, and thus the less likely it is that the decryption would fail (i.e., fail to zero out $K'$). But a larger $\varepsilon$ means the digit extraction operation would be more expensive. 
+
+\subsubsection{Generalization to $\Delta = p^r$} 
+
+Like the case of BFV's bootstrapping (Summary~\ref*{subsubsec:bfv-bootstrapping-summary} in \autoref{subsubsec:bfv-bootstrapping-summary}), we can generalize the plaintext modulus (i.e., noise scaling factor) to $p^r$ where $p$ is a prime and $r$ can be any positive integer. 
+

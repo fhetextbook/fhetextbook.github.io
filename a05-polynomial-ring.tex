@@ -1,0 +1,256 @@
+\textbf{- Reference 1:} 
+\href{https://en.wikipedia.org/wiki/Polynomial_ring}{Polynomial Ring (Wikipedia)}~\cite{polynomial-ring}
+
+\noindent \textbf{- Reference 2:} 
+\href{https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Discrete_Structures_(Doerr_and_Levasseur)/16%3A_An_Introduction_to_Rings_and_Fields/16.03%3A_Polynomial_Rings}{Polynomial Rings (LibreTexts)}~\cite{polynomial-rings}
+
+\subsection{Overview}
+\label{subsec:poly-ring-overview}
+
+\textbf{A polynomial ring} is a set of polynomials where polynomial computations over the $(+, \cdot)$ operators (e.g., $f_1 + f_2$, $f_1 \cdot (f_2 - f_3)$, $f_1 + f_2 + f_4$) are closed, associative, commutative, and distributive. 
+
+
+A polynomial ring $\bm{\mathbb{Z}_q[x] / (x^n + 1)}$ is a set of all polynomials $f_i$ that have the following properties:
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:poly-ring-overview}} Ring}}]
+
+For a polynomial $f \in \mathbb{Z}_q[x] / (x^n + 1)$ where $f = c_0 + c_1x^1 + \gap{$\cdots$} + c_{n-1}x^{n-1}$:
+
+\begin{itemize}
+\item \textbf{Coefficient Ring:} $f_i$'s each polynomial coefficient $c_j$ is in integer modulo $p$.
+
+(i.e., $c_i + q \equiv c_i \gap{\text{mod}} q$). 
+
+$ $
+
+\item \textbf{Degree Ring:} Any polynomial $f'$ can be broken down to: 
+
+$ $
+
+$f' = (x^n + 1)(f_q) + f_r \equiv f_r \in \mathbb{Z}_q[x]/(x^n + 1)$
+
+$ $
+
+, where $f_q$ is called a quotient polynomial and $f_r$ is called a remainder polynomial resulting from the polynomial division of $f'$ divided by $x^n + 1$.
+
+$ $
+
+\item \textbf{Polynomial Congruence:} If two polynomials are congruent, they belong to the same equivalence class, in which case they are interchangeable in the polynomial operations ($+, \cdot$) in the polynomial ring. For example, if: 
+
+$f' \equiv f_{r1} \in \mathbb{Z}_q[x] / (x^n + 1)$
+
+$f{''} \equiv f_{r2} \in \mathbb{Z}_q[x] / (x^n + 1)$
+
+$f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
+
+$ $
+
+, then the polynomial operation result of $f' + f''$ is in the same equivalence class as: 
+
+$f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
+
+
+\end{itemize}
+
+To make the notation simple, we denote the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, q \rangle}$
+\end{tcolorbox}
+
+Recall that in an integer ring $\mathbb{Z}_p$, a big number $b$ can be divided by $p$ and $b = q \cdot p + r \equiv r \bmod p$ (the quotient $q$ gets eliminated). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by polynomial modulo $x^n + 1$, which gives:
+
+$f_{big} = (X^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
+
+\noindent, whereas $f_q$ is a quotient polynomial and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated and $f_r$ (i.e., the simplified version of $f_{big}$) can be interchangeably used for polynomial operations $(+, \cdot)$ in the polynomial ring. 
+Polynomial simplification in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$, because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$ where $p \equiv 0$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
+
+For a polynomial modulo, we normally choose a cyclotomic polynomial $x^n + 1$ (where $n$ is $2^p$ for some integer $p$) as the divisor, as it provides computational efficiency. 
+
+\subsubsection{Example}
+\label{subsubsec:poly-ring-ex}
+Given $f \in \mathbb{Z}_7[x] / (x^2 + 1)$, suppose $f = x^4 + 3x^3 + 11x^2 + 6x + 10$. Then, 
+
+$ $
+
+$f = (x^2)\cdot(x^2) + 3x\cdot(x^2) + 11x^2 + 6x + 10$ 
+
+$ \equiv (-1)(-1) + 3x(-1) +  (11 \gap{\text{mod}} 7)(-1) + 6x + (10 \gap{\text{mod}} 7)$
+
+$ = 3x \in \mathbb{Z}_7[x] / (x^2 + 1)$
+
+$ $
+
+\noindent Thus, $f(x) = x^4 + 3x^3 + 11x^2 + 6x + 10$ is equivalent to ($\equiv$) $3x$ in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$.
+
+
+\subsubsection{Discussion}
+\label{subsubsec:polynomial-ring-discuss}
+
+\begin{table}[h]
+\centering
+\noindent\adjustbox{max width=\columnwidth}{
+\begin{tabular}{|c||c|c|} % left align
+\hline
+&\textbf{Integer Ring} & \textbf {Polynomial Ring} \\
+\hline
+\hline
+\textbf{{Set Elements}} & number & polynomial \\
+\hline
+\textbf{{Ring Notation}} & $\mathbb{Z}_p = \{0, 1, \gap{$\cdots$}, p - 1\}$  & $\mathbb{Z}_p[x] / (x^n + 1)$ \\
+\textbf{{\& Definition}} & A set of all integers between $0$ and $p$ & A set of all polynomials $f$ such that\\
+&& $f= c_0 + c_1x^1 + c_2x^2 \cdots + c_{n-1}x^{n-1}$ \\
+&& where each coefficient $c_i \in \mathbb{Z}_p$ \\
+&& and $f$'s degree is less than $n$ \\
+\hline
+\textbf{{Supported}}&$(+, \cdot)$& $(+, \cdot)$ \\
+\textbf{{Operations}}&(Addition, Multiplication)& (Addition, Multiplication) \\
+\hline
+\textbf{{($+$) Operation}} & We know how to add numbers & $f_a = a_0 + a_1x^1 + a_2x^2 \cdots + a_{d_a-1}x^{d_a-1}$ \\
+ & & $f_b = b_0 + b_1x^1 + b_2x^2 \cdots + b_{d_b-1}x^{d_b-1}$ \\
+ & & Then, $f_a + f_b$ is computed as: \\
+ & & $f_c = \sum\limits_{i=0}^{\textsf{max}(d_a,d_b)}(a_i+b_i)x^i$ \\
+\hline
+\textbf{{($\cdot$) Operation}} & We know how to multiply numbers & $f_a = a_0 + a_1x^1 + a_2x^2 \cdots + a_{d_a-1}x^{d_a-1}$ \\
+ & & $f_b = b_0 + b_1x^1 + b_2x^2 \cdots + b_{d_b-1}x^{d_b-1}$ \\
+ & & Then, $f_a \cdot f_b$ is computed as: \\
+ & & $f_c = \sum\limits_{i=0}^{d_a+d_b}\sum\limits_{j=0}^{i}a_jb_{i-j}x^i$ \\
+\hline
+& For $a, b \in \mathbb{Z}_p$ & For $f_a, f_b \in \mathbb{Z}_p[X]/(x^x + 1)$,\\
+\textbf{{Commutative}}  & $ a + b = b + a$ & $f_a + f_b = f_b + f_a$\\
+\textbf{{Associative}} & $(a + b) + c = a + (b + c)$ & $(f_a + f_b) + f_c = f_a + (f_b + f_c)$\\
+\textbf{{Distributive}} & $a \cdot (b + c) = a\cdot b + a\cdot c$ & $f_a \cdot (f_b + f_c) = f_a\cdot f_b + f_a\cdot f_c$\\
+\textbf{{Closed}}& $a + b \equiv c \in \mathbb{Z}_p$, $a \cdot b \equiv d \in \mathbb{Z}_p$ & $f_a + f_b \equiv f_c \in \mathcal{R}_{\langle n, q \rangle}$, \\
+&&$f_a \cdot f_b \equiv f_d \in \mathcal{R}_{\langle n, q \rangle}$\\
+\hline
+\textbf{{Congruency ($\equiv$)}} & Two numbers $a \equiv b$ in modulo $p$ if: & Two polynomials $f_a \equiv f_b$ in $\mathbb{Z}_p[x] / (x^n + 1)$ if:    \\
+ & $(a \gap{\text{mod}} p) = (b \gap{\text{mod}} p)$   & $f'_a = f_a \gap{\text{mod}} (x^n + 1) = \sum\limits_{i=0}^{d_a} a_ix^i$ \\
+ & & $f'_b = f_b \gap{\text{mod}} (x^n + 1) = \sum\limits_{i=0}^{d_b} b_ix^i$, \\
+&& $d_a = d_b$ and $a_i \equiv b_i$ in modulo $p$\\
+&&for all $0 \leq i \leq d_a$\\ 
+\hline
+\end{tabular}}
+\centering
+\caption{Comparison between a number ring and a polynomial ring.
+}
+\label{tab:ring-comparison}
+\end{table}
+
+\para{Congruency:} If two numbers are congruent, they are in the same \textit{congruency class}. The same is true for two congruent polynomials. If the computation results of two mathematical formulas belong to the same congruency class, then their computations wrap around within modulo of their congruency. This is a useful property for cryptographic schemes where encryption \& decryption computations wrap around their values within a limited set of binary bits. Congruency is useful for simplifying computation. For example, a big number or a complex polynomial can be \textit{normalized} to a simpler number or polynomial by using the congruency rule, which reduces the computation overhead. 
+
+\para{Polynomial Evaluation:} Note that two numbers that belong to the same congruency class are not necessarily the same number. For example, $5 \equiv 10$ modulo 5, but these two numbers are not the same. Likewise, two congruent polynomials are not the same. While two congruent polynomials in a polynomial ring can be interchangeably used for polynomial operations supported in the ring (i.e., $(+, \cdot)$), such as $f_1 + f_2$ or $f_1 \cdot (f_2 - f_3)$, two congruent polynomials do not necessarily give the same result when they are evaluated for a certain variable value $x = a$. For example, in the previous example of \autoref{subsubsec:poly-ring-ex}, the two polynomials $x^4 + 3x^3 + 11x^2 + 6x + 10$ and $3x$ are congruent in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$. However, these two polynomials do not give the same evaluation results for $x = 0$: the original polynomial gives 10, whereas the reduced (i.e., simplified) polynomial gives 0. This discrepency in evaluation occurs because we defined two polynomials $M_1$ and $M_2$ to be congruent over $x^n + 1$ (i.e., $M_1 \equiv M_2$) if their remainder is the same after being divided by $X^n + 1$ (i.e., $M_1 = Q \cdot (X^n + 1) + M_2$ for some polynomial $Q$). Therefore, $M_1$ and $M_2$ will be evaluated to the same polynomial $M_2$ if they are evaluated at the $x$ values such that $X^n = -1$, which make the $X^n +1$ term 0. The solutions for $x^n = -1$ are called the $n$-th roots of unity, which we will learn in \autoref{sec:roots} and \autoref{sec:cyclotomic-polynomial-integer-ring}. We summarize as follows: 
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:polynomial-ring-discuss}} Polynomial Evaluation over Polynomial Ring}}]
+
+Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n + 1$. This is equivalent to the following relation: $M_1 = Q \cdot (X^n + 1) + M_2$ $Q$ for some polynomial $Q$. Then, $M_1(X)$ and $M_2(X)$ are guaranteed to be evaluated to the same value if $X=x_i$ is the solution for $X^n + 1$ (i.e., $X$ is the $n$-th root of unity). That is , $M_1(x_i) = M_2(x_i)$. 
+
+\end{tcolorbox}
+
+\para{Number Ring \& Polynomial Ring:} These two rings share many common characteristics, which are summarized in \autoref{tab:ring-comparison}. 
+
+
+\subsection{Coefficient Rotation}
+\label{subsec:coeff-rotation}
+
+Coefficient rotation is a process of shifting the entire coefficients of a polynomial (either to the left or right) in a polynomial ring. In order to rotate the entire coefficients of a polynomial by $h$ positions to the left, we multiply $x^{-h}$ to the polynomial. 
+
+For example, suppose we have a polynomial as follows:
+
+$ $
+
+$f(x) = c_0 + c_1x^1 + c_2x^2 + \gap{$\cdots$} + c_hx^h + \gap{$\cdots$} + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+
+$ $
+
+To shift the entire coefficients of $f$ to the left by $h$ positions (i.e., shift $f$'s $h$-th coefficient to the constant term), we compute $f \cdot x^{-h}$, which is:
+
+$ $
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:coeff-rotation}} Polynomial Rotation}}]
+
+Give the $(n-1)$-degree polynomial: 
+
+$ $
+
+$f(x) = c_0 + c_1x^1 + c_2x^2 + \gap{$\cdots$} + c_hx^h + \gap{$\cdots$} + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+
+$ $
+
+The coefficients of $f(x)$ can be rotated to the left by $h$ positions by multiplying to $f(x)$ by $x^{-h}$ as follows:
+
+$ $
+
+$f(x) \cdot x^{-h} = c_0\cdot x^{-h} + c_1x^1 \cdot x^{-h} + c_2x^2 \cdot x^{-h} + \gap{$\cdots$} + c_hx^h \cdot x^{-h} + \gap{$\cdots$} + c_{n-1}x^{n-1} \cdot x^{-h}$
+$\equiv c_h + c_{h+1}x + c_{h+2}x^2 + \gap{$\cdots$} + c_{n-1}x^{n-1-h} - c_0x^{n - h} - \gap{$\cdots$} - c_{h-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+\end{tcolorbox}
+
+$ $
+
+Note that multiplying the two polynomials $f$ and $x^{-h}$ will have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. Therefore, the rotated polynomial, which is the result of $f \cdot x^{-h}$, will also have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. 
+
+Note that the coefficient signs change when they rotate around the boundary of $x^n (= -1)$, as the computation is done in the polynomial ring $Z_q[x] / (x^n + 1)$.
+
+
+
+
+\subsubsection{Example}
+\label{subsec:coeff-rotation-ex}
+
+Suppose we have a polynomial $f \in \mathbb{Z}_8 / (x^4 + 1)$ as follows:
+
+$\mathbb{Z}_8 = \{-4, -3, -2, -1, 0, 1, 2, 3\}$
+
+$f = 2 + 3x - 4x^2 -x^3$
+
+
+
+
+$ $
+
+The polynomial ring $\mathbb{Z}_8 / (x^4 + 1)$ has the following 4  congruence relationships: 
+
+$\bm{x^4 \equiv -1}$
+
+$x^4 \cdot x^{-1} \equiv -1 \cdot x^{-1}$
+
+$\bm{x^3 \equiv -x^{-1}}$
+
+$ $
+
+$x^4 \equiv -1$
+
+$x^4 \cdot x^{-3} \equiv -1 \cdot x^{-3}$
+
+$\bm{x \equiv -x^{-3}}$
+
+$ $
+
+$x^4 \equiv -1$
+
+$x^4 \cdot x^{-2} \equiv -1 \cdot x^{-2}$
+
+$\bm{x^2 \equiv -x^{-2}}$
+
+$ $
+
+
+
+Then, based on the coefficient rotation technique in Summary~\ref*{subsec:coeff-rotation}.1, rotating 1 position to the left is equivalent to computing $f \cdot x^{-1}$ as follows:
+
+$f\cdot x^{-1} = 2\cdot(x^{-1}) + 3x\cdot(x^{-1}) - 4x^2\cdot(x^{-1}) - x^3\cdot(x^{-1})$
+
+$\equiv -2x^{3} + 3 - 4x^1 - x^2$
+
+$= 3 - 4x^1 - x^2 -2x^{3}$
+
+$ $
+
+As another example, rotating 3 positions to the left is equivalent to computing $f \cdot x^{-3}$ as follows:
+
+$f\cdot x^{-3} = 2\cdot(x^{-3}) + 3x\cdot(x^{-3}) - 4x^2\cdot(x^{-3}) - x^3\cdot(x^{-3})$
+
+$\equiv -2x - 3x^2 + 4x^3 - 1$
+
+$= -1 - 2x - 3x^2 + 4x^3$
+
+$= -1 - 2x - 3x^2 + (4 \equiv -4 \bmod 8) x^3$
+
+$\equiv -1 - 2x - 3x^2 -4x^3$
+

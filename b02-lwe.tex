@@ -1,0 +1,124 @@
+
+\textbf{- Reference:} 
+\href{https://www.zama.ai/post/tfhe-deep-dive-part-1}{TFHE Deep Dive: Part I - Ciphertext types}~\cite{tfhe-1}
+
+
+
+$ $
+
+
+
+
+\subsection{Setup}
+Let $[0, t-1)$ be the plaintext range, and $[0, q-1)$ the ciphertext range, where $t < q$ ($t$ is much smaller than $q$). Randomly pick a vector ${S}$ of length $k$ comprising $k$ binary numbers as a secret key (denoted as $S \xleftarrow{\$} \mathbb{Z}_2^k$). Let $\Delta = \dfrac{q}{t}$, the scaling factor of plaintext.
+
+\subsection{Encryption}
+\label{subsec:lwe-enc}
+
+\begin{enumerate}
+\item Suppose we have a plaintext $m \in \mathbb{Z}_t$ to encrypt. \item Randomly pick a vector ${A} \in \mathbb{Z}_q^k$ (of length $k$) as a one-time public key (denoted as $A \xleftarrow{\$} \mathbb{Z}_q^k$).
+\item Randomly pick a small one-time noise $e \in \mathbb{Z}_q$ sampled from the Gaussian distribution $\chi_\sigma$ (denoted as $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$). 
+\item Scale $m$ by $\Delta$, which is to compute $\Delta \cdot m$. This converts $m \in \mathbb{Z}_t$ into $\Delta \cdot m \in \mathbb{Z}_q$.
+\item Compute $b = {A} \cdot {S} + \Delta \cdot m + e \in \mathbb{Z}_q$. 
+\end{enumerate}
+
+$ $
+
+The LWE encryption formula is summarized as follows:
+
+$ $
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:lwe-enc}} LWE Encryption}}]
+\textbf{\underline{Initial Setup}:} $\Delta = \dfrac{q}{t}$, $S \xleftarrow{\$} \mathbb{Z}_2^k$, where $t$ divides $q$
+
+$ $
+
+$ $
+
+\textbf{\underline{Encryption Input}:} $m \in \mathbb{Z}_t$, $A \xleftarrow{\$} \mathbb{Z}_q^k$, $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$
+
+$ $
+
+%\textbf{Encryption}
+
+\begin{enumerate}
+\item Scale up $m \longrightarrow \Delta \cdot m \text{ } \in \mathbb{Z}_q$
+
+\item Compute $b = {A} \cdot {S} + \Delta  m + e \pmod q$
+\item $\textsf{LWE}_{S,\sigma}(\Delta  m) = ({A}, b) \text{ } \in \mathbb{Z}_q^{k + 1}$ 
+\end{enumerate}
+
+\end{tcolorbox}
+
+\subsection{Decryption}
+\label{subsec:lwe-dec} 
+
+\begin{enumerate}
+\item Given the ciphertext $({A}, b)$ where $b = {A} \cdot {S} + \Delta \cdot m + e \in \mathbb{Z}_q$, compute $b - {A} \cdot {S}$, which gives the same value as $\Delta \cdot m + e \in \mathbb{Z}_q$. 
+\item Round $\Delta \cdot m + e \in \mathbb{Z}_q$ to the nearest multiple of $\Delta$ (i.e., round it as a base $\Delta$ number), which is denoted as $\lceil \Delta \cdot m + e \rfloor_{\Delta}$. This rounding operation successfully eliminates $e$ and gives $\Delta m$, provided $e$ is small enough to be $e < \dfrac{\Delta}{2}$. If $e \geq \dfrac{\Delta}{2}$, then some of the higher bits of the noise $e$ will overlap the plaintext $m$, won't be blown away and corrupt some lower bits of the plaintext $m$.
+\item Compute $\dfrac{\Delta m} {\Delta}$, which is equivalent to right-shifting $\lceil \Delta \cdot m + e \rfloor_{\Delta}$ by $\text{log}_2 \Delta$ bits. 
+\end{enumerate}
+
+$ $
+
+The LWE decryption formula is summarized as follows:
+
+$ $
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:lwe-dec}} LWE Decryption}}]
+
+\textbf{\underline{Decryption Input}:} $C = (A, b) \text{ } \in \mathbb{Z}_q^{k+1}$
+
+$ $
+
+%\textbf{Decryption}
+\begin{enumerate}
+\item $\textsf{LWE}^{-1}_{S,\sigma}(C) = b - A\cdot S = \Delta  m + e \pmod q$
+
+\item Scale down $\Bigg\lceil\dfrac{ \Delta  m + e } {\Delta}\Bigg\rfloor \bmod t = m \text{ } \in \mathbb{Z}_t$
+\end{enumerate}
+
+For correct decryption, the noise $e$ should be $e < \dfrac{\Delta}{2}$.
+
+\end{tcolorbox}
+
+During decryption, the secret key owner can subtract $A \cdot S$ from $b$ because he can directly compute $A \cdot S$ by using his secret key $S$. 
+
+The reason we scaled the plaintext $m$ by $\Delta$ is: (i) to left-shift $m$ by $\text{log}_2\Delta$ bits and separate it from the noise $e$ in the lower bits during encryption, whereas $e$ is essential to make it hard for the attacker to guess $m$ or $S$; and (ii) to eliminate $e$ in the lower bits by right-shifting it by $\Delta$ bits without compromising $m$ in the higher bits during decryption. The process of right-shifting (i.e., scaling) the plaintext $m$ by $\text{log}_2\Delta$ bits followed by adding the noise $e$ is illustrated in \autoref{fig:scaling}.
+
+\subsubsection{In the Case of $t$ not Dividing $q$}
+\label{subsubsec:scaling-factor-computation}
+
+In Summary~\ref*{subsec:lwe-enc} (\autoref{subsec:lwe-enc}), we assumed that $t$ divides $q$. In this case, there is no upper or lower limit on the size of plaintext $m$: its value is allowed to wrap around modulo $t$ indefinitely, yet the decryption works correctly. This is because any $m$ value greater than $t$ will be correctly modulo-reduced by $t$ when we do modulo reduction by $q$ during decryption.
+
+On the other hand, suppose that $t$ does not divide $q$. In such a case, we set the scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, provided $q \gg t$, the decryption works correctly even if $m$ is a large value that wraps around $t$. We will show why this is so. 
+
+We can denote plaintext $m \bmod t$ as $m = m' + kt$, where $m' \in \mathbb{Z}_t$ and $k$ are some integers we use to represent the modulo $t$ wrap-around value portion of $m$. And we set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added scaled plaintext value is as follows:
+
+$\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e = \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ \# by applying $m = m' + kt$}
+
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$  \textcolor{red}{ \# where $0 \leq \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor < 1$}
+
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - (\dfrac{q}{p} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$
+
+$ $
+
+We treat the above noisy scaled ciphertext as $= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - e' + e$, where $e' = kt$, the maximum possible value of $\left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$. In other words, we overestimate the noise caused by $(\dfrac{q}{p} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$ to $kt$, because the maximum value this term can become is less than $kt$.
+
+Given the LWE decryption relation $b - A\cdot S \bmod q = \Delta m + e$, we can decrypt the above message by performing:
+
+$\left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - e' + e \bmod q\right)\right\rfloor \bmod t$
+
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - kt + e \bmod q\right)\right\rfloor \bmod t$
+
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - kt + e \right)\right\rfloor \bmod t$
+
+$= \left\lceil m'  - \dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$
+
+$= m'$  \textcolor{red}{ \# provided $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$}
+
+To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ where $t$ does not divide $q$, the decryption works correctly as far as the error bound $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ holds. This error bound can break if: (1) the noise $e$ is too large; (2) the plaintext modulus $t$ is too large; and (3) the plaintext value wraps around $t$ too many times (i.e., $k$ is too large). A solution to ensure $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is that the ciphertext modulus $q$ is sufficiently large. To put it differently, if $q \gg t$, then the error bound will hold. 
+
+Therefore, we can generalize the formula for the plaintext's scaling factor in Summary~\ref*{subsec:lwe-enc} (in \autoref{subsec:lwe-enc}) as $\left\lfloor\dfrac{q}{t}\right\rfloor$ where $t$ does not necessarily divide $q$. 
+
+

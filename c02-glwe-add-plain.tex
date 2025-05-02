@@ -1,0 +1,57 @@
+Suppose we have a GLWE ciphertext $C$ and a new plaintext polynomial $\Lambda$ as follows: 
+
+
+$C = \textsf{GLWE}_{S, \sigma}(\Delta M) = ( A_1, A_2, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+
+$\Lambda$: a new plaintext polynomial
+
+$\Delta \Lambda$: a $\Delta$-scaled new plaintext polynomial
+
+$ $
+
+\noindent Let's define the following TFHE ciphertext-to-plaintext addition operation: 
+
+$C + \Delta\Lambda = ( A_1, \text{ } A_2, \gap{$\cdots$}, A_{k-1}, \text{ } B + \Delta \Lambda)$
+
+$ $
+
+\noindent Then, the following is true:
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{sec:glwe-add-plain}} GLWE Homomorphic Addition with a Plaintext}}]
+$\textsf{GLWE}_{S, \sigma}(\Delta M) + \Delta\Lambda $
+
+$=  (\{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle}) + \Delta\Lambda$
+
+$=  (\{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle} + \Delta\Lambda)$
+
+$= \textsf{GLWE}_{S, \sigma}(\Delta (M + \Lambda) )$
+\end{tcolorbox}
+
+
+This means that a plaintext polynomial to a TFHE ciphertext and decrypting it gives the same result as adding two original plaintexts. 
+
+
+
+
+\noindent \textbf{\underline{Proof}}
+\begin{enumerate}
+\item Since $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$,
+
+$B + \Delta \cdot \Lambda = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E + \Delta \cdot \Lambda = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot (M + \Lambda) + E$  \\
+
+This means that $(A_1, A_2, ... \text{ } A_{k-1}
+, B + \Delta \Lambda)$ form the ciphertext $\textsf{GLWE}_{S, \sigma}(\Delta (\Lambda + M))$
+\item Thus, \\
+$\textsf{GLWE}_{S, \sigma}(\Delta M) + \Delta\Lambda$ \\
+$ = (A_0, \text { } A_1, ... \text{ } A_{k-1}, \text { } B + \Delta \Lambda)$ \\
+$ = (\{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text { } B + \Delta \Lambda)$ \\
+$= \textsf{GLWE}_{S, \sigma}(\Delta (M + \Lambda))$
+
+\begin{flushright}
+\qedsymbol{} 
+\end{flushright}
+\end{enumerate}
+
+\subsubsection{Discussion}
+
+\para{Noise Growth: } Note that after decryption, the original ciphertext $C +\Lambda$'s noise $E$ stays the same as before. This means that ciphertext-to-plaintext multiplication does not increase the noise level.

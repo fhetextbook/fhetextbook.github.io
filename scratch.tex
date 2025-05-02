@@ -1,0 +1,110 @@
+\subsection{Another Version of RNS-based BFV Decryption: $\textsf{Dec}_{\textsf{RNS}}^{\textsf{BFV2}}$}
+\label{subsubsec:rns-dec-bfv2}
+
+In \autoref{subsubsec:rns-dec-bfv2}, we learned how to efficiently decrypt an RNS-based BFV ciphertext. Besides this method, there is another way to design an efficient decryption algorithm based on \textsf{ModRaise\textsubscript{RNS}}, \textsf{ModSwitch\textsubscript{RNS}}, \textsf{FastBConv}, and \textsf{FastBConvEx}. 
+
+$ $
+
+The initial input to $\textsf{Dec}_{\textsf{RNS}}^{\textsf{BFV2}}$ is $\textsf{ct}(s) = \Delta m + e + kq$, whose RNS representation is $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$. Note that each $x_i = (\Delta m + e + kq)_i \in \mathbb{Z}_{q_i}$, and $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$.
+
+$ $
+
+\begin{enumerate}
+
+\item \textbf{\underline{\textsf{ModRaise}} from $q \rightarrow qb$:}
+
+$\textsf{ModRaise\textsubscript{RNS}}(x, q, qb)$ \textcolor{red}{ \# where $b > q$}
+
+$= (x_1, x_2, \cdots, x_{q_k}, \textsf{FastBConv}(x, q, b))$
+
+$= (x_1, x_2, \cdots, x_{q_k}, c_1, c_2, \cdots, c_l)$
+ \textcolor{red}{ \# where $c = x + uq \bmod b$ (and $u \in [0, k - 1]$)}
+ 
+$ 
+%= (\chi_1, \chi_2, \cdots, \chi_{k+l}) 
+\text{ } \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$   
+
+$ $ 
+
+The above RNS representation collectively represents the value $x + uq \bmod qb$  $(u \in [0, k - 1])$. We assume that we chose a sufficiently large $b$ such that $x + uq \ll qb$. Therefore, $|x + uq|_{qb} = x + uq$.
+
+$ $
+
+\item \textbf{\underline{Multiplication} by $t$:} 
+
+$t\cdot 
+%(\chi_1, \chi_2, \cdots, \chi_{k+l}) = (t\chi_1, t\chi_2, \cdots, t\chi_{k+l})
+(x_1, x_2, \cdots, x_{q_k}, c_1, c_2, \cdots, c_l))
+\in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
+
+$ = 
+%(\nu_1, \nu_2, \cdots, \nu_{k+1}) 
+(|t\cdot x_1|_{q_1}, |t\cdot x_2|_{q_2}, \cdots, |t\cdot x_{q_k}|_{q_k}, |t\cdot c_1|_{b_1}, |t\cdot c_2|_{b_2}, \cdots, |t\cdot c_l|_{b_l})$ 
+
+
+$ = (\nu_1, \nu_2, \cdots, \nu_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
+
+$ $
+
+, where $\nu = t\cdot (x + u\cdot q) \bmod qb = |tx + tuq|_{qb}$. Again, we assume that we chose a sufficiently large $b$ such that $t\cdot(x + uq) \ll qb$. Therefore, $|tx + tuq|_{qb} = tx + tuq$.
+
+$ $
+
+\item \textbf{\underline{\textsf{ModSwitch}} from $qb \rightarrow b$:}
+
+
+
+$\textsf{FastBConv\textsubscript{RNS}}\bm(\{|t\cdot c_i|_{q_i}\}_{i=1}^k, q, b\bm)$
+
+$ = (\hat\nu_1, \hat\nu_2, \cdots, \hat\nu_l) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$ 
+
+$ $
+
+, where $\hat\nu = \Big||tx + tuq|_{q} + u'q\Big|_b = \Big||tx|_{q} + u'q\Big|_b$ \textcolor{red}{\# $u' \in [0, l-1]$}
+
+$ $
+
+$\textsf{ModSwitch\textsubscript{RNS}}(\{\nu_i|_{q_i}^k\}_{i=1} \cup \{\nu_i|_{b_j}^k\}_{j=1}^l, qb, b)$
+
+$ = \{|q^{-1}|_{q_j} \cdot (\nu_j - \hat{\nu}_j) \bmod b_j\}_{i=1}^{l} \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$ 
+
+$ = (\tau_1, \tau_2, \cdots, \tau_l) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
+
+$ $
+
+, where $\tau = \Big|q^{-1}\cdot(tx + tuq - |tx|_{q} + u'q)\Big|_b$
+
+$ = \left|\dfrac{tx - |tx|_{q}}{q} + tu + u')\right|_b$ \textcolor{red}{ \# where $\dfrac{tx - |tx|_{q}}{q}$ is an integer}
+
+$ = \left|\left\lfloor\dfrac{tx}{q}\right\rfloor + tu + u')\right|_b$
+
+
+$ $
+
+$ $
+
+\item \textbf{\underline{\textsf{FastBConvEx}} from $b \rightarrow t$:} 
+
+$\hat{\tau} = \textsf{ModDrop}(\tau, b, \hat{b})$ 
+
+$\beta_{\hat{\tau}} = (\textsf{FastBConv}(\hat{\tau}, \hat{b}, b_\alpha) - \hat{\tau})\cdot \hat{b}^{-1}$ \textcolor{red}{ \# where $b_\alpha = \dfrac{b}{\hat b}$ is a single modulus element}
+
+$ $
+
+$\textsf{FastBConvEx}(\tau, b, t) = \Big|\textsf{FastBConv}(\hat{\tau}, \hat{b}, t) - |\beta_{\hat{\tau}}|_{b_{\alpha}} \cdot\hat{b}\Big|_t $
+
+$= |\tau|_t$
+
+$ $
+
+$ = \left|\left\lfloor\dfrac{tx}{q}\right\rfloor + tu + u')\right|_t$
+
+$ $
+
+$ = \left\lfloor\dfrac{tx}{q}\right\rfloor + u'$
+
+$ \approx m + u'$
+
+\textcolor{red}{ALERT: The decryption is not $m$}
+
+\end{enumerate}

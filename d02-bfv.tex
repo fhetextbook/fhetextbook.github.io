@@ -973,7 +973,7 @@ Given a plaintext polynomial $M(X)$, in order to give its decoded version of inp
 
 $ $
 
-\para{Decoding $\bm{M'(X)}$ into $\bm{\vec{v}^{\langle h \rangle}}$:} Our second task is to modify our original decoding scheme in order to successfully decode $M'(X)$ into the rotated input vector $\vec{v}^{\langle h \rangle}$. For this, we will modify our original isomorphic mapping $\sigma : M(X) \longrightarrow \vec{v}$, from:
+\para{Decoding $\bm{M'(X)}$ into \boldmath$\vec{v}^{\langle h \rangle}$}: Our second task is to modify our original decoding scheme in order to successfully decode $M'(X)$ into the rotated input vector $\vec{v}^{\langle h \rangle}$. For this, we will modify our original isomorphic mapping $\sigma : M(X) \longrightarrow \vec{v}$, from:
 
 $\sigma: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}M(\omega), M(\omega^3),f(\omega^5), \cdots, M(\omega^{2n-1})\bm{)} \in \mathbb{Z}^n$ \textcolor{red}{ \text{ } \# designed in \autoref{subsec:poly-vector-transformation}}
 
@@ -1069,10 +1069,10 @@ To demonstrate that $\hathat{W}$ is a valid encoding matrix like $W$ and $\hatha
 
 \item \textbf{${\hathat{\bm W}}$ is a basis of the $\bm{n}$-dimensional vector space:} This is true, because $\hathat{W}$ is simply a row-wise re-ordering of $W$, which is still a basis of the $\bm{n}$-dimensional vector space.
 
-\item \textbf{$\hathat{\bm W}^{\bm{*}} \bm{\cdot} \hathat{\bm{W}} \bm{ = n \cdot I_n^R}$ (to satisfy Theorem~\ref*{subsec:vandermonde-euler} in \autoref{subsec:vandermonde-euler})}: This proof is split into 2 sub-proofs: 
+\item \boldmath{$\hathat{W}^{*} \cdot \hathat{W} = n \cdot I_n^R$ (to satisfy Theorem~\ref*{subsec:vandermonde-euler} in \autoref{subsec:vandermonde-euler})}: This proof is split into 2 sub-proofs: 
 \begin{enumerate}[leftmargin=2\parindent]
-\item \textbf{${\hathat{\bm W}^{\bm *} \cdot \hathat{\bm W}}$ has value $\bm{n}$ along the anti-diagonal line:} Each element along the anti-diagonal line of $\hathat{\bm W}^{\bm *} \cdot \hathat{\bm W}$ is computed as $\sum\limits_{i=0}^{n-1} \omega^{2nik} = n$ where $k$ is some integer.
-\item \textbf{${\hathat{\bm W}^{\bm *} \cdot \hathat{\bm W}}$ has value 0 at all other coordinates:} All other elements except for the ones along the anti-diagonal lines are $\sum\limits_{i=0}^{n-1}\omega^{2i} \dfrac{\omega^n - 1}{\omega - 1} = 0$ (by Geometric Sum). 
+\item \boldmath{${\hathat{ W}^{ *} \cdot \hathat{ W}}$ has value $\bm{n}$ along the anti-diagonal line:} Each element along the anti-diagonal line of \boldmath$\hathat{ W}^{ *} \cdot \hathat{ W}$ is computed as $\sum\limits_{i=0}^{n-1} \omega^{2nik} = n$ where $k$ is some integer.
+\item \boldmath{${\hathat{ W}^{ *} \cdot \hathat{ W}}$ has value 0 at all other coordinates:} All other elements except for the ones along the anti-diagonal lines are $\sum\limits_{i=0}^{n-1}\omega^{2i} \dfrac{\omega^n - 1}{\omega - 1} = 0$ (by Geometric Sum). 
 \end{enumerate}
 
 We provide \href{https://github.com/gogo9th/fhe-textbook/blob/main/soruce%20code/bfv_j_matrix_inverse_proof.py}{\underline{the Python script}} that empirically demonstrates this. 
@@ -1816,7 +1816,7 @@ $ $
 The technical details of the BFV bootstrapping procedure are as follows. Suppose we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}\bm(\Delta M\bm) \bmod q$, where $A\cdot S + B = \Delta M + E$, \text{ } $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ and $t = p$ (i.e., the plaintext modulus is a prime).
 
 \begin{enumerate}
-\item \textbf{Modulus Switch ($\bm{q \rightarrow p^\varepsilon})$:} Scale down the ciphertext modulus from $(A, B) \bmod q$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B') \bmod p^\varepsilon$, where $p^\varepsilon \ll q$. The purpose of this modulus switch is to change the plaintext modulus to $p^\varepsilon$, which is required to use the digit extraction polynomial $G_\varepsilon(x)$ (because we need to represent the input to $G_\varepsilon(x)$ as a base-$p$ number in order to interpret it as a $\bmod p^\varepsilon$ value). Notice that $\textsf{RLWE}_{S, \sigma}^{-1}\bm(\textsf{ct} = (A', B') \bm) = p^{\varepsilon-1}M + E'$, where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-1}\right)\cdot M$ \textcolor{red}{ \# the modulus switch error of $E \rightarrow E'$ plus the modulus switch error of the plaintext's scaling factor $\left\lfloor\dfrac{q}{t}\right\rfloor \rightarrow p^{\varepsilon-1}$}
+\item \textbf{Modulus Switch (\boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext modulus from $(A, B) \bmod q$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B') \bmod p^\varepsilon$, where $p^\varepsilon \ll q$. The purpose of this modulus switch is to change the plaintext modulus to $p^\varepsilon$, which is required to use the digit extraction polynomial $G_\varepsilon(x)$ (because we need to represent the input to $G_\varepsilon(x)$ as a base-$p$ number in order to interpret it as a $\bmod p^\varepsilon$ value). Notice that $\textsf{RLWE}_{S, \sigma}^{-1}\bm(\textsf{ct} = (A', B') \bm) = p^{\varepsilon-1}M + E'$, where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-1}\right)\cdot M$ \textcolor{red}{ \# the modulus switch error of $E \rightarrow E'$ plus the modulus switch error of the plaintext's scaling factor $\left\lfloor\dfrac{q}{t}\right\rfloor \rightarrow p^{\varepsilon-1}$}
 
 $ $
 
@@ -1871,11 +1871,11 @@ $ $
 
 \item \textbf{Scaling Factor Re-interpretation:} At this point, we have the ciphertext $\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon)\bm) \bmod q$, where the plaintext modulus is $p^\varepsilon$ and the plaintext scaling factor $\Delta' = \dfrac{q}{p^\varepsilon}$. Without doing any actual additional computation, we can view this ciphertext as $\textsf{RLWE}_{S, \sigma}\bm(\dfrac{q}{p}M)\bm) = \bmod q$, which is an encryption of plaintext modulus $p$ whose scaling factor $\Delta' = \dfrac{q}{p}$. This is because:
 
-$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm\right)$
+$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\bm{\Big(}\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm{\Big)}$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M + K'q \bm\right)$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M + K'q \right)$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M \bm\right)$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M \right)$
 
 
 In other words, we can view the ciphertext $ \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1} M + K'p^\varepsilon )\bm) \bmod q$ whose plaintext modulus is $p^\varepsilon$ and scaling factor $\Delta' = \dfrac{q}{p^\varepsilon}$ as another ciphertext $ \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm) \bmod q$ whose plaintext modulus is $p$ and scaling factor $\Delta = \dfrac{q}{p}$. 
@@ -2093,7 +2093,7 @@ Now, our final remaining task is to design the actual \textit{lifting} polynomia
 
 $ $
 
-\para{Designing $\bm{F_{\varepsilon'}(z_i)}$:} We will derive $F_{\varepsilon'}(z_i)$ based on the following steps. 
+\para{Designing \boldmath$F_{\varepsilon'}(z_i)$:} We will derive $F_{\varepsilon'}(z_i)$ based on the following steps. 
 
 $ $
 
@@ -2249,11 +2249,11 @@ Therefore, the output of the digit extraction and \textsf{SlotToCoeff} steps is 
 as we derived in \autoref{subsubsec:bfv-bootstrapping-homomorphic-decryption}). However, our desired outcome of the BFV bootstrapping is a noise-removed ciphertext whose plaintext modulus is $p$ and the plaintext scaling factor is $\Delta=\dfrac{q}{p}$. Without doing any actual additional computation, we can view the above ciphertext $\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon)\bm) \bmod q$ as an encryption of plaintext modulo $p$ whose scaling factor is $\Delta = \dfrac{q}{p}$. This is because:
 
 
-$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm\right)$
+$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-1}M + K'p^\varepsilon) \right)$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M + K'q \bm\right)$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M + K'q \right)$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M \bm\right) \bmod q$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M \right) \bmod q$
 
 $ $
 
@@ -2278,7 +2278,7 @@ $G_{\varepsilon,1} \circ \cdots \circ G_{\varepsilon,\varepsilon-2} \circ G_{\va
 
 $ $
 
-\para{Generalization of $\bm{t = p^r}$: } We have explained the BFV bootstrapping with the assumption that the plaintext modulus $t = p$, a prime number. However, we can generalize $t$ as $t=p^r$ where $r$ can be any positive integer. The benefit of choosing $t = p^r$ with a small $p$ instead of $t = p$ with a big $p$ is efficient noise management of the digit extraction process. As digit extraction requires many ciphertext-to-plaintext multiplications with $p, p^2, \cdots, p^{\varepsilon-1}$, using a small $p$ generates a smaller noise during the homomorphic operations.  
+\para{Generalization of \boldmath$t = p^r$: } We have explained the BFV bootstrapping with the assumption that the plaintext modulus $t = p$, a prime number. However, we can generalize $t$ as $t=p^r$ where $r$ can be any positive integer. The benefit of choosing $t = p^r$ with a small $p$ instead of $t = p$ with a big $p$ is efficient noise management of the digit extraction process. As digit extraction requires many ciphertext-to-plaintext multiplications with $p, p^2, \cdots, p^{\varepsilon-1}$, using a small $p$ generates a smaller noise during the homomorphic operations.  
 
 
 \subsubsection{Summary}
@@ -2293,7 +2293,7 @@ Suppose we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}\bm(\Delt
 $ $
 
 \begin{enumerate}
-\item \textbf{\underline{Modulus Switch} (from $\bm{q \rightarrow p^\varepsilon}$):} Scale down the ciphertext from $(A, B)$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B')$ \textcolor{red}{ \# where $p^\varepsilon \ll q$} 
+\item \textbf{\underline{Modulus Switch} (from \boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext from $(A, B)$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B')$ \textcolor{red}{ \# where $p^\varepsilon \ll q$} 
 
 $ $
 
@@ -2351,11 +2351,11 @@ $ $
 
 The output of the previous step is $\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm) \bmod q$, where $\Delta' = \dfrac{q}{p^\varepsilon}$, which is a modulo-$q$ ciphertext encrypting a modulo-$p^\varepsilon$ plaintext with the scaling factor $\dfrac{q}{p^\varepsilon}$. Without any additional computation, we can theoretically view this ciphertext as a modulo-$q$ ciphertext encrypting a modulo-$p$ plaintext with the scaling factor $\dfrac{q}{p}$. This is because: 
 
-$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm\right)$
+$\textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm) = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p^\varepsilon} \cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \right)$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M + K'q \bm\right)$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M + K'q \right)$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p}M \bm\right) \bmod q$
+$ = \textsf{RLWE}_{S, \sigma}\left(\dfrac{q}{p}M \right) \bmod q$
 
 $ $
 
@@ -2378,4 +2378,3 @@ $G_{\varepsilon,1} \circ \cdots \circ G_{\varepsilon,\varepsilon-r-2} \circ G_{\
 \end{tcolorbox}
 
 \para{Necessity of Homomorphic Decryption:} Suppose that we performed the BFV bootstrapping without homomorphic decryption. Then, the input to the digit extraction step would be $p^{\varepsilon-r}M + Kp^\varepsilon$, not $p^{\varepsilon-r}M + E' + Kp^\varepsilon$. This is because the ciphertext $(A', B')$ encrypts $\textsf{RLWE}_{S,\sigma}(\Delta'' M)$, where $\Delta'' = p^{\varepsilon-r}$. Therefore, applying the \textsf{CoeffToSlot} transformation to $\textsf{RLWE}_{S,\sigma}(\Delta'' M)$ will store the coefficients of $M \bmod p^\varepsilon$, not the coefficients of $\Delta'' M + E' = p^{\varepsilon-r}M + E' \bmod p^\varepsilon$. In order to preserve the noise $E'$ as well, we homomorphically decrypt $\textsf{RLWE}_{S,\sigma}(\Delta'' M)$ by using an encrypted secret key $\textsf{RLWE}_{S, \sigma}(\Delta' S)$ to make it $\textsf{RLWE}_{S,\sigma}\bm(\Delta' \cdot (p^{\varepsilon-r}M + E' + Kp^\varepsilon) \bm)$. 
-

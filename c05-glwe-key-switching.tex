@@ -104,7 +104,7 @@ $ $
 
 The decryption of the above ciphertext gives us:
 
-$ \textsf{GLWE}_{S', \sigma}^{-1} \bm\left( \text{ } (\overbrace{-A'_0, -A'_1, \gap{$\cdots$}, -A'_k}^k, \text{ } B - B') \text{ } \bm\right)$
+$ \textsf{GLWE}_{S', \sigma}^{-1} \bm{\Big(} \text{ } (\overbrace{-A'_0, -A'_1, \gap{$\cdots$}, -A'_k}^k, \text{ } B - B') \text{ } \bm{\Big)}$
 
 $ = B -  B' - \sum\limits_{i=0}^{k-1} -A'_iS_i'$
 
@@ -123,4 +123,3 @@ $ $
 $\textsf{GLWE}_{S',\sigma}(\Delta M)$ is an encryption of plaintext $\Delta M$ with the plaintext scaling factor 1. However, we can theoretically see this as an encryption of plaintext $M$ with the plaintext scaling factor $\Delta$. This way, we can recover the ciphertext's original scaling factor $\Delta$ without any additional computation. 
 \end{enumerate}
 \end{myproof}
-

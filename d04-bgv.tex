@@ -631,11 +631,11 @@ $ $
 
 \begin{enumerate}
 
-\item \textbf{\underline{Modulus Switch} from $\bm{q_l \rightarrow \hat{q}}$:} BFV's bootstrapping initially switches the ciphertext modulus from $q \rightarrow p^{\varepsilon-1}$ where $q \gg p^\varepsilon > t = p$. On the other hand, BGV's bootstrapping switches the ciphertext modulus to $\hat{q}$ that is a special modulus satisfying the relation: $\hat{q} \equiv 1 \bmod p^\varepsilon$ and $\hat{q} > p^\varepsilon$ (where $p^\varepsilon$ will be explained in the next step). In order for a modulus switch from $q_l \rightarrow \hat{q}$ (i.e., the special modulus) to be possible, the prime factor(s) comprising $\hat{q}$ have to be congruent with $q_{0}, \cdots, q_L \bmod t$, so that we can do \textsf{ModRaise} from $q_l \rightarrow q_l\cdot \hat{q}$ and then a modulus switch from $q_l\cdot \hat{q} \rightarrow \hat{q}$ (based on the technique learned in \autoref{subsec:bgv-modulus-switch}). Eventually, this step's modulus switch transforms the ciphertext $(A, B) \bmod q_l$ to $(\hat{A}, \hat{B}) \bmod \hat{q}$, during which the plaintext modulus (i.e., noise's scaling factor) stays the same. 
+\item \textbf{\underline{Modulus Switch} from \boldmath$q_l \rightarrow \hat{q}$:} BFV's bootstrapping initially switches the ciphertext modulus from $q \rightarrow p^{\varepsilon-1}$ where $q \gg p^\varepsilon > t = p$. On the other hand, BGV's bootstrapping switches the ciphertext modulus to $\hat{q}$ that is a special modulus satisfying the relation: $\hat{q} \equiv 1 \bmod p^\varepsilon$ and $\hat{q} > p^\varepsilon$ (where $p^\varepsilon$ will be explained in the next step). In order for a modulus switch from $q_l \rightarrow \hat{q}$ (i.e., the special modulus) to be possible, the prime factor(s) comprising $\hat{q}$ have to be congruent with $q_{0}, \cdots, q_L \bmod t$, so that we can do \textsf{ModRaise} from $q_l \rightarrow q_l\cdot \hat{q}$ and then a modulus switch from $q_l\cdot \hat{q} \rightarrow \hat{q}$ (based on the technique learned in \autoref{subsec:bgv-modulus-switch}). Eventually, this step's modulus switch transforms the ciphertext $(A, B) \bmod q_l$ to $(\hat{A}, \hat{B}) \bmod \hat{q}$, during which the plaintext modulus (i.e., noise's scaling factor) stays the same. 
 
 $ $
 
-\item \textbf{\underline{Ciphertext Coefficient Multiplication by $\bm{p^{\varepsilon-1}}$}:} 
+\item \textbf{\underline{Ciphertext Coefficient Multiplication by \boldmath$p^{\varepsilon-1}$}:} 
 The constant $p^{\varepsilon-1}$ is multiplied to each coefficient of the ciphertext polynomials, updating the ciphertext to $p^{\varepsilon-1} \cdot (\hat{A}, \hat{B}) = (A', B') \bmod \hat{q}$, where $A' = p^{\varepsilon-1}\hat{A}$ and $B' = p^{\varepsilon-1}\hat{B}$. This operation updates the original decryption relation $\hat{A}\cdot S + \hat{B} = M + p E + K\hat{q}$ to $A'\cdot S + B' = p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q}$ (where $K' = K \cdot p^{\varepsilon - 1}$). Notice that the plaintext modulus (i.e., noise's scaling factor) has been changed from $p \rightarrow p^\varepsilon$. When choosing $\varepsilon$, BGV enforces the following additional constraint: $\hat{q} > p^\varepsilon$ and $\hat{q}  \equiv 1 \bmod p^\varepsilon$.
 
 $ $
@@ -711,7 +711,7 @@ $ $
 
 $ $
 
-\item \textbf{\underline{Homomorphic Multiplication by $\bm{p^{-(\varepsilon-1)}}$}:} 
+\item \textbf{\underline{Homomorphic Multiplication by \boldmath$p^{-(\varepsilon-1)}$}:} 
 The output of the digit extraction step is $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ stored in each input vector slot. We homomorphically multiply $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to it, which is a modulo-$p^\varepsilon$ inverse of $p^{\varepsilon-1}$. 
 Note that $p^{-(\varepsilon-1)}$ is guaranteed to exist because $\mathbb{Z}_{p^\varepsilon}$ is a finite field (i.e., Galois field) whose every element is guaranteed to have its counterpart inverse (Theorem~\ref*{subsec:field-def} in \autoref{subsec:field-def}). Multiplying $p^{-(\varepsilon-1)}$ to $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is equivalent to an exact division of $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ by $p^{\varepsilon-1}$, because $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is exactly divisible by $p^{\varepsilon-1}$. We homomorphically compute the following:
 
@@ -758,4 +758,3 @@ The larger $\varepsilon$ is, the greater the (base-$p$) digit-wise gap between $
 \subsubsection{Generalization to $\Delta = p^r$} 
 
 Like the case of BFV's bootstrapping (Summary~\ref*{subsubsec:bfv-bootstrapping-summary} in \autoref{subsubsec:bfv-bootstrapping-summary}), we can generalize the plaintext modulus (i.e., noise scaling factor) to $p^r$ where $p$ is a prime and $r$ can be any positive integer. 
-

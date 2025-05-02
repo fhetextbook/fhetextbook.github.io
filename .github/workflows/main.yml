@@ -1,25 +1,54 @@
-name: CI 
-on: [push] 
-permissions:               
-  contents: write
+name: CI
 
-jobs: 
-  build: 
-   runs-on: ubuntu-latest 
-   steps: 
-   - uses: actions/checkout@v1 
-   - name: Run make4ht 
-     uses: docker://ghcr.io/michal-h21/make4ht-action:latest 
-     env: 
-       command: |          
-          apt-get update -qq 
-          apt-get install -y --no-install-recommends wget curl libnet-ssleay-perl libio-socket-ssl-perl xz-utils ghostscript imagemagick 
-          tlmgr init-usertree 
-          tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final 
-          tlmgr install --usermode esvect dvisvgm 
+# ------------------------------------------------------------------
+# Trigger
+# ------------------------------------------------------------------
+on: [push]
+
+# ------------------------------------------------------------------
+# GitHub-Pages needs the write permission
+# ------------------------------------------------------------------
+permissions:
+  contents: write        # required by peaceiris/actions-gh-pages
+
+# ------------------------------------------------------------------
+# Job
+# ------------------------------------------------------------------
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    #---------------------------------------------------------------
+    # 1. check out the repository
+    #---------------------------------------------------------------
+    - uses: actions/checkout@v4       # v4 is the current LTS
+
+    #---------------------------------------------------------------
+    # 2. run make4ht inside the dedicated container
+    #    (all commands are passed through the `command`
+    #     environment variable that the action executes with /bin/sh)
+    #---------------------------------------------------------------
+    - name: Build HTML with make4ht
+      uses: docker://ghcr.io/michal-h21/make4ht-action:latest
+      env:
+        command: |
+          set -e                        # stop the script on the first error
+          apt-get update -qq
+          apt-get install -y --no-install-recommends \
+              wget curl libnet-ssleay-perl libio-socket-ssl-perl \
+              xz-utils ghostscript imagemagick
+          tlmgr init-usertree
+          tlmgr option repository \
+              https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final
+          tlmgr install --usermode esvect dvisvgm
           make4ht -u -f html5+svg -d out 00-main.tex
-   - name: Publish the web pages 
-     uses:  peaceiris/actions-gh-pages@v3 
-     with: 
-       github_token: ${{ secrets.GITHUB_TOKEN }} 
-       publish_dir: ./out
+
+    #---------------------------------------------------------------
+    # 3. publish the `out/` directory to the gh-pages branch
+    #---------------------------------------------------------------
+    - name: Publish to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: out

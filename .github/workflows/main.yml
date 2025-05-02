@@ -1,5 +1,8 @@
 name: CI 
 on: [push] 
+permissions:               
+  contents: write
+
 jobs: 
   build: 
    runs-on: ubuntu-latest 
@@ -8,8 +11,13 @@ jobs:
    - name: Run make4ht 
      uses: docker://ghcr.io/michal-h21/make4ht-action:latest 
      env: 
-       command:           
-          "apt-get update -qq && apt-get install -y --no-install-recommends wget curl libnet-ssleay-perl libio-socket-ssl-perl xz-utils ghostscript imagemagick && tlmgr init-usertree && tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final && tlmgr install --usermode esvect dvisvgm && make4ht -u -f html5+svg -d out 00-main.tex" 
+       command: |          
+          apt-get update -qq \
+          apt-get install -y --no-install-recommends wget curl libnet-ssleay-perl libio-socket-ssl-perl xz-utils ghostscript imagemagick \
+          tlmgr init-usertree \
+          tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final \
+          tlmgr install --usermode esvect dvisvgm \
+          make4ht -u -f html5+svg -d out 00-main.tex
    - name: Publish the web pages 
      uses:  peaceiris/actions-gh-pages@v3 
      with: 

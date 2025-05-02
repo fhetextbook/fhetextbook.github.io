@@ -20,9 +20,9 @@ jobs:
          apt-get install -y --no-install-recommends \
          wget curl libnet-ssleay-perl libio-socket-ssl-perl \
          xz-utils ghostscript imagemagick      #texlive-fonts-extra libjs-mathjax dvisvgm
+         TL_REPO="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final"
          tlmgr init-usertree
-         tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet
-         tlmgr install --usermode make4ht mathjax-latex-4ht esvect
+         tlmgr --repository "$TL_REPO" install --usermode esvect mathjax-latex-4ht dvisvgm
          make4ht -u -f html5+dvisvgm+mathjax -c .github/workflows/split.cfg -d out 00-main.tex
 
       - name: Publish to GitHub Pages

@@ -22,6 +22,7 @@ jobs:
             wget curl libnet-ssleay-perl libio-socket-ssl-perl \
             xz-utils ghostscript imagemagick
           tlmgr init-usertree
+          tlmgr update --self --all
           tlmgr option repository \
             https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final
           tlmgr install --usermode esvect

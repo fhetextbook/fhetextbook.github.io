@@ -21,6 +21,7 @@ jobs:
           apt-get install -y --no-install-recommends \
             wget curl libnet-ssleay-perl libio-socket-ssl-perl \
             xz-utils ghostscript imagemagick
+          wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh | sh - -- --update
           tlmgr init-usertree
           tlmgr update --self --all
           tlmgr option repository \

@@ -20,12 +20,7 @@ jobs:
          apt-get install -y --no-install-recommends \
          wget curl libnet-ssleay-perl libio-socket-ssl-perl \
          xz-utils ghostscript imagemagick texlive-fonts-extra
-         tlmgr init-usertree
-         tlmgr option repository \
-          https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final
-         tlmgr install --usermode mathjax-latex-4ht
-         tlmgr install --usermode esvect
-         make4ht -u -f html5+mathjax -c .github/workflows/split.cfg -d out -jindex 00-main.tex
+         make4ht -u -f html5+svg -c .github/workflows/split.cfg -d out -jindex 00-main.tex
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

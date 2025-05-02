@@ -9,7 +9,7 @@ jobs:
      uses: docker://ghcr.io/michal-h21/make4ht-action:latest 
      env: 
        command:           
-          "tlmgr update --self --all && tlmgr install esvect && make4ht -u -d out 00-main.tex" 
+          "tlmgr init-usertree && tlmgr install --usermode esvect && make4ht -u -d out 00-main.tex" 
    - name: Publish the web pages 
      uses:  peaceiris/actions-gh-pages@v3 
      with: 

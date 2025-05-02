@@ -1158,13 +1158,13 @@ modulus switch to a lower level.
 
 
 \subsubsection{BGV's Ciphertext-to-Ciphertext Multiplication}
-\label{subsubsec:rns-cipher-mult-bfv}
+\label{subsubsec:rns-cipher-mult-bgv}
 
 BGV's ciphertext-to-ciphertext multiplication (Summary~\ref*{subsec:bgv-mult-cipher} in \autoref{subsec:bgv-mult-cipher}) is almost the same as CKKS's, except that BGV uses its own modulus switch ($\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$ as described in Summary~\ref*{subsec:bgv-modulus-switch} in \autoref{subsec:bgv-modulus-switch}) during the rescaling step. Therefore, BGV's RNS-based ciphertext-to-ciphertext multiplication is the same as CKKS's, except that \textsf{ModSwitch\textsubscript{RNS}} is replaced by $\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$.
 
 
 \subsubsection{BFV's Bootstrapping}
-\label{subsubsec:rns-ckks-bootstrapping}
+\label{subsubsec:rns-bfv-bootstrapping}
 
 BFV's original bootstrapping procedure (Summary~\ref*{subsubsec:bfv-bootstrapping-summary} in \autoref{subsubsec:bfv-bootstrapping-summary}) is as follows: (1) modulus switch from $q \rightarrow p^\varepsilon$; (2) homomorphic decryption; (3) \textsf{CoeffToSlot}; (4) \textsf{EvalExp}; (5) \textsf{SlotToCoeff}; and (6) re-interpretation. 
 

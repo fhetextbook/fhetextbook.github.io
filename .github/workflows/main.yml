@@ -25,7 +25,7 @@ jobs:
           tlmgr option repository \
             https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final
           tlmgr install --usermode esvect dvisvgm
-          make4ht -u -f html5+svg -d out 00-main.tex
+          make4ht -u -f html5+svg -d out -jobname=index 00-main.tex
           ls -R out || true
           du -sh out || true
 

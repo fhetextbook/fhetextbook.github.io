@@ -9,7 +9,7 @@ jobs:
      uses: docker://ghcr.io/michal-h21/make4ht-action:latest 
      env: 
        command:           
-          "apt-get update -qq && apt-get install -y --no-install-recommends wget curl libnet-ssleay-perl libio-socket-ssl-perl && tlmgr init-usertree && tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final && tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet && tlmgr install --usermode esvect && make4ht -u -d out 00-main.tex" 
+          "apt-get update -qq && apt-get install -y --no-install-recommends wget curl libnet-ssleay-perl libio-socket-ssl-perl && tlmgr init-usertree && tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final && tlmgr install --usermode esvect && make4ht -u -d out 00-main.tex" 
    - name: Publish the web pages 
      uses:  peaceiris/actions-gh-pages@v3 
      with: 

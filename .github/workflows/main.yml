@@ -19,8 +19,8 @@ jobs:
          apt-get update -qq
          apt-get install -y --no-install-recommends \
          wget curl libnet-ssleay-perl libio-socket-ssl-perl \
-         xz-utils ghostscript imagemagick texlive-fonts-extra
-         make4ht -u -f html5+svg -c .github/workflows/split.cfg -d out -jindex 00-main.tex
+         xz-utils ghostscript imagemagick texlive-fonts-extra libjs-mathjax dvisvgm
+         make4ht -u -f html5+dvisvgm+mathjax -c .github/workflows/split.cfg -d out 00-main.tex
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

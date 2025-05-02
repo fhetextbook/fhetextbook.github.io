@@ -34,15 +34,17 @@ jobs:
       env:
         command: |
           set -e                        # stop the script on the first error
-          apt-get update -qq
-          apt-get install -y --no-install-recommends \
+          apt-get update -qq && \
+          apt-get install -y --no-install-recommends  && \ 
               wget curl libnet-ssleay-perl libio-socket-ssl-perl \
-              xz-utils ghostscript imagemagick
-          tlmgr init-usertree
+              xz-utils ghostscript imagemagick && \
+          tlmgr init-usertree && \
           tlmgr option repository \
-              https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final
-          tlmgr install --usermode esvect dvisvgm
+              https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final && \
+          tlmgr install --usermode esvect dvisvgm && \
           make4ht -u -f html5+svg -d out 00-main.tex
+          ls -R out || true        # don't fail the workflow, just show us
+          du -sh out || true
 
     #---------------------------------------------------------------
     # 3. publish the `out/` directory to the gh-pages branch

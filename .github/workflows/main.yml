@@ -19,7 +19,10 @@ jobs:
          apt-get update -qq
          apt-get install -y --no-install-recommends \
          wget curl libnet-ssleay-perl libio-socket-ssl-perl \
-         xz-utils ghostscript imagemagick texlive-fonts-extra libjs-mathjax dvisvgm
+         xz-utils ghostscript imagemagick      #texlive-fonts-extra libjs-mathjax dvisvgm
+         tlmgr init-usertree
+         tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet
+         tlmgr install --usermode make4ht mathjax-latex-4ht esvect
          make4ht -u -f html5+dvisvgm+mathjax -c .github/workflows/split.cfg -d out 00-main.tex
 
       - name: Publish to GitHub Pages

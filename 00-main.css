@@ -1,37 +1,44 @@
  
 /* start css.sty */
+.rm-lmbx-10x-x-109{ font-weight: bold;}
+.rm-lmbx-8{font-size:72%; font-weight: bold;}
+.lmbsy-10x-x-109{font-weight:bold;}
+.lmbsy-10x-x-109{font-weight:bold;}
+.lmbsy-10x-x-109{font-weight:bold;}
+.lmbsy-10x-x-80{font-size:72%;font-weight:bold;}
+.lmbsy-10x-x-80{font-weight:bold;}
+.lmbsy-10x-x-80{font-weight:bold;}
+.lmbsy-7x-x-85{font-size:54%;font-weight:bold;}
+.lmbsy-7x-x-85{font-weight:bold;}
+.lmbsy-7x-x-85{font-weight:bold;}
+.lmex-10{font-size:90%;}
+.msam-10x-x-109{}
+.msam-10x-x-80{font-size:72%;}
+.msam-7x-x-85{font-size:54%;}
+.msbm-10x-x-109{}
+.msbm-10x-x-80{font-size:72%;}
+.msbm-7x-x-85{font-size:54%;}
 .rm-lmr-10x-x-109{}
+.rm-lmr-8{font-size:72%;}
+.rm-lmr-6{font-size:54%;}
+.lmmi-10x-x-109{}
+.lmmi-8{font-size:72%;}
+.lmmi-6{font-size:54%;}
+.lmsy-10x-x-109{}
+.lmsy8-{font-size:72%;}
+.lmsy6-{font-size:54%;}
 .rm-lmr-17x-x-143{font-size:221%;}
 .rm-lmbx-12x-x-207{font-size:225%; font-weight: bold;}
 .rm-lmr-12{font-size:109%;}
-.rm-lmr-8{font-size:72%;}
-.lmmi-8{font-size:72%;}
-.lmmi-6{font-size:54%;}
-.lmsy8-{font-size:72%;}
-.lmex-10{font-size:90%;}
-.msbm-10x-x-80{font-size:72%;}
-.cmbx-8{font-size:72%; font-weight: bold;}
-.cmbx-8{ font-weight: bold;}
 .rm-lmbx-12{font-size:109%; font-weight: bold;}
 .rm-lmr-10{font-size:90%;}
 .rm-lmbx-10{font-size:90%; font-weight: bold;}
-.rm-lmbx-10x-x-109{ font-weight: bold;}
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
-.lmmi-10x-x-109{}
-.lmsy-10x-x-109{}
-.msbm-10x-x-109{}
-.cmbx-10x-x-109{ font-weight: bold;}
-.cmbx-10x-x-109{ font-weight: bold;}
-.cmmib-10x-x-109{font-style: italic; font-weight: bold;}
-.cmbsy-10x-x-109{font-weight: bold;}
 .ts1-lmr10-x-x-109{}
 .rm-lmbxi-10x-x-109{ font-style:italic; font-weight: bold;}
 .rm-lmri-10x-x-109{ font-style:italic;}
 .rm-lmss-10x-x-109{ font-family: sans-serif;}
 .rm-lmssbx-10x-x-109{ font-family: sans-serif; font-weight: bold;}
-.rm-lmbx-8{font-size:72%; font-weight: bold;}
-.htf-calligraphy {font-family:cursive}
-.htf-calligraphy-bold {font-family:cursive ; font-weight: bold; }
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -44,8 +51,7 @@ a img { border-top: 0; border-left: 0; border-right: 0; }
 center { margin-top:1em; margin-bottom:1em; }
 td center { margin-top:0em; margin-bottom:0em; }
 .Canvas { position:relative; }
-img.math{vertical-align:middle;}
-div.par-math-display, div.math-display{text-align:center;}
+math { text-indent: 0em; }
 body{ margin:1em auto; max-width:80ch; padding:0 .62em; }
 h1,h2,h3,h4,h5 { line-height:1.2; }
 @media print{ body{ max-width:none } }
@@ -54,7 +60,7 @@ h1,h2,h3,h4,h5 { line-height:1.2; }
 .sectionHead, .likesectionHead { font-size: 1.5157em; }
 .subsectionHead, .likesubsectionHead { font-size: 1.3195em; }
 .subsubsectionHead, .likesubsubsectionHead { font-size: 1.1487em; }
- @media (prefers-color-scheme: dark) { img[src^="index"]{filter: invert(1); } } 
+ @media (prefers-color-scheme: dark) { img[src^="00-main"]{filter: invert(1); } } 
  body { background-color: Canvas; color: CanvasText; color-scheme: light dark; } 
 li p.indent { text-indent: 0em }
 li p:first-child{ margin-top:0em; }
@@ -113,7 +119,6 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline hr, .cline hr{border:none;border-top:1px solid black;}
 .hline {border-top: 1px solid black;}
 .hline + .vspace:last-child{display:none;}
-.hline:first-child{border-bottom:1px solid black;border-top:none;}
 .tabbing-right {text-align:right;}
 div.float, div.figure {margin-left: auto; margin-right: auto;}
 div.float img {text-align:center;}
@@ -121,25 +126,26 @@ div.figure img {text-align:center;}
 .marginpar,.reversemarginpar {width:20%; float:right; text-align:left; margin-left:auto; margin-top:0.5em; font-size:85%; text-decoration:underline;}
 .marginpar p,.reversemarginpar p{margin-top:0.4em; margin-bottom:0.4em;}
 .reversemarginpar{float:left;}
-table.equation {width:100%;}
-.equation td{text-align:center; }
-td.equation { margin-top:1em; margin-bottom:1em; } 
-td.equation-label { width:5%; text-align:center; }
-td.eqnarray4 { width:5%; white-space: normal; }
-td.eqnarray2 { width:5%; }
-table.eqnarray-star, table.eqnarray {width:100%;}
-div.eqnarray{text-align:center;}
-div.array {text-align:center;}
-div.pmatrix {text-align:center;}
-table.pmatrix {width:100%;}
-span.pmatrix img{vertical-align:middle;}
-div.pmatrix {text-align:center;}
-table.pmatrix {width:100%;}
-span.bar-css {text-decoration:overline;}
-img.cdots{vertical-align:middle;}
+.equation td{text-align:center; vertical-align:middle; }
+td.eq-no{ width:5%; }
+table.equation { width:100%; } 
+div.math-display, div.par-math-display{text-align:center;}
+.array-hline,.array-cline{ border-top: 1px solid black; height:0px; }
+.array-hline + .array-vspace:last-child{display:none;}
+.hline-mtd, .array-hline td{ display:none }
+.array-hline:first-child{border-bottom:1px solid black;border-top:none;}
+math .texttt { font-family: monospace; }
+math .textit { font-style: italic; }
+math .textsl { font-style: oblique; }
+math .textsf { font-family: sans-serif; }
+math .textbf { font-weight: bold; }
+mo.MathClass-op + mi{margin-left:0.3em}
+mi + mo.MathClass-op{margin-left:0.3em}
+ math mstyle[mathvariant="bold"] { font-weight: bold; font-style: normal; } 
+ math mstyle[mathvariant="normal"] { font-weight: normal; font-style: normal; } 
 .partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
 .index-item, .index-subitem, .index-subsubitem {display:block}
-div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}
+div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:center; margin-top: 0.5rem;}
 div.caption span.id{font-weight: bold; white-space: nowrap; }
 h1.partHead{text-align: center}
 p.bibitem { text-indent: -2em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }
@@ -167,19 +173,11 @@ figcaption.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-al
 figcaption.caption span.id{font-weight: bold; white-space: nowrap; }
 p + figcaption, img + figcaption{margin-top: 1em;}
 .abstract{margin:1em;}
-.equation td{text-align:center; }
-.equation-star td{text-align:center; }
-table.equation-star { width:100%; }
-table.equation { width:100%; }
-table.align, table.alignat, table.xalignat, table.xxalignat, table.flalign {width:95%; margin-left:5%; white-space: nowrap;}
-table.align-star, table.alignat-star, table.xalignat-star, table.flalign-star {margin-left:auto; margin-right:auto; white-space: nowrap;}
-td.align-label { width:5%; text-align:center; }
-td.align-odd { text-align:right; padding-right:0.3em;}
-td.align-even { text-align:left; padding-right:0.6em;}
-table.multline, table.multline-star {width:100%;}
-td.gather {text-align:center; }
-table.gather {width:100%;}
-div.gather-star {text-align:center;}
+.equation-star td{text-align:center; vertical-align:middle; }
+table.equation-star { width:100%; } 
+.boxed{border: 1px solid black; padding-left:2px; padding-right:2px;}
+mtd.align-odd{margin-left:2em; text-align:right;}
+mtd.align-even{margin-right:2em; text-align:left;}
 .rotatebox{display: inline-block;}
 .supertabular {text-align:center}
 div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
@@ -202,11 +200,9 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline hr, .cline hr{border:none;border-top:1px solid black;}
 .hline {border-top: 1px solid black;}
 .hline + .vspace:last-child{display:none;}
-.hline:first-child{border-bottom:1px solid black;border-top:none;}
-div.array {text-align:center;}
 div.algorithm table.caption { border-bottom: 1px solid black; margin-bottom:1pt; }
 div.algorithmic span.algorithmic{white-space:pre}
-div.subfigure {text-align:center;display:inline-block; max-width:45%;}
+div.subfigure {text-align:center;display:inline-block; max-width:45%; margin-right: 2rem;}
 dl.enumerate-enumitem{display:grid; grid-template-columns: 3ch 1fr; align-items: top; row-gap:1ch;}
 .alltt P { margin-bottom : 0em; margin-top : 0em; }
 .alltt { margin-bottom : 1em; margin-top : 1em; font-family:monospace,monospace; }
@@ -221,19 +217,20 @@ div.verbatiminput {font-family: monospace,monospace; white-space: nowrap; }
 code.lstinline{font-family:monospace,monospace;}
 pre.listings{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; }
 .lstlisting .label{margin-right:0.5em; }
-pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; }
-pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; }
+pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; text-align: left; }
+pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; text-align: left; }
 .lstinputlisting .label{margin-right:0.5em;}
+img { max-width: 100%; height: auto; }
 #tcolobox-1 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-1 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-1 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
 #tcolobox-2 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-2 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-2 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
-span#textcolor1{color:#FF0000}
-span#textcolor2{color:#FF0000}
-span#textcolor3{color:#FF0000}
-span#textcolor4{color:#FF0000}
+#textcolor1{color:#FF0000}
+#textcolor2{color:#FF0000}
+#textcolor3{color:#FF0000}
+#textcolor4{color:#FF0000}
 #tcolobox-3 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-3 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-3 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
@@ -267,11 +264,6 @@ span#textcolor4{color:#FF0000}
 #tcolobox-13 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-13 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-13 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
-#TBL-2-1{border-left: 1px solid black;}
-#TBL-2-1{border-right:1px solid black;}
-#TBL-2-1{border-right:1px solid black;}
-#TBL-2-2{border-right:1px solid black;}
-#TBL-2-3{border-right:1px solid black;}
 #adjustbox-1{border: 0.04.95em solid black;padding: 0.3.95em;}
 #tcolobox-14 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-14 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
@@ -282,5 +274,23 @@ span#textcolor4{color:#FF0000}
 #tcolobox-16 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-16 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-16 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-17 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-17 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-17 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-18 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-18 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-18 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-19 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-19 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-19 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-20 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-20 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-20 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-21 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-21 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-21 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-22 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-22 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-22 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
 /* end css.sty */
 

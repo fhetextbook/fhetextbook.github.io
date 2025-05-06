@@ -15,7 +15,7 @@ jobs:
             set -euxo pipefail         # stop on first error, echo commands
             rm -rf out                 # clean previous artefacts (optional)
             make4ht -u -f html5 \
-                    -c config.cfg \
+                    -c .github/workflows/config.cfg \
                     -d out 00-main.tex
    - name: Publish the web pages 
      uses:  peaceiris/actions-gh-pages@v3 

@@ -1,32 +1,24 @@
-name: CI
-on: [push]
-
-permissions:
+name: CI 
+on: [push] 
+permissions:               
   contents: write
 
-jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    container:               # use Michal Hrušecký’s image
-      image: ghcr.io/michal-h21/make4ht-action:latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build HTML with make4ht
-        shell: bash          # so the pipes and back-slashes work
-        run: |
-         set -e
-         apt-get update -qq
-         apt-get install -y --no-install-recommends \
-         wget curl libnet-ssleay-perl libio-socket-ssl-perl \
-         xz-utils ghostscript imagemagick      #texlive-fonts-extra libjs-mathjax dvisvgm
-         TL_REPO="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final"
-         tlmgr init-usertree
-         tlmgr --repository "$TL_REPO" install --usermode esvect mathjax-latex-4ht dvisvgm
-         make4ht -u -f html5+dvisvgm+mathjax -c .github/workflows/split.cfg -d out 00-main.tex
-
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+jobs: 
+  build: 
+   runs-on: ubuntu-latest 
+   steps: 
+   - uses: actions/checkout@v1 
+   - name: Run make4ht 
+     uses: xu-cheng/texlive-action/full@v1
+     with:
+          run: |
+            set -euxo pipefail         # stop on first error, echo commands
+            rm -rf out                 # clean previous artefacts (optional)
+            make4ht -u -f html5 \
+                    -c config.cfg \
+                    -d out 00-main.tex
+   - name: Publish the web pages 
+     uses:  peaceiris/actions-gh-pages@v3 
+     with: 
+       github_token: ${{ secrets.GITHUB_TOKEN }} 
+       publish_dir: ./out

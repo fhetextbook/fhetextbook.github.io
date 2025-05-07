@@ -2,6 +2,10 @@
 /* start css.sty */
 .rm-lmbx-10x-x-109{ font-weight: bold;}
 .rm-lmbx-8{font-size:72%; font-weight: bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
@@ -519,5 +523,14 @@ img { max-width: 100%; height: auto; }
 #tcolobox-75 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-75 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-75 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-76 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-76 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-76 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor57{color:#FFFFFF}
+#textcolor58{color:#FFFFFF}
+#textcolor59{color:#FFFFFF}
+#adjustbox-2{border: 0.04.95em solid black;padding: 0.3.95em;}
+#textcolor62{color:#FF8000}
+#textcolor63{color:#00FF00}
 /* end css.sty */
 

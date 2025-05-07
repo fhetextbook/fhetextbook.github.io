@@ -1617,6 +1617,7 @@ $M'(X) = m_0 + m_{l}X^{l} + m_{2l}X^{2l} + \cdots +  m_{n-l}X^{n-l}$
 
 During CKKS's ciphertext-to-ciphertext multiplication, each ciphertext is associated with a particular multiplicative level and it decreases by 1 upon each ciphertext-to-ciphertext multiplication (by its internal modulus rescaling operation). Reaching multiplicative level 0 is equivalent to reaching the end of a ciphertext's modulus chain and no more ciphertext-to-ciphertext multiplication can be performed. To continue with further ciphertext-to-ciphertext multiplication, CKKS provides a special operation called \textit{bootstrapping}, which is a process of resetting the ciphertext's end-of-chain modulus $q_0$ to the initial maximum modulus $q_L$ (which is either $q_0\cdot\Delta^{L}$ in the vanilla rescaling scheme, or $\prod\limits_{m=0}^{L}w_m$ in the case of using CRT, as explained in \autoref{subsubsec:ckks-mult-cipher-rescale}). 
 
+
 Suppose we have a ciphertext $(A, B)$ with multiplicative depth 0. If we decrypt a ciphertext whose multiplicative level is 0 (i.e., the ciphertext's modulus is $q_0$), then decrypting it \textit{without} reduction modulo $q_0$ would output:
 
 $\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$

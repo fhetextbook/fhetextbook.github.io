@@ -506,7 +506,7 @@ $ $
 
 $\vec{s}_{'} = (s_{0,0}, s_{0,1}, \gap{$\cdots$}, s_{0,n-1}, s_{1,0}, s_{1,1}, \gap{$\cdots$}, s_{1, n-1}, \gap{$\cdots$}, s_{k-1, n-1}) = (s'_0, s'_1, \gap{$\cdots$}, s'_{nk} ) \in \mathbb{Z}_q^{nk}$
 
-$\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h) = (a_0', a_1{'}, \gap{$\cdots$} , a_{nk}{'}, b_h) \in \mathbb{Z}_q^{nk + 1}$
+$\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h) = (a_0', a_1', \gap{$\cdots$} , a_{nk}{'}, b_h) \in \mathbb{Z}_q^{nk + 1}$
 
 
 \[
@@ -1024,7 +1024,7 @@ $ = \left(A_0 = \sum\limits_{j=0}^{15}(a_{0,0} + a_{0,1}X + \cdots), A_1 = \cdot
 
 Now, we extract the constant term's coefficient of the encrypted polynomial $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta \cdot (1 + 1X + 1X^2 + \cdots))$ by using the coefficient extraction formula (Summary~\ref{subsec:tfhe-extraction}). Specifically, we will extract the constant term's coefficient, which corresponds to $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$. We extract $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$ by computing the following:
 
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1{'}, \gap{$\cdots$} , a_k{'}, b_h)$
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k', b_h)$
 
 \[
     \text{, where } a'_{n \cdot i + j} =   

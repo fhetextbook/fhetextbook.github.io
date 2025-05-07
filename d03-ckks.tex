@@ -1636,3 +1636,24 @@ $ = B + A\cdot S = \Delta M + E + q_0\cdot K$ \textcolor{red}{ \# since $B + A\c
 As the first step of bootstrapping, we forcibly change the modulus of the ciphertext $(A, B)$ from $q_0$ to $q_L$. Then, its decryption with reduction modulo $q_L$ would output:
 
 $\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$
+
+$ = B + A\cdot S \bmod q_L$
+
+$= \Delta M + E + q_0 K \bmod q_L$
+
+Here, we assume that $q_L$ is large enough such that $\Delta M + E + q_0K \ll q_L$. This is true given $S$ has small coefficients which are either $\{-1, 0, 1\}$, and thus the coefficients of $B + A\cdot S$ would not grow much. 
+
+
+In the $\Delta M + E + q_0 K \bmod q_L$ term, notice that because of the $q_0K$ term which is not modulo-reduced by $q_0$ anymore, the ciphertext's decrypted plaintext polynomial's each $i$-th term would get a corrupted coefficient $\Delta m_i + e_i + q_0\cdot k_i \bmod q_L$ instead of $\Delta m_i + e_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0\cdot k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$.
+
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=1.0\linewidth]{figures/modulo-reduction-sine.png}
+  \caption{Sine function $f(x) = \dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi x}{q_0}\right)$ such that $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$ (provided $\Delta m_i + e_i \ll q_0$) \href{https://eprint.iacr.org/2018/153.pdf}{(Source)}}
+  \label{fig:modulo-reduction-sine}
+\end{figure}
+
+ To do so, we will take an approximated approach by using a sine function described in \autoref{fig:modulo-reduction-sine}, which has a period of $q_0$ with the amplitude $\dfrac{q_0}{2\pi}$. This sine function has the following two useful properties:
+ 
+ 

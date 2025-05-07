@@ -10,11 +10,149 @@
 </head><body>
    <!-- l. 602 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>next</a>] [<a href='BFVScheme.html'>prev</a>] [<a href='BFVScheme.html#tailBFVScheme.html'>prev-tail</a>] [<a href='#tailCKKSScheme.html'>tail</a>] [<a href='FullyHomomorphicEncryptionSchemes.html#CKKSScheme.html'>up</a>] </p></div>
    <h3 class='sectionHead' id='ckks-scheme'><span class='titlemark'>D-3   </span> <a id='x117-173000D-3'></a>CKKS Scheme</h3>
+<!-- l. 1 --><p class='noindent'>The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that
+contain imaginary numbers. Therefore, unlike BFV, GBV, or TFHE that can only compute over integers,
+CKKS can compute real-world floating point arithmetic, such as machine learning.
+</p><!-- l. 4 --><p class='indent'>   The CKKS scheme’s goal is to homomorphically compute addition and multiplication of complex
+numbers. However, while our targeted inputs are complex numbers, CKKS’s plaintext space is defined as a
+<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree
+polynomial ring with real-number coefficient having a limited precision, that is,
+<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>ℝ</mi><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+Therefore, CKKS designs its unique encoding scheme which converts the input
+complex numbers into integers which can be used as coefficients of a polynomial in
+<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></math>.
+</p><!-- l. 7 --><p class='indent'>   <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 9 --><p class='noindent'>In overall, CKKS’s encryption procedure is as follows:
+</p><!-- l. 12 --><p class='indent'>
+   </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
+1. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub class='textsubscript'><span class='rm-lmss-10'>1</span></sub>:</span> Encode the targeted input complex number into a real number
+   </dd><dt class='enumerate-enumitem'>
+2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub class='textsubscript'><span class='rm-lmss-10'>2</span></sub>:</span> Encode the real number into an integer
+   </dd><dt class='enumerate-enumitem'>
+3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encryption</span>:</span> Encrypt the integer by RLWE</dd></dl>
+<!-- l. 16 --><p class='noindent'>The encrypted RLWE ciphertext supports homomorphic addition and multiplication.
+</p><!-- l. 18 --><p class='indent'>   <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 20 --><p class='noindent'>At the end of all homomorphic operations, CKKS’s decryption procedure is as follows:
+</p><!-- l. 23 --><p class='indent'>
+   </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
+1. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decryption</span>:</span> Decrypt the RLWE ciphertext into a plaintext integer
+   </dd><dt class='enumerate-enumitem'>
+2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub class='textsubscript'><span class='rm-lmss-10'>1</span></sub>:</span> Decode the integer to a real number
+   </dd><dt class='enumerate-enumitem'>
+3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub class='textsubscript'><span class='rm-lmss-10'>2</span></sub>:</span> Decode the real number to a complex number</dd></dl>
+<!-- l. 28 --><p class='indent'>   <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 31 --><p class='indent'>   Remember that BFV is an exact encryption scheme based on integer ring. On the other hand, CKKS
+introduces a drifting error while its encoding process of rounding square-root values (included in the
+Euler’s formula) to the nearest integer. Therefore, its decryption is not exactly the same as before
+encryption. Such a small error occurring during encryption and decryption makes CKKS an <span class='rm-lmri-10x-x-109'>approximate</span>
+encryption scheme.
                                                                                          
                                                                                          
+</p><!-- l. 33 --><p class='indent'>   CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext
+addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses
+slightly different schemes than BFV for encoding the input vector (i.e., input vector slots)
+rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and
+bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations
+over complex numbers as inputs whereas BFV handles homomorphic operations over integer
+rings.
+</p><!-- l. 36 --><p class='indent'>   <!-- l. 36 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 38 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Required Background</span></span>
+</p>
+   <ul class='itemize1'>
+   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!-- tex4ht:ref: sec:modulo  --></a>
+   </li>
+   <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='Group.html#group'>Group<!-- tex4ht:ref: sec:group  --></a>
+   </li>
+   <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='Field.html#field'>Field<!-- tex4ht:ref: sec:field  --></a>
+   </li>
+   <li class='itemize'><a href='Order.html#order'><span class='ts1-lmr10-x-x-109'>§</span>A-4<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='Order.html#order'>Order<!-- tex4ht:ref: sec:order  --></a>
+   </li>
+   <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!-- tex4ht:ref: sec:polynomial-ring  --></a>
+   </li>
+   <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!-- tex4ht:ref: sec:decomp  --></a>
+   </li>
+   <li class='itemize'><a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='RootsofUnity.html#roots-of-unity'>Roots of Unity<!-- tex4ht:ref: sec:roots  --></a>
+   </li>
+   <li class='itemize'><a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'>Cyclotomic Polynomial<!-- tex4ht:ref: sec:cyclotomic  --></a>
+   </li>
+   <li class='itemize'><a href='VectorandMatrix.html#vector-and-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='VectorandMatrix.html#vector-and-matrix'>Vector and Matrix<!-- tex4ht:ref: sec:matrix  --></a>
+   </li>
+   <li class='itemize'><a href='EulersFormula.html#eulers-formula'><span class='ts1-lmr10-x-x-109'>§</span>A-11<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='EulersFormula.html#eulers-formula'>Euler’s Formula<!-- tex4ht:ref: sec:euler  --></a>
+   </li>
+   <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!-- tex4ht:ref: sec:modulus-rescaling  --></a>
+   </li>
+                                                                                         
+                                                                                         
+   <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!-- tex4ht:ref: sec:chinese-remainder  --></a>
+   </li>
+   <li class='itemize'><a href='TaylorSeries.html#taylor-series'><span class='ts1-lmr10-x-x-109'>§</span>A-14<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='TaylorSeries.html#taylor-series'>Taylor Series<!-- tex4ht:ref: sec:taylor-series  --></a>
+   </li>
+   <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!-- tex4ht:ref: sec:polynomial-interpolation  --></a>
+   </li>
+   <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!-- tex4ht:ref: sec:ntt  --></a>
+   </li>
+   <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!-- tex4ht:ref: sec:lattice  --></a>
+   </li>
+   <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!-- tex4ht:ref: sec:rlwe  --></a>
+   </li>
+   <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!-- tex4ht:ref: sec:glwe  --></a>
+   </li>
+   <li class='itemize'><a href='GLev.html#glev'><span class='ts1-lmr10-x-x-109'>§</span>B-5<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLev.html#glev'>GLev<!-- tex4ht:ref: sec:glev  --></a>
+   </li>
+   <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!-- tex4ht:ref: sec:glwe-add-cipher  --></a>
+   </li>
+   <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!-- tex4ht:ref: sec:glwe-add-plain  --></a>
+   </li>
+   <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!-- tex4ht:ref: sec:glwe-mult-plain  --></a>
+   </li>
+   <li class='itemize'><a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.2<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching<!-- tex4ht:ref: subsec:modulus-switch-rlwe  --></a>
+   </li>
+   <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!-- tex4ht:ref: sec:glwe-key-switching  --></a>
+   </li>
+   <li class='itemize'><a href='BFVScheme.html#bfv-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-2<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>: <a href='BFVScheme.html#bfv-scheme'>BFV Scheme<!-- tex4ht:ref: sec:bfv  --></a></li></ul>
+   
+   <div class='subsectionTOCS'>
+                                                                                         
+                                                                                         
+   <span class='subsectionToc'>D-3.1 <a href='EncodingandDecoding.html#encoding-and-decoding'>Encoding and Decoding</a></span>
+<br />   <span class='subsubsectionToc'>D-3.1.1 <a href='EncodingandDecoding.html#example6'>Example</a></span>
+<br />   <span class='subsectionToc'>D-3.2 <a href='EncryptionandDecryption2.html#encryption-and-decryption2'>Encryption and Decryption</a></span>
+<br />   <span class='subsectionToc'>D-3.3 <a href='CiphertexttoCiphertextAddition1.html#ciphertexttociphertext-addition1'>Ciphertext-to-Ciphertext Addition</a></span>
+<br />   <span class='subsectionToc'>D-3.4 <a href='CiphertexttoPlaintextAddition1.html#ciphertexttoplaintext-addition1'>Ciphertext-to-Plaintext Addition</a></span>
+<br />   <span class='subsectionToc'>D-3.5 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#homomorphic-ciphertexttociphertext-multiplication1'>Homomorphic Ciphertext-to-Ciphertext Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.1 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#synthetic-ciphertext-derivation'>Synthetic Ciphertext Derivation</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.2 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-decomposition'>Relinearization Method 1 – Ciphertext Decomposition</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.3 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-modulus-switch'>Relinearization Method 2 – Ciphertext Modulus Switch</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.4 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#rescaling1'>Rescaling</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.5 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#comparing-bfv-and-ckks-bootstrapping'>Comparing BFV and CKKS Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.6 <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#summary4'>Summary</a></span>
+<br />   <span class='subsectionToc'>D-3.6 <a href='CiphertexttoPlaintextMultiplication1.html#ciphertexttoplaintext-multiplication1'>Ciphertext-to-Plaintext Multiplication</a></span>
+<br />   <span class='subsectionToc'>D-3.7 <a href='textsfModDrop.html#moddrop'><span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
+<br />   <span class='subsubsectionToc'>D-3.7.1 <a href='textsfModDrop.html#difference-between-modulus-switch-and-moddrop'>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
+<br />   <span class='subsectionToc'>D-3.8 <a href='HomomorphicKeySwitching2.html#homomorphic-key-switching2'>Homomorphic Key Switching</a></span>
+<br />   <span class='subsectionToc'>D-3.9 <a href='HomomorphicRotationofInputVectorSlots1.html#homomorphic-rotation-of-input-vector-slots1'>Homomorphic Rotation of Input Vector Slots</a></span>
+<br />   <span class='subsubsectionToc'>D-3.9.1 <a href='HomomorphicRotationofInputVectorSlots1.html#example7'>Example</a></span>
+<br />   <span class='subsectionToc'>D-3.10 <a href='ContemplationonCKKSEncoding.html#contemplation-on-ckks-encoding'>Contemplation on CKKS Encoding</a></span>
+<br />   <span class='subsectionToc'>D-3.11 <a href='HomomorphicConjugation.html#homomorphic-conjugation'>Homomorphic Conjugation</a></span>
+<br />   <span class='subsectionToc'>D-3.12 <a href='SparselyPackingCiphertext.html#sparsely-packing-ciphertext'>Sparsely Packing Ciphertext</a></span>
+<br />   <span class='subsubsectionToc'>D-3.12.1 <a href='SparselyPackingCiphertext.html#forward-proof-decoding-of-sparsely-packed-ciphertext'>Forward Proof: Decoding of Sparsely Packed Ciphertext</a></span>
+<br />   <span class='subsectionToc'>D-3.13 <a href='ModulusBootstrapping.html#modulus-bootstrapping'>Modulus Bootstrapping</a></span>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                                          
                                                                                          
    <!-- l. 609 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>next</a>] [<a href='BFVScheme.html'>prev</a>] [<a href='BFVScheme.html#tailBFVScheme.html'>prev-tail</a>] [<a href='CKKSScheme.html'>front</a>] [<a href='FullyHomomorphicEncryptionSchemes.html#CKKSScheme.html'>up</a>] </p></div>
-<!-- l. 609 --><p class='indent'>   <a id='tailCKKSScheme.html'></a> </p> 
+<!-- l. 609 --><p class='indent'>   <a id='tailCKKSScheme.html'></a>  </p> 
 </body> 
 </html>

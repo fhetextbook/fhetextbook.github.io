@@ -27,9 +27,9 @@ ring (finite field) and <!-- l. 74 --><math display='inline' xmlns='http://www.w
 </p><!-- l. 76 --><p class='indent'>   <!-- l. 76 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>σ</mi> <mo class='MathClass-punc' stretchy='false'>:</mo> <mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>F</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-rel' stretchy='false'>→</mo><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>ω</mi></mrow><mrow><mn>1</mn></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-punc' stretchy='false'>,</mo><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>ω</mi></mrow><mrow><mn>3</mn></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>ω</mi></mrow><mrow><mi>n</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow><mrow><mi>n</mi></mrow></msubsup></mrow></math>
 </p><!-- l. 78 --><p class='indent'>   , where <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>ω</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>g</mi></mrow><mrow><mfrac><mrow><mi>t</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow>
  <mrow><mn>2</mn><mi>n</mi></mrow></mfrac> </mrow></msup></mrow></math> is a root of
+                                                                                         
+                                                                                         
 (i.e., primitive <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th root of
-                                                                                         
-                                                                                         
 unity) of the <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th cyclotomic
 polynomial <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math> defined
 over a prime modulo <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
@@ -79,9 +79,9 @@ slot vector into an <!-- l. 87 --><math display='inline' xmlns='http://www.w3.or
 in <a href='HomomorphicRotationofInputVectorSlots.html#summary2'><span class='ts1-lmr10-x-x-109'>§</span>D-2.9.3<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>) to support homomorphic rotation of input vector slots. Likewise, the CKKS batch encoding scheme
 uses <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> and
 <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></mrow><mrow><mo class='MathClass-bin' stretchy='false'>∗</mo></mrow></msup></math> instead
+                                                                                         
+                                                                                         
 of <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>W</mi></math> and
-                                                                                         
-                                                                                         
 <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>W</mi></mrow><mrow><mi>T</mi> </mrow></msup></math> in
 order to support homomorphic rotation. Therefore, the CKKS batch encoding scheme’s isomorphic
 mapping is updated as follows:
@@ -128,9 +128,9 @@ a rotation helper formula.
    preserve the precision of input values . On the other hand, CKKS’s down-scaled polynomial
    coefficients may lose their precision if their original input values have too many decimal digits so
    that the scaling factor cannot left-shift all of them to make them part of the integer domain, which
+                                                                                         
+                                                                                         
    means that some lower decimal digits of the input value may be rounded off, which loses precision
-                                                                                         
-                                                                                         
    of the original input. For example, suppose the polynomial coefficient <!-- l. 112 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>3</mn></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0.33333</mn><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace></mrow></math>,
    and the scaling factor <!-- l. 112 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>100</mn></mrow></math>.

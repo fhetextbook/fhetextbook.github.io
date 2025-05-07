@@ -11,10 +11,50 @@
    <!-- l. 1611 --><div class='crosslinks'><p class='noindent'>[<a href='SparselyPackingCiphertext.html'>prev</a>] [<a href='SparselyPackingCiphertext.html#tailSparselyPackingCiphertext.html'>prev-tail</a>] [<a href='#tailModulusBootstrapping.html'>tail</a>] [<a href='CKKSScheme.html#ModulusBootstrapping.html'>up</a>] </p></div>
    <h4 class='subsectionHead' id='modulus-bootstrapping'><span class='titlemark'>D-3.13   </span> <a id='x130-196000D-3.13'></a>Modulus Bootstrapping</h4>
 <!-- l. 1615 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference:  </span><a href='https://eprint.iacr.org/2018/153.pdf'>Bootstrapping for Approximate Homomorphic Encryption</a> <span class='cite'>[<span class='rm-lmbx-10x-x-109'>?</span>]</span>
+</p><!-- l. 1620 --><p class='indent'>   During CKKS’s ciphertext-to-ciphertext multiplication, each ciphertext is associated with a particular
+multiplicative level and it decreases by 1 upon each ciphertext-to-ciphertext multiplication (by its internal
+modulus rescaling operation). Reaching multiplicative level 0 is equivalent to reaching the end of a
+ciphertext’s modulus chain and no more ciphertext-to-ciphertext multiplication can be performed. To
+continue with further ciphertext-to-ciphertext multiplication, CKKS provides a special operation
+called <span class='rm-lmri-10x-x-109'>bootstrapping</span>, which is a process of resetting the ciphertext’s end-of-chain modulus
+<!-- l. 1620 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> to the initial maximum
+modulus <!-- l. 1620 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math> (which is
+either <!-- l. 1620 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>L</mi></mrow></msup></mrow></math> in the vanilla
+rescaling scheme, or <!-- l. 1620 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><munderover accent='false' accentunder='false'><mrow><mi class='MathClass-op'>∏</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>m</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>L</mi></mrow></munderover><msub><mrow><mi>w</mi></mrow><mrow><mi>m</mi></mrow></msub></mrow></math>
+in the case of using CRT, as explained in <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#rescaling1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.4<!-- tex4ht:ref: subsec:ckks-encoding-decoding  --></a>).
+</p><!-- l. 1623 --><p class='indent'>   Suppose we have a ciphertext <!-- l. 1623 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+with multiplicative depth 0. If we decrypt a ciphertext whose multiplicative level is 0 (i.e., the ciphertext’s modulus is
+<!-- l. 1623 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>), then decrypting it
+<span class='rm-lmri-10x-x-109'>without </span>reduction modulo <!-- l. 1623 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>
+would output:
+</p><!-- l. 1625 --><p class='indent'>   <!-- l. 1625 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mstyle class='text'><mtext class='textbf' mathvariant='bold'>(</mtext></mstyle><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext class='textbf' mathvariant='bold'>)</mtext></mstyle></mrow></math>
+</p><!-- l. 1627 --><p class='indent'>   <!-- l. 1627 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>K</mi></mrow></math> <span id='textcolor154'>#
+since <!-- l. 1627 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>B</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi></mrow></math></span>
+</p><!-- l. 1629 --><p class='indent'>   , where <!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>K</mi></mrow></math> accounts for
+wrap-around modulo <!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> values–
+each coefficient of polynomial <!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub><mi>K</mi></mrow></math>
+is some multiple of <!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>.
+CKKS’s bootstrapping procedure is equivalent to <span class='rm-lmri-10x-x-109'>safely </span>transforming a ciphertext’s modulus from
+<!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> to
+<!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math> (where
+<!-- l. 1629 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>»</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></mrow></math>).
+   
+</p>
+   <h5 class='subsubsectionHead' id='highlevel-idea2'><span class='titlemark'>D-3.13.1   </span> <a id='x130-197000D-3.13.1'></a>High-level Idea</h5>
+<!-- l. 1636 --><p class='noindent'>As the first step of bootstrapping, we forcibly change the modulus of the ciphertext
+<!-- l. 1636 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> from
+<!-- l. 1636 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> to
+<!-- l. 1636 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math>. Then, its decryption
+                                                                                         
+                                                                                         
+with reduction modulo <!-- l. 1636 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math>
+would output:
+</p><!-- l. 1638 --><p class='indent'>   <!-- l. 1638 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mstyle class='text'><mtext class='textbf' mathvariant='bold'>(</mtext></mstyle><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext class='textbf' mathvariant='bold'>)</mtext></mstyle><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></mrow></math>
                                                                                          
                                                                                          
 </p>
    <!-- l. 609 --><div class='crosslinks'><p class='noindent'>[<a href='SparselyPackingCiphertext.html'>prev</a>] [<a href='SparselyPackingCiphertext.html#tailSparselyPackingCiphertext.html'>prev-tail</a>] [<a href='ModulusBootstrapping.html'>front</a>] [<a href='CKKSScheme.html#ModulusBootstrapping.html'>up</a>] </p></div>
-<!-- l. 609 --><p class='indent'>   <a id='tailModulusBootstrapping.html'></a> </p> 
+<!-- l. 609 --><p class='indent'>   <a id='tailModulusBootstrapping.html'></a>  </p> 
 </body> 
 </html>

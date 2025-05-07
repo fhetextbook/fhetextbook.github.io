@@ -1615,3 +1615,687 @@ $M'(X) = m_0 + m_{l}X^{l} + m_{2l}X^{2l} + \cdots +  m_{n-l}X^{n-l}$
 \textbf{- Reference:} 
 \href{https://eprint.iacr.org/2018/153.pdf}{Bootstrapping for Approximate Homomorphic Encryption}~\cite{ckks}
 
+
+
+During CKKS's ciphertext-to-ciphertext multiplication, each ciphertext is associated with a particular multiplicative level and it decreases by 1 upon each ciphertext-to-ciphertext multiplication (by its internal modulus rescaling operation). Reaching multiplicative level 0 is equivalent to reaching the end of a ciphertext's modulus chain and no more ciphertext-to-ciphertext multiplication can be performed. To continue with further ciphertext-to-ciphertext multiplication, CKKS provides a special operation called \textit{bootstrapping}, which is a process of resetting the ciphertext's end-of-chain modulus $q_0$ to the initial maximum modulus $q_L$ (which is either $q_0\cdot\Delta^{L}$ in the vanilla rescaling scheme, or $\prod\limits_{m=0}^{L}w_m$ in the case of using CRT, as explained in \autoref{subsubsec:ckks-mult-cipher-rescale}). 
+
+
+Suppose we have a ciphertext $(A, B)$ with multiplicative depth 0. If we decrypt a ciphertext whose multiplicative level is 0 (i.e., the ciphertext's modulus is $q_0$), then decrypting it \textit{without} reduction modulo $q_0$ would output:
+
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$
+
+$ = B + A\cdot S = \Delta M + E + q_0\cdot K$ \textcolor{red}{ \# since $B + A\cdot S \bmod q_0 = \Delta M + E$}
+
+, where $q_0 \cdot K$ accounts for wrap-around modulo $q_0$ values-- each coefficient of polynomial $q_0K$ is some multiple of $q_0$. CKKS's bootstrapping procedure is equivalent to \textit{safely} transforming a ciphertext's modulus from $q_0$ to $q_L$ (where $q_L \gg q_0$).
+
+
+
+\subsubsection{High-level Idea}
+\label{subsubsec:ckks-bootstrapping-high-level}
+
+As the first step of bootstrapping, we forcibly change the modulus of the ciphertext $(A, B)$ from $q_0$ to $q_L$. Then, its decryption with reduction modulo $q_L$ would output:
+
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$
+
+$ = B + A\cdot S \bmod q_L$
+
+$= \Delta M + E + q_0 K \bmod q_L$
+
+Here, we assume that $q_L$ is large enough such that $\Delta M + E + q_0K \ll q_L$. This is true given $S$ has small coefficients which are either $\{-1, 0, 1\}$, and thus the coefficients of $B + A\cdot S$ would not grow much. 
+
+
+In the $\Delta M + E + q_0 K \bmod q_L$ term, notice that because of the $q_0K$ term which is not modulo-reduced by $q_0$ anymore, the ciphertext's decrypted plaintext polynomial's each $i$-th term would get a corrupted coefficient $\Delta m_i + e_i + q_0\cdot k_i \bmod q_L$ instead of $\Delta m_i + e_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0\cdot k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$.
+
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=1.0\linewidth]{figures/modulo-reduction-sine.png}
+  \caption{Sine function $f(x) = \dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi x}{q_0}\right)$ such that $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$ (provided $\Delta m_i + e_i \ll q_0$) \href{https://eprint.iacr.org/2018/153.pdf}{(Source)}}
+  \label{fig:modulo-reduction-sine}
+\end{figure}
+
+ To do so, we will take an approximated approach by using a sine function described in \autoref{fig:modulo-reduction-sine}, which has a period of $q_0$ with the amplitude $\dfrac{q_0}{2\pi}$. This sine function has the following two useful properties:
+ 
+ \begin{enumerate}
+\item When $f(x)$ is evaluated at $x$ values near the multiple of $q_0$, the result approximates to that of a line function $y = x$. This is because the derivative (slope) of $\sin x$ is $y' = \cos x$, and if $x$ is a multiple of $2\pi$, the slope is: $y' = \cos 2\pi = 1$. 
+\item The evaluation of $f(x)$ eliminates the multiples of $q_0$ from the input (i.e., modulo reduction $q_0$)
+\end{enumerate}
+
+$ $
+
+Combining these two properties, given input $x = \Delta m_i + e_i + q_0k_i$, 
+
+$f(\Delta m_i + e_i + q_0k_i) = \dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi \cdot (\Delta m_i + e_i + q_0k_i))}{q_0}\right) = \dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi \cdot (\Delta m_i + e_i))}{q_0}\right) \approx \Delta m_i + e_i$
+
+$ $
+
+
+, provided $\Delta m_i + e_i$ is very close to 0 relative to $q_0$ (i.e., $\Delta m_i + e_i \ll q_0$). This is true, because by construction of the CKKS scheme, the plaintext modulus (even with scaling it up by $\Delta$), is significantly smaller than the ciphertext modulus. Therefore, to remove $q_0K$ from $\Delta M + E + q_0K$, we can update each coefficient of the polynomial $\Delta M + E + q_0K$ by evaluating it with the $f(x)$ sine function. However, we cannot directly update the coefficients of the polynomial, because the CKKS scheme (the RLWE scheme in general) only supports the input vector's slot-wise $(+, \cdot)$ operations. Therefore, to update the polynomial coefficients, we need to express the update logic in terms of slot-wise input vector arithmetic $(+, \cdot)$. Considering all these, CKKS's overall bootstrapping procedure is described in \autoref{tab:ckks-bootstrapping-procedure}.
+
+\begin{table}
+\begin{tabular}{|ll|}
+\hline
+1& \textsf{\textbf{\underline{ModRaise:}}} Given ciphertext $(A, B) \bmod q_L$, we forcibly modify its modulus from $q_0$ to $q_L$. \\
+& Then, it ends up encrypting $\Delta M + E + q_0k$ instead of $\Delta M + E$.\\
+2& \textsf{\textbf{\underline{CoeffToSlot:}}} Based on step 1's ciphertext $(A, B) \bmod q_L$, we generate a new ciphertext\\
+& that encrypts an input vector whose its each $i$-th slot stores $\Delta m_i + e_i + q_0k_i$.\\
+& This is equivalent to moving the coefficients of polynomial $\Delta M + E + q_0K$ to\\
+& the input vector slots.\\
+3& \textsf{\textbf{\underline{EvalExp:}}} We convert the sine function into an approximated polynomial by using \\
+& the Taylor series, as well as other optimizations such as\\ 
+& Euler's formula ($e^{i\theta} = \cos(\theta) + i\cdot\sin(\theta)$). Then, we generate a CKKS plaintext that encodes \\
+& this approximated sine function, and then use this to homomorphically evaluate \\
+& step 2's encrypted vector elements (to homomorphically remove every $q_0k_i$.\\
+4& \textsf{\textbf{\underline{SlotToCoeff:}}} Based on the resulting ciphertext from step 3, we generate a new ciphertext \\
+& whose encrypted polynomial's each $i$-th coefficient is (approximately) $\Delta m_i + e_i$. \\
+& This is equivalent to moving the $q_0k_i$-eliminated values stored in the input vector slots in \\
+&step 3 back to the positions of the polynomial coefficients. The final ciphertext is \\
+& our goal ciphertext that (approximately) encrypts $\Delta M + E$ under modulus $q_L$.\\
+\hline
+\end{tabular}
+\caption{High-level Description of CKKS's Bootstrapping Procedure}
+\label{tab:ckks-bootstrapping-procedure}
+\end{table}
+%CKKS's bootstrapping procedure described above breaks down into the following 5 steps: \textsf{ModRaise}, \textsf{CoeffToSlot}, \textsf{EvalExp}, \textsf{ImgExt}, and \textsf{SlotToCoeff}.
+
+\subsubsection{Mathematical Expansion of the High-level Idea}
+\label{subsubsec:ckks-bootstrapping-high-level-correctness}
+
+We will mathematically walk through how the bootstrapping procedure (\autoref{tab:ckks-bootstrapping-procedure}) correctly updates the modulus of the input ciphertext from $q_0$ to $q_L$. 
+
+For ease of understanding, we will first explain how we would do modulus bootstrapping for a ciphertext with multiplicative level 0 (i.e., its modulus is $q_0$) in case we have access to the secret key $S(X)$. Using this key, we can decrypt the ciphertext as follows:
+
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+
+$ = B + A\cdot S = \Delta M + E \bmod q_0$ 
+
+$ = \Delta M + E + q_0K$ \textcolor{red}{\# where $q_0K$ accounts for any potential wrap-around modulo $q_0$ values}
+
+Our initial goal is to bootstrap the modulus of the ciphertext from $q_0$ to $q_L$ by using only the following three tools:
+
+\begin{itemize}
+\item Secret key $S$
+\item Batch-encoding ($\sigma^{-1}$) and decoding ($\sigma$) formulas
+\item Batched slot-wise $(+, \cdot)$ operation of input vectors based on their batch-encoded polynomials
+\end{itemize}
+
+$ $
+
+After explaining the above, we will then explain how to achieve the same bootstrapping without having access to the secret key $S$. 
+
+
+$ $
+
+\para{\textsf{\textbf{\underline{ModRaise}:}}} This step forcibly changes the ciphertext's modulus from $q_0$ to $q_L$ and then decrypts the ciphertext as follows:
+
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} = B + A\cdot S = \Delta M + E + q_0 K \bmod q_L$
+
+Notice that the ciphertext's decrypted plaintext polynomial's each $i$-th coefficient gets corrupted to $m_i + e_i + q_0\cdot k_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$. 
+
+$ $
+
+\para{\textsf{\textbf{\underline{CoeffToSlot}:}}} This step generates a new plaintext polynomial whose each $i$-th input vector slot stores the corrupted coefficient $(m_i + e_i + q_0k_i)$. The trick of doing this is to apply CKKS's batch-encoding mapping $\sigma^{-1}$ (which represents the transformation $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$ as explained in \autoref{subsec:ckks-encoding-decoding}) to the input vector slots that encode the polynomial $\Delta M + E + q_0 K \bmod q_L$. Let $\vec{v}_c$ be the input vector that corresponds to polynomial $\Delta M + E + q_0 K$. Then, $\vec{v}_c$ and $\Delta M + E + q_0 K$ satisfy the following relation over the encoding mapping $\sigma^{-1}$: 
+
+$\sigma^{-1}\bm(\vec{v}_c\bm) = M_c = \sum\limits_{i=0}^{n-1}(\Delta m_i + e_i + q_0k_i)\cdot X^{i}$ \textcolor{red}{ \# i.e., polynomial $\Delta M + E + q_0K$} 
+
+This implies that if we \textit{homomorphically} apply the $\sigma^{-1}$ transformation to the elements of input vector $\vec{v}_c$, then the resulting input vector $\vec{v}_s$ will store $\vec{v}_c$'s encoded polynomial coefficient values as follows:
+
+$\sigma^{-1} \circ \vec{v}_c = \vec{v}_s = (\Delta m_0 + e_0 + q_0k_0, \text{ } \Delta m_1 + e_1 + q_0k_1, \text{ } \cdots, \text{ } \Delta m_{n-1} + e_{n-1} + q_0k_{n-1})$  
+
+\textcolor{red}{ \# where $\circ$ represents a linear transformation operation comprising $(+, \cdot)$}
+
+$ $
+
+
+
+
+However, remember that at the end of the \textsf{ModRaise} step, we get the decrypted (but corrupted by $q_0k$) polynomial $M_c = \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\bm) = \Delta M + E + q_0K$ and we are not allowed to decode it into $\vec{v}_c$. Therefore, we will instead \textit{encode} the matrix $\hathat W \cdot I_n^R$ in the encoding transformation $\sigma^{-1}$ ($\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$) into its equivalent polynomials (treating a matrix as a combination of vectors) and then perform batched slot-wise $(+, \cdot)$ operation between $M_c$ and the polynomial version of $\hathat W \cdot I_n^R$. We express this polynomial-based computation as follows:
+
+$M_s = \sigma^{-1}_{\sigma^{-1}} \circ M_c \bmod q_L$
+\textcolor{red}{ \# $\sigma^{-1}_{\sigma^{-1}}$ is the polynomial-encoded version of the $\sigma^{-1}$ transformation}
+
+Then, the resulting polynomial $M_s$'s corresponding input vector slots (i.e., the decoded version of $M_s$) will store $\vec{v}_s = (\Delta m_0 + e_0 + q_0k_0, \text{ } \Delta m_1 + e_1 + q_0k_1, \text{ } \cdots, \text{ } \Delta m_{n-1} + e_{n-1} + q_0k_{n-1})$. In other words, the above computation effectively \textit{moves} the coefficients of $M_c$ to the input vector slots of a new plaintext polynomial. 
+
+However, remember that in CKKS, an input vector can store only up to $\dfrac{n}{2}$ slots, whereas we need to store a total of $n$ coefficients of $M_c$ in the input vector slots. Therefore, we technically need to create 2 pieces of $M_s$ as $M_{s1}$ and $M_{s2}$, where the input vector of $M_{s1}$ stores $(\Delta m_0 + e_0 + q_0k_0, \text{ } \Delta m_1 + e_1 + q_0k_1, \text{ } \cdots, \text{ } \Delta m_{\frac{n}{2}-1} + e_{\frac{n}{2}-1} + q_0k_{\frac{n}{2}-1})$, and the input vector of $M_{s2}$ stores $(\Delta m_{\frac{n}{2}} + e_{\frac{n}{2}} + q_0k_{\frac{n}{2}}, \text{ } \cdots, \text{ } \Delta m_{n-1} + e_{n-1} + q_0k_{n-1})$.
+
+$ $
+
+\para{\textsf{\textbf{\underline{EvalExp}:}}}
+Our next step is to update $\vec{v}_s$'s each element $m_i + e_i + q_0k_i$ to $m_i + e_i$ by evaluating it with the sine function $f(x)$. Since the output of the \textsf{CoeffToSlot} step is polynomial $M_s$ (technically $M_{s1}$ and $M_{s2}$), we need apply the evaluation transformation in an encoded form. First, we approximate $f(x)$ as linear combination comprising only $(+, \cdot)$ operations by using the Taylor series and Euler's formula (will be explained later). Then, we encode (i.e., $\sigma$) the approximated formula into a polynomial form, and we denote as $\sigma_f$. Finally, We apply the $\sigma_f$ transformation to $M_s$ as follows: 
+
+$\sigma^{-1}_f \circ M_s \bmod q_L$  \textcolor{red}{ \# Applying the sine function's linear transformation to $\vec{v}_s$'s each slot storing $\Delta m_i + e_i + q_0k_i$}
+
+$= M_t = \sigma\bm{(}\vec{v}_t\bm{)} = \sigma\bm{(}(\Delta m_i + e_i)_{i=0}^{n-1}\bm{)} \bmod q_L$
+
+$ $
+
+After the linear transformation by the sine function, notice that each $q_0 k_i$ term gets eliminated from $\vec{v}_s$'s slots (i.e. modulo reduction by $q$) and the resulting vector $\vec{v}_t$ stores only the $\Delta m_i + e_i$ terms. 
+
+
+
+%Suppose $f$ is an approximate linear transformation that eliminates the multiples of $q$ from the input $\Delta M + E + q_0 \cdot K$ where $\Delta M + E \ll q$ (e.g., a sine function with period $q$), and $\sigma^{-1}_f$ is an batch-encoded form of $f$ for homomorphic computation. By $\sigma^{-1}_f \text{ } \circ$, we denote applying linear transformation of $f$ in a batch-encoded manner to the right-hand-side expression. Now, we apply this linear transformation to the decrypted result of ciphertext $\textsf{ct} = (A, B) \bmod q_L$, which gives us:
+
+%$\sigma^{-1}_f \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$  \textcolor{red}{ \# Applying the linear transformation to $\Delta M + E + q_0k$}
+
+%$= \sigma^{-1}_f\bm{(}\Delta M + E + q_0 \cdot K\bm{)} \bmod q_L$
+
+%$ = \Delta M + E + E' = \Delta M + E'' \bmod q_L$ \textcolor{red}{ \# The $q_0 K$ term is eliminated (i.e. modulo reduction by $q$)}
+
+$ $
+
+\para{\textsf{\textbf{\underline{SlotToCoeff}:}}}
+Now that we have a polynomial $M_t$ whose corresponding input vector $\vec{v}_t$'s slots store garbage-removed coefficients of (i.e., $\Delta m_i + e_i$) our initial plaintext polynomial, our next step is to put these coefficients stored in $\vec{v}_t$ back to the polynomial. This is an exact reverse operation of \textsf{CoeffToSlot} as follows:
+
+$\sigma^{-1}_{\sigma} \circ M^t = M_b$ 
+\textcolor{red}{ \# $\sigma^{-1}_{\sigma}$ is a polynomial-encoded form of the batch-decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ (\autoref{subsec:ckks-encoding-decoding})}
+
+The result is polynomial $M_b$ whose coefficients are garbage-eliminated (i.e., $q_0k_i$-free) versions of $M_c$. Finally, we re-encrypt $M_b$ as $\textsf{RLWE}_{S, \sigma}(M_b)$ as the final modulus-bootstrapped ciphertext. 
+
+
+$ $
+
+\para{\textsf{\textbf{\underline{Bootstrapping Without Secret Key}:}}} So far, we have assumed that we have access to the secret key $S$. With decryption and re-encryption enabled, the above bootstrapping steps described are mathematically equivalent to computing the following:
+
+\begin{enumerate}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+
+\item \textsf{\textbf{\underline{ModRaise}:}} $\textsf{ct} = (A, B) \bmod q_L$
+
+\item \textsf{\textbf{\underline{Decryption}:}} 
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)} \bmod q_L$
+
+\item \textsf{\textbf{\underline{CoeffToSlot}:}} $\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)} \bmod q_L$
+
+\item \textsf{\textbf{\underline{EvalExp}:}} $\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}) \bmod q_L$
+
+\item \textsf{\textbf{\underline{SlotToCoeff}:}} $\sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)})) \bmod q_L$
+
+\item \textsf{\textbf{\underline{Re-encryption}:}} $\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}))\bm) \bmod q_L$
+
+\end{enumerate}
+
+$ $
+
+However, the ultimate goal of CKKS bootstrapping is to reset the modulus of a ciphertext from $q_0$ to $q_L$ without having access to $S$.
+
+Meanwhile, one important insight is that CKKS's \textsf{ModRaise} procedure on the ciphertext $(A, B) \bmod q_0$ from $q_0 \rightarrow q_L$ effectively transforms the ciphertext into a new one which is an encryption of $\Delta M + q_0K$. Before \textsf{ModRaise}, ciphertext $(A, B) \bmod q_0$'s decryption relation is as follows:
+
+$A\cdot A + B = \Delta M + E + Kq_0 \bmod q_0 = \Delta M + E$ 
+
+$ $
+
+After \textsf{ModRaise} to $(A, B) \bmod q_L$, its decryption relation is as follows:
+
+$A\cdot S + B = \Delta M + E + Kq_0 \bmod q_L = \Delta M + E + Kq_0$ \textcolor{red}{\# because $\Delta M + E + Kq_0 \ll q_L$}
+
+$ $
+
+Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_{S, \sigma}(\Delta M + Kq_0)$ with noise $E$. Thus, CKKS's \textit{homomorphic} bootstrapping strategy is to run the subsequent \textsf{CoeffToSlot}, \textsf{EvalExp}, and \textsf{SlotToCoeff} steps \textsf{homomorphically} based on the ciphertext $(A, B) \bmod q_L$. Running these 3 steps consumes a few multiplicative levels due to the ciphertext-to-ciphertext multiplication operations when homomorphically multiplying the coefficient-to-slot and slot-to-coefficient transformation matrices and homomorphically computing powers of $X$ (i.e., $X^k$) during sine approximation. Therefore, upon completion of these 3 steps, the ciphertext modulus reduces from $q_L \rightarrow q_l$ (where $l$ is some integer such that $l < L$).
+
+%$\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + K_1q) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \bmod Q$
+
+%$\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + K_2q) = (A^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \bmod Q$
+
+
+%, but having access only to a RLev encryption of $S$ (i.e., $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$), which we call a \textit{bootstrapping key}. With this bootstrapping key, we can compute the following:
+
+%$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B \bmod q_L$ \textcolor{red}{ \# where the plaintext scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}(S) = \{\textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta}S_1\right), \textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta^2}S_2\right), \cdots \}$ are all 1}
+
+%$ $
+
+%$ = \textsf{RLWE}_{S, \sigma}(AS) + B \bmod q_L$ 
+
+%$ = \textsf{RLWE}_{S, \sigma}(AS + B) \bmod q_L$
+
+%$ = \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$ \textcolor{red}{ \# the plaintext is $\Delta M + E + q_0K$ and the scaling factor is 1}
+
+%In the above homomorphic decryption computation (without scaling down by $\Delta$, we treat $A$ and $B$ as plaintext polynomials whose coefficients are in $\mathbb{Z}_{q_0}$, whereas the ciphertext modulus is $\mathbb{Z}_{q_L}$. We consider $\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle$ as ciphertext-to-plaintext multiplication, and adding $B$ to the result is considered as ciphertext-to-plaintext addition. 
+%As each coefficient of polynomial $A$ and $B$ is in $[0, q_0 - 1]$ and each coefficient of $S$ is in $[-1, 1]$, and these polynomials have degree $n$, the result the above homomorphic computation will be a ciphertext that encrypts the plaintext polynomial $A\cdot S + B$ whose coefficients are guaranteed to be much smaller than $q_L$ (i.e., does not wrap around $q_L$). Therefore, we can consider the above homomorphic computation to output a ciphertext that encrypts the plaintext $\Delta M + E + q_0K$ for some integer polynomial $K$. 
+
+%Based on the above technique of \textit{homomorphic} decryption (without modulo reduction by $q_0$) which generates $\textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$, we will derive the \textit{homomorphic} bootstrapping formula which achieves the same goal of bootstrapping without explicit decryption \& re-encryption, but based on \textit{homomorphic} decryption by using the bootstrapping key, as follows:
+
+
+%$\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}))\bm) \bmod q_L$
+
+%$ $
+
+%\textcolor{red}{ \# Replace the initial decryption and final re-encryption by homomorphic decryption using $\textsf{RLWE}_{S, \sigma}(S)$}
+
+%$= \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \bm(A\cdot \textsf{RLWE}_{S, \sigma}(S) + B\bm) \textbf{)}) \bmod q_L$
+
+
+%$= \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + Kq\bm) \textbf{)})) \bmod q_L$
+
+%$= \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm) \bmod q_L$
+
+
+%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}\bm)))$
+
+%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B))\bm)))$
+
+%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\textsf{RLWE}^{-1}\textbf{(}\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)\bm))))$
+
+%$ $
+
+%\textcolor{red}{ \# Encryption and decryption cancel each other}
+
+%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
+
+
+%$ $
+
+%\textcolor{red}{ \# Regardless of whether the $\sigma^{-1}_{\sigma}, \sigma^{-1}_{f}$ and $ \sigma^{-1}_{\sigma^{-1}}$ operands are RLWE plaintexts or RLWE ciphertexts, the computational result is the same}
+
+%$\stackrel{q_L}{\equiv} \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
+
+
+%Thus, homomorphically bootstrapping the modulus of a CKKS ciphertext (without any intermediate decryption and re-encryption) guarantees the same correctness of modulus bootstrapping. 
+%The actual homomorphic bootstrapping procedure is as follows:
+\begin{comment}
+
+\begin{enumerate}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+
+\item \textsf{\textbf{\underline{ModRaise}:}} $\textsf{ct} = (A, B) \bmod q_L$
+
+\item \textsf{\textbf{\underline{Homomorphic Decryption}:}}
+$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B  = \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+\item \textsf{\textbf{\underline{CoeffToSlot}:}} $\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+\item \textsf{\textbf{\underline{EvalExp}:}} $\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K)) \bmod q_{l}$
+
+\item \textsf{\textbf{\underline{SlotToCoeff}:}} $\sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K))) \bmod q_{l}$
+
+\item \textsf{\textbf{\underline{Scaling Factor Re-interpretation}:}} View the encrypted plaintext $\Delta M$ with scaling factor 1 as an encrypted plaintext $M$ with scaling factor $\Delta$ (like the re-interpretation in BFV's bootstrapping, \autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation})
+
+
+\end{enumerate}
+
+$ $
+\end{comment}
+
+%\para{Necessity of Homomorphic Decryption:} Before the \textsf{CoeffToSlot} step, we homomorphically decrypt the ciphertext (without modulo reduction by $q_0$) using the bootstrapping key, which effectively updates the plaintext polynomial from $M$ to $\Delta M + E + q_0K$. If we did not perform this homomorphic decryption, then the subsequent \textsf{CoeffToSlot} step would move the coefficients of $M$ to the input vector slots instead of the coefficients of $\Delta M + E + q_0K$. Therefore, homomorphic decryption is necessary in order to pass the coefficients of $\Delta M + E + q_0K$ as inputs to the \textsf{EvalExp} step. 
+
+
+Note that the result of homomorphic bootstrapping is equal to the explicit bootstrapping based on decryption \& re-encryption (if we ignore the small differences in the final ciphertext modulus and the noise). In the following subsections, we will explain the algebraic details of \textsf{CoeffToSlot}, \textsf{EvalExp} and \textsf{SlotToCoeff} steps. 
+
+\subsubsection{Details: \textsf{CoeffToSlot}}
+\label{subsubsec:ckks-bootstrapping-coefftoslot-details}
+
+Homomorphically moving the coefficients of $M_c$ (i.e., $\Delta m_i + e_i + q_0k_i$ for $0 \leq i \leq n - 1$) to a new ciphertext's input vector slots is mathematically equivalent to homomorphically computing $\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)$, which is equivalent to applying the encoding formula to the input vector slot values of $\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)$. 
+
+
+
+As explained in Summary~\ref*{subsec:ckks-rotation} (in \autoref{subsec:ckks-rotation}), the encoding formula for converting an input vector into a list of polynomial coefficients is $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$, where $\hathat W$ is a basis of the $n$-dimensional vector space crafted as follows: 
+
+$ $
+
+\noindent{\small{$\noindent\hathat W = \begin{bmatrix}
+1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
+(\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
+(\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
+\end{bmatrix}$}}
+
+$ $
+
+\textcolor{red}{ \# where the rotation helper function $J(h) = 5^h \bmod 2n$}
+
+$ $
+
+Therefore, given the input ciphertext $\textsf{ct}_{\textsf{c}} = \textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm) \bmod q_L$ whose plaintext polynomial $M_c$ contains corrupted coefficients, computing $\sigma^{-1}_{\sigma^{-1}} \text{ } \circ \text{ } \textsf{ct}_{\textsf{c}}$ is equivalent to computing $\dfrac{\hathat W \cdot I_n^R \cdot \textsf{ct\textsubscript{c}}}{n}$. However, one problem here is that each CKKS ciphertext encodes only $\dfrac{n}{2}$ input vector slots, whereas our goal is to move $n$ (corrupted) coefficients of the plaintext polynomial $M_c$ encrypted in $\textsf{ct\textsubscript{c}}$. Therefore, we will instead generate 2 ciphertexts, $\textsf{ct}_{\textsf{s1}}$ and $\textsf{ct}_{\textsf{s2}}$, such that each $\textsf{ct}_{\textsf{s1}}$'s input vector slots store $(\Delta m_i + e_i + q_0k_i)_{0 \leq i < \frac{n}{2}}$ and $\textsf{ct}_{\textsf{s2}}$'s input vector slots store $(\Delta m_i + e_i + q_0k_i)_{\frac{n}{2} \leq i < n}$. 
+
+We split the $n \times n$ matrix $\hathat W \cdot I_n^R$ into four $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices as follows:
+
+\begin{itemize}
+\item $[\hathat WI_n^R]_{11}$: a matrix comprising the upper left-half section of $\hathat W\cdot I_n^R$
+\item $[\hathat WI_n^R]_{12}$: a matrix comprising the upper right-half section of $\hathat W\cdot I_n^R$
+\item $[\hathat WI_n^R]_{21}$: a matrix comprising the lower left-half section of $\hathat W\cdot I_n^R$
+\item $[\hathat WI_n^R]_{22}$: a matrix comprising the lower right-half section of $\hathat W\cdot I_n^R$
+\end{itemize}
+
+$ $
+
+Then, we can compute $\textsf{ct}_{\textsf{s1}}$ and $\textsf{ct}_{\textsf{s2}}$ as follows:
+
+$\textsf{ct}_{\textsf{s1}} = \dfrac{[\hathat WI_n^R]_{11} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{12} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}}{n}$
+
+$\textsf{ct}_{\textsf{s2}} = \dfrac{[\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{22} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}}{n}$
+
+Each homomorphic matrix-vector multiplication (e.g., $[\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}}$) can be done in an efficient manner that reduces the number of homomorphic rotations (\autoref{subsec:bfv-matrix-multiplication}). $\mathit{\overline{\textsf{ct\textsubscript{c}}}}$ can be computed by appplying homomorphic conjugation to \textsf{ct\textsubscript{c}} (\autoref{subsec:ckks-conjugation}).
+
+
+
+\subsubsection{Details: \textsf{EvalExp}}
+\label{subsubsec:ckks-bootstrapping-evalexp-details}
+
+We will use the sine function $f(x) = \dfrac{q}{2\pi}\cdot \sin\left(\dfrac{2\pi x}{q_0}\right)$ to approximately eliminate $q_0k_i$ from $\Delta m_i + e_i + q_0k_i$ by computing $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$. This approximation works if $\Delta m_i + e_i$ is very close to $x=0$ relative to $q_0$ (i.e., $\Delta m_i + e_i \ll q_0$). Still, the elimination of $q_0k_i$ is approximate (i.e., $\approx \Delta m_i + e_i$), because $f(x)$ is $y \approx x$ nearby $x=0$, not exactly $y = x$. 
+
+One issue is that we need to evaluate $f(x)$ homomorphically based on \textsf{ct\textsubscript{s1}} and \textsf{ct\textsubscript{s2}} as inputs (i.e., $f(\textsf{ct\textsubscript{s1}})$ and $f(\textsf{ct\textsubscript{s2}})$), but FHE supports only $(+, \cdot)$ operations, whereas the sine graph cannot be formulated by only $(+, \cdot)$. Therefore, we will approximate the sine function $f(x)$ by using the Taylor series (\autoref{sec:taylor-series}): 
+
+$f(x) = f(a) + \dfrac{f'(a)}{1!}(x-a) + \dfrac{f''(a)}{2!}(x-a)^2 + \dfrac{f'''(a)}{3!}(x-a)^3 + \cdots = \sum\limits_{d=0}^{\infty}\dfrac{f^{(d)}(x)}{d!}(x-a)^d$ 
+
+$ $
+
+If we approximate $f(x)$ around $x = 0$, then the approximated polynomial is as follows: 
+
+$f(x) = \dfrac{q_0}{2\pi}\cdot \sin\left(\dfrac{2\pi}{q_0}\cdot 0\right) + \dfrac{q_0}{2\pi}\cdot\dfrac{2\pi}{q_0}\cdot\dfrac{\cos\left(\dfrac{2\pi}{q_0} \cdot 0\right)}{1!}\cdot x + \dfrac{q_0}{2\pi}\cdot \left(\dfrac{2\pi}{q_0}\right)^{2}\cdot\dfrac{-\sin\left(\dfrac{2\pi}{q_0} \cdot 0\right)}{2!}\cdot x^2 + \cdots$
+
+$ = \dfrac{q_0}{2\pi}\cdot \sum\limits_{j=0}^{\infty}\left(\dfrac{(-1)^j}{(2j + 1)!}\cdot \left(\dfrac{2\pi x}{q_0}\right)^{2j + 1}\right)$
+
+$ \approx \dfrac{q_0}{2\pi}\cdot \sum\limits_{j=0}^{h}\left(\dfrac{(-1)^j}{(2j + 1)!}\cdot \left(\dfrac{2\pi x}{q_0}\right)^{2j + 1}\right) = \hat f(x)$
+
+, where $f'(x)$ is a $(2h + 1)$-degree polynomial. 
+
+Remember that in the RLWE cryptosystem, $B + AS \bmod q_0 = \Delta M + E$, or $B + AS = \Delta M + E + q_0K$ with some polynomial $K$ representing the wrapping around values of modulo $q_0$. Since the secret key $S$ is an $(n-1)$-degree polynomial whose coefficients are small (i.e., $s_i \in \{-1, 0, 1\}$), the coefficients of $K$ will have some \textit{reasonably small} upper-bound, which decreases with the sparsity of $S$ (i.e., the frequency of 0 coefficients in $S$). Therefore, the degree of our approximated $\hat f(x)$ only need to be high enough to accurately evaluate $y$ values between $-q_0\cdot \mathit{k_{max}} \leq x \leq q_0\cdot \mathit{k_{max}}$.
+The required minimum degree of our approximated Taylor polynomial $\hat f(x)$ increases with $q_0\mathit{k_{max}}$ (i.e., the upper bound of $x$). Our one issue is that the computation overhead for homomorphic evaluation of a polynomial generally increases exponentially with the degree of the polynomial, which will slow down bootstrapping. To reduce this computation cost, we will leverage the Euler's formula (\autoref{sec:euler}) and its square arithmetic:
+
+\[
+\begin{cases}
+e^{i\cdot \theta} = \cos \theta + i \cdot \sin \theta\\
+(e^{i \cdot \theta})^2 = e^{i\cdot 2\theta}\\
+\end{cases}
+\]
+
+By substituting $\theta = \dfrac{2\pi x}{q_0}$, we will use the Euler's formula. We will also approximate $e^{i\theta}$ with the Taylor series, but instead of directly approximating $e^{i\theta}$, we will first approximate $e^{\frac{i\theta}{2^r}}$ for some large $2^r$. After then, we will iteratively square $e^{\frac{i\theta}{2^r}}$ total $r$ times. Then, we get an approximation of $(e^{\frac{i\theta}{2^r}})^{2^r} = e^{i\theta}$. The reason why we start with the approximation of $e^{\frac{i\theta}{2^r}}$ instead of $e^{i\theta}$ is because its approximation requires a small degree of polynomial, as $\dfrac{\theta}{2^r}$ (i.e., the input to the complex exponential function) is small provided $2^r$ is sufficiently large. Specifically, we learned that $x$ ($= \Delta m_i + e_i + q_0k_i$) is upper-bounded by $q_0\mathit{k_{max}}$, thus $\theta = \dfrac{2\pi x}{q_0}$ is upper-bounded by $\dfrac{2\pi\mathit{k_{max}}}{2^r}$. As the targeted range of $x$ for approximation in $f(x)$ is small, we need a small degree of Taylor series polynomial. 
+
+Using the Taylor series with degree $d_0$ around $x = 0$, we can approximate $e^{\frac{2\pi i x}{2^r q_0}}$ as: 
+
+$f_e(x) = e^{\frac{2\pi i x}{2^r q_0}} \approx \sum\limits_{d=0}^{d_0}\dfrac{1}{d!}\left(\dfrac{2\pi i x}{2^rq_0}\right)^d = \hat{f}_e(x)$
+
+$ $
+
+Then, we iteratively square $\hat{f}_e$ total $r$ times to get:
+
+$(\hat{f}_e(x))^{2^r} \approx (f_e(x))^{2^r} = e^{i\frac{2\pi x}{q_0}} = e^{i\theta}$
+
+$ $
+
+Then, based on the Euler's formula $e^{i\cdot \theta} = \cos \theta + i \cdot \sin \theta$, we can derive the following relations:
+
+$ $
+
+$\overline{e^{i\cdot \theta}} = \cos \theta + \overline{i \cdot \sin \theta} $
+
+$ e^{-i\cdot \theta} = \cos \theta - i \cdot \sin \theta$
+
+$ e^{i\cdot \theta} - e^{-i\cdot \theta} = (\cos \theta + i \cdot \sin \theta) - (\cos \theta - i \cdot \sin \theta) = 2i\sin \theta$
+
+$\sin \theta = \dfrac{-i}{2} \cdot (e^{i\cdot \theta} - e^{-i\cdot \theta})$
+
+$\dfrac{q_0}{2\pi}\cdot \sin \theta = \dfrac{q_0}{2\pi}\cdot \dfrac{-i}{2} \cdot (e^{i\cdot \theta} - e^{-i\cdot \theta})$
+
+$ $
+
+Substituting $\theta = \dfrac{2\pi x}{q_0}$, we finally get: 
+
+$\dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi x}{q_0}\right) = \dfrac{q_0}{2\pi}\cdot \dfrac{-i}{2} \cdot (e^{i\cdot \frac{2\pi x}{q_0}} - e^{-i\cdot \frac{2\pi x}{q_0}})$
+
+$ $
+
+Using the final relation above, the \textsf{EvalExp} step homomorphically evaluates the approximation of $\dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi x}{q_0}\right)$ where $x = \Delta m_i + e_i + q_0k_i$ as follows: 
+
+\begin{enumerate}
+\item Homomorphically approximately compute $\hat{f}(x) = e^{i\cdot \frac{2\pi x}{q_0}}$.
+\item Homomorphically approximately compute $\overline{\hat{f}(x)} = e^{-i\cdot \frac{2\pi x}{q_0}}$ by applying homomorphic conjugation. (\autoref{subsec:ckks-conjugation}) to $\hat{f}(x)$
+\item Homomorphically compute $\hat{f}(x) - \overline{\hat{f}(x)} = e^{i\cdot \frac{2\pi x}{q_0}} -  e^{-i\cdot \frac{2\pi x}{q_0}}$, and then multiply the result by $\dfrac{-i}{2}$ encoded as CKKS plaintext.
+\end{enumerate}
+
+$ $
+
+The result of \textsf{EvalExp} is two ciphertexts whose input vector slots store the bootstrapped coefficients of $M_c$, which are modulo-reduced $q_0$ from $\Delta m_i + e_i + q_0k_i$ to $\Delta m_i + e_i + e_{bi}$. Note that $e_{bi}$ is a bootstrapping error introduced by the following three factors: (1) the intrinsic homomorphic $(+, \cdot)$ computation noises of the \textsf{CoeffToSlot}, \textsf{EvalExp}, and \textsf{SlotToCoeff} steps; (2) the \textsf{EvalExp} step's Taylor polynomial approximation error of the exponential function $e^{i\theta}$; (3) the \textsf{EvalExp} step's sine graph error, since the graph is not exactly $y=x$ around $x=0$, but only $y \approx x$.
+
+Note that since the output of the \textsf{CoeffToSlot} step was split into 2 ciphertexts (\textsf{ct\textsubscript{s1}} and \textsf{ct\textsubscript{s2}}), the output of the \textsf{EvalExp} step is also in 2 ciphertexts: (\textsf{ct\textsubscript{b1}} and \textsf{ct\textsubscript{b2}}). The input vector slots of \textsf{ct\textsubscript{b1}} store $(\Delta m_i + e_i + e_{bi})_{i=0}^{\frac{n}{2} - 1}$, whereas the input vector slots of \textsf{ct\textsubscript{b2}} store $(\Delta m_i + e_i + e_{bi})_{i=\frac{n}{2}}^{n - 1}$.
+
+
+\subsubsection{Details: \textsf{SlotToCoeff}}
+\label{subsubsec:ckks-bootstrapping-slottocoeff-details}
+
+This step is an exact inverse of the \textsf{CoeffToSlot} step, which is moving the bootstrapped (i.e. modulo-reduced $q_0$) coefficients of $M_v$ stored in the input vector slots back to the final plaintext polynomial $M_f$. Remember that the decoding formula from a polynomial to an input vector (\autoref{subsec:ckks-encoding-decoding}) is $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$, where:
+
+
+
+
+$\hathat{W}^* = \begin{bmatrix}
+1 & (\omega^{J(0)}) & (\omega^{J(0)})^2 & \cdots & (\omega^{J(0)})^{n-1}\\
+1 & (\omega^{J(1)}) & (\omega^{J(1)})^2 & \cdots & (\omega^{J(1)})^{n-1}\\
+1 & (\omega^{J(2)}) & (\omega^{J(2)})^2 & \cdots & (\omega^{J(2)})^{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & (\omega^{J(\frac{n}{2}-1)}) & (\omega^{J(\frac{n}{2}-1)})^2 & \cdots & (\omega^{J(\frac{n}{2}-1)})^{n-1}\\
+1 & (\omega^{J_*(\frac{n}{2}-1)}) & (\omega^{J_*(\frac{n}{2}-1)})^2 & \cdots & (\omega^{J_*(\frac{n}{2}-1)})^{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & (\omega^{J_*(1)}) & (\omega^{J_*(1)})^2 & \cdots & (\omega^{J_*(1)})^{n-1}\\
+1 & (\omega^{J_*(0)}) & (\omega^{J_*(0)})^2 & \cdots & (\omega^{J_*(0)})^{n-1}\\
+\end{bmatrix}$
+
+$ $
+
+$ $
+
+We denote $[\hathat W^*]_{11}$, $[\hathat W^*]_{12}$, $[\hathat W^*]_{21}$, and $[\hathat W^*]_{22}$ as $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices corresponding to the the upper-left, upper-right, lower-left, and low-right section of $\hathat W^*$. Then, homomorphically applying the decoding formula results in the final bootstrapped ciphertext \textsf{ct\textsubscript{final}} modulo $q_L$ whose plaintext polynomial is garbage-eliminated from $\Delta M + E + q_0K \bmod q_L$ to $\Delta M + E + E_b \bmod q_l$ (where $E_b$ is the bootstrapping error polynomial). Note that the ciphertext modulus changed from $q_L \rightarrow q_l$ because we consumed some multiplicative levels for computing ciphertext-to-ciphertext multiplications during polynomial evaluation (i.e., $X^k$).  We can derive  \textsf{ct\textsubscript{final}} by homomorphically applying the decoding transformation $\hathat W_T$ to the results of the \textsf{EvalExp} step (\textsf{ct\textsubscript{b1}} and \textsf{ct\textsubscript{b2}}) as follows:
+
+$\textsf{ct\textsubscript{final}} = \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + E_{b}\bm) = [\hathat W^*]_{11} \cdot \textsf{ct\textsubscript{b1}} + [\hathat W^*]_{12} \cdot \textsf{ct\textsubscript{b2}}$
+
+Note that we do not use $[\hathat W^*]_{21}$ and $[\hathat W^*]_{22}$, because we only need to derive the $\dfrac{n}{2}$ input vector slots whose decoding would result in the $n$ coefficients $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$ of the final $(n-1)$-degree polynomial. Once we generate a new ciphertext \textsf{ct\textsubscript{final}} whose $\dfrac{n}{2}$ input vector slots store $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$, then its latter $\dfrac{n}{2}$ conjugate slots get automatically filled with the the conjugates of the first $\dfrac{n}{2}$ slot values.
+
+\begin{comment}
+\subsubsection{Details: Scaling Factor Re-interpretation}
+\label{subsubsec:ckks-bootstrapping-scaling-factor-reinterpretation}
+
+The output of the \textsf{SlotToCoeff} step is the ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M + E + E_b) \bmod q_l$, whose plaintext is $\Delta M + E + E_b$ with the scaling factor 1. Just like we did in BFV bootstrapping's scaling factor re-interpretation step (\autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation}), we can view $\textsf{RLWE}_{S, \sigma}(\Delta M + E + E_b) \bmod q_l$ as a ciphertext that encrypts plaintext $M$ with the scaling factor $\Delta$. This step does not require any additional computation, yet we restore the original plaintext scaling factor that was used before the bootstrapping. 
+
+\end{comment}
+
+\subsubsection{Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext}
+\label{subsubsec:ckks-bootstrapping-time-reduction}
+
+In many cases, the application of CKKS may use only a small number of input vector slots (e.g., $\dfrac{n'}{2}$) out of $\dfrac{n}{2}$ slots. Suppose that such $n'$ is some number that divides $n$. Then, we can do a series of homomorphic rotations and multiplication to make the input vector slots store $\dfrac{n}{n'}$ repetitions of the $\dfrac{n'}{2}$-slot values. Specifically, we can do this in total $\dfrac{n}{n'}$ rounds of rotations and additions: initially, we zero-mask between the $$\frac{n'}{2}$$-th slot and the $$\frac{n}{2} - 1$$-th slots and save as \textsf{ct}, and then in each $i$-th round we compute $\textsf{ct} = \textsf{ct} +  \textsf{Rotate}\bm(\textsf{ct}, -n' \cdot 2^i\bm)$. 
+
+Then, we apply the optimization of sparsely packing ciphertext in Summary~\ref{subsec:ckks-sparse-packing} (\autoref{subsec:ckks-sparse-packing}): if an $\dfrac{n}{2}$-dimensional input vector is structured as $\dfrac{n}{n'}$ consecutive repetitions of the first $\dfrac{n'}{2}$ slot values, then its encoded polynomial $M(X) \in \mathbb{Z}[X] / (X^{n} + 1)$ has the structure such that all its coefficients whose degree term is not a multiple of $\dfrac{n}{n'}$ are zero as follows:
+
+$M(X) = c_0 + c_{\frac{n}{n'}}X^{\frac{n}{n'}} + c_{\frac{2n}{n'}}X^{\frac{2n}{n'}} + \cdots + c_{n - \frac{n}{n'}}X^{n - \frac{n}{n'}}$. 
+
+Remember that in the \textsf{CoeffToSlot} step (\autoref{subsubsec:ckks-bootstrapping-coefftoslot-details}), we use the formula $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$ to move the $q_0k$-contaminated polynomial's coefficients to the input vector slots. But by the principle of sparsely packed ciphertext, we know that all the slots of $\vec{m}$ which are not a multiple of $\dfrac{n}{n'}$ slots would store a zero coefficient. This means that we will get the same computation result even if we only compute the $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$ formula with the rows of $\hathat W$ which whose row index is a multiple of $\dfrac{n}{n'}$. Mathematically, we can update the encoding formula to $\vec{m_s} = \dfrac{ \text{\rotatecharone{E}} \cdot I_{n'}^R \cdot \vec{v}_{'}}{n'}$ where the $n \times \frac{n}{n'}$ matrix \rotatecharone{E} is an elimination of all those columns from $\hathat W$ whose column index is not a multiple of $\dfrac{n}{n'}$:
+
+{\footnotesize{\hspace{-1cm}\noindent $\text{\rotatecharone{E}} = \begin{bmatrix}
+1 & 1 & \cdots & 1 & 1 & \cdots & 1 & 1\\
+(\xi^{J(\frac{0\cdot n}{n'}-n')}) & (\xi^{J(\frac{1\cdot n}{n'})}) & \cdots & (\xi^{J(n-\frac{n}{n'})}) & (\xi^{J_*(n-\frac{n}{n'})}) & \cdots & (\xi^{J_*(\frac{1\cdot n}{n'})}) & (\xi^{J_*(\frac{0\cdot n}{n'}-n')})\\
+(\xi^{J(\frac{0\cdot n}{n'}-n')})^2 & (\xi^{J(\frac{1\cdot n}{n'}-n')})^2 & \cdots & (\xi^{J(n-\frac{n}{n'})})^2 & (\xi^{J_*(n-\frac{n}{n'})})^2 & \cdots & (\xi^{J_*(\frac{1\cdot n}{n'}-n')})^2 & (\xi^{J_*(\frac{0\cdot n}{n'}-n')})^2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+(\xi^{J(\frac{0\cdot n}{n'}-n')})^{n-1} & (\xi^{J(\frac{1\cdot n}{n'}-n')})^{n-1} & \cdots & (\xi^{J(n-\frac{n}{n'})})^{n-1} & (\xi^{J_*(n-\frac{n}{n'})})^{n-1} & \vdots & (\xi^{J_*(\frac{1\cdot n}{n'}-n')})^{n-1} & (\xi^{J_*(\frac{0\cdot n}{n'}-n')})^{n-1} 
+\end{bmatrix}$}}
+
+$ $
+
+Remember that in the original \textsf{CoeffToSlot} step (\autoref{subsubsec:ckks-bootstrapping-coefftoslot-details}), we had to split \textsf{ct\textsubscript{s}} into \textsf{ct\textsubscript{s1}} and \textsf{ct\textsubscript{s2}} because in CKKS each input vector can store maximum $\frac{n}{2}$ slots but we need to move total $n$ coefficient values to the input vector slots for bootstrapping. On the other hand, the computation result of the above updated encoding formula (using a sparsely packed ciphertext) is $\vec{m}_s$, having only $\frac{n}{n'}$ coefficient slots instead of $n$ coefficient slots, and each slot index $i$ in $\vec{m}_s$ corresponds to the encoded polynomial's coefficient with degree term $i \cdot \dfrac{n}{n'}$ (we do not compute any other coefficient terms, because we know that they are 0 anyway, so no need to bootstrap them). And notice that $\frac{n}{n'} \leq \frac{n}{2}$, because $n'$ divides $n$. Therefore, without computing two ciphertexts $\textsf{ct}_{\textsf{s1}} = [\hathat WI_n^R]_{11} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{12} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}$ and $\textsf{ct}_{\textsf{s2}} = [\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{22} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}$ separately, we can directly compute $\textsf{ct\textsubscript{c}} = \dfrac{ \text{\rotatecharone{E}} \cdot I_{n'}^R \cdot \textsf{ct\textsubscript{c}}}{n'}$, because all coefficients for bootstrapping fit in $\dfrac{n}{2}$ slots. Therefore, the number of homomorphic computations and memory requirement for the \textsf{CoeffToSlot} step can be reduced by half. And the same is true for the \textsf{EvalExp} step (\autoref{subsubsec:ckks-bootstrapping-evalexp-details}).
+
+Similarly, as for the \textsf{SlotToCoeff} step (\autoref{subsubsec:ckks-bootstrapping-slottocoeff-details}), we update the decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ to $\vec{v}_{'} = \text{\rotatecharone{E}}^T \cdot \vec{m}_c$. This again reduces the number of homomorphic computations and memory requirement for the \textsf{SlotToCoeff} step by half. Notice that $\text{\rotatecharone{E}}^T$ is a matrix where those columns whose column index is a not a multiple of $\dfrac{n}{n'}$ are zero. This zero-enforcement to the columns of $\text{\rotatecharone{E}}^T$ still outputs the same computation result, because $\vec{m}_c$ is a vector such that those slots whose slot index is not a multiple of $\dfrac{n}{n'}$ are zero, which makes the computation result with their corresponding columns of $\text{\rotatecharone{E}}^T$ (i.e., the columns whose index is not a multiple of $\dfrac{n}{n'}$) zero, anyway.
+
+
+\begin{comment}
+
+Also, remember that decoding $M(X) \in \mathbb{R}[X] \in (X^{n} + 1)$ into an input vector is equivalent to evaluating the polynomial at $n$ distinct primitive $(\mu=2n)$-th roots of unity: 
+
+$X = \{\omega^{J(0)}, \omega^{J(1)}, \cdots, \omega^{J(\frac{n}{2}-1)}, \omega^{J_*(\frac{n}{2}-1)}, \cdots, \omega^{J_*(1)}, \omega^{J_*(0)} \}$, where $\omega = e^{\frac{i\pi}{n}}$
+
+Suppose we define another variable $Y = X^{\frac{n}{n'}}$, based on which we define a $n'$-degree (smaller-degree) polynomial ring $M_Y(Y) \in \mathbb{Z}[Y] / (Y^{n'} + 1)$. 
+%The primitive $n'$-th roots of unity are: 
+%$\{\xi^{J(0)}, \xi^{J(1)}, \cdots, \xi^{J(\frac{n'}{2}-1)}, \xi^{J_*(\frac{n'}{2}-1)}, \cdots, \xi^{J_*(1)}, \xi^{J_*(0)}\}$, where $\xi = e^{\frac{i\pi}{n'}}$
+Then, we can express $M(X)$ in terms of $M_Y(Y)$ as follows: $M(X) = M_Y(X^{\frac{n}{n'}})$. Therefore, the decoding process $\sigma$ of evaluating $M(X)$ at $n$ distinct primitive $(\mu=2n)$-th roots of unity is equivalent to the following:
+
+$\sigma\bm((M(X)\bm) = \bm( M(\omega^{J(0)}), M(\omega^{J(1)}), \cdots, M(\omega^{J(\frac{n}{2}-1)}), M(\omega^{J_*(\frac{n}{2}-1)}), \cdots, M(\omega^{J_*(1)}), M(\omega^{J_*(0)}) \bm)$
+
+$ $
+
+$= \bm( M_Y((\omega^{J(0)})^{\frac{n}{n'}}), M_Y((\omega^{J(1)}))^{\frac{n}{n'}}), \cdots, M_Y((\omega^{J(\frac{n}{2}-1)})^{\frac{n}{n'}}), M_Y((\omega^{J_*(\frac{n}{2}-1)})^{\frac{n}{n'}}),$
+
+$ \cdots, M_Y((\omega^{J_*(1)})^{\frac{n}{n'}}), M_Y((\omega^{J_*(0)})^{\frac{n}{n'}}) \bm)$
+\textcolor{red}{ \# since $M(X) = M_Y(X^{\frac{n}{n'}})$}
+
+$ $
+
+$= \bm( M_Y((\omega^\frac{n}{n'})^{{J(0)}}), M_Y((\omega^{\frac{n}{n'}}))^{J(1)}), \cdots, M_Y((\omega^{\frac{n}{n'}})^{J(\frac{n}{2}-1)}), M_Y((\omega^{\frac{n}{n'}})^{J_*(\frac{n}{2}-1)}),$
+
+$ \cdots, M_Y((\omega^{\frac{n}{n'}})^{J_*(1)}), M_Y((\omega^{\frac{n}{n'}})^{J_*(0)}) \bm)$
+
+$ $
+
+$= \bm( M_Y(\xi^{{J(0)}}), M_Y(\xi^{J(1)}), \cdots, M_Y(\xi^{J(\frac{n}{2}-1)}), M_Y(\xi^{J_*(\frac{n}{2}-1)}), \cdots, M_Y(\xi^{J_*(1)}), M_Y(\xi^{J_*(0)}) \bm)$ 
+
+\textcolor{red}{ \# where $\xi = e^{\frac{i\pi}{n'}}$}
+
+
+$ $
+
+$= \bm( \overbrace{M_Y(\xi^{{J(0)}}), M_Y(\xi^{J(1)}), \cdots, M_Y(\xi^{J(\frac{n'}{2}-1)}), M_Y(\xi^{{J(0)}}), \cdots M_Y(\xi^{J(\frac{n'}{2}-1)})}^{\frac{n}{n'} \text{ repetitions of } M_Y(\xi^{{J(0)}}), M_Y(\xi^{J(1)}), \cdots, M_Y(\xi^{J(\frac{n'}{2}-1)})},$
+
+$ \textcolor{white}{ = ( } \overbrace{M_Y(\xi^{J_*(\frac{n'}{2}-1)}), \cdots, M_Y(\xi^{J_*(1)}), M_Y(\xi^{J_*(0)} , M_Y(\xi^{J_*(\frac{n'}{2}-1)}), \cdots, M_Y(\xi^{J_*(0)}}^{\frac{n}{n'} \text{ repetitions of } M_Y(\xi^{J_*(\frac{n'}{2}-1)}), \cdots, M_Y(\xi^{J_*(1)}), M_Y(\xi^{J_*(0)}}) \bm)$ 
+
+\textcolor{red}{ \# since $\{J(0), \cdots J(\frac{n}{2})\}$ are $\frac{n}{n'}$ repetitions of $\{J(0), \cdots J(\frac{n'}{2})\}$} 
+
+\textcolor{red}{ \textcolor{white}{\# }, and $\{J_*(\frac{n}{2}), \cdots J(0)\}$ are $\frac{n}{n'}$ repetitions of $\{J_*(\frac{n'}{2}), \cdots J(0)\}$}
+
+$ $
+
+This result means that decoding an $(n-1)$-degree polynomial $M(X)$ which is an encoding of $\dfrac{n}{n'}$ repetitive slot values of input vectors is equivalent to evaluating the evaluating an $(n'-1)$-degree (i.e., smaller degree) polynomial $M_Y(Y)$ at $n'$ distinct primitive $(\mu=2n')$-the roots of unity and replicating the results $\dfrac{n}{n'}$ times. Notice that this is computationally faster and lighter than the standard decoding process of evaluating the evaluating an $(n-1)$-degree (i.e., smaller degree) polynomial $M(X)$ at $n$ distinct primitive $(\mu=2n)$-the roots of unity. Similarly, the encoding process of converting a vector into a polynomial is faster and lighter than the standard method. In the \textsf{CoeffToSlot} step (\autoref{subsubsec:ckks-bootstrapping-coefftoslot-details}), we use the formula $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$. However, if we use the optimization of sparsely packing ciphertext, we can instead use the following formula giving the same computation result but faster and lighter: 
+
+\end{comment}
+
+\subsubsection{Summary}
+\label{subsubsec:ckks-bootstrapping-summary}
+
+We summarize the CKKS bootstrapping procedure as follows. 
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:ckks-bootstrapping-summary}} CKKS Bootstrapping}}]
+
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+\begin{enumerate}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+
+$ $
+
+, which satisfies the decryption relation: $A\cdot S + B = \Delta M + E + Kq_0$ 
+
+$ $
+
+\item \textsf{\textbf{\underline{ModRaise}:}} View the polynomials $A$ and $B$ as plaintext polynomials whose each coefficient is in $\mathbb{Z}_{q_L}$ (i.e., $(A, B) \bmod q_L$). This change of viewpoint automatically changes the ciphertext as $\textsf{RLWE}_{S, \sigma}(\Delta M + Kq_0)$. The \textsf{ModRaise} step does not require any actual computation. 
+
+$ $
+\begin{comment}
+\item \textsf{\textbf{\underline{Homomorphic Decryption} (without scaling down by $\Delta$):}}
+
+With the bootstrapping key $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$ whose ciphertext modulus is $q_L$, perform homomorphic decryption (without modulo reduction by $q_L$) as follows: 
+
+$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B$
+
+$= \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+$ $
+
+, where the encrypted plaintext this ciphertext is $\Delta M + E + q_0K$ with the scaling factor $1$.
+
+$ $
+\end{comment}
+\item \textsf{\textbf{\underline{CoeffToSlot}:}} 
+
+Move the coefficients of the encrypted plaintext $\Delta M + E + q_0K$ to the input vector slots by homomorphically multiplying $n^{-1}\cdot \hathat W \cdot I_n^R$ to it follows: 
+
+$\textsf{RLWE}_{S, \sigma}(Z_1) = n^{-1}\cdot \hathat W \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+$ $
+
+\item \textsf{\textbf{\underline{EvalExp}:}} 
+
+Remove the wrap-around garbage value $q_0K$ in $\Delta M + E + q_0K$ by homomorphically evaluating the polynomial $\sigma_f$ which approximates a sine function with period $q_0$ as follows: 
+
+$\textsf{RLWE}_{S, \sigma}(Z_2) = \sigma_f \circ \textsf{RLWE}_{S, \sigma}(Z_1)  \bmod q_l$
+
+$ $
+
+This step is equivalent to \textit{homomorphically} performing modulo reduction by $q_0$ to the input value. This step reduces the ciphertext modulus from $q_L \rightarrow q_l$ as it consumes multiplicative levels when homomorphically evaluating the polynomial approximation of the sine function.
+
+$ $
+
+\item \textsf{\textbf{\underline{SlotToCoeff}:}} 
+
+Move the modulo-$q_0$-reduced plaintext value $\Delta M + E$ stored in the input vector slots back to the plaintext coefficient positions by homomorphically multiplying the encoding matrix $\hathat W^*$ as follows:
+
+$\textsf{RLWE}_{S, \sigma}(\Delta M + E) = \hathat W^* \cdot \textsf{RLWE}_{S, \sigma}(Z_2)  \bmod q_l$
+
+$ $
+\begin{comment}
+\item \textsf{\textbf{\underline{Scaling Factor Re-interpretation}:}} The ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M + E)$ is an encryption of plaintext $\Delta M + E$ with scaling factor 1. Like we did in BFV's bootstrapping (\autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation}), without any additional computation, we can view this ciphertext as an encryption of plaintext $M$ with scaling factor $\Delta$ with a small noise $E$. Incorporating the small noise $E$ into the scaled plaintext $\Delta M$ can be tolerated due to CKKS's innate nature of approximate encryption. 
+\end{comment}
+\end{enumerate}
+\setlist[itemize]{leftmargin=\leftmargini}
+\setlist[enumerate]{leftmargin=\leftmargini}
+
+$ $
+
+\textbf{Limitation:} The noise slowly grows over each bootstrapping due to the bootstrapping error and will eventually overflow the message and the ciphertext modulus. 
+
+\end{tcolorbox}
+
+
+\para{Comparison between BFV and CKKS Bootstrapping:} In the case of CKKS's bootstrapping, it does not reduce the magnitude of the old noise $E$ and keeps it the same as before, because the sine approximation function converts $\Delta M + E + Kq_0$ into $\Delta M + E$. However, as the ciphertext modulus gets increased from $q_0 \rightarrow q_L$, the noise-to-ciphertext-modulus ratio decreases, since $\dfrac{E}{q_L} \ll \dfrac{E}{q_0}$. On the other hand, the bootstrapping procedure introduces a new bootstrapping noise, which can be viewed as a fixed amount. However, this fixed amount of new noise accumulates over each bootstrapping. Therefore, after a very large number of bootstrappings, the noise will eventually overflow the message and even the ciphertext modulus. 
+
+In the case of BFV's bootstrapping, it reduces the noise, but does not change the ciphertext modulus. However, there is no need to reset the ciphertext modulus, because BFV does not have a leveled ciphertext modulus chain, and BFV's ciphertext-to-ciphertext multiplication does not consume ciphertext modulus. Furthermore, since BFV's bootstrapping directly removes the noise, the noise is guaranteed to be kept under a certain threshold even after an infinite number of bootstrappings. 
+
+Another important difference is that CKKS's bootstrapping does not require homomorphic decryption, primarily because it maintains the plaintext's scaling factor to be the same across the entire bootstrapping procedure. On the other hand, BFV's bootstrapping needs to change the plaintext's scaling factor to run the digit extraction algorithm. Therefore, homomorphic decryption is required to change the plaintext scaling factor ($p^{\varepsilon}$) while preserving the same ciphertext modulus ($q$). 
+
+
+
+
+
+\subsubsection{Reducing the Bootstrapping Noise}
+\label{subsubsec:ckks-bootstrapping-noise-reduction}
+
+As explained in \autoref{subsubsec:ckks-bootstrapping-evalexp-details}, the bootstrapping procedure generates three types of noises:
+
+%\renewcommand{\labelenumi}{\underline{Type-\arabic{enumi} Noise:}}
+\begin{itemize}
+\item \underline{Type-1 Noise}: the intrinsic homomorphic $(+, \cdot)$ computation noises of the \textsf{CoeffToSlot}, \textsf{EvalExp}, and \textsf{SlotToCoeff} steps
+\item \underline{Type-2 Noise}: the \textsf{EvalExp} step's approximation error of the exponential function $e^{i\theta}$
+\item \underline{Type-3 Noise}: the \textsf{EvalExp} step's sine graph error (i.e., not exactly $y=x$ around $x=0$, but only $y \approx x$)
+\end{itemize}
+
+%\renewcommand{\labelenumi}{\arabic{enumi}.}
+
+$ $
+
+
+The Type-1 noise is inevitable by the design of FHE. The Type-2 noise can be either avoided or unavoidable depending on the tradeoff setup between the bootstrapping accuracy and efficiency. Unlike these two types of noises, the Type-3 noise can be effectively reduced by newer bootstrapping techniques.  
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=1.0\linewidth]{figures/arc-sine.png}
+  \caption{Arc-sine graph for smaller approximation error \href{https://www.google.com/search?sca_esv=c744cb070de47b7e&sxsrf=ADLYWIKKaF93fcAFvJC4ehJso1E5qFTaow:1732546684173&q=arcsin(sin(x))&source=lnms&fbs=AEQNm0DmKhoYsBCHazhZSCWuALW8l8eUs1i3TeMYPF4tXSfZ95GzcfXnm5XYTvJV_9Qreh2py964ICpZJthXkELijctC8pFBYULoa3-fvQmwK0VJF0ntzsbN_W2CCJL9N57SWFNwWI58jCKaBJSdPgkprHQVK8H1PYOYWXMHTCCV-rDbC44rR6ANM870jZCZRtTKwFWtMIe2&sa=X&ved=2ahUKEwjZy6qt3_eJAxXbhlYBHXD2IvEQ0pQJegQIDxAB&cshid=1732546705369143&biw=1280&bih=635&dpr=1.5}{(Source)}}
+  \label{fig:arc-sine}
+\end{figure}
+
+$ $
+
+\para{$\bm{\arcsin(\sin(x))}$ Approximation (\href{https://dl.acm.org/doi/10.1007/978-3-030-77870-5_22}{EUROCRYPT 2021}~\cite{cryptoeprint:2020/552}):} Using the $\arcsin(\sin(x))$ function instead of the $\sin x$ function can reduce the Type-3 noise, because its line is not curved but straight, as shown in \autoref{fig:arc-sine} (comprising a series of $y = x$ and $y = -x$ segments). This technique also uses the Remez algorithm that evenly distributes the approximation error over a specified region. However, one downside of this technique is that it consumes 3 multiplicative levels. 
+
+$ $
+
+\para{Meta-BTS (\href{https://dl.acm.org/doi/10.1145/3548606.3560696}{CCS 2022}~\cite{cryptoeprint:2022/1167}):} This is thus far the most computationally efficient and accurate bootstrapping technique, whose procedure is as follows:
+\begin{enumerate}
+\item Perform the regular bootstrapping based on the sine graph to the input ciphertext.
+\item Rescale step 1's bootstrapped ciphertext to modulus $q_0$.
+\item Subtract step 2's ciphertext from the initial un-bootstrapped ciphertext (where both ciphertexts are modulo $q_0$), whose result is a modulo $q_0$ ciphertext storing the bootstrapping error.
+\item Bootstrap the output ciphertext of step 3 (storing the bootstrapping error) to modulus $q_l$.
+\item Subtract step 4's ciphertext from step 1's ciphertext (where both ciphertexts are modulo $q_l$), which gives a new modulo $q_l$ ciphertext with a reduced bootstrapping error.
+\end{enumerate}
+
+$ $
+
+\para{Limitation in Noise Handling:} The above bootstrapping techniques can reduce the Type-3 noise, because the bootstrapping error is smaller than the plaintext message and a smaller input $x$ value to the approximating sine function outputs a value closer to $y=x$. Running this algorithm multiple times, the Type-3 noise becomes exponentially smaller, because the size of the target plaintext (i.e., the extracted bootstrapping error as the output of step 3 above) is much smaller than before. Meanwhile, Type-1 and Type-2 noises do not decrease over multiple bootstrapping rounds, relatively keeping  their same level, because each round generates new Type-1 and Type-2 noises. 
+
+
+
+%\para{Reducing All Types of Noises:}
+%\textcolor{purple}{In the RLWE cryptosystem, all types of noises can be reduced by the rescaling process during ciphertext-to-ciphertext multiplication (\autoref{subsec:glwe-mult-cipher-rescale}), where the scaling factor stays the same (or almost the same in case of using CRT) as $\Delta$, while the noise gets scaled down by $\Delta$ (or almost $\Delta$ in case of using CRT). Also note that CKKS's modulus bootstrapping does not change the plaintext's scaling factor, either.}

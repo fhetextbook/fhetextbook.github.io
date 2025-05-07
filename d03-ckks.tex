@@ -2179,6 +2179,52 @@ Another important difference is that CKKS's bootstrapping does not require homom
 
 
 
+\subsubsection{Reducing the Bootstrapping Noise}
+\label{subsubsec:ckks-bootstrapping-noise-reduction}
+
+As explained in \autoref{subsubsec:ckks-bootstrapping-evalexp-details}, the bootstrapping procedure generates three types of noises:
+
+%\renewcommand{\labelenumi}{\underline{Type-\arabic{enumi} Noise:}}
+\begin{itemize}
+\item \underline{Type-1 Noise}: the intrinsic homomorphic $(+, \cdot)$ computation noises of the \textsf{CoeffToSlot}, \textsf{EvalExp}, and \textsf{SlotToCoeff} steps
+\item \underline{Type-2 Noise}: the \textsf{EvalExp} step's approximation error of the exponential function $e^{i\theta}$
+\item \underline{Type-3 Noise}: the \textsf{EvalExp} step's sine graph error (i.e., not exactly $y=x$ around $x=0$, but only $y \approx x$)
+\end{itemize}
+
+%\renewcommand{\labelenumi}{\arabic{enumi}.}
+
+$ $
+
+
+The Type-1 noise is inevitable by the design of FHE. The Type-2 noise can be either avoided or unavoidable depending on the tradeoff setup between the bootstrapping accuracy and efficiency. Unlike these two types of noises, the Type-3 noise can be effectively reduced by newer bootstrapping techniques.  
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=1.0\linewidth]{figures/arc-sine.png}
+  \caption{Arc-sine graph for smaller approximation error \href{https://www.google.com/search?sca_esv=c744cb070de47b7e&sxsrf=ADLYWIKKaF93fcAFvJC4ehJso1E5qFTaow:1732546684173&q=arcsin(sin(x))&source=lnms&fbs=AEQNm0DmKhoYsBCHazhZSCWuALW8l8eUs1i3TeMYPF4tXSfZ95GzcfXnm5XYTvJV_9Qreh2py964ICpZJthXkELijctC8pFBYULoa3-fvQmwK0VJF0ntzsbN_W2CCJL9N57SWFNwWI58jCKaBJSdPgkprHQVK8H1PYOYWXMHTCCV-rDbC44rR6ANM870jZCZRtTKwFWtMIe2&sa=X&ved=2ahUKEwjZy6qt3_eJAxXbhlYBHXD2IvEQ0pQJegQIDxAB&cshid=1732546705369143&biw=1280&bih=635&dpr=1.5}{(Source)}}
+  \label{fig:arc-sine}
+\end{figure}
+
+$ $
+
+\para{$\bm{\arcsin(\sin(x))}$ Approximation (\href{https://dl.acm.org/doi/10.1007/978-3-030-77870-5_22}{EUROCRYPT 2021}~\cite{cryptoeprint:2020/552}):} Using the $\arcsin(\sin(x))$ function instead of the $\sin x$ function can reduce the Type-3 noise, because its line is not curved but straight, as shown in \autoref{fig:arc-sine} (comprising a series of $y = x$ and $y = -x$ segments). This technique also uses the Remez algorithm that evenly distributes the approximation error over a specified region. However, one downside of this technique is that it consumes 3 multiplicative levels. 
+
+$ $
+
+\para{Meta-BTS (\href{https://dl.acm.org/doi/10.1145/3548606.3560696}{CCS 2022}~\cite{cryptoeprint:2022/1167}):} This is thus far the most computationally efficient and accurate bootstrapping technique, whose procedure is as follows:
+\begin{enumerate}
+\item Perform the regular bootstrapping based on the sine graph to the input ciphertext.
+\item Rescale step 1's bootstrapped ciphertext to modulus $q_0$.
+\item Subtract step 2's ciphertext from the initial un-bootstrapped ciphertext (where both ciphertexts are modulo $q_0$), whose result is a modulo $q_0$ ciphertext storing the bootstrapping error.
+\item Bootstrap the output ciphertext of step 3 (storing the bootstrapping error) to modulus $q_l$.
+\item Subtract step 4's ciphertext from step 1's ciphertext (where both ciphertexts are modulo $q_l$), which gives a new modulo $q_l$ ciphertext with a reduced bootstrapping error.
+\end{enumerate}
+
+$ $
+
+\para{Limitation in Noise Handling:} The above bootstrapping techniques can reduce the Type-3 noise, because the bootstrapping error is smaller than the plaintext message and a smaller input $x$ value to the approximating sine function outputs a value closer to $y=x$. Running this algorithm multiple times, the Type-3 noise becomes exponentially smaller, because the size of the target plaintext (i.e., the extracted bootstrapping error as the output of step 3 above) is much smaller than before. Meanwhile, Type-1 and Type-2 noises do not decrease over multiple bootstrapping rounds, relatively keeping  their same level, because each round generates new Type-1 and Type-2 noises. 
+
+
 
 %\para{Reducing All Types of Noises:}
 %\textcolor{purple}{In the RLWE cryptosystem, all types of noises can be reduced by the rescaling process during ciphertext-to-ciphertext multiplication (\autoref{subsec:glwe-mult-cipher-rescale}), where the scaling factor stays the same (or almost the same in case of using CRT) as $\Delta$, while the noise gets scaled down by $\Delta$ (or almost $\Delta$ in case of using CRT). Also note that CKKS's modulus bootstrapping does not change the plaintext's scaling factor, either.}

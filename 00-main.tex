@@ -122,7 +122,11 @@
   \raisebox{-\dp\z@}{\scalebox{.5}[.25]{$\m@th#1]$}}%
 }
 
-
+\ifdefined\HCode          % \HCode is defined only in TeX-4ht runs
+  \ExplSyntaxOn
+  \RenewDocumentCommand\ref*{m}{\getrefnumber{#1}}
+  \ExplSyntaxOff
+\fi
 
 \makeatother
 

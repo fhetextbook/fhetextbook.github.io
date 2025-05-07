@@ -8,7 +8,7 @@
 <meta content='00-main.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!-- l. 527 --><div class='crosslinks'><p class='noindent'>[<a href='CoefficientExtraction.html'>prev</a>] [<a href='CoefficientExtraction.html#tailCoefficientExtraction.html'>prev-tail</a>] [<a href='#tailNoiseBootstrapping.html'>tail</a>] [<a href='TFHEScheme.html#NoiseBootstrapping.html'>up</a>] </p></div>
+   <!-- l. 527 --><div class='crosslinks'><p class='noindent'>[<a href='TFHEonaDiscreteTorus.html'>next</a>] [<a href='CoefficientExtraction.html'>prev</a>] [<a href='CoefficientExtraction.html#tailCoefficientExtraction.html'>prev-tail</a>] [<a href='#tailNoiseBootstrapping.html'>tail</a>] [<a href='TFHEScheme.html#NoiseBootstrapping.html'>up</a>] </p></div>
    <h4 class='subsectionHead' id='noise-bootstrapping'><span class='titlemark'>D-1.8   </span> <a id='x103-127000D-1.8'></a>Noise Bootstrapping</h4>
 <!-- l. 531 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference:  </span><a href='https://www.zama.ai/post/tfhe-deep-dive-part-4'>TFHE Deep Dive - Part IV - Programmable Bootstrapping</a> <span class='cite'>[<span class='rm-lmbx-10x-x-109'>?</span>]</span>
 </p><!-- l. 534 --><p class='indent'>   <!-- l. 534 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
@@ -987,11 +987,39 @@ processing 2 input bits of an AND gate.
                                                                                          
                                                                                          
    </figure>
-<!-- l. 594 --><p class='indent'>
+<!-- l. 1147 --><p class='indent'>   Homomorphic encryption can be applied to the neurons of deep neural networks, in which each neuron
+is generally comprised of two steps of computation:
+   </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
+1. </dt><dd class='enumerate-enumitem'><span class='rm-lmbx-10x-x-109'>Linear Combination of Input Values: </span>An input feature value (or intermediate value) set
+   <!-- l. 1150 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext></mtext><mstyle class='math'><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace></mstyle><mtext></mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
+   a weight set <!-- l. 1150 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>w</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>w</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext></mtext><mstyle class='math'><mo class='MathClass-rel' stretchy='false'>⋯</mo><mi>x</mi></mstyle><mtext></mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>w</mi></mrow><mrow><mi>n</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
+   and a bias <!-- l. 1150 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>b</mi></math>
+   are computed as: <!-- l. 1150 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>y</mi> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><msub><mrow><mi>a</mi></mrow><mrow><mn>0</mn></mrow></msub><msub><mrow><mi>w</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi></mrow></math>.
+   </dd><dt class='enumerate-enumitem'>
+2. </dt><dd class='enumerate-enumitem'><span class='rm-lmbx-10x-x-109'>Activation Function: </span><!-- l. 1151 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>y</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is computed, where <!-- l. 1151 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
+   is a non-linear activation function such as the <!-- l. 1151 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi class='loglike'>sin</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --></mrow></math>
+   function, ReLU, sigmoid, hyperbolic tangent, etc.
+   </dd><dt class='enumerate-enumitem'>
+3. </dt><dd class='enumerate-enumitem'></dd></dl>
+<!-- l. 1155 --><p class='indent'>   TFHE can homomorphically compute the 1st step’s linear combination formula:
+<!-- l. 1155 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>y</mi> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><msub><mrow><mi>a</mi></mrow><mrow><mn>0</mn></mrow></msub><msub><mrow><mi>w</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi></mrow></math> as
+<!-- l. 1155 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><munderover accent='false' accentunder='false'><mrow><mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>a</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mi>w</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi></mrow></math>, which
+can be implemented as ciphertext addition (<a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!-- tex4ht:ref: subsec:coeff-rotation  --></a>) and ciphertext-to-plaintext multiplication
+(<a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!-- tex4ht:ref: subsec:coeff-rotation  --></a>).
+</p><!-- l. 1157 --><p class='indent'>   However, the 2nd step’s non-linear functions cannot be expressed as addition and multiplication of
+ciphertexts. To address this issue, the activation function can be evaluated as a programmable
+bootstrapping, such that the output of the bootstrapping matches or (or is similar) to the output of the
+activation function. If we use bootstrapping at the 2nd step, noises can be refreshed at the end of every
+neuron, thus we can potentially handle neural networks of any depth without worrying about the noise
+growth.
                                                                                          
                                                                                          
 </p>
-   <!-- l. 596 --><div class='crosslinks'><p class='noindent'>[<a href='CoefficientExtraction.html'>prev</a>] [<a href='CoefficientExtraction.html#tailCoefficientExtraction.html'>prev-tail</a>] [<a href='NoiseBootstrapping.html'>front</a>] [<a href='TFHEScheme.html#NoiseBootstrapping.html'>up</a>] </p></div>
-<!-- l. 596 --><p class='indent'>   <a id='tailNoiseBootstrapping.html'></a>  </p> 
+   <!-- l. 1161 --><div class='crosslinks'><p class='noindent'>[<a href='TFHEonaDiscreteTorus.html'>next</a>] [<a href='CoefficientExtraction.html'>prev</a>] [<a href='CoefficientExtraction.html#tailCoefficientExtraction.html'>prev-tail</a>] [<a href='NoiseBootstrapping.html'>front</a>] [<a href='TFHEScheme.html#NoiseBootstrapping.html'>up</a>] </p></div>
+<!-- l. 1161 --><p class='indent'>   <a id='tailNoiseBootstrapping.html'></a>  </p> 
 </body> 
 </html>

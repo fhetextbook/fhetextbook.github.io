@@ -1646,11 +1646,5 @@ Here, we assume that $q_L$ is large enough such that $\Delta M + E + q_0K \ll q_
 
 In the $\Delta M + E + q_0 K \bmod q_L$ term, notice that because of the $q_0K$ term which is not modulo-reduced by $q_0$ anymore, the ciphertext's decrypted plaintext polynomial's each $i$-th term would get a corrupted coefficient $\Delta m_i + e_i + q_0\cdot k_i \bmod q_L$ instead of $\Delta m_i + e_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0\cdot k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$.
 
+$\sin x$
 
-\begin{figure}[h!]
-    \centering
-  \includegraphics[width=1.0\linewidth]{figures/modulo-reduction-sine.png}
-  \caption{Sine function $f(x) = \dfrac{q_0}{2\pi}\cdot \sin{} 
- \, \left(\dfrac{2\pi x}{q_0}\right)$ such that $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$ (provided $\Delta m_i + e_i \ll q_0$) \href{https://eprint.iacr.org/2018/153.pdf}{(Source)}}
-  \label{fig:modulo-reduction-sine}
-\end{figure}

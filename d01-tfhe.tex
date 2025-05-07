@@ -1118,3 +1118,28 @@ Besides implementing the homomorphic MUX logic gate used during blind rotation (
 %  \label{fig:torus-gate}
 %\end{figure}
 
+
+\autoref{tab:gate-and} is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT polynomial $V$ as $V(X) = \sum\limits_{i=0}^{7}-X^i$. The LUT polynomial $V(X)$ maps one half of the plaintext domain to $-1$, while the other half to $-1$ (as the terms wrap around the boundary of $n=7$). In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate input 0 and 1 are encoded as $-1$ and $1$, respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2) - 1$. Its output is positive if both inputs are positive (i.e. $1$, in which case the blind rotation will rotate $V$ to the left by $\hat\Delta\cdot 1 + e$ positions and the constant term's coefficient will be $1$. Thus, the output of blind rotation and coefficient extraction will be $\textsf{LWE}_{\vec{s}, \sigma}(\Delta \cdot 1)$ with a reduced noise, which is an encoding of $1$. This design can tolerate the maximum noise of $|e| = 1$. To endure bigger noises, we should increase $q$ and $n$. 
+
+Note that the AND gate's LUT layout is negacyclic, which is a special case, thus we could use the entire $2n=16$ coefficient states in $V(X)$ for the AND gate mapping function's outputs, by leveraging $V(X)$'s innate property of negacyclic rotation. However, in many use cases, the LUT layout is not necessarily negacyclic like this AND gate example. Even our noise bootstrapping's LUT layout (\autoref{subsec:bootstrapping-overview}) was not negacyclic, but a unity function (as it simply removes the noise). Thus, for most use cases, we need to use only $\dfrac{t}{2}$ out of $t$ plaintext space to avoid more than $n-1$ rotations of $V(X)$ (\autoref{subsec:tfhe-zero-padding}). 
+
+Besides the AND gate, other logic gates can be built in a similar manner, each of which based on a different linear combination formula and LUT layout. 
+
+\para{Division:} TFHE does not support direct division of plaintext numbers of any size. This is because TFHE's LWE vector elements are in the $Z_q$ ring, where each element $g$ does not necessarily have a multiplicative inverse $g^{-1}$, which makes it hard to multiply $g^{-1}$ to the target number to divide. Instead, division can be implemented as binary division based on the gates implemented by gate bootstrapping. To support binary division, each plaintext has to be a single bit and encrypted as an independent ciphertext. Or multiple bits can be bundled up and processed concurrently by designing a linear combination formula, similar to the linear combination that we designed for processing 2 input bits of an AND gate.
+
+\subsubsection{Application: Neural Networks Bootstrapping}
+\label{subsec:tfhe-neural-network}
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=0.8\linewidth]{figures/neural-network.pdf}
+  \caption{An illustration of neural networks }
+  \label{fig:neural-network}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=0.8\linewidth]{figures/nn-homomorphic.pdf}
+  \caption{An illustration of neural networks's programmable bootstrapping}
+  \label{fig:neural-network2}
+\end{figure}

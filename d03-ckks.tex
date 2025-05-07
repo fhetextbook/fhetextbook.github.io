@@ -30,7 +30,7 @@ $ $
 
 Remember that BFV is an exact encryption scheme based on integer ring. On the other hand, CKKS introduces a drifting error while its encoding process of rounding square-root values (included in the Euler's formula) to the nearest integer. Therefore, its decryption is not exactly the same as before encryption. Such a small error occurring during encryption and decryption makes CKKS an \textit{approximate} encryption scheme. 
 
-CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots) rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations over complex numbers as inputs whereas BFV handles homomorphic operations over integer rings. 
+CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots) rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations over complex numbers as inputs, whereas BFV handles homomorphic operations over integer rings. 
 
 
 $ $
@@ -1646,3 +1646,10 @@ Here, we assume that $q_L$ is large enough such that $\Delta M + E + q_0K \ll q_
 
 In the $\Delta M + E + q_0 K \bmod q_L$ term, notice that because of the $q_0K$ term which is not modulo-reduced by $q_0$ anymore, the ciphertext's decrypted plaintext polynomial's each $i$-th term would get a corrupted coefficient $\Delta m_i + e_i + q_0\cdot k_i \bmod q_L$ instead of $\Delta m_i + e_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0\cdot k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$.
 
+
+\begin{figure}[h!]
+    \centering
+  \includegraphics[width=1.0\linewidth]{figures/modulo-reduction-sine.png}
+  \caption{Sine function $f(x) = \dfrac{q_0}{2\pi}\cdot \sin \left(\dfrac{2\pi x}{q_0}\right)$ such that $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$ (provided $\Delta m_i + e_i \ll q_0$) }
+  \label{fig:modulo-reduction-sine}
+\end{figure}

@@ -43,7 +43,7 @@ This means that $a$ and $b$ are congruent modulo $q$ if and only if $a$ and $b$ 
 
 The supported modulo operations are addition, subtraction, and multiplication. The properties of these modulo operations are as follows:
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\getrefnumber{subsec:group-def}.1} Properties of Modulo Operations}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:group-def}.1} Properties of Modulo Operations}}]
 For any integer $x$, the following is true:
 
 \begin{enumerate}
@@ -159,4 +159,4 @@ Also, the same property holds for an inverse: an inverse of $a$ modulo $q$ is $a
 
 Using a signed residue representation is useful in certain cases. In an example of canonical (i.e., unsigned) residue representation, suppose we have the relation $a + b \bmod q$ and we know that in a given application, $a + b$ is guaranteed to be within the $[0, q-1]$ range (i.e., $0 \leq a + b \leq q-1$). Then, $(a + b \bmod q)$ = $a + b$, and thus we can remove the modulo operation, simplifying the relation. Now, suppose a different example of centered (i.e., signed) residue representation where we have the relation $a - b \bmod q$, and we know that in a given application, $a - b$ is guaranteed to be within the range $\left[-\dfrac{q}{2}, \dfrac{q}{2} - 1\right]$. Then, $(a - b \bmod q) = a - b$. However, notice that if the relation $a - b \bmod q$ were in a canonical residue representation, then we cannot remove the modulo operation, because if $a - b$ is negative, then this becomes smaller than the lower bound of the canonical residue system (i.e., $0$), and thus a modulo reduction (i.e., addition by one or more $q$) is needed. 
 
-In \autoref{subsec:rns-fastbconvex}, we design the \textsf{FastBConvEx} operation based on this beneficial property of centered residue representation: in this algorithm design, we can simplify $(\mu + u \bmod b_\alpha)$ to $\mu + u$, because we know that $\dfrac{b_\alpha}{2} \leq \mu + u < \dfrac{b_\alpha}{2}$.
+In \autoref{subsec:rns-fastbconvex}, we design the \textsf{FastBConvEx} operation based on this beneficial property of centered residue representation: in this algorithm design, we can simplify $(\mu + u \bmod b_\alpha)$ to $\mu + u$, because we know that $-\dfrac{b_\alpha}{2} \leq \mu + u < \dfrac{b_\alpha}{2}$.

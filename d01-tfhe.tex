@@ -506,7 +506,7 @@ $ $
 
 $\vec{s}_{'} = (s_{0,0}, s_{0,1}, \gap{$\cdots$}, s_{0,n-1}, s_{1,0}, s_{1,1}, \gap{$\cdots$}, s_{1, n-1}, \gap{$\cdots$}, s_{k-1, n-1}) = (s'_0, s'_1, \gap{$\cdots$}, s'_{nk} ) \in \mathbb{Z}_q^{nk}$
 
-$\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h) = (a_0', a_1', \gap{$\cdots$} , a_{nk}{'}, b_h) \in \mathbb{Z}_q^{nk + 1}$
+$\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h) = (a_0', a_1', \gap{$\cdots$} , a_{nk}', b_h) \in \mathbb{Z}_q^{nk + 1}$
 
 
 \[
@@ -647,13 +647,13 @@ $ $
 
 $V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_nX^{n-1}$
 
-\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e_0}} + m_0X^{\hat{\Delta} m_0 + \hat{e_1}} + m_0X^{\hat{\Delta} m_0 + \hat{e_2}} + \gap{$\cdots$} +  m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e}_0} + m_0X^{\hat{\Delta} m_0 + \hat{e}_1} + m_0X^{\hat{\Delta} m_0 + \hat{e}_2} + \gap{$\cdots$} +  m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
 
-\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e_0}} + m_1X^{\hat{\Delta} m_1 + \hat{e_1}} + m_1X^{\hat{\Delta} m_1 + \hat{e_2}} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e}_0} + m_1X^{\hat{\Delta} m_1 + \hat{e}_1} + m_1X^{\hat{\Delta} m_1 + \hat{e}_2} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$
 
 \text{ } $ + \gap{$\cdots$} $
 
-\text{ } $ + \text{ } m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e_0}} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e_1}} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e_2}} + \gap{$\cdots$} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $ + \text{ } m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_0} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_1} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_2} + \gap{$\cdots$} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_{\hat{\Delta} - 1}}$
 
 $ $
 
@@ -716,13 +716,13 @@ $ $
 
 $V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_nX^{n-1}$
 
-\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e_0}} + m_0X^{\hat{\Delta} m_0 + \hat{e_1}} + m_0X^{\hat{\Delta} m_0 + \hat{e_2}} + \gap{$\cdots$} + m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e}_0} + m_0X^{\hat{\Delta} m_0 + \hat{e}_1} + m_0X^{\hat{\Delta} m_0 + \hat{e}_2} + \gap{$\cdots$} + m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
 
-\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e_0}} + m_1X^{\hat{\Delta} m_1 + \hat{e_1}} + m_1X^{\hat{\Delta} m_1 + \hat{e_2}} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e}_0} + m_1X^{\hat{\Delta} m_1 + \hat{e}_1} + m_1X^{\hat{\Delta} m_1 + \hat{e}_2} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$
 
 \text{ } $ + \gap{$\cdots$} $
 
-\text{ } $ + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e_0}} + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e_1}} + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e_2}}$
+\text{ } $ + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e}_0} + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e}_1} + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e}_2}$
 
 \text{ } \text{ } $ + \gap{$\cdots$} + m_{{t}/{2} - 1}X^{\hat{\Delta} m_{{t}/{2} - 1} + \hat{e}_{\hat{\Delta} - 1}}$
 
@@ -737,9 +737,9 @@ $ $
 \subsubsection{Blind Rotation}
 \label{subsec:bootstrapping-blind-rotation} 
 
-Blind rotation refers to rotating an \textit{encrypted} polynomial's coefficients so that it is not possible to know how many positions the polynomial's coefficients are rotated, and after the rotation, it is not possible to see which coefficient has moved to which degree term. Blind rotation uses the basic polynomial rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation} in \autoref{subsec:coeff-rotation}), with the difference the $V(X)\cdot X^{-i}$ computation is done homomorphically. 
+Blind rotation refers to rotating an \textit{encrypted} polynomial's coefficients so that it is not possible to know how many positions the polynomial's coefficients are rotated, and after the rotation, it is not possible to see which coefficient has moved to which degree term. Blind rotation uses the basic polynomial rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation} in \autoref{subsec:coeff-rotation}), with the difference that the $V(X)\cdot X^{-i}$ computation is done homomorphically. 
 
-Note that $X^{\hat{\Delta} m + \hat{e}_b} = X^{\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}}$, so we can rotate $V$ by computing $V \cdot X^{-(\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i})} = V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$. In fact, we cannot directly compute the LWE decryption formula $-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ (or $\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}$) without the knowledge of the LWE secret key $S$. Nevertheless, there is a mathematical walk-around to compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ without the knowledge of the secret key $S$, provided we are given $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ at the TFHE setup stage. Note that $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ is an GGSW encryption of the LWE secret key $S$, encrypted by the GLWE secret key $\vec{S}_{bk}$ (i.e., a \textit{bootstrapping} key). We use $\vec{S}_{bk}$ to homomorphically compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ (i.e., blindly rotate the coefficients of $V$ to the left by $\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ positions), according to the following procedure:
+Note that $X^{\hat{\Delta} m + \hat{e}_b} = X^{\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}}$, so we can rotate $V$ by computing $V \cdot X^{-(\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i})} = V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$. In fact, we cannot directly compute the LWE decryption formula $-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ (or $\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}$) without the knowledge of the LWE secret key $S$. Nevertheless, there is a mathematical work-around to compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ without the knowledge of the secret key $S$, provided we are given $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ at the TFHE setup stage. Note that $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ is an GGSW encryption of the LWE secret key $S$, encrypted by the GLWE secret key $\vec{S}_{bk}$ (i.e., a \textit{bootstrapping} key). We use $\vec{S}_{bk}$ to homomorphically compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ (i.e., blindly rotate the coefficients of $V$ to the left by $\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ positions), according to the following procedure:
 
 \begin{enumerate}
 \item GLWE-encrypt the polynomial $V$ with the bootstrapping key $\vec{S}_{bk}$ at the TFHE setup stage, so that each coefficient of $V$ gets encrypted.
@@ -777,7 +777,7 @@ Note that while we restrict the application's plaintext space usage to some cont
 
 \subsubsection{Coefficient Extraction}
 
-Finally, we use the coefficient extraction technique (\autoref{subsec:tfhe-extraction}) to extract the rotated polynomial $V'(X)$'s constant term's coefficient as an encryption of $m$: $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$. At this point, the original $\textsf{LWE}$ ciphertext's old noise $\hat{e_b}$ has gone, and the bootstrapped new ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ has a newly generated small noise $e_s$. 
+Finally, we use the coefficient extraction technique (\autoref{subsec:tfhe-extraction}) to extract the rotated polynomial $V'(X)$'s constant term's coefficient as an encryption of $m$: $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$. At this point, the original $\textsf{LWE}$ ciphertext's old noise $\hat{e}_b$ has gone, and the bootstrapped new ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ has a newly generated small noise $e_s$. 
 
 In fact, the homomorphic MUX logic in the blind rotation procedure (\autoref{subsec:bootstrapping-blind-rotation}) involves lots of ciphertext multiplications and additions, which can accumulate additional noises until we reach the point of coefficient extraction. In order to limit the accumulating noises during the series of MUX logic, we can carefully adjust the security parameters. For example, we can design a narrower Gaussian distribution for sampling the noise $e$, while designing a sufficiently large $n$ to compensate for the reduced noise. Meanwhile, increasing $q$ rather makes the system less secure, because it becomes more vulnerable to Lattice reduction attacks. 
 
@@ -840,7 +840,7 @@ $ $
 
 $ $
 
-\para{\underline{Halving the Usable Plaintext Range}: } Problematically, the LUT polynomial V rotates negacyclically. To avoid this problem, we require the application to ensure that the plaintext $m$ uses only continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$. This way, we avoid rotating $V(X)$ more than $n-1$ positions that causes coefficient extraction of double-signed contradicting coefficients. 
+\para{\underline{Halving the Usable Plaintext Range}: } Problematically, the LUT polynomial V rotates negacyclically. To avoid this problem, we require the application to ensure that the plaintext $m$ uses only continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$. This way, we avoid rotating $V(X)$ more than $n-1$ positions that cause coefficient extraction of double-signed contradicting coefficients. 
 %\item Piping the LUT output to a \textbf{negacyclic function}.
 %\item Multiplying the LUT output with \textbf{another negacyclically rotating polynomial}. 
 %\end{itemize}
@@ -850,7 +850,7 @@ $ $
 \subsubsection{Example: Noise Bootstrapping}
 \label{subsec:tfhe-noise-bootstrapping-ex}
 
-Suppose the a GLWE security setup: $n = 16$, $t = 8$, $q = 64$, $k = 8$
+Suppose the GLWE security setup: $n = 16$, $t = 8$, $q = 64$, $k = 8$
 
 $\mathbb{Z}_{t=8} = \{-4, -3, -2, -1, 0 , 1, 2, 3\}$
 
@@ -1149,7 +1149,6 @@ Homomorphic encryption can be applied to the neurons of deep neural networks, in
 \begin{enumerate}
 \item \textbf{Linear Combination of Input Values:} An input feature value (or intermediate value) set $(x_1, x_2, \gap{$\cdots$}, x_n)$, a weight set $(w_1, w_2, \gap{$\cdots x$}, w_n)$, and a bias $b$ are computed as: $y = \sum\limits_{i=1}^{n}a_0w_0 + b$. 
 \item \textbf{Activation Function:} $f(y)$ is computed, where $f$ is a non-linear activation function such as the $\sin$ function, ReLU, sigmoid, hyperbolic tangent, etc. 
-\item 
 \end{enumerate}
 
 TFHE can homomorphically compute the 1st step's linear combination formula: $y = \sum\limits_{i=1}^{n}a_0w_0 + b$ as $\sum\limits_{i=1}^{n}\textsf{LWE}_{\vec{s}, \sigma}(a_0) \cdot w_0 + b$, which can be implemented as ciphertext addition (\autoref{sec:glwe-add-cipher}) and ciphertext-to-plaintext multiplication (\autoref{sec:glwe-mult-plain}). 

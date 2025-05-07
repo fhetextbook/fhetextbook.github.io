@@ -910,6 +910,83 @@ and <!-- l. 1054 --><math display='inline' xmlns='http://www.w3.org/1998/Math/Ma
                                                                                          
    </figure>
    </div>
+<!-- l. 1122 --><p class='indent'>   <a href='#an-example-truth-table-for-an-and-operation-with-an-additional-encoding'>Table 5<!-- tex4ht:ref: subsec:coeff-rotation  --></a> is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT
+polynomial <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> </mrow></math> as
+<!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mn>7</mn></mrow></munderover> <mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>X</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></math>. The LUT polynomial
+<!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> maps one half of the plaintext
+domain to <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>, while the other
+half to <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math> (as the terms wrap
+around the boundary of <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>7</mn></mrow></math>).
+In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate input 0 and 1 are
+encoded as <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>
+and <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>,
+respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is
+<!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo><msub><mrow> <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>. Its output is positive if both
+inputs are positive (i.e. <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>, in which
+case the blind rotation will rotate <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> </mrow></math>
+to the left by <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true'>^</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mn>1</mn> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math> positions and the
+constant term’s coefficient will be <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>.
+Thus, the output of blind rotation and coefficient extraction will be
+<!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> with a reduced noise, which is an
+encoding of <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>. This design can tolerate
+the maximum noise of <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><mi>e</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>. To endure
+bigger noises, we should increase <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
+and <!-- l. 1122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math>.
+</p><!-- l. 1124 --><p class='indent'>   Note that the AND gate’s LUT layout is negacyclic, which is a special case, thus we could use the entire
+<!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>2</mn><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>16</mn></mrow></math> coefficient
+states in <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+for the AND gate mapping function’s outputs, by leveraging
+<!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>’s innate
+property of negacyclic rotation. However, in many use cases, the LUT layout is not necessarily negacyclic
+like this AND gate example. Even our noise bootstrapping’s LUT layout (<a href='#overview3'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8.1<!-- tex4ht:ref: subsec:coeff-rotation  --></a>) was not negacyclic,
+but a unity function (as it simply removes the noise). Thus, for most use cases, we need to use only
+<!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>t</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></math> out of
+<!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> plaintext space to
+avoid more than <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>
+rotations of <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+(<a href='#halving-the-plaintext-space-to-be-used'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8.3<!-- tex4ht:ref: subsec:coeff-rotation  --></a>).
+</p><!-- l. 1126 --><p class='indent'>   Besides the AND gate, other logic gates can be built in a similar manner, each of which based on a
+different linear combination formula and LUT layout.
+</p><!-- l. 1128 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Division: </span>TFHE does not support direct division of plaintext numbers
+of any size. This is because TFHE’s LWE vector elements are in the
+<!-- l. 1128 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>Z</mi></mrow><mrow><mi>q</mi></mrow></msub></math> ring, where each element
+<!-- l. 1128 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>g</mi></math> does not necessarily have a
+multiplicative inverse <!-- l. 1128 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>g</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup></math>, which
+makes it hard to multiply <!-- l. 1128 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>g</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup></math>
+                                                                                         
+                                                                                         
+to the target number to divide. Instead, division can be implemented as binary division based on the gates
+implemented by gate bootstrapping. To support binary division, each plaintext has to be a single bit and
+encrypted as an independent ciphertext. Or multiple bits can be bundled up and processed concurrently
+by designing a linear combination formula, similar to the linear combination that we designed for
+processing 2 input bits of an AND gate.
+   
+</p>
+   <h5 class='subsubsectionHead' id='application-neural-networks-bootstrapping'><span class='titlemark'>D-1.8.10   </span> <a id='x103-137000D-1.8.10'></a>Application: Neural Networks Bootstrapping</h5>
+   <figure class='figure'> 
+
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+<!-- l. 1135 --><p class='noindent' id='an-illustration-of-neural-networks-'> <img alt='PIC' src='figures/neural-network-.png' /> <a id='x103-137001r13'></a></p>
+<figcaption class='caption'><span class='id'>Figure 13: </span><span class='content'>An illustration of neural networks                                                </span></figcaption><!-- tex4ht:label?: x103-137001r13  -->
+                                                                                         
+                                                                                         
+   </figure>
+   <figure class='figure'> 
+
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+<!-- l. 1142 --><p class='noindent' id='an-illustration-of-neural-networkss-programmable-bootstrapping'> <img alt='PIC' src='figures/nn-homomorphic-.png' /> <a id='x103-137002r14'></a></p>
+<figcaption class='caption'><span class='id'>Figure 14: </span><span class='content'>An illustration of neural networks’s programmable bootstrapping                    </span></figcaption><!-- tex4ht:label?: x103-137002r14  -->
+                                                                                         
+                                                                                         
+   </figure>
 <!-- l. 594 --><p class='indent'>
                                                                                          
                                                                                          

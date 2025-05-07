@@ -49,11 +49,11 @@ encryption scheme.
                                                                                          
                                                                                          
 </p><!-- l. 33 --><p class='indent'>   CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext
-addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses
-slightly different schemes than BFV for encoding the input vector (i.e., input vector slots)
+addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication. Meanwhile, CKKS
+uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots)
 rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and
 bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations
-over complex numbers as inputs whereas BFV handles homomorphic operations over integer
+over complex numbers as inputs, whereas BFV handles homomorphic operations over integer
 rings.
 </p><!-- l. 36 --><p class='indent'>   <!-- l. 36 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 38 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Required Background</span></span>

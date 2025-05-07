@@ -447,7 +447,7 @@ Because of the rounding drifts for converting square roots into integers, the de
 
 $ $
 
-\para{Source Code:} Examples of CKKS encoding can be executed by running \href{https://github.com/gogo9th/fhe-textbook/blob/main/soruce%20code/ckks.py}{\underline{this Python script}}. 
+\para{Source Code:} Examples of CKKS encoding can be executed by running \href{https://github.com/gogo9th/fhe-textbook/blob/main/source%20code/ckks.py}{\underline{this Python script}}. 
 
 
 
@@ -1292,7 +1292,7 @@ In practice, we do not directly update $\Delta M(X)$ to $\Delta M(X^{J(1)})$, be
 $ $
 
 
-\para{Source Code:} Examples of CKKS's homomorphic input vector slot rotation can be executed by running \href{https://github.com/gogo9th/fhe-textbook/blob/main/soruce%20code/ckks.py}{\underline{this Python script}}. 
+\para{Source Code:} Examples of CKKS's homomorphic input vector slot rotation can be executed by running \href{https://github.com/gogo9th/fhe-textbook/blob/main/source%20code/ckks.py}{\underline{this Python script}}. 
 
 
 
@@ -2090,7 +2090,7 @@ $ $
 
 Remember that in the original \textsf{CoeffToSlot} step (\autoref{subsubsec:ckks-bootstrapping-coefftoslot-details}), we had to split \textsf{ct\textsubscript{s}} into \textsf{ct\textsubscript{s1}} and \textsf{ct\textsubscript{s2}} because in CKKS each input vector can store maximum $\frac{n}{2}$ slots but we need to move total $n$ coefficient values to the input vector slots for bootstrapping. On the other hand, the computation result of the above updated encoding formula (using a sparsely packed ciphertext) is $\vec{m}_s$, having only $\frac{n}{n'}$ coefficient slots instead of $n$ coefficient slots, and each slot index $i$ in $\vec{m}_s$ corresponds to the encoded polynomial's coefficient with degree term $i \cdot \dfrac{n}{n'}$ (we do not compute any other coefficient terms, because we know that they are 0 anyway, so no need to bootstrap them). And notice that $\frac{n}{n'} \leq \frac{n}{2}$, because $n'$ divides $n$. Therefore, without computing two ciphertexts $\textsf{ct}_{\textsf{s1}} = [\hathat WI_n^R]_{11} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{12} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}$ and $\textsf{ct}_{\textsf{s2}} = [\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{22} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}$ separately, we can directly compute $\textsf{ct\textsubscript{c}} = \dfrac{ \text{\rotatecharone{E}} \cdot I_{n'}^R \cdot \textsf{ct\textsubscript{c}}}{n'}$, because all coefficients for bootstrapping fit in $\dfrac{n}{2}$ slots. Therefore, the number of homomorphic computations and memory requirement for the \textsf{CoeffToSlot} step can be reduced by half. And the same is true for the \textsf{EvalExp} step (\autoref{subsubsec:ckks-bootstrapping-evalexp-details}).
 
-Similarly, as for the \textsf{SlotToCoeff} step (\autoref{subsubsec:ckks-bootstrapping-slottocoeff-details}), we update the decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ to $\vec{v}_{'} = \text{\rotatecharone{E}}^T \cdot \vec{m}_c$. This again reduces the number of homomorphic computations and memory requirement for the \textsf{SlotToCoeff} step by half. Notice that $\text{\rotatecharone{E}}^T$ is a matrix where those columns whose column index is a not a multiple of $\dfrac{n}{n'}$ are zero. This zero-enforcement to the columns of $\text{\rotatecharone{E}}^T$ still outputs the same computation result, because $\vec{m}_c$ is a vector such that those slots whose slot index is not a multiple of $\dfrac{n}{n'}$ are zero, which makes the computation result with their corresponding columns of $\text{\rotatecharone{E}}^T$ (i.e., the columns whose index is not a multiple of $\dfrac{n}{n'}$) zero, anyway.
+Similarly, as for the \textsf{SlotToCoeff} step (\autoref{subsubsec:ckks-bootstrapping-slottocoeff-details}), we update the decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ to $\vec{v}_{'} = \text{\rotatecharone{E}}^{T} \cdot \vec{m}_c$. This again reduces the number of homomorphic computations and memory requirements for the \textsf{SlotToCoeff} step by half. Notice that $\text{\rotatecharone{E}}^{T}$ is a matrix where those columns whose column index is not a multiple of $\dfrac{n}{n'}$ are zero. This zero-enforcement to the columns of $\text{\rotatecharone{E}}^{T}$ still outputs the same computation result, because $\vec{m}_c$ is a vector such that those slots whose slot index is not a multiple of $\dfrac{n}{n'}$ are zero, which makes the computation result with their corresponding columns of $\text{\rotatecharone{E}}^{T}$ (i.e., the columns whose index is not a multiple of $\dfrac{n}{n'}$) zero, anyway.
 
 
 

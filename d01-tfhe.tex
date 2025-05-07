@@ -1037,3 +1037,84 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k'
 
 
 \end{enumerate}
+
+
+\subsubsection{Discussion}
+\label{subsec:tfhe-noise-bootstrapping-discussion}
+
+\begin{itemize}
+\item \textbf{Programmable Bootstrapping}: While the bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping}) uses a simple Lookup Table $V(X)$ which maps $\Delta m + e$ to $\Delta m$, we can edit the coefficients of $V(X)$ to make $\Delta m + e$ map to different values. For example, an altered mappings between the inputs and outputs to LUT can implement logic gates such as AND, OR, XOR, CMUX, etc, which will be explained in \autoref{subsec:tfhe-noise-bootstrapping-gate}. Such edited mappings between the exponents and coefficients in $V(X)$ are called programmable bootstrapping. If we encrypt $V(X)$ as a GLWE ciphertext, we can hide the mappings as well as each input instance, which effectively implements \textit{functional encryption}. Note that both the vanilla bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping}) and programmable bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping-gate}) generate the same amount of noise. 
+\item \textbf{Bootstrapping Noise}: During the bootstrapping's LUT polynomial $V(X)$ rotation, we perform many TFHE multiplications in the homomorphic MUX gates to derive $V_0 \cdots V_k$, which inevitably creates additional noises before the the noise gets re-initialized at the end. However, a careful parameter choice can limit the growth of this additional noise during modulus switch and blind rotation. 
+\end{itemize}
+
+
+\subsubsection{Application: Gate Bootstrapping}
+\label{subsec:tfhe-noise-bootstrapping-gate}
+
+Besides implementing the homomorphic MUX logic gate used during blind rotation (\autoref{subsec:bootstrapping-blind-rotation}), it is possible to leverage the LUT polynomial $V(X)$ to implement other homomorphic logic gates such as AND, NAND, OR, XOR, etc. When implementing these gates, each ciphertext is an encryption of a single-bit plaintext (or several bits can be bundled up in a linear combination formula and be processed simultaneously by using LUT). Suppose $q = 32$, $t = 8$, $m \in \mathbb{Z}_8 = \{-4,-3, -2,-1,0,1,2,3\}$, $\Delta = \dfrac{q}{t} = 4$, $\hat\Delta = \dfrac{\Delta\cdot 2n}{q} = 2$, and we encode the gate input into LWE plaintext as $0 \rightarrow -1$, and $1 \rightarrow 1$, and the maximum (accumulated) noise $e = [-1, 1]$. 
+
+
+\begin{table}[ht]
+  \centering
+  \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{c c | r r | c | c | c | c}
+      \hline
+        \multicolumn{8}{c}{Lookup Table Polynomial $V(X) = 1 + 1X + 1X^2 + 1X^3 + 1X^4 + 1X^5 + 1X^6 + 1X^7$}\\
+      \hline
+      \multicolumn{2}{c|}{\textbf{Decoded}} & 
+      \multicolumn{2}{c|}{\textbf{Encoded}} & 
+      \multicolumn{1}{c|}{\begin{tabular}{c}
+        \textbf{Linear} \\ \textbf{combination} \\
+        \textbf{of encodings}
+      \end{tabular}} & 
+      \multicolumn{1}{c|}{\begin{tabular}{c}
+        \textbf{Scaled} \textbf{Encoded} \\
+         \textbf{Combination} 
+      \end{tabular}} &
+      \textbf{Bootstrapping} & 
+      \begin{tabular}{c}
+        \textbf{Decoded} \\ \textbf{result} \\
+      \end{tabular} \\
+        \hline
+      $d_1$ & $d_2$ & $m_1$ & $m_2$ & $m_1 + m_2 - 1$ & $\hat\Delta\cdot(m_1+m_2-1)$ &
+      $V(X)\cdot X^{-\hat\Delta\cdot(m_1 + m_2 - 1)+e}$ &   $d_1 \land d_2$ \\
+      \hline
+      0 & 0 &
+      $-1$ & $-1$ &
+      $-3$ &
+      $-6$ &
+      constant term's coeff. is $-1$ &
+      0 \\
+      0 & 1 & 
+      $-1$ & $1$ &
+      $-1$ &
+      $-2$ &
+      constant term's coeff. is $-1$ &
+      0 \\
+      1 & 0 & 
+      $1$ & $-1$ &
+      $-1$ &
+      $-2$ &
+      constant term's coeff. is $-1$ &
+      0 \\
+      1 & 1 & 
+      $1$ & $1$ &
+      $1$ &
+      $2$ &
+      constant term's coeff. is $1$ &
+      1 \\
+      \hline
+    \end{tabular}
+  }
+  \caption{An example truth table for an AND operation with an additional encoding.}
+  \label{tab:gate-and}
+\end{table}
+
+
+%\begin{figure}[h!]
+%    \centering
+%  \includegraphics[width=\linewidth]{figures/torus-gate.png}
+%  \caption{An illustration of an AND gate in Torus \href{https://assets-global.website-files.com/622ef9de9152c97467eac748/6298a348a0c75850f0688c83_NAND_bootstrap.png}{(Source)}}
+%  \label{fig:torus-gate}
+%\end{figure}
+

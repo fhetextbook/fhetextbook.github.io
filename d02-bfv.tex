@@ -1048,7 +1048,7 @@ $ $
 
 $ $
 
-\noindent $\hathat W = \begin{bmatrix}
+\noindent $\hathat{W} = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
 (\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
 (\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
@@ -1105,14 +1105,14 @@ $\vec{v}^{\langle h \rangle} = \bm{(} \text{ } M(\omega^{J(h)}), \text{ } M(\ome
 
 $ $
 
-Notice that the above computation of $\vec{v}^{\langle h \rangle}$ is equivalent to vertically rotating the upper $\frac{n}{2}$ rows of $\hathat W^*$ by $h$ positions upward (in a wrapping manner among them), rotating the lower $\frac{n}{2}$ rows of $\hathat{W}^{*}$ by $h$ positions upward (in a wrapping manner among them), and multiplying the resulting matrix with $\vec{m}$. However, it is not desirable to directly modify the decoding matrix $\hathat W^*$ like this in practice, because then the decoding matrix loses its consistency. Therefore, instead of directly modifying $\hathat W^*$, we will modify $\vec{m}$ to $\vec{m}_{'}$ (i.e., modify $M(X)$ to $M'(X)$) such that the relation $\vec{v}^{\langle h \rangle} = \hathat W^* \cdot \vec{m}_{'}$ holds. Let's extract the upper-half rows of $\hathat W^*$ and denote this $\dfrac{n}{2} \times n$ matrix as $\hathat H_1{^T}$. Then, $\hathat H_1^T$ is equivalent to a Vandermonde matrix (Definition~\ref*{subsec:vandermonde} in \autoref{subsec:vandermonde}) in the form of $V(\omega^{J(0)}, \omega^{J(1)}, \cdots, \omega^{J(\frac{n}{2}-1)})$. Similarly, let's extract the lower-half rows of $\hathat W^*$ and denote this $\dfrac{n}{2} \times n$ matrix as $\hathat H_2{^T}$. Then, $\hathat H_2^*$ is equivalent to a Vandermonde matrix (Definition~\ref*{subsec:vandermonde} in \autoref{subsec:vandermonde}) in the form of $V(\omega^{J_*(0)}, \omega^{J_*(1)}, \cdots, \omega^{J_*(\frac{n}{2}-1)})$. 
+Notice that the above computation of $\vec{v}^{\langle h \rangle}$ is equivalent to vertically rotating the upper $\frac{n}{2}$ rows of $\hathat{W}^*$ by $h$ positions upward (in a wrapping manner among them), rotating the lower $\frac{n}{2}$ rows of $\hathat{W}^{*}$ by $h$ positions upward (in a wrapping manner among them), and multiplying the resulting matrix with $\vec{m}$. However, it is not desirable to directly modify the decoding matrix $\hathat{W}^*$ like this in practice, because then the decoding matrix loses its consistency. Therefore, instead of directly modifying $\hathat{W}^*$, we will modify $\vec{m}$ to $\vec{m}_{'}$ (i.e., modify $M(X)$ to $M'(X)$) such that the relation $\vec{v}^{\langle h \rangle} = \hathat{W}^* \cdot \vec{m}_{'}$ holds. Let's extract the upper-half rows of $\hathat{W}^*$ and denote this $\dfrac{n}{2} \times n$ matrix as $\hathat{H}_1{^T}$. Then, $\hathat{H}_1^T$ is equivalent to a Vandermonde matrix (Definition~\ref*{subsec:vandermonde} in \autoref{subsec:vandermonde}) in the form of $V(\omega^{J(0)}, \omega^{J(1)}, \cdots, \omega^{J(\frac{n}{2}-1)})$. Similarly, let's extract the lower-half rows of $\hathat{W}^*$ and denote this $\dfrac{n}{2} \times n$ matrix as $\hathat{H}_2{^T}$. Then, $\hathat{H}_2^*$ is equivalent to a Vandermonde matrix (Definition~\ref*{subsec:vandermonde} in \autoref{subsec:vandermonde}) in the form of $V(\omega^{J_*(0)}, \omega^{J_*(1)}, \cdots, \omega^{J_*(\frac{n}{2}-1)})$. 
 
-Now, let's vertically rotate the rows of $\hathat H_1^*$ by $h$ positions upward and denote it as $\hathat H_1{^{*\langle h \rangle}}$; and vertically rotate the rows of $\hathat H_2^*$ by $h$ positions upward and denote it as $\hathat H_2{^{T\langle h \rangle}}$. And let's denote the $\dfrac{n}{2}$-dimensional vector comprising the first-half elements of $\vec{v}^{\langle h \rangle}$ as $\vec{v}_1^{\langle h \rangle}$, and the $\dfrac{n}{2}$-dimensional vector comprising the second-half elements of $\vec{v}^{\langle h \rangle}$ as $\vec{v}_2^{\langle h \rangle}$. 
-Then, computing (i.e., decoding) $\vec{v}_1^{\langle h \rangle} = \hathat H_1^{*\langle h \rangle}\cdot \vec{m}$ is equivalent to modifying $M(X)$ to $M'(X) = M(X^{J(h)})$ (whose coefficient vector is $\vec{m}^{\langle h \rangle}$) and then computing (i.e., decoding) $\vec{v}_1^{\langle h \rangle} = \hathat H_1^{*}\cdot \vec{m}^{\langle h \rangle}$. This is because:
+Now, let's vertically rotate the rows of $\hathat{H}_1^*$ by $h$ positions upward and denote it as $\hathat{ H}_1{^{*\langle h \rangle}}$; and vertically rotate the rows of $\hathat{H}_2^*$ by $h$ positions upward and denote it as $\hathat{H}_2{^{T\langle h \rangle}}$. And let's denote the $\dfrac{n}{2}$-dimensional vector comprising the first-half elements of $\vec{v}^{\langle h \rangle}$ as $\vec{v}_1^{\langle h \rangle}$, and the $\dfrac{n}{2}$-dimensional vector comprising the second-half elements of $\vec{v}^{\langle h \rangle}$ as $\vec{v}_2^{\langle h \rangle}$. 
+Then, computing (i.e., decoding) $\vec{v}_1^{\langle h \rangle} = \hathat{H}_1^{*\langle h \rangle}\cdot \vec{m}$ is equivalent to modifying $M(X)$ to $M'(X) = M(X^{J(h)})$ (whose coefficient vector is $\vec{m}^{\langle h \rangle}$) and then computing (i.e., decoding) $\vec{v}_1^{\langle h \rangle} = \hathat{H}_1^{*}\cdot \vec{m}^{\langle h \rangle}$. This is because:
 
-$\vec{v}_1^{\langle h \rangle} =\hathat H_1^{*\langle h \rangle}\cdot \vec{m}$
+$\vec{v}_1^{\langle h \rangle} =\hathat{H}_1^{*\langle h \rangle}\cdot \vec{m}$
 
-$ = \bm{(} \text{ } \hathat W^*_{h}\cdot\vec{m}, \text{ } \hathat W^*_{h+1}\cdot\vec{m}, \text{ } \hathat W^*_{h+2}\cdot\vec{m}, \cdots, \hathat W^*_{\frac{n}{2}-1}\cdot\vec{m}, \text{ } \hathat W^*_{0}\cdot\vec{m}, \text{ }\hathat W^*_{1}\cdot\vec{m}, \cdots, \text{ } \hathat W^*_{h-2}\cdot\vec{m}, \text{ } \hathat W^*_{h-1}\cdot\vec{m}  \bm{)}$
+$ = \bm{(} \text{ } \hathat{W}^*_{h}\cdot\vec{m}, \text{ } \hathat{W}^*_{h+1}\cdot\vec{m}, \text{ } \hathat{W}^*_{h+2}\cdot\vec{m}, \cdots, \hathat{W}^*_{\frac{n}{2}-1}\cdot\vec{m}, \text{ } \hathat{W}^*_{0}\cdot\vec{m}, \text{ }\hathat{W}^*_{1}\cdot\vec{m}, \cdots, \text{ } \hathat{W}^*_{h-2}\cdot\vec{m}, \text{ } \hathat{W}^*_{h-1}\cdot\vec{m}  \bm{)}$
 
 $ $
 
@@ -1142,16 +1142,16 @@ $= H_1^{T}\cdot \vec{m}^{\langle h \rangle}$ \textcolor{red}{ \text{ } \# where 
 
 $ $
 
-Similarly, computing (i.e., decoding) $\vec{v}_2^{\langle h \rangle} = \hathat H_2^{*\langle h \rangle}\cdot \vec{m}$ is equivalent to modifying $M(X)$ to $M'(X) = M(X^{J(h)})$ (whose coefficient vector is $\vec{m}^{\langle h \rangle}$) and then computing (i.e., decoding) $\vec{v}_2^{\langle h \rangle} = \hathat H_2^{*}\cdot \vec{m}^{\langle h \rangle}$. This is because,
+Similarly, computing (i.e., decoding) $\vec{v}_2^{\langle h \rangle} = \hathat{H}_2^{*\langle h \rangle}\cdot \vec{m}$ is equivalent to modifying $M(X)$ to $M'(X) = M(X^{J(h)})$ (whose coefficient vector is $\vec{m}^{\langle h \rangle}$) and then computing (i.e., decoding) $\vec{v}_2^{\langle h \rangle} = \hathat{H}_2^{*}\cdot \vec{m}^{\langle h \rangle}$. This is because,
 
-$\vec{v}_2^{\langle h \rangle} =\hathat H_2^{*\langle h \rangle}\cdot \vec{m}$
+$\vec{v}_2^{\langle h \rangle} =\hathat{H}_2^{*\langle h \rangle}\cdot \vec{m}$
 
 $ $
 
 
-$ = \bm{(} \text{ } \hathat W^*_{\frac{n}{2} +h}\cdot\vec{m}, \text{ } \hathat W^*_{\frac{n}{2} + h+1}\cdot\vec{m}, \text{ } \hathat W^*_{\frac{n}{2} +h+2}\cdot\vec{m}, \cdots, \hathat W^*_{n -1}\cdot\vec{m}, \text{ } \hathat W^*_{\frac{n}{2}}\cdot\vec{m}, \text{ }\hathat W^*_{\frac{n}{2} + 1}\cdot\vec{m}, \cdots,$
+$ = \bm{(} \text{ } \hathat{W}^*_{\frac{n}{2} +h}\cdot\vec{m}, \text{ } \hathat{W}^*_{\frac{n}{2} + h+1}\cdot\vec{m}, \text{ } \hathat{W}^*_{\frac{n}{2} +h+2}\cdot\vec{m}, \cdots, \hathat{W}^*_{n -1}\cdot\vec{m}, \text{ } \hathat{W}^*_{\frac{n}{2}}\cdot\vec{m}, \text{ }\hathat{W}^*_{\frac{n}{2} + 1}\cdot\vec{m}, \cdots,$
 
-\text{ }\text{ }\text{ }\text{ }$ \text{ } \hathat W^*_{\frac{n}{2} + h-2}\cdot\vec{m}, \text{ } \hathat W^*_{\frac{n}{2} + h-1}\cdot\vec{m}  \bm{)}$
+\text{ }\text{ }\text{ }\text{ }$ \text{ } \hathat{W}^*_{\frac{n}{2} + h-2}\cdot\vec{m}, \text{ } \hathat{W}^*_{\frac{n}{2} + h-1}\cdot\vec{m}  \bm{)}$
 
 $ $
 
@@ -1176,12 +1176,12 @@ $\cdots, \text{ } M(\omega^{J_*(h-2)}), \text{ } M(\omega^{J_*(h-1)})  \bm{)}$
 
 $ $
 
-$= \hathat H_2^{*}\cdot \vec{m}^{\langle h \rangle}$
+$= \hathat{H}_2^{*}\cdot \vec{m}^{\langle h \rangle}$
 
 
 $ $
 
-The above derivations demonstrate that $\vec{v}_1^{\langle h \rangle} = \hathat H_1^{*}\cdot \vec{m}^{\langle h \rangle}$, and $\vec{v}_2^{\langle h \rangle} = \hathat H_2^{*}\cdot \vec{m}^{\langle h \rangle}$. Combining these two findings, we reach the conclusion that $\vec{v}^{\langle h \rangle} = \hathat{W}^* \cdot \vec{m}^{\langle h \rangle}$: rotating the first-half elements of the input vector $\vec{v}$ by $h$ positions to the left and the second-half elements of it by $h$ positions also to the left is equivalent to updating the plaintext polynomial $M(X)$ to $M(X^{J(h)})$ and then decoding it with the decoding matrix $\hathat W^*$. 
+The above derivations demonstrate that $\vec{v}_1^{\langle h \rangle} = \hathat{H}_1^{*}\cdot \vec{m}^{\langle h \rangle}$, and $\vec{v}_2^{\langle h \rangle} = \hathat{H}_2^{*}\cdot \vec{m}^{\langle h \rangle}$. Combining these two findings, we reach the conclusion that $\vec{v}^{\langle h \rangle} = \hathat{W}^* \cdot \vec{m}^{\langle h \rangle}$: rotating the first-half elements of the input vector $\vec{v}$ by $h$ positions to the left and the second-half elements of it by $h$ positions also to the left is equivalent to updating the plaintext polynomial $M(X)$ to $M(X^{J(h)})$ and then decoding it with the decoding matrix $\hathat{W}^*$. 
 
 \begin{comment}
 We will also more concretely demonstrate this below. In particular, we will show that $M(X^{J(h)})$ decodes into a vector that is a rotated version of $\vec{v}$ by $h$ positions to the left. Given the plaintext polynomial $M(X)$, its input vector is as follows:
@@ -1237,7 +1237,7 @@ $= \vec{v}^{\langle h \rangle}$
 
 $ $
 
-In conclusion, given the modified encoding matrix $\hathat W$ and modified decoding matrix $\hathat W^*$, rotating all elements of the input vector $\vec{v}$ by $h$ positions to the left is equivalent to updating the plaintext polynomial $M(X)$ to $M(X^{J(h)})$. 
+In conclusion, given the modified encoding matrix $\hathat{W}$ and modified decoding matrix $\hathat{W}^*$, rotating all elements of the input vector $\vec{v}$ by $h$ positions to the left is equivalent to updating the plaintext polynomial $M(X)$ to $M(X^{J(h)})$. 
 \end{comment}
 
 
@@ -1285,7 +1285,7 @@ To support input vector slot rotation, we update the original encoding matrix in
 
 $ $
 
-{\footnotesize{\noindent $\hathat W = \begin{bmatrix}
+{\footnotesize{\noindent $\hathat{W} = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
 (\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
 (\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
@@ -1376,9 +1376,9 @@ $\{2^1, 2^3, 2^5, 2^7\} \equiv \{8^1, 8^3, 8^5, 8^7\} \equiv \{15^1, 15^3, 15^5,
 
 $ $
 
-Among $\{2, 8, 15, 9\}$ as the roots of $X^4 + 1$, let's choose $\omega = 2$ as the base root to construct the encoding matrix $\hathat W$ and the decoding matrix $\hathat W^*$ as follows: 
+Among $\{2, 8, 15, 9\}$ as the roots of $X^4 + 1$, let's choose $\omega = 2$ as the base root to construct the encoding matrix $\hathat{W}$ and the decoding matrix $\hathat{W}^*$ as follows: 
 
-$\hathat W = \begin{bmatrix}
+$\hathat{W} = \begin{bmatrix}
 1 & 1 & 1 & 1\\
 \omega^{J(1)} & \omega^{J(0)} & \omega^{J_*(1)} & \omega^{J_*(0)}\\
 (\omega^{J(1)})^2 & (\omega^{J(0)})^2 & (\omega^{J_*(1)})^2 & (\omega^{J_*(0)})^2\\
@@ -1399,7 +1399,7 @@ $ = \begin{bmatrix}
 
 $ $ 
 
-$\hathat W^* = \begin{bmatrix}
+$\hathat{W}^* = \begin{bmatrix}
 1 & \omega^{J(0)} & (\omega^{J(0)})^2 & (\omega^{J(0)})^3\\
 1 & \omega^{J(1)} & (\omega^{J(1)})^2 & (\omega^{J(1)})^3\\
 1 & \omega^{J_*(0)} & (\omega^{J_*(0)})^2 & (\omega^{J_*(0)})^3\\
@@ -1448,7 +1448,7 @@ These two vectors are encoded as follows:
 
 $ $
 
-$\vec{m}_1 = n^{-1} \hathat W \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatrix}
+$\vec{m}_1 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatrix}
 1 & 1 & 1 & 1\\
 8 & 9 & 15 & 2\\
 13 & 13 & 4 & 4\\
@@ -1462,7 +1462,7 @@ $\vec{m}_1 = n^{-1} \hathat W \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatri
 
 $ $
 
-$\vec{m}_2 = n^{-1} \hathat W \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatrix}
+$\vec{m}_2 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatrix}
 1 & 1 & 1 & 1\\
 8 & 9 & 15 & 2\\
 13 & 13 & 4 & 4\\
@@ -1499,7 +1499,7 @@ $\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_1}{\Delta} = \dfrac{(40, 32, 52, 14)}{2} 
 $ $
 
 
-$\vec{v}_1 = \hathat W^* \cdot \vec{m}_1 = \begin{bmatrix}
+$\vec{v}_1 = \hathat{W}^* \cdot \vec{m}_1 = \begin{bmatrix}
 1 & 9 & 13 & 15\\
 1 & 8 & 13 & 2\\
 1 & 2 & 4 & 8\\
@@ -1508,14 +1508,14 @@ $\vec{v}_1 = \hathat W^* \cdot \vec{m}_1 = \begin{bmatrix}
 
 $ $
 
-$\vec{v}_2 = \hathat W^* \cdot \vec{m}_2 = \begin{bmatrix}
+$\vec{v}_2 = \hathat{W}^* \cdot \vec{m}_2 = \begin{bmatrix}
 1 & 9 & 13 & 15\\
 1 & 8 & 13 & 2\\
 1 & 2 & 4 & 8\\
 1 & 15 & 4 & 9\\
 \end{bmatrix} \cdot (8, 5, 14, 6) = (2, 4, 3, 6) \pmod{17}$
 
-$\vec{v}_{1+2} = \hathat W^* \cdot \vec{m}_{1+2} = \begin{bmatrix}
+$\vec{v}_{1+2} = \hathat{W}^* \cdot \vec{m}_{1+2} = \begin{bmatrix}
 1 & 9 & 13 & 15\\
 1 & 8 & 13 & 2\\
 1 & 2 & 4 & 8\\
@@ -1549,9 +1549,9 @@ $3^8 \equiv 5^8 \equiv 6^8 \equiv 7^8 \equiv 10^8 \equiv 11^8 \equiv 12^8 \equiv
 
 $ $
 
-Among $\{3, 5, 6, 7, 10, 11, 12, 14\}$ as the roots of $X^8 + 1$, let's choose $\omega = 3$ as the base root to construct the encoding matrix $\hathat W$ and the decoding matrix $\hathat W^*$ as follows: 
+Among $\{3, 5, 6, 7, 10, 11, 12, 14\}$ as the roots of $X^8 + 1$, let's choose $\omega = 3$ as the base root to construct the encoding matrix $\hathat{W}$ and the decoding matrix $\hathat{W}^*$ as follows: 
 
-$\hathat W = \begin{bmatrix}
+$\hathat{W} = \begin{bmatrix}
 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 \omega^{J(3)} & \omega^{J(2)} & \omega^{J(1)} & \omega^{J(0)} & \omega^{J_*(3)} & \omega^{J_*(2)} & \omega^{J_*(1)} & \omega^{J_*(0)}\\
 (\omega^{J(3)})^2 & (\omega^{J(2)})^2 & (\omega^{J(1)})^2 & (\omega^{J(0)})^2 & (\omega^{J_*(3)})^2 & (\omega^{J_*(2)})^2 & (\omega^{J_*(1)})^2 & (\omega^{J_*(0)})^2\\
@@ -1575,7 +1575,7 @@ $ \equiv \begin{bmatrix}
 
 $ $ 
 
-$\hathat W^* = \begin{bmatrix}
+$\hathat{W}^* = \begin{bmatrix}
 1 & \omega^{J(0)} & (\omega^{J(0)})^2 & (\omega^{J(0)})^3 & (\omega^{J(0)})^4 & (\omega^{J(0)})^5 & (\omega^{J(0)})^6 & (\omega^{J(0)})^7\\
 1 & \omega^{J(1)} & (\omega^{J(1)})^2 & (\omega^{J(1)})^3 & (\omega^{J(1)})^4& (\omega^{J(1)})^5& (\omega^{J(1)})^6& (\omega^{J(1)})^7\\
 1 & \omega^{J(2)} & (\omega^{J(2)})^2 & (\omega^{J(2)})^3 & (\omega^{J(2)})^4 & (\omega^{J(2)})^5 & (\omega^{J(2)})^6 & (\omega^{J(2)})^7\\
@@ -1650,7 +1650,7 @@ $\vec{v}$ is encoded as follows:
 
 $ $
 
-$\vec{m} = n^{-1} \hathat W \cdot I_n^R \cdot \vec{v} $
+$\vec{m} = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} $
 
 $= 13 \cdot  \begin{bmatrix}
 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
@@ -1697,7 +1697,7 @@ $\vec{m} = \dfrac{\Delta \vec{m}_{J(3)}}{\Delta} = \dfrac{(26, 24, -20, -2, 18, 
 $ $
 
 
-$\vec{v}_{J(3)} = \hathat W^* \cdot \vec{m}_{J(3)} = \begin{bmatrix}
+$\vec{v}_{J(3)} = \hathat{W}^* \cdot \vec{m}_{J(3)} = \begin{bmatrix}
 1&3&9&10&13&5&15&11\\
 1&5&8&6&13&14&2&10\\
 1&14&9&7&13&12&15&6\\
@@ -1960,9 +1960,9 @@ In the next sub-section, we will explain the \textsf{CoeffToSlot} procedure, a p
 The goal of the \textsf{CoeffToSlot} step is to homomorphically move polynomial $Z$'s coefficients $z_i$ to input vector slots. 
 
 
-In Summary~\ref*{subsubsec:bfv-rotation-summary} (in \autoref{subsubsec:bfv-rotation-summary}), we learned that the encoding formula for converting a vector of input slots $\vec{v}$ into a vector of polynomial coefficients $\vec{m}$ is: $\vec{m} = n^{-1}\cdot\hathat W \cdot I_n^R \cdot \vec{v}$, where $\hathat W$ is a basis of the $n$-dimensional vector space crafted as follows: 
+In Summary~\ref*{subsubsec:bfv-rotation-summary} (in \autoref{subsubsec:bfv-rotation-summary}), we learned that the encoding formula for converting a vector of input slots $\vec{v}$ into a vector of polynomial coefficients $\vec{m}$ is: $\vec{m} = n^{-1}\cdot\hathat{W} \cdot I_n^R \cdot \vec{v}$, where $\hathat{W}$ is a basis of the $n$-dimensional vector space crafted as follows: 
 
-$\hathat W = \begin{bmatrix}
+$\hathat{W} = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
 (\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
 (\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
@@ -1976,11 +1976,11 @@ $ $
 
 $ $
 
-Therefore, given the input ciphertext $\textsf{ct} = \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm) \bmod q$, we can understand its input vector slots as storing some values such that multiplying $n^{-1}\cdot\hathat W \cdot I_n^R$ to each of them turns them into a coefficient $z_i$ of polynomial $Z$. This implies that if we \textit{homomorphically} multiply $n^{-1}\cdot\hathat W \cdot I_n^R$ to the input vector slots of $\textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$, then the resulting ciphertext's $n$-dimensional input vector slots will contain the $n$ coefficients of $Z$, which is equivalent to moving the coefficients of $Z$ to the input vector slots. Therefore, the \textsf{CoeffToSlot} step is equivalent to homomorphically computing $n^{-1}\cdot\hathat W \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$. We can homomorphically compute matrix-vector multiplication by using the technique explained in \autoref{subsec:bfv-matrix-multiplication}.
+Therefore, given the input ciphertext $\textsf{ct} = \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm) \bmod q$, we can understand its input vector slots as storing some values such that multiplying $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to each of them turns them into a coefficient $z_i$ of polynomial $Z$. This implies that if we \textit{homomorphically} multiply $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to the input vector slots of $\textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$, then the resulting ciphertext's $n$-dimensional input vector slots will contain the $n$ coefficients of $Z$, which is equivalent to moving the coefficients of $Z$ to the input vector slots. Therefore, the \textsf{CoeffToSlot} step is equivalent to homomorphically computing $n^{-1}\cdot\hathat{W} \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$. We can homomorphically compute matrix-vector multiplication by using the technique explained in \autoref{subsec:bfv-matrix-multiplication}.
 
 After the \textsf{CoeffToSlot} step, we can homomorphically eliminate the noise in the lower $\varepsilon-1$ base-$p$ digits of each $z_i$ by homomorphically evaluating the noise-removing polynomial (to be explained in the next subsection).  
 
-After we get noise-free coefficients of $Z$, we need to move them back from the input vector slots to their original coefficient positions. This step is called \textsf{SlotToCoeff}, which is an exact inverse procedure of \textsf{CoeffToSlot}. We also learned in Summary~\ref*{subsubsec:bfv-rotation-summary} (in \autoref{subsubsec:bfv-rotation-summary}) that the inverse matrix of $n^{-1}\cdot\hathat W \cdot I_n^R$ is $\hathat{W}^*$, where: 
+After we get noise-free coefficients of $Z$, we need to move them back from the input vector slots to their original coefficient positions. This step is called \textsf{SlotToCoeff}, which is an exact inverse procedure of \textsf{CoeffToSlot}. We also learned in Summary~\ref*{subsubsec:bfv-rotation-summary} (in \autoref{subsubsec:bfv-rotation-summary}) that the inverse matrix of $n^{-1}\cdot\hathat{W} \cdot I_n^R$ is $\hathat{W}^*$, where: 
 
 $\hathat{W}^* = \begin{bmatrix}
 1 & (\omega^{J(0)}) & (\omega^{J(0)})^2 & \cdots & (\omega^{J(0)})^{n-1}\\
@@ -2343,7 +2343,7 @@ $ $
 
 $ $
 
-\item \textbf{\textsf{\underline{SlotToCoeff}}:} Homomorphically move each input vector slot's value $p^{\varepsilon-r}m_i + k_ip^\varepsilon$ back to the (encrypted) polynomial coefficient positions. This is done by multiplying $\hathat W^*$ to the output ciphertext of the digit extraction step, where $\hathat{W}^*$ is the decoding matrix (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsubsec:bfv-rotation-summary}). The output of this computation is $\textsf{RLWE}_{S, \sigma}\bm(\Delta'\cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm) \bmod q$, where $\Delta' = \dfrac{q}{p^\varepsilon}$ and the plaintext modulus is $p^\varepsilon$. 
+\item \textbf{\textsf{\underline{SlotToCoeff}}:} Homomorphically move each input vector slot's value $p^{\varepsilon-r}m_i + k_ip^\varepsilon$ back to the (encrypted) polynomial coefficient positions. This is done by multiplying $\hathat{W}^*$ to the output ciphertext of the digit extraction step, where $\hathat{W}^*$ is the decoding matrix (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsubsec:bfv-rotation-summary}). The output of this computation is $\textsf{RLWE}_{S, \sigma}\bm(\Delta'\cdot (p^{\varepsilon-r}M + K'p^\varepsilon) \bm) \bmod q$, where $\Delta' = \dfrac{q}{p^\varepsilon}$ and the plaintext modulus is $p^\varepsilon$. 
 
 $ $
 

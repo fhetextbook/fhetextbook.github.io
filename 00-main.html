@@ -53,21 +53,22 @@ for Fully Homomorphic Encryption</h2>
      </p><!-- l. 271 --><p class='indent'>   <!-- l. 271 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p>
    <ul class='itemize1'>
-   <li class='itemize'><a href='BasicMath.html#basic-math'><span class='rm-lmbx-10'>Part I</span></a><span class='rm-lmbx-10'>: </span><a href='BasicMath.html#basic-math'><span class='rm-lmbx-10'>Basic Math</span><!-- tex4ht:ref: part:basic-math  --></a> <span class='rm-lmr-10'>explains necessary background concepts for FHE, such as Group,
+   <li class='itemize'><a href='BasicMath.html#basic-math'><span class='rm-lmbx-10'>Part I</span></a><span class='rm-lmbx-10'>: </span><a href='BasicMath.html#basic-math'><span class='rm-lmbx-10'>Basic Math</span><!-- tex4ht:ref: part:basicmmath  --></a> <span class='rm-lmr-10'>explains necessary background concepts for FHE, such as Group,
    Field,  Order,  Polynomial  Ring,  Cyclotomic  Polynomial,  Vectors  and  Matrices,  Chinese
    Remainder Theorem, Taylor Series, Polynomial Interpolation, and Fast Fourier Transform.</span>
    </li>
-   <li class='itemize'><span class='rm-lmbx-10'>??: ?? </span><span class='rm-lmr-10'>explains well-known lattice-based cryptographic schemes, which are LWE, RLWE,
-   GLWE, GLev, and GGSW cryptosystems.</span>
+   <li class='itemize'><a href='PostquantumCryptography.html#postquantum-cryptography'><span class='rm-lmbx-10'>Part II</span></a><span class='rm-lmbx-10'>: </span><a href='PostquantumCryptography.html#postquantum-cryptography'><span class='rm-lmbx-10'>Post-quantum Cryptography</span><!-- tex4ht:ref: part:pqc  --></a> <span class='rm-lmr-10'>explains well-known lattice-based cryptographic
+   schemes, which are LWE, RLWE, GLWE, GLev, and GGSW cryptosystems.</span>
    </li>
-   <li class='itemize'><span class='rm-lmbx-10'>??: ?? </span><span class='rm-lmr-10'>explains the generic techniques of FHE adopted by many existing schemes, such as
-   homomorphic addition, multiplication, modulus switching, and key switching.</span>
+   <li class='itemize'><a href='GenericFullyHomomorphicEncryption.html#generic-fully-homomorphic-encryption'><span class='rm-lmbx-10'>Part III</span></a><span class='rm-lmbx-10'>: </span><a href='GenericFullyHomomorphicEncryption.html#generic-fully-homomorphic-encryption'><span class='rm-lmbx-10'>Generic Fully Homomorphic Encryption</span><!-- tex4ht:ref: part:genericffhe  --></a> <span class='rm-lmr-10'>explains the generic techniques
+   of FHE adopted by many existing schemes, such as homomorphic addition, multiplication,
+   modulus switching, and key switching.</span>
    </li>
-   <li class='itemize'><span class='rm-lmbx-10'>??: ?? </span><span class='rm-lmr-10'>explains four widely used FHE schemes: TFHE, BFV, CKKS, and BGV, as well as
-   their RNS-variant versions.</span></li></ul>
+   <li class='itemize'><a href='FullyHomomorphicEncryptionSchemes.html#fully-homomorphic-encryption-schemes'><span class='rm-lmbx-10'>Part IV</span></a><span class='rm-lmbx-10'>: </span><a href='FullyHomomorphicEncryptionSchemes.html#fully-homomorphic-encryption-schemes'><span class='rm-lmbx-10'>Fully Homomorphic Encryption Schemes</span><!-- tex4ht:ref: part:fhesschemes  --></a> <span class='rm-lmr-10'>explains four widely used FHE
+   schemes: TFHE, BFV, CKKS, and BGV, as well as their RNS-variant versions.</span></li></ul>
+                                                                                         
+                                                                                         
      <!-- l. 284 --><p class='indent'>     <!-- l. 284 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-                                                                                         
-                                                                                         
      </p><!-- l. 286 --><p class='indent'>   <span class='rm-lmr-10'>These parts are designed in an incremental manner, and therefore understanding each part requires
      the understanding of its prior part(s).</span>
      </p><!-- l. 288 --><p class='indent'>   <!-- l. 288 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
@@ -103,6 +104,83 @@ for Fully Homomorphic Encryption</h2>
 <br />   <span class='sectionToc'>A-7 <a href='RootsofUnity.html#roots-of-unity' id='QQ2-25-37'>Roots of Unity</a></span>
 <br />   <span class='subsectionToc'>A-7.1 <a href='Definitions3.html#definitions3' id='QQ2-26-38'>Definitions</a></span>
 <br />   <span class='subsectionToc'>A-7.2 <a href='Theorems2.html#theorems2' id='QQ2-27-39'>Theorems</a></span>
+<br />   <span class='sectionToc'>A-8 <a href='CyclotomicPolynomial.html#cyclotomic-polynomial' id='QQ2-28-41'>Cyclotomic Polynomial</a></span>
+<br />   <span class='subsectionToc'>A-8.1 <a href='Definitions4.html#definitions4' id='QQ2-29-42'>Definitions</a></span>
+<br />   <span class='subsectionToc'>A-8.2 <a href='Theorems3.html#theorems3' id='QQ2-30-43'>Theorems</a></span>
+<br />   <span class='sectionToc'>A-9 <a href='RootsofUnityandCyclotomicPolynomialoverIntegerRing.html#roots-of-unity-and-cyclotomic-polynomial-over-integer-ring' id='QQ2-31-44'>Roots of Unity and Cyclotomic Polynomial over Integer Ring</a></span>
+<br />   <span class='subsectionToc'>A-9.1 <a href='VandermondeMatrixwithRootsofaCyclotomicPolynomial.html#vandermonde-matrix-with-roots-of-a-cyclotomic-polynomial' id='QQ2-32-46'>Vandermonde Matrix with Roots of a Cyclotomic Polynomial</a></span>
+<br />   <span class='sectionToc'>A-10 <a href='VectorandMatrix.html#vector-and-matrix' id='QQ2-33-47'>Vector and Matrix</a></span>
+<br />   <span class='subsectionToc'>A-10.1 <a href='VectorArithmetic.html#vector-arithmetic' id='QQ2-34-48'>Vector Arithmetic</a></span>
+                                                                                         
+                                                                                         
+<br />   <span class='subsectionToc'>A-10.2 <a href='VariousTypesofMatrix.html#various-types-of-matrix' id='QQ2-35-49'>Various Types of Matrix</a></span>
+<br />   <span class='subsectionToc'>A-10.3 <a href='MatrixArithmetic.html#matrix-arithmetic' id='QQ2-36-50'>Matrix Arithmetic</a></span>
+<br />   <span class='subsectionToc'>A-10.4 <a href='Projection.html#projection' id='QQ2-37-51'>Projection</a></span>
+<br />   <span class='subsectionToc'>A-10.5 <a href='BasisofaPolynomialRing.html#basis-of-a-polynomial-ring' id='QQ2-38-53'>Basis of a Polynomial Ring</a></span>
+<br />   <span class='subsectionToc'>A-10.6 <a href='IsomorphismbetweenPolynomialsandVectorsoverIntegers.html#isomorphism-between-polynomials-and-vectors-over-integers' id='QQ2-39-54'>Isomorphism between Polynomials and Vectors over Integers</a></span>
+<br />   <span class='subsectionToc'>A-10.7 <a href='IsomorphismbetweenPolynomialsandVectorsoverComplexNumbers.html#isomorphism-between-polynomials-and-vectors-over-complex-numbers' id='QQ2-40-56'>Isomorphism between Polynomials and Vectors over Complex Numbers</a></span>
+<br />   <span class='subsectionToc'>A-10.8 <a href='TransformingBasisbetweenPolynomialRingandVectorSpace.html#transforming-basis-between-polynomial-ring-and-vector-space' id='QQ2-41-60'>Transforming Basis between Polynomial Ring and Vector Space</a></span>
+<br />   <span class='sectionToc'>A-11 <a href='EulersFormula.html#eulers-formula' id='QQ2-42-61'>Euler’s Formula</a></span>
+<br />   <span class='subsectionToc'>A-11.1 <a href='PythagoreanIdentity.html#pythagorean-identity' id='QQ2-43-62'>Pythagorean Identity</a></span>
+<br />   <span class='subsectionToc'>A-11.2 <a href='ImaginaryNumber.html#imaginary-number' id='QQ2-44-64'>Imaginary Number</a></span>
+<br />   <span class='subsectionToc'>A-11.3 <a href='EulersFormula1.html#eulers-formula1' id='QQ2-45-65'>Euler’s Formula</a></span>
+<br />   <span class='subsectionToc'>A-11.4 <a href='VandermondeMatrixwithRootsofCyclotomicPolynomial.html#vandermonde-matrix-with-roots-of-cyclotomic-polynomial' id='QQ2-46-67'>Vandermonde Matrix with Roots of Cyclotomic Polynomial</a></span>
+<br />   <span class='sectionToc'>A-12 <a href='ModuloRescaling.html#modulo-rescaling' id='QQ2-47-68'>Modulo Rescaling</a></span>
+<br />   <span class='subsectionToc'>A-12.1 <a href='RescalingModuloofCongruenceRelations.html#rescaling-modulo-of-congruence-relations' id='QQ2-48-69'>Rescaling Modulo of Congruence Relations</a></span>
+<br />   <span class='sectionToc'>A-13 <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem' id='QQ2-49-72'>Chinese Remainder Theorem</a></span>
+<br />   <span class='subsectionToc'>A-13.1 <a href='ApplicationNumberResidueSystemRNS.html#application-number-residue-system-rns' id='QQ2-50-73'>Application: Number Residue System (RNS)</a></span>
+<br />   <span class='sectionToc'>A-14 <a href='TaylorSeries.html#taylor-series' id='QQ2-51-74'>Taylor Series</a></span>
+<br />   <span class='sectionToc'>A-15 <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation' id='QQ2-52-75'>Lagrange’s Polynomial Interpolation</a></span>
+<br />   <span class='sectionToc'>A-16 <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt' id='QQ2-53-76'>Efficient Polynomial Multiplication by FFT and NTT</a></span>
+<br />   <span class='subsectionToc'>A-16.1 <a href='BackgroundandMotivation.html#background-and-motivation' id='QQ2-54-77'>Background and Motivation</a></span>
+<br />   <span class='subsectionToc'>A-16.2 <a href='ForwardFFTorNTT.html#forward-fft-or-ntt' id='QQ2-55-78'>Forward FFT (or NTT)</a></span>
+<br />   <span class='subsectionToc'>A-16.3 <a href='PointwiseMultiplication.html#pointwise-multiplication' id='QQ2-56-81'>Point-wise Multiplication</a></span>
+<br />   <span class='subsectionToc'>A-16.4 <a href='InverseFFTorNTT.html#inverse-fft-or-ntt' id='QQ2-57-82'>Inverse FFT (or NTT)</a></span>
+<br />   <span class='partToc'>II  <a href='PostquantumCryptography.html#postquantum-cryptography' id='QQ2-58-83'>Post-quantum Cryptography</a></span>
+<br />   <span class='sectionToc'>B-1 <a href='LatticebasedCryptography.html#latticebased-cryptography' id='QQ2-59-84'>Lattice-based Cryptography</a></span>
+<br />   <span class='subsectionToc'>B-1.1 <a href='Overview2.html#overview2' id='QQ2-60-85'>Overview</a></span>
+<br />   <span class='subsectionToc'>B-1.2 <a href='LWECryptosystem.html#lwe-cryptosystem' id='QQ2-61-86'>LWE Cryptosystem</a></span>
+<br />   <span class='subsectionToc'>B-1.3 <a href='RLWECryptosystem.html#rlwe-cryptosystem' id='QQ2-62-88'>RLWE Cryptosystem</a></span>
+<br />   <span class='sectionToc'>B-2 <a href='LWECryptosystem1.html#lwe-cryptosystem1' id='QQ2-63-89'>LWE Cryptosystem</a></span>
+<br />   <span class='subsectionToc'>B-2.1 <a href='Setup.html#setup' id='QQ2-64-90'>Setup</a></span>
+<br />   <span class='subsectionToc'>B-2.2 <a href='Encryption.html#encryption' id='QQ2-65-91'>Encryption</a></span>
+<br />   <span class='subsectionToc'>B-2.3 <a href='Decryption.html#decryption' id='QQ2-66-92'>Decryption</a></span>
+<br />   <span class='sectionToc'>B-3 <a href='RLWECryptosystem1.html#rlwe-cryptosystem1' id='QQ2-67-94'>RLWE Cryptosystem</a></span>
+<br />   <span class='subsectionToc'>B-3.1 <a href='Setup1.html#setup1' id='QQ2-68-95'>Setup</a></span>
+<br />   <span class='subsectionToc'>B-3.2 <a href='Encryption1.html#encryption1' id='QQ2-69-96'>Encryption</a></span>
+<br />   <span class='subsectionToc'>B-3.3 <a href='Decryption1.html#decryption1' id='QQ2-70-97'>Decryption</a></span>
+<br />   <span class='sectionToc'>B-4 <a href='GLWECryptosystem.html#glwe-cryptosystem' id='QQ2-71-98'>GLWE Cryptosystem</a></span>
+<br />   <span class='subsectionToc'>B-4.1 <a href='Setup2.html#setup2' id='QQ2-72-99'>Setup</a></span>
+<br />   <span class='subsectionToc'>B-4.2 <a href='Encryption2.html#encryption2' id='QQ2-73-100'>Encryption</a></span>
+<br />   <span class='subsectionToc'>B-4.3 <a href='Decryption2.html#decryption2' id='QQ2-74-101'>Decryption</a></span>
+<br />   <span class='subsectionToc'>B-4.4 <a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe' id='QQ2-75-103'>An Alternative Version of GLWE</a></span>
+<br />   <span class='subsectionToc'>B-4.5 <a href='PublicKeyEncryption.html#public-key-encryption' id='QQ2-76-104'>Public Key Encryption</a></span>
+<br />   <span class='sectionToc'>B-5 <a href='GLev.html#glev' id='QQ2-77-105'>GLev</a></span>
+<br />   <span class='subsectionToc'>B-5.1 <a href='Encryption3.html#encryption3' id='QQ2-78-106'>Encryption</a></span>
+<br />   <span class='subsectionToc'>B-5.2 <a href='Decryption3.html#decryption3' id='QQ2-79-108'>Decryption</a></span>
+                                                                                         
+                                                                                         
+<br />   <span class='subsectionToc'>B-5.3 <a href='LevandRLev.html#lev-and-rlev' id='QQ2-80-109'>Lev and RLev</a></span>
+<br />   <span class='sectionToc'>B-6 <a href='GGSW.html#ggsw' id='QQ2-81-110'>GGSW</a></span>
+<br />   <span class='subsectionToc'>B-6.1 <a href='Encryption4.html#encryption4' id='QQ2-82-111'>Encryption</a></span>
+<br />   <span class='subsectionToc'>B-6.2 <a href='Decryption4.html#decryption4' id='QQ2-83-113'>Decryption</a></span>
+<br />   <span class='subsectionToc'>B-6.3 <a href='GSWandRGSW.html#gsw-and-rgsw' id='QQ2-84-114'>GSW and RGSW</a></span>
+<br />   <span class='partToc'>III  <a href='GenericFullyHomomorphicEncryption.html#generic-fully-homomorphic-encryption' id='QQ2-85-115'>Generic Fully Homomorphic Encryption</a></span>
+<br />   <span class='sectionToc'>C-1 <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition' id='QQ2-86-116'>GLWE Ciphertext-to-Ciphertext Addition</a></span>
+<br />   <span class='sectionToc'>C-2 <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition' id='QQ2-87-118'>GLWE Ciphertext-to-Plaintext Addition</a></span>
+<br />   <span class='sectionToc'>C-3 <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication' id='QQ2-88-120'>GLWE Ciphertext-to-Plaintext Multiplication</a></span>
+<br />   <span class='sectionToc'>C-4 <a href='GLWEModulusSwitching.html#glwe-modulus-switching' id='QQ2-89-122'>GLWE Modulus Switching</a></span>
+<br />   <span class='subsectionToc'>C-4.1 <a href='LWEModulusSwitching.html#lwe-modulus-switching' id='QQ2-90-123'>LWE Modulus Switching</a></span>
+<br />   <span class='subsectionToc'>C-4.2 <a href='RLWEModulusSwitching.html#rlwe-modulus-switching' id='QQ2-91-127'>RLWE Modulus Switching</a></span>
+<br />   <span class='subsectionToc'>C-4.3 <a href='GLWEModulusSwitching1.html#glwe-modulus-switching1' id='QQ2-92-128'>GLWE Modulus Switching</a></span>
+<br />   <span class='sectionToc'>C-5 <a href='GLWEKeySwitching.html#glwe-key-switching' id='QQ2-93-129'>GLWE Key Switching</a></span>
+<br />   <span class='partToc'>IV  <a href='FullyHomomorphicEncryptionSchemes.html#fully-homomorphic-encryption-schemes' id='QQ2-94-130'>Fully Homomorphic Encryption Schemes</a></span>
+<br />   <span class='sectionToc'>D-1 <a href='TFHEScheme.html#tfhe-scheme' id='QQ2-95-131'>TFHE Scheme</a></span>
+<br />   <span class='sectionToc'>D-2 <a href='BFVScheme.html#bfv-scheme' id='QQ2-96-132'>BFV Scheme</a></span>
+<br />   <span class='sectionToc'>D-3 <a href='CKKSScheme.html#ckks-scheme' id='QQ2-97-133'>CKKS Scheme</a></span>
+<br />   <span class='sectionToc'>D-4 <a href='BGVScheme.html#bgv-scheme' id='QQ2-98-134'>BGV Scheme</a></span>
+<br />   <span class='sectionToc'>D-5 <a href='RNSvariantFHESchemes.html#rnsvariant-fhe-schemes' id='QQ2-99-135'>RNS-variant FHE Schemes</a></span>
+<br />   <span class='sectionToc'>D-6 <a href='FHESchemeComparisonandSummary.html#fhe-scheme-comparison-and-summary' id='QQ2-100-136'>FHE Scheme Comparison and Summary</a></span>
    </div>
    <h5 class='likesubsubsectionHead' id='acknowledgments'><a id='x1-1000'></a>Acknowledgments</h5>
 <!-- l. 295 --><p class='noindent'>Special thanks are extended to Robin Geelen (KU Leuven) for his thoughtful and dedicated comments,
@@ -112,6 +190,12 @@ and to Yongwoo Lee (Inha University) for his general advice.
                                                                                          
    
 </p>
- 
+
+
+
+<p></p> 
 </body> 
 </html>
+                                                                                         
+
+

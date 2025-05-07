@@ -1,0 +1,243 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>Roots of Unity and Cyclotomic Polynomial over Integer Ring</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='00-main.css' rel='stylesheet' type='text/css' /> 
+<meta content='00-main.tex' name='src' /> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
+</head><body>
+   <!-- l. 411 --><div class='crosslinks'><p class='noindent'>[<a href='VectorandMatrix.html'>next</a>] [<a href='CyclotomicPolynomial.html'>prev</a>] [<a href='CyclotomicPolynomial.html#tailCyclotomicPolynomial.html'>prev-tail</a>] [<a href='#tailRootsofUnityandCyclotomicPolynomialoverIntegerRing.html'>tail</a>] [<a href='BasicMath.html#RootsofUnityandCyclotomicPolynomialoverIntegerRing.html'>up</a>] </p></div>
+   <h3 class='sectionHead' id='roots-of-unity-and-cyclotomic-polynomial-over-integer-ring'><span class='titlemark'>A-9   </span> <a id='x31-40000A-9'></a>Roots of Unity and Cyclotomic Polynomial over Integer Ring</h3>
+<!-- l. 2 --><p class='noindent'>In <a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!-- tex4ht:ref: subsec:coeff-rotation  --></a> and <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!-- tex4ht:ref: subsec:coeff-rotation  --></a>, we learned about the definition and properties of the
+<!-- l. 2 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th roots of unity and the
+<!-- l. 2 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th cyclotomic polynomial
+over complex numbers (i.e., <!-- l. 2 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>)
+as follows:
+</p>
+   <ul class='itemize1'>
+   <li class='itemize'><span class='rm-lmbx-10x-x-109'>The </span><!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+   roots of unity </span>are the solutions for <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>
+   over <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>
+   (complex numbers). The formula for the <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   root of unity is <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑖𝑘</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>μ</mi></mrow></msup></mrow></math>
+   for all integer <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math>
+   such that <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>.
+   </li>
+   <li class='itemize'><span class='rm-lmbx-10x-x-109'>The primitive </span><!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+   roots of unity (denoted as </span><!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛚</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>)</span>
+   are those <!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity whose order (<a href='Definitions2.html#definitions2'><span class='ts1-lmr10-x-x-109'>§</span>A-4.1<!-- tex4ht:ref: subsec:coeff-rotation  --></a>) is <!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>
+   (i.e., <!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>
+   and <!-- l. 6 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mfrac><mrow><mi>μ</mi></mrow>
+<mrow><mn>2</mn></mrow></mfrac> </mrow></msup><mo class='MathClass-rel' stretchy='false'>≠</mo><mn>1</mn></mrow></math>).
+   </li>
+   <li class='itemize'>Given any primitive <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math>,
+   it can generate all primitive <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity by computing <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>ω</mi></mrow><mrow><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup>
+  </mrow></msup></math>
+   such that <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup></math>
+   is an integer <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>μ</mi></mrow></math>
+   and <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝗀𝖼𝖽</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>
+   (Theorem <a href='Theorems2.html#theorems2'>A-7.2<!-- tex4ht:ref: subsec:roots-theorem  --></a>.4 in <a href='Theorems1.html#theorems1'><span class='ts1-lmr10-x-x-109'>§</span>A-4.2<!-- tex4ht:ref: subsec:roots-theorem  --></a>).
+   </li>
+   <li class='itemize'>
+   <!-- l. 8 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>The </span><!-- l. 8 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+                                                                                         
+                                                                                         
+   cyclotomic polynomial </span>is defined as a polynomial whose roots are the primitive
+   <!-- l. 8 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity. That is, </p><table class='equation-star'><tr><td>
+   <!-- l. 8 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
+<msub><mrow><mi mathvariant='normal'>Φ</mi></mrow><mrow><mi>μ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munder class='msub'><mrow><mo> ∏</mo>
+   </mrow><mrow><mi>ω</mi><mo class='MathClass-rel' stretchy='false'>∈</mo><mi>P</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></munder><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mi>ω</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munder class='msub'><mrow><mo> ∏</mo>
+   </mrow><mrow>
+<mtable class='subarray-c' columnalign='center' rowlines='' rowspacing='0' style=''><mtr><mtd><mn>0</mn><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo>
+</mtd></mtr><mtr><mtd><mstyle class='text'><mtext>gcd</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>k</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn>
+</mtd></mtr>                                                                                                                                                                      </mtable></mrow></munder><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>ω</mi></mrow><mrow><mi>k</mi></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo>
+</mrow></math></td></tr></table>
+   </li></ul>
+<!-- l. 11 --><p class='indent'>   In this section, we will explain the <!-- l. 11 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+cyclotomic polynomial over <!-- l. 11 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>
+(integer ring), which is structured as follows:
+</p>
+   <div class='tcolorbox tcolorbox' id='tcolobox-28'>     
+<div class='tcolorbox-title'>
+<!-- l. 23 --><p class='indent'>   <!-- l. 23 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Definition </span><a href='#roots-of-unity-and-cyclotomic-polynomial-over-integer-ring'><span class='rm-lmbx-10x-x-109'>A-9</span><!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a><!-- l. 23 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<span class='rm-lmbx-10x-x-109'>Roots of Unity and Cyclotomic Polynomial over Integer Ring</span>
+                                                                                         
+                                                                                         
+<!-- l. 23 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></math></p></div> 
+<div class='tcolorbox-content'>   <ul class='itemize1'>
+   <li class='itemize'><span class='rm-lmbx-10x-x-109'>The </span><!-- l. 17 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+   roots of unity (denoted as </span><!-- l. 17 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛚</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>)</span>
+   are the solutions for <!-- l. 17 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>.
+   Note that these solutions are not <!-- l. 17 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>ω</mi></mrow><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑖𝑘</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>μ</mi></mrow></msup></mrow></math>
+   (the formula for the solutions over <!-- l. 17 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>).
+   </li>
+   <li class='itemize'><span class='rm-lmbx-10x-x-109'>The primitive </span><!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+   roots of unity </span>are defined as those <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity whose order (<a href='Definitions2.html#definitions2'><span class='ts1-lmr10-x-x-109'>§</span>A-4.1<!-- tex4ht:ref: subsec:coeff-rotation  --></a>) is <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>
+   (i.e., <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>,
+   and <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mfrac><mrow><mi>μ</mi></mrow>
+<mrow><mn>2</mn></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo></mrow></msup><mo class='MathClass-rel' stretchy='false'>≢</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>).
+   </li>
+   <li class='itemize'>Given any primitive <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math>,
+   it can generate all primitive <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity by computing <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>ω</mi></mrow><mrow><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup>
+  </mrow></msup></math>
+   such that <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup></math>
+   is an integer <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>μ</mi></mrow></math>
+   and <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝗀𝖼𝖽</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>.
+   </li>
+   <li class='itemize'>
+   <!-- l. 20 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>The </span><!-- l. 20 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+   cyclotomic polynomial </span>is defined as a polynomial whose roots are the primitive
+   <!-- l. 20 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+   roots of unity. That is, </p><table class='equation-star'><tr><td>
+   <!-- l. 20 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
+<msub><mrow><mi mathvariant='normal'>Φ</mi></mrow><mrow><mi>μ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munder class='msub'><mrow><mo> ∏</mo>
+   </mrow><mrow><mi>ω</mi><mo class='MathClass-rel' stretchy='false'>∈</mo><mi>P</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></munder><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mi>ω</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munder class='msub'><mrow><mo> ∏</mo>
+   </mrow><mrow>
+<mtable class='subarray-c' columnalign='center' rowlines='' rowspacing='0' style=''><mtr><mtd><mn>0</mn><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo>
+</mtd></mtr><mtr><mtd><mstyle class='text'><mtext>gcd</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>k</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn>
+</mtd></mtr>                                                                                                                                                           </mtable></mrow></munder><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>ω</mi></mrow><mrow><mi>k</mi></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo>
+</mrow></math></td></tr></table>
+   </li></ul>
+ 
+</div> 
+</div>
+   <div class='table'>
+                                                                                         
+                                                                                         
+<!-- l. 25 --><p class='indent'>   </p><figure class='float' id='x31-40001r2'><span id='the-roots-of-unity-and-cyclotomic-polynomials-over-x-c-vs-over-x-zp'></span>
+                                                                                         
+                                                                                         
+<div class='tabular'> <table class='tabular' id='TBL-3' rules='groups'><colgroup id='TBL-3-1g'><col id='TBL-3-1' /></colgroup><colgroup id='TBL-3-2g'><col id='TBL-3-2' /></colgroup><colgroup id='TBL-3-3g'><col id='TBL-3-3' /></colgroup><tr class='hline'><td></td><td></td><td></td></tr><tr class='hline'><td></td><td></td><td></td></tr><tr id='TBL-3-1-'><td class='td11' id='TBL-3-1-1' style='text-align:left;'> <!-- l. 28 --><p class='noindent'>
+          </p></td><td class='td11' id='TBL-3-1-2' style='text-align:left;'> <!-- l. 28 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Polynomial over</span>
+ <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle mathvariant='bold'><mi>𝐗</mi></mstyle><mstyle mathvariant='bold'><mo class='MathClass-rel' stretchy='false'>∈</mo></mstyle><mstyle mathvariant='bold'><mi>ℂ</mi></mstyle></mrow></math>  
+ </p></td><td class='td11' id='TBL-3-1-3' style='text-align:left;'> <!-- l. 28 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Polynomial over</span>
+ <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle mathvariant='bold'><mi>𝐗</mi></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='bold'><mi>ℤ</mi></mstyle></mrow><mrow><mstyle mathvariant='bold'><mi>𝐩</mi></mstyle></mrow></msub></mrow></math>                      </p></td>
+</tr><tr id='TBL-03-4-'><td class='td11' id='TBL-03-4-1' style='text-align:left;'> <!-- l. 29 --><p class='noindent'>
+           </p></td><td class='td11' id='TBL-03-4-2' style='text-align:left;'> <!-- l. 29 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>(Complex Number)</span>                    </p></td><td class='td11' id='TBL-03-4-3' style='text-align:left;'> <!-- l. 29 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>(Integer Ring)</span>                                           </p></td></tr><tr class='hline'><td></td><td></td><td></td></tr><tr class='hline'><td></td><td></td><td></td></tr><tr id='TBL-003-7-'><td class='td11' id='TBL-003-7-1' style='text-align:left;'> <!-- l. 30 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Definition
+ of the</span>
+ <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+ Root of
+ Unity</span>
+               </p></td><td class='td11' id='TBL-003-7-2' style='text-align:left;'> <!-- l. 30 --><p class='noindent'>All
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>
+  such that
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>,
+  (which are computed as
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑖𝑘</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>μ</mi></mrow></msup></mrow></math>
+  for integer
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math>
+ where
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>)
+ </p></td><td class='td11' id='TBL-003-7-3' style='text-align:left;'> <!-- l. 30 --><p class='noindent'>All
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>
+  such that
+  <!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>                 </p></td>
+</tr><tr class='hline'><td></td><td></td><td></td></tr><tr id='TBL-0003-10-'><td class='td11' id='TBL-0003-10-1' style='text-align:left;'> <!-- l. 31 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Definition
+ of the
+ Primitive</span>
+ <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+ Root of
+ Unity</span>
+               </p></td><td class='td11' id='TBL-0003-10-2' style='text-align:left;'> <!-- l. 31 --><p class='noindent'>Those
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+  roots of unity
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math>
+ such that
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>,
+  and
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mfrac><mrow><mi>μ</mi></mrow>
+<mrow><mn>2</mn></mrow></mfrac> </mrow></msup><mo class='MathClass-rel' stretchy='false'>≠</mo><mn>1</mn></mrow></math>  
+ </p></td><td class='td11' id='TBL-0003-10-3' style='text-align:left;'> <!-- l. 31 --><p class='noindent'>Those
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+  roots of unity
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math>
+ such that
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>,
+  and
+  <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mfrac><mrow><mi>μ</mi></mrow>
+<mrow><mn>2</mn></mrow></mfrac> </mrow></msup><mo class='MathClass-rel' stretchy='false'>≢</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>                 </p></td>
+</tr><tr class='hline'><td></td><td></td><td></td></tr><tr id='TBL-00003-13-'><td class='td11' id='TBL-00003-13-1' style='text-align:left;'> <!-- l. 32 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Definition
+ of the</span>
+ <!-- l. 32 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+ Cyclotomic
+ Polynomial</span>  </p></td><td class='td11' colspan='2' id='TBL-00003-13-2' style='text-align:center; white-space:nowrap;'>
+ <div class='multicolumn' style='text-align:center; white-space:nowrap;'><img alt='The  polynomial who∏se roots are the μ-th primitive roots of unity as follows:
+         Φμ(x) =   ω∈P(μ)(x − ω)  (see De finition A -8.1 in §A -8.1)' class='pic-halign' src='00-main0x.svg' />                             </div>  
+</td></tr><tr class='hline'><td></td><td></td><td></td></tr><tr id='TBL-000003-16-'><td class='td11' id='TBL-000003-16-1' style='text-align:left;'> <!-- l. 33 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Finding
+ Primitive</span>
+ <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mi>𝛍</mi></mstyle></math><span class='rm-lmbx-10x-x-109'>-th
+ Roots of
+ Unity</span>
+               </p></td><td class='td11' id='TBL-000003-16-2' style='text-align:left;'> <!-- l. 33 --><p class='noindent'>For
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>ω</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑖</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>μ</mi></mrow></msup></mrow></math>,
+  compute all
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>ω</mi></mrow><mrow><mi>k</mi></mrow></msup></math>
+  such that
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>k</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>μ</mi></mrow></math>
+ and
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝗀𝖼𝖽</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>k</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>
+  (Theorem <a href='Theorems2.html#theorems2'>A-7.2<!-- tex4ht:ref: subsec:roots-theorem  --></a>.4 in <a href='Theorems2.html#theorems2'><span class='ts1-lmr10-x-x-109'>§</span>A-7.2<!-- tex4ht:ref: subsec:roots-theorem  --></a>)               
+ </p></td><td class='td11' id='TBL-000003-16-3' style='text-align:left;'> <!-- l. 33 --><p class='noindent'>Find one satisfactory
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math>
+ that is a root of the
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th
+  cyclotomic polynomial, and compute
+  all
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>k</mi></mrow></msup><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math>
+ such that
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>k</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>μ</mi></mrow></math>
+ and
+  <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝗀𝖼𝖽</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>k</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>                    </p></td>
+</tr><tr class='hline'><td></td><td></td><td></td></tr><tr class='hline'><td></td><td></td><td></td></tr></table>                                                                                              </div>
+
+                                                                                         
+                                                                                         
+<figcaption class='caption'><span class='id'>Table 2:       </span><span class='content'>The       roots       of       unity       and       cyclotomic       polynomials       over
+<!-- l. 35 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>
+v.s.                                                                                                                       over
+<!-- l. 35 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>
+</span></figcaption><!-- tex4ht:label?: x31-40001r2  -->
+                                                                                         
+                                                                                         
+   </figure>
+   </div>
+<!-- l. 39 --><p class='indent'>   Note that in the <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th cyclotomic
+polynomial in both cases of over <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>
+and over <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>, their
+each root <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math> (i.e., the
+primitive <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th root of
+unity) has the order <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>
+(i.e., <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> over
+<!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>, and
+<!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>ω</mi></mrow><mrow><mi>μ</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>p</mi></mrow></math> over
+<!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>). Also note that each
+root <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ω</mi></math> can generate all
+roots of the <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th cyclotomic
+polynomial by computing <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>ω</mi></mrow><mrow><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup>
+  </mrow></msup></math>
+such that <!-- l. 39 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝗀𝖼𝖽</mtext></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>k</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>μ</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>.
+</p><!-- l. 41 --><p class='indent'>   <a href='#the-roots-of-unity-and-cyclotomic-polynomials-over-x-c-vs-over-x-zp'>Table 2<!-- tex4ht:ref: subsec:coeff-rotation  --></a> compares the properties of the roots of unity and the
+<!-- l. 41 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>μ</mi></math>-th cyclotomic polynomial
+over <!-- l. 41 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math> (complex
+numbers) and over <!-- l. 41 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>p</mi></mrow></msub></mrow></math>
+(integer ring).
+   
+</p>
+   <div class='subsectionTOCS'>
+   <span class='subsectionToc'>A-9.1 <a href='VandermondeMatrixwithRootsofaCyclotomicPolynomial.html#vandermonde-matrix-with-roots-of-a-cyclotomic-polynomial'>Vandermonde Matrix with Roots of a Cyclotomic Polynomial</a></span>
+   </div>
+                                                                                         
+                                                                                         
+   <!-- l. 417 --><div class='crosslinks'><p class='noindent'>[<a href='VectorandMatrix.html'>next</a>] [<a href='CyclotomicPolynomial.html'>prev</a>] [<a href='CyclotomicPolynomial.html#tailCyclotomicPolynomial.html'>prev-tail</a>] [<a href='RootsofUnityandCyclotomicPolynomialoverIntegerRing.html'>front</a>] [<a href='BasicMath.html#RootsofUnityandCyclotomicPolynomialoverIntegerRing.html'>up</a>] </p></div>
+<!-- l. 417 --><p class='indent'>   <a id='tailRootsofUnityandCyclotomicPolynomialoverIntegerRing.html'></a> </p> 
+</body> 
+</html>

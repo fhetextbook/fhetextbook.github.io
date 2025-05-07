@@ -1167,3 +1167,43 @@ Fully Homomorphic Encryption
 over the [Discretized] Torus}~\cite{torus}
 
 $ $
+
+Torus $\mathbb{T}$ is a continuous real number domain between 0 and 1 that wraps around, that is $[0, 1)$. 
+
+A discrete torus $\mathbb{T}_t$ is a finite real number set: $\Big(0, \dfrac{1}{t}, \dfrac{2}{t}, \gap{$\cdots$}, \dfrac{t - 1}{t}\Big)$
+
+
+In the previous subsections, we explained the TFHE scheme based on the following setup:
+
+$ $
+
+$m \in \mathbb{Z}_t$ 
+$\vec{s} = \{0, 1\}^{k}$
+$e \in \mathbb{Z}_q$
+
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m) = (a_0, a_1, \gap{$\cdots$}, a_k, b) \in \mathbb{Z}_t^{k + 1}$
+
+$ $
+
+However, the original TFHE scheme is designed based on a discrete torus:
+
+
+$ $
+
+$m \in \mathbb{T}_{t}, \text{ } \vec{s} \in \{0, 1\}^{k}, \text{ } e \in \mathbb{T}_{q}$
+
+$ $
+
+$\textsf{LWE}_{\vec{s}, \sigma}(m) = \textsf{ct} = (a_0, a_1, \gap{$\cdots$}, a_k, b) \in \mathbb{T}_{q}^{k+1}$
+
+$b = \sum\limits_{i=0}^{k}(a_is_i) + m + e \in \mathbb{T}_q$
+
+$\textsf{LWE}_{\vec{s}, \sigma}^{-1}(\textsf{ct}) =  \Big\lceil b - \sum\limits_{i=0}^{k-1}(a_is_i) \Big\rfloor_{\frac{1}{t}} = \Big\lceil m + e \Big\rfloor_{\frac{1}{t}} = m$, given $e < \dfrac{1}{2t}$  
+
+\textcolor{red}{\# where $\lceil x \rfloor_{\frac{1}{t}}$ means rounding $x$ to the nearest multiple of $\dfrac{1}{t}$}
+
+$ $
+
+The original TFHE's difference is that all values (either polynomial coefficients or vector elements) are computed in a floating point modulo 1 (i.e., $[0, 1)$) instead of a big integer (i.e., $[0, q)$). This means the plaintext also has to be encoded as values within $[0, 1)$ instead of integers within $[0, q)$. Note that in the original TFHE scheme, there is no need of the scaling factor $\Delta$, because the continuous domain of torus $[0, 1)$ provides a floating-point precision up to $q$ discrete decimal values, and its decryption process can successfully blow away the noise $E$ as far as each coefficient (or vector element) $e_i$ in $E$ is smaller than $\dfrac{1}{2t}$. 
+
+Both the torus-based and integer-ring-based TFHE schemes are built based on the same fundamental principles.

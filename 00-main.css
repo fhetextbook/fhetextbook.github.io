@@ -6,6 +6,16 @@
 .lmmib-10x-x-109{font_weight:bold;}
 .lmmib-10x-x-109{font_weight:bold;}
 .lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-109{font_weight:bold;}
+.lmmib-10x-x-80{font-size:72%;font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
+.lmmib-10x-x-80{font_weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
 .lmbsy-10x-x-109{font-weight:bold;}
@@ -38,13 +48,19 @@
 .rm-lmbx-12{font-size:109%; font-weight: bold;}
 .rm-lmr-10{font-size:90%;}
 .rm-lmbx-10{font-size:90%; font-weight: bold;}
+.rm-lmr-5{font-size:45%;}
+.lmmi-5{font-size:45%;}
+.lmsy5-{font-size:45%;}
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
+.rm-lmss-10x-x-109{ font-family: sans-serif;}
+.rm-lmss-10{font-size:90%; font-family: sans-serif;}
 .ts1-lmr10-x-x-109{}
 .rm-lmbxi-10x-x-109{ font-style:italic; font-weight: bold;}
 .rm-lmri-10x-x-109{ font-style:italic;}
-.rm-lmss-10x-x-109{ font-family: sans-serif;}
 .rm-lmssbx-10x-x-109{ font-family: sans-serif; font-weight: bold;}
 .rm-lmri-8{font-size:72%; font-style:italic;}
+.rm-lmr-9{font-size:81%;}
+.lmmi-9{font-size:81%;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -533,5 +549,97 @@ img { max-width: 100%; height: auto; }
 #textcolor62{color:#FF8000}
 #textcolor63{color:#00FF00}
 #textcolor64{color:#FF0000}
+#tcolobox-77 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-77 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-77 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor65{color:#FF0000}
+#textcolor65{color:#0000FF}
+#tcolobox-78 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-78 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-78 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-79 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-79 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-79 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor66{color:#FF0000}
+#tcolobox-80 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-80 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-80 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-81 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-81 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-81 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-82 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-82 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-82 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor67{color:#FF0000}
+#textcolor68{color:#FF0000}
+#textcolor69{color:#FF0000}
+#textcolor70{color:#FF0000}
+#textcolor71{color:#FF0000}
+#textcolor72{color:#FF0000}
+#textcolor73{color:#FF0000}
+#textcolor74{color:#FF0000}
+#textcolor75{color:#FF0000}
+#textcolor76{color:#FF0000}
+#textcolor77{color:#FF0000}
+#textcolor78{color:#FF0000}
+#textcolor79{color:#FF0000}
+#textcolor80{color:#FF0000}
+#textcolor81{color:#FF0000}
+#textcolor82{color:#FF0000}
+#textcolor82{color:#0000FF}
+#textcolor83{color:#FF0000}
+#textcolor84{color:#FF0000}
+#textcolor85{color:#FF0000}
+#textcolor86{color:#FF0000}
+#textcolor87{color:#FF0000}
+#textcolor88{color:#FF0000}
+#textcolor89{color:#FF0000}
+#tcolobox-83 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-83 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-83 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-84 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-84 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-84 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor90{color:#FF0000}
+#textcolor91{color:#FF0000}
+#textcolor92{color:#FF0000}
+#textcolor93{color:#FF0000}
+#textcolor94{color:#FF0000}
+#textcolor94{color:#0000FF}
+#textcolor95{color:#FFFFFF}
+#textcolor96{color:#FF0000}
+#textcolor97{color:#FF0000}
+#textcolor98{color:#FF0000}
+#textcolor99{color:#FF0000}
+#textcolor100{color:#FF0000}
+#textcolor101{color:#FF0000}
+#tcolobox-85 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-85 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-85 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor102{color:#FF0000}
+#textcolor103{color:#FF0000}
+#textcolor104{color:#FF0000}
+#textcolor105{color:#FF0000}
+#textcolor106{color:#FF0000}
+#textcolor107{color:#FF0000}
+#textcolor108{color:#FF0000}
+#textcolor109{color:#FF0000}
+#textcolor110{color:#FF0000}
+#textcolor111{color:#FF0000}
+#textcolor112{color:#FF0000}
+#textcolor113{color:#FF0000}
+#textcolor114{color:#FF0000}
+#textcolor115{color:#FF0000}
+#textcolor116{color:#FF0000}
+#textcolor117{color:#FF0000}
+#textcolor118{color:#FF0000}
+#tcolobox-86 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-86 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-86 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor119{color:#FF0000}
+#textcolor120{color:#FF0000}
+#textcolor121{color:#FF0000}
+#textcolor122{color:#FF0000}
+#textcolor123{color:#FF0000}
 /* end css.sty */
 

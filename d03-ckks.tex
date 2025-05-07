@@ -2091,3 +2091,94 @@ Remember that in the original \textsf{CoeffToSlot} step (\autoref{subsubsec:ckks
 Similarly, as for the \textsf{SlotToCoeff} step (\autoref{subsubsec:ckks-bootstrapping-slottocoeff-details}), we update the decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ to $\vec{v}_{'} = \text{\rotatecharone{E}}^T \cdot \vec{m}_c$. This again reduces the number of homomorphic computations and memory requirement for the \textsf{SlotToCoeff} step by half. Notice that $\text{\rotatecharone{E}}^T$ is a matrix where those columns whose column index is a not a multiple of $\dfrac{n}{n'}$ are zero. This zero-enforcement to the columns of $\text{\rotatecharone{E}}^T$ still outputs the same computation result, because $\vec{m}_c$ is a vector such that those slots whose slot index is not a multiple of $\dfrac{n}{n'}$ are zero, which makes the computation result with their corresponding columns of $\text{\rotatecharone{E}}^T$ (i.e., the columns whose index is not a multiple of $\dfrac{n}{n'}$) zero, anyway.
 
 
+
+\subsubsection{Summary}
+\label{subsubsec:ckks-bootstrapping-summary}
+
+We summarize the CKKS bootstrapping procedure as follows. 
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:ckks-bootstrapping-summary}} CKKS Bootstrapping}}]
+
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+\begin{enumerate}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+
+$ $
+
+, which satisfies the decryption relation: $A\cdot S + B = \Delta M + E + Kq_0$ 
+
+$ $
+
+\item \textsf{\textbf{\underline{ModRaise}:}} View the polynomials $A$ and $B$ as plaintext polynomials whose each coefficient is in $\mathbb{Z}_{q_L}$ (i.e., $(A, B) \bmod q_L$). This change of viewpoint automatically changes the ciphertext as $\textsf{RLWE}_{S, \sigma}(\Delta M + Kq_0)$. The \textsf{ModRaise} step does not require any actual computation. 
+
+$ $
+\begin{comment}
+\item \textsf{\textbf{\underline{Homomorphic Decryption} (without scaling down by $\Delta$):}}
+
+With the bootstrapping key $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$ whose ciphertext modulus is $q_L$, perform homomorphic decryption (without modulo reduction by $q_L$) as follows: 
+
+$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B$
+
+$= \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+$ $
+
+, where the encrypted plaintext this ciphertext is $\Delta M + E + q_0K$ with the scaling factor $1$.
+
+$ $
+\end{comment}
+\item \textsf{\textbf{\underline{CoeffToSlot}:}} 
+
+Move the coefficients of the encrypted plaintext $\Delta M + E + q_0K$ to the input vector slots by homomorphically multiplying $n^{-1}\cdot \hathat W \cdot I_n^R$ to it follows: 
+
+$\textsf{RLWE}_{S, \sigma}(Z_1) = n^{-1}\cdot \hathat W \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
+
+$ $
+
+\item \textsf{\textbf{\underline{EvalExp}:}} 
+
+Remove the wrap-around garbage value $q_0K$ in $\Delta M + E + q_0K$ by homomorphically evaluating the polynomial $\sigma_f$ which approximates a sine function with period $q_0$ as follows: 
+
+$\textsf{RLWE}_{S, \sigma}(Z_2) = \sigma_f \circ \textsf{RLWE}_{S, \sigma}(Z_1)  \bmod q_l$
+
+$ $
+
+This step is equivalent to \textit{homomorphically} performing modulo reduction by $q_0$ to the input value. This step reduces the ciphertext modulus from $q_L \rightarrow q_l$ as it consumes multiplicative levels when homomorphically evaluating the polynomial approximation of the sine function.
+
+$ $
+
+\item \textsf{\textbf{\underline{SlotToCoeff}:}} 
+
+Move the modulo-$q_0$-reduced plaintext value $\Delta M + E$ stored in the input vector slots back to the plaintext coefficient positions by homomorphically multiplying the encoding matrix $\hathat W^*$ as follows:
+
+$\textsf{RLWE}_{S, \sigma}(\Delta M + E) = \hathat W^* \cdot \textsf{RLWE}_{S, \sigma}(Z_2)  \bmod q_l$
+
+$ $
+\begin{comment}
+\item \textsf{\textbf{\underline{Scaling Factor Re-interpretation}:}} The ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M + E)$ is an encryption of plaintext $\Delta M + E$ with scaling factor 1. Like we did in BFV's bootstrapping (\autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation}), without any additional computation, we can view this ciphertext as an encryption of plaintext $M$ with scaling factor $\Delta$ with a small noise $E$. Incorporating the small noise $E$ into the scaled plaintext $\Delta M$ can be tolerated due to CKKS's innate nature of approximate encryption. 
+\end{comment}
+\end{enumerate}
+\setlist[itemize]{leftmargin=\leftmargini}
+\setlist[enumerate]{leftmargin=\leftmargini}
+
+$ $
+
+\textbf{Limitation:} The noise slowly grows over each bootstrapping due to the bootstrapping error and will eventually overflow the message and the ciphertext modulus. 
+
+\end{tcolorbox}
+
+
+\para{Comparison between BFV and CKKS Bootstrapping:} In the case of CKKS's bootstrapping, it does not reduce the magnitude of the old noise $E$ and keeps it the same as before, because the sine approximation function converts $\Delta M + E + Kq_0$ into $\Delta M + E$. However, as the ciphertext modulus gets increased from $q_0 \rightarrow q_L$, the noise-to-ciphertext-modulus ratio decreases, since $\dfrac{E}{q_L} \ll \dfrac{E}{q_0}$. On the other hand, the bootstrapping procedure introduces a new bootstrapping noise, which can be viewed as a fixed amount. However, this fixed amount of new noise accumulates over each bootstrapping. Therefore, after a very large number of bootstrappings, the noise will eventually overflow the message and even the ciphertext modulus. 
+
+In the case of BFV's bootstrapping, it reduces the noise, but does not change the ciphertext modulus. However, there is no need to reset the ciphertext modulus, because BFV does not have a leveled ciphertext modulus chain, and BFV's ciphertext-to-ciphertext multiplication does not consume ciphertext modulus. Furthermore, since BFV's bootstrapping directly removes the noise, the noise is guaranteed to be kept under a certain threshold even after an infinite number of bootstrappings. 
+
+Another important difference is that CKKS's bootstrapping does not require homomorphic decryption, primarily because it maintains the plaintext's scaling factor to be the same across the entire bootstrapping procedure. On the other hand, BFV's bootstrapping needs to change the plaintext's scaling factor to run the digit extraction algorithm. Therefore, homomorphic decryption is required to change the plaintext scaling factor ($p^{\varepsilon}$) while preserving the same ciphertext modulus ($q$). 
+
+
+
+
+
+
+%\para{Reducing All Types of Noises:}
+%\textcolor{purple}{In the RLWE cryptosystem, all types of noises can be reduced by the rescaling process during ciphertext-to-ciphertext multiplication (\autoref{subsec:glwe-mult-cipher-rescale}), where the scaling factor stays the same (or almost the same in case of using CRT) as $\Delta$, while the noise gets scaled down by $\Delta$ (or almost $\Delta$ in case of using CRT). Also note that CKKS's modulus bootstrapping does not change the plaintext's scaling factor, either.}

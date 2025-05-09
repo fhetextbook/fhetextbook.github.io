@@ -1,5 +1,6 @@
  
 /* start css.sty */
+.cmr-10x-x-109{}
 .rm-lmbx-10x-x-109{ font-weight: bold;}
 .rm-lmbx-8{font-size:72%; font-weight: bold;}
 .lmmib-10x-x-109{font_weight:bold;}
@@ -62,6 +63,7 @@
 .lmsy5-{font-size:45%;}
 .msbm-10{font-size:90%;}
 .rm-lmss-10x-x-109{ font-family: sans-serif;}
+.rm-lmss-10{font-size:90%; font-family: sans-serif;}
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
 .ts1-lmr10-x-x-109{}
 .rm-lmbxi-10x-x-109{ font-style:italic; font-weight: bold;}
@@ -70,6 +72,7 @@
 .rm-lmri-8{font-size:72%; font-style:italic;}
 .rm-lmr-9{font-size:81%;}
 .lmmi-9{font-size:81%;}
+.rm-lmssbx-10{font-size:90%; font-family: sans-serif; font-weight: bold;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -252,10 +255,7 @@ pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-t
 pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; text-align: left; }
 .lstinputlisting .label{margin-right:0.5em;}
  /* global colours */ body { background:#ffffff; color:#000000; margin:1em auto; max-width:52em; colorscheme: light; } a { color:#0645ad; } /* GitHub-like link blue */ nav.crosslinks { font-size:.9em; text-align:center; margin:1em 0; } nav.crosslinks a { margin:0 .5em; text-decoration:none; } 
- body{ margin:1em auto; max-width:160ch; padding:0 .62em; } p {max-width: 100ch} 
-.hline:first-child{border-bottom:1px solid black;border-top:none;}
 img { max-width: 100%; height: auto; }
-hr { border: none; height: 1px; background-color: #000000; } 
 #tcolobox-1 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-1 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-1 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
@@ -299,6 +299,7 @@ hr { border: none; height: 1px; background-color: #000000; }
 #tcolobox-13 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-13 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-13 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#adjustbox-1{border: 0.04.95em solid black;padding: 0.3.95em;}
 #tcolobox-14 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-14 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-14 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
@@ -556,6 +557,7 @@ hr { border: none; height: 1px; background-color: #000000; }
 #textcolor57{color:#FFFFFF}
 #textcolor58{color:#FFFFFF}
 #textcolor59{color:#FFFFFF}
+#adjustbox-2{border: 0.04.95em solid black;padding: 0.3.95em;}
 #textcolor62{color:#FF8000}
 #textcolor63{color:#00FF00}
 #textcolor64{color:#FF0000}
@@ -941,8 +943,10 @@ hr { border: none; height: 1px; background-color: #000000; }
 #textcolor319{color:#FFFFFF}
 #textcolor320{color:#FFFFFF}
 #textcolor321{color:#FFFFFF}
+#adjustbox-3{border: 0.04.95em solid black;padding: 0.3.95em;}
 #textcolor322{color:#FF8000}
 #textcolor323{color:#00FF00}
+#adjustbox-4{border: 0.04.95em solid black;padding: 0.3.95em;}
 #tcolobox-117 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-117 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-117 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }

@@ -25,9 +25,9 @@ complex numbers into integers which can be used as coefficients of a polynomial 
 </p><!-- l. 9 --><p class='noindent'>In overall, CKKS’s encryption procedure is as follows:
 </p><!-- l. 12 --><p class='indent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub>:</span> Encode the targeted input complex number into a real number
+1. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub class='textsubscript'><span class='rm-lmss-10'>1</span></sub>:</span> Encode the targeted input complex number into a real number
    </dd><dt class='enumerate-enumitem'>
-2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub>:</span> Encode the real number into an integer
+2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encoding</span><sub class='textsubscript'><span class='rm-lmss-10'>2</span></sub>:</span> Encode the real number into an integer
    </dd><dt class='enumerate-enumitem'>
 3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encryption</span>:</span> Encrypt the integer by RLWE</dd></dl>
 <!-- l. 16 --><p class='noindent'>The encrypted RLWE ciphertext supports homomorphic addition and multiplication.
@@ -37,9 +37,9 @@ complex numbers into integers which can be used as coefficients of a polynomial 
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
 1. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decryption</span>:</span> Decrypt the RLWE ciphertext into a plaintext integer
    </dd><dt class='enumerate-enumitem'>
-2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub>:</span> Decode the integer to a real number
+2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub class='textsubscript'><span class='rm-lmss-10'>1</span></sub>:</span> Decode the integer to a real number
    </dd><dt class='enumerate-enumitem'>
-3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub>:</span> Decode the real number to a complex number</dd></dl>
+3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub class='textsubscript'><span class='rm-lmss-10'>2</span></sub>:</span> Decode the real number to a complex number</dd></dl>
 <!-- l. 28 --><p class='indent'>   <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 31 --><p class='indent'>   Remember that BFV is an exact encryption scheme based on integer ring. On the other hand, CKKS
 introduces a drifting error while its encoding process of rounding square-root values (included in the

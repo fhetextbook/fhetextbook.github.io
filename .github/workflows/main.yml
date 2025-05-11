@@ -15,6 +15,7 @@ jobs:
             set -euxo pipefail         # stop on first error, echo commands
             rm -rf out                 # clean previous artefacts (optional)
             make4ht -u -f html5 \
+                    -j index \
                     -c .github/workflows/config.cfg \
                     -d out 00-main.tex
    - name: Publish the web pages 

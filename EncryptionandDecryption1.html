@@ -9,14 +9,14 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 285 --><div class='crosslinks'><p class='noindent'>[<a href='CiphertexttoCiphertextAddition.html'>next</a>] [<a href='BatchEncoding.html'>prev</a>] [<a href='BatchEncoding.html#tailBatchEncoding.html'>prev-tail</a>] [<a href='#tailEncryptionandDecryption1.html'>tail</a>] [<a href='BFVScheme.html#EncryptionandDecryption1.html'>up</a>] </p></div>
-   <h4 class='subsectionHead' id='encryption-and-decryption1'><span class='titlemark'>D-2.3   </span> <a id='x108-147000D-2.3'></a>Encryption and Decryption</h4>
+   <h4 class='subsectionHead' id='encryption-and-decryption1'><span class='titlemark'>D-2.3   </span> <a id='x109-148000D-2.3'></a>Encryption and Decryption</h4>
 <!-- l. 288 --><p class='noindent'>BFV encrypts and decrypts ciphertexts based on the RLWE cryptosystem (<a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>) with the sign of each
 <!-- l. 288 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math> term flipped in the
 encryption and decryption formula. Specifically, this is equivalent to the alternative version of the GLWE cryptosystem
 (<a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe'><span class='ts1-lmr10-x-x-109'>§</span>B-4.4<!-- tex4ht:ref: subsubsec:bfv-rotation-summary  --></a>) with <!-- l. 288 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>.
 Thus, BFV’s encryption and decryption formulas are as follows:
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-79'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-78'>     
 <div class='tcolorbox-title'>
 <!-- l. 341 --><p class='indent'>   <!-- l. 341 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary </span><a href='#encryption-and-decryption1'><span class='rm-lmbx-10x-x-109'>D-2.3</span><!-- tex4ht:ref: subsec:bfv-enc-dec  --></a><!-- l. 341 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
@@ -68,7 +68,7 @@ gets eliminated by the rounding process)
    </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo>  </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>
-    <span id='textcolor66'># <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi></mrow></math>
+    <span id='textcolor82'># <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi></mrow></math>
    accounts for the plaintext <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math>’s
     wrapped-around value as multiples of <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math></span>
 </p>

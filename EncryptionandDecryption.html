@@ -9,11 +9,11 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 35 --><div class='crosslinks'><p class='noindent'>[<a href='HomomorphicCiphertexttoCiphertextAddition.html'>next</a>] [<a href='#tailEncryptionandDecryption.html'>tail</a>] [<a href='TFHEScheme.html#EncryptionandDecryption.html'>up</a>] </p></div>
-   <h4 class='subsectionHead' id='encryption-and-decryption'><span class='titlemark'>D-1.1   </span> <a id='x96-118000D-1.1'></a>Encryption and Decryption</h4>
+   <h4 class='subsectionHead' id='encryption-and-decryption'><span class='titlemark'>D-1.1   </span> <a id='x97-119000D-1.1'></a>Encryption and Decryption</h4>
 <!-- l. 38 --><p class='noindent'>TFHE encrypts and decrypts ciphertexts based on the LWE cryptosystem (<a href='LWECryptosystem1.html#lwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-2<!-- tex4ht:ref: subsubsec:scaling-factor-computation  --></a>), which is equivalent to the GLWE
 cryptosystem (<a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!-- tex4ht:ref: subsubsec:scaling-factor-computation  --></a>) with <!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-67'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-66'>     
 <div class='tcolorbox-title'>
 <!-- l. 72 --><p class='indent'>   <!-- l. 72 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary </span><a href='#encryption-and-decryption'><span class='rm-lmbx-10x-x-109'>D-1.1</span><!-- tex4ht:ref: subsec:tfhe-enc-dec  --></a><!-- l. 72 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
@@ -22,7 +22,7 @@ cryptosystem (<a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1
 <div class='tcolorbox-content'><!-- l. 42 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Initial Setup</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow></math>,
 <!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msubsup><mrow><mi>ℤ</mi></mrow><mrow><mn>2</mn></mrow><mrow><mi>k</mi></mrow></msubsup></mrow></math>
-<span id='textcolor35'># where <!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+<span id='textcolor51'># where <!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
 divides <!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>,
 and each element of <!-- l. 42 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true'>→</mo></mover></math>
 is a 0-degree polynomial</span>
@@ -30,7 +30,7 @@ is a 0-degree polynomial</span>
 </p><!-- l. 46 --><p class='noindent'></p><hr />
 <!-- l. 48 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Encryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math>,
 <!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true'>→</mo></mover><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi></mrow></msubsup></mrow></math>,
-<!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></mrow></munderover><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math> <span id='textcolor36'># each
+<!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></mrow></munderover><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math> <span id='textcolor52'># each
 element of <!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true'>→</mo></mover></math>
 is a 0-degree polynomial</span>
     </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
@@ -46,7 +46,7 @@ is a 0-degree polynomial</span>
     </dd><dt class='enumerate-enumitem'>
 2.  </dt><dd class='enumerate-enumitem'>Scale down <!-- l. 62 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
    </mrow><mrow><mi mathvariant='normal'>Δ</mi>    </mrow></mfrac></mstyle><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌋</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>m</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math>
-    <span id='textcolor37'># i.e., modulus switch from <!-- l. 62 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><mi>t</mi></mrow></math></span></dd></dl>
+    <span id='textcolor53'># i.e., modulus switch from <!-- l. 62 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><mi>t</mi></mrow></math></span></dd></dl>
 <!-- l. 65 --><p class='noindent'><!-- l. 65 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 67 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Condition for Correct Decryption:</span> </p>
    <ul class='itemize1'>

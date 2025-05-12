@@ -147,34 +147,3 @@ Then, $\gamma = \langle \textsf{Decomp}^{\vec{g}}(\gamma), \vec{g} \rangle $
 $ $
 
 In the case of number decomposition (\autoref{subsec:number-decomp}), its gadget vector is $\vec{g} = \Bigg(\dfrac{q}{\beta}, \dfrac{q}{\beta^2}, \cdots, \dfrac{q}{\beta^l}\Bigg)$.
-
-%After ciphertext-to-plaintext multiplication $\Lambda \cdot \textsf{GLWE}_{S, \sigma}(M)$, the noise grows from $E$ to $E' = \Lambda \cdot E$. To limit this noise growth, we introduce a technique called gadget decomposition, which consists of decomposed (\autoref{subsec:number-decomp}) $\Lambda$ and an GLev encryption (\autoref{subsec:glev-enc}) of $M$ as follows:
-
-%$\Lambda = \Lambda_1 \dfrac{q}{\beta^1} + \Lambda_2 \dfrac{q}{\beta^2} + \cdots + \Lambda_l \dfrac{q}{\beta^l} \longrightarrow \textsf{Decomp}^{\beta, l}(\Lambda) = (\Lambda_1, \Lambda_2, \cdots, \Lambda_l)$
-
-%$ $
-
-%$\textsf{GLev}_{S, \sigma}^{\beta, l}(\Delta M) = \Bigg\{ \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^1}\right), \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^2}\right), \cdots \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^l}\right) \Bigg\}$
-
-%$ $
-
-%Based on decomposed $\Lambda$ and the GLev encryption of $M$, we can compute the ciphertext-to-plaintext multiplication of $M \cdot \Lambda$ as follows:
-
-%$\langle \textsf{Decomp}^{\beta, l}(\Lambda), \textsf{GLev}_{S, \sigma}^{\beta, l}(\Delta M) \rangle$
-
-
-%$= \Lambda_1 \cdot \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^1}\right) +  \Lambda_2 \cdot \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^2}\right) \cdots \Lambda_l \cdot \textsf{GLWE}_{S, \sigma}\left(\Delta M \dfrac{q}{\beta^l}\right)$
-
-%$= \textsf{GLWE}_{S, \sigma}\left(\Delta M \cdot \Lambda_1\dfrac{q}{\beta^1}\right) + \textsf{GLWE}_{S, \sigma}\left(\Delta M  \cdot \Lambda_2\dfrac{q}{\beta^2}\right) \cdots \cdot \textsf{GLWE}_{S, \sigma}\left(\Delta M  \cdot \Lambda_l\dfrac{q}{\beta^l}\right)$
-
-%$= \textsf{GLWE}_{S, \sigma}\left(\Delta M  \cdot \left(  \Lambda_1 \dfrac{q}{\beta^1} + \Lambda_2 \dfrac{q}{\beta^2} + \cdots + \Lambda_l \dfrac{q}{\beta^l} \right) \right)$
-
-%$= \textsf{GLWE}_{S, \sigma}(\Delta (M \cdot \Lambda))$
-
-%$ $
-
-%Given the noise of each GLWE ciphertext in the GLev ciphertext above is $E_i$, the aggregate noise of the final ciphertext-to-plaintext multiplication is $\sum\limits_{i=0}^{l}E_i$, which is much smaller than the original noise $\Lambda \cdot e$ in \tboxlabel{\ref*{subsec:tfhe-mult-plain}.3}-- as $l$ is usually much smaller than $\Lambda$. This way, we can limit the noise growth of ciphertext-to-plaintext multiplication. 
-
-%We can do gadget decomposition for any number of consecutive ciphertext-to-plaintext multiplication operations, by postponing the summation of GLWE ciphertexts to the end. However, gadget decomposition gets terminated if there is any interruption of a different operation, such as ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, or ciphertext-to-ciphertext multiplication, because in that case, the consistent format of the $GLev$ ciphertext breaks. 
-
-%There is a more general and powerful solution to re-initialize the accumulated noise $E$ without decrypting the ciphertext, which is called bootstrapping. We will later explain the TFHE scheme's bootstrapping in \autoref{subsec:tfhe-bootstrapping}). 

@@ -85,7 +85,6 @@
 \usepackage{mathtools}  
 \usepackage{array}
 \usepackage{hyperref}
-
 \usepackage{hyperref}
 \usepackage{mathtools, nccmath}
 %\usepackage[style=numeric,sorting=none]{biblatex}
@@ -236,6 +235,8 @@
 \endgroup%
 }
 
+\newcommand{\revise}[1]{{{\textcolor{black}{#1}}}}
+
 \makeatother
 
 % \title{**\vspace*{\fill}**The Beginner's Textbook for Fully Homomorphic Encryption}
@@ -247,7 +248,7 @@
 
 \begin{document}
 \title{\Huge{\textbf{The Beginner's Textbook}}\\ \Huge{\textbf{for Fully Homomorphic Encryption}}}
-\author{\textbf{}\\{LG Electronics Inc.}}%\\\texttt{\small{hajoon.ko@lge.com}}}
+\author{\textbf{Ronny Ko}\\{LG Electronics Inc.}}%\\\texttt{\small{hajoon.ko@lge.com}}}
 \date{January 1, 2025}
 
 
@@ -259,7 +260,7 @@
 
 \clearpage
 
-\begin{abstract}
+\section*{Preface}
 Fully Homomorphic Encryption (FHE) is a cryptographic scheme that enables computations to be performed directly on encrypted data, as if the data were in plaintext. After all computations are performed on the encrypted data, it can be decrypted to reveal the result. The decrypted value matches the result that would have been obtained if the same computations were applied to the plaintext data.
 
 FHE supports basic operations such as addition and multiplication on encrypted numbers. Using these fundamental operations, more complex computations can be constructed, including subtraction, division, logic gates (e.g., AND, OR, XOR, NAND, MUX), and even advanced mathematical functions such as ReLU, sigmoid, and trigonometric functions (e.g., sin, cos). These functions can be implemented either as exact formulas or as approximations, depending on the trade-off between computational efficiency and accuracy. 
@@ -292,7 +293,7 @@ $ $
 This book is available both as an \href{https://arxiv.org/abs/2503.05136}{\textbf{arXiv PDF}} and on a \href{https://fhetextbook.github.io} {\textbf{tentative website}} (powered by \href{https://www.kodymirus.cz/overleaf-html-sample/main.html}{make4ht}). 
 Please report any bugs or suggestions regarding the draft to the \href{https://github.com/fhetextbook/fhe-textbook/issues}{\textbf{Issues Board}}. 
 
-\end{abstract}
+
 
 \subsubsection*{Acknowledgments}
 Special thanks are extended to Robin Geelen (KU Leuven) for his thoughtful and dedicated comments, and to Yongwoo Lee (Inha University) for his general advice.
@@ -626,7 +627,7 @@ This chapter explains the four most well-known FHE schemes: TFHE, CKKS, BGV, and
 \input{d06-scheme-summary}
 
 
-%\clearpage
+\clearpage
 %\input{scratch}
 
 

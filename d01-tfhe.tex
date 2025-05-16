@@ -924,7 +924,8 @@ This small difference in $\hat b$ comes from the aggregated noises of rounding $
 
 \begin{table}[h]
 \centering
-\noindent\adjustbox{max width=\columnwidth}{
+\footnotesize
+%\noindent\adjustbox{max width=\columnwidth}{
 \begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|} % left align
 \hline
 % remove line in a table, \usepackage{adjustbox}
@@ -951,7 +952,7 @@ This small difference in $\hat b$ comes from the aggregated noises of rounding $
 \hline
 \textbf{$\bm{m}$ (plaintext)} & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ \\
 \hline
-\end{tabular}}
+\end{tabular}
 \centering
 \caption{The Lookup Table for $n=16, q=64, t=8$ LWE setup.
 \textcolor{orange}{Orange} is the plaintext $m$'s bits. \textcolor{green}{Green} is the noise $e$'s bits. %\textcolor{cyan}{Cyan} is the 0-padding bit at the MSB of $\hat\Delta m + e$ (and thus the MSB of $m$), ensured by the application's usage of plaintext numbers.
@@ -961,7 +962,7 @@ This small difference in $\hat b$ comes from the aggregated noises of rounding $
 
 Note that $V(X)$'s coefficients for the $X^8 \sim X^{15}$ terms are $\{2, 1\}$ instead of $\{-2, -1\}$, so that if $V$ gets rotated by $\{-8,-7,-6,-5,4,5,6,7\}$ slots to the left, the constant term's coefficient flips its sign to $\{-2, -1\}$ due to wrapping around the boundary of the $n$ exponent. 
 
-During the actual bootstrapping, we will do blind rotation of \autoref{tab:lut}'s $V(X)$ (which is GLWE-encrypted) by $\hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 4$ positions to the left, which computed as follows:
+During the actual bootstrapping, we will do blind rotation of \autoref{tab:lut}'s $V(X)$ (which is GLWE-encrypted) by $\hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 4$ positions to the left, which is computed as follows:
 
 $\hat\Delta m + \hat e = \hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 12 - (4 - 16 + 16 + 4) = 4 \text{ mod 32} \in \mathbb{Z}_{2n=32}$ 
 

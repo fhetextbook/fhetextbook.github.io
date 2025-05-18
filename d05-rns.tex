@@ -2,11 +2,15 @@ FHE parameters of BFV, BGV, or CKKS schemes which are secure enough sometimes re
 
 While RNS can directly compute modulo addition and multiplication, it does not directly support other operations such as \textsf{ModRaise} or modulus switch, which are essential operations for all FHE schemes. This section explains how we can design such corner-case operations based on RNS to accomplish a complete design of RNS-based FHE schemes. Besides BFV, BGV, and CKKS, TFHE can also theoretically use RNS for representing its ciphertext coefficients. However, TFHE's practically used coefficient size is less than $2^{32}$ (or $2^{64}$), which compactly fits in 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE does not need RNS. Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS. 
 
-Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}) whose modulo overflow \& underflow boundaries are $\dfrac{q}{2} - 1$ and $\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex})-- by using the assumption of limiting the possible range of certain residue arithmetic as discussed in \autoref{subsec:modulo-centered}. 
+Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}) whose modulo overflow \& underflow boundaries are $-\dfrac{q}{2} - 1$ and $-\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex})-- by using the assumption of limiting the possible range of certain residue arithmetic as discussed in \autoref{subsec:modulo-centered}. 
 
-$ $
-
-\noindent \textbf{\underline{Required Background}}
+\begin{tcolorbox}[
+    title = \textbf{Required Background},    % box title
+    colback = white,    % light background; tweak to taste
+    colframe = black,  % frame colour
+    boxrule = 0.8pt,     % line thickness
+    left = 1mm, right = 1mm, top = 1mm, bottom = 1mm % inner padding
+]
 
 \begin{itemize}
 \item \autoref{sec:modulo}: \nameref{sec:modulo}
@@ -30,6 +34,9 @@ $ $
 \item \autoref{sec:ckks}: \nameref{sec:ckks}
 \item \autoref{sec:bgv}: \nameref{sec:bgv}
 \end{itemize}
+\end{tcolorbox}
+
+\clearpage 
 
 \subsection{Fast Base Conversion: \textsf{FastBConv}}
 \label{subsec:rns-fastbconv}

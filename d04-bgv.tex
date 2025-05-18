@@ -1,16 +1,17 @@
 
 Similar to BFV, the BGV scheme is designed for homomorphic addition and multiplication of integers. Unlike CKKS, BGV guarantees exact encryption and decryption. From this view, BGV is similar to BFV. However, the major difference between these two schemes is that BFV stores the plaintext value in the MSBs (most significant bits) and the noise in the low-digit area (least significant bits), while BGV stores them the other way around: the plaintext value in the low-digit area and the noise in the MSBs. Technically, while BFV scales the plaintext polynomial by $\Delta$, BGV scales the noise polynomial by $\Delta$. Therefore, these two schemes use slightly different strategies to store and manage the plaintext and noise within a ciphertext. 
 
-BGV internally uses almost the same strategy as BFV for plaintext encoding, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication, and input vector rotation. 
-
-On the other hand, BGV's encryption and decryption are slightly different from BFV's scheme, because its scaling target is not the plaintext, but the noise. Also, unlike BFV where ciphertext-to-ciphertext multiplication has no limit on the number, BGV's ciphertext-to-ciphertext multiplication is leveled, switching the modulus to a lower level like CKKS, and thus it is limited. Furthermore, BGV's modulus switch and bootstrapping are partially different from BFV's. 
+BGV internally uses almost the same strategy as BFV for plaintext encoding, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, ciphertext-to-plaintext multiplication, and input vector rotation. On the other hand, BGV's encryption and decryption are slightly different from BFV's scheme, because its scaling target is not the plaintext, but the noise. Also, unlike BFV where ciphertext-to-ciphertext multiplication has no limit on the number, BGV's ciphertext-to-ciphertext multiplication is leveled, switching the modulus to a lower level like CKKS, and thus it is limited. Furthermore, BGV's modulus switch and bootstrapping are partially different from BFV's. 
 
 
 
-
-$ $
-
-\noindent \textbf{\underline{Required Background}}
+\begin{tcolorbox}[
+    title = \textbf{Required Background},    % box title
+    colback = white,    % light background; tweak to taste
+    colframe = black,  % frame colour
+    boxrule = 0.8pt,     % line thickness
+    left = 1mm, right = 1mm, top = 1mm, bottom = 1mm % inner padding
+]
 
 \begin{itemize}
 \item \autoref{sec:modulo}: \nameref{sec:modulo}
@@ -39,7 +40,9 @@ $ $
 \item \autoref{sec:bfv}: \nameref{sec:bfv}
 \item \autoref{sec:ckks}: \nameref{sec:ckks}
 \end{itemize}
+\end{tcolorbox}
 
+\clearpage
 
 \subsection{Encoding and Decoding}
 \label{subsec:bgv-encoding-decoding}

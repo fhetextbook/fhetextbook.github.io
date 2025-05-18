@@ -33,9 +33,14 @@ Remember that BFV is an exact encryption scheme based on integer ring. On the ot
 CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots) rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations over complex numbers as inputs, whereas BFV handles homomorphic operations over integer rings. 
 
 
-$ $
 
-\noindent \textbf{\underline{Required Background}}
+\begin{tcolorbox}[
+    title = \textbf{Required Background},    % box title
+    colback = white,    % light background; tweak to taste
+    colframe = black,  % frame colour
+    boxrule = 0.8pt,     % line thickness
+    left = 1mm, right = 1mm, top = 1mm, bottom = 1mm % inner padding
+]
 
 \begin{itemize}
 \item \autoref{sec:modulo}: \nameref{sec:modulo}
@@ -64,7 +69,9 @@ $ $
 \item \autoref{sec:glwe-key-switching}: \nameref{sec:glwe-key-switching}
 \item \autoref{sec:bfv}: \nameref{sec:bfv}
 \end{itemize}
+\end{tcolorbox}
 
+\clearpage
 
 
 \subsection{Encoding and Decoding}

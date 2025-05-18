@@ -5,9 +5,13 @@ In BFV, each plaintext is encrypted as an RLWE ciphertext. Therefore, BFV's ciph
 
 
 
-$ $
-
-\noindent \textbf{\underline{Required Background}}
+\begin{tcolorbox}[
+    title = \textbf{Required Background},    % box title
+    colback = white,    % light background; tweak to taste
+    colframe = black,  % frame colour
+    boxrule = 0.8pt,     % line thickness
+    left = 1mm, right = 1mm, top = 1mm, bottom = 1mm % inner padding
+]
 
 \begin{itemize}
 \item \autoref{sec:modulo}: \nameref{sec:modulo}
@@ -34,7 +38,9 @@ $ $
 \item \autoref{subsec:modulus-switch-rlwe}: \nameref{subsec:modulus-switch-rlwe}
 \item \autoref{sec:glwe-key-switching}: \nameref{sec:glwe-key-switching}
 \end{itemize}
+\end{tcolorbox}
 
+\clearpage
 
 \subsection{Single Value Encoding}
 \label{subsec:bfv-single-encoding}

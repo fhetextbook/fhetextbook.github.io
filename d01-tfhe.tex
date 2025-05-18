@@ -7,30 +7,36 @@ This section will explain TFHE's novel components: key switching, ciphertext-to-
 
 $ $
 
-\noindent \textbf{\underline{Required Background}}
-
+\begin{tcolorbox}[
+    title = \textbf{Required Background},    % box title
+    colback = white,    % light background; tweak to taste
+    colframe = black,  % frame colour
+    boxrule = 0.8pt,     % line thickness
+    left = 1mm, right = 1mm, top = 1mm, bottom = 1mm % inner padding
+]
 \begin{itemize}
-\item \autoref{sec:modulo}: \nameref{sec:modulo}
-\item \autoref{sec:group}: \nameref{sec:group}
-\item \autoref{sec:field}: \nameref{sec:field}
-\item \autoref{sec:order}: \nameref{sec:order}
-\item \autoref{sec:polynomial-ring}: \nameref{sec:polynomial-ring}
-\item \autoref{sec:decomp}: \nameref{sec:decomp}
-\item \autoref{sec:modulus-rescaling}: \nameref{sec:modulus-rescaling}
-\item \autoref{sec:lattice}: \nameref{sec:lattice}
-\item \autoref{sec:lwe}: \nameref{sec:lwe}
-\item \autoref{sec:rlwe}: \nameref{sec:rlwe}
-\item \autoref{sec:glwe}: \nameref{sec:glwe}
-\item \autoref{sec:glev}: \nameref{sec:glev}
-\item \autoref{sec:ggsw}: \nameref{sec:ggsw}
-\item \autoref{sec:glwe-add-cipher}: \nameref{sec:glwe-add-cipher}
-\item \autoref{sec:glwe-add-plain}: \nameref{sec:glwe-add-plain}
-\item \autoref{sec:glwe-mult-plain}: \nameref{sec:glwe-mult-plain}
-\item \autoref{subsec:modulus-switch-lwe}: \nameref{subsec:modulus-switch-lwe}
-\item \autoref{sec:glwe-key-switching}: \nameref{sec:glwe-key-switching}
+  \item \autoref{sec:modulo}: \nameref{sec:modulo}
+  \item \autoref{sec:group}: \nameref{sec:group}
+  \item \autoref{sec:field}: \nameref{sec:field}
+  \item \autoref{sec:order}: \nameref{sec:order}
+  \item \autoref{sec:polynomial-ring}: \nameref{sec:polynomial-ring}
+  \item \autoref{sec:decomp}: \nameref{sec:decomp}
+  \item \autoref{sec:modulus-rescaling}: \nameref{sec:modulus-rescaling}
+  \item \autoref{sec:lattice}: \nameref{sec:lattice}
+  \item \autoref{sec:lwe}: \nameref{sec:lwe}
+  \item \autoref{sec:rlwe}: \nameref{sec:rlwe}
+  \item \autoref{sec:glwe}: \nameref{sec:glwe}
+  \item \autoref{sec:glev}: \nameref{sec:glev}
+  \item \autoref{sec:ggsw}: \nameref{sec:ggsw}
+  \item \autoref{sec:glwe-add-cipher}: \nameref{sec:glwe-add-cipher}
+  \item \autoref{sec:glwe-add-plain}: \nameref{sec:glwe-add-plain}
+  \item \autoref{sec:glwe-mult-plain}: \nameref{sec:glwe-mult-plain}
+  \item \autoref{subsec:modulus-switch-lwe}: \nameref{subsec:modulus-switch-lwe}
+  \item \autoref{sec:glwe-key-switching}: \nameref{sec:glwe-key-switching}
 \end{itemize}
+\end{tcolorbox}
 
-
+\clearpage
 
 \subsection{Encryption and Decryption}
 \label{subsec:tfhe-enc-dec}

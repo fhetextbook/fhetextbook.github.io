@@ -793,18 +793,13 @@ Then, we can do a series of homomorphic rotations and multiplication to make the
 we can do this in total <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>
 rounds of rotations and additions: initially, we zero-mask between the
+<!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mfrac><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow>
+<mrow><mn>2</mn></mrow></mfrac> </mrow></math>-th slot and the
+<!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mfrac><mrow><mi>n</mi></mrow>
+<mrow><mn>2</mn></mrow></mfrac> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>-th slots and save as <span class='rm-lmss-10x-x-109'>ct</span>,
                                                                                          
                                                                                          
-<!-- tex4ht:inline --></p><!-- l. 2080 --><math display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-                                            <mfrac><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow>
-<mrow><mn>2</mn></mrow></mfrac>
-</mrow></math>
-<!-- l. 2080 --><p class='nopar'>-th slot and the
-<!-- tex4ht:inline --></p><!-- l. 2080 --><math display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-                                          <mfrac><mrow><mi>n</mi></mrow>
-<mrow><mn>2</mn></mrow></mfrac> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn>
-</mrow></math>
-<!-- l. 2080 --><p class='nopar'>-th slots and save as <span class='rm-lmss-10x-x-109'>ct</span>, and then in each <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>-th
+and then in each <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>-th
 round we compute <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝗈𝗍𝖺𝗍𝖾</mtext></mstyle><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>(</mo></mstyle><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mn>2</mn></mrow><mrow><mi>i</mi></mrow></msup><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>)</mo></mstyle></mrow></math>.
 </p><!-- l. 2082 --><p class='indent'>   Then, we apply the optimization of sparsely packing ciphertext in Summary <a href='SparselyPackingCiphertext.html#sparsely-packing-ciphertext'>D-3.12<!-- tex4ht:ref: subsec:ckks-sparse-packing  --></a> (<a href='SparselyPackingCiphertext.html#sparsely-packing-ciphertext'><span class='ts1-lmr10-x-x-109'>§</span>D-3.12<!-- tex4ht:ref: subsec:ckks-sparse-packing  --></a>): if an
 <!-- l. 2082 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><mi>n</mi>
@@ -836,8 +831,6 @@ not a multiple of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.or
 slots would store a zero coefficient. This means that we will get the same computation result even if we only compute the
 <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>m</mi></mrow><mo accent='true'>→</mo></mover> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msubsup><mrow><mi>I</mi></mrow><mrow><mi>n</mi></mrow><mrow><mi>R</mi></mrow></msubsup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><msup><mrow></mrow><mrow><mi>′</mi></mrow></msup></mrow></msub>
        </mrow><mrow><mi>n</mi>       </mrow></mfrac></mstyle></mrow></math> formula with the rows
-                                                                                         
-                                                                                         
 of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> which whose row
 index is a multiple of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>.
@@ -869,6 +862,8 @@ result of the above updated encoding formula (using a sparsely packed ciphertext
 of <!-- l. 2098 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> coefficient slots,
 and each slot index <!-- l. 2098 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>
 in <!-- l. 2098 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mover accent='true'><mrow><mi>m</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><mi>s</mi></mrow></msub></math>
+                                                                                         
+                                                                                         
 corresponds to the encoded polynomial’s coefficient with degree term
 <!-- l. 2098 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>i</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></mrow></math> (we do not
@@ -900,8 +895,6 @@ is a matrix where those columns whose column index is not a multiple of
 <!-- l. 2100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math> are zero. This zero-enforcement
 to the columns of <!-- l. 2100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mstyle class='text'><mstyle><mtext style='transform:rotate(-180deg)'>E</mtext></mstyle></mstyle></mrow><mrow><mi>T</mi> </mrow></msup></math> still outputs the
-                                                                                         
-                                                                                         
 same computation result, because <!-- l. 2100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mover accent='true'><mrow><mi>m</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><mi>c</mi></mrow></msub></math>
 is a vector such that those slots whose slot index is not a multiple of
 <!-- l. 2100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>

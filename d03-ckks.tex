@@ -205,7 +205,7 @@ $ $
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Decoding}: } From the plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}$$\Delta m_iX^i$, recover $\vec{m} = \dfrac{\Delta \vec{m}}{\Delta}$. Then,
+\textbf{\underline{Decoding}: } From the plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$, recover $\vec{m} = \dfrac{\Delta \vec{m}}{\Delta}$. Then,
 compute $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$, where:
 
 \noindent $\hathat{W}^* = \begin{bmatrix}
@@ -2077,7 +2077,7 @@ The output of the \textsf{SlotToCoeff} step is the ciphertext $\textsf{RLWE}_{S,
 \subsubsection{Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext}
 \label{subsubsec:ckks-bootstrapping-time-reduction}
 
-In many cases, the application of CKKS may use only a small number of input vector slots (e.g., $\dfrac{n'}{2}$) out of $\dfrac{n}{2}$ slots. Suppose that such $n'$ is some number that divides $n$. Then, we can do a series of homomorphic rotations and multiplication to make the input vector slots store $\dfrac{n}{n'}$ repetitions of the $\dfrac{n'}{2}$-slot values. Specifically, we can do this in total $\dfrac{n}{n'}$ rounds of rotations and additions: initially, we zero-mask between the $$\frac{n'}{2}$$-th slot and the $$\frac{n}{2} - 1$$-th slots and save as \textsf{ct}, and then in each $i$-th round we compute $\textsf{ct} = \textsf{ct} +  \textsf{Rotate}\bm(\textsf{ct}, -n' \cdot 2^i\bm)$. 
+In many cases, the application of CKKS may use only a small number of input vector slots (e.g., $\dfrac{n'}{2}$) out of $\dfrac{n}{2}$ slots. Suppose that such $n'$ is some number that divides $n$. Then, we can do a series of homomorphic rotations and multiplication to make the input vector slots store $\dfrac{n}{n'}$ repetitions of the $\dfrac{n'}{2}$-slot values. Specifically, we can do this in total $\dfrac{n}{n'}$ rounds of rotations and additions: initially, we zero-mask between the $\frac{n'}{2}$-th slot and the $\frac{n}{2} - 1$-th slots and save as \textsf{ct}, and then in each $i$-th round we compute $\textsf{ct} = \textsf{ct} +  \textsf{Rotate}\bm(\textsf{ct}, -n' \cdot 2^i\bm)$. 
 
 Then, we apply the optimization of sparsely packing ciphertext in Summary~\ref{subsec:ckks-sparse-packing} (\autoref{subsec:ckks-sparse-packing}): if an $\dfrac{n}{2}$-dimensional input vector is structured as $\dfrac{n}{n'}$ consecutive repetitions of the first $\dfrac{n'}{2}$ slot values, then its encoded polynomial $M(X) \in \mathbb{Z}[X] / (X^{n} + 1)$ has the structure such that all its coefficients whose degree term is not a multiple of $\dfrac{n}{n'}$ are zero as follows:
 

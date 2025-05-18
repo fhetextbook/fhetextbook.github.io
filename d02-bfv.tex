@@ -214,14 +214,14 @@ Note that by computing $\dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$
 \subsubsection{\textsf{Encoding\textsubscript{2}}}  
 
 Once we have the $n$-dimensional vector $\vec{m}$, we scale (i.e., multiply) it by some scaling factor $\Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$, where $q$ is the ciphertext modulus. We scale $\vec{m}$ by $\Delta$ and make it $\Delta \vec{m}$. 
-The $n$ integers in $\Delta\vec{m}$ will be used as $n$ coefficients of the plaintext polynomial for RLWE encryption. The finally encoded plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}$$\Delta m_iX^i$. 
+The $n$ integers in $\Delta\vec{m}$ will be used as $n$ coefficients of the plaintext polynomial for RLWE encryption. The finally encoded plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$. 
 
 %\textbf{Choice of $\bm\Delta$:} As discussed in \autoref{subsubsec:glwe-add-cipher-discuss}, the FHE cryptosystem assumes that the scaled plaintext coefficient $\Delta m_i$ never overflows (or underflows) the ciphertext modulo $q$ (i.e., $0 \leq \Delta m_i < q$ or $\dfrac{q}{2} \leq \Delta m_i < \dfrac{q}{2}$) for the correctness of the final divide-and-round operation upon decryption. Therefore, in BFV, the scaling factor $\Delta$ can be any value such that $1 \leq \Delta \leq \dfrac{q}{t}$. However, if $\Delta$ is smaller than $\dfrac{q}{t}$ but too close to $\dfrac{q}{t}$, then the plaintext coefficient may overflow the boundary of $\dfrac{q}{t}$ during homomorphic addition or multiplication and the correctness of computation will break. Conversely, if $\Delta$ is too small and close to 1, then the growing noise will easily trespass and corrupt the plaintext digits, breaking the correctness of further computations. 
 
 \subsubsection{\textsf{Decoding\textsubscript{1}}}  
 \label{subsubsec:bfv-enc-dec-decoding1} 
 
-Once an RLWE ciphertext is decrypted to $\Delta M = \sum\limits_{i=0}^{n-1}$$\Delta m_iX^i$, we compute $\dfrac{\Delta\vec{m}}{\Delta} = \vec{m}$.
+Once an RLWE ciphertext is decrypted to $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$, we compute $\dfrac{\Delta\vec{m}}{\Delta} = \vec{m}$.
 
 
 
@@ -277,7 +277,7 @@ $= \begin{bmatrix}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Decoding}:} From the plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}$$\Delta m_iX^i$, recover $\vec{m} = \dfrac{\Delta \vec{m}}{\Delta}$. Then,
+\textbf{\underline{Decoding}:} From the plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$, recover $\vec{m} = \dfrac{\Delta \vec{m}}{\Delta}$. Then,
 compute $\vec{v} = W^T \cdot \vec{m}$.
 
 \end{tcolorbox}

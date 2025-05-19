@@ -785,7 +785,7 @@ values.
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></math> slots. Suppose
 that such <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></math> is some
 number that divides <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math>.
-Then, we can do a series of homomorphic rotations and multiplication to make the input vector slots store
+Then, we can do a series of homomorphic rotations and multiplications to make the input vector slots store
 <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math> repetitions of the
 <!-- l. 2080 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup>
@@ -830,16 +830,15 @@ not a multiple of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.or
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>
 slots would store a zero coefficient. This means that we will get the same computation result even if we only compute the
 <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>m</mi></mrow><mo accent='true'>→</mo></mover> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msubsup><mrow><mi>I</mi></mrow><mrow><mi>n</mi></mrow><mrow><mi>R</mi></mrow></msubsup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><msup><mrow></mrow><mrow><mi>′</mi></mrow></msup></mrow></msub>
-       </mrow><mrow><mi>n</mi>       </mrow></mfrac></mstyle></mrow></math> formula with the rows
-of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> which whose row
-index is a multiple of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
-</mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>.
-Mathematically, we can update the encoding formula to
-<!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><msub><mrow><mi>m</mi></mrow><mrow><mi>s</mi></mrow></msub></mrow><mo accent='true'>→</mo></mover> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mstyle class='text'><mstyle><mtext style='transform:rotate(-180deg)'>E</mtext></mstyle></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msubsup><mrow><mi>I</mi></mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow><mrow><mi>R</mi></mrow></msubsup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><msup><mrow></mrow><mrow><mi>′</mi></mrow></msup></mrow></msub>
-      </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup>     </mrow></mfrac></mstyle></mrow></math> where the
-<!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>×</mo> <mfrac><mrow><mi>n</mi></mrow> 
-<mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mrow></math> matrix <mtext style='transform:rotate(-180deg)'>E</mtext> is an elimination of
-all those columns from <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> whose
+       </mrow><mrow><mi>n</mi>       </mrow></mfrac></mstyle></mrow></math> formula with the rows of
+<!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> whose row index is a multiple of
+<!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
+</mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>. Mathematically, we can update
+the encoding formula to <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><msub><mrow><mi>m</mi></mrow><mrow><mi>s</mi></mrow></msub></mrow><mo accent='true'>→</mo></mover> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mstyle class='text'><mstyle><mtext style='transform:rotate(-180deg)'>E</mtext></mstyle></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msubsup><mrow><mi>I</mi></mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow><mrow><mi>R</mi></mrow></msubsup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true'>→</mo></mover></mrow><mrow><msup><mrow></mrow><mrow><mi>′</mi></mrow></msup></mrow></msub>
+      </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup>     </mrow></mfrac></mstyle></mrow></math> where
+the <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>×</mo> <mfrac><mrow><mi>n</mi></mrow> 
+<mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mrow></math> matrix <mtext style='transform:rotate(-180deg)'>E</mtext> is an elimination
+of all those columns from <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>Ŵ</mi></mrow><mo accent='true'>^</mo></mover></math> whose
 column index is not a multiple of <!-- l. 2086 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow> <mi>n</mi>
 </mrow><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></mfrac></mstyle></math>:
 </p><!-- l. 2088 --><p class='indent'><!-- l. 2088 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mstyle><mtext style='transform:rotate(-180deg)'>E</mtext></mstyle></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mrow><mo fence='true' form='prefix'>[</mo><mrow><mtable align='axis' class='array' columnlines='none none none none none none none none none' displaystyle='true' equalcolumns='false' equalrows='false' rowlines='none none none none none none none none none none none' style=''><mtr class='array-row'><mtd class='array-td' columnalign='center'>           <mn>1</mn>           </mtd><mtd class='array-td' columnalign='center'>           <mn>1</mn>           </mtd><mtd class='array-td' columnalign='center'>  <mo class='MathClass-rel' stretchy='false'>⋯</mo> </mtd><mtd class='array-td' columnalign='center'>         <mn>1</mn>          </mtd><mtd class='array-td' columnalign='center'>           <mn>1</mn>           </mtd><mtd class='array-td' columnalign='center'>  <mo class='MathClass-rel' stretchy='false'>⋯</mo> </mtd><mtd class='array-td' columnalign='center'>          <mn>1</mn>            </mtd><mtd class='array-td' columnalign='center'>            <mn>1</mn>            </mtd></mtr> <mtr class='array-row'><mtd class='array-td' columnalign='center'> </mtd></mtr> <mtr class='array-row'><mtd class='array-td' columnalign='center'> </mtd>
@@ -909,7 +908,7 @@ zero, anyway.
    <h5 class='subsubsectionHead' id='summary5'><span class='titlemark'>D-3.13.7   </span> <a id='x131-204000D-3.13.7'></a>Summary</h5>
 <!-- l. 2107 --><p class='noindent'>We summarize the CKKS bootstrapping procedure as follows.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-100'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-101'>     
 <div class='tcolorbox-title'>
 <!-- l. 2178 --><p class='indent'>   <!-- l. 2178 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary </span><a href='#summary5'><span class='rm-lmbx-10x-x-109'>D-3.13.7</span><!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a><!-- l. 2178 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
@@ -1077,7 +1076,7 @@ noises.
                                                                                          
                                                                                          
 </p>
-   <!-- l. 613 --><div class='crosslinks'><p class='noindent'>[<a href='SparselyPackingCiphertext.html'>prev</a>] [<a href='SparselyPackingCiphertext.html#tailSparselyPackingCiphertext.html'>prev-tail</a>] [<a href='ModulusBootstrapping.html'>front</a>] [<a href='CKKSScheme.html#ModulusBootstrapping.html'>up</a>] </p></div>
-<!-- l. 613 --><p class='indent'>   <a id='tailModulusBootstrapping.html'></a>  </p> 
+   <!-- l. 623 --><div class='crosslinks'><p class='noindent'>[<a href='SparselyPackingCiphertext.html'>prev</a>] [<a href='SparselyPackingCiphertext.html#tailSparselyPackingCiphertext.html'>prev-tail</a>] [<a href='ModulusBootstrapping.html'>front</a>] [<a href='CKKSScheme.html#ModulusBootstrapping.html'>up</a>] </p></div>
+<!-- l. 623 --><p class='indent'>   <a id='tailModulusBootstrapping.html'></a>  </p> 
 </body> 
 </html>

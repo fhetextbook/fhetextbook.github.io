@@ -16,7 +16,7 @@ jobs:
             rm -rf out                 # clean previous artefacts (optional)
             make4ht -u -f html5 \
                     -j index \
-                    -e .github/workflows/build.lua
+                    -e .github/workflows/build.lua \
                     -c .github/workflows/config.cfg \
                     -d out 00-main.tex
    - name: Publish the web pages 

@@ -20,13 +20,13 @@ Ciphertext-to-ciphertext multiplication is more complex than ciphertext-to-plain
 comprises four steps: (1) <span class='rm-lmss-10x-x-109'>ModRaise</span>; (2) polynomial multiplication; (3) relinearization; and (4)
 rescaling.
 </p><!--  l. 425  --><p class='indent'>   For better understanding, we will explain BFV’s ciphertext-to-ciphertext multiplication
-based on the alternate version of RLWE (Theorem <a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe'>B-4.4<!--  tex4ht:ref: subsec:glwe-alternative   --></a> in <a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe'><span class='ts1-lmr10-x-x-109'>§</span>B-4.4<!--  tex4ht:ref: subsec:glwe-alternative   --></a>), where the sign of the
+based on the alternate version of RLWE (Theorem B-4.4 in <a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe'><span class='ts1-lmr10-x-x-109'>§</span>B-4.4<!--  tex4ht:ref: subsec:glwe-alternative   --></a>), where the sign of the
 <!--  l. 425  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝐴𝑆</mi></mrow></math> term is
 flipped in the encryption and decryption formulas.
    
 </p>
    <h5 class='subsubsectionHead' id='modraise'><span class='titlemark'>D-2.7.1   </span> <a id='x113-153000D-2.7.1'></a><span class='rm-lmss-10x-x-109'>ModRaise</span></h5>
-<!--  l. 430  --><p class='noindent'>We learned from Summary <a href='EncryptionandDecryption1.html#encryption-and-decryption1'>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a> (in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>) that a BFV ciphertext whose ciphertext modulus is
+<!--  l. 430  --><p class='noindent'>We learned from Summary D-2.3 (in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>) that a BFV ciphertext whose ciphertext modulus is
 <!--  l. 430  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> has the (decryption)
 relation: <!--  l. 430  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>K</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>q</mi></mrow></math>, where
 <!--  l. 430  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>K</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>q</mi></mrow></math> stands for modulo
@@ -471,7 +471,7 @@ follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-85'>     
 <div class='tcolorbox-title'>
-<!--  l. 823  --><p class='indent'>   <!--  l. 823  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary </span><a href='#summary1'><span class='rm-lmbx-10x-x-109'>D-2.7.5</span><!--  tex4ht:ref: subsubsec:bfv-mult-cipher-summary   --></a><!--  l. 823  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!--  l. 823  --><p class='indent'>   <!--  l. 823  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-2.7.5</span><!--  l. 823  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>BFV’s Ciphertext-to-Ciphertext Multiplication</span></p></div> 
@@ -536,10 +536,10 @@ stay the same as before.
 </div>                                        
                                                                                          
 <!--  l. 826  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>The Purpose of </span><span class='rm-lmssbx-10x-x-109'>ModRaise</span><span class='rm-lmbx-10x-x-109'>:  </span>When we multiply polynomials at the second step of ciphertext-to-ciphertext
-multiplication (<a href='#polynomial-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7.2<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>), the underlying plaintext within the ciphertext temporarily grows to
+multiplication (<a href='#polynomial-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7.2<!--  tex4ht:ref: subsubsec:bfv-mult-cipher-summary   --></a>), the underlying plaintext within the ciphertext temporarily grows to
 <!--  l. 826  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>, which exceeds the allowed
 maximum boundary <!--  l. 826  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
-for the plaintext (Summary <a href='EncryptionandDecryption1.html#encryption-and-decryption1'>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a> in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>). After this point, applying
+for the plaintext (Summary D-2.3 in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>). After this point, applying
 modulo-<!--  l. 826  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> reduction to
 the intermediate result will irrevocably corrupt the plaintext. To avoid the corruption of the plaintext when it grows to
 <!--  l. 826  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>, we temporarily increase the

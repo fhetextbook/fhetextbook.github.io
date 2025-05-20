@@ -17,7 +17,7 @@
 from <!--  l. 286  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> to
 <!--  l. 286  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true'>^</mo></mover></math>, it should decrypt to
 the same plaintext <!--  l. 286  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>.
-BGV’s modulus switch is similar to that of the RLWE modulus switch (<a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.2<!--  tex4ht:ref: subsec:ckks-moddrop   --></a>),
+BGV’s modulus switch is similar to that of the RLWE modulus switch (<a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.2<!--  tex4ht:ref: subsec:bgv-mult-plain   --></a>),
 but there is an additional requirement, because BGV applies the scaling factor
 <!--  l. 286  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> not to
 plaintext <!--  l. 286  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>, but
@@ -234,7 +234,7 @@ BGV’s modulus switch procedure is as follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-109'>     
 <div class='tcolorbox-title'>
-<!--  l. 479  --><p class='indent'>   <!--  l. 479  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary </span><a href='#modulus-switch1'><span class='rm-lmbx-10x-x-109'>D-4.7</span><!--  tex4ht:ref: subsec:bgv-modulus-switch   --></a><!--  l. 479  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!--  l. 479  --><p class='indent'>   <!--  l. 479  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-4.7</span><!--  l. 479  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>BGV’s Modulus Switch</span></p></div> 
@@ -285,7 +285,7 @@ but this does not decrease the noise-to-ciphertext modulus ratio.
 </div>
    
    <h5 class='subsubsectionHead' id='difference-between-modulus-switch-and-moddrop1'><span class='titlemark'>D-4.7.1   </span> <a id='x139-214000D-4.7.1'></a>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></h5>
-<!--  l. 486  --><p class='noindent'>In the case of CKKS (<a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#rescaling1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.4<!--  tex4ht:ref: subsec:ckks-moddrop   --></a>), the difference between modulus switch and
+<!--  l. 486  --><p class='noindent'>In the case of CKKS (<a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#rescaling1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.4<!--  tex4ht:ref: subsec:bgv-modulus-switch   --></a>), the difference between modulus switch and
                                                                                          
                                                                                          
 <span class='rm-lmss-10x-x-109'>ModDrop </span>is that the former scales down the plaintext’s scaling factor by
@@ -301,7 +301,7 @@ However, the key difference is that rescaling also decreases the noise’s scali
 </mrow><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msub></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≈</mo><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></mfrac></mstyle></mrow></math>,
 whereas <span class='rm-lmss-10x-x-109'>ModDrop </span>keeps the noise’s scaling factor the same as it is. Therefore, rescaling
-is used only during ciphertext-to-ciphertext multiplication (to be explained in <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.8<!--  tex4ht:ref: subsec:ckks-moddrop   --></a>)
+is used only during ciphertext-to-ciphertext multiplication (to be explained in <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.8<!--  tex4ht:ref: subsec:bgv-modulus-switch   --></a>)
 when scaling down the plaintext’s scaling factor in the intermediate ciphertext from
 <!--  l. 488  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>→</mo><mi mathvariant='normal'>Δ</mi></mrow></math>.
 Meanwhile, <span class='rm-lmss-10x-x-109'>ModDrop </span>is used to reduce the modulo computation time during an application’s routine when

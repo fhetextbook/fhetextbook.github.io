@@ -17,7 +17,7 @@ bootstrapping technique can be further applied to functional encryption.
 </p><!--  l. 4  --><p class='indent'>   In TFHE, each plaintext is encrypted as an LWE ciphertext. Therefore, TFHE’s ciphertext-to-ciphertext
 addition, ciphertext-to-plaintext addition, and ciphertext-to-plaintext multiplication are
 implemented based on GLWE’s homomorphic addition and multiplication described in
-<!--  l. 4  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x86-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mi mathvariant='italic'>𝑃𝑎𝑟𝑡 𝐼𝐼𝐼</mi><!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></mstyle><!--  endlabel  --></mrow></math>, with
+<!--  l. 4  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x86-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mi mathvariant='italic'>𝑃𝑎𝑟𝑡 𝐼𝐼𝐼</mi><!--  tex4ht:ref: sec:glwe-key-switching   --></mstyle><!--  endlabel  --></mrow></math>, with
 <!--  l. 4  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> to
 make GLWE an LWE.
 </p><!--  l. 6  --><p class='indent'>   This section will explain TFHE’s novel components: key switching, ciphertext-to-ciphertext
@@ -30,41 +30,41 @@ multiplication, coefficient extraction, and noise bootstrapping.
                                                                                          
 <!--  l. 37  --><p class='indent'>   <span class='rm-lmbx-10x-x-109'>Required Background</span></p></div> 
 <div class='tcolorbox-content'>   <ul class='itemize1'>
-   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!--  tex4ht:ref: sec:modulo   --></a>
+   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!--  tex4ht:ref: sec:modulo   --></a>
     </li>
-    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='Group.html#group'>Group<!--  tex4ht:ref: sec:group   --></a>
+    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='Group.html#group'>Group<!--  tex4ht:ref: sec:group   --></a>
     </li>
-    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='Field.html#field'>Field<!--  tex4ht:ref: sec:field   --></a>
+    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='Field.html#field'>Field<!--  tex4ht:ref: sec:field   --></a>
     </li>
-    <li class='itemize'><a href='Order.html#order'><span class='ts1-lmr10-x-x-109'>§</span>A-4<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='Order.html#order'>Order<!--  tex4ht:ref: sec:order   --></a>
+    <li class='itemize'><a href='Order.html#order'><span class='ts1-lmr10-x-x-109'>§</span>A-4<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='Order.html#order'>Order<!--  tex4ht:ref: sec:order   --></a>
     </li>
-    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!--  tex4ht:ref: sec:polynomial-ring   --></a>
+    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!--  tex4ht:ref: sec:polynomial-ring   --></a>
     </li>
-    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!--  tex4ht:ref: sec:decomp   --></a>
+    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!--  tex4ht:ref: sec:decomp   --></a>
     </li>
-    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!--  tex4ht:ref: sec:modulus-rescaling   --></a>
+    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!--  tex4ht:ref: sec:modulus-rescaling   --></a>
     </li>
-    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!--  tex4ht:ref: sec:lattice   --></a>
+    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!--  tex4ht:ref: sec:lattice   --></a>
     </li>
-    <li class='itemize'><a href='LWECryptosystem1.html#lwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-2<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='LWECryptosystem1.html#lwe-cryptosystem1'>LWE Cryptosystem<!--  tex4ht:ref: sec:lwe   --></a>
+    <li class='itemize'><a href='LWECryptosystem1.html#lwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-2<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='LWECryptosystem1.html#lwe-cryptosystem1'>LWE Cryptosystem<!--  tex4ht:ref: sec:lwe   --></a>
     </li>
-    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!--  tex4ht:ref: sec:rlwe   --></a>
+    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!--  tex4ht:ref: sec:rlwe   --></a>
     </li>
-    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!--  tex4ht:ref: sec:glwe   --></a>
+    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!--  tex4ht:ref: sec:glwe   --></a>
     </li>
-    <li class='itemize'><a href='GLev.html#glev'><span class='ts1-lmr10-x-x-109'>§</span>B-5<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLev.html#glev'>GLev<!--  tex4ht:ref: sec:glev   --></a>
+    <li class='itemize'><a href='GLev.html#glev'><span class='ts1-lmr10-x-x-109'>§</span>B-5<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLev.html#glev'>GLev<!--  tex4ht:ref: sec:glev   --></a>
     </li>
-    <li class='itemize'><a href='GGSW.html#ggsw'><span class='ts1-lmr10-x-x-109'>§</span>B-6<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GGSW.html#ggsw'>GGSW<!--  tex4ht:ref: sec:ggsw   --></a>
+    <li class='itemize'><a href='GGSW.html#ggsw'><span class='ts1-lmr10-x-x-109'>§</span>B-6<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GGSW.html#ggsw'>GGSW<!--  tex4ht:ref: sec:ggsw   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!--  tex4ht:ref: sec:glwe-add-cipher   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!--  tex4ht:ref: sec:glwe-add-cipher   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!--  tex4ht:ref: sec:glwe-add-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!--  tex4ht:ref: sec:glwe-add-plain   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>
     </li>
-    <li class='itemize'><a href='LWEModulusSwitching.html#lwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.1<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='LWEModulusSwitching.html#lwe-modulus-switching'>LWE Modulus Switching<!--  tex4ht:ref: subsec:modulus-switch-lwe   --></a>
+    <li class='itemize'><a href='LWEModulusSwitching.html#lwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.1<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='LWEModulusSwitching.html#lwe-modulus-switching'>LWE Modulus Switching<!--  tex4ht:ref: subsec:modulus-switch-lwe   --></a>
     </li>
-    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!--  tex4ht:ref: subsubsec:scaling-factor-computation   --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!--  tex4ht:ref: sec:glwe-key-switching   --></a></li></ul>
+    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!--  tex4ht:ref: sec:glwe-key-switching   --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!--  tex4ht:ref: sec:glwe-key-switching   --></a></li></ul>
  
 </div> 
 </div>                                                               

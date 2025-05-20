@@ -15,7 +15,7 @@ Cyclotomic Polynomial: </span>At this point, it becomes clear why the CKKS
 encoding and decoding scheme uses the (power-of-2)-th cyclotomic polynomial (i.e.,
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math>) over
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <mi>ℂ</mi></mrow></math>
-(complex numbers) (<a href='EncodingandDecoding.html#encoding-and-decoding'><span class='ts1-lmr10-x-x-109'>§</span>D-3.1<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>). The first reason is that CKKS’s first requirement for designing a valid
+(complex numbers) (<a href='EncodingandDecoding.html#encoding-and-decoding'><span class='ts1-lmr10-x-x-109'>§</span>D-3.1<!--  tex4ht:ref: subsec:ckks-rotation   --></a>). The first reason is that CKKS’s first requirement for designing a valid
 encoding and decoding formula for an input complex vector is to isomorphically convert it into a unique
 real number vector (and we scale this real number vector as an integer vector and use it as a list of
 coefficients for polynomial encoding, because CKKS’s homomorphic encryption and decryption are
@@ -27,8 +27,8 @@ distinct <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/
 resulting set of <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> distinct
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>Y</mi> </mrow></math> values is guaranteed to
 be unique within the <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math>-th
-degree polynomial ring. Based on this insight, we designed a decoding matrix (<a href='EncodingandDecoding.html#encoding-and-decoding'><span class='ts1-lmr10-x-x-109'>§</span>D-3.1<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>) in
-the form of a Vandermonde matrix (<a href='VariousTypesofMatrix.html#various-types-of-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10.2<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>). Then, the encoding formula is equivalent to
+degree polynomial ring. Based on this insight, we designed a decoding matrix (<a href='EncodingandDecoding.html#encoding-and-decoding'><span class='ts1-lmr10-x-x-109'>§</span>D-3.1<!--  tex4ht:ref: subsec:ckks-rotation   --></a>) in
+the form of a Vandermonde matrix (<a href='VariousTypesofMatrix.html#various-types-of-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10.2<!--  tex4ht:ref: subsec:ckks-rotation   --></a>). Then, the encoding formula is equivalent to
 multiplying the input complex vector by an inverse of this decoding matrix. However,
 in linear algebra, not all matrices are guaranteed to have a counterpart inverse matrix.
 Therefore, for the guarantee of the existence of a valid encoding matrix (i.e., an inverse of the
@@ -37,16 +37,16 @@ decoding matrix), we leveraged the following arithmetic property: if a Vandermon
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> distinct primitive
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th roots of unity
 (where <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> is a
-power of 2), then such a Vandermonde matrix is guaranteed to have an inverse (<a href='VandermondeMatrixwithRootsofCyclotomicPolynomial.html#vandermonde-matrix-with-roots-of-cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-11.4<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>) counterpart. In fact, the
+power of 2), then such a Vandermonde matrix is guaranteed to have an inverse (<a href='VandermondeMatrixwithRootsofCyclotomicPolynomial.html#vandermonde-matrix-with-roots-of-cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-11.4<!--  tex4ht:ref: subsec:ckks-rotation   --></a>) counterpart. In fact, the
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th roots of unity are
 <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> distinct roots of
 the <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th cyclotomic
-polynomial: <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math> (<a href='Definitions4.html#definitions4'><span class='ts1-lmr10-x-x-109'>§</span>A-8.1<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>).
+polynomial: <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math> (<a href='Definitions4.html#definitions4'><span class='ts1-lmr10-x-x-109'>§</span>A-8.1<!--  tex4ht:ref: subsec:ckks-rotation   --></a>).
 Therefore, CKKS uses <!--  l. 1311  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math>
-as the polynomial ring of its subsequent encryption and decryption scheme (<a href='EncryptionandDecryption2.html#encryption-and-decryption2'><span class='ts1-lmr10-x-x-109'>§</span>D-3.2<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>) as well.
+as the polynomial ring of its subsequent encryption and decryption scheme (<a href='EncryptionandDecryption2.html#encryption-and-decryption2'><span class='ts1-lmr10-x-x-109'>§</span>D-3.2<!--  tex4ht:ref: subsec:ckks-rotation   --></a>) as well.
 </p><!--  l. 1313  --><p class='indent'>   The CKKS encoding’s second reason for using the
 <!--  l. 1313  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-th cyclotomic
-polynomialis to design a valid input vector slot rotation scheme (<a href='HomomorphicRotationofInputVectorSlots1.html#homomorphic-rotation-of-input-vector-slots1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.9<!--  tex4ht:ref: subsubsec:bfv-rotation-summary   --></a>). In this rotation scheme, updating the encoded
+polynomialis to design a valid input vector slot rotation scheme (<a href='HomomorphicRotationofInputVectorSlots1.html#homomorphic-rotation-of-input-vector-slots1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.9<!--  tex4ht:ref: subsec:ckks-rotation   --></a>). In this rotation scheme, updating the encoded
                                                                                          
                                                                                          
 polynomial <!--  l. 1313  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>

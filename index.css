@@ -269,13 +269,10 @@ pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-t
 pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; text-align: left; }
 .lstinputlisting .label{margin-right:0.5em;}
  /* global colours */ body { background:#ffffff; color:#000000; margin:1em auto; max-width:52em; colorscheme: light; } a { color:#0645ad; } /* GitHub-like link blue */ nav.crosslinks { font-size:.9em; text-align:center; margin:1em 0; } nav.crosslinks a { margin:0 .5em; text-decoration:none; } 
-body{ margin:1em auto; max-width:100ch; padding:0 .62em; }
-p,li,h1,h2,h3,h4,h5, .abstract, dd, .tcolorbox {max-width: 100ch}
-table,math{overflow-x:auto; }
+body{ margin:1em auto; max-width:160ch; padding:0 .62em; }
+p,li,h1,h2,h3,h4,h5, .abstract {max-width: 100ch}
 ul{padding-left: 0;}
 ul li{margin-left: 1rem;}
-ol{padding-left:0;}
-ol li{margin-left:1rem;}
 .hline:first-child{border-bottom:1px solid black;border-top:none;}
 img { max-width: 100%; height: auto; }
 .subsectionTOCS { margin: 2em 0; } 

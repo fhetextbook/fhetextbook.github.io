@@ -56,7 +56,7 @@ $A_0(X) = a_0 + a_2X + a_4X^2 + \cdots + a_{n-2}X^{\frac{n}{2} - 1}$
 
 $A_1(X) = a_1 + a_3X + a_5X^2 + \cdots + a_{n-2}X^{\frac{n}{1} - 1}$
 
-The above way of splitting a polynomial into two half-degree polynomials is called the Cooley-Tukey step. As we split $A(X)$ into two smaller-degree polynomials $A_0(X)$ and $A_1(X)$, evaluating $A(X)$ at $n$ distinct $n$-th roots of unity $\{\omega^0, \omega^1, \omega^2, \cdots, \omega^{n-1}\}$ is equivalent to evaluating $A_0(X)$ and $A_1(X)$ at $n$ distinct \textit{squared} $n$-th roots of unity $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ and computing $A_0(X^2) + X\cdot A_1(X^2)$. However, remember that the primitive $n$-th root of unity $\omega$ has order $n$ (i.e., $\omega^n = 1$ and $\omega^m \neq 1$ for all $m < n$). Therefore, the second half of $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ is a repetition of the first half. This implies that we only need to evaluate $A_0(X)$ and $A_1(X)$ at $\dfrac{n}{2}$ distinct $x$ coordinates each instead of $n$ distinct coordinates, because the polynomial evaluation results for the other half are the same as that of the first half (as their input $x$ to the polynomial is the same). 
+The above way of splitting a polynomial into two half-degree polynomials is called the Cooley-Tukey step. As we split $A(X)$ into two smaller-degree polynomials $A_0(X)$ and $A_1(X)$, evaluating $A(X)$ at $n$ distinct $n$-th roots of unity $\{\omega^0, \omega^1, \omega^2, \cdots, \omega^{n-1}\}$ is equivalent to evaluating $A_0(X)$ and $A_1(X)$ at $n$ distinct \textit{squared} $n$-th roots of unity $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ and computing $A_0(X^2) + X\cdot A_1(X^2)$. However, remember that the primitive $n$-th root of unity $\omega$ has order $n$ (i.e., $\omega^n = 1$ and $\omega^m \neq 1$ for all $m < n$). Therefore, the second half of $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ is a repetition of the first half. This implies that we only need to evaluate $A_0(X)$ and $A_1(X)$ at $\dfrac{n}{2}$ distinct $x$ coordinates each instead of $n$ distinct coordinates, because the polynomial evaluation results for the other half are the same as those of the first half (as their input $x$ to the polynomial is the same). 
 
 We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and evaluate them at half-counted $n$-th roots of unity. Then, the total rounds of splitting is $\log n$, and each round's maximum number of root-to-coefficient multiplications is $n$, which aggregates to $O(n \log n)$. 
 
@@ -106,7 +106,7 @@ $ $
 
 $A(X) = A_0(X^2) + X \cdot A_1(X^2)$
 
-$\mathcolor{white}{A(X)} = \underbrace{\underbrace{(\underbrace{A_{0,0}(X^4)}_{\text{\mymathcolor{red}{FFT Level 1}}} + X^2\cdot \underbrace{A_{0,1}(X^4)}_{\text{\mymathcolor{red}{FFT Level 1}}})}_{\text{\mymathcolor{red}{FFT Level 2}}} + X \cdot \underbrace{(\underbrace{A_{1,0}(X^4)}_{\text{\mymathcolor{red}{FFT Level 1}}} + X^2\cdot \underbrace{A_{1,1}(X^4)}_{\text{\mymathcolor{red}{FFT Level 1}}})}_{\text{\mymathcolor{red}{FFT Level 2}}}}_{\text{\mymathcolor{red}{FFT Level 3}}}$
+$\mathcolor{white}{A(X)} = \underbrace{\underbrace{(\underbrace{A_{0,0}(X^4)}_{\text{FFT Level 1}} + X^2\cdot \underbrace{A_{0,1}(X^4)}_{\text{FFT Level 1}})}_{\text{FFT Level 2}} + X \cdot \underbrace{(\underbrace{A_{1,0}(X^4)}_{\text{FFT Level 1}} + X^2\cdot \underbrace{A_{1,1}(X^4)}_{\text{FFT Level 1}})}_{\text{FFT Level 2}}}_{\text{FFT Level 3}}$
 
 $ $
 

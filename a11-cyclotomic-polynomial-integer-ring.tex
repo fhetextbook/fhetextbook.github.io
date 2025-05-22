@@ -23,14 +23,30 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \end{tcolorbox}
 
 \begin{table}[h] %usepackage{array} 
-\begin{tabular}{|>{\centering\arraybackslash}p{0.1\columnwidth}||>{\centering\arraybackslash}p{0.4\columnwidth}||>{\centering\arraybackslash}p{0.4\columnwidth}|}
+\begin{tabular}{|c||c||c|}
 \hline \hline
 & \textbf{Polynomial over $\bm{X} \bm{\in} \bm{\mathbb{C}}$} & \textbf{Polynomial over $\bm{X} \in \bm{\mathbb{Z}}_{\bm{p}}$} \\ 
 & \textbf{(Complex Number)} & \textbf{(Integer Ring)} \\ \hline \hline
-\textbf{Definition of the $\bm \mu$-th Root of Unity}& All $X \in \mathbb{C}$ such that $X^\mu = 1$, (which are computed as $X = e^{2 \pi i k / \mu}$ for integer $k$ where $0 \leq k \leq \mu - 1$)& All $X \in \mathbb{Z}_p$ such that $X^\mu \equiv 1 \bmod p$\\ \hline
-\textbf{Definition of the Primitive $\bm \mu$-th Root of Unity}& Those $\mu$-th roots of unity $\omega$ such that $\omega^{\mu} = 1$, and $\omega^{\frac{\mu}{2}} \neq 1$ &  Those $\mu$-th roots of unity $\omega$ such that $\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{\frac{\mu}{2}} \not\equiv 1 \bmod p$ \\ \hline
-\textbf{Definition of the $\bm \mu$-th Cyclotomic Polynomial} & \multicolumn{2}{|c|}{\shortstack{The polynomial whose roots are the $\mu$-th primitive roots of unity as follows: \\ $ \Phi_{\mu}(x) = \prod_{\omega \in P(\mu)} (x - \omega) $  \text{ } (see Definition~\ref*{subsec:cyclotomic-def} in \autoref{subsec:cyclotomic-def})}}\\ \hline
-\textbf{Finding Primitive $\bm \mu$-th Roots of Unity} & For $\omega = e^{2 \pi i/ \mu}$, compute all $\omega^k$ such that $0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$  (Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:roots-theorem}) & Find one satisfactory $\omega$ that is a root of the $\mu$-th cyclotomic polynomial, and compute all $\omega^k \bmod p$ such that $0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$ \\ \hline \hline
+\textbf{Definition}&All $X \in \mathbb{C}$ such that $X^\mu = 1$, (which are&All $X \in \mathbb{Z}_p$ such that $X^\mu \equiv 1 \bmod p$\\
+\textbf{of the}&computed as $X = e^{2 \pi i k / \mu}$ for integer $k$&\\
+\textbf{$\bm \mu$-th}&where $0 \leq k \leq \mu - 1$)&\\
+\textbf{Root of Unity}&&\\\hline
+\textbf{Definition}&Those $\mu$-th roots of unity $\omega$ such that&Those $\mu$-th roots of unity $\omega$ such that\\
+\textbf{of the}&$\omega^{\mu} = 1$, and $\omega^{\frac{\mu}{2}} \neq 1$&$\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{\frac{\mu}{2}} \not\equiv 1 \bmod p$\\
+\textbf{Primitive}&&\\
+\textbf{$\bm \mu$-th}&&\\
+\textbf{Root of}&&\\
+\textbf{Unity}&&\\\hline
+\textbf{Definition}&\multicolumn{2}{|c|}{The polynomial whose roots are the $\mu$-th primitive roots of unity as follows:}\\
+\textbf{of the}&\multicolumn{2}{|c|}{$ \Phi_{\mu}(x) = \prod_{\omega \in P(\mu)} (x - \omega) $  \text{ } (see Definition~\ref*{subsec:cyclotomic-def} in \autoref{subsec:cyclotomic-def})}\\
+\textbf{$\bm \mu$-th}&\multicolumn{2}{|c|}{}\\
+\textbf{Cyclotomic}&\multicolumn{2}{|c|}{}\\
+\textbf{Polynomial}&\multicolumn{2}{|c|}{}\\\hline
+\textbf{Finding}&For $\omega = e^{2 \pi i/ \mu}$, compute all $\omega^k$ such that&Find one satisfactory $\omega$ that is a root of\\
+\textbf{Primitive}&$0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$&the $\mu$-th cyclotomic polynomial, and\\
+\textbf{$\bm \mu$-th}&(Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:roots-theorem})&compute all $\omega^k \bmod p$ such that\\
+\textbf{Roots of}&&$0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$\\
+\textbf{Unity}&&\\\hline\hline
 \end{tabular}
 \caption{The roots of unity and cyclotomic polynomials over $X \in \mathbb{C}$ v.s. over $X \in \mathbb{Z}_p$}
 \label{tab:cyclotomic-polynomial-comparison}

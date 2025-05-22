@@ -29,8 +29,9 @@
 .rm-lmr-17x-x-143{font-size:221%;}
 .rm-lmbx-12x-x-207{font-size:225%; font-weight: bold;}
 .rm-lmr-12{font-size:109%;}
-.ts1-lmr10-x-x-109{}
+.rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
 .rm-lmss-10x-x-109{ font-family: sans-serif;}
+.rm-lmri-10x-x-109{ font-style:italic;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -227,5 +228,9 @@ hr { border: none; height: 1px; background-color: #000000; }
 #tcolobox-1 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-1 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-1 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#tcolobox-2 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
+#tcolobox-2 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
+#tcolobox-2 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor1{color:#FF0000}
 /* end css.sty */
 

@@ -14,7 +14,7 @@
 the ring size of polynomial coefficients to be 1000 bits or more, which consumes much
 computational resources for 64-bit CPU architectures. To make the computation efficient, we
 can alternatively represent the coefficients of ciphertext polynomials by the number residue
-system (RNS) <a href='ApplicationNumberResidueSystemRNS.html#application-number-residue-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>, which allows modulo addition and multiplication of elements from a
+system (RNS) <a href='ApplicationNumberResidueSystemRNS.html#application-number-residue-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>, which allows modulo addition and multiplication of elements from a
 large ring (e.g., 1000 bits) by the combination of values computed in small rings (e.g.,
 32<!--  l. 1  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>∼</mo></mrow></math>64
 bits), each of which compactly fits in 64-bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt
@@ -31,14 +31,14 @@ which compactly fits in 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE
 Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS.
 </p><!--  l. 5  --><p class='indent'>   Particularly in this section, we assume the modulo reduction
 <!--  l. 5  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mi>a</mi><msub><mrow><mo class='MathClass-rel' stretchy='false'>|</mo></mrow><mrow><mi>q</mi></mrow></msub></mrow></math> implicitly
-uses a centered (i.e., signed) residue representation (<a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>) whose modulo overflow &amp; underflow boundaries
+uses a centered (i.e., signed) residue representation (<a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>) whose modulo overflow &amp;underflow boundaries
 are <!--  l. 5  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math> and
 <!--  l. 5  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>,
 respectively. This assumption is necessary to eliminate a certain modulo reduction operation when
-designing <span class='rm-lmss-10x-x-109'>FastBconvEx </span>(<a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>)– by using the assumption of limiting the possible range of certain residue
-arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>.
+designing <span class='rm-lmss-10x-x-109'>FastBconvEx </span>(<a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>)– by using the assumption of limiting the possible range of certain residue
+arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>.
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-113'>     
 <div class='tcolorbox-title'>
@@ -46,45 +46,45 @@ arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-repr
                                                                                          
 <!--  l. 37  --><p class='indent'>   <span class='rm-lmbx-10x-x-109'>Required Background</span></p></div> 
 <div class='tcolorbox-content'>   <ul class='itemize1'>
-   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!--  tex4ht:ref: sec:modulo   --></a>
+   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!--  tex4ht:ref: sec:modulo   --></a>
     </li>
-    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='Group.html#group'>Group<!--  tex4ht:ref: sec:group   --></a>
+    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='Group.html#group'>Group<!--  tex4ht:ref: sec:group   --></a>
     </li>
-    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='Field.html#field'>Field<!--  tex4ht:ref: sec:field   --></a>
+    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='Field.html#field'>Field<!--  tex4ht:ref: sec:field   --></a>
     </li>
-    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!--  tex4ht:ref: sec:polynomial-ring   --></a>
+    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!--  tex4ht:ref: sec:polynomialrring   --></a>
     </li>
-    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!--  tex4ht:ref: sec:decomp   --></a>
+    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!--  tex4ht:ref: sec:decomp   --></a>
     </li>
-    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!--  tex4ht:ref: sec:modulus-rescaling   --></a>
+    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!--  tex4ht:ref: sec:modulusrrescaling   --></a>
     </li>
-    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!--  tex4ht:ref: sec:chinese-remainder   --></a>
+    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!--  tex4ht:ref: sec:chineserremainder   --></a>
     </li>
-    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!--  tex4ht:ref: sec:polynomial-interpolation   --></a>
+    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!--  tex4ht:ref: sec:polynomialiinterpolation   --></a>
     </li>
-    <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!--  tex4ht:ref: sec:ntt   --></a>
+    <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!--  tex4ht:ref: sec:ntt   --></a>
     </li>
-    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!--  tex4ht:ref: sec:lattice   --></a>
+    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!--  tex4ht:ref: sec:lattice   --></a>
     </li>
-    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!--  tex4ht:ref: sec:rlwe   --></a>
+    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!--  tex4ht:ref: sec:rlwe   --></a>
     </li>
-    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!--  tex4ht:ref: sec:glwe   --></a>
+    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!--  tex4ht:ref: sec:glwe   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!--  tex4ht:ref: sec:glwe-add-cipher   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!--  tex4ht:ref: sec:glweaaddccipher   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!--  tex4ht:ref: sec:glwe-add-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!--  tex4ht:ref: sec:glweaaddpplain   --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!--  tex4ht:ref: sec:glwemmultpplain   --></a>
     </li>
-    <li class='itemize'><a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.2<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching<!--  tex4ht:ref: subsec:modulus-switch-rlwe   --></a>
+    <li class='itemize'><a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.2<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching<!--  tex4ht:ref: subsec:modulussswitchrrlwe   --></a>
     </li>
-    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!--  tex4ht:ref: sec:glwe-key-switching   --></a>
+    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!--  tex4ht:ref: sec:glwekkeysswitching   --></a>
     </li>
-    <li class='itemize'><a href='BFVScheme.html#bfv-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-2<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='BFVScheme.html#bfv-scheme'>BFV Scheme<!--  tex4ht:ref: sec:bfv   --></a>
+    <li class='itemize'><a href='BFVScheme.html#bfv-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-2<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='BFVScheme.html#bfv-scheme'>BFV Scheme<!--  tex4ht:ref: sec:bfv   --></a>
     </li>
-    <li class='itemize'><a href='CKKSScheme.html#ckks-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-3<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='CKKSScheme.html#ckks-scheme'>CKKS Scheme<!--  tex4ht:ref: sec:ckks   --></a>
+    <li class='itemize'><a href='CKKSScheme.html#ckks-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-3<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='CKKSScheme.html#ckks-scheme'>CKKS Scheme<!--  tex4ht:ref: sec:ckks   --></a>
     </li>
-    <li class='itemize'><a href='BGVScheme.html#bgv-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-4<!--  tex4ht:ref: subsubsec:bfv-bootstrapping-summary   --></a>: <a href='BGVScheme.html#bgv-scheme'>BGV Scheme<!--  tex4ht:ref: sec:bgv   --></a></li></ul>
+    <li class='itemize'><a href='BGVScheme.html#bgv-scheme'><span class='ts1-lmr10-x-x-109'>§</span>D-4<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>: <a href='BGVScheme.html#bgv-scheme'>BGV Scheme<!--  tex4ht:ref: sec:bgv   --></a></li></ul>
  
 </div> 
 </div>                                                               
@@ -92,8 +92,8 @@ arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-repr
                                                                                          
                                                                                          
    
-   <div class='subsectionTOCS'>
-   <span class='subsectionToc'>D-5.1 <a href='FastBaseConversiontextsfFastBConv.html#fast-base-conversion-fastbconv'>Fast Base Conversion: <span class='rm-lmss-10x-x-109'>FastBConv</span></a></span>
+   <div class='subsectionTOCS hrr'>
+<br />   <span class='subsectionToc'>D-5.1 <a href='FastBaseConversiontextsfFastBConv.html#fast-base-conversion-fastbconv'>Fast Base Conversion: <span class='rm-lmss-10x-x-109'>FastBConv</span></a></span>
 <br />   <span class='subsectionToc'>D-5.2 <a href='RNSbasedModRaisetextsfModRaisetextsubscriptRNS.html#rnsbased-modraise-modraise-rns'>RNS-based ModRaise: <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.3 <a href='RNSbasedModDroptextsfModDroptextsubscriptRNS.html#rnsbased-moddrop-moddrop-rns'>RNS-based ModDrop: <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.4 <a href='RNSbasedModulusSwitchtextsfModSwitchtextsubscriptRNS.html#rnsbased-modulus-switch-modswitch-rns'>RNS-based Modulus Switch: <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
@@ -123,6 +123,7 @@ arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-repr
 <br />   <span class='subsubsectionToc'>D-5.10.10 <a href='ApplyingRNSTechniquestoFHEOperations.html#noise-impact-of-rns-operations'>Noise Impact of RNS Operations</a></span>
 <br />   <span class='subsubsectionToc'>D-5.10.11 <a href='ApplyingRNSTechniquestoFHEOperations.html#python-source-code-of-rns-primitives'>Python Source Code of RNS Primitives</a></span>
    </div>
+<!--  l. 41  --><p class='indent'>   
 
 
 
@@ -134,7 +135,7 @@ arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-repr
 
                                                                                          
                                                                                          
-   <!--  l. 636  --><div class='crosslinks'><p class='noindent'>[<a href='FHESchemeComparisonandSummary.html'>next</a>] [<a href='BGVScheme.html'>prev</a>] [<a href='BGVScheme.html#tailBGVScheme.html'>prev-tail</a>] [<a href='RNSvariantFHESchemes.html'>front</a>] [<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>up</a>] </p></div>
+   <!--  l. 636  --></p><div class='crosslinks'><p class='noindent'>[<a href='FHESchemeComparisonandSummary.html'>next</a>] [<a href='BGVScheme.html'>prev</a>] [<a href='BGVScheme.html#tailBGVScheme.html'>prev-tail</a>] [<a href='RNSvariantFHESchemes.html'>front</a>] [<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>up</a>] </p></div>
 <!--  l. 636  --><p class='indent'>   <a id='tailRNSvariantFHESchemes.html'></a> </p> 
 </body> 
 </html>

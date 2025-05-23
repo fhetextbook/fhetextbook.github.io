@@ -17,6 +17,7 @@ jobs:
             make4ht -u -f html5 \
                     -j index \
                     -c .github/workflows/config.cfg \
+                    -e .github/workflows/build.lua \
                     -d out 00-main.tex
    - name: Publish the web pages 
      uses:  peaceiris/actions-gh-pages@v3 

@@ -551,7 +551,7 @@ values, and because of this, BFV bootstrapping includes the initial step of modu
 <!--  l. 896  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><msup><mrow><mi>p</mi></mrow><mrow><mi>e</mi></mrow></msup></mrow></math>, where
 <!--  l. 896  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>p</mi></mrow><mrow><mi>e</mi></mrow></msup></math> is used
 as the plaintext modulus after homomorphic decryption.
-</p><!--  l. 898  --><p class='indent'>   Both BFV and CKKS uses the same strategy for their <span class='rm-lmss-10x-x-109'>CoeffToSlot</span>, <span class='rm-lmss-10x-x-109'>SlotToCoeff</span>, and <span class='rm-lmss-10x-x-109'>Scaling Factor
+</p><!--  l. 898  --><p class='indent'>   Both BFV and CKKS use the same strategy for their <span class='rm-lmss-10x-x-109'>CoeffToSlot</span>, <span class='rm-lmss-10x-x-109'>SlotToCoeff</span>, and <span class='rm-lmss-10x-x-109'>Scaling Factor
 Re-interpretation </span>steps.
 </p><!--  l. 900  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Multiplicative Level: </span>A critical difference between BFV and CKKS is that in BFV, the ciphertext modulus
 <!--  l. 900  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> stays
@@ -562,7 +562,7 @@ and when it reaches <!--  l. 900  --><math display='inline' xmlns='http://www.w3
 no more multiplication can be done, unless we reset the ciphertext modulus to
 <!--  l. 900  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math> by
 using the modulus bootstrapping technique (<a href='ModulusBootstrapping.html#modulus-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-3.13<!--  tex4ht:ref: subsec:glwe-enc   --></a>).
-</p><!--  l. 902  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Limitation in Noise Handling: </span>Also CKKS’s rescaling during ciphertext-to-ciphertext multiplication reduces the
+</p><!--  l. 902  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Limitation of Noise Handling: </span>Although CKKS’s rescaling during ciphertext-to-ciphertext multiplication reduces the
 magnitude of noise <!--  l. 902  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math>
 by <!--  l. 902  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>, it also
 reduces the ciphertext modulus by the same amount, and thus the relative noise-to-ciphertext-modulus

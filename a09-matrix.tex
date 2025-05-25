@@ -649,13 +649,15 @@ Now, we will demonstrate $\sigma_c$'s isomorphism (i.e., bijective and homomorph
 \begin{figure}[h!]
     \centering
   \includegraphics[width=0.3\linewidth]{figures/cyclotomic-polynomial.pdf}
-  \caption{An illustration of the four roots of the 8th cyclotomic polynomial $x^4 + 1$ \href{https://blog.openmined.org/content/images/2020/08/roots.PNG}{(Source)}}
+  \caption{An illustration of the four roots of the 8th cyclotomic polynomial $x^4 + 1$ 
+  %\href{https://blog.openmined.org/content/images/2020/08/roots.PNG}{(Source)}
+  }
   \label{fig:cyclotomic-polynomial}
 \end{figure}
 
 $ $
 
-\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can be also pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where blue arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the blue arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., imaginary number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements is a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
+\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., imaginary number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
 
 $\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
 

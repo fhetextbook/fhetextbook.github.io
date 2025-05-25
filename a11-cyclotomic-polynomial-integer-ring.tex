@@ -8,9 +8,9 @@ In \autoref{sec:roots} and \autoref{sec:cyclotomic}, we learned about the defini
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
 \end{itemize}
 
-In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (integer ring), which is structured as follows: 
+In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (ring), which is structured as follows: 
 
-\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{sec:cyclotomic-polynomial-integer-ring}} Roots of Unity and Cyclotomic Polynomial over Integer Ring $\mathbb{Z}_p$}}]
+\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{sec:cyclotomic-polynomial-integer-ring}} Roots of Unity and Cyclotomic Polynomial over Ring $\mathbb{Z}_p$}}]
 
 
 \begin{itemize}
@@ -26,7 +26,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \begin{tabular}{|c||c||c|}
 \hline \hline
 & \textbf{Polynomial over $\bm{X} \bm{\in} \bm{\mathbb{C}}$} & \textbf{Polynomial over $\bm{X} \in \bm{\mathbb{Z}}_{\bm{p}}$} \\ 
-& \textbf{(Complex Number)} & \textbf{(Integer Ring)} \\ \hline \hline
+& \textbf{(Complex Number)} & \textbf{(Ring)} \\ \hline \hline
 \textbf{Definition}&All $X \in \mathbb{C}$ such that $X^\mu = 1$, (which are&All $X \in \mathbb{Z}_p$ such that $X^\mu \equiv 1 \bmod p$\\
 \textbf{of the}&computed as $X = e^{2 \pi i k / \mu}$ for integer $k$&\\
 \textbf{$\bm \mu$-th}&where $0 \leq k \leq \mu - 1$)&\\
@@ -54,7 +54,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 
 Note that in the $\mu$-th cyclotomic polynomial in both cases of over $X \in \mathbb{C}$ and over $X \in \mathbb{Z}_p$, each of their roots $\omega$ (i.e., the primitive $\mu$-th root of unity) has the order $\mu$ (i.e., $\omega^{\mu} = 1$ over $X \in \mathbb{C}$, and $\omega^{\mu} \equiv 1 \bmod p$ over $X \in \mathbb{Z}_p$). Also note that each root $\omega$ can generate all roots of the $\mu$-th cyclotomic polynomial by computing $\omega^{k'}$ such that $\textsf{gcd}(k', \mu) = 1$.
 
-\autoref{tab:cyclotomic-polynomial-comparison} compares the properties of the roots of unity and the $\mu$-th cyclotomic polynomial over $X \in \mathbb{C}$ (complex numbers) and over $X \in \mathbb{Z}_p$ (integer ring).
+\autoref{tab:cyclotomic-polynomial-comparison} compares the properties of the roots of unity and the $\mu$-th cyclotomic polynomial over $X \in \mathbb{C}$ (complex numbers) and over $X \in \mathbb{Z}_p$ (ring).
 
 
 

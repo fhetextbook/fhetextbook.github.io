@@ -89,16 +89,16 @@ $e^{i\theta} = \cos\theta + i\cdot\sin\theta$
 The value of $e^{i\theta}$ is represented as a coordinate on a circle in the complex plane in \autoref{fig:complex-plane}, where the $x$-axis encodes the value's real number part and the $y$-axis encodes the value's imaginary number part. Note that as $\theta$ increases, the complex part oscillates between $i$ and $-i$, and the real part oscillates between $1$ and $-1$, with the period of $2\pi$. 
 
 
-\subsection{Vandermonde Matrix with Roots of Cyclotomic Polynomial over Complex Number}
+\subsection{Vandermonde Matrix with Roots of Cyclotomic Polynomial over Complex Numbers}
 \label{subsec:vandermonde-euler}
 
  
  
-In this subsection, we will build a Vandermonde matrix (\autoref{subsec:vandermonde}) with the $n$ distinct roots of the $\mu$-th cyclotomic polynomial (where $\mu$ is a power of 2) as follows:
+In this subsection, we will build a Vandermonde matrix (\autoref{subsec:vandermonde}) with the $n$ distinct roots of the $\mu$-th cyclotomic polynomial over complex numbers (where $\mu$ is a power of 2) as follows:
 
 
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:vandermonde-euler}} Vandermonde Matrix with the Roots of  \text{(power-of-2)}-th Cyclotomic Polynomial over Complex Number}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:vandermonde-euler}} Vandermonde Matrix with the Roots of  \text{(power-of-2)}-th Cyclotomic Polynomial over Complex Numbers}}]
 
 Suppose we have an $n \times n$ (where $n$ is a power of 2) Vandermonde matrix comprised of $n$ distinct roots of the $\mu$-th cyclotomic polynomial (explained in Theorem~\ref*{subsec:cyclotomic-theorem}.1 in \autoref{subsec:cyclotomic-theorem}), where $\mu$ is a power of 2 and $n = \dfrac{\mu}{2}$. In other words, $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_j = (e^{i\pi/n})^{2j-1}$ for $1 \leq j \leq n$ (i.e., the primitive $\mu$-th roots of unity). Then, the following holds:
 
@@ -231,15 +231,15 @@ $\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \n
 
 
 
-\subsection{Vandermonde Matrix with Roots of a Cyclotomic Polynomial over Integer Ring}
+\subsection{Vandermonde Matrix with Roots of a Cyclotomic Polynomial over Ring ($\mathbb{Z}_p$)}
 \label{subsec:vandermonde-euler-integer-ring}
 
-Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}) showed that $V \cdot V^T = n \cdot I^R_n$, where $V$ is the Vandermonde matrix $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the primitive $\mu$-th root of unity over $X \in \mathbb{C}$ (i.e., complex number) and $\mu$ is a power of 2. In this subsection, we will show that the relation $V \cdot V^T = n \cdot I^R_n$ holds even if each $x_i$ is the primitive $\mu$-th root of unity over $X \in \mathbb{Z}_p$ (i.e., integer ring). In particular, we will prove Theorem~\ref*{subsec:vandermonde-euler}: 
+Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}) showed that $V \cdot V^T = n \cdot I^R_n$, where $V$ is the Vandermonde matrix $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the primitive $\mu$-th root of unity over $X \in \mathbb{C}$ (i.e., complex number) and $\mu$ is a power of 2. In this subsection, we will show that the relation $V \cdot V^T = n \cdot I^R_n$ holds even if each $x_i$ is the primitive $\mu$-th root of unity over $X \in \mathbb{Z}_p$ (i.e., ring). In particular, we will prove Theorem~\ref*{subsec:vandermonde-euler}: 
 
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:vandermonde-euler-integer-ring}} Vandermonde Matrix with Roots of  \text{(power-of-2)}-th Cyclotomic Polynomial over Integer Ring}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:vandermonde-euler-integer-ring}} Vandermonde Matrix with Roots of  \text{(power-of-2)}-th Cyclotomic Polynomial over Ring ($\mathbb{Z}_p$)}}]
 
-The proof takes the same format as that of Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}). Suppose we have an $n \times n$ (where $n$ is a power of 2) Vandermonde matrix comprised of $n$ distinct roots of the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (integer ring), where $\mu$ is a power of 2 and $n = \dfrac{\mu}{2}$. In other words, $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the root of $X^n + 1$ (i.e., the primitive $(\mu=2n)$-th roots of unity). Then, the following holds:
+The proof takes the same format as that of Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}). Suppose we have an $n \times n$ (where $n$ is a power of 2) Vandermonde matrix comprised of $n$ distinct roots of the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (ring), where $\mu$ is a power of 2 and $n = \dfrac{\mu}{2}$. In other words, $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the root of $X^n + 1$ (i.e., the primitive $(\mu=2n)$-th roots of unity). Then, the following holds:
 
 $V \cdot V^T = \begin{bmatrix}
 0 & \cdots & 0 & 0 & n\\

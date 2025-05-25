@@ -28,9 +28,9 @@ $ $
 $ $
 
 
-Remember that BFV is an exact encryption scheme based on integer ring. On the other hand, CKKS introduces a drifting error while its encoding process of rounding square-root values (included in the Euler's formula) to the nearest integer. Therefore, its decryption is not exactly the same as before encryption. Such a small error occurring during encryption and decryption makes CKKS an \textit{approximate} encryption scheme. 
+Remember that BFV is an exact encryption scheme based on rings. On the other hand, CKKS introduces a drifting error while its encoding process of rounding square-root values (included in the Euler's formula) to the nearest integer. Therefore, its decryption is not exactly the same as before encryption. Such a small error occurring during encryption and decryption makes CKKS an \textit{approximate} encryption scheme. 
 
-CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots) rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations over complex numbers as inputs, whereas BFV handles homomorphic operations over integer rings. 
+CKKS internally uses the same schemes as BFV for encryption, decryption, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication. Meanwhile, CKKS uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots) rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations over complex numbers as inputs, whereas BFV handles homomorphic operations over rings. 
 
 
 
@@ -78,7 +78,7 @@ CKKS internally uses the same schemes as BFV for encryption, decryption, ciphert
 \label{subsec:ckks-encoding-decoding}
 
 
-CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-dimensional vectors of integer ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
+CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-dimensional vectors in a ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
 
 $\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{n-1})) \in \mathbb{Z}_t^n$
 
@@ -86,7 +86,7 @@ $\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\o
 
 $ $
 
-CKKS's batch encoding scheme uses exactly the same formula for encoding and decoding (i.e., $\vec{v} = W^T \cdot \vec{m}$ and $\vec{m} = \dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$), but the $n$-dimensional input slot vector comprises not in an integer ring (i.e., $\mathbb{Z}^n_p$), but complex numbers (i.e., $\mathbb{\hat C}^n$). In Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}), we also designed the mapping $\sigma_c$ between polynomials and vectors over complex numbers as follows:
+CKKS's batch encoding scheme uses exactly the same formula for encoding and decoding (i.e., $\vec{v} = W^T \cdot \vec{m}$ and $\vec{m} = \dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$), but the $n$-dimensional input slot vector comprises not in a ring (i.e., $\mathbb{Z}^n_p$), but complex numbers (i.e., $\mathbb{\hat C}^n$). In Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}), we also designed the mapping $\sigma_c$ between polynomials and vectors over complex numbers as follows:
 
 $\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{ } (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
 

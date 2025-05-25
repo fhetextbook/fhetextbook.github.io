@@ -41,7 +41,7 @@ complex numbers into integers which can be used as coefficients of a polynomial 
    </dd><dt class='enumerate-enumitem'>
 3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub>:</span> Decode the real number to a complex number</dd></dl>
 <!--  l. 28  --><p class='indent'>   <!--  l. 28  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!--  l. 31  --><p class='indent'>   Remember that BFV is an exact encryption scheme based on integer ring. On the other hand, CKKS
+</p><!--  l. 31  --><p class='indent'>   Remember that BFV is an exact encryption scheme based on rings. On the other hand, CKKS
 introduces a drifting error while its encoding process of rounding square-root values (included in the
 Euler’s formula) to the nearest integer. Therefore, its decryption is not exactly the same as before
 encryption. Such a small error occurring during encryption and decryption makes CKKS an <span class='rm-lmri-10x-x-109'>approximate</span>
@@ -51,9 +51,9 @@ addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multipl
                                                                                          
                                                                                          
 uses slightly different schemes than BFV for encoding the input vector (i.e., input vector slots)
-rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication, and
-bootstrapping. This difference comes from the fact that CKKS handles homomorphic operations
-over complex numbers as inputs, whereas BFV handles homomorphic operations over integer
+rotation (if BFV uses the batch encoding scheme), ciphertext-to-ciphertext multiplication,
+and bootstrapping. This difference comes from the fact that CKKS handles homomorphic
+operations over complex numbers as inputs, whereas BFV handles homomorphic operations over
 rings.
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-89'>     

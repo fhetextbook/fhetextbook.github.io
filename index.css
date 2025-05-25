@@ -83,8 +83,8 @@
 .rm-lmtt-9{ font-family: monospace,monospace;}
 .rm-lmbx-9{font-size:81%; font-weight: bold;}
 .rm-lmss-9{font-size:81%; font-family: sans-serif;}
-.rm-lmri-8{font-size:72%; font-style:italic;}
 .rm-lmr-10{font-size:90%;}
+.rm-lmri-8{font-size:72%; font-style:italic;}
 .lmmib-10x-x-90{font-size:81%;font_weight:bold;}
 .lmmib-10x-x-90{font_weight:bold;}
 .lmmib-10x-x-90{font_weight:bold;}
@@ -401,7 +401,6 @@ hr { border: none; height: 1px; background-color: #000000; }
 #tcolobox-28 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-28 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-28 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
-#textcolor21{color:#FF0000}
 #tcolobox-29 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-29 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-29 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
@@ -417,10 +416,10 @@ hr { border: none; height: 1px; background-color: #000000; }
 #tcolobox-33 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-33 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-33 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor21{color:#FF0000}
 #tcolobox-34 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-34 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-34 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
-#textcolor22{color:#FF0000}
 #tcolobox-35 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-35 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-35 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
@@ -442,11 +441,12 @@ hr { border: none; height: 1px; background-color: #000000; }
 #tcolobox-41 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-41 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-41 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
+#textcolor22{color:#FF0000}
+#textcolor23{color:#FF0000}
+#textcolor24{color:#FF0000}
 #tcolobox-42 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-42 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}
 #tcolobox-42 div{ padding-top:8.5358px; padding-bottom:8.5358px; padding-left:14.22635px; padding-right:14.22635px; }
-#textcolor23{color:#FF0000}
-#textcolor24{color:#FF0000}
 #textcolor25{color:#FF0000}
 #tcolobox-43 .tcolorbox-title{color: #FFFFFF; background-color: #404040;}
 #tcolobox-43 .tcolorbox-content{color: #000000; background-color: #F2F2F2; border: 1px solid #404040;}

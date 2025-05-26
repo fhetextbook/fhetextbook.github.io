@@ -88,7 +88,7 @@
 \usepackage{hyperref}
 \usepackage{mathtools, nccmath}
 %\usepackage[style=numeric,sorting=none]{biblatex}
-
+%\usepackage[lite]{mtpro2}
 \usepackage{titling}
 \renewcommand\maketitlehooka{\null\mbox{}\vfill}
 \renewcommand\maketitlehookd{\vfill\null}
@@ -225,15 +225,16 @@
   \let\@ifnextchar\new@ifnextchar
   \array{*\c@MaxMatrixCols #1}}
 
+\newcommand{\hathat}{\tilde} 
 
-\newcommand{\hathat}[1]{% 
-\begingroup%
-  \let\macc@kerna\z@%
-  \let\macc@kernb\z@%
-  \let\macc@nucleus\@empty%
-  \hat{\raisebox{.2ex}{\vphantom{\ensuremath{#1}}}\smash{\hat{#1}}}%
-\endgroup%
-}
+%\newcommand{\hathat}[1]{% 
+%\begingroup%
+%  \let\macc@kerna\z@%
+%  \let\macc@kernb\z@%
+%  \let\macc@nucleus\@empty%
+%  \hat{\raisebox{.2ex}{\vphantom{\ensuremath{#1}}}\smash{\hat{#1}}}%
+%\endgroup%
+%}
 
 \newcommand{\revise}[1]{{{\textcolor{black}{#1}}}}
 
@@ -248,7 +249,7 @@
 
 \begin{document}
 \title{\Huge{\textbf{The Beginner's Textbook}}\\ \Huge{\textbf{for Fully Homomorphic Encryption}}}
-\author{\textbf{}\\{LG Electronics Inc.}}%\\\texttt{\small{hajoon.ko@lge.com}}}
+\author{\textbf{Ronny Ko}\\{LG Electronics Inc.}}%\\\texttt{\small{hajoon.ko@lge.com}}}
 \date{January 1, 2025}
 
 

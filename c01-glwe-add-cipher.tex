@@ -67,7 +67,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangl
 \end{enumerate}
 \end{myproof}
 
-\subsubsection{Discussion}
+\subsection{Discussion}
 \label{subsubsec:glwe-add-cipher-discuss} 
 
 \para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ get eliminated by rounding after decryption, regardless of whatever their randomly sampled values were during encryption.

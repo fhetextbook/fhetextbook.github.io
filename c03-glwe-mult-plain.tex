@@ -73,7 +73,7 @@ If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta \cdot \Lambda \cdot M)$ by using
 
 The noise is a bigger problem now, because after decryption, the original ciphertext $C$'s noise has increased from $E$ to $E' = \Lambda \cdot E$. This means that if we continue multiplication computations without decrypting the ciphertext to blow away the noise $E'$, it will continue growing more and eventually the noise in the lower bit area in $B$ will overflow to the scaled plaintext bit area. If this happens, the noise $E'$ won't be blown away during decryption, ending up corrupting the plaintext $M$. Therefore, if the constant $\Lambda$ is big, it is recommended to use gadget decomposition (\autoref{subsec:gadget-decomposition}), which we will explain in the next subsection. 
 
-\subsubsection{Gadget Decomposition for Noise Suppression}
+\subsection{Gadget Decomposition for Noise Suppression}
 \label{subsubsec:gadget-decomposition-noise-suppression}
 
 In ciphertext-to-plaintext multiplication $\Lambda \cdot \textsf{GLWE}_{S, \sigma}(M)$, the noise $E$ grows to $E' = \Lambda \cdot E$. To limit this noise growth, we introduce a technique based on decomposing $\Lambda$ (\autoref{subsec:number-decomp}) and an GLev encryption (\autoref{subsec:glev-enc}) of $M$ as follows:

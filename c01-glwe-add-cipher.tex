@@ -35,7 +35,8 @@ This means that adding two TFHE ciphertexts and decrypting it gives the same eff
 
 $ $
 
-\noindent \textbf{\underline{Proof}}
+%\noindent \textbf{\underline{Proof}}
+\begin{myproof}
 \begin{enumerate}
 \item Define the following notations: \\
 $A_1^{\langle 3 \rangle} = A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}$ \\
@@ -59,11 +60,12 @@ $ = ( A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\l
 $ = ( \{A_i^{\langle 3 \rangle}\}_{i=0}^{k-1}, B^{\langle 3 \rangle})$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$
 
-\begin{flushright}
-\qedsymbol{} 
-\end{flushright}
+%\begin{flushright}
+%\qedsymbol{} 
+%\end{flushright}
 
 \end{enumerate}
+\end{myproof}
 
 \subsubsection{Discussion}
 \label{subsubsec:glwe-add-cipher-discuss} 

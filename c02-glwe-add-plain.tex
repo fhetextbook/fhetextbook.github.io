@@ -33,7 +33,8 @@ This means that a plaintext polynomial to a TFHE ciphertext and decrypting it gi
 
 
 
-\noindent \textbf{\underline{Proof}}
+\begin{myproof}
+
 \begin{enumerate}
 \item Since $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$,
 
@@ -47,10 +48,13 @@ $ = (A_0, \text { } A_1, ... \text{ } A_{k-1}, \text { } B + \Delta \Lambda)$ \\
 $ = (\{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text { } B + \Delta \Lambda)$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M + \Lambda))$
 
-\begin{flushright}
-\qedsymbol{} 
-\end{flushright}
+%\begin{flushright}
+%\qedsymbol{} 
+%\end{flushright}
 \end{enumerate}
+
+\end{myproof}
+
 
 \subsubsection{Discussion}
 

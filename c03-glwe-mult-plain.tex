@@ -37,7 +37,8 @@ This means that multiplying a plaintext (polynomial) by a ciphertext (polynomial
 
 $ $
 
-\noindent \textbf{\underline{Proof}}
+%\noindent \textbf{\underline{Proof}}
+\begin{myproof}
 \begin{enumerate}
 \item Define the following notations: \\
 $A_1' = \Lambda \cdot A_1$ \\
@@ -62,10 +63,11 @@ $ = (\Lambda \cdot A_0, \text { } \Lambda \cdot A_1, ... \text{ } \Lambda \cdot 
 $ = ( \{A'_{i}\}_{i=0}^{k-1}, \text { } \Lambda \cdot B)$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M \cdot \Lambda) )$
 
-\begin{flushright}
-\qedsymbol{} 
-\end{flushright}
+%\begin{flushright}
+%\qedsymbol{} 
+%\end{flushright}
 \end{enumerate}
+\end{myproof}
 
 If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta \cdot \Lambda \cdot M)$ by using $S$, then we get the plaintext $\Lambda \cdot M$. Meanwhile, $A_1', A_2', ... \text{ } A_{k-1}', E'$ get eliminated by rounding during decryption, regardless of whatever their values were randomly sampled during encryption. 
 

@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!--  l. 410  --><div class='crosslinks'><p class='noindent'>[<a href='CiphertexttoPlaintextMultiplication.html'>prev</a>][<a href='BFVScheme.html#CiphertexttoCiphertextMultiplication.html'>parent</a>][<a href='HomomorphicKeySwitching1.html'>next</a>]</p></div>
-   <h4 class='subsectionHead' id='ciphertexttociphertext-multiplication'><span class='titlemark'>D-2.7   </span> <a id='x113-152000D-2.7'></a>Ciphertext-to-Ciphertext Multiplication</h4>
+   <h4 class='subsectionHead' id='ciphertexttociphertext-multiplication'><span class='titlemark'>D-2.7   </span> <a id='x118-152000D-2.7'></a>Ciphertext-to-Ciphertext Multiplication</h4>
 <!--  l. 413  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 1:  </span><a href='https://www.inferati.com/blog/fhe-schemes-bfv'>Introduction to the BFV encryption scheme</a> <span class='cite'>[<a href='refname.html#Xinferati-bfv'>12</a>]</span>
 </p><!--  l. 416  --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 2:  </span><a href='https://eprint.iacr.org/2012/144.pdf'>Somewhat Partially Fully Homomorphic Encryption</a> <span class='cite'>[<a href='refname.html#Xcryptoeprint_2012_144'>13</a>]</span>
 </p><!--  l. 423  --><p class='indent'>   Given two ciphertexts <!--  l. 423  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
@@ -25,7 +25,7 @@ based on the alternate version of RLWE (Theorem B-4.4 in <a href='AnAlternative
 flipped in the encryption and decryption formulas.
    
 </p>
-   <h5 class='subsubsectionHead' id='modraise'><span class='titlemark'>D-2.7.1   </span> <a id='x113-153000D-2.7.1'></a><span class='rm-lmss-10x-x-109'>ModRaise</span></h5>
+   <h5 class='subsubsectionHead' id='modraise'><span class='titlemark'>D-2.7.1   </span> <a id='x118-153000D-2.7.1'></a><span class='rm-lmss-10x-x-109'>ModRaise</span></h5>
 <!--  l. 430  --><p class='noindent'>We learned from Summary D-2.3 (in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>) that a BFV ciphertext whose ciphertext modulus is
 <!--  l. 430  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> has the (decryption)
 relation: <!--  l. 430  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>K</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>q</mi></mrow></math>, where
@@ -82,7 +82,7 @@ follows:
 </p><!--  l. 458  --><p class='indent'>   <!--  l. 458  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>K</mi></mrow><mrow><mn>2</mn></mrow></msub><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>A</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>B</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>Q</mi></mrow></math>
    
 </p>
-   <h5 class='subsubsectionHead' id='polynomial-multiplication'><span class='titlemark'>D-2.7.2   </span> <a id='x113-154000D-2.7.2'></a>Polynomial Multiplication</h5>
+   <h5 class='subsubsectionHead' id='polynomial-multiplication'><span class='titlemark'>D-2.7.2   </span> <a id='x118-154000D-2.7.2'></a>Polynomial Multiplication</h5>
 <!--  l. 464  --><p class='noindent'>Our next goal is to derive a new ciphertext which encrypts
 <!--  l. 465  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>K</mi></mrow><mrow><mn>1</mn></mrow></msub><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>K</mi></mrow><mrow><mn>2</mn></mrow></msub><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
 </p><!--  l. 467  --><p class='indent'>   First, we can derive the following relation:
@@ -131,7 +131,7 @@ conversion process is called a relinearization process (which will be explained 
 subsection).
    
 </p>
-   <h5 class='subsubsectionHead' id='relinearization'><span class='titlemark'>D-2.7.3   </span> <a id='x113-155000D-2.7.3'></a>Relinearization</h5>
+   <h5 class='subsubsectionHead' id='relinearization'><span class='titlemark'>D-2.7.3   </span> <a id='x118-155000D-2.7.3'></a>Relinearization</h5>
 <!--  l. 506  --><p class='noindent'>Relinearization is a process of converting the polynomial triplet
 <!--  l. 506  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>∈</mo><msubsup><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>Q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow><mrow><mn>3</mn></mrow></msubsup></mrow></math> into two RLWE
 ciphertexts <!--  l. 506  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle></mrow><mrow><mi>α</mi></mrow></msub></math> and
@@ -291,7 +291,7 @@ at the end. This goal is accomplished by the final rescaling step to be explaine
 subsection.
    
 </p>
-   <h5 class='subsubsectionHead' id='rescaling'><span class='titlemark'>D-2.7.4   </span> <a id='x113-156000D-2.7.4'></a>Rescaling</h5>
+   <h5 class='subsubsectionHead' id='rescaling'><span class='titlemark'>D-2.7.4   </span> <a id='x118-156000D-2.7.4'></a>Rescaling</h5>
 <!--  l. 606  --><p class='noindent'>The rescaling step is equivalent to converting the ciphertext
 <!--  l. 606  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>α</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mi>β</mi></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>B</mi></mrow><mrow><mi>α</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mi>β</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>Q</mi></mrow></math> into
 <!--  l. 606  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>A</mi></mrow><mrow><mi>α</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mi>β</mi></mrow></msub>
@@ -465,7 +465,7 @@ rescaling also inevitably changes the modulus of the ciphertext that contains th
 <a href='#rescaling'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7.4<!--  tex4ht:ref: subsec:bfv-enc-dec   --></a>). Therefore, these two terms can be used interchangeably.
    
 </p>
-   <h5 class='subsubsectionHead' id='summary1'><span class='titlemark'>D-2.7.5   </span> <a id='x113-157000D-2.7.5'></a>Summary</h5>
+   <h5 class='subsubsectionHead' id='summary1'><span class='titlemark'>D-2.7.5   </span> <a id='x118-157000D-2.7.5'></a>Summary</h5>
 <!--  l. 742  --><p class='noindent'>To put all things together, BFV’s ciphertext-to-ciphertext multiplication is summarized as
 follows:
 </p>

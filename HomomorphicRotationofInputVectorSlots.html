@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!--  l. 845  --><div class='crosslinks'><p class='noindent'>[<a href='HomomorphicKeySwitching1.html'>prev</a>][<a href='BFVScheme.html#HomomorphicRotationofInputVectorSlots.html'>parent</a>][<a href='ApplicationMatrixMultiplication.html'>next</a>]</p></div>
-   <h4 class='subsectionHead' id='homomorphic-rotation-of-input-vector-slots'><span class='titlemark'>D-2.9   </span> <a id='x115-159000D-2.9'></a>Homomorphic Rotation of Input Vector Slots</h4>
+   <h4 class='subsectionHead' id='homomorphic-rotation-of-input-vector-slots'><span class='titlemark'>D-2.9   </span> <a id='x120-159000D-2.9'></a>Homomorphic Rotation of Input Vector Slots</h4>
 <!--  l. 849  --><p class='noindent'>In this section, we will explain how to homomorphically rotate the elements of an input vector
 <!--  l. 849  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover></math> after it
 is already encoded as a polynomial and encrypted as an RLWE ciphertext. In <a href='CoefficientRotation.html#coefficient-rotation'><span class='ts1-lmr10-x-x-109'>§</span>A-5.2<!--  tex4ht:ref: subsec:bfv-key-switching   --></a>, we learned
@@ -31,7 +31,7 @@ will divide this task into the following two sub-problems:
           by updating the RLWE ciphertext polynomials <!--  l. 856  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
           to <!--  l. 856  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>A</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>B</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>?</dd></dl>
    
-   <h5 class='subsubsectionHead' id='rotating-input-vector-slots-by-updating-the-plaintext-polynomial'><span class='titlemark'>D-2.9.1   </span> <a id='x115-160000D-2.9.1'></a>Rotating Input Vector Slots by Updating the Plaintext Polynomial</h5>
+   <h5 class='subsubsectionHead' id='rotating-input-vector-slots-by-updating-the-plaintext-polynomial'><span class='titlemark'>D-2.9.1   </span> <a id='x120-160000D-2.9.1'></a>Rotating Input Vector Slots by Updating the Plaintext Polynomial</h5>
 <!--  l. 863  --><p class='noindent'>In this task, our goal is to modify the plaintext polynomial
 <!--  l. 863  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> such that the first-half
 elements of the input vector <!--  l. 863  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>v</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover></math>
@@ -572,7 +572,7 @@ to <!--  l. 1250  --><math display='inline' xmlns='http://www.w3.org/1998/Math/M
 will explain this in the next subsection.
    
 </p>
-   <h5 class='subsubsectionHead' id='updating-the-plaintext-polynomial-by-updating-the-ciphertext-polynomials'><span class='titlemark'>D-2.9.2   </span> <a id='x115-161000D-2.9.2'></a>Updating the Plaintext Polynomial by Updating the Ciphertext Polynomials</h5>
+   <h5 class='subsubsectionHead' id='updating-the-plaintext-polynomial-by-updating-the-ciphertext-polynomials'><span class='titlemark'>D-2.9.2   </span> <a id='x120-161000D-2.9.2'></a>Updating the Plaintext Polynomial by Updating the Ciphertext Polynomials</h5>
 <!--  l. 1255  --><p class='noindent'>Given an RLWE ciphertext <!--  l. 1255  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
 our goal is to update <!--  l. 1255  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> to
 <!--  l. 1255  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>C</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>h</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>A</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>h</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>B</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>h</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> such that decrypting it
@@ -627,7 +627,7 @@ follows:
 </mtd></mtr>                                                                                                                            </mtable></mrow></munder></mrow></math>
    
 </p>
-   <h5 class='subsubsectionHead' id='summary2'><span class='titlemark'>D-2.9.3   </span> <a id='x115-162000D-2.9.3'></a>Summary</h5>
+   <h5 class='subsubsectionHead' id='summary2'><span class='titlemark'>D-2.9.3   </span> <a id='x120-162000D-2.9.3'></a>Summary</h5>
 <!--  l. 1286  --><p class='noindent'>We summarize the procedure for rotating the BFV input vectors as follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-87'>     
@@ -701,7 +701,7 @@ positions to the left (in a wrapping manner among them) is as follows:
                                                                                          
                                                                                          
    
-   <h5 class='subsubsectionHead' id='encoding-example'><span class='titlemark'>D-2.9.4   </span> <a id='x115-163000D-2.9.4'></a>Encoding Example</h5>
+   <h5 class='subsubsectionHead' id='encoding-example'><span class='titlemark'>D-2.9.4   </span> <a id='x120-163000D-2.9.4'></a>Encoding Example</h5>
 <!--  l. 1353  --><p class='noindent'>Suppose we have the following setup:
 </p><!--  l. 1355  --><p class='indent'>   <!--  l. 1355  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>μ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>4</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>17</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mn>2</mn></mrow><mrow><mn>6</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>64</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><msup><mrow><mi>n</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>13</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn></mrow></math>
@@ -839,7 +839,7 @@ and <!--  l. 1533  --><math display='inline' xmlns='http://www.w3.org/1998/Math/
 match the expected values.
    
 </p>
-   <h5 class='subsubsectionHead' id='rotation-example'><span class='titlemark'>D-2.9.5   </span> <a id='x115-164000D-2.9.5'></a>Rotation Example</h5>
+   <h5 class='subsubsectionHead' id='rotation-example'><span class='titlemark'>D-2.9.5   </span> <a id='x120-164000D-2.9.5'></a>Rotation Example</h5>
 <!--  l. 1541  --><p class='noindent'>Suppose we have the following setup:
 </p><!--  l. 1543  --><p class='indent'>   <!--  l. 1543  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>16</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>μ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>17</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mn>2</mn></mrow><mrow><mn>6</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>64</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><msup><mrow><mi>n</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>13</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn></mrow></math>

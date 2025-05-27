@@ -1,8 +1,8 @@
 A GLev ciphertext is a list of GLWE ciphertexts which encrypts the list of plaintext $\dfrac{q}{\beta^1}M, \dfrac{q}{\beta^2}M, \gap{$\cdots$}, \dfrac{q}{\beta^l}M$, where $M$ is a plaintext encoded in a polynomial. Note  a GLev ciphertext's each $i$-th GLWE ciphertext uses a different plaintext scaling factor, which is: $\Delta_i = \dfrac{q}{\beta^i}$. The structure of GLev ciphertext is visually depicted in \autoref{fig:glev}.
 
-%Note that $p < \beta < q$ should hold. 
-Note that $\beta$ should be some value between $p$ and $q$.
-Especially, $t$ should be smaller than $\beta$, because if $p > \beta$, then the higher bits of $M$ will overflow beyond $q$ after computing $\dfrac{q}{\beta^1}M$. 
+%Note that $p < \beta < q$ should hold. Especially, $t$ should be smaller than $\beta$, because if $p > \beta$, then the higher bits of $M$ will overflow beyond $q$ after computing $\dfrac{q}{\beta^1}M$. 
+Note that $\beta$ should be some value between $p$ and $q$. Especially, $t$ should be smaller than $\beta$, because if $p$ is greater than $\beta$, then the higher bits of $M$ will overflow beyond $q$ after computing $\dfrac{q}{\beta^1}M$. 
+
 
 \subsection{Encryption}
 \label{subsec:glev-enc}

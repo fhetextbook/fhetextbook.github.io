@@ -85,7 +85,7 @@ For correct decryption, every noise coefficient $e_i$ of polynomial $E$ should b
 
 \subsubsection{Discussion}
 \begin{enumerate}
-\item \textbf{LWE} is a special case of GLWE where the polynomial ring's degree $n = 0$. That is, all polynomials in $\{A_i\}_{i=0}^{k-1}, \{S_i\}_{i=0}^{k-1}, E$, and $M$ are zero-degree polynomial constants. Instead, there are $k$ such constants for $A_i$ and $S_i$, so each of them forms a vector.
+\item \textbf{LWE} is a special case of GLWE where the polynomial ring's degree $n = 1$. That is, all polynomials in $\{A_i\}_{i=0}^{k-1}, \{S_i\}_{i=0}^{k-1}, E$, and $M$ are zero-degree polynomial constants. Instead, there are $k$ such constants for $A_i$ and $S_i$, so each of them forms a vector.
 \item \textbf{RLWE} is a special case of GLWE where $k = 1$. That is, the secret key $S$ is a single polynomial $S_0$, and each encryption is processed by only a single polynomial $A_0$ as a public key.
 \item \textbf{Size of $\bm{n}$:} A large polynomial degree $n$ increases the number of the secret key's coefficient terms (i.e., $S_i = s_{i,0} + s_{i,1}X + \gap{$\cdots$} + s_{i, n-1}X^{n-1} $), which makes it more difficult to guess the complete secret key. The same applies to the noise polynomial $E$ and the public key polynomials $A_i$, thus making it harder to solve the search-hard problem (\autoref{subsec:lattice-overview}). Also, higher-degree polynomials can encode more plaintext terms in the same plaintext polynomial $M$, improving the throughput efficiency of processing ciphertexts.
 %\item \textbf{Size of $\bm{q}$:} Increasing $q$ increases the ciphertext molulus space, making it hard to attack the cryptosystem. 

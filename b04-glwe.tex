@@ -156,9 +156,9 @@ The encryption scheme in \autoref{subsec:glwe-enc} assumes that it is the secret
 \begin{itemize}
 \item The scaling factor $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$
 \item The secret key $\vec{S} = \{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$
-\item The public key pair $(\mathit{PK}_1, \vv{\mathit{PK}}_2) \in \mathcal{R}_{\langle n, q \rangle}$ is generated as follows:
+\item The public key pair $(\mathit{PK}_1, \vv{\mathit{PK}}_2) \in \mathcal{R}_{\langle n, q \rangle}^{k+1}$ is generated as follows:
 
-$\vec{A} = \{A_i\}_{i=0}^{k} \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}^k$, \text{ } $E \xleftarrow{\sigma} \mathcal{R}_{\langle n, q \rangle}^{k+1}$
+$\vec{A} = \{A_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}^k$, \text{ } $E \xleftarrow{\sigma} \mathcal{R}_{\langle n, q \rangle}$
 
 $\mathit{PK}_1 = \vec{A} \cdot \vec{S} + E \in \mathcal{R}_{\langle n, q \rangle}$
 
@@ -212,13 +212,13 @@ $\textsf{GLWE}^{-1}_{S,\sigma}\bm{(}\text{ } C = (B, \vec{D}) \text{ }\bm{)} = B
 
 $ = (\mathit{PK}_1\cdot U + \Delta  M + E_2) - (\vv{\mathit{PK}}_2 \cdot U + \vec{E}_2)\cdot \vec{S} $
 
-$=  (\vec{A} \cdot \vec{S} + E)\cdot U + \Delta M + E_2 - (\vec{A}\cdot U)\cdot \vec{S} + \vec{E}_2\cdot\vec{S}$
+$=  (\vec{A} \cdot \vec{S} + E)\cdot U + \Delta M + E_2 - (\vec{A}\cdot U)\cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
 
-$=  (U\cdot\vec{A}) \cdot \vec{S} + E \cdot U + \Delta M + E_2 - (U\cdot \vec{A}) \cdot \vec{S} + \vec{E}_2\cdot\vec{S}$
+$=  (U\cdot\vec{A}) \cdot \vec{S} + E \cdot U + \Delta M + E_2 - (U\cdot \vec{A}) \cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
 
-$= \Delta M + E \cdot U + E_2 + \vec{E}_2\cdot\vec{S}$
+$= \Delta M + E \cdot U + E_2 - \vec{E}_2\cdot\vec{S}$
 
-$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{all}} = E \cdot U + E_2 + \vec{E}_2\cdot\vec{S}$} 
+$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{all}} = E \cdot U + E_2 - \vec{E}_2\cdot\vec{S}$} 
 
 
 $ $

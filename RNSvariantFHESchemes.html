@@ -14,7 +14,7 @@
 the ring size of polynomial coefficients to be 1000 bits or more, which consumes much
 computational resources for 64-bit CPU architectures. To make the computation efficient, we
 can alternatively represent the coefficients of ciphertext polynomials by the number residue
-system (RNS) <a href='ApplicationNumberResidueSystemRNS.html#application-number-residue-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>, which allows modulo addition and multiplication of elements from a
+system (RNS) <a href='ApplicationResidueNumberSystemRNS.html#application-residue-number-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!--  tex4ht:ref: subsubsec:bfvbbootstrappingssummary   --></a>, which allows modulo addition and multiplication of elements from a
 large ring (e.g., 1000 bits) by the combination of values computed in small rings (e.g.,
 32<!--  l. 1  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>∼</mo></mrow></math>64
 bits), each of which compactly fits in 64-bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt

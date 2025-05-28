@@ -118,7 +118,7 @@ Then, we do the similar reasoning as step 2: since every co-prime $n_j$ divides 
 \end{proof}
 
 
-\subsection{Application: Number Residue System (RNS)} 
+\subsection{Application: Residue Number System (RNS)} 
 \label{subsec:crt-application}
 
 In a modern processor, each data size is a maximum of 64 bits. If the data size exceeds 64 bits, its computations can be handled efficiently by using the Chinese remainder theorem such that each co-prime modulus $\log_2n_i \leq 64$ (where $N = n_0\cdot n_1\cdots\cdot n_k$) can be used to represent big value $a \bmod N$ as $\vec{a}_{\mathit{crt}} = (a_0, a_1, \cdots , a_k)$, where $a \equiv a_i \bmod n_i$. Then, for any pair of big numbers $a$ and $b \bmod N$, we can compute $a + b \bmod N$ and $a \cdot b \bmod N$ as follows: 

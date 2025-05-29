@@ -359,11 +359,11 @@ $= \dfrac{\hat{q}}{q} \sum\limits_{i=0}^{j}(a_{j-i}s_{i}) - \dfrac{\hat{q}}{q} \
 
 $=  \sum\limits_{i=0}^{j}\left(\dfrac{\hat{q}}{q}\cdot a_{j-i}s_{i}\right) - \sum\limits_{i=j+1}^{n-1}\left(\dfrac{\hat{q}}{q} \cdot a_{n+j-i}s_{i}\right) + \hat{\Delta} m_j + (\hat{e}_j - \epsilon_{e_j}) + \hat{q} \cdot c_j + \epsilon_{b_j}$
 
-$=  \sum\limits_{i=0}^{j}((\hat{a}_{j-i}-\epsilon_{a_i})\cdot s_{i}) - \sum\limits_{i=j+1}^{n-1}((\hat{a}_{n+j-i}-\epsilon_{a_{n+j-i}})\cdot s_{i}) + \hat{\Delta} m_j + (\hat{e}_j - \epsilon_{e_j}) + \hat{q} \cdot c_j + \epsilon_{b_j}$
+$=  \sum\limits_{i=0}^{j}((\hat{a}_{j-i}-\epsilon_{a_{j-i}})\cdot s_{i}) - \sum\limits_{i=j+1}^{n-1}((\hat{a}_{n+j-i}-\epsilon_{a_{n+j-i}})\cdot s_{i}) + \hat{\Delta} m_j + (\hat{e}_j - \epsilon_{e_j}) + \hat{q} \cdot c_j + \epsilon_{b_j}$
 
 $=  \sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i) 
 - \sum\limits_{i=j+1}^{n-1}(\hat{a}_{n+j-i}s_i)
-- \sum\limits_{i=0}^{j}(\epsilon_{a_i} s_i)
+- \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)
 + \hat{\Delta} m_j + (\hat{e}_j - \epsilon_{e_j}) + \hat{q} \cdot c_j + \epsilon_{b_j}$
 
@@ -372,7 +372,7 @@ $=  \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i)
 - \sum\limits_{i=j+1}^{n-1}(\hat{a}_{n+j-i}s_i)\right)
 + \hat{\Delta} m_j + \hat{e}_j 
 + \left(\epsilon_{b_j} - \epsilon_{e_j}
-- \sum\limits_{i=0}^{j}(\epsilon_{a_i} s_i)
+- \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)\right) + \hat{q} \cdot c_j
 $
 
@@ -382,9 +382,9 @@ $=  \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i)
 + \epsilon_{all} \in \mathbb{Z}_{\hat{q}}
 $
 
-, where $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
-- \sum\limits_{i=0}^{j}(\epsilon_{a_i} s_i)
-+ \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i) \approx 0$
+\textcolor{red}{ \# where $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+- \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
++ \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i) \approx 0$}
 
 
 $ $
@@ -474,11 +474,11 @@ Meanwhile, $\vec{S}$ and $M$ stay the same as before.
 The proof is similar to that of RLWE modulus switching. The modulus-switched GLWE ciphertext's culminating rounding drift error for each $j$-th polynomial coefficient in its congruence relationship (i.e., $B = \sum\limits_{i=0}^{k-1}A_i\cdot S_i + \Delta M + E$) is as follows:
 
 $\epsilon_{j, all} = \epsilon_{b_j} - \epsilon_{e_j}
-- \sum\limits_{l=0}^{k-1}\sum\limits_{i=0}^{j}(\epsilon_{a_{l,i}} \cdot s_{l,i})
+- \sum\limits_{l=0}^{k-1}\sum\limits_{i=0}^{j}(\epsilon_{a_{l,j-i}} \cdot s_{l,i})
 + \sum\limits_{l=0}^{k-1}\sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{l,n+j-i}} \cdot s_{l,i})$
 
-\textcolor{red}{ \# Borrowing from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
-- \sum\limits_{i=0}^{j}(\epsilon_{a_i} s_i)
+\textcolor{red}{ \# derived from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+- \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)$}
 
 $ $

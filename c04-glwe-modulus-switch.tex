@@ -102,17 +102,17 @@ $= \sum\limits_{i=0}^{k-1}\left((\hat{a}_i - \epsilon_{a_i}) \cdot s_i\right) + 
 
 $= \sum\limits_{i=0}^{k-1}(\hat{a}_is_i - \epsilon_{a_i}s_i) + \hat{\Delta} m + \hat{e} - \epsilon_e + \epsilon_b \in \mathbb{Z}_{\hat{q}}$
 
-$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \left( \hat{e} - \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{n-1}\epsilon_{a_i}s_i \right) \in \mathbb{Z}_{\hat{q}}$
+$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \left( \hat{e} - \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i \right) \in \mathbb{Z}_{\hat{q}}$
 
-$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \hat{e} + \epsilon_{\textit{all}} \in \mathbb{Z}_{\hat{q}}$, where $\epsilon_{\textit{all}} = \left(- \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{n-1}\epsilon_{a_i}s_i \right)$
+$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \hat{e} + \epsilon_{\textit{all}} \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{\#  where $\epsilon_{\textit{all}} = \left(- \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i \right)$}
 
 $ $
 
 The biggest possible value for $\epsilon_{\textit{all}}$ is, 
 
-$\epsilon_{\textit{all}} = |-0.5| + |0.5| + |-0.5 \cdot (k+1)| = 1.5 + 0.5k$ 
+$\epsilon_{\textit{all}} = |-0.5| + |0.5| + |-0.5 \cdot k| = 1 + 0.5k$ 
 
-So, LWE modulus switching results in an approximate congruence relationship (\autoref{sec:modulus-rescaling}). However, if $\hat \Delta$ is large enough, $\epsilon_{\textit{all}} = 1.5 + 0.5k$ will be shifted to the right upon LWE decryption and get eliminated, and finally we can recover the original $m$. Also, in practice, the term $\sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i$ would converge to 0 for a sufficiently large $k$, because each $a_i$ is uniformly sampled and $s_i$ is also uniformly sampled. 
+So, LWE modulus switching results in an approximate congruence relationship (\autoref{sec:modulus-rescaling}). However, if $\hat \Delta$ is large enough, $\epsilon_{\textit{all}} = 1 + 0.5k$ will be shifted to the right upon LWE decryption and get eliminated, and finally we can recover the original $m$. Also, in practice, the term $\sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i$ would converge to 0 for a sufficiently large $k$, because each $a_i$ is uniformly sampled and $s_i$ is also uniformly sampled. 
 
 \para{Caution:} If $\hat \Delta$ is not large enough, then $\epsilon_{all}$ may not get eliminated during decryption and corrupt the plaintext $m$. Also, if $\Delta \rightarrow \hat\Delta$ shrinks too much, then the distance between $\hat\Delta m$ and $\hat e$ would become too narrow and the rounding process of $\hat e = \Big\lceil e \dfrac{\hat{q}}{q} \Big\rfloor$ may end up overlapping the least significant bit of $\hat \Delta m$, corrupting the plaintext. 
 

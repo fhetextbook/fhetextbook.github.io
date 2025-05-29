@@ -261,7 +261,7 @@ $\hat{A} = \hat{a}_0 + \hat{a}_1X + \hat{a}_2X^2 + \cdots + \hat{a}_{n-1}X^{n-1}
 
 $\hat{B} = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_i = \Big\lceil b_i\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\textsf{RLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, q \rangle}^{2}$ 
+$\textsf{RLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{2}$ 
 
 $ $
 
@@ -302,17 +302,17 @@ $ = (b_0 + b_1X + \gap{$\cdots$} + b_{n-1}X^{n-1} ) - (a_{0} + a_{1}X + \gap{$\c
 
 $ = \left(b_0 - \left( \sum\limits_{i=0}^{0}(a_{0-i}s_{i}) - \sum\limits_{i=1}^{n-1}(a_{n-i}s_{i}) \right)\right)$
 
-$ + \left(b_1 - \left( \sum\limits_{i=0}^{1}(a_{1-i}s_{i}) - \sum\limits_{i=2}^{n-1}(a_{n-i}s_{i})   \right) \right)\cdot X$ 
+$ + \left(b_1 - \left( \sum\limits_{i=0}^{1}(a_{1-i}s_{i}) - \sum\limits_{i=2}^{n-1}(a_{n+1-i}s_{i})   \right) \right)\cdot X$ 
 
 
 
-$ + \left(b_2 - \left( \sum\limits_{i=0}^{2}(a_{2-i}s_{i}) - \sum\limits_{i=3}^{n-1}(a_{n-i}s_{i})   \right) \right)\cdot X^2$ 
+$ + \left(b_2 - \left( \sum\limits_{i=0}^{2}(a_{2-i}s_{i}) - \sum\limits_{i=3}^{n-1}(a_{n+2-i}s_{i})   \right) \right)\cdot X^2$ 
 
 
 $\gap{$\vdots$}$ 
 
 
-$ + \left(b_{n-1} - \left(  \sum\limits_{i=0}^{n-1}(a_{n-1-i}s_{i}) -  \sum\limits_{i=n}^{n-1}(a_{n-i}s_{i})  \right) \right)\cdot X^{n-1}$ \textcolor{red}{\# Grouping the terms by same exponents}
+$ + \left(b_{n-1} - \left(  \sum\limits_{i=0}^{n-1}(a_{n-1-i}s_{i}) -  \sum\limits_{i=n}^{n-1}(a_{n+n-1-i}s_{i})  \right) \right)\cdot X^{n-1}$ \textcolor{red}{\# Grouping the terms by same exponents}
 
 $ $
 
@@ -451,7 +451,7 @@ $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a
 
 $\hat{B} = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_j = \Big\lceil b_j\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, q \rangle}^{k+1}$ 
+$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{k+1}$ 
 
 $ $
 
@@ -476,5 +476,11 @@ The proof is similar to that of RLWE modulus switching. The modulus-switched GLW
 $\epsilon_{j, all} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{l=0}^{k-1}\sum\limits_{i=0}^{j}(\epsilon_{a_{l,i}} \cdot s_{l,i})
 + \sum\limits_{l=0}^{k-1}\sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{l,n+j-i}} \cdot s_{l,i})$
+
+\textcolor{red}{ \# Borrowing from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+- \sum\limits_{i=0}^{j}(\epsilon_{a_i} s_i)
++ \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)$}
+
+$ $
 
 Note that GLWE's modulus switching can have a bigger rounding drift error (about $k$ times) than that of RLWE's modulus switching. However, in the long run, they can cancel out and converge to 0 as they are sampled from the $\sigma$ distribution.

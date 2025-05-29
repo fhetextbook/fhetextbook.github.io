@@ -108,7 +108,7 @@ $= \Lambda \cdot \textsf{GLWE}_{S, \sigma}( \Delta M)$
 
 $ $
 
-While the computation results are the same, as we decompose $\Lambda$ into smaller plaintext polynomials $\Lambda_1, \Lambda_2, \cdots, \Lambda_l$, the generated noise by each of $l$ plaintext-to-ciphertext multiplications becomes smaller.  Given the noise of each GLWE ciphertext in the GLev ciphertext is $E_i$, the final noise of the ciphertext-to-plaintext multiplication is $\sum\limits_{i=0}^{l}E_i$, which is much smaller than $\Lambda \cdot E$, because $l$ is much smaller than $\Lambda$. 
+While the computation results are the same, as we decompose $\Lambda$ into smaller plaintext polynomials $\Lambda_1, \Lambda_2, \cdots, \Lambda_l$, the generated noise by each of $l$ plaintext-to-ciphertext multiplications becomes smaller.  Given the noise of each GLWE ciphertext in the GLev ciphertext is $E_i$, the final noise of the ciphertext-to-plaintext multiplication is $\sum\limits_{i=1}^{l}\Lambda_i\cdot E_i$, which is much smaller than $\Lambda \cdot E$ (because the coefficients of each decomposed polynomial $\Lambda_i$ are much smaller than those of $\Lambda$). 
 
 However, we cannot use this decomposition technique to the resulting ciphertext again, because the output of this algorithm is a GLWE ciphertext and converting it into a GLev ciphertext without decrypting it costs much noise and computation time (as we need to multiply the GLWE ciphertext by $\dfrac{q}{\beta}, \dfrac{q}{\beta^2}, \cdots, \dfrac{q}{\beta^l})$.  
 

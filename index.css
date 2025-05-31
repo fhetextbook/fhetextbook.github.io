@@ -67,6 +67,8 @@
 .rm-lmr-12{font-size:109%;}
 .rm-lmbx-12{font-size:109%; font-weight: bold;}
 .ts1-lmr10-x-x-109{}
+.rm-lmri-12{font-size:109%; font-style:italic;}
+.rm-lmbxi-10x-x-120{font-size:109%; font-style:italic; font-weight: bold;}
 .rm-lmss-10x-x-109{ font-family: sans-serif;}
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
@@ -284,7 +286,7 @@ pre.listings{font-family: monospace,monospace; white-space: pre-wrap; margin-top
 pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; text-align: left; }
 pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; text-align: left; }
 .lstinputlisting .label{margin-right:0.5em;}
- /* global colours */ body { background:#ffffff; color:#000000; margin:1em auto; max-width:52em; colorscheme: light; font-family: 'URW Bookman', STIXGeneral, STIX, Superclarendon, 'Bookman Old Style', 'URW Bookman L', 'Georgia Pro', Georgia, serif; } a { color:#0645ad; } /* GitHub-like link blue */ nav.crosslinks { font-size:.9em; text-align:center; margin:1em 0; } nav.crosslinks a { margin:0 .5em; text-decoration:none; } 
+ /* global colours */ body { background:#ffffff; color:#000000; margin:1em auto; max-width:52em; colorscheme: light; font-family: STIXGeneral, STIX, Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; } a { color:#0645ad; } /* GitHub-like link blue */ nav.crosslinks { font-size:.9em; text-align:center; margin:1em 0; } nav.crosslinks a { margin:0 .5em; text-decoration:none; } 
 body{ margin:1em auto; max-width:100ch; padding:0 .62em; }
 p,li,h1,h2,h3,h4,h5, .abstract, dd, .tcolorbox {max-width: 100ch}
 table,math{overflow-x:auto; }

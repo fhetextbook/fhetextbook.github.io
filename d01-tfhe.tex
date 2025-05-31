@@ -992,21 +992,21 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m) = (\hat{a}_0, \hat{a}_1, \hat{a}_
 
 $V_0 = V \cdot X^{-\hat{b}} = V \cdot X^{-12} = v_{12} + v_{13}X + v_{14}X^2 + \cdots $
 
-$V_1 = V_0 \cdot X^{\hat{a}_0s_0} = s_0 \cdot (V_0 \cdot X^{a_0} - V_0) + V_0 = V_0 \cdot X^{4} = v_{8} + v_{9}X + v_{10}X^2 + \cdots$ 
+$V_1 = V_0 \cdot X^{\hat{a}_0s_0} = s_0 \cdot (V_0 \cdot X^{\hat{a}_0} - V_0) + V_0 = V_0 \cdot X^{4} = v_{8} + v_{9}X + v_{10}X^2 + \cdots$ 
 
-$V_2 = V_1 \cdot X^{\hat{a}_1s_1} = s_1 \cdot (V_1 \cdot X^{a_1} - V_1) + V_1 = V_1 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
+$V_2 = V_1 \cdot X^{\hat{a}_1s_1} = s_1 \cdot (V_1 \cdot X^{\hat{a}_1} - V_1) + V_1 = V_1 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
 
-$V_3 = V_2 \cdot X^{\hat{a}_2s_2} = s_2 \cdot (V_2 \cdot X^{a_2} - V_2) + V_2 = V_2 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
+$V_3 = V_2 \cdot X^{\hat{a}_2s_2} = s_2 \cdot (V_2 \cdot X^{\hat{a}_2} - V_2) + V_2 = V_2 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
 
-$V_4 = V_3 \cdot X^{\hat{a}_3s_3} = s_3 \cdot (V_3 \cdot X^{a_3} - V_3) + V_3 = V_3 \cdot X^{-16} = -v_{8} - v_{9}X - v_{10}X^2 - \cdots$
+$V_4 = V_3 \cdot X^{\hat{a}_3s_3} = s_3 \cdot (V_3 \cdot X^{\hat{a}_3} - V_3) + V_3 = V_3 \cdot X^{-16} = -v_{8} - v_{9}X - v_{10}X^2 - \cdots$
 
-$V_5 = V_4 \cdot X^{\hat{a}_4s_4} = s_4 \cdot (V_4 \cdot X^{a_4} - V_4) + V_4 = V_4 \cdot X^{0} = -v_{8} - v_{9}X - v_{10}X^2 - \cdots$
+$V_5 = V_4 \cdot X^{\hat{a}_4s_4} = s_4 \cdot (V_4 \cdot X^{\hat{a}_4} - V_4) + V_4 = V_4 \cdot X^{0} = -v_{8} - v_{9}X - v_{10}X^2 - \cdots$
 
-$V_6 = V_5 \cdot X^{\hat{a}_5s_5} = s_5 \cdot (V_5 \cdot X^{a_5} - V_5) + V_5 = V_5 \cdot X^{16} = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
+$V_6 = V_5 \cdot X^{\hat{a}_5s_5} = s_5 \cdot (V_5 \cdot X^{\hat{a}_5} - V_5) + V_5 = V_5 \cdot X^{16} = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
 
-$V_7 = V_6 \cdot X^{\hat{a}_6s_6} = s_6 \cdot (V_6 \cdot X^{a_6} - V_6) + V_6 = V_6 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
+$V_7 = V_6 \cdot X^{\hat{a}_6s_6} = s_6 \cdot (V_6 \cdot X^{\hat{a}_6} - V_6) + V_6 = V_6 = v_{8} + v_{9}X + v_{10}X^2 + \cdots$
 
-$V_8 = V_7 \cdot X^{\hat{a}_7s_7} = s_7 \cdot (V_7 \cdot X^{a_7} - V_7) + V_7 = V_7 \cdot X^{4} = v_{4} + v_5X + v_6X^2 + \cdots $
+$V_8 = V_7 \cdot X^{\hat{a}_7s_7} = s_7 \cdot (V_7 \cdot X^{\hat{a}_7} - V_7) + V_7 = V_7 \cdot X^{4} = v_{4} + v_5X + v_6X^2 + \cdots $
 
 $ $
 
@@ -1028,13 +1028,13 @@ $ $
 
 $\textsf{GLWE}_{\vec{S}, \sigma}(V_8)$
 
-$ = \textsf{GLWE}_{\vec{S}, \sigma}\bm(\Delta \cdot (v_4 + v_5X + v_6X^2 + v_7X^3 + v_8X^{4} + v_9X^{5} + v_{10}X^{6} + v_{11}X^{7} + v_{12}X^{8} + v_{13}X^{9} + v_{14}X^{10} + v_{15}X^{11} - v_{0}X^{12} - v_{1}X^{13} - v_{2}X^{14} - v_{3}X^{15})\bm)$
+$ = \textsf{GLWE}_{\vec{S}, \sigma}\bm(\hat{\Delta} \cdot (v_4 + v_5X + v_6X^2 + v_7X^3 + v_8X^{4} + v_9X^{5} + v_{10}X^{6} + v_{11}X^{7} + v_{12}X^{8} + v_{13}X^{9} + v_{14}X^{10} + v_{15}X^{11} - v_{0}X^{12} - v_{1}X^{13} - v_{2}X^{14} - v_{3}X^{15})\bm)$
 
-$ = \textsf{GLWE}_{\vec{S}, \sigma}\bm(\Delta\cdot(1 + 1X + 1X^2 + 1X^3 + 2X^{4} + 2X^{5} + 2X^{6} + 2X^{7} + 1X^{8} + 1X^{9} + 1X^{10} + 1X^{11} - 0X^{12} - 0X^{13} - 0X^{14} - 0X^{15})\bm)$
+$ = \textsf{GLWE}_{\vec{S}, \sigma}\bm(\hat{\Delta}\cdot(1 + 1X + 1X^2 + 1X^3 + 2X^{4} + 2X^{5} + 2X^{6} + 2X^{7} + 1X^{8} + 1X^{9} + 1X^{10} + 1X^{11} - 0X^{12} - 0X^{13} - 0X^{14} - 0X^{15})\bm)$
 
 $ = \left(A_0 = \sum\limits_{j=0}^{15}(a_{0,0} + a_{0,1}X + \cdots), A_1 = \cdots, A_{k-1} = \cdots, B = \sum\limits_{j=0}^{15}b_{j}X^j\right)$
 
-Now, we extract the constant term's coefficient of the encrypted polynomial $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta \cdot (1 + 1X + 1X^2 + \cdots))$ by using the coefficient extraction formula (Summary~\ref{subsec:tfhe-extraction}). Specifically, we will extract the constant term's coefficient, which corresponds to $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$. We extract $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$ by computing the following:
+Now, we extract the constant term's coefficient of the encrypted polynomial $\textsf{GLWE}_{\vec{S}, \sigma}(\hat{\Delta} \cdot (1 + 1X + 1X^2 + \cdots))$ by using the coefficient extraction formula (Summary~\ref{subsec:tfhe-extraction}). Specifically, we will extract the constant term's coefficient, which corresponds to $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$. We extract $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$ by computing the following:
 
 $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k', b_h)$
 

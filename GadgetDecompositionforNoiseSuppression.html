@@ -71,15 +71,28 @@ the final noise of the ciphertext-to-plaintext multiplication is
 <!--  l. 111  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Λ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>E</mi></mrow></math> (because the coefficients of each
 decomposed polynomial <!--  l. 111  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi mathvariant='normal'>Λ</mi></mrow><mrow><mi>i</mi></mrow></msub></math> are
 significantly smaller than those of <!--  l. 111  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Λ</mi></math>).
-</p><!--  l. 113  --><p class='indent'>   However, we cannot use this decomposition technique to the resulting ciphertext again, because the
+This is visually depicted in <a href='#noise-reduction-in-ciphertexttoplaintext-multiplication-by-gadget-decomposition'>Figure 11<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>.
+</p>
+   <figure class='figure'> 
+
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+<!--  l. 115  --><p class='noindent' id='noise-reduction-in-ciphertexttoplaintext-multiplication-by-gadget-decomposition'> <img alt='PIC' src='figures/decomp2-.png' /> <a id='x92-109001r11'></a></p>
+<figcaption class='caption'><span class='id'>Figure 11: </span><span class='content'>Noise reduction in ciphertext-to-plaintext multiplication by gadget decomposition.    </span></figcaption><!--  tex4ht:label?: x92-109001r11   -->
+                                                                                         
+                                                                                         
+   </figure>
+<!--  l. 120  --><p class='indent'>   However, we cannot use this decomposition technique to the resulting ciphertext again, because the
 output of this algorithm is a GLWE ciphertext and converting it into a GLev ciphertext without
 decrypting it costs much noise and computation time (as we need to multiply the GLWE ciphertext by
-<!--  l. 113  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><mi>β</mi></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>l</mi></mrow></msup></mrow></mfrac></mstyle><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-</p><!--  l. 115  --><p class='indent'>   As a more efficient technique to re-initialize the noise
-<!--  l. 115  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math>, we will
+</p><!--  l. 122  --><p class='indent'>   As a more efficient technique to re-initialize the noise
+<!--  l. 122  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math>, we will
 describe TFHE’s noise bootstrapping technique in <a href='NoiseBootstrapping.html#noise-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>.
                                                                                          
                                                                                          

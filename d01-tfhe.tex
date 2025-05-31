@@ -574,44 +574,46 @@ $ $
 \subsubsection{Overview}
 \label{subsec:bootstrapping-overview}
 
-To implement noise bootstrapping, we create a specially designed $(n-1)$-degree polynomial $V(X)$ called a Lookup Table (LUT). The polynomial $V(X)$'s each degree term $X^{i'}$ has its exponent $i' = \Delta m_i + e$, a noisy plaintext, and its corresponding coefficient $v_{i'} = \Delta m_i$, which is a noise-free plaintext. Therefore, $V(X)$ is defined as:
+To implement noise bootstrapping, we create a specially designed $(n-1)$-degree polynomial $V(X)$ called a Lookup Table (LUT). Before explaining $V(X)$, we will first motivate the idea based on a preliminary LUT polynomial $V_q(X)$. Imagine that the polynomial $V_q(X)$'s each degree term $X^{j}$ has its exponent $j = \Delta m_i + e_*$, a plaintext $m_i$ with some noise $e_* \in \mathbb{Z}_{\Delta}$, and its corresponding coefficient $v_{j} = m_i$, which is a noise-free plaintext. Therefore, the $(q-1)$-degree polynomial $V_q(X)$ is defined as follows:
 
-$V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{n-1}X^{n-1}$
+$V_q(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{q-1}X^{q-1}$
 
-\text{ } $= m_0X^{\Delta m_0 + e_0} + m_0X^{\Delta m_0 + e_1} + m_0X^{\Delta m_0 + e_2} + \gap{$\cdots$} + m_0X^{\Delta m_0 + e_{\Delta - 1}}$
+\text{ } $= m_0X^{\Delta m_0 + e_0} + m_0X^{\Delta m_0 + e_1} + m_0X^{\Delta m_0 + e_2} + \gap{$\cdots$} + m_0X^{\Delta m_0 + e_{\Delta - 1}}$ \textcolor{red}{ \# total $\Delta$ terms}
 
-\text{ } $ + \text{ } m_1X^{\Delta m_1 + e_0} + m_1X^{\Delta m_1 + e_1} + m_1X^{\Delta m_1 + e_2} + \gap{$\cdots$} + m_1X^{\Delta m_1 + e_{\Delta - 1}}$
+\text{ } $ + \text{ } m_1X^{\Delta m_1 + e_0} + m_1X^{\Delta m_1 + e_1} + m_1X^{\Delta m_1 + e_2} + \gap{$\cdots$} + m_1X^{\Delta m_1 + e_{\Delta - 1}}$ \textcolor{red}{ \# total $\Delta$ terms}
 
 \text{ } $ + \gap{$\cdots$} $
 
-\text{ } $ + \text{ } m_{t - 1}X^{\Delta m_{t - 1} + e_0} + m_{t - 1}X^{\Delta m_{t - 1} + e_1} + m_{t - 1}X^{\Delta m_{t - 1} + e_2} + \gap{$\cdots$} + m_{t - 1}X^{\Delta m_{t - 1} + e_{\Delta - 1}}$
+\text{ } $ + \text{ } m_{t - 1}X^{\Delta m_{t - 1} + e_0} + m_{t - 1}X^{\Delta m_{t - 1} + e_1} + m_{t - 1}X^{\Delta m_{t - 1} + e_2} + \gap{$\cdots$} + m_{t - 1}X^{\Delta m_{t - 1} + e_{\Delta - 1}}$ \textcolor{red}{ \# total $\Delta$ terms}
 
 $ $
 
-We design $V$ to have the special property that its each $v_{i'}X^{i'}$ term has the special mapping of (exponent, coefficient) $= (\Delta m_i + e_{*}, m_i)$. During the TFHE setup stage, we GLWE-encrypt $V(X)$ by using our newly defined GLWE key $\vec{S}_{kb}$, a \textit{bootstrapping key}, which is different from the LWE secret key $\vec{s}$. $\vec{S}_{kb}$ is a list of $(n-1)$-degree polynomials with binary coefficients. Later, during the noise bootstrapping stage, we rotate the the coefficients of $V$ by $\Delta m + e$ positions to the left by computing $V \cdot X^{-(\Delta m + e)} = V'$, by using the polynomial coefficient rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation}.1 in \autoref{subsec:coeff-rotation}). Then, we will extract the polynomial's constant term's coefficient (i.e., the left-most 0-degree term's coefficient in the rotated $V'$) by using the coefficient extraction technique (\autoref{subsec:tfhe-extraction}). Further, we will encrypt $V(X)$ as a GLWE ciphertext at the TFHE setup stage, and thus the rotated $V'(X)$'s extracted constant term's coefficient is an LWE encryption of $m$ (i.e., $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$) with a re-initialized noise. 
+In the above formula, each $m_i$ and $e_k$ represent every possible plaintext message and error values (where $m_i \in \mathbb{Z}_t$ and $e_k \in \mathbb{Z}_{\Delta}$). %Note that $\mathbb{Z}_{q} = \{0, 1, \cdots, q-1\} = \{\Delta m_0 + e_0, \Delta m_0 + e_1, \cdots, \Delta m_{t-1} + e_{\Delta - 1}\}$. 
+
+We design $V_q(X)$ to have the special property that each $v_{j}X^{j}$ term represents the special mapping (exponent, coefficient) $= (\Delta m_i + e_{*}, m_i)$, where $e_*$ can be any value in $\mathbb{Z}_{\Delta}$. During the TFHE setup stage, we GLWE-encrypt $V_q(X)$ by using our newly defined GLWE key $\vec{S}_{bk}$, a \textit{bootstrapping key}, which is different from the LWE secret key $\vec{s}$. $\vec{S}_{bk}$ is a list of $(n-1)$-degree polynomials with binary coefficients. Later, during the noise bootstrapping stage, we will rotate the coefficients of $V$ by $\Delta m + e$ positions to the left by computing $V \cdot X^{-(\Delta m + e)} = V'$, by using the polynomial coefficient rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation}.1 in \autoref{subsec:coeff-rotation}). Then, we will extract the polynomial's constant term's coefficient (i.e., the left-most 0-degree term's coefficient in the rotated polynomial $V'$) by using the coefficient extraction technique (\autoref{subsec:tfhe-extraction}). Further, we will encrypt $V_q(X)$ as a GLWE ciphertext at the TFHE setup stage, and thus the rotated $V'_q(X)$'s extracted constant term's coefficient is an LWE encryption of $m$ (i.e., $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$) with a re-initialized (i.e., completely reduced) noise. 
 
 To summarize, the noise bootstrapping procedure can be conceptually understood (at least for now) as follows: 
 
 $ $
 
 \begin{enumerate}
-\item \textbf{Input:} $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e)$ as a noisy ciphertext encrypting $m$
-\item Convert the input into the form of $X^{-(\Delta m + e)}$ as a rotator of $V(X)$ (Lookup Table)
-\item Rotate $V$ to the left by $\Delta m + e$ positions by computing $V \cdot X^{-(\Delta m + e)} = V'$
-\item Extract the rotated $V'(X)$'s constant term's coefficient $m$ as an LWE encryption, which is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$
-\item \textbf{Output:} $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ as an LWE encryption of the plaintext $m$ with a re-initialized noise. 
+\item \textbf{\underline{Input}:} $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e)$ as a noisy ciphertext encrypting $m$
+\item Convert the input into the form of $X^{-(\Delta m + e)}$ as a rotator of $V_q(X)$ (Lookup Table).
+\item Rotate $V_q$ to the left by $\Delta m + e$ positions by computing $V_q \cdot X^{-(\Delta m + e)} = V'_q$.
+\item Extract the rotated $V'_q(X)$'s constant term's coefficient $m$ as an LWE encryption, which is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$.
+\item \textbf{\underline{Output}:} $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ as an LWE encryption of the plaintext $m$ with a re-initialized noise
 \end{enumerate}
 
 $ $
 
-The final $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ can be used for subsequent TFHE homomorphic operations (e.g., addition or multiplication). During this noise bootstrapping process, the polynomial $V$ is used as a \textit{dictionary} that contains the mappings from the noisy plaintext $\Delta m + e$ (i.e., as $i$ in $v_iX^i$) to the noise-free plaintext $m$ (i.e., as $v_i$ in $v_iX^i$). Therefore, $V$ is called Lookup Table (LUT). 
+The output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ encrypts the same plaintext message as the input ciphertext, but with completely reduced noise. Therefore, the output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ can be used for subsequent TFHE homomorphic operations (e.g., addition or multiplication). During this noise bootstrapping process, the polynomial $V_q$ is used as a \textit{dictionary} that contains the mappings from the noisy plaintext $\Delta m + e$ (i.e., as $\Delta m + e = j$ where $v_jX^j$) to the noise-free plaintext $m$ (i.e., as $m = v_j$ where $v_jX^j$). Therefore, $V_q$ is called the Lookup Table (LUT). 
 
-Then, what should be the degree of $V$? In order for $V$ to encode all possible mappings from $\Delta m + e \in \mathbb{Z}_q$ to $m \in \mathbb{Z}_t$, it should be a $(q-1)$-degree polynomial. However, $q$ is a very big number and it is computationally infeasible to manage a $(q-1)$-degree polynomial. Thus, in practice, we instead use a much smaller polynomial $V$ whose degree is $n-1$. Remember that according to our TFHE setup, $n < q$. Therefore, we need a way to \textit{compress} the big ciphertext space $\Delta m + e \in \mathbb{Z}_q$ into the smaller space $\mathbb{Z}_n$ and encode them as the exponents of $X^i$ in a \textit{proportionally} correct way. For this proportional compression from $\mathbb{Z}_q \rightarrow \mathbb{Z}_n$, we will use the LWE modulus switching technique learned from \autoref{subsec:modulus-switch-lwe}. 
+Then, what should be the degree of $V_q(X)$? In order for $V_q(X)$ to encode all possible mappings from $\Delta m + e \in \mathbb{Z}_q$ to $m \in \mathbb{Z}_t$, $V_q(X)$ should be a $(q-1)$-degree polynomial. However, $q$ is a very big number, and it is computationally infeasible to manage a $(q-1)$-degree polynomial. Thus, in practice, we instead use a much smaller polynomial $V(X)$ whose degree is only $n-1$. Remember that according to our TFHE setup, $n \ll q$. Therefore, we need a way to \textit{compress} the big ciphertext space $\Delta m + e \in \mathbb{Z}_q$ into a much smaller space $\mathbb{Z}_n$ and encode the compressed values as the exponents of $X^j$ in a \textit{proportionally} correct way. For this proportional compression of $\mathbb{Z}_q \rightarrow \mathbb{Z}_n$, we will use the LWE modulus switching technique learned from \autoref{subsec:modulus-switch-lwe}. 
 
 \subsubsection{Modulus Switch for Noise Boootstrapping}
 \label{subsec:bootstrapping-modulus-switch}
 
-We need to compress $q$ possible plaintext elements ($\Delta m + e \in \mathbb{Z}_q$) as $n$ distinct exponents of the $(n-1)$-degree polynomial $V$, where each $v_iX^i$ term in $V$ represents a mapping from $i \rightarrow v_i$ (i.e., noisy plaintext to noise-free plaintext). However, notice that when we rotate the coefficients of the $(n-1)$-degree polynomial $V$ to the left, as $v_iX^i$ rotates around the boundary between $X^0$ and $X^{n-1}$ degree terms, $v_i$'s sign flips to $-v_i$ (as shown in the example of \autoref{subsec:coeff-rotation-ex}). Due to this coefficient sign flip, the $(n-1)$-degree polynomial $V$ can encode total $2n$ distinct coefficient states as follows: $(v_0, v_1, v_2, \gap{$\cdots$}, v_{n-1}, -v_0, -v_1, \gap{$\cdots$}, -v_{n-1})$. To move each of these $2n$ distinct coefficients to the constant term's position in $V$ (i.e., , shifting the coefficient $v_i$ to the leftmost position), the rotating computation of $V \cdot X^{-i}$ can use $2n$ distinct $i$ values, which are $\{0, 1, 2, \gap{$\cdots$}, n-1, n, \gap{$\cdots$}, 2n-1\}$, to move each of $(v_0, v_1, v_2, \gap{$\cdots$}, v_{n-1}, -v_0, -v_1, \gap{$\cdots$}, -v_{n-1})$ coefficients to the constant term's position. This implies that the exponent $i$ in $V\cdot X^{-i}$ can take in $2n$ distinct values to cover all possible $2n$ coefficient states. Also, remember that $i = \Delta m + e$.  Therefore, we will switch the modulo of $\Delta m + e$ from $q \rightarrow 2n$. Using the LWE modulus switching technique (\autoref{subsec:modulus-switch-lwe}), our original LWE ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e) = ({a}_0, {a}_1, \gap{$\cdots$} {a}_{k-1}, {b}) \in \mathbb{Z}_q^{k+1}$ (i.e., the initial input to the noise bootstrapping procedure) will be converted into the following: 
+To avoid using the giant $(q-1)$-degree polynomial $V_q$, we will compress $q$ possible ciphertext elements $\Delta m + e \in \mathbb{Z}_q$ into $n$ distinct exponents of the $(n-1)$-degree polynomial $V$, where each $v_jX^j$ term in $V$ represents a mapping from $j \rightarrow v_j$ (i.e., noisy plaintext to noise-free plaintext). However, notice that when we rotate the coefficients of the $(n-1)$-degree polynomial $V$ to the left, as $v_jX^j$ rotates across the boundary between $X^0$ and $X^{n-1}$ degree terms, $v_j$'s sign flips to $-v_j$ (as shown in the example of \autoref{subsec:coeff-rotation-ex}). Due to this coefficient sign flip, the $(n-1)$-degree polynomial $V$ can theoretically encode total $2n$ distinct coefficient states as follows: $(v_0, v_1, v_2, \gap{$\cdots$}, v_{n-1}, -v_0, -v_1, \gap{$\cdots$}, -v_{n-1})$. To move each of these $2n$ distinct coefficients to the constant term's coefficient position in $V$ (i.e., shifting the coefficient $v_j$ to the leftmost term in $V$), the rotating computation of $V \cdot X^{-j}$ can use $2n$ distinct $j$ values, which are $\{0, 1, 2, \gap{$\cdots$}, n-1, n, \gap{$\cdots$}, 2n-1\}$, to move each of $(v_0, v_1, v_2, \gap{$\cdots$}, v_{n-1}, -v_0, -v_1, \gap{$\cdots$}, -v_{n-1})$ coefficients to the constant term's position. This implies that the exponent $j$ in $V\cdot X^{-j}$ can use any of the $2n$ distinct values to cover all possible $2n$ (sign-flipped) coefficient states of $V$. Also, remember that $j = \Delta m + e$.  Therefore, we will switch the modulo of $\Delta m + e$ from $q \rightarrow 2n$. Using the LWE modulus switching technique (\autoref{subsec:modulus-switch-lwe}), our original LWE ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e) = ({a}_0, {a}_1, \gap{$\cdots$} {a}_{k-1}, {b}) \in \mathbb{Z}_q^{k+1}$ (i.e., the initial input to the noise bootstrapping procedure) will be converted into the following: 
 
 $ $
 
@@ -619,82 +621,81 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta} m) = (\hat{a}_0, \hat{a}_1, \gap{$\
 
 $\vec{s} = (s_0, s_1, \gap{$\cdots$} s_k) \in \mathbb{Z}_2^{k}$  \textcolor{red}{\# the secret key stays the same, as each $s_i$ is binary}
 
-$\hat{\Delta} = \Delta\dfrac{2n}{q} \in \mathbb{Z}_{2n}$
+$\hat{\Delta} = \Delta\dfrac{2n}{q} = \dfrac{2n}{t} \in \mathbb{Z}_{2n}$
 
 $\hat{a}_i = \left \lceil a_i\dfrac{2n}{q} \right \rfloor \in \mathbb{Z}_{2n}$
 
-$\hat{e}_b = \left \lceil e_b\dfrac{2n}{q} \right \rfloor \in \mathbb{Z}_{2n}$
+$\hat{e} = \left \lceil e\dfrac{2n}{q} \right \rfloor \in \mathbb{Z}_{2n}$
 
-$\hat{b} = \left \lceil b\dfrac{2n}{q} \right \rfloor \approx \sum\limits_{i=0}^{k-1} \hat{a}_is_i + \hat{\Delta} m + \hat{e}_b  \in \mathbb{Z}_{2n}$
+$\hat{b} = \left \lceil b\dfrac{2n}{q} \right \rfloor \approx \sum\limits_{i=0}^{k-1} \hat{a}_is_i + \hat{\Delta} m + \hat{e}  \in \mathbb{Z}_{2n}$
 
 
 
 $ $
 
-\para{The degree of $V(X)$ and Security}: If our goal were to design the minimal-degree polynomial $V$ whose coefficients map all possible values of the plaintext $m$, then it would be sufficient to design a ${t}$-degree polynomial $V$. Nonetheless, there are two reasons why we choose the degree of $V$ to be $2n$ instead of ${t}$: (1) greater gap of modulus switch creates more noise, due to the decreasing distance between the plaintext bits and the noise bits in the ciphertext; (2) to guarantee an enough security level-- the higher the polynomial degree $n$ is, the safer our scheme is against attacks. 
+\para{The degree of $V(X)$ and Security}: If our goal were to design the minimal-degree polynomial $V$ whose coefficients map all possible values of the plaintext $m$, then it would be sufficient to design a ${t}$-degree polynomial $V$. Nonetheless, the reason why we choose the degree of $V$ to be $2n$ instead of ${t}$ is to guarantee an enough security level-- the higher the polynomial degree $n$ is, the safer our scheme is against attacks. 
 
 
 
 \subsubsection{Halving the Plaintext Space To be Used}
 \label{subsec:tfhe-zero-padding} 
 
-Problematically, Lookup Table $V(X)$ polynomial rotates \textit{negacyclically}, that is, $V(X)X^{n} = -V(X)$ (i.e., coefficients flip their signs with the rotating period of $n$). More generally:
+Problematically, the LUT polynomial $V(X)$  rotates \textit{negacyclically}, that is, $V(X)\cdot X^{n} = -V(X)$ (i.e., coefficients flip their signs with the rotation period of $n$). More generally:
 
 \begin{figure}[h]
 \[
-    V(X)\cdot X^{-i}= V(X)\cdot X^{2n - i} = V(X)\cdot X^{4n - i} = \cdots = V(X)\cdot X^{-(i \gap{\text{mod} 2n)}} =  
+    V(X)\cdot X^{-j}= V(X)\cdot X^{2n - j} = V(X)\cdot X^{4n - j} = \cdots = V(X)\cdot X^{-(j \bmod 2n)} =  
 \begin{cases}
-    v_i  + v_{i+1}X + \cdots, \text{for } 0\leq i<n\\
-    -v_{i} - v_{i-1}X - \cdots, \text{for } n\leq i<2n
+    v_j  + v_{j+1}X + \cdots, \text{for } 0\leq i<n\\
+    -v_{j} - v_{j-1}X - \cdots, \text{for } n\leq j<2n
 \end{cases}
 \]
 \end{figure}
 
-\noindent , where $v_i$ denotes the constant term's coefficient after rotating the polynomial $V(X)$ by $i$ positions to the left. Problematically, $v_i$ flips its sign whenever its rotation passes the boundary between $X^0$ and $X^{n-1}$. After applying modulus switch (\autoref{subsec:bootstrapping-modulus-switch}) to $V(X)$, it becomes the following polynomial:
+\noindent , where $v_j$ denotes the constant term's coefficient after rotating the polynomial $V(X)$ by $j$ positions to the left. Problematically, $v_j$ flips its sign whenever its rotation crosses the boundary between $X^0$ and $X^{n-1}$. Given the modulus-switched values $\hat{a}_j$, $\hat{e}$, and $\hat{b}$, we design the following LUT polynomial $V(X)$:
 
 $ $
 
-$V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_nX^{n-1}$
+$V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{n-1}X^{n-1}$
 
-\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e}_0} + m_0X^{\hat{\Delta} m_0 + \hat{e}_1} + m_0X^{\hat{\Delta} m_0 + \hat{e}_2} + \gap{$\cdots$} +  m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e}_0} + m_0X^{\hat{\Delta} m_0 + \hat{e}_1} + m_0X^{\hat{\Delta} m_0 + \hat{e}_2} + \gap{$\cdots$} +  m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$ \textcolor{red}{ \# total $\hat{\Delta}$ terms}
 
-\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e}_0} + m_1X^{\hat{\Delta} m_1 + \hat{e}_1} + m_1X^{\hat{\Delta} m_1 + \hat{e}_2} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$
+\text{ } $ + \text{ } m_1X^{\hat{\Delta} m_1 + \hat{e}_0} + m_1X^{\hat{\Delta} m_1 + \hat{e}_1} + m_1X^{\hat{\Delta} m_1 + \hat{e}_2} + \gap{$\cdots$} + m_1X^{\hat{\Delta} m_1 + \hat{e}_{\hat{\Delta} - 1}}$ \textcolor{red}{ \# total $\hat{\Delta}$ terms}
 
 \text{ } $ + \gap{$\cdots$} $
 
-\text{ } $ + \text{ } m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_0} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_1} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_2} + \gap{$\cdots$} + m_{t - 1}X^{\hat{\Delta} m_{t - 1} + \hat{e}_{\hat{\Delta} - 1}}$
-
-$ $
-
-\noindent , where $\hat{\Delta} m_{t - 1} + \hat{e}_{\hat{\Delta} - 1} \in \mathbb{Z}_{2n}$
-
-$ $
-
-Remember that by computing $V(X)\cdot X^{-i'}$ for  $i'= \{0, 1, \cdots , n-1\}$, we can rotate $V(X)$'s coefficients to the left by $\{0, 1, \cdots n-1 \}$ positions. Also, remember that $i' = \hat{\Delta} m_{t - 1} + \hat{e}_{\hat{\Delta} - 1}$. For each rotation of $i'= \{0, 1, \cdots , n-1\}$, we get the following values as the constant-term coefficient: 
+\text{ } $ + \text{ } m_{t/2 - 1}X^{\hat{\Delta} m_{t/2 - 1} + \hat{e}_0} + m_{t/2 - 1}X^{\hat{\Delta} m_{t/2 - 1} + \hat{e}_1} + m_{t/2 - 1}X^{\hat{\Delta} m_{t/2 - 1} + \hat{e}_2} + \gap{$\cdots$} + m_{t/2 - 1}X^{\hat{\Delta} m_{t/2 - 1} + \hat{e}_{\hat{\Delta} - 1}}$ \textcolor{red}{ \# total $\hat{\Delta}$ terms}
 
 $ $
 
 
-$ $
+Remember that by computing $V(X)\cdot X^{-j}$ for  $j= \{0, 1, \cdots , n-1\}$, we can rotate $V(X)$'s coefficients to the left by $\{0, 1, \cdots n-1 \}$ positions. For each $j$-slot rotation of $V(X)$ where $j= \{0, 1, \cdots , n-1\}$, the rotated polynomial $V'(X)$ gets the following values as the constant-term's coefficient: 
 
-In the above expression, $e_*$ is a noise that can range from $[0, \hat{\Delta})$. Note that all of $\hat\Delta m_i + e_0, \hat\Delta m_i + e_1, \cdots,\hat\Delta m_i + e_{\hat\Delta - 1}$ exponents are associated with the same coefficient value, $m_i$, because their underlying plaintext $m_i$ is the same. This is why the coefficients for each $m_i$ are redundantly used $\hat\Delta$ times in $V(X)$.
+$\overbrace{\overbrace{\underbrace{\Delta m_0, \Delta m_0, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_0 + \hat{e}_*}}}^{\hat{\Delta} \text{ repetitions}} \overbrace{\underbrace{\Delta m_1, \Delta m_1, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_1 + \hat{e}_*}}}^{\hat{\Delta} \text{ repetitions}} \gap{$\cdots$} \overbrace{\underbrace{\Delta m_{{t}/{2}-1}, \Delta m_{{t}/{2}-1}, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_{{t}/{2}-1}+ \hat{e}_*} }}^{\hat{\Delta} \text{ repetitions}}}^{\text{$V'(X)$'s constant term's coefficient for $j = \{0, 1, \cdots n-1\}$ rotations}}$ 
 
-So far, the above sequence of $m_0, m_1, \cdots, m_{{t}/{2} - 1}$ coefficients is what we expect $V'(X)$ to return for each of $[0, n-1)$ rotations (where each $m_i < m_{i+1}$). However, the coefficient mappings all break between $[n, 2n -1)$ rotations, because their coefficients get flipped signs as they pass the term's boundary from $X^0$ to $X^{n-1}$, due to the nature of a polynomial ring modulo $(x^n + 1)$: 
 
-$ $
-
-$\overbrace{\overbrace{\underbrace{-m_{t/2}, -m_{t/2}, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_{t/2} + e_*}}}^{\hat{\Delta} \text{ repetitions}} \overbrace{\underbrace{-m_{t/2+1}, -m_{t/2+1}, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_{t/2+1} + e_*}}}^{\hat{\Delta} \text{ repetitions}} \gap{$\cdots$} \overbrace{\underbrace{-m_{t - 1}, -m_{t - 1}, \gap{$\cdots$}}_{\text{coeff. of } X^{\hat{\Delta}m_{t - 1}+ e_*} }}^{\hat{\Delta} \text{ repetitions}}}^{\text{$V(X)$'s constant term coefficient after each of $n, n+1, \cdots 2n-1$ rotations}}$ 
 
 $ $
 
-As you see above, the rotated $V'(X)$'s constant term coefficient shows a negacyclic pattern with the period of $n$, where the second $n$ rotation group's coefficients are the exactly negatived values of the first $n$ rotation group's values. Let's understand why this negacyclic behavior breaks the (exponent, coefficient) = $(\hat{\Delta} m + \hat e, m)$ mappings. The semantic meaning of rotating $V(X)$ to the left by 1 position means that we increase the value of $\hat{\Delta}m_i + e$ (i.e., noisy plaintext's value) by 1 when we compute $V(X)\cdot X^{\hat{\Delta}m_i + e}$, and get the rotated ${V}_{'}(X)$'s constant term coefficient $m_i$ (i.e, the mapped noise-free plaintext). Therefore, as we gradually increase the rotation count of $V$ from $[0, 2n)$, the returned $m_i$ should be a value that is either the same or greater than $m_{i-1}$, all the way to $m_{t - 1}$. This constraint holds for the first-half $i = [0, n)$, as the rotated $V'(X)$'s constant term coefficient is $m_0, \cdots, m_1, \cdots, m_{t/2 - 1}$. However, for the second-half $i = [n, 2n)$, the rotated $V'(X)$'s constant term coefficient is $-m_0, \cdots, -m_1, \cdots, -m_{t/2 - 1}$, which violates our constraint that $m_i \leq m_{i+1}$. Therefore, the combination of the first-half and the second-half domains of $i$ cannot mathematically implement a continuous modulo value range $\mathbb{Z}_t$. 
+In the above expression, $\hat{e}_*$ is a noise that can range from $[0, \hat{\Delta})$. Note that all of $\hat\Delta m_i + \hat{e}_0, \hat\Delta m_i + \hat{e}_1, \cdots,\hat\Delta m_i + \hat{e}_{\hat\Delta - 1}$ exponents are designed to be mapped to the same coefficient value, $m_i$, which aligns with the fact that their underlying plaintext $m_i$ is the same when decrypted (once their associated noise $\hat{e}_*$ gets eliminated). This is why each $m_i$ is redundantly used $\hat\Delta$ times in a row as coefficients in $V(X)$. We can view this sequential repetition of coefficients as having a robustness of mapping each $\hat{\Delta}m_i + \hat{e}_*$ to $m_i$ against any noise $\hat{e}_* \in \mathbb{Z}_{\hat{\Delta}}$. 
 
-To summarize the problem, $V(X)$ cannot be used as a complete bootstrapping LUT, because it preserves the correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, m)$ only for one half of $i \in \mathbb{Z}_t$, not for the other half. 
+So far, the above sequence of $m_0, m_1, \cdots, m_{{t}/{2} - 1}$ coefficients is what we expect $V'(X)$ (i.e., the rotated polynomial) to return as its constant term's coefficient for each of $0, 1, \cdots, n-1$ rotations (where each $m_i + 1 = m_{i+1}$). However, the correctness of the coefficient mappings breaks when the rotation count is between $[n, 2n -1)$, because their coefficients flip their signs when they cross the term's boundary from $X^0$ to $X^{n-1}$, due to the polynomial ring's negacyclic nature. Specifically, the constant term's coefficient values of the rotated polynomial $V'(X)$ are as follows for each rotation of $n, n+1, \cdots, 2n-1$ positions:
+
+$ $
+
+$\overbrace{\overbrace{\underbrace{-m_{0}, -m_{0}, \gap{$\cdots$}}_{-\text{coeff. of } X^{\hat{\Delta}m_{0} + \hat{e}_*}}}^{\hat{\Delta} \text{ repetitions}} \overbrace{\underbrace{-m_{1}, -m_{1}, \gap{$\cdots$}}_{-\text{coeff. of } X^{\hat{\Delta}m_{1} + \hat{e}_*}}}^{\hat{\Delta} \text{ repetitions}} \gap{$\cdots$} \overbrace{\underbrace{-m_{t/2 - 1}, -m_{t/2 - 1}, \gap{$\cdots$}}_{-\text{coeff. of } X^{\hat{\Delta}m_{t/2 - 1} + \hat{e}_*} }}^{\hat{\Delta} \text{ repetitions}}}^{\text{$V'(X)$'s constant term's coefficient after each of $n, n+1, \cdots 2n-1$ rotations}}$ 
+
+$ $
+
+As we can see above, the rotated $V'(X)$'s constant term's coefficient shows a negacyclic pattern with the rotation period of $n$, where the second $n$-rotation group's coefficients are exactly the negated values of the first $n$-rotation group's values. Let's understand why this negacyclic behavior breaks the (exponent, coefficient) = $(\hat{\Delta} m + \hat{e}, m)$ mappings. Since TFHE's plaintext and ciphertext values are defined in rings, as we rotate the LUT polynomial $V(X)$, we ideally want the rotated polynomial $V'(X)$'s constant term's value (i.e., mapped plaintext value) to wrap around in a circular manner, representing a ring pattern (with sequential $\hat{\Delta}$ repetitions of each value to be resistant against up to a $\hat{e}_* \in Z_{\hat{\Delta}}$ noise). However, the negacyclic nature of a polynomial ring makes the constant term's value of the second-half rotation group problematic, because they are exact negations of those of the first-half rotation group, breaking the circular wrapping-around ring pattern between the first-group values and the second-group values. 
+%Specifically, as we gradually rotate $V$ with the rotation count $[0, 2n)$, the constant term's coefficient (i.e., $m_i$) should be ideally a value that is either the same as before or greater than the previous value ($m_{i-1}$), all the way to $2n$ rotations (to represent a ring pattern). This constraint holds for the first-half $i = [0, n)$, as the rotated $V'(X)$'s constant term's coefficient is $m_0, \cdots, m_1, \cdots, m_{t/2 - 1}$. However, for the second-half $i = [n, 2n)$, the rotated $V'(X)$'s constant term's coefficient is $-m_0, \cdots, -m_1, \cdots, -m_{t/2 - 1}$, which violates our constraint that $m_i \leq m_{i+1}$. Therefore, the combination of the first-half and the second-half domains of $i$ cannot mathematically implement a continuous modulo value range $\mathbb{Z}_t$. 
+
+To summarize the problem, $V(X)$ has a limitation in becoming a perfect LUT, because it preserves the correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat{e}, m)$ only for one half of $i \in \mathbb{Z}_t$, not for the other half. 
 
 \para{Solution:} 
-Fortunately, we have verified that $V(X)$'s mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, \Delta m)$ preserve their consistency if $V(X)$ is rotated no more than $n-1$ positions. Therefore, the most practical solution for the negacyclic problem of polynomial rotation is to restrict $V(X)$ to be rotated no more than $n-1$ positions during the noise bootstrapping. To enforce this, we can require the TFHE application such that while it processes plaintext numbers (in its original plaintext computation logic without homomorphic computation), the application should ensure to use only some continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$. This enforces the possible values of $\hat\Delta m + \hat e$ to be continuous $n$ modulo values within $\mathbb{Z}_{2n}$. Since LUT $V(X)$ is rotated by computing $V(X)\cdot X^{-(\hat\Delta m + \hat e)}$, as we restrict $\hat\Delta m + \hat e$ to be at most $n-1$, $V(X)$ will be rotated at most $n-1$ positions during the noise bootstrapping. Thus, we can prevent the occurrences of the problematic $\{n, n+1, \gap{$\cdots$}, 2n -1 \}$ rotations that cause coefficient extraction of double-signed contradicting coefficients. 
+Good news is that we have observed that $V(X)$'s mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, \Delta m)$ preserve their ring-pattern consistency if $V(X)$ is rotated no more than $n-1$ positions (i.e., the first-half rotation group). Therefore, the easiest solution to avoid the negacyclic problem of the LUT polynomial rotation is that the application of TFHE restricts $V(X)$ to be rotated no more than $n-1$ positions \textit{by design} during the noise bootstrapping. To enforce this, when the TFHE application's computation pipeline processes plaintext values (in its original plaintext computation logic before considering any homomorphic operations), the application should ensure to involve only some pre-defined continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$ as the possible inputs and outputs of each computation step. This constraint effectively ensures the possible values of $\hat\Delta m + \hat e$ to be continuous $n$ values within $\mathbb{Z}_{2n}$. Since the LUT polynomial $V(X)$ gets rotated by computing $V(X)\cdot X^{-(\hat\Delta m + \hat e)}$, as the application restricts $\hat\Delta m + \hat e$ to be at most $n-1$ (out of $2n - 1$) by its application design, $V(X)$ will be rotated at most $n-1$ positions during the noise bootstrapping. Thus, we can prevent the occurrences of the problematic $\{n, n+1, \gap{$\cdots$}, 2n -1 \}$ rotations that flip the signs of coefficients.  
 
-To summarize, at the cost of halving the application's usable plaintext values to some continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$, we can prevent $V(X)$'s negacyclic rotation problem, and thereby preserve $V(X)$'s correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, \Delta m)$.
+To summarize, at the cost of halving the application's usable plaintext values to some continuous $\dfrac{t}{2}$ values within $\mathbb{Z}_t$, we can prevent $V(X)$'s negacyclic rotation problem, and thereby preserve $V(X)$'s correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, m)$.
 
 \begin{comment}
 Meanwhile, the ciphertext space $q$ is unmodified, because If we take a simple example of $t = 8$, our TFHE application can design the following encoding scheme:
@@ -723,7 +724,7 @@ Considering all these, our final LUT polynomial $V(X)$ is as follows:
 
 $ $
 
-$V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_nX^{n-1}$
+$V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{n-1}X^{n-1}$
 
 \text{ } $= m_0X^{\hat{\Delta} m_0 + \hat{e}_0} + m_0X^{\hat{\Delta} m_0 + \hat{e}_1} + m_0X^{\hat{\Delta} m_0 + \hat{e}_2} + \gap{$\cdots$} + m_0X^{\hat{\Delta} m_0 + \hat{e}_{\hat{\Delta} - 1}}$
 
@@ -737,7 +738,7 @@ $V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_nX^{n-1}$
 
 $ $
 
-\noindent , where $\hat\Delta = \Delta \cdot \dfrac{2n}{q}$. The application should ensure that $m_0, m_1, \cdots, m_{t/2 - 1}$ is some continuous $\dfrac{t}{2}$ modulo values in $\mathbb{Z}_t$. This constraint ensures $V(X)$'s rotation positions $\hat{\Delta} m_i + \hat e_{*}$ to be at most $n$ continuous possibilities, preventing $V(X)$ from making more than 1 full-circle rotation that triggers a negacyclic problem. 
+\noindent , where $\hat\Delta = \Delta \cdot \dfrac{2n}{q} = \dfrac{2n}{t}$. The application should ensure that $m_0, m_1, \cdots, m_{t/2 - 1}$ are some continuous modulo-$\dfrac{t}{2}$ values in $\mathbb{Z}_t$. This constraint ensures $V(X)$'s rotation positions $\hat{\Delta} m_i + \hat {e}_{*}$ (where $e_* \in \mathbb{Z}_{\hat{\Delta}}$) to be most $n$ continuous possibilities, preventing $V(X)$ from making more than 1 full-cycle rotation that triggers a negacyclic problem. 
 
 
 \end{tcolorbox}
@@ -788,7 +789,7 @@ Note that while we restrict the application's plaintext space usage to some cont
 
 Finally, we use the coefficient extraction technique (\autoref{subsec:tfhe-extraction}) to extract the rotated polynomial $V'(X)$'s constant term's coefficient as an encryption of $m$: $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$. At this point, the original $\textsf{LWE}$ ciphertext's old noise $\hat{e}_b$ has gone, and the bootstrapped new ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ has a newly generated small noise $e_s$. 
 
-In fact, the homomorphic MUX logic in the blind rotation procedure (\autoref{subsec:bootstrapping-blind-rotation}) involves lots of ciphertext multiplications and additions, which can accumulate additional noises until we reach the point of coefficient extraction. In order to limit the accumulating noises during the series of MUX logic, we can carefully adjust the security parameters. For example, we can design a narrower Gaussian distribution for sampling the noise $e$, while designing a sufficiently large $n$ to compensate for the reduced noise. Meanwhile, increasing $q$ rather makes the system less secure, because it becomes more vulnerable to Lattice reduction attacks. 
+In fact, the homomorphic MUX logic in the blind rotation procedure (\autoref{subsec:bootstrapping-blind-rotation}) involves lots of ciphertext multiplications and additions, which can accumulate additional noise until we reach the point of coefficient extraction. In order to limit the accumulating noise during the series of MUX logic, we can carefully adjust the security parameters. For example, we can design a narrower Gaussian distribution for sampling the noise $e$, while designing a sufficiently large $n$ to compensate for the reduced noise. Meanwhile, increasing $q$ rather makes the system less secure, because it becomes more vulnerable to lattice reduction attacks. 
 
 
 
@@ -807,7 +808,7 @@ TFHE's noise bootstrapping procedure is summarized as follows:
 $ $
   
 \begin{enumerate}
-\item \textbf{\underline{Modulus Switch}:} Change the modulus of the TFHE ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e_b)$ from $q \rightarrow 2n$ to get $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta} m + \hat e_b)$, where $\hat\Delta = \Delta \cdot \dfrac{2n}{q}$.
+\item \textbf{\underline{Modulus Switch}:} Change the modulus of the TFHE ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e_b)$ from $q \rightarrow 2n$ to get $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta} m + \hat e_b)$, where $\hat\Delta = \Delta \cdot \dfrac{2n}{q} = \dfrac{2n}{t}$.
 
 $ $
 
@@ -835,7 +836,7 @@ $\textsf{GLWE}_{\vec{S}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}, \sigma}^{\be
 
 $ $
 
-\item \textbf{\underline{Coefficient Extractio}:} Homomorphically extract the constant term's coefficient $m$ from the rotated polynomial $V_k$, which is $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m)$. 
+\item \textbf{\underline{Coefficient Extraction}:} Homomorphically extract the constant term's coefficient $m$ from the rotated polynomial $V_k$, which is $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m)$. 
 %\item \textbf{Rescaling:} Multiply $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m)$ by $\dfrac{q}{2n}$ to get:  
 
 %$\dfrac{q}{2n} \cdot LWE_{S, \sigma}(\hat{\Delta}m)$
@@ -927,6 +928,7 @@ $\hat b = 12 \approx 13 = \sum\limits_{i=0}^{7}(\hat{a}_is_i) + \hat{\Delta}m + 
 
 This small difference in $\hat b$ comes from the aggregated noises of rounding $\hat a_0, \hat a_1, \cdots , \hat e$ during the modulus switch. 
 
+$ $
 
 \item \textbf{Blind Rotation:} We assume that the application avoids the problem of negacyclic polynomial rotation by ensuring that the usable plaintext values are the following continuous $\dfrac{8}{2}$ modulo values within $\mathbb{Z}_8 = \{-4, -3, -2, -1, 0, 1, 2, 3\}$, which are $\{-2, -1, 0, 1\}$. This implies that the only possible values of $i=\hat\Delta m + \hat e$ in $V(X)\cdot X^{i}$ will be: $i = \{-8, -7, \cdots, 6, 7\}$. Based on these requirements, \autoref{tab:lut} is the Lookup Table polynomial $V(X)$ that maps $\hat{\Delta} m + \hat{e}$ to $\Delta m$. 
 
@@ -976,7 +978,7 @@ During the actual bootstrapping, we will do blind rotation of \autoref{tab:lut}'
 $\hat\Delta m + \hat e = \hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 12 - (4 - 16 + 16 + 4) = 4 \text{ mod 32} \in \mathbb{Z}_{2n=32}$ 
 
 
-In \autoref{tab:lut}, if the rotation count $i = 4$, the corresponding constant term coefficient is $v_4 = 1 = m$. As $\Delta = 4$, we finally get $\textsf{LWE}_{\vec{s},\sigma}(\Delta m) = 1$. 
+In \autoref{tab:lut}, if the rotation count $i = 4$, the corresponding constant term's coefficient is $v_4 = 1 = m$. As $\Delta = 4$, we finally get $\textsf{LWE}_{\vec{s},\sigma}(\Delta m) = 1$. 
 
 
 

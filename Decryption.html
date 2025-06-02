@@ -104,7 +104,7 @@ during decryption.
 does not divide <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. In such a case,
 we set the scaling factor as <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>.
-Then, provided <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>»</mo><mi>t</mi></mrow></math>, the decryption
+Then, provided <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>, the decryption
 works correctly even if <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> is a
 large value that wraps around <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>.
 We will show why this is so.
@@ -191,7 +191,7 @@ ensure <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Mat
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> is that the ciphertext
 modulus <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> is sufficiently large.
-To put it differently, if <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>»</mo><mi>t</mi></mrow></math>,
+To put it differently, if <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>,
 then the error bound will hold.
 </p><!--  l. 122  --><p class='indent'>   Therefore, we can generalize the formula for the plaintext’s scaling factor in Summary B-2.2 (in <a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!--  tex4ht:ref: subsec:lwe-enc   --></a>) as
 <!--  l. 122  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>

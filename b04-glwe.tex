@@ -12,9 +12,11 @@ Notice that GLWE's setup parameters are similar to that of RLWE. One difference 
 \subsection{Encryption}
 \label{subsec:glwe-enc}
 
+Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{(n, t)}$ whose coefficients represent the plaintext numbers to encrypt.
+
+
 \begin{enumerate}
-\item Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{(n, t)}$ whose coefficients represent the plaintext numbers to encrypt.
-\item Randomly pick a list of $k$ $(n-1)$-degree polynomials $\{A_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n,q \rangle}^{k}$ as a one-time public key. 
+\item Randomly pick a list of $k$ $(n-1)$-degree polynomials $\{A_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n,q \rangle}^{k}$ as a one-time public key.
 \item Randomly pick a small polynomial $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n,q \rangle}$ as a one-time noise, whose $n$ coefficients are small numbers in $\mathbb{Z}_q$ randomly sampled from the Gaussian distribution $\chi_\sigma$. 
 \item Scale $M$ by $\Delta$, which is to compute $\Delta \cdot M$. This converts $M \in \mathcal{R}_{\langle n, t \rangle}$ into $\Delta \cdot M \in \mathcal{R}_{\langle n,q \rangle}$.
 \item Compute $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$. 

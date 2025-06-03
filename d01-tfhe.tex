@@ -642,15 +642,19 @@ $ $
 
 Problematically, the LUT polynomial $V(X)$  rotates \textit{negacyclically}, that is, $V(X)\cdot X^{n} = -V(X)$ (i.e., coefficients flip their signs with the rotation period of $n$). More generally:
 
-\begin{figure}[h]
-\[
-    V(X)\cdot X^{-j}= V(X)\cdot X^{2n - j} = V(X)\cdot X^{4n - j} = \cdots = V(X)\cdot X^{-(j \bmod 2n)} =  
+
+$V(X)\cdot X^{-j}= V(X)\cdot X^{2n - j} = V(X)\cdot X^{4n - j} = \cdots$
+
+
+$
+= V(X)\cdot X^{-(j \bmod 2n)} =  
 \begin{cases}
     v_j  + v_{j+1}X + \cdots, \text{for } 0\leq i<n\\
     -v_{j} - v_{j-1}X - \cdots, \text{for } n\leq j<2n
 \end{cases}
-\]
-\end{figure}
+$
+
+$ $
 
 \noindent , where $v_j$ denotes the constant term's coefficient after rotating the polynomial $V(X)$ by $j$ positions to the left. Problematically, $v_j$ flips its sign whenever its rotation crosses the boundary between $X^0$ and $X^{n-1}$. Given the modulus-switched values $\hat{a}_j$, $\hat{e}$, and $\hat{b}$, we design the following LUT polynomial $V(X)$:
 

@@ -1283,7 +1283,7 @@ $ $
 \subsubsection{Summary}
 \label{subsubsec:bfv-rotation-summary}
 
-We summarize the procedure for rotating the BFV input vectors as follows: 
+We summarize the procedure of rotating the BFV input vectors as follows: 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bfv-rotation}} BFV's Homomorphic Rotation of Input Vector Slots}}]
 
@@ -1295,8 +1295,8 @@ $ $
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
 (\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
 (\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
-\vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \cdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$}}
 
 $ $
@@ -1330,7 +1330,7 @@ $ $
 
 Suppose we have an RLWE ciphertext and a key-switching key as follows:
 
-$\textsf{RLWE}_{S, \sigma}(\Delta M) = (A, B)$, \text{ } $\textsf{RLev}_{S, \sigma}^{\beta, l}(S^{J(h)})$
+$\textsf{RLWE}_{S, \sigma}(\Delta M) = (A, B)$, \text{ } $\textsf{RLev}_{S, \sigma}^{\beta, l}\bm(S(X^{J(h)})\bm)$
 
 $ $
 
@@ -1382,7 +1382,7 @@ $\{2^1, 2^3, 2^5, 2^7\} \equiv \{8^1, 8^3, 8^5, 8^7\} \equiv \{15^1, 15^3, 15^5,
 
 $ $
 
-Among $\{2, 8, 15, 9\}$ as the roots of $X^4 + 1$, let's choose $\omega = 2$ as the base root to construct the encoding matrix $\hathat{W}$ and the decoding matrix $\hathat{W}^*$ as follows: 
+Among $\{2, 8, 15, 9\}$ as the roots of $X^4 + 1$, let's choose $\omega = 9$ as the base root to construct the encoding matrix $\hathat{W}$ and the decoding matrix $\hathat{W}^*$ as follows: 
 
 $\hathat{W} = \begin{bmatrix}
 1 & 1 & 1 & 1\\
@@ -1409,7 +1409,7 @@ $\hathat{W}^* = \begin{bmatrix}
 1 & \omega^{J(0)} & (\omega^{J(0)})^2 & (\omega^{J(0)})^3\\
 1 & \omega^{J(1)} & (\omega^{J(1)})^2 & (\omega^{J(1)})^3\\
 1 & \omega^{J_*(0)} & (\omega^{J_*(0)})^2 & (\omega^{J_*(0)})^3\\
-1 & \omega^{J_*(1)} & (\omega^{J_*(1)})^3 & (\omega^{J_*(1)})^3\\
+1 & \omega^{J_*(1)} & (\omega^{J_*(1)})^2 & (\omega^{J_*(1)})^3\\
 \end{bmatrix} \equiv \begin{bmatrix}
 1 & 9 & 13 & 15\\
 1 & 8 & 13 & 2\\
@@ -1460,11 +1460,16 @@ $\vec{m}_1 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 13 & 13 & 4 & 4\\
 2 & 15 & 9 & 8\\
 \end{bmatrix} \cdot \begin{bmatrix}
-0 & 0 & 0 & 4\\
-0 & 0 & 4 & 0\\
-0 & 4 & 0 & 0\\
-4 & 0 & 0 & 0\\
-\end{bmatrix} \cdot (10, 3, 5, 13) \equiv (12, 11, 12,1)  \bmod 17$
+0 & 0 & 0 & 1\\
+0 & 0 & 1 & 0\\
+0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0\\
+\end{bmatrix} \cdot \begin{bmatrix}
+10\\
+3\\
+5\\
+13\\
+\end{bmatrix} \equiv (12, 11, 12,1)  \bmod 17$
 
 $ $
 
@@ -1474,11 +1479,16 @@ $\vec{m}_2 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 13 & 13 & 4 & 4\\
 2 & 15 & 9 & 8\\
 \end{bmatrix} \cdot \begin{bmatrix}
-0 & 0 & 0 & 4\\
-0 & 0 & 4 & 0\\
-0 & 4 & 0 & 0\\
-4 & 0 & 0 & 0\\
-\end{bmatrix} \cdot (2, 4, 3, 6) \equiv (8, 5, 14, 6) \bmod 17$
+0 & 0 & 0 & 1\\
+0 & 0 & 1 & 0\\
+0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0\\
+\end{bmatrix} \cdot \begin{bmatrix}
+2\\
+4\\
+3\\
+6\\
+\end{bmatrix} \equiv (8, 5, 14, 6) \bmod 17$
 
 $ $
 
@@ -1498,9 +1508,9 @@ We decode $M_1(X)$ and $M_2(X)$ as follows:
 
 $\vec{m}_1 = \dfrac{\Delta \vec{m}_1}{\Delta} = \dfrac{(24, 22, 24, 2)}{2} = (12, 11, 12, 1)$
 
-$\vec{m}_2 = \dfrac{\Delta \vec{m}_1}{\Delta} = \dfrac{(16, 10, 28, 12)}{2} = (8, 5, 14, 6)$
+$\vec{m}_2 = \dfrac{\Delta \vec{m}_2}{\Delta} = \dfrac{(16, 10, 28, 12)}{2} = (8, 5, 14, 6)$
 
-$\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_1}{\Delta} = \dfrac{(40, 32, 52, 14)}{2} = (20, 16, 26, 7)$
+$\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_{1+2}}{\Delta} = \dfrac{(40, 32, 52, 14)}{2} = (20, 16, 26, 7)$
 
 $ $
 
@@ -1642,7 +1652,7 @@ $ = \begin{bmatrix}
 
 $ $
 
-Now suppose that we encode the following two input vectors (i.e., input vector slots) in $\mathbb{Z}_{17}$:
+Now suppose that we encode the following input vector (i.e., input vector slots) in $\mathbb{Z}_{17}$:
 
 $\vec{v} = (1, 2, 3, 4, 5, 6, 7, 8)$
 
@@ -1668,15 +1678,24 @@ $= 13 \cdot  \begin{bmatrix}
 2&15&2&15&9&8&9&8\\
 7&6&10&11&5&3&12&14\\
 \end{bmatrix} \cdot \begin{bmatrix}
-0 & 0 & 0 & 0 & 0 & 0 & 0 & 8\\
-0 & 0 & 0 & 0 & 0 & 0 & 8 & 0\\
-0 & 0 & 0 & 0 & 0 & 8 & 0 & 0\\
-0 & 0 & 0 & 0 & 8 & 0 & 0 & 0\\
-0 & 0 & 0 & 8 & 0 & 0 & 0 & 0\\
-0 & 0 & 8 & 0 & 0 & 0 & 0 & 0\\
-0 & 8 & 0 & 0 & 0 & 0 & 0 & 0\\
-8 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-\end{bmatrix} \cdot (1,2,3,4,5,6,7,8) $
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+\end{bmatrix} \cdot \begin{bmatrix}
+1\\
+2\\
+3\\
+4\\
+5\\
+6\\
+7\\
+8\\
+\end{bmatrix}$
 
 $ \equiv (13, 16, 10, 5, 9, 12, 7, 1)  \bmod 17$
 
@@ -1698,7 +1717,7 @@ Note that the coefficients of the scaled polynomials $\Delta M(X^{J(3)})$ is sti
 
 We decode $M(X^{J(3)})$ as follows: 
 
-$\vec{m} = \dfrac{\Delta \vec{m}_{J(3)}}{\Delta} = \dfrac{(26, 24, -20, -2, 18, -32, -14, 10)}{2} = (13, 12, -10, -2, 18, -32, -14, 10) \pmod{17}$
+$\vec{m}_{J(3)} = \dfrac{\Delta \vec{m}_{J(3)}}{\Delta} = \dfrac{(26, 24, -20, -2, 18, -32, -14, 10)}{2} = (13, 12, -10, -2, 18, -32, -14, 10) \pmod{17}$
 
 $ $
 

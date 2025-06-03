@@ -484,7 +484,7 @@ Meanwhile, we also have the following relations:
 
 $\textsf{RLWE}_{S, \sigma}^{-1}(\Delta M^{\langle 1 \rangle} + K_1q) = \Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle} + K_1q$
 
-$\textsf{RLWE}_{S, \sigma}^{-1}(\Delta M^{\langle 2 \rangle} + K_2q) = \Delta M^{\langle 1 \rangle} + E^{\langle 2 \rangle} + K_1q$
+$\textsf{RLWE}_{S, \sigma}^{-1}(\Delta M^{\langle 2 \rangle} + K_2q) = \Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle} + K_2q$
 
 $ $
 
@@ -721,7 +721,7 @@ In conclusion, the ciphertext $\left(\left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}
 
 $ $
 
-\para{Noise Analysis:} Among the terms of $\epsilon''$, let's analyze the noise growth of the $(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1)$ term after ciphertext-to-ciphertext multiplication. Each coefficient of $K_1$ is at most $n$, because $A^{\langle 1 \rangle}\cdot S + B^{\langle 1 \rangle} = \Delta M + E^{\langle 1 \rangle} + K_1$, where the maximum possible coefficient value of $A^{\langle 1 \rangle}\cdot S + B^{\langle 1 \rangle}$ is $q\cdot n$. And the same is true for the coefficients of $K_2$. Therefore, after scaling down $(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1)$ by $\Delta$ upon the final decryption stage, this term's down-scaled noise gets bound by: 
+\para{Noise Analysis:} Among the terms of $\epsilon''$, let's analyze the noise growth of the $(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1)$ term after ciphertext-to-ciphertext multiplication. Each coefficient of $K_1$ is at most $n$, because $A^{\langle 1 \rangle}\cdot S + B^{\langle 1 \rangle} = \Delta M + E^{\langle 1 \rangle} + K_1q$, where the maximum possible coefficient value of $A^{\langle 1 \rangle}\cdot S + B^{\langle 1 \rangle}$ is $q\cdot n$. And the same is true for the coefficients of $K_2$. Therefore, after scaling down $(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1)$ by $\Delta$ upon the final decryption stage, this term's down-scaled noise gets bound by: 
 
 $\dfrac{1}{\Delta}\cdot(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) \approx \dfrac{t}{q}\cdot(t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) < \dfrac{nt \cdot (t + \epsilon)}{q} \cdot (E^{\langle 1 \rangle} + E^{\langle 2 \rangle})$
 
@@ -796,7 +796,7 @@ $ \textsf{ct}_{\alpha + \beta} = \textsf{ct}_{\alpha} + \textsf{ct}_{\beta}$
 
 $ $
 
-Then, this property holds: $\textsf{RLWE}^{-1}_{S, \sigma}\bm(\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})\bm) \approx \textsf{RLWE}^{-1}_{S, \sigma}\bm{(}\textsf{ct}_{\alpha + \beta}\bm)$
+Then, this property holds: $\textsf{RLWE}^{-1}_{S, \sigma}\bm(\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})\bm) \approx \textsf{RLWE}^{-1}_{S, \sigma}\bm{(}\textsf{ct}_{\alpha + \beta}\bm)$
 
 $ $
 
@@ -922,7 +922,7 @@ $\vec{v} = \dfrac{W^T \Delta \vec{m}}{\Delta} = \bm{(}W^T_0\cdot \vec{m}, \text{
 $= \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots, M(\omega^{2n-3}), \text{ } M(\omega^{2n-1}) \text{ } \bm{)}$
 
 
-$= \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots, M(\omega^{n-3}), \text{ } M(\omega^{2n-1}), \text{ } M(\omega^{-(2n-1)}), \text{ } M(\omega^{-(2n-3)}), \cdots, M(\omega^{-3}), \text{ } M(\omega{-1}) \text{ } \bm{)}$ 
+$= \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots, M(\omega^{n-3}), \text{ } M(\omega^{n-1}), \text{ } M(\omega^{-(n-1)}), \text{ } M(\omega^{-(n-3)}), \cdots, M(\omega^{-3}), \text{ } M(\omega{-1}) \text{ } \bm{)}$ 
 
 
 %%$\textsf{LWE}_{S, \sigma}(\Delta M) = (A, B) \in \mathcal{R}_{\langle n, q \rangle }^{2}$ \textcolor{red}{\text{ } \# An LWE ciphertext that encrypts $\Delta M$}

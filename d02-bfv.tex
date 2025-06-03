@@ -974,22 +974,22 @@ $\sigma_{M} : M(X) \rightarrow M(X^{J(h)})$
 
 $ $
 
-Given a plaintext polynomial $M(X)$, in order to give its decoded version of input vector $\vec{v}$ the effect of the first half of the elements being rotated by $h$ positions to the left (in a wrapping manner) and the second half of the elements also being rotated by $h$ positions to the left (in a wrapping manner), we update the current plaintext polynomial $M(X)$ to a new polynomial $M'(X) = M(X^{J(h)}) = M(X^{5^h})$ by applying the $\sigma_M$ mapping, where $h$ is the number of positions for left rotations for the first-half and second-half of the elements of $\vec{v}$. 
+Given a plaintext polynomial $M(X)$, in order to give its decoded version of input vector $\vec{v}$ the effect of the first half of the elements being rotated by $h$ positions to the left (in a wrapping manner) and the second half of the elements also being rotated by $h$ positions to the left (in a wrapping manner), we update the current plaintext polynomial $M(X)$ to a new polynomial $M'(X) = M(X^{J(h)}) = M(X^{5^h})$ by applying the $\sigma_M$ mapping, where $h$ is the number of positions for left rotations for the first half and second half of the elements of $\vec{v}$. 
 
 
 $ $
 
 \para{Decoding $\bm{M'(X)}$ into \boldmath$\vec{v}^{\langle h \rangle}$}: Our second task is to modify our original decoding scheme in order to successfully decode $M'(X)$ into the rotated input vector $\vec{v}^{\langle h \rangle}$. For this, we will modify our original isomorphic mapping $\sigma : M(X) \longrightarrow \vec{v}$, from:
 
-$\sigma: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}M(\omega), M(\omega^3),f(\omega^5), \cdots, M(\omega^{2n-1})\bm{)} \in \mathbb{Z}^n$ \textcolor{red}{ \text{ } \# designed in \autoref{subsec:poly-vector-transformation}}
+$\sigma: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}M(\omega), M(\omega^3),M(\omega^5), \cdots, M(\omega^{2n-1})\bm{)} \in \mathbb{Z}^n$ \textcolor{red}{ \text{ } \# designed in \autoref{subsec:poly-vector-transformation}}
 
 $ $
 
 , to the following: 
 
-$\sigma_J: M(X) \in \mathcal{R}_{\langle n, t \rangle} \longrightarrow  \bm{(}X(\omega^{J(0)}),X(\omega^{J(1)}),X(\omega^{J(2)}), \cdots, X(\omega^{J(\frac{n}{2} - 1)}), $
+$\sigma_J: M(X) \in \mathcal{R}_{\langle n, t \rangle} \longrightarrow  \bm{(}M(\omega^{J(0)}),M(\omega^{J(1)}),M(\omega^{J(2)}), \cdots, M(\omega^{J(\frac{n}{2} - 1)}), $
 
-\textcolor{white}{$\sigma_J: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}$} $X(\omega^{J_*(0)}), \text{ } X(\omega^{J_*(1)}), \text{ } X(\omega^{J_*(2)}), \cdots, X(\omega^{J_*(\frac{n}{2} - 1}) \text{ } \bm{)} \in \mathbb{Z}^{n}$
+\textcolor{white}{$\sigma_J: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}$} $M(\omega^{J_*(0)}), \text{ } M(\omega^{J_*(1)}), \text{ } M(\omega^{J_*(2)}), \cdots, M(\omega^{J_*(\frac{n}{2} - 1}) \text{ } \bm{)} \in \mathbb{Z}^{n}$
 
 
 %\textcolor{red}{\# $J(h) + J_*(h) = 0 \bmod 2n$, which implies that $\omega^{J_*(h)}$ is a conjugate of $\omega^{J(h)}$ (i.e., $\omega^{J_*(h)} = \overline\omega^{J(h)}$)}

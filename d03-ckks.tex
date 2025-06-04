@@ -80,7 +80,7 @@ CKKS internally uses the same schemes as BFV for encryption, decryption, ciphert
 
 CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-dimensional vectors in a ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
 
-$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{2n-1})) \in \mathbb{Z}_t^n$
+$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{n-1})) \in \mathbb{Z}_t^n$
 
 , where $\omega = g^{\frac{t - 1}{2n}}$ is a root of (i.e., primitive $(\mu=2n)$-th root of unity) of the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ defined over a prime modulo $t$ ring. 
 
@@ -173,7 +173,7 @@ $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline v_0, \overline v_
 
 \item Convert $\vec{v}_{'}$ into a real number vector $\vec{m}$ by applying the transformation $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$
 
-, where $\hathat{W}$ is a basis of the $n$-dimensional vector space crafted as follows: 
+, where $W$ is a basis of the $n$-dimensional vector space crafted as follows: 
 
 $ $
 

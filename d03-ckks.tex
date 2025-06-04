@@ -80,7 +80,7 @@ CKKS internally uses the same schemes as BFV for encryption, decryption, ciphert
 
 CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-dimensional vectors in a ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
 
-$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{n-1})) \in \mathbb{Z}_t^n$
+$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{2n-1})) \in \mathbb{Z}_t^n$
 
 , where $\omega = g^{\frac{t - 1}{2n}}$ is a root of (i.e., primitive $(\mu=2n)$-th root of unity) of the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ defined over a prime modulo $t$ ring. 
 
@@ -173,7 +173,7 @@ $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline v_0, \overline v_
 
 \item Convert $\vec{v}_{'}$ into a real number vector $\vec{m}$ by applying the transformation $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$
 
-, where $W$ is a basis of the $n$-dimensional vector space crafted as follows: 
+, where $\hathat{W}$ is a basis of the $n$-dimensional vector space crafted as follows: 
 
 $ $
 
@@ -263,7 +263,7 @@ $ $
 \para{CKKS's Encoding Range:} \autoref{tab:polynomial-encoding-capacity-complex} depicts the range of input values that can be encoded by the polynomials $M(X) \in \mathcal{R}_{\langle n \rangle}$ over $X \in \mathbb{C}$. As illustrated in \autoref{tab:polynomial-encoding-capacity-complex}, the encoding range of complex number inputs is determined by the size of the $n$ and $q$ parameters. Therefore, these two parameters should be chosen sufficiently large enough to encode all values that can be used by an application. 
 \end{comment}
 
-\para{CKKS's Approximation Property:} In the encoding process, when we convert $\vec{v}_{'} \rightarrow \vec{m} \rightarrow \Delta\vec{m}$, we multiply $\vec{v}_{'}$ by $W$ which contains real numbers with infinite decimals (e.g., $\sqrt{2}$) coming from Euler's formula, which we should round to the nearest integer by computing $\lceil \Delta m \rfloor$ (which we will denote as $\Delta m$ throughout this section for simplicity) and thus we lose some precision. This implies that if we later decode $\Delta\vec{m}$ into $\vec{v}_{'d}$, this value would be slightly different from the original input vector $\vec{v}_{'}$. As CKKS's encoding scheme is subject to such a small rounding error, the decryption does not perfectly match the original input vector. Such errors also propagate across homomorphic computations, because those computations are done based on approximately encoded plaintext $\lceil \Delta \vec{m} \rfloor$. As these errors are caused by throwing away the infinitely long decimal digits, they can be corrected during the decoding process only if we use an infinitely big scaling factor $\Delta$, which is impossible because $\Delta m_i$ should not overflow the ciphertext modulus $q_0$ of the lowest multiplicative level. Due to this limitation, CKKS is considered an \textit{approximate} homomorphic encryption. 
+\para{CKKS's Approximation Property:} In the encoding process, when we convert $\vec{v}_{'} \rightarrow \vec{m} \rightarrow \Delta\vec{m}$, we multiply $\vec{v}_{'}$ by $\hathat{W}$ which contains real numbers with infinite decimals (e.g., $\sqrt{2}$) coming from Euler's formula, which we should round to the nearest integer by computing $\lceil \Delta m \rfloor$ (which we will denote as $\Delta m$ throughout this section for simplicity) and thus we lose some precision. This implies that if we later decode $\Delta\vec{m}$ into $\vec{v}_{'d}$, this value would be slightly different from the original input vector $\vec{v}_{'}$. As CKKS's encoding scheme is subject to such a small rounding error, the decryption does not perfectly match the original input vector. Such errors also propagate across homomorphic computations, because those computations are done based on approximately encoded plaintext $\lceil \Delta \vec{m} \rfloor$. As these errors are caused by throwing away the infinitely long decimal digits, they can be corrected during the decoding process only if we use an infinitely big scaling factor $\Delta$, which is impossible because $\Delta m_i$ should not overflow the ciphertext modulus $q_0$ of the lowest multiplicative level. Due to this limitation, CKKS is considered an \textit{approximate} homomorphic encryption. 
 
 
 \subsubsection{Example}
@@ -274,7 +274,7 @@ Suppose our input complex vector's dimension $\dfrac{n}{2} = 2$, the bounding po
 
 Our basis of the $n$-dimensional vector space 
 
-$W= \begin{bmatrix}
+$\hathat{W}= \begin{bmatrix}
 1 & 1 & 1 & 1\\
 \omega^{J(1)} & \omega^{J(0)} & \overline{\omega}^{J(1)} & \overline{\omega}^{J(0)}\\
 (\omega^{J(1)})^2 & ({\omega^{J(0)}})^2 & (\overline{\omega}^{J(1)})^2 & (\overline{\omega}^{J(0)})^2\\
@@ -303,7 +303,7 @@ $ $
 Next, convert the complex vector $\vec{v}_{'}$ into a real number vector $\vec{m}$ by applying the transformation: 
 
 
-$\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n} = \dfrac{1}{4} \cdot \begin{bmatrix}
+$\vec{m} = \dfrac{\hathat \hathat{W} \cdot I_n^R \cdot \vec{v}_{'}}{n} = \dfrac{1}{4} \cdot \begin{bmatrix}
 1 & 1 & 1 & 1\\
 \omega^5 & \omega & \overline{\omega}^5 & \overline{\omega}\\
 \omega^2 & \omega^2 & \overline{\omega}^2 & \overline{\omega}^2\\

@@ -549,7 +549,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta (M + \Lambda) )$
 \subsection{Homomorphic Ciphertext-to-Ciphertext Multiplication}
 \label{subsec:ckks-mult-cipher}
 
-CKKS's ciphertext-to-ciphertext multiplication is partially different from that of BFV. In the case of BFV, its ciphertext modulus stays the same after each multiplication. On the other hand, CKKS reduces its reduces the ciphertext modulus size by 1 after each multiplication (which is equivalent to reducing its multiplicative level by 1. When the level reaches 0, no more multiplication can be further done (unless we bootstrap the modulus). This difference happens because the two schemes use different strategies in handling their plaintext scaling factors-- BFV's $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, whereas CKKS's $\Delta$ can be any value such that $\Delta \ll q_0$ where $q_0$ is the lowest multiplicative level's ciphertext modulus. However, both schemes use the similar relinearization technique. 
+CKKS's ciphertext-to-ciphertext multiplication is partially different from that of BFV. In the case of BFV, its ciphertext modulus stays the same after each multiplication. On the other hand, CKKS reduces its ciphertext modulus size by 1 after each multiplication (which is equivalent to reducing its multiplicative level by 1). When the level reaches 0, no more multiplication can be further done (unless we bootstrap the modulus). This difference happens because the two schemes use different strategies in handling their plaintext scaling factors-- BFV's $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, whereas CKKS's $\Delta$ can be any value such that $\Delta \ll q_0$ where $q_0$ is the lowest multiplicative level's ciphertext modulus. However, both schemes use the similar relinearization technique. 
 
 To make it easy to understand, we will explain CKKS's ciphertext-to-ciphertext multiplication based on this alternate version of RLWE (Theorem~\ref*{subsec:glwe-alternative} in \autoref{subsec:glwe-alternative}),
 where the sign of the $AS$ term is flipped in the encryption and decryption formulas.
@@ -570,9 +570,9 @@ $ $
 $ $
 
 \begin{enumerate}
-\item Find a formula for the \textit{synthetic} ciphertext that is equivalent to $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot \Delta M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ by leveraging the following congruence relation: 
+\item Find a formula for the \textit{synthetic} ciphertext that is equivalent to $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ by leveraging the following congruence relation: 
 
-$\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot \Delta M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle}) = \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle}) \cdot \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 2 \rangle})$ 
+$\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle}) = \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle}) \cdot \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 2 \rangle})$ 
 
 $ $
 
@@ -614,7 +614,7 @@ $ $
 
 Remember from \autoref{subsec:glwe-alternative} the following: 
 
-$\textsf{RLWE}^{-1}_{S,\sigma}\bm{(} \text{ } C = (A, B) \text{ } \bm{)} = \Delta  M + E = B \text{ } + A \cdot S = B + A\cdot S$ 
+$\textsf{RLWE}^{-1}_{S,\sigma}\bm{(} \text{ } C = (A, B) \text{ } \bm{)} = \Delta  M + E = B + A\cdot S$ 
 
 $ $
 
@@ -651,12 +651,12 @@ $= \textsf{RLWE}_{S, \sigma}^{-1}\bm{(}\text{ } C_\alpha = (D_1, D_0) \text{ }\b
 
 $ $
 
-In the final step above, we converted $D_0 + D_1\cdot S$ into $\textsf{RLWE}_{S, \sigma}^{-1}\bm{(}\text{ } C_\alpha=(D_1, D_0) \text{ } \bm{)}$, where $C_\alpha$ is the synthetic RLWE ciphertext $(D_1, D_0)$ encrypted by $S$. Similarly, our next task is to derive a synthetic RLWE ciphertext $C_\beta$ such that $D_2\cdot S^2 = \textsf{RLWE}_{S, \sigma}^{-1}(C_\beta)$. The reason why we want this synthetic ciphertext is because we do not want the square root of $S$ (i.e., $ S^2$), because if we continue to keep $ S^2$, then over more consequent ciphertext-to-ciphertext multiplications, this term will aggregate exponentially growing bigger exponents such as $S^4, S^8, \cdots...$, which would exponentially increase the computational overhead of decryption. In the next subsection, we will explain how to derive the synthetic RLWE ciphertext $C_\beta$ such that $D_2\cdot S^2 = \textsf{RLWE}_{S, \sigma}^{-1}(C_\beta)$.
+In the final step above, we converted $D_0 + D_1\cdot S$ into $\textsf{RLWE}_{S, \sigma}^{-1}\bm{(}\text{ } C_\alpha=(D_1, D_0) \text{ } \bm{)}$, where $C_\alpha$ is the synthetic RLWE ciphertext $(D_1, D_0)$ encrypted by $S$. Similarly, our next task is to derive a synthetic RLWE ciphertext $C_\beta$ such that $D_2\cdot S^2 = \textsf{RLWE}_{S, \sigma}^{-1}(C_\beta)$. The reason why we want this synthetic ciphertext is that we do not want the square of $S$ (i.e., $ S^2$), because if we continue to keep $ S^2$, then over more consequent ciphertext-to-ciphertext multiplications, this term will aggregate exponentially growing bigger exponents such as $S^4, S^8, \cdots...$, which would exponentially increase the computational overhead of decryption. In the next subsection, we will explain how to derive the synthetic RLWE ciphertext $C_\beta$ such that $D_2\cdot S^2 = \textsf{RLWE}_{S, \sigma}^{-1}(C_\beta)$.
 
 \subsubsection{Relinearization  Method 1 -- Ciphertext Decomposition}
 \label{subsubsec:relinearization-gadget-decomposition}
 
-As explained in BFV's ciphertext-to-ciphertext multiplication (\autoref{subsubsec:bfv-mult-cipher-relinearization}), relinearization is a process of converting the polynomial triplet $(D_0, D_1, D_2) \in \mathcal{R}_{\langle n, q \rangle}^{3}$, which can be decrypted into $\Delta M$ using by $S$ and $S^2$ as keys, into the polynomial pairs $(C_\alpha, C_\beta)\in \mathcal{R}_{\langle n, q \rangle}^{2}$, which can be decrypted into the same $\Delta M$ by using $S$ as key. In the previous subsection, we explained that we can convert $D_0$ and $D_1$ into $C_\alpha$ simply by viewing $D_0$ and $D_1$ as  $C_\alpha = (D_0, D_1)$. The process of converting $D_2$ into $C_\beta$ is exactly the same as the technique explained in \autoref{subsubsec:bfv-mult-cipher-relinearization}, which applies the gadget decomposition (\autoref{subsec:gadget-decomposition}) on $D_2$ and computes an inner product with the RLev encryption (\autoref{sec:glev}) of $S^2$. Specifically, we compute the following:
+As explained in BFV's ciphertext-to-ciphertext multiplication (\autoref{subsubsec:bfv-mult-cipher-relinearization}), relinearization is a process of converting the polynomial triplet $(D_0, D_1, D_2) \in \mathcal{R}_{\langle n, q \rangle}^{3}$, which can be decrypted into $\Delta M$ using $S$ and $S^2$ as keys, into the polynomial pairs $(C_\alpha, C_\beta)\in \mathcal{R}_{\langle n, q \rangle}^{2}$, which can be decrypted into the same $\Delta M$ by using $S$ as key. In the previous subsection, we explained that we can convert $D_0$ and $D_1$ into $C_\alpha$ simply by viewing $D_0$ and $D_1$ as  $C_\alpha = (D_1, D_0)$. The process of converting $D_2$ into $C_\beta$ is exactly the same as the technique explained in \autoref{subsubsec:bfv-mult-cipher-relinearization}, which applies the gadget decomposition (\autoref{subsec:gadget-decomposition}) on $D_2$ and computes an inner product with the RLev encryption (\autoref{sec:glev}) of $S^2$. Specifically, we compute the following:
 
 $\textsf{RLWE}_{S, \sigma}^{-1}(C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ \# the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
 
@@ -828,7 +828,7 @@ We will explain this process in the next subsection.
 
 To convert $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ into $\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$, we cannot simply divide the ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ by $\Delta$, because as explained in \autoref{subsec:modulo-division}, modulo arithmetic does not support direct division. Multiplying the RLWE ciphertext by $\Delta^{-1}$ (i.e., an inverse of $\Delta$) does not work either, because the only useful property we can use for inverse multiplication is: $a \cdot a^{-1} \equiv 1$. If an inverse is multiplied to any other values other than its counterpart, the result is an arbitrary value. For example, if $\Delta^{-1}$ is multiplied to a noise (i.e., $\Delta^{-1}E$), then the result can be a very huge value. Thus, multiplying the RLWE ciphertext by $\Delta^{-1}$ does not help due to the unpredictable result of the noise term. 
 
-The safest way to convert $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ into $\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ is modulus switch (\autoref{subsec:modulus-switch-glwe}), which is essentially modulo rescaling (\autoref{sec:modulus-rescaling}). For this to work, the RLWE setup stage should design the ciphertext domain $q$ as $q_0\cdot\Delta^{l}$, where $l$ is denoted as the level of multiplication, and $q_0 \gg \Delta$ (which is important for accuracy of homomorphic modulo reduction during bootstrapping in \autoref{subsec:ckks-bootstrapping}). Upon each ciphertext-to-ciphertext multiplication, we switch the modulus of the RLWE ciphertext from $q_0\cdot\Delta^{i} \rightarrow q_0\cdot\Delta^{i-1}$, which effectively converts the plaintext's squared scaling factor $\Delta^2$ (in $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$) into $\Delta$ (in $\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$). Once the RLWE ciphertext's level reaches 0 (i.e., ciphertext modulus $q_0$), we cannot do any more ciphertext-to-ciphertext multiplication, in which case we need a special process called bootstrapping to re-initialize the modulus level to $L$. 
+The safest way to convert $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ into $\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$ is modulus switch (\autoref{subsec:modulus-switch-glwe}), which is essentially modulo rescaling (\autoref{sec:modulus-rescaling}). For this to work, the RLWE setup stage should design the ciphertext domain $q$ as $q_0\cdot\Delta^{L}$, where $L$ is denoted as the level of multiplication, and $q_0 \gg \Delta$ (which is important for the accuracy of homomorphic modulo reduction during bootstrapping in \autoref{subsec:ckks-bootstrapping}). Upon each ciphertext-to-ciphertext multiplication, we switch the modulus of the RLWE ciphertext from $q_0\cdot\Delta^{i} \rightarrow q_0\cdot\Delta^{i-1}$, which effectively converts the plaintext's squared scaling factor $\Delta^2$ (in $\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$) into $\Delta$ (in $\textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})$). Once the RLWE ciphertext's level reaches 0 (i.e., ciphertext modulus $q_0$), we cannot do any more ciphertext-to-ciphertext multiplication, in which case we need a special process called bootstrapping to re-initialize the modulus level to $L$. 
 
 However, one problem with this setup is that $\Delta^L$ will be a huge number. Performing homomorphic addition or multiplication over modulo $\Delta^L$ is computationally expensive. To reduce the overhead of ciphertext size, we use the Chinese remainder theorem (\autoref{sec:chinese-remainder}): given an integer $x \text{ mod } W$ where $W$ is a multiplication of $L+1$ co-primes such that $W = w_0w_1w_2w_3\cdots w_L$, the following congruence relationships hold:
 
@@ -836,7 +836,7 @@ $x \equiv d_0 \text{ mod } w_0$
 
 $x \equiv d_1 \text{ mod } w_1$ 
 
-$x \equiv D_2 \text{ mod } w_2$ 
+$x \equiv d_2 \text{ mod } w_2$ 
 
 $\vdots$
 
@@ -860,17 +860,17 @@ $\hat{q} = \dfrac{q}{w_l}$
 $\hat{A_i} = \left\lceil\dfrac{\hat q}{q}\cdot A_i\right\rfloor = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a}_{i, {n-1}}X^{n-1}$, where each $\hat{a}_{i,j} = \Big\lceil a_{i,j}\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{a_{i,j}}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ 
 
 
-$\hat{B} = \left\lceil\dfrac{\hat q}{q}\cdot B\right\rfloor = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_j = \Big\lceil b_j\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{b_j}{n_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
+$\hat{B} = \left\lceil\dfrac{\hat q}{q}\cdot B\right\rfloor = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_j = \Big\lceil b_j\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{b_j}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
 
-$\textsf{RLWE}_{{S},\sigma}(\Delta  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, q' \rangle}$ 
+$\textsf{RLWE}_{{S},\sigma}(\Delta  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}$ 
 
 
 $ $
 
 The above update of $(\{A_i\}_{i=0}^{k-1}, B)$ to $(\{\hat{A}_i\}_{i=0}^{k-1}, \hat B)$ effectively changes $\Delta, E$ to $\hat\Delta, \hat E$ as follows:
 
-$\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_j = \Big\lceil e_j\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_j}{n_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
+$\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_j = \Big\lceil e_j\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_j}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
 $\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ \# If we treat $\hat\Delta$ as $\Delta$, the rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same $M$}
 
@@ -880,15 +880,15 @@ Note that after the rescaling, the plaintext scaling factor of $(\hat A, \hat B)
 
 $ $
 
-After we switch the modulus of the ciphertext $C$ from $q \rightarrow \hat{q}$ by multiplying $\dfrac{\hat{q}}{q}$ to $A$ and $B$, the encrypted original plaintext term $\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}$ will become $\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle} \cdot \dfrac{\hat{q}}{q} = \dfrac{\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}}{w_l} = (\Delta + \epsilon_\Delta)\cdot M^{\langle 1 \rangle} M^{\langle 2 \rangle}$, where $\epsilon_\Delta \approx 0$, because as explained before, we chose $\{w_i\}_{i=1}^{l}$ such that $w_i \approx \Delta$. Therefore, $(\Delta + \epsilon_\Delta)\cdot M^{\langle 1 \rangle} M^{\langle 2 \rangle} = \Delta M^{\langle 1 \rangle} M_2^{\langle 2 \rangle} + \epsilon_\Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle}$, where $\epsilon_\Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle} \approx 0$, which becomes part of the noise term of the modulus-switched (i.e., rescaled) new ciphertext $\hat{C}$. 
+After we switch the modulus of the ciphertext $C$ from $q \rightarrow \hat{q}$ by multiplying $\dfrac{\hat{q}}{q}$ to $A$ and $B$, the encrypted original plaintext term $\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}$ will become $\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle} \cdot \dfrac{\hat{q}}{q} = \dfrac{\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}}{w_l} = (\Delta + \epsilon_\Delta)\cdot M^{\langle 1 \rangle} M^{\langle 2 \rangle}$, where $\epsilon_\Delta \approx 0$, because as explained before, we chose $\{w_i\}_{i=1}^{L}$ such that $w_i \approx \Delta$. Therefore, $(\Delta + \epsilon_\Delta)\cdot M^{\langle 1 \rangle} M^{\langle 2 \rangle} = \Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle} + \epsilon_\Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle}$, where $\epsilon_\Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle} \approx 0$, which becomes part of the noise term of the modulus-switched (i.e., rescaled) new ciphertext $\hat{C}$. 
 
 $ $
 
-The benefit of this design of the CRT (Chinese remainder problem)-based ciphertext modulus and rescaling is that we can isomorphically decompose the huge coefficients (bigger than 64 bits) of polynomials in a ciphertexts into $l$-dimensional Chinese remainder vectors (Theorem~\ref{sec:chinese-remainder}.2 in \autoref{sec:chinese-remainder}) and perform element-wise addition or multiplication for computing coefficients over the small vector elements. This promotes computational efficiency for homomorphic addition and multiplication over a large ciphertext modulus (although the number of addition/multiplication operations increases). This technique is called Residue Number system (RNS). When CRT is used in ciphertexts, the security regarding the ciphertext modulus depends on the smallest and the largest CRT elements. 
+The benefit of this design of the CRT (Chinese remainder problem)-based ciphertext modulus and rescaling is that we can isomorphically decompose the huge coefficients (bigger than 64 bits) of polynomials in ciphertexts into $l$-dimensional Chinese remainder vectors (Theorem~\ref{sec:chinese-remainder}.2 in \autoref{sec:chinese-remainder}) and perform element-wise addition or multiplication for computing coefficients over the small vector elements. This promotes computational efficiency for homomorphic addition and multiplication over a large ciphertext modulus (although the number of addition/multiplication operations increases). This technique is called Residue Number system (RNS). When CRT is used in ciphertexts, the security regarding the ciphertext modulus depends on the smallest and the largest CRT elements. 
 
 \para{Initial Scaling Factor $\bm\Delta$ Upon Encryption:} To support multi-level multiplicative levels (using CRT), we need to modify the generic scaling factor setup presented in Summary~\ref*{subsec:glwe-enc} (\autoref{subsec:glwe-enc}) from $\Delta = \dfrac{q}{t}$ to $\Delta = w_L$. 
 
-\para{Noise Growth:} Upon each step of rescaling during ciphertext-ciphertext multiplication, the noise also gets scaled down by $\dfrac{1}{\Delta}$ (or by $\dfrac{1}{w_l}$ at multiplicative level $l$ in the case of using CRT). \textcolor{purple}{Therefore, if the accumulated noise is smaller than $\Delta$ ($w_l$ in the case of using CRT), running a single ciphertext-ciphertext multiplication operation effectively reduces the noise against growing.} However, each ciphertext-to-ciphertext multiplication, the encrypted (noisy) plaintext is $(\Delta M_1 + E_1)\cdot(\Delta M2 + E_1) = \Delta^2 M_1 M_2 + \Delta\cdot (M_1E_2 + M_2E_1) + E_1E_2$, and rescaling roughly has the effect of dividing this by $\Delta$, which approximately gives us $\Delta M_1 M_2 + M_1E_2 + M_2E_1 + \dfrac{E_1E_2}{\Delta}$. Because of the $(M_1E_2 + M_2E_1)$ term, the noise actually grows compared to before ciphertext-to-ciphertext multiplication. Therefore, ciphertext-to-ciphertext multiplication inevitably increases the noise. 
+\para{Noise Growth:} Upon each step of rescaling during ciphertext-ciphertext multiplication, the noise also gets scaled down by $\dfrac{1}{\Delta}$ (or by $\dfrac{1}{w_l}$ at multiplicative level $l$ in the case of using CRT). \textcolor{purple}{Therefore, if the accumulated noise is smaller than $\Delta$ ($w_l$ in the case of using CRT), running a single ciphertext-ciphertext multiplication operation effectively reduces the noise against growing.} However, during each ciphertext-to-ciphertext multiplication, the encrypted (noisy) plaintext is $(\Delta M_1 + E_1)\cdot(\Delta M_2 + E_2) = \Delta^2 M_1 M_2 + \Delta\cdot (M_1E_2 + M_2E_1) + E_1E_2$, and rescaling roughly has the effect of dividing this by $\Delta$, which approximately gives us $\Delta M_1 M_2 + M_1E_2 + M_2E_1 + \dfrac{E_1E_2}{\Delta}$. Because of the $(M_1E_2 + M_2E_1)$ term, the noise actually grows compared to before ciphertext-to-ciphertext multiplication. Therefore, ciphertext-to-ciphertext multiplication inevitably increases the noise. 
 
 \subsubsection{Comparing BFV and CKKS Bootstrapping}
 \label{subsubsec:bfv-bootstrapping-ckks-comparison}
@@ -976,13 +976,13 @@ $\hat{q} = \dfrac{q}{w_l}$
 $\hat{A} = \left\lceil\dfrac{\hat q}{q}\cdot A\right\rfloor = \hat{a}_{0} + \hat{a}_{1}X + \hat{a}_{2}X^2 + \cdots + \hat{a}_{{n-1}}X^{n-1}$, where each $\hat{a}_{i} = \Big\lceil a_{i}\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{a_{i}}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ 
 
 
-$\hat{B} = \left\lceil\dfrac{\hat q}{q}\cdot B\right\rfloor = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_i = \Big\lceil b_i\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{b_i}{n_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
+$\hat{B} = \left\lceil\dfrac{\hat q}{q}\cdot B\right\rfloor = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_i = \Big\lceil b_i\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{b_i}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
 $ $
 
 The above update of $(A, B)$ to $(\hat{A}, \hat B)$ effectively changes $\Delta, E$ to $\hat\Delta, \hat E$ as follows:
 
-$\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_i = \Big\lceil e_i\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_i}{n_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
+$\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_i = \Big\lceil e_i\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_i}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
 $\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ \# This rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same plaintext $M$}
 

@@ -1991,8 +1991,8 @@ $\hathat{W} = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
 (\omega^{J(\frac{n}{2} - 1)}) & (\omega^{J(\frac{n}{2} - 2)}) & \cdots & (\omega^{J(0)}) & (\omega^{J_*(\frac{n}{2} - 1)}) & (\omega^{J_*(\frac{n}{2} - 2)}) & \cdots & (\omega^{J_*(0)})\\
 (\omega^{J(\frac{n}{2} - 1)})^2 & (\omega^{J(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J(0)})^2 & (\omega^{J_*(\frac{n}{2} - 1)})^2 & (\omega^{J_*(\frac{n}{2} - 2)})^2 & \cdots & (\omega^{J_*(0)})^2 \\
-\vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+(\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \cdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$
 
 $ $
@@ -2069,7 +2069,7 @@ $ $
 
 $\vdots$
 
-\para{$\bm{(e-1)}$-th Recursion:} $\underbrace{F_{\varepsilon-1}  \circ \cdots \circ F_{3} \circ F_{2} \circ F_{1}}_{\varepsilon-1 \text{ times}}(z_i) = 0p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ \# $F_{\varepsilon-1} \cdots F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^\varepsilon$} 
+\para{$\bm{(\varepsilon-1)}$-th Recursion:} $\underbrace{F_{\varepsilon-1}  \circ \cdots \circ F_{3} \circ F_{2} \circ F_{1}}_{\varepsilon-1 \text{ times}}(z_i) = 0p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ \# $F_{\varepsilon-1} \cdots F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^\varepsilon$} 
 
 $ $
 
@@ -2094,7 +2094,7 @@ Notice that $G_{\varepsilon, v}(z_i)$ is equivalent to zeroing out the least sig
 
 $\vdots$
 
-\textbf{$\bm{e-1}$-th Recursion:} $G_{\varepsilon,1} \circ \cdots \circ G_{\varepsilon,\varepsilon-2} \circ G_{\varepsilon,\varepsilon-1}(z_i) = z_{i, \varepsilon-1}p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p + 0 \bmod p^\varepsilon$
+\textbf{$\bm{\varepsilon-1}$-th Recursion:} $G_{\varepsilon,1} \circ \cdots \circ G_{\varepsilon,\varepsilon-2} \circ G_{\varepsilon,\varepsilon-1}(z_i) = z_{i, \varepsilon-1}p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p + 0 \bmod p^\varepsilon$
 
 $ $
 
@@ -2123,20 +2123,20 @@ $ $
 $ $
 
 \begin{enumerate}
-\item Let's define $x_i = z_{i,0} + \sum\limits_{j=\varepsilon'}^{\varepsilon-1} z_{i,j}p^j$ = $z_{i,0} + kp^{\varepsilon'}$
+\item Let's define $z_i = z_{i,0} + \sum\limits_{j=\varepsilon'}^{\varepsilon-1} z_{i,j}p^j$ = $z_{i,0} + kp^{\varepsilon'}$
 
 $ $
 
-, where $z_{i,0} \in [0, p-1]$, \text{ } $\varepsilon'$ is the least significant base-$p$ digit's index of $x_i$ which has a non-zero value, \text{ } and \text{ } $ k = p^{-\varepsilon'}\cdot \sum\limits_{j=\varepsilon'}^{\varepsilon-1} z_{i,j}p^j \in [0, p^{\varepsilon-\varepsilon'} - 1]$. 
+, where $z_{i,0} \in [0, p-1]$, \text{ } $\varepsilon'$ is the least significant base-$p$ digit's index of $z_i$ which has a non-zero value, \text{ } and \text{ } $ k = p^{-\varepsilon'}\cdot \sum\limits_{j=\varepsilon'}^{\varepsilon-1} z_{i,j}p^j \in [0, p^{\varepsilon-\varepsilon'} - 1]$. 
 
-Basically, $x_i$ can be any number in $\mathbb{Z}_{p^\varepsilon}$ whose base-$p$ representation has 0s between the base-$p$ digit index greater than 0 and smaller than $\varepsilon'$.
+Basically, $z_i$ can be any number in $\mathbb{Z}_{p^\varepsilon}$ whose base-$p$ representation has 0s between the base-$p$ digit index greater than 0 and smaller than $\varepsilon'$.
 
 $ $
 
 \item \textbf{\textit{Claim:}} $z_i^{p} \equiv z_{i,0} \bmod p$ 
 
 \begin{proof}
-Fermat's Little Theorem states $a^{p-1} \equiv 1 \bmod p$ for all $a \in \mathbb{Z}_p$ and prime $p$. Therefore, $z_i \equiv z_{i,0} \bmod p$.
+Fermat's Little Theorem states $a^{p-1} \equiv 1 \bmod p$ for all $a \in \mathbb{Z}_p$ and prime $p$. Therefore, $z_i \equiv z_{i,0}^{p} \bmod p$.
 \end{proof}
 
 \item \textbf{\textit{Claim:}} $z_i^p \equiv z_{i, 0}^p \bmod p^{\varepsilon'+1}$ 
@@ -2174,7 +2174,7 @@ Note that whenever we increase $\varepsilon'$ to $\varepsilon' + 1$, we add a ne
 $z_i^p \equiv z_{i,0} + \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i,0})\cdot p^j \bmod p^{\varepsilon'+1}$
 
 \begin{myproof}
-According to step 1's claim ($z_i^{p} = z_{i,0} \bmod p$), we know that the following base-$p$ representation of $z_i^p$:
+According to step 2's claim ($z_i^{p} \equiv z_{i,0} \bmod p$), we know that the following base-$p$ representation of $z_i^p$:
 
 $z_i^p \bmod p^{\varepsilon'+1} = c_0 + c_1p + c_2p^2 + \cdots + c_{\varepsilon-1}p^{\varepsilon'}$
 

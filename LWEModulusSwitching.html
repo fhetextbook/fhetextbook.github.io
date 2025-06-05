@@ -35,7 +35,7 @@
    <li class='itemize'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption</span></span><span class='rm-lmbx-10x-x-109'>: </span><!--  l. 27  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mi>C</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
 </li></ul>
 <!--  l. 31  --><p class='indent'>   <!--  l. 31  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!--  l. 34  --><p class='indent'>   In the LWE cryptosystem, modulus switch is a process of converting an original LWE ciphertext’s modulo
+</p><!--  l. 34  --><p class='indent'>   In the LWE cryptosystem, modulus switching is a process of converting an original LWE ciphertext’s modulo
 domain to a smaller modulo domain. This can be seen as scaling down all components, except for the plaintext
 <!--  l. 34  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> and the secret key
 <!--  l. 34  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>, in the original
@@ -50,13 +50,13 @@ the noise <!--  l. 34  --><math display='inline' xmlns='http://www.w3.org/1998/M
 because the noise gets rounded away after decryption, anyway), and
 <!--  l. 34  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>A</mi></math> also gets scaled
 down to a smaller <!--  l. 34  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>A</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></math>.
-Modulus switch is used for computational efficiency during TFHE’s bootstrapping (which will be
-discussed in <a href='NoiseBootstrapping.html#noise-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>). Modulus switch is also used for implementing the ciphertext-to-ciphertext
+Modulus switching is used for computational efficiency during TFHE’s bootstrapping (which will be
+discussed in <a href='NoiseBootstrapping.html#noise-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>). Modulus switching is also used for implementing the ciphertext-to-ciphertext
 multiplication algorithm in BGV (<a href='CiphertexttoCiphertextMultiplication.html#ciphertexttociphertext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>) and CKKS (<a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#homomorphic-ciphertexttociphertext-multiplication1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>).
                                                                                          
                                                                                          
 </p><!--  l. 36  --><p class='indent'>   The high-level idea of LWE modulus switch is to rescale the congruence relationship of
-the LWE scheme. LWE’s homomorphic computation algorithms include the followings:
+the LWE scheme. LWE’s homomorphic computation algorithms include the following:
 ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication,
 ciphertext-to-ciphertext multiplication. However, all congruence relationships used in these algorithms are
 essentially rewritten versions of the following single fundamental congruence relationship:
@@ -129,7 +129,7 @@ we need to prove that the following relationship holds:
 </span><!--  l. 77  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!--  l. 78  --><p class='indent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1. </dt><dd class='enumerate-enumitem'>Note the followings:
+1. </dt><dd class='enumerate-enumitem'>Note the following:
    <!--  l. 80  --><p class='noindent'><!--  l. 80  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>b</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle mathsize='1.61em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mi>b</mi><mstyle displaystyle='true'><mfrac><mrow><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover>
  </mrow><mrow><mi>q</mi> </mrow></mfrac></mstyle><mstyle mathsize='1.61em'><mrow><mo fence='true' form='prefix'>⌋</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>b</mi><mstyle displaystyle='true'><mfrac><mrow><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover>
  </mrow><mrow><mi>q</mi> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>𝜖</mi></mrow><mrow><mi>b</mi></mrow></msub></mrow></math>

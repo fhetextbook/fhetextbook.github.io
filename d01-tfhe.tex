@@ -133,7 +133,7 @@ $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m \cdot \lambda) )$
 \textbf{- Reference:} 
 \href{https://www.zama.ai/post/tfhe-deep-dive-part-3}{TFHE Deep Dive - Part III - Key switching and leveled multiplications}~\cite{tfhe-3}
 
-TFHE's key switching scheme changes an LWE ciphertext's the secret key from $\vec{s}$ to $\vec{s}_{'}$. This scheme is essentially LWE's key switching scheme. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) key switching scheme (\autoref{sec:glwe-key-switching}) with $n = 1$ as follows:
+TFHE's key switching scheme changes an LWE ciphertext's secret key from $\vec{s}$ to $\vec{s}_{'}$. This scheme is essentially LWE's key switching scheme. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) key switching scheme (\autoref{sec:glwe-key-switching}) with $n = 1$ as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-key-switching}} TFHE Key Switching}}]
 $\textsf{LWE}_{\vec{s}_{'},\sigma}(\Delta m) = (0, b) + \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{a}), \text{ } \textsf{Lev}_{\vec{s}_{'}, \sigma}^{\beta, l}(\vec{s}) \bm{\rangle}$
@@ -152,7 +152,7 @@ TFHE supports multiplication of two ciphertexts in the form: $\textsf{LWE}_{\vec
 
 $ $
 
-\noindent The 1st term $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1)$ comes from one of the followings: 
+\noindent The 1st term $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1)$ comes from one of the following: 
 \begin{itemize}
 \item A fresh LWE encryption (\autoref{subsec:glwe-enc}) of plaintext $m_1$. 
 \item A homomorphically added result of two LWE ciphertexts (\autoref{sec:glwe-add-cipher}). 
@@ -161,7 +161,7 @@ $ $
 
 $ $
 
-\noindent The 2nd term $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ comes from one of the followings:
+\noindent The 2nd term $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ comes from one of the following:
 \begin{itemize}
 \item A fresh GSW encryption (\autoref{subsec:ggsw-enc}) of plaintext $m_2$.
 \item Converted from $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2)$ into $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ by \textit{circuit bootstrapping} (this will be covered in the future).
@@ -169,7 +169,7 @@ $ $
 
 $ $
 
-\noindent Remember the followings: 
+\noindent Remember the following: 
 
 $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (\vec{a}, b) \in \mathbb{Z}_{q}^{k + 1}$, where $b = \vec{a} \cdot \vec{s} + \Delta m_1 + e$ 
 
@@ -277,7 +277,7 @@ We can further generalize TFHE's LWE-to-GSW multiplication to GLWE-to-GGSW multi
 
 $ $
 
-\noindent The 1st term $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1)$ comes from one of the followings: 
+\noindent The 1st term $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1)$ comes from one of the following: 
 \begin{itemize}
 \item A fresh GLWE encryption (\autoref{subsec:glwe-enc}) of plaintext $M_1$. 
 \item A homomorphically added result of two GLWE ciphertexts (\autoref{sec:glwe-add-cipher}). 
@@ -286,7 +286,7 @@ $ $
 
 $ $
 
-\noindent The 2nd term $\textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2)$ comes from one of the followings:
+\noindent The 2nd term $\textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2)$ comes from one of the following:
 \begin{itemize}
 \item A fresh GGSW encryption (\autoref{subsec:ggsw-enc}) of plaintext $M_2$.
 \item Converted from $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_2)$ into $\textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2)$ by \textit{circuit bootstrapping} (this will be covered in the future).
@@ -294,7 +294,7 @@ $ $
 
 $ $
 
-\noindent Remember the followings: 
+\noindent Remember the following: 
 
 $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1) = (A_0, A_0, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{n, q}^{k + 1}$, where $B = \sum\limits_{i=0}^{k-1}(A_i \cdot S_i) + \Delta M_1 + E$ \\ \textcolor{red}{\# from \autoref{subsec:glwe-enc}} 
 
@@ -492,7 +492,7 @@ $C_h = (a'_0, a'_1, \gap{$\cdots$}, a'_{nk-1}, b_h) \in \mathbb{Z}_q^{nk + 1}$
 \]
 \end{figure}
 
-\noindent Note that $b_h - \sum\limits_{i=0}^{nk-1}s'_ia'_i = \Delta m_h + e_h$. This means that $C_h$ can be replaced by its encrypted version, $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$, an LWE ciphertext $\textsf{ct}_h$ encrypting the $h$-th coefficient of $M$. Therefore, we just extracted $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$ from $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M)$. This operation is called coefficient extraction, which does not add any noise, because it simply extracts an LWE ciphertext by reordering the polynomial of the GLWE ciphertext. 
+\noindent Note that $b_h - \sum\limits_{i=0}^{nk-1}s'_ia'_i = \Delta m_h + e_h$. This means that $C_h$ can be replaced by its encrypted version, $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$, an LWE ciphertext $\textsf{ct}_h$ encrypting the $h$-th coefficient of $M$. Therefore, we just extracted $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$ from $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M)$. This operation is called coefficient extraction, which does not add any noise because it simply extracts an LWE ciphertext by reordering the polynomial of the GLWE ciphertext. 
 
 Once we have $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$, we can key-switch it from $\vec{s}_{'} \rightarrow \vec{s}$ (\autoref{subsec:tfhe-key-switching}). 
 
@@ -753,7 +753,7 @@ $ $
 
 Blind rotation refers to rotating an \textit{encrypted} polynomial's coefficients so that it is not possible to know how many positions the polynomial's coefficients are rotated, and after the rotation, it is not possible to see which coefficient has moved to which degree term. Blind rotation uses the basic polynomial rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation} in \autoref{subsec:coeff-rotation}), with the difference that the $V(X)\cdot X^{-i}$ computation is done homomorphically. 
 
-Note that $X^{\hat{\Delta} m + \hat{e}_b} = X^{\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}}$, so we can rotate $V$ by computing $V \cdot X^{-(\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i})} = V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$. In fact, we cannot directly compute the LWE decryption formula $-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ (or $\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}$) without the knowledge of the LWE secret key $S$. Nevertheless, there is a mathematical work-around to compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ without the knowledge of the secret key $S$, provided we are given $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ at the TFHE setup stage. Note that $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ is an GGSW encryption of the LWE secret key $S$, encrypted by the GLWE secret key $\vec{S}_{bk}$ (i.e., a \textit{bootstrapping} key). We use $\vec{S}_{bk}$ to homomorphically compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ (i.e., blindly rotate the coefficients of $V$ to the left by $\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ positions), according to the following procedure:
+Note that $X^{\hat{\Delta} m + \hat{e}_b} = X^{\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}}$, so we can rotate $V$ by computing $V \cdot X^{-(\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i})} = V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$. In fact, we cannot directly compute the LWE decryption formula $-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ (or $\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}$) without the knowledge of the LWE secret key $S$. Nevertheless, there is a mathematical work-around to compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ without the knowledge of the secret key $S$, provided we are given $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ at the TFHE setup stage. Note that $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ is a GGSW encryption of the LWE secret key $S$, encrypted by the GLWE secret key $\vec{S}_{bk}$ (i.e., a \textit{bootstrapping} key). We use $\vec{S}_{bk}$ to homomorphically compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ (i.e., blindly rotate the coefficients of $V$ to the left by $\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ positions), according to the following procedure:
 
 \begin{enumerate}
 \item GLWE-encrypt the polynomial $V$ with the bootstrapping key $\vec{S}_{bk}$ at the TFHE setup stage, so that each coefficient of $V$ gets encrypted.
@@ -977,7 +977,7 @@ $ $
 
 Note that $V(X)$'s coefficients for the $X^8 \sim X^{15}$ terms are $\{2, 1\}$ instead of $\{-2, -1\}$, so that if $V$ gets rotated by $\{-8,-7,-6,-5,4,5,6,7\}$ slots to the left, the constant term's coefficient flips its sign to $\{-2, -1\}$ due to wrapping around the boundary of the $n$ exponent. 
 
-During the actual bootstrapping, we will do blind rotation of \autoref{tab:lut}'s $V(X)$ (which is GLWE-encrypted) by $\hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 4$ positions to the left, which is computed as follows:
+During the actual bootstrapping, we will do a blind rotation of \autoref{tab:lut}'s $V(X)$ (which is GLWE-encrypted) by $\hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 4$ positions to the left, which is computed as follows:
 
 $\hat\Delta m + \hat e = \hat{b} - \sum\limits_{i=0}^{7}\hat{a}_is_i = 12 - (4 - 16 + 16 + 4) = 4 \text{ mod 32} \in \mathbb{Z}_{2n=32}$ 
 
@@ -1135,11 +1135,11 @@ Besides implementing the homomorphic MUX logic gate used during blind rotation (
 %\end{figure}
 
 
-\autoref{tab:gate-and} is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT polynomial $V$ as $V(X) = \sum\limits_{i=0}^{7}-X^i$. The LUT polynomial $V(X)$ maps one half of the plaintext domain to $-1$, while the other half to $-1$ (as the terms wrap around the boundary of $n=7$). In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate input 0 and 1 are encoded as $-1$ and $1$, respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2) - 1$. Its output is positive if both inputs are positive (i.e. $1$, in which case the blind rotation will rotate $V$ to the left by $\hat\Delta\cdot 1 + e$ positions and the constant term's coefficient will be $1$. Thus, the output of blind rotation and coefficient extraction will be $\textsf{LWE}_{\vec{s}, \sigma}(\Delta \cdot 1)$ with a reduced noise, which is an encoding of $1$. This design can tolerate the maximum noise of $|e| = 1$. To endure bigger noises, we should increase $q$ and $n$. 
+\autoref{tab:gate-and} is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT polynomial $V$ as $V(X) = \sum\limits_{i=0}^{7}-X^i$. The LUT polynomial $V(X)$ maps one half of the plaintext domain to $-1$, while the other half to $-1$ (as the terms wrap around the boundary of $n=7$). In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate inputs 0 and 1 are encoded as $-1$ and $1$, respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2) - 1$. Its output is positive if both inputs are positive (i.e. $1$, in which case the blind rotation will rotate $V$ to the left by $\hat\Delta\cdot 1 + e$ positions and the constant term's coefficient will be $1$. Thus, the output of blind rotation and coefficient extraction will be $\textsf{LWE}_{\vec{s}, \sigma}(\Delta \cdot 1)$ with a reduced noise, which is an encoding of $1$. This design can tolerate the maximum noise of $|e| = 1$. To endure bigger noises, we should increase $q$ and $n$. 
 
 Note that the AND gate's LUT layout is negacyclic, which is a special case, thus we could use the entire $2n=16$ coefficient states in $V(X)$ for the AND gate mapping function's outputs, by leveraging $V(X)$'s innate property of negacyclic rotation. However, in many use cases, the LUT layout is not necessarily negacyclic like this AND gate example. Even our noise bootstrapping's LUT layout (\autoref{subsec:bootstrapping-overview}) was not negacyclic, but a unity function (as it simply removes the noise). Thus, for most use cases, we need to use only $\dfrac{t}{2}$ out of $t$ plaintext space to avoid more than $n-1$ rotations of $V(X)$ (\autoref{subsec:tfhe-zero-padding}). 
 
-Besides the AND gate, other logic gates can be built in a similar manner, each of which based on a different linear combination formula and LUT layout. 
+Besides the AND gate, other logic gates can be built in a similar manner, each of which is based on a different linear combination formula and LUT layout. 
 
 \para{Division:} TFHE does not support direct division of plaintext numbers of any size. This is because TFHE's LWE vector elements are in the $Z_q$ ring, where each element $g$ does not necessarily have a multiplicative inverse $g^{-1}$, which makes it hard to multiply $g^{-1}$ to the target number to divide. Instead, division can be implemented as binary division based on the gates implemented by gate bootstrapping. To support binary division, each plaintext has to be a single bit and encrypted as an independent ciphertext. Or multiple bits can be bundled up and processed concurrently by designing a linear combination formula, similar to the linear combination that we designed for processing 2 input bits of an AND gate.
 
@@ -1219,6 +1219,6 @@ $\textsf{LWE}_{\vec{s}, \sigma}^{-1}(\textsf{ct}) =  \Big\lceil b - \sum\limits_
 
 $ $
 
-The original TFHE's difference is that all values (either polynomial coefficients or vector elements) are computed in a floating point modulo 1 (i.e., $[0, 1)$) instead of a big integer (i.e., $[0, q)$). This means the plaintext also has to be encoded as values within $[0, 1)$ instead of integers within $[0, q)$. Note that in the original TFHE scheme, there is no need of the scaling factor $\Delta$, because the continuous domain of torus $[0, 1)$ provides a floating-point precision up to $q$ discrete decimal values, and its decryption process can successfully blow away the noise $E$ as far as each coefficient (or vector element) $e_i$ in $E$ is smaller than $\dfrac{1}{2t}$. 
+The original TFHE's difference is that all values (either polynomial coefficients or vector elements) are computed in a floating point modulo 1 (i.e., $[0, 1)$) instead of a big integer (i.e., $[0, q)$). This means the plaintext also has to be encoded as values within $[0, 1)$ instead of integers within $[0, q)$. Note that in the original TFHE scheme, there is no need for the scaling factor $\Delta$, because the continuous domain of torus $[0, 1)$ provides a floating-point precision up to $q$ discrete decimal values, and its decryption process can successfully blow away the noise $E$ as far as each coefficient (or vector element) $e_i$ in $E$ is smaller than $\dfrac{1}{2t}$. 
 
 Both the torus-based and integer-ring-based TFHE schemes are built based on the same fundamental principles.

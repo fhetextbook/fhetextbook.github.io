@@ -3,7 +3,7 @@ Suppose we are given $n+1$ two-dimensional coordinates $(x_0, y_0), (x_1, y_1), 
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{sec:polynomial-interpolation}} Lagrange's Polynomial Interpolation}}]
 
-Suppose we are given $n+1$ two-dimensional coordinates $(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)$, whereas all $X$ values are distinct but the $Y$ values don't need to be distinct. The domain of $(X, Y$) can be either: $(x_i, y_i) \in \mathbb{C}^2$ (which includes the real domain) or $(x_i, y_i) \in \mathbb{Z}_p^2$ (where $p$ is a prime). Then, there exists a unique $n$-degree (or lesser degree) polynomial $f(X)$ that passes through these $n$ coordinates. Such a polynomial $f(X)$ is computed as follows:
+Suppose we are given $n+1$ two-dimensional coordinates $(x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)$, whereas all $X$ values are distinct but the $Y$ values don't need to be distinct. The domain of $(X, Y)$ can be either: $(x_i, y_i) \in \mathbb{C}^2$ (which includes the real domain) or $(x_i, y_i) \in \mathbb{Z}_p^2$ (where $p$ is a prime). Then, there exists a unique $n$-degree (or lesser degree) polynomial $f(X)$ that passes through these $n$ coordinates. Such a polynomial $f(X)$ is computed as follows:
 
 $f(X) = \sum\limits_{j=0}^{n}\dfrac{(X-x_0)\cdot(X-x_1)\cdots(X-x_{j-1})\cdot(X-x_{j+1})\cdots(X-x_{n})}{(x_j-x_0)\cdot(x_j-x_1)\cdots(x_j-x_{j-1})\cdot(x_j-x_{j+1})\cdots(x_j-x_{n})}\cdot y_j$
 

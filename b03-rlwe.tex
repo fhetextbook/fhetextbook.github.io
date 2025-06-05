@@ -4,7 +4,7 @@ In RLWE, all polynomials are computed in the polynomial ring $\mathbb{Z}_q[x] / 
 
 \subsection{Setup}
 
-Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick an $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, 2 \rangle}$ whose coefficients are binary numbers, 1 or -1, as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
+Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, 2 \rangle}$ whose coefficients are binary numbers, 1 or -1, as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
 
 Notice that RLWE's setup parameters are similar to that of LWE. One difference is that $S$ is not a vector of length $k$, but an $(n-1)$-degree polynomial encoding $n$ secret coefficients, where each coefficient is a randomly picked binary number in $\{0, 1\}$ (denoted as $S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$).
 

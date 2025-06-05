@@ -2,7 +2,7 @@
 \subsection{Rescaling Modulo of Congruence Relations}
 \label{subsec:modulo-rescaling}
 
-Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $k$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differs by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
+Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $k$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differ by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
 
 In this section, we introduce another way of describing the relationship between numbers. We will describe two numbers $a$ and $b$ in terms of a different modulo $q'$ instead of the original modulo $q$. Such a change of modulo of a congruence relation is called modulo scaling. When we rescale the modulo of a congruence relation, we also need to rescale the numbers involved in the congruence relation. 
 
@@ -160,7 +160,7 @@ $ $
 
 As shown in the proof, if all numbers in the congruence relations are exactly divisible by the rescaling factor during the modulo rescaling, then the rescaled result gives exact congruence relations in the new modulo. On the other hand, if any numbers in the congruence relations are not divisible by the rescaling factor during the modulo rescaling (i.e., we need to round some decimals), then the rescaled result gives approximate congruence relations in the new modulo.
 
-In a more complicated congruence relation that contain many $(+, -, \cdot)$ operations, the same principle of modulo rescaling explained above can be recursively applied to each pair of operands surrounding each operator. 
+In a more complicated congruence relation that contains many $(+, -, \cdot)$ operations, the same principle of modulo rescaling explained above can be recursively applied to each pair of operands surrounding each operator. 
 
 \subsubsection{Example}
 \label{subsec:modulo-rescaling-ex}
@@ -214,7 +214,7 @@ $4 \equiv 7 \bmod 3$
 
 $ $
 
-As shown above, the rescaled congruence relation preserves correctness, because all rescaled values are divisible by the rescaling factor. By contract, if $\dfrac{q}{q'} = \dfrac{30}{3} = 10$ did not divide any of $a\cdot s$, $\Delta m$, or $e$, then the rescaled congruence relation would be an approximate (i.e., $\cong$) congruence relation. 
+As shown above, the rescaled congruence relation preserves correctness, because all rescaled values are divisible by the rescaling factor. By contrast, if $\dfrac{q}{q'} = \dfrac{30}{3} = 10$ did not divide any of $a\cdot s$, $\Delta m$, or $e$, then the rescaled congruence relation would be an approximate (i.e., $\cong$) congruence relation. 
 
 
 

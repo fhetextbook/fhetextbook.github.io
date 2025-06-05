@@ -104,7 +104,7 @@ $\hathat{W}^* = \begin{bmatrix}
 \subsection{Encryption and Decryption}
 \label{subsec:bgv-enc-dec}
 
-BGV's encryption and decryption scheme is very similar to BFV's scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) with a small difference: while BFV scales the plaintext polynomial $M(X)$ by $\Delta$, BGV scales the noise polynomial $E(X)$ by $\Delta$. In BFV, each encoded plaintext polynomial $M(X)$ is scaled by $ \Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$. This strategy effectively shifts each plaintext coefficient value to the most significant bits while keeping the noise in the least significant bits. One the other hand, BGV does not scale the plaintext polynomial $M(X)$, but instead it scales each new noise $E(X)$ by $\Delta = t$, making the noise $\Delta E(X)$, which is newly generated upon each new ciphertext creation. This different scaling strategy effectively shifts the noise (i.e., $e_i$) to the most significant bits by scaling it by $\Delta = t$ while keeping the plaintext value (i.e., $m_i$) $M(X)$'s each coefficient in the least significant bits. 
+BGV's encryption and decryption scheme is very similar to BFV's scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) with a small difference: while BFV scales the plaintext polynomial $M(X)$ by $\Delta$, BGV scales the noise polynomial $E(X)$ by $\Delta$. In BFV, each encoded plaintext polynomial $M(X)$ is scaled by $ \Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$. This strategy effectively shifts each plaintext coefficient value to the most significant bits while keeping the noise in the least significant bits. On the other hand, BGV does not scale the plaintext polynomial $M(X)$, but instead it scales each new noise $E(X)$ by $\Delta = t$, making the noise $\Delta E(X)$, which is newly generated upon each new ciphertext creation. This different scaling strategy effectively shifts the noise (i.e., $e_i$) to the most significant bits by scaling it by $\Delta = t$ while keeping the plaintext value (i.e., $m_i$) $M(X)$'s each coefficient in the least significant bits. 
 
 Also, in BGV, the ciphertext modulus $q$ is leveled like CKKS's one: $q \in \{q_0, q_1, \cdots, q_L\}$, where each $q_l = \prod\limits_{i=0}^l w_i$ (where each $w_i$ is a CRT modulus). 
 
@@ -222,7 +222,7 @@ Notice that BGV's ciphertext-to-plaintext multiplication does not consume any mu
 \subsection{\textsf{ModDrop}}
 \label{subsec:bgv-moddrop}
 
-BGV's \textsf{ModDrop} works similar to that of CKKS's \textsf{ModDrop} (Summary~\ref*{subsec:ckks-moddrop} in \autoref{subsec:ckks-moddrop}). Remember that CKKS's ciphertext decryption relation is as follows:
+BGV's \textsf{ModDrop} works similarly to that of CKKS's \textsf{ModDrop} (Summary~\ref*{subsec:ckks-moddrop} in \autoref{subsec:ckks-moddrop}). Remember that CKKS's ciphertext decryption relation is as follows:
 
 $M + \Delta E = A \cdot S + B \bmod q_l$
 
@@ -446,7 +446,7 @@ We summarize BGV's modulus switch as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-modulus-switch}} BGV's Modulus Switch}}]
 
-Suppose we have the current ciphertext modulus $q_l$ and new ciphertext modulus $\hat{q}$ where $q_l \equiv \hat{q} \equiv 1 \bmod t$, $\hat{q} < q_l$, and $\hat{q}$ and $\hat{q_l}$ are co-prime. Therefore, $\hat{q}$ may or may not be one of the ciphertext modulus comprising a BGV ciphertext's multiplicative level moduli $q_0, q_1, \cdots, q_L$.
+Suppose we have the current ciphertext modulus $q_l$ and new ciphertext modulus $\hat{q}$ where $q_l \equiv \hat{q} \equiv 1 \bmod t$, $\hat{q} < q_l$, and $\hat{q}$ and $\hat{q_l}$ are co-prime. Therefore, $\hat{q}$ may or may not be one of the ciphertext moduli comprising a BGV ciphertext's multiplicative level moduli $q_0, q_1, \cdots, q_L$.
 
 $ $
 
@@ -517,7 +517,7 @@ $ $
 \begin{enumerate}
 \item \textbf{\underline{Basic Multiplication}}
 
-Compute the followings:
+Compute the following:
 
 $ $
 

@@ -35,7 +35,7 @@ To solve this efficiency problem, this section will introduce an efficient techn
 \subsection{Forward FFT (or NTT)}
 \label{subsec:ntt-forward}
 
-We assume a polynomial ring of either $\mathbb{R}[X]/ X^n + 1$ for FTT, and $\mathbb{Z}[X]_p/ X^n + 1$ for NTT (where $X^n + 1$ is cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are $n$ distinct $n$-th roots of unity that satisfy $X^n = 1$, which are: $\{1, \omega, \omega^2, \cdots, \omega^{n-1}\}$. In the case of FFT (i.e., $\mathbb{R}[X] / X^n + 1$), the primitive $n$-th root of unity is $\omega = e^{\frac{2i\pi}{n}}$. In the case of NTT (i.e., $\mathbb{Z}_p[X] / X^n + 1$ where $p$ is a prime), the primitive $n$-th root of unity $\omega = g^{\frac{p-1}{n}}$, where $g$ is the generator of $\mathbb{Z}^{\times}_p$ and $n$ divides $p - 1$ (a variation of Summary~\ref*{subsec:polynomial-ring-basis} in \autoref{subsec:polynomial-ring-basis}). 
+We assume a polynomial ring of either $\mathbb{R}[X]/ X^n + 1$ for FTT, and $\mathbb{Z}[X]_p/ X^n + 1$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are $n$ distinct $n$-th roots of unity that satisfy $X^n = 1$, which are: $\{1, \omega, \omega^2, \cdots, \omega^{n-1}\}$. In the case of FFT (i.e., $\mathbb{R}[X] / X^n + 1$), the primitive $n$-th root of unity is $\omega = e^{\frac{2i\pi}{n}}$. In the case of NTT (i.e., $\mathbb{Z}_p[X] / X^n + 1$ where $p$ is a prime), the primitive $n$-th root of unity $\omega = g^{\frac{p-1}{n}}$, where $g$ is the generator of $\mathbb{Z}^{\times}_p$ and $n$ divides $p - 1$ (a variation of Summary~\ref*{subsec:polynomial-ring-basis} in \autoref{subsec:polynomial-ring-basis}). 
 
 Then, the point-value representation of polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
 
@@ -58,12 +58,12 @@ $A_1(X) = a_1 + a_3X + a_5X^2 + \cdots + a_{n-2}X^{\frac{n}{1} - 1}$
 
 The above way of splitting a polynomial into two half-degree polynomials is called the Cooley-Tukey step. As we split $A(X)$ into two smaller-degree polynomials $A_0(X)$ and $A_1(X)$, evaluating $A(X)$ at $n$ distinct $n$-th roots of unity $\{\omega^0, \omega^1, \omega^2, \cdots, \omega^{n-1}\}$ is equivalent to evaluating $A_0(X)$ and $A_1(X)$ at $n$ distinct \textit{squared} $n$-th roots of unity $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ and computing $A_0(X^2) + X\cdot A_1(X^2)$. However, remember that the primitive $n$-th root of unity $\omega$ has order $n$ (i.e., $\omega^n = 1$ and $\omega^m \neq 1$ for all $m < n$). Therefore, the second half of $\{(\omega^2)^0, (\omega^2)^1, (\omega^2)^2, \cdots, (\omega^2)^{n-1}\}$ is a repetition of the first half. This implies that we only need to evaluate $A_0(X)$ and $A_1(X)$ at $\dfrac{n}{2}$ distinct $x$ coordinates each instead of $n$ distinct coordinates, because the polynomial evaluation results for the other half are the same as those of the first half (as their input $x$ to the polynomial is the same). 
 
-We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and evaluate them at half-counted $n$-th roots of unity. Then, the total rounds of splitting is $\log n$, and each round's maximum number of root-to-coefficient multiplications is $n$, which aggregates to $O(n \log n)$. 
+We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and evaluate them at half-counted $n$-th roots of unity. Then, the total rounds of splitting are $\log n$, and each round's maximum number of root-to-coefficient multiplications is $n$, which aggregates to $O(n \log n)$. 
 
 \subsubsection{Details}
 \label{subsec:ntt-forward-details}
 
-Suppose we have polynomial ring which is either $\mathbb{Z}_{p}[X] / X^8 + 1$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / X^8 + 1$ (over complex numbers). 
+Suppose we have a polynomial ring which is either $\mathbb{Z}_{p}[X] / X^8 + 1$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / X^8 + 1$ (over complex numbers). 
 %$g = 3$ is the generator of $\mathbb{Z}_{17}^* = \{1, 2, \cdots, 16\}$. 
 We denote the primitive $(n=8)$-th roots of unity as $\omega$, and 
 %which is $\omega = e^{\frac{i 2\pi}{n}}$ and %$ = g^{\frac{p - 1}{n}}$.

@@ -44,7 +44,7 @@ $S \cdot A^{\langle 2 \rangle} = s_0\cdot a_{0,0} + s_1\cdot a_{2,1} + \cdots + 
 
 $ $
 
-Then, even if the attacker has a sufficient number of $(A^{\langle i \rangle}, b_i)$ tuples, it is not feasible to derive $s_0, s_1, \cdots, s_{k-1}$, because even a small noise added to each equation prevents linear-algebra-based direct derivation of the unknown variables. For each above equation, the attacker has to consider as many possibilities as the number of the possible values of $e_i$. For example, if there are $r$ possible values of each noise $e_i$, the attacker's brute-force search space of applying linear algebra to those $n$ equations is: $\overbrace{r \times r \times r \times \cdots \times r}^{\text{n times}} = r^n$. Thus, the number of the noisy equations grows, the aggregate possibilities of $e_i$s grow exponentially, which means that the attacker's cost of attack grows exponentially. 
+Then, even if the attacker has a sufficient number of $(A^{\langle i \rangle}, b_i)$ tuples, it is not feasible to derive $s_0, s_1, \cdots, s_{k-1}$, because even a small noise added to each equation prevents linear-algebra-based direct derivation of the unknown variables. For each above equation, the attacker has to consider as many possibilities as the number of the possible values of $e_i$. For example, if there are $r$ possible values of each noise $e_i$, the attacker's brute-force search space of applying linear algebra to those $n$ equations is: $\overbrace{r \times r \times r \times \cdots \times r}^{\text{n times}} = r^n$. Thus, the number of noisy equations grows, the aggregate possibilities of $e_i$s grow exponentially, which means that the attacker's cost of attack grows exponentially. 
 
 Based on this intuition, the mathematical hard problem that constitutes lattice-based cryptography is as follows:
 
@@ -53,7 +53,7 @@ $ $
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:lattice-overview}} The LWE (Learning with Errors) and RLWE Problems}}]
 \textbf{\underline{LWE Problem}}
 
-Suppose we have a plaintext number $m$ to encrypt. The encryption formula is: $b = S \cdot A + \Delta \cdot m + e$. In this formula, $e$ is a small noise, and $\Delta$ is a scaling factor to bit-wise separate the plaintext $m$ from the noise $e$ with an enough gap when they are added up (this is needed for successful decryption, which will be explained later). 
+Suppose we have a plaintext number $m$ to encrypt. The encryption formula is: $b = S \cdot A + \Delta \cdot m + e$. In this formula, $e$ is a small noise, and $\Delta$ is a scaling factor to bit-wise separate the plaintext $m$ from the noise $e$ with enough gap when they are added up (this is needed for successful decryption, which will be explained later). 
 
 For each encryption, a random $k$-dimensional vector $A \in \mathbb{Z}_q^k$ and a small noise value $e \in \mathbb{Z}_q$ are newly sampled from $\{0, 1, \cdots, q - 1\}$, where $q$ is the ciphertext domain size. On the other hand, the $k$-dimensional secret vector $S$ is the same for all encryptions. Suppose we have an enough number of ciphertext tuples: 
 
@@ -122,7 +122,7 @@ $ $
 
 $ $
 
-\noindent \textbf{Security: } Given an attacker has a large list of $(A^{\langle i \rangle}, B^{\langle i \rangle})$ (i.e., many ciphertexts), it's almost impossible for him to derive $S$, because of the random noise $E^{\langle i \rangle}$ added in each encryption (which is a search-hard problem described in\autoref{subsec:lattice-overview}). This is because even small added unknown noises $E^{\langle i \rangle}$ greatly changes the mathematical solution for $S$ that satisfies all the $B^{\langle i \rangle} = S \cdot A^{\langle i \rangle} + \Delta \cdot M^{\langle i \rangle} + E^{\langle i \rangle}$ equations. 
+\noindent \textbf{Security: } Given an attacker has a large list of $(A^{\langle i \rangle}, B^{\langle i \rangle})$ (i.e., many ciphertexts), it's almost impossible for him to derive $S$, because of the random noise $E^{\langle i \rangle}$ added in each encryption (which is a search-hard problem described in \autoref{subsec:lattice-overview}). This is because even small added unknown noises $E^{\langle i \rangle}$ greatly change the mathematical solution for $S$ that satisfies all the $B^{\langle i \rangle} = S \cdot A^{\langle i \rangle} + \Delta \cdot M^{\langle i \rangle} + E^{\langle i \rangle}$ equations. 
 
 %$Y = S \cdot X$
 
@@ -134,4 +134,4 @@ To summarize, the lattice-based cryptography hides a plaintext by adding the enc
 
 \subsection{RLWE Cryptosystem}
 
-In the RLWE cryptosystem, the formula in \tboxlabel{\ref*{subsec:lattice-scheme}} is the same, but $S, A^{\langle i \rangle}, M^{\langle i \rangle} E^{\langle i \rangle}$ are polynomials. 
+In the RLWE cryptosystem, the formula in \tboxlabel{\ref*{subsec:lattice-scheme}} is the same, but $S, A^{\langle i \rangle}, M^{\langle i \rangle}, E^{\langle i \rangle}$ are polynomials. 

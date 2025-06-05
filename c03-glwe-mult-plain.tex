@@ -76,7 +76,7 @@ The noise is a bigger problem now, because after decryption, the original cipher
 \subsection{Gadget Decomposition for Noise Suppression}
 \label{subsubsec:gadget-decomposition-noise-suppression}
 
-In ciphertext-to-plaintext multiplication $\Lambda \cdot \textsf{GLWE}_{S, \sigma}(M)$, the noise $E$ grows to $E' = \Lambda \cdot E$. To limit this noise growth, we introduce a technique based on decomposing $\Lambda$ (\autoref{subsec:number-decomp}) and an GLev encryption (\autoref{subsec:glev-enc}) of $M$ as follows:
+In ciphertext-to-plaintext multiplication $\Lambda \cdot \textsf{GLWE}_{S, \sigma}(M)$, the noise $E$ grows to $E' = \Lambda \cdot E$. To limit this noise growth, we introduce a technique based on decomposing $\Lambda$ (\autoref{subsec:number-decomp}) and a GLev encryption (\autoref{subsec:glev-enc}) of $M$ as follows:
 
 
 $\Lambda = \Lambda_1 \dfrac{q}{\beta^1} + \Lambda_2 \dfrac{q}{\beta^2} + \cdots + \Lambda_l \dfrac{q}{\beta^l} \longrightarrow \textsf{Decomp}^{\beta, l}(\Lambda) = (\Lambda_1, \Lambda_2, \cdots, \Lambda_l)$

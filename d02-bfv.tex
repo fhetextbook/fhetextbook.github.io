@@ -1,4 +1,4 @@
-The BFV scheme is designed for homomorphic addition and multiplication of integers. BFV's encoding scheme does not require such approximation issues, because BFV is designed to encode only integers. Therefore, BFV guarantees exact encryption and decryption. BFV is suitable for use cases where the encrypted and decrypted values should exactly match (e.g., voting, financial computation), whereas CKKS is suitable for the use cases that tolerate tiny errors (e.g., data analytics, machine learning).  
+The BFV scheme is designed for homomorphic addition and multiplication of integers. BFV's encoding scheme does not require such approximation issues because BFV is designed to encode only integers. Therefore, BFV guarantees exact encryption and decryption. BFV is suitable for use cases where the encrypted and decrypted values should exactly match (e.g., voting, financial computation), whereas CKKS is suitable for the use cases that tolerate tiny errors (e.g., data analytics, machine learning).  
 
 In BFV, each plaintext is encrypted as an RLWE ciphertext. Therefore, BFV's ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, and ciphertext-to-plaintext multiplication are implemented based on GLWE's homomorphic addition and multiplication (as we learned in $\autoref{part:generic-fhe}$), with $k = 1$ to make GLWE an RLWE. 
 
@@ -129,7 +129,7 @@ $M_{3}(X) = 1X^3 + 0X^2 + 0X^1 + 1$
 
 $ $
 
-That being said, both polynomials that are mapped to the same $m_{1+2}$ (i.e., $1001$) as follows:
+That being said, both polynomials are mapped to the same $m_{1+2}$ (i.e., $1001$) as follows:
 
 $M_{1+2}(2) = 4 + 4 + 1 = 9$
 
@@ -137,7 +137,7 @@ $M_{3}(2) = 8 + 1 = 9$
 
 $ $
 
-Although the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} is not bijective but only one-to-many mappings, it preserves homomorphism and and the decoded number decomposition sums to the same original integer. Therefore, this encoding scheme can be validly used for fully homomorphic encryption.
+Although the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} is not bijective but only one-to-many mappings, it preserves homomorphism and the decoded number decomposition sums to the same original integer. Therefore, this encoding scheme can be validly used for fully homomorphic encryption.
 
 
 \subsection{Batch Encoding}
@@ -442,7 +442,7 @@ $(A^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \bmod Q$
 
 $ $
 
-After \textsf{ModRaise}, the decryption of these two ciphertexts would be the followings: 
+After \textsf{ModRaise}, the decryption of these two ciphertexts would be the following: 
 
 $A^{\langle 1 \rangle} \cdot S + B^{\langle 1 \rangle} = \Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle} + K_1q < Q$
 
@@ -846,7 +846,7 @@ $\textsf{RLWE}_{S',\sigma}(\Delta M) = (0, B) + \bm{\langle} \textsf{Decomp}^{\b
 \label{subsec:bfv-rotation}
 
 
-In this section, we will explain how to homomorphically rotate the elements of an input vector $\vec{v}$ after it is already encoded as a polynomial and encrypted as an RLWE ciphertext. In \autoref{subsec:coeff-rotation}, we learned how to rotate the coefficients of a polynomial. However, rotating the plaintext polynomial $M(X)$ or RLWE ciphertext polynomials $(A(X), B(X))$ does not necessarily rotate the input vector which is the source of them. 
+In this section, we will explain how to homomorphically rotate the elements of an input vector $\vec{v}$ after it is already encoded as a polynomial and encrypted as an RLWE ciphertext. In \autoref{subsec:coeff-rotation}, we learned how to rotate the coefficients of a polynomial. However, rotating the plaintext polynomial $M(X)$ or RLWE ciphertext polynomials $(A(X), B(X))$ does not necessarily rotate the input vector, which is the source of them. 
 
 The key requirement of homomorphic rotation of input vector slots (i.e., input vector) is that this operation should be performed on the RLWE ciphertext such that after this operation, if we decrypt the RLWE ciphertext and decode it, the recovered input vector will be in a rotated state as we expect. We will divide this task into the following two sub-problems:
 
@@ -945,7 +945,7 @@ $\sigma_M : (M(X), h) \in (\mathcal{R}_{\langle n, t \rangle}, \mathbb{Z}_{n}) \
 
 $ $
 
-\para{Converting $\bm{M(X)}$ into $\bm{M'(X)}$:} Our first task is to convert $M(X)$ into $M'(X)$, which is equivalent to applying our new mapping $\sigma_M : (M(X), h) \in (\mathcal{R}_{\langle n, t \rangle}, \mathbb{Z}_{n}) \longrightarrow M'(X) \in \mathcal{R}_{\langle n, t \rangle}$, such that decoding $M'(X)$ gives a rotated input vector $\vec{v}^{\langle h \rangle}$ whose first half of the elements in $\vec{v}$ are rotated by $h$ positions to the left (in a wrapping manner among them), and the second half of the elements are also rotated by $h$ positions to the left (in a wrapping manner among them). To design $\sigma_M$ that satisfies this requirement, we will use the number $5^j$ which has the following two special properties (based on the number theory):
+\para{Converting $\bm{M(X)}$ into $\bm{M'(X)}$:} Our first task is to convert $M(X)$ into $M'(X)$, which is equivalent to applying our new mapping $\sigma_M : (M(X), h) \in (\mathcal{R}_{\langle n, t \rangle}, \mathbb{Z}_{n}) \longrightarrow M'(X) \in \mathcal{R}_{\langle n, t \rangle}$, such that decoding $M'(X)$ gives a rotated input vector $\vec{v}^{\langle h \rangle}$ whose first half of the elements in $\vec{v}$ are rotated by $h$ positions to the left (in a wrapping manner among them), and the second half of the elements are also rotated by $h$ positions to the left (in a wrapping manner among them). To design $\sigma_M$ that satisfies this requirement, we will use the number $5^j$ which has the following two special properties (based on number theory):
 \begin{itemize}
 \item $(5^j \bmod 2n)$ and $(-5^j \bmod 2n)$ generate all odd numbers between $[0, 2n)$ for the integer $j$ where $0 \leq j < \dfrac{n}{2}$. 
 \item For each integer $j$ where $0 \leq j < \dfrac{n}{2}$, $(5^j \bmod 2n) + (-5^j \bmod 2n) \equiv 0 \bmod 2n$. 
@@ -1247,7 +1247,7 @@ In conclusion, given the modified encoding matrix $\hathat{W}$ and modified deco
 \end{comment}
 
 
-However, now a new problem is that we cannot directly update the plaintext $M(X)$ to $M(X^{J(h)})$, because $M(X)$ is encrypted as an RLWE ciphertext. Therefore, we need to instead update the RLWE ciphertext components $(A, B)$ to \textit{indirectly} update $M(X)$ to $M(X^{J(X)})$. We will explain this in the next subsection. 
+However, now a new problem is that we cannot directly update the plaintext $M(X)$ to $M(X^{J(h)})$, because $M(X)$ is encrypted as an RLWE ciphertext. Therefore, we need to instead update the RLWE ciphertext components $(A, B)$ to \textit{indirectly} by updating $M(X)$ to $M(X^{J(X)})$. We will explain this in the next subsection. 
 
 
 \subsubsection{Updating the Plaintext Polynomial by Updating the Ciphertext Polynomials}
@@ -1272,7 +1272,7 @@ $ $
 
 This relation implies that if we decrypt the ciphertext $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ with $S(X^{J(h)})$ as the secret key, then we get $\Delta M(X^{J(h)})$. Therefore, $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ is the RLWE ciphertext we are looking for, because decrypting it and then decoding its plaintext $M(X^{J(h)})$ will give us the input vector $\vec{v}^{\langle h \rangle}$. 
 
-We can easily convert $\textsf{ct} = (A(X), B(X))$ into $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ by applying $X^{J(h)}$ to $X$ for each of the $A(X)$ and $B(X)$ polynomials. However, after then, notice that the decryption key of the RLWE ciphertext $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ has been changed from $S(X)$ to $S(X^{J(h)})$. Thus, we need to additionally switch the ciphertext $C^{\langle h \rangle}$'s key from $S(X^{J(h)}) \rightarrow S(X)$, which is equivalent to converting $\textsf{RLWE}_{S(X^{J(h)}), \sigma}\bm{(} C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)})) \bm{)}$ into $\textsf{RLWE}_{S, \sigma}\bm{(} C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)})) \bm{)}$. For this, we will apply the BFV key switching technique (Summary~\ref*{subsec:bfv-key-switching}) learned in \autoref{subsec:bfv-key-switching} as follows: 
+We can easily convert $\textsf{ct} = (A(X), B(X))$ into $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ by applying $X^{J(h)}$ to $X$ for each of the $A(X)$ and $B(X)$ polynomials. However, after that, notice that the decryption key of the RLWE ciphertext $C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)}))$ has been changed from $S(X)$ to $S(X^{J(h)})$. Thus, we need to additionally switch the ciphertext $C^{\langle h \rangle}$'s key from $S(X^{J(h)}) \rightarrow S(X)$, which is equivalent to converting $\textsf{RLWE}_{S(X^{J(h)}), \sigma}\bm{(} C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)})) \bm{)}$ into $\textsf{RLWE}_{S, \sigma}\bm{(} C^{\langle h \rangle} = (A(X^{J(h)}), B(X^{J(h)})) \bm{)}$. For this, we will apply the BFV key switching technique (Summary~\ref*{subsec:bfv-key-switching}) learned in \autoref{subsec:bfv-key-switching} as follows: 
 
 $ $
 
@@ -1713,7 +1713,7 @@ $\Delta M(X^{J(3)}) = \Delta M(X^{13}) = 26 + 24X - 20X^2 - 2X^3 + 18X^4 - 32X^5
 
 $ $
 
-Note that the coefficients of the scaled polynomials $\Delta M(X^{J(3)})$ is still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
+Note that the coefficients of the scaled polynomials $\Delta M(X^{J(3)})$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
 
 We decode $M(X^{J(3)})$ as follows: 
 
@@ -1782,7 +1782,7 @@ $A \cdot \vec{x} = \Big(\vec{a}_{\langle 0, * \rangle} \cdot \vec{x}, \text{ } \
 
 $ $
 
-Let's define $\rho(\vec{v}, h)$ as rotation of $\vec{v}$ by $h$ positions to the left. And remember that the Hadamard dot product (Definition~\ref*{subsec:vector-arithmetic} in \autoref{subsec:vector-arithmetic}) is defined as slot-wise multiplication of two vectors: 
+Let's define $\rho(\vec{v}, h)$ as the rotation of $\vec{v}$ by $h$ positions to the left. And remember that the Hadamard dot product (Definition~\ref*{subsec:vector-arithmetic} in \autoref{subsec:vector-arithmetic}) is defined as slot-wise multiplication of two vectors: 
 
 $\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1} b_{n-1})$
 
@@ -1834,7 +1834,7 @@ In BFV, continuous ciphertext-to-ciphertext multiplication increases the noise i
 
 In this subsection, we will assume the plaintext modulus $t = p$, a prime number. Although $t$ can be generalized as $t = p^r$ where $r \in \mathbb{I}$ and $r \geq 1$ (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}), we will explain BFV's bootstrapping assuming $t=p$ for simplicity, and then generalize $t$ as $t = p^r$ in the end. 
 
-The core idea of the BFV bootstrapping is to homomorphically evaluate a special polynomial $G_\varepsilon(x)$, a digit extraction polynomial modulo $p^\varepsilon$ (for some positive integer $\varepsilon$), where the input to $G_\varepsilon(x)$ is a noisy plaintext value modulo $p^\varepsilon$ and the output is a noise-free plaintext value modulo $p^\varepsilon$ where the noise located at the least significant digits in a base-$p$ (prime) representation gets zeroed out. For example, $G_\varepsilon(3p^3 + 4p^2 + 6p + 2) = 3p^3 + 4p^2 + 6p \bmod p^\varepsilon$. Given the noise resides in the least significant $\varepsilon-1$ digits in base-$p$ representation, we can homomorphically recursively evaluate $G_\varepsilon(x)$ total $\varepsilon-1$ times in a row, which zeros out the least significant (base-$p$) $\varepsilon-1$ digits of input $x$. To homomorphically evaluate the noisy plaintext through $G_\varepsilon(x) \bmod p^\varepsilon$, we need to first switch the plaintext modulus from $t$ to $p^\varepsilon$, where $q \gg p^\varepsilon > p = t$. The larger $\varepsilon$ is, the more likely that the noise gets successfully zeroed out, but instead the computation overhead becomes larger. If $\varepsilon$ is small, the computation gets faster, but the digit-wise distance between the noise and the plaintext gets smaller, potentially corrupting the plaintext during bootstrapping, because removing the most significant noise digit may remove the least significant plaintext digit as well. Therefore, $\varepsilon$ should be chosen carefully. 
+The core idea of the BFV bootstrapping is to homomorphically evaluate a special polynomial $G_\varepsilon(x)$, a digit extraction polynomial modulo $p^\varepsilon$ (for some positive integer $\varepsilon$), where the input to $G_\varepsilon(x)$ is a noisy plaintext value modulo $p^\varepsilon$ and the output is a noise-free plaintext value modulo $p^\varepsilon$, where the noise located at the least significant digits in a base-$p$ (prime) representation gets zeroed out. For example, $G_\varepsilon(3p^3 + 4p^2 + 6p + 2) = 3p^3 + 4p^2 + 6p \bmod p^\varepsilon$. Given the noise resides in the least significant $\varepsilon-1$ digits in base-$p$ representation, we can homomorphically recursively evaluate $G_\varepsilon(x)$ total $\varepsilon-1$ times in a row, which zeros out the least significant (base-$p$) $\varepsilon-1$ digits of input $x$. To homomorphically evaluate the noisy plaintext through $G_\varepsilon(x) \bmod p^\varepsilon$, we need to first switch the plaintext modulus from $t$ to $p^\varepsilon$, where $q \gg p^\varepsilon > p = t$. The larger $\varepsilon$ is, the more likely that the noise gets successfully zeroed out, but instead the computation overhead becomes larger. If $\varepsilon$ is small, the computation gets faster, but the digit-wise distance between the noise and the plaintext gets smaller, potentially corrupting the plaintext during bootstrapping, because removing the most significant noise digit may remove the least significant plaintext digit as well. Therefore, $\varepsilon$ should be chosen carefully. 
 
 $ $
 
@@ -1867,7 +1867,7 @@ $ $
 
 Let's see how we derived the above relation. Suppose we compute $A'\cdot S + B' \bmod p^\varepsilon$, whose output will be $p^{\varepsilon-1}M + E'$. Now, instead of using the plaintext secret key $S$, we use an encrypted secret key $\textsf{RLWE}_{S, \sigma}(\Delta' S)$, where $S$ is a plaintext modulo $p^\varepsilon$, its scaling factor $\Delta' = \left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor$, and the ciphertext encrypting $S$ is in modulo $q$. Then, the result of homomorphically computing $A'\cdot \textsf{RLWE}_{S, \sigma}(\Delta' S) + B'$ will be an encryption of $p^{\varepsilon-1}M + E' + Kp^\varepsilon$, where $Kp^\varepsilon$ stands for the wrapping-around coefficient values of the multiples of $p^\varepsilon$. %Finally, we replace $A'\cdot \textsf{RLWE}_{S, \sigma}(S)$ with $\langle \textsf{Decomp}^{\beta, l}(A'), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle$, which is computationally equivalent to $A' \cdot \textsf{RLWE}_{S, \sigma}(S)$ but the noise becomes much smaller (we will explain why later in \autoref{subsubsec:bfv-bootstrapping-homomorphic-decryption}).
 
-Notice that we did not reduce $Kp^\varepsilon$ by modulo $p^\varepsilon$ during homomorphic decryption (without modulo-$q$ reduction), because such an homomorphic modulo reduction is not directly doable. Instead, we will handle $Kp^\varepsilon$ in the later digit extraction step. 
+Notice that we did not reduce $Kp^\varepsilon$ by modulo $p^\varepsilon$ during homomorphic decryption (without modulo-$q$ reduction), because such a homomorphic modulo reduction is not directly doable. Instead, we will handle $Kp^\varepsilon$ in the later digit extraction step. 
 
 
 For simplicity, we will denote $Z = p^{\varepsilon-1} M + E' \bmod p^\varepsilon$.
@@ -2075,11 +2075,11 @@ $ $
 
 %Let's denote $z^{\langle v \rangle}_i = F_{\varepsilon'} \circ F_{\varepsilon'} \circ F_{\varepsilon'} \circ \cdots \circ F_{\varepsilon'}(z_i)$, the output of recursively evaluating $F_{\varepsilon'}$ at $z_i$ total $v$ times. Then, computing $(z_i - z^{\langle\varepsilon-1 \rangle}_i) \bmod p^\varepsilon$ is equivalent to zeroing out the least significant base-$p$ digit of $z_i$. 
 
-In the above recursive computation, notice that the order of using function $F_{\varepsilon'}$ is specifically $F_{1} \rightarrow F_{2} \rightarrow F_{3} \rightarrow \cdots \rightarrow F_{\varepsilon -1}$. We choose this specific order, because we assume that for the initial input $z_i$, we don't know its associated $\varepsilon'$ value (i.e., the least significant base-$p$ digit index whose value is non-zero after digit index 0). If we choose the order $F_{1} \rightarrow F_{2} \rightarrow F_{3} \rightarrow \cdots \rightarrow F_{\varepsilon -1}$, then regardless of the value of $z_i$, we get the universal guarantee that the final output will be $z_{i,0} \bmod p^\varepsilon$ (i.e., the value of the base-$p$ digit index 0).
+In the above recursive computation, notice that the order of using function $F_{\varepsilon'}$ is specifically $F_{1} \rightarrow F_{2} \rightarrow F_{3} \rightarrow \cdots \rightarrow F_{\varepsilon -1}$. We choose this specific order because we assume that for the initial input $z_i$, we don't know its associated $\varepsilon'$ value (i.e., the least significant base-$p$ digit index whose value is non-zero after digit index 0). If we choose the order $F_{1} \rightarrow F_{2} \rightarrow F_{3} \rightarrow \cdots \rightarrow F_{\varepsilon -1}$, then regardless of the value of $z_i$, we get the universal guarantee that the final output will be $z_{i,0} \bmod p^\varepsilon$ (i.e., the value of the base-$p$ digit index 0).
 
 $ $
 
-Now, We define the digit extraction function $G_{\varepsilon, v}(z_i)$ as follows:
+Now, we define the digit extraction function $G_{\varepsilon, v}(z_i)$ as follows:
 
 $G_{\varepsilon, v}(z_i) = z_i - (\underbrace{F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{\varepsilon-v}}_{v \text{ times}}(z_i) \bmod p^\varepsilon$
 
@@ -2165,7 +2165,7 @@ $ $
 
 Based on step 3's claim ($z_i^p \equiv z_{i, 0}^p \bmod p^{\varepsilon'+1}$), we know that the value of $z_i^p \bmod p^{\varepsilon' + 1}$ depends only on $z_{i,0}$ (given $p$ and $\varepsilon'$ are fixed). Therefore, we can imagine that there exists some function $f(z_{i,0})$ whose input is $z_{i,0} \in [0, p-1]$ and the output is $z_i^p \in [0, p^{\varepsilon'+1} - 1]$. Alternatively, we can imagine that there exist $\varepsilon'+1$ different functions $f_0, f_1, \cdots, f_{\varepsilon'}$ such that each $f_j$ is a polynomial whose input is $z_{i,0} \in [0, p-1]$ and the output is $c_i \in [0, p-1]$, and $z_i^p \equiv \sum\limits_{j=0}^{\varepsilon'}f_j(z_{i,0})\cdot p^j \bmod p^{\varepsilon'+1}$. The input and output domain of each polynomial $f_j$ is $[0, p - 1]$. Therefore, we can design each $f_j$ as a $(p-1)$-degree polynomial and derive each $f_j$ based on polynomial interpolation (\autoref{sec:polynomial-interpolation}) by using $(p-1)$ coordinate values. 
 
-Note that whenever we increase $\varepsilon'$ to $\varepsilon' + 1$, we add a new polynomial $f_{\varepsilon' + 1}$. However, the previous polynomials $f_0, f_1, \cdots, f_{\varepsilon'}$ stay the same as before, because increasing $\varepsilon'$ by 1 only adds a new base-$p$ constant $c_{\varepsilon' + 1}$ for the highest base-$p$ digit, while keeping the lower-digit constants $c_0, c_1, \cdots, c_{\varepsilon'}$ the same as before. Therefore, the polynomials $f_0, f_1, \cdots, f_{\varepsilon'}$ each of which computes  $c_0, c_1, \cdots, c_{\varepsilon'}$ also stays the same as before. 
+Note that whenever we increase $\varepsilon'$ to $\varepsilon' + 1$, we add a new polynomial $f_{\varepsilon' + 1}$. However, the previous polynomials $f_0, f_1, \cdots, f_{\varepsilon'}$ stay the same as before, because increasing $\varepsilon'$ by 1 only adds a new base-$p$ constant $c_{\varepsilon' + 1}$ for the highest base-$p$ digit, while keeping the lower-digit constants $c_0, c_1, \cdots, c_{\varepsilon'}$ the same as before. Therefore, the polynomials $f_0, f_1, \cdots, f_{\varepsilon'}$, each of which computes  $c_0, c_1, \cdots, c_{\varepsilon'}$, also stay the same as before. 
 
 \end{myproof}
 
@@ -2251,12 +2251,12 @@ $F_{\varepsilon'}(z_i) = z_i^p - \sum\limits_{j=1}^{\varepsilon'}f_j(z_i)\cdot p
 $\textcolor{white}{F_{\varepsilon'}(z_i) } \equiv z_{i,0} \bmod p^{\varepsilon' + 1}$
 
 
-The above relation implies that $F_{\varepsilon'}(x) \bmod p^{\varepsilon'+1}$ is equivalent to the least significant base-$p$ digit of of $x$ (according to step 6's claim). Therefore, if we plug in $z_i$ into $F_{\varepsilon'}(x)$ and regard $\varepsilon' = 1$, then the output is some number whose least significant base-$p$ digit is $z_{i,0} \bmod p^2$ and the 2nd least significant base-$p$ digit is $0 \bmod p^2$. As we recursively apply the output back to $F_{\varepsilon'}(x)$ and increment $\varepsilon'$ by 1, we iteratively zero out the 2nd least significant base-$p$ digit, the 3rd least significant base-$p$ digit, and so on. We repeat this process for $\varepsilon-1$ times to zero out the upper $\varepsilon-1$ base-$p$ digits, keeping only the least significant digit as it is (i.e., $z_{i,0}$). Therefore, $F_{\varepsilon'}(x)$ is a valid lifting polynomial that can be iteratively used to extract the least significant digit of $z_i \bmod p^\varepsilon$. 
+The above relation implies that $F_{\varepsilon'}(x) \bmod p^{\varepsilon'+1}$ is equivalent to the least significant base-$p$ digit of $x$ (according to step 6's claim). Therefore, if we plug in $z_i$ into $F_{\varepsilon'}(x)$ and regard $\varepsilon' = 1$, then the output is some number whose least significant base-$p$ digit is $z_{i,0} \bmod p^2$ and the 2nd least significant base-$p$ digit is $0 \bmod p^2$. As we recursively apply the output back to $F_{\varepsilon'}(x)$ and increment $\varepsilon'$ by 1, we iteratively zero out the 2nd least significant base-$p$ digit, the 3rd least significant base-$p$ digit, and so on. We repeat this process for $\varepsilon-1$ times to zero out the upper $\varepsilon-1$ base-$p$ digits, keeping only the least significant digit as it is (i.e., $z_{i,0}$). Therefore, $F_{\varepsilon'}(x)$ is a valid lifting polynomial that can be iteratively used to extract the least significant digit of $z_i \bmod p^\varepsilon$. 
 
 
 \end{enumerate}
 
-We use $F_{\varepsilon'}(x)$ as the internal helper function within the digit extraction function $G_{\varepsilon,v}(z_i)$ that calls $F_{\varepsilon'}(x)$ total $v-1$ times.
+We use $F_{\varepsilon'}(x)$ as the internal helper function within the digit extraction function $G_{\varepsilon,v}(z_i)$ that calls $F_{\varepsilon'}(x)$ a total $v-1$ times.
 
 %\para{Configuring the Bootstrapping Speed:} The bootstrapping overhead largely depends on the $\varepsilon$ parameter in $p^\varepsilon$, as it determines the ciphertext modulus size as well as the complexity of the digit extraction polynomial $G_{\varepsilon,v}(z_i)$. We have considered $p^\varepsilon \approx q_L$, the maximum multiplicative level. But it is also possible to relax the level and set it to a lower level $p^\varepsilon \approx q_l$ where $1 \leq l \leq L$, which can reduce the bootstrapping delay. 
 
@@ -2303,7 +2303,7 @@ $G_{\varepsilon,1} \circ \cdots \circ G_{\varepsilon,\varepsilon-2} \circ G_{\va
 
 $ $
 
-\para{Generalization of \boldmath$t = p^r$: } We have explained the BFV bootstrapping with the assumption that the plaintext modulus $t = p$, a prime number. However, we can generalize $t$ as $t=p^r$ where $r$ can be any positive integer. The benefit of choosing $t = p^r$ with a small $p$ instead of $t = p$ with a big $p$ is efficient noise management of the digit extraction process. As digit extraction requires many ciphertext-to-plaintext multiplications with $p, p^2, \cdots, p^{\varepsilon-1}$, using a small $p$ generates a smaller noise during the homomorphic operations.  
+\para{Generalization of \boldmath$t = p^r$: } We have explained the BFV bootstrapping with the assumption that the plaintext modulus $t = p$ is a prime number. However, we can generalize $t$ as $t=p^r$ where $r$ can be any positive integer. The benefit of choosing $t = p^r$ with a small $p$ instead of $t = p$ with a big $p$ is the efficient noise management of the digit extraction process. As digit extraction requires many ciphertext-to-plaintext multiplications with $p, p^2, \cdots, p^{\varepsilon-1}$, using a small $p$ generates a smaller noise during the homomorphic operations.  
 
 
 \subsubsection{Summary}

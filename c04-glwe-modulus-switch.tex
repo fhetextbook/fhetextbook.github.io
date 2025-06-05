@@ -1,5 +1,5 @@
 In the GLWE cryptosystem, modulus switching is a process of changing a ciphertext's modulo domain to a smaller (or larger) one, while ensuring that the ciphertext still decrypts to the same plaintext. For example, suppose we have the ciphertext $\textsf{LWE}_{S, \sigma}(\Delta m) \in \mathbb{Z}_q^{k+1}$. If we switch the ciphertext's modulo from $q \rightarrow q'$, then the ciphertext is converted into $\textsf{LWE}_{S, \sigma}\left(\Delta\dfrac{q'}{q} m\right) \in \mathbb{Z}_{q'}^{k+1}$. The ciphertext's all other components such as the noise ($e$) and public keys ($a_0, a_1, \cdots, a_{k-1}$, $b$) are scaled by $\dfrac{q'}{q}$, becoming $\left\lceil e\dfrac{q'}{q} \right\rfloor$, $\left(\left\lceil a_0\dfrac{q'}{q}\right\rfloor, \left\lceil a_1\dfrac{q'}{q}\right\rfloor, \cdots, \left\lceil a_{k-1}\dfrac{q'}{q}\right\rfloor, \left\lceil b\dfrac{q'}{q}\right\rfloor\right)$. To switch the modulo of an LWE ciphertext, we use the modulo rescaling technique learned from \autoref{sec:modulus-rescaling}. 
-The same modulus switching technique can be also applied to RLWE ciphertexts. In this section, we will show how to switch (i.e., rescale) the modulo of LWE and RLWE ciphertexts and prove its correctness.  
+The same modulus switching technique can also be applied to RLWE ciphertexts. In this section, we will show how to switch (i.e., rescale) the modulo of LWE and RLWE ciphertexts and prove its correctness.  
 %That is, after  LWE/RLWE ciphertexts, we will prove why they are still valid LWE/RLWE ciphertexts.
 
 
@@ -31,9 +31,9 @@ $ $
 $ $
 
 
-In the LWE cryptosystem, modulus switch is a process of converting an original LWE ciphertext's modulo domain to a smaller modulo domain. This can be seen as scaling down all components, except for the plaintext $m$ and the secret key $S$, in the original LWE ciphertext to a smaller domain. This operation preserves the size and integrity of the original plaintext $m$, while the scaling factor $\Delta$ gets reduced to a smaller value $\hat{\Delta}$ and the noise $e$ to a smaller (reduced) noise $\hat{e}$ (note that noise alteration does not affect the original plaintext $m$, because the noise gets rounded away after decryption, anyway), and $A$ also gets scaled down to a smaller $\hat A$. Modulus switch is used for computational efficiency during TFHE's bootstrapping (which will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}). Modulus switch is also used for implementing the ciphertext-to-ciphertext multiplication algorithm in BGV (\autoref{subsec:bfv-mult-cipher}) and CKKS (\autoref{subsec:ckks-mult-cipher}). 
+In the LWE cryptosystem, modulus switching is a process of converting an original LWE ciphertext's modulo domain to a smaller modulo domain. This can be seen as scaling down all components, except for the plaintext $m$ and the secret key $S$, in the original LWE ciphertext to a smaller domain. This operation preserves the size and integrity of the original plaintext $m$, while the scaling factor $\Delta$ gets reduced to a smaller value $\hat{\Delta}$ and the noise $e$ to a smaller (reduced) noise $\hat{e}$ (note that noise alteration does not affect the original plaintext $m$, because the noise gets rounded away after decryption, anyway), and $A$ also gets scaled down to a smaller $\hat A$. Modulus switching is used for computational efficiency during TFHE's bootstrapping (which will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}). Modulus switching is also used for implementing the ciphertext-to-ciphertext multiplication algorithm in BGV (\autoref{subsec:bfv-mult-cipher}) and CKKS (\autoref{subsec:ckks-mult-cipher}). 
 
-The high-level idea of LWE modulus switch is to rescale the congruence relationship of the LWE scheme. LWE's homomorphic computation algorithms include the followings: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication. However, all congruence relationships used in these algorithms are essentially rewritten versions of the following single fundamental congruence relationship: $b = A\cdot S + \Delta m + e \bmod q$. Thus, modulus switch of an LWE ciphertext from $q \rightarrow q'$ is equivalent to rescaling the modulo of the above congruence relationship from $q \rightarrow q'$.
+The high-level idea of LWE modulus switch is to rescale the congruence relationship of the LWE scheme. LWE's homomorphic computation algorithms include the following: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication. However, all congruence relationships used in these algorithms are essentially rewritten versions of the following single fundamental congruence relationship: $b = A\cdot S + \Delta m + e \bmod q$. Thus, modulus switch of an LWE ciphertext from $q \rightarrow q'$ is equivalent to rescaling the modulo of the above congruence relationship from $q \rightarrow q'$.
 
 Based on this insight, the LWE cryptosystem's modulus switching from $q \rightarrow \hat{q}$ (where $q > \hat{q}$) is a process of converting the original LWE ciphertext $\textsf{LWE}_{S, \sigma}(\Delta m)$ as follows:
 
@@ -75,7 +75,7 @@ $ $
 %\textbf{\underline{Proof}}
 \begin{myproof}
 \begin{enumerate}
-\item Note the followings: 
+\item Note the following: 
 
 $\hat{b} = \Big\lceil b \dfrac{\hat{q}}{q} \Big\rfloor = b\dfrac{\hat{q}}{q} + \epsilon_b$ (where $-0.5 < \epsilon_b < 0.5$, a rounding drift error)
 
@@ -206,7 +206,7 @@ $m = \left \lceil \dfrac{9}{\hat \Delta} \right \rfloor = \left \lceil \dfrac{9}
   \label{fig:modulus-switch}
 \end{figure}
 
-\para{Reduced Distance between $m$ and $e$:} After modulus switching of an LWE ciphertext from $q \rightarrow \hat{q}$, the underlying plaintext (containing a noise) $\Delta m + e$ gets shrunk to $\hat{\Delta}m + \hat{e}$, as illustrated in \autoref{fig:modulus-switch}. Note that after the modulus switch from $q \rightarrow \hat{q}$, $\Delta m$ is down-scaled to $\hat{\Delta} m$ without losing its bit data. Notably, the plaintext value $m$ stays the same after the modulus switch, while its scaling factor $\Delta$ gets reduced to $\hat{\Delta}$ and the noise $e$ reduced to $\hat e$. However, after the modulus switch, the distance between $\hat e$'s MSB and $\hat \Delta m$'s LSB gets reduced than the distance between $e$'s MSB and $\Delta m$'s LSB.
+\para{Reduced Distance between $m$ and $e$:} After modulus switching of an LWE ciphertext from $q \rightarrow \hat{q}$, the underlying plaintext (containing a noise) $\Delta m + e$ gets shrunk to $\hat{\Delta}m + \hat{e}$, as illustrated in \autoref{fig:modulus-switch}. Note that after the modulus switch from $q \rightarrow \hat{q}$, $\Delta m$ is down-scaled to $\hat{\Delta} m$ without losing its bit data. Notably, the plaintext value $m$ stays the same after the modulus switch, while its scaling factor $\Delta$ gets reduced to $\hat{\Delta}$ and the noise $e$ gets reduced to $\hat e$. However, after the modulus switch, the distance between $\hat e$'s MSB and $\hat \Delta m$'s LSB gets reduced compared to the distance between $e$'s MSB and $\Delta m$'s LSB.
 
 
 
@@ -284,7 +284,7 @@ $ $
 \textbf{\underline{Proof}}
 
 \begin{enumerate}
-\item Note the followings: 
+\item Note the following: 
 
 $\hat{b}_i = \Big\lceil b_i \dfrac{\hat{q}}{q} \Big\rfloor = b_i\dfrac{\hat{q}}{q} + \epsilon_{b_i}$ (where $-0.5 < \epsilon_{b_i} < 0.5$, a rounding drift error)
 

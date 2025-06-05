@@ -1317,22 +1317,21 @@ The CKKS encoding's second reason for using the $(\mu=2n)$-th cyclotomic polynom
 \label{subsec:ckks-conjugation}
 
 
-As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-dimensional input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-dimensional Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-2}, \cdots, \overline{v}_1, \overline{v}_0)$. To compute the conjugation of $\vec{v}$, we which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
+As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-dimensional input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-dimensional Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-2}, \cdots, \overline{v}_1, \overline{v}_0)$. To compute the conjugation of $\vec{v}$, which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
 
 $\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1}, {v}_{\frac{n}{2}-1}, \cdots, {v}_1, {v}_0)$
 
 $= \bm{(}M(\overline{\omega})), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega^{n-1}), \cdots, M(\omega^{3}), M(\omega)\bm{)}$ \textcolor{red}{ \# where $\omega = e^{\frac{i\pi}{n}}$}
 
-$= \bm{(}M((\omega)^{2n-1}), M(\omega^{2n-3}), \cdots, M((\omega^{1}), M((\overline{\omega^{1}}), \cdots, M(\overline{\omega^{3}}), M((\overline{\omega})^{-2n-1})\bm{)}$
-\textcolor{red}{ \# $\omega$'s period is $2\pi$}
+%$= \bm{(}M((\omega)^{2n-1}), M(\omega^{2n-3}), \cdots, M(\omega^{n+1}), M(\overline{\omega^{n+1}}), \cdots, M(\overline{\omega^{n+3}}), M((\overline{\omega})^{2n-1})\bm{)}$
 
-$= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M((\overline{\omega^{n-1}})^{-1}), \cdots, M((\overline{\omega^{3}})^{-1}), M((\overline{\omega})^{-1})\bm{)}$
+$= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M((\overline{\omega^{n-1}})^{-1}), \cdots, M((\overline{\omega^{3}})^{-1}), M((\overline{\omega})^{-1})\bm{)}$ 
 
-$=\{M(X^{-1})\}$ 
+\textcolor{red}{ \# since $\overline{\omega^k} = e^{\overline{\frac{ki\pi}{n}}} = e^{-\frac{ki\pi}{n}} = \omega^{-k}$ and $\omega^{k} = (\overline{\omega^k})^{-1}$ for $k = \{1, 3, \cdots, n-1\}$}
 
 $ $
 
-, where $X = \{\omega, \omega^{3}, \cdots, \omega^{2n - 1}, \overline{\omega^{2n - 1}}, \cdots, \overline{\omega^3}, \overline{\omega} \} = \{\omega^{1}, \omega^{3}, \cdots, \omega^{2n - 1}\}$
+$=\{M(X^{-1})\}$ \textcolor{red}{ \# where $X = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \overline{\omega^{n - 1}}, \cdots, \overline{\omega^3}, \overline{\omega} \} = \{\omega^{1}, \omega^{3}, \cdots, \omega^{2n - 1}\}$}
 
 $ $
 
@@ -1688,7 +1687,7 @@ $ $
 \begin{table}
 \begin{tabular}{|ll|}
 \hline
-1& \textsf{\textbf{\underline{ModRaise:}}} Given ciphertext $(A, B) \bmod q_L$, we forcibly modify its modulus from $q_0$ to $q_L$. \\
+1& \textsf{\textbf{\underline{ModRaise:}}} Given ciphertext $(A, B) \bmod q_0$, we forcibly modify its modulus from $q_0$ to $q_L$. \\
 & Then, it ends up encrypting $\Delta M + E + q_0k$ instead of $\Delta M + E$.\\
 2& \textsf{\textbf{\underline{CoeffToSlot:}}} Based on step 1's ciphertext $(A, B) \bmod q_L$, we generate a new ciphertext\\
 & that encrypts an input vector whose its each $i$-th slot stores $\Delta m_i + e_i + q_0k_i$.\\

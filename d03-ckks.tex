@@ -1350,7 +1350,7 @@ Homomorphic conjugation of the input vector of a ciphertext is equivalent to the
 
 \end{tcolorbox}
 
-\subsection{Sparsely Packing Ciphertext}
+\subsection{Sparsely Packing Ciphertexts}
 \label{subsec:ckks-sparse-packing}
 
 In \autoref{subsec:ckks-encoding-decoding}, we learned the CKKS encoding scheme which encodes an input vector with $\dfrac{n}{2}$ slots (i.e., $\dfrac{n}{2}$-dimensional input vector) into an $(n-1)$-degree polynomial. While the polynomial ring's degree $n$ is fixed at the setup stage of CKKS as a security parameter, some applications may only need to use fewer than $\dfrac{n}{2}$ input vector slots. Suppose we only need to use $\frac{n'}{2}$ slots out of $\frac{n}{2}$ slots, where $n'$ is some number that divides $n$. Then, the corresponding input vector and encoded polynomial get a special property as described below:

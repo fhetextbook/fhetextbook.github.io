@@ -127,7 +127,7 @@ BGV's encryption decryption process is described as follows:
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, q \rangle}$, $A_i \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$, $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$
+\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, q \rangle}$, $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$, $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$
 
 
 \begin{enumerate}
@@ -237,7 +237,7 @@ $= (A \bmod q_{l-1}) \cdot S + (B \bmod q_{l-1}) - K\cdot q_l$
 $= (A - K_A\cdot q_{l-1}) \cdot S + (B - K_B\cdot q_{l-1}) - K\cdot q_l$ 
 
 $= A\cdot S + B - (K_A + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
-\textcolor{red}{ \# where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-the prime element of $q_L$)}
+\textcolor{red}{ \# where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-th prime element of $q_L$)}
 
 $= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ \# where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
 
@@ -283,7 +283,7 @@ After this, the ciphertext's multiplicative level decreases by 1, the noise's sc
 \noindent \textbf{- Reference 3:} 
 \href{https://eprint.iacr.org/2012/099.pdf}{Homomorphic Evaluation of the AES Circuit}~\cite{bgv-modswitch3}
 
-Remember that the requirement of modulus switch is that while we change the ciphertext modulus from $q$ to $\hat q$, it should decrypt to the same plaintext $M$. BGV's modulus switch is similar to that of the RLWE modulus switch (\autoref{subsec:modulus-switch-rlwe}), but there is an additional requirement, because BGV applies the scaling factor $\Delta$ not to plaintext $M$, but to noise $E$. In the case of BFV or CKKS, their decryption process only needs to round off the noise in the low-digit area. However, in the case of BGV, the plaintext is in the low-digit area and its decryption process has to remove the noise in the higher-bit area by modulo-$t$ reduction (i.e., the plaintext modulus). More concretely, BGV's modulus switch from $(A, B) \bmod q_{l}$ $\rightarrow$  $(\hat{A}, \hat{B}) \bmod \hat{q}$ should satisfy the decryption relation such that $(\hat{A} \cdot S + \hat{B} \bmod \hat{q}) \bmod t = M$. In BGV's modulus switch, $\hat{q}$ does not have to be one of the multiplicative levels of the ciphertext, and $\hat{q}$ only needs to satisfy the relationship: $\hat{q}$ and $q_l$ are co-prime, $\hat{q} < q_l$ and $\hat{q} \equiv 1 \bmod t$. BGV's modulus switch procedure is as follows:
+Remember that the requirement of modulus switch is that while we change the ciphertext modulus from $q$ to $\hat q$, it should decrypt to the same plaintext $M$. BGV's modulus switch is similar to that of the RLWE modulus switch (\autoref{subsec:modulus-switch-rlwe}), but there is an additional requirement, because BGV applies the scaling factor $\Delta$ not to plaintext $M$, but to noise $E$. In the case of BFV or CKKS, their decryption process only needs to round off the noise in the low-digit area. However, in the case of BGV, the plaintext is in the low-digit area and its decryption process has to remove the noise in the higher-bit area by modulo-$t$ reduction (i.e., the plaintext modulus). More concretely, BGV's modulus switch from $(A, B) \bmod q_{l}$ $\rightarrow$  $(\hat{A}, \hat{B}) \bmod \hat{q}$ should satisfy the decryption relation such that $((\hat{A} \cdot S + \hat{B}) \bmod \hat{q}) \bmod t = M$. In BGV's modulus switch, $\hat{q}$ does not have to be one of the multiplicative levels of the ciphertext, and $\hat{q}$ only needs to satisfy the relationship: $\hat{q}$ and $q_l$ are co-prime, $\hat{q} < q_l$ and $\hat{q} \equiv 1 \bmod t$. BGV's modulus switch procedure is as follows:
 
 $ $
 
@@ -292,7 +292,7 @@ $ $
 
 \item The input ciphertext is $\textsf{ct} = (A, B) \bmod q_l$. We compute new polynomials $A'$ and $B'$ as follows:
 
-$(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l} A\right\rfloor, \left\lceil\dfrac{\hat{q}}{q_l}\cdot B\right\rfloor\right) \pmod{\hat{q}}$
+$(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l}\cdot A\right\rfloor, \left\lceil\dfrac{\hat{q}}{q_l}\cdot B\right\rfloor\right) \pmod{\hat{q}}$
 
 $ $
 
@@ -453,7 +453,7 @@ $ $
 BGV's modulus switch from $q_l \rightarrow \hat{q}$ is equivalent to updating $(A, B) \bmod q_l$ to $(\hat A, \hat B) \bmod \hat{q}$ as follows:
 
 
-$(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l} A\right\rfloor, \left\lceil\dfrac{\hat{q}}{q_l}\cdot B\right\rfloor\right) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^2$
+$(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l}\cdot A\right\rfloor, \left\lceil\dfrac{\hat{q}}{q_l}\cdot B\right\rfloor\right) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^2$
 
 $ $
 
@@ -485,7 +485,7 @@ After the modulus switch (i.e., the noise scaling factor), $\Delta = t$ stays th
 
 In the case of CKKS (\autoref{subsubsec:ckks-mult-cipher-rescale}), the difference between modulus switch and \textsf{ModDrop} is that the former scales down the plaintext's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} does not affect the plaintext's scaling factor. 
 
-Similarly, in the case of BGV, modulus switch (rescaling) and \textsf{ModDrop} from $q_l \rightarrow q_{l-1}$ both lower a BFV ciphertext's modulus from $q_l \rightarrow q_{l-1}$. However, the key difference is that rescaling also decreases the noise's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} keeps the noise's scaling factor the same as it is. Therefore, rescaling is used only during ciphertext-to-ciphertext multiplication (to be explained in \autoref{subsec:bgv-mult-cipher}) when scaling down the plaintext's scaling factor in the intermediate ciphertext from $\Delta^2 \rightarrow \Delta$. Meanwhile, \textsf{ModDrop} is used to reduce the modulo computation time during an application's routine when it becomes certain that the ciphertext will not undergo any additional ciphertext-to-ciphertext multiplication (i.e., no need to further decrease the ciphertext's modulus). 
+Similarly, in the case of BGV, modulus switch (rescaling) and \textsf{ModDrop} from $q_l \rightarrow q_{l-1}$ both lower a BGV ciphertext's modulus from $q_l \rightarrow q_{l-1}$. However, the key difference is that rescaling also decreases the noise's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} keeps the noise's scaling factor the same as it is. Therefore, rescaling is used only during ciphertext-to-ciphertext multiplication (to be explained in \autoref{subsec:bgv-mult-cipher}) when scaling down the plaintext's scaling factor in the intermediate ciphertext from $\Delta^2 \rightarrow \Delta$. Meanwhile, \textsf{ModDrop} is used to reduce the modulo computation time during an application's routine when it becomes certain that the ciphertext will not undergo any additional ciphertext-to-ciphertext multiplication (i.e., no need to further decrease the ciphertext's modulus). 
 
 The main difference in modulus switch between CKKS and BGV is that the former decreases the plaintext's scaling factor by approximately $\dfrac{1}{\Delta}$, whereas the latter decreases the noise's scaling factor by approximately $\dfrac{1}{\Delta}$. 
 
@@ -593,9 +593,9 @@ BGV's homomorphic rotation scheme of input vector slots is exactly the same as B
 
 Suppose we have a BGV ciphertext and a key-switching key as follows:
 
-$\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B)$, \text{ } $\textsf{RLev}_{S, \sigma}^{\beta, l}(S^{J(h)})$
-
-$ $
+\[
+\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B), \quad \textsf{RLev}_{S, \sigma}^{\beta, l}(S^{J(h)})
+\]
 
 Then, the procedure of rotating the first-half elements of the ciphertext's original input vector $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) and the second-half elements of $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) is as follows: 
 
@@ -684,7 +684,7 @@ $ = p^{\varepsilon-1} m_i + p^\varepsilon e_i + k'_i\cdot(k^{\langle \hat{q} \ra
 
 $ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon  \cdot (e_i + k'_i\cdot k^{\langle \hat{q} \rangle }) $ \textcolor{red}{ \# rearranging the terms}
 
-$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ \# where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k^{\langle \hat{q} \rangle } $}
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ \# where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k'_i\cdot k^{\langle \hat{q} \rangle } $}
 
 $ = p^{\varepsilon-1} m_i + k'_i \bmod p^\varepsilon$
 

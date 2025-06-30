@@ -1806,7 +1806,7 @@ The result is polynomial $M_b$ whose coefficients are garbage-eliminated (i.e., 
 
 $ $
 
-\para{\textsf{\textbf{\underline{Bootstrapping Without Secret Key}:}}} So far, we have assumed that we have access to the secret key $S$. With decryption and re-encryption enabled, the above bootstrapping steps described are mathematically equivalent to computing the following:
+\para{\textsf{\textbf{\underline{Bootstrapping Without a Secret Key}:}}} So far, we have assumed that we have access to the secret key $S$. With decryption and re-encryption enabled, the above bootstrapping steps described are mathematically equivalent to computing the following:
 
 \begin{enumerate}
 \item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
@@ -1975,6 +1975,8 @@ $f(x) = \dfrac{q_0}{2\pi}\cdot \sin\left(\dfrac{2\pi}{q_0}\cdot 0\right) + \dfra
 $ = \dfrac{q_0}{2\pi}\cdot \sum\limits_{j=0}^{\infty}\left(\dfrac{(-1)^j}{(2j + 1)!}\cdot \left(\dfrac{2\pi x}{q_0}\right)^{2j + 1}\right)$
 
 $ \approx \dfrac{q_0}{2\pi}\cdot \sum\limits_{j=0}^{h}\left(\dfrac{(-1)^j}{(2j + 1)!}\cdot \left(\dfrac{2\pi x}{q_0}\right)^{2j + 1}\right) = \hat f(x)$
+
+$ $
 
 , where $\hat{f}(x)$ is a $(2h + 1)$-degree polynomial. 
 

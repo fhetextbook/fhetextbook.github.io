@@ -2,7 +2,7 @@ FHE parameters of BFV, BGV, or CKKS schemes which are secure enough sometimes re
 
 While RNS can directly compute modulo addition and multiplication, it does not directly support other operations such as \textsf{ModRaise} or modulus switch, which are essential operations for all FHE schemes. This section explains how we can design such corner-case operations based on RNS to accomplish a complete design of RNS-based FHE schemes. Besides BFV, BGV, and CKKS, TFHE can also theoretically use RNS for representing its ciphertext coefficients. However, TFHE's practically used coefficient size is less than $2^{32}$ (or $2^{64}$), which compactly fits in 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE does not need RNS. Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS. 
 
-Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}) whose modulo overflow \& underflow boundaries are $-\dfrac{q}{2} - 1$ and $-\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex})-- by using the assumption of limiting the possible range of certain residue arithmetic as discussed in \autoref{subsec:modulo-centered}. 
+Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}) whose modulo overflow \& underflow boundaries are $\dfrac{q}{2} - 1$ and $-\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex})-- by using the assumption of limiting the possible range of certain residue arithmetic as discussed in \autoref{subsec:modulo-centered}. 
 
 \begin{tcolorbox}[
     title = \textbf{Required Background},    % box title
@@ -50,14 +50,13 @@ Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$
 $ $
 
 
-Suppose we have $x \in \mathbb{Z}_q$ (where $q$ is a big modulus). Then, we can express $x$ by using RNS (\autoref{subsec:crt-application}) as $(x_1, x_2, \cdots, x_k)$, where each $x_i \in \mathbb{Z}_{q_i}$, $\prod\limits_{i=1}^k q_i = q$, and $\{q_i, q_2, \cdots, q_k\}$ are co-prime. In RNS, we define base conversion as an operation of converting the RNS residues $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times 
- \mathbb{Z}_{q_k}$ into $(c_1, c_2, \cdots, c_k) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$, where $\{b_1, b_2, \cdots, b_l\}$ are a new base, and $\{q_1, q_2, \cdots, q_k\}$ and $\{b_1, b_2, \cdots, b_l\}$ are all co-prime. The relationship between $x$ and $c$ is: $c = |x|_b$ (where $x \in \mathbb{Z}_{q}$ and $c \in \mathbb{Z}_b$). The standard way of performing base conversion is assembling $(x_1, x_2, \cdots, x_k)$ into $x$ by computing $x = \sum\limits_{i=1}^k |a_i z_i|_{q_i} \cdot y_i \bmod q$ (where $y_i = \dfrac{q}{q_i} \text{ and } z_i = y_i^{-1} \bmod q_i$), and then computing $c_j \equiv x \bmod b_j$ for $j \in [1, l]$. However, this computation is slow if the modulus $q$ is large. To compute the base conversion \textit{fast}, we design the fast base conversion operation $\textsf{FastBConv}$ as follows: 
+Suppose we have $x \in \mathbb{Z}_q$ (where $q$ is a big modulus). Then, we can express $x$ by using RNS (\autoref{subsec:crt-application}) as $(x_1, x_2, \cdots, x_k)$, where each $x_i \in \mathbb{Z}_{q_i}$, $\prod\limits_{i=1}^k q_i = q$, and $\{q_1, q_2, \cdots, q_k\}$ are co-prime. In RNS, we define base conversion as an operation of converting the RNS residues $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ into $(c_1, c_2, \cdots, c_k) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$, where $\{b_1, b_2, \cdots, b_l\}$ are a new base, and $\{q_1, q_2, \cdots, q_k\}$ and $\{b_1, b_2, \cdots, b_l\}$ are all co-prime. The relationship between $x$ and $c$ is: $c = |x|_b$ (where $x \in \mathbb{Z}_{q}$ and $c \in \mathbb{Z}_b$). The standard way of performing base conversion is assembling $(x_1, x_2, \cdots, x_k)$ into $x$ by computing $x = \sum\limits_{i=1}^k |x_i z_i|_{q_i} \cdot y_i \bmod q$ (where $y_i = \dfrac{q}{q_i} \text{ and } z_i = y_i^{-1} \bmod q_i$), and then computing $c_j \equiv x \bmod b_j$ for $j \in [1, l]$. However, this computation is slow if the modulus $q$ is large. To compute the base conversion \textit{fast}, we design the fast base conversion operation $\textsf{FastBConv}$ as follows: 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-fastbconv}} Fast Base Conversion: \textsf{FastBConv}}}]
 
 
-\textbf{\underline{Input}:} $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ \textcolor{red}{ \# which represents the big value $x \in \mathbb{Z}_q$, where $q = \prod\limits_{i=1}^kq_i$, and $\{q_1, q_2, \cdots \cdot q_k\}$ are co-prime}
+\textbf{\underline{Input}:} $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ \textcolor{red}{ \# which represents the big value $x \in \mathbb{Z}_q$, where $q = \prod\limits_{i=1}^kq_i$, and $\{q_1, q_2, \cdots, q_k\}$ are co-prime}
 
 $ $
 
@@ -83,7 +82,7 @@ $ $
 
 The output of this \textsf{FastBConv} function is a list of RNS residues $(c_1, c_2, \cdots, c_l)$ having the prime moduli $(b_1, b_2, \cdots, b_l)$ as the base. This RNS vector represents the big value 
 
-$c = \left(\sum\limits_{i=1}^k c_i\cdot y'_i \cdot z'_i\right) \bmod b = \left(\sum\limits_{i=1}^k |c_i\cdot z'_i|_{b_i} \cdot y'_i\right) \bmod b$ \textcolor{red}{ \# where $y'_i = \dfrac{b}{b_i}$ and $z'_i = {y_{i}'}^{-1} \bmod b_i$}
+$c = \left(\sum\limits_{i=1}^l c_i\cdot y'_i \cdot z'_i\right) \bmod b = \left(\sum\limits_{i=1}^l |c_i\cdot z'_i|_{b_i} \cdot y'_i\right) \bmod b$ \textcolor{red}{ \# where $y'_i = \dfrac{b}{b_i}$ and $z'_i = {y_{i}'}^{-1} \bmod b_i$}
 
 $ $
 
@@ -101,7 +100,9 @@ $c = x + uq \bmod b$ (where $u$ is an integer with the magnitude $|u| \leq \dfra
 
 We will prove why a fast base conversion of $x$ into $c$ gets an additional noise $|u\cdot q|_b$ (where integer $|u| \leq \dfrac{k}{2}+1$) compared to a standard base conversion. If we did a standard (i.e., exact) base conversion of $x$ from base moduli $(q_1, \cdots, q_k)$ to $(b_1, \cdots, b_l)$, then we would compute the following:
 
-$\left( \left( \sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i \bmod q \right) \bmod b_j \right)_{j \in [1,l]} = \left( x \bmod b_j \right)_{j \in [1,l]}$
+$$
+\left( \left( \sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i \bmod q \right) \bmod b_j \right)_{j \in [1,l]} = \left( x \bmod b_j \right)_{j \in [1,l]}
+$$
 
 But $\textsf{FastBConv}$ omits the intermediate (big) reduction modulo $q$ and directly applies (small) reduction modulo $b_j$ for the sake of fast computation, so that our conversion process does not need to handle large values whose magnitude can be as large as $\pm\dfrac{q}{2}$. In this approach of fast base conversion, for each $i \in [1, k]$, the computation result of $|x_i \cdot z_i|_{q_i} \cdot y_i$ is some value between $\left[-\left\lceil\dfrac{q}{2}\right\rceil, \left\lfloor\dfrac{q}{2}\right\rfloor\right]$, because $|x_i \cdot z_i|_{q_i}$ is some integer between $\left[-\left\lceil\dfrac{q_i}{2}\right\rceil, \left\lfloor\dfrac{q_i}{2}\right\rfloor\right]$ and $y_i = \dfrac{q}{q_i}$. Therefore, $-\dfrac{q+1}{2} \leq |x_i \cdot z_i|_{q_i} \cdot y_i \leq \dfrac{q}{2}$. If we sum $k$ such values for $i \in [1, k]$, then the total sum $x' = \sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i = x + u\cdot q$ (Summary~\ref*{sec:chinese-remainder} in \autoref{sec:chinese-remainder}) for some integer $u$ (where $u\cdot q$ represents the $q$-multiple overflows). And since we have shown that $-\dfrac{q+1}{2} \leq |x_i \cdot z_i|_{q_i} \cdot y_i \leq \dfrac{q}{2}$ for each $i \in [1, k]$, $uq$ has to be greater than $-k\cdot\dfrac{q+1}{2}$ and smaller than $k\cdot\dfrac{q}{2}$ (i.e., $u$ is an integer between $-\dfrac{k}{2} - 1 \leq u \leq \dfrac{k}{2}$). Therefore, $\sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i$ can have maximum $-\left(\dfrac{k}{2} + 1\right)\cdot q$ underflows and $\dfrac{k}{2}\cdot q$ overflows. Thus, while standard (i.e., exact) base conversion computes each residue as $\hat{c}_j = \left(\sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i \bmod q\right) \bmod b_j$ (i.e., $\hat{c}_j = x \bmod b_j$), fast (i.e., approximate) base conversion computes each residue as $c_j = \left(\sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i\right) \bmod b_j$ (i.e., $c_j = x + uq \bmod b_j$, where integer $|u| \leq \dfrac{k}{2} + 1$). Notice that the residual difference (i.e., error) between each $\hat{c}_j$ and $c_j$ is $uq \bmod b_j$, and the collective noise generated by fast base conversion from $q \rightarrow  b$ is  $uq \bmod b$. Also, note that the RNS residue vector $(c_1, c_2, \cdots, c_l) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$ represents the big value $c = x + uq \bmod b$. 
 
@@ -126,7 +127,7 @@ $ $
 \textsf{ModRaise} is an operation of raising a ciphertext's modulus from $q$ to $qb$ (where $q \ll qb$). We used \textsf{ModRaise} in BFV's ciphertext-to-ciphertext multiplication (Summary~\ref*{subsubsec:bfv-mult-cipher-summary} in \autoref{subsubsec:bfv-mult-cipher-summary}) and in CKKS's modulus bootstrapping (Summary~\ref*{subsubsec:ckks-bootstrapping-summary} in \autoref{subsubsec:ckks-bootstrapping-summary}). The RNS-based \textsf{ModRaise} operation is designed as follows:
 
 
- \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-modraise}} \textsf{ModRaise\textsubscript{RNS}}}}]
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-modraise}} \textsf{ModRaise\textsubscript{RNS}}}}]
 
 \textbf{\underline{Input}:} $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ \textcolor{red}{ \# which represents the big value $x \in \mathbb{Z}_q$}
 
@@ -236,10 +237,10 @@ $ = (x_1, x_2, \cdots, x_{k'}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \tim
 
 Modulus switch is an operation of reducing a ciphertext's modulus from $q$ to $q'$ (where $q' < q$) and updating the target value from $x$ to $\left\lceil x\cdot \dfrac{q'}{q}\right\rfloor$. Modulus switch is used for lowering the multiplicative level of a ciphertext upon each ciphertext-to-ciphertext multiplication (in the case of BFV, CKKS, or BGV) or even upon each ciphertext-to-plaintext multiplication (in the case of CKKS). Upon each modulus switch from $q \rightarrow q'$ of a ciphertext, the scaling factor of the underlying plaintext in the ciphertext also gets reduced by the same proportion: $\dfrac{q'}{q}$. 
 
-The modulus switch operation of an RNS-based ciphertext is denoted as \textsf{ModSwitch\textsubscript{RNS}}, which requires that the output base moduli are a subset of the input base moduli. In other words, like the case of \textsf{ModDrop\textsubscript{RNS}}, it only supports a modulus switch from $qb \rightarrow b$, where $q$ and $b$ are co-prime. 
+The modulus switch operation of an RNS-based ciphertext is denoted as \textsf{ModSwitch\textsubscript{RNS}}, which requires that the output base moduli are a subset of the input base moduli. In other words, like the case of \textsf{ModDrop\textsubscript{RNS}}, it only supports a modulus switch from $qb \rightarrow q$, where $q$ and $b$ are co-prime. 
 
 
-Suppose we have $(\chi_1, \chi_2, \cdots, \chi_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}, \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l} $, which represents the value $\chi = \left(\sum\limits_{i=1}^{k}\left|\chi_i\cdot\left(\dfrac{qb}{q_i}\right)^{-1}\right|_{q_i}\cdot\dfrac{qb}{q_i}\right) + \left(\sum\limits_{j=k+1}^{k+l}\left|\chi_j\cdot\left(\dfrac{qb}{b_j}\right)^{-1}\right|_{b_j}\cdot\dfrac{qb}{b_j}\right) \bmod qb$. 
+Suppose we have $(\chi_1, \chi_2, \cdots, \chi_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l} $, which represents the value $\chi = \left(\sum\limits_{i=1}^{k}\left|\chi_i\cdot\left(\dfrac{qb}{q_i}\right)^{-1}\right|_{q_i}\cdot\dfrac{qb}{q_i}\right) + \left(\sum\limits_{j=k+1}^{k+l}\left|\chi_j\cdot\left(\dfrac{qb}{b_j}\right)^{-1}\right|_{b_j}\cdot\dfrac{qb}{b_j}\right) \bmod qb$. 
 
 $ $
 
@@ -282,9 +283,9 @@ $= (\hat\chi_1, \hat\chi_2, \cdots, \hat\chi_{k}) \in \mathbb{Z}_{q_1} \times \m
 
 $ $ 
 
-Now, notice that the above RNS residue vector $(\hat\chi_1, \hat\chi_2, \cdots, \hat\chi_k)$ represents the value $\hat\chi = \chi + u \cdot b \bmod q$ (where integer $|u| \leq \dfrac{l}{2}+1$), which is our desired formula for $\hat\chi$. Therefore, $\hat\chi = \textsf{FastBConv}(\{\chi_{k+i}\}_{i=1}^{l}, b, q)$.
+Now, notice that the above RNS residue vector $(\hat\chi_1, \hat\chi_2, \cdots, \hat\chi_k)$ represents the value $\hat\chi = |\chi|_b + u \cdot b \bmod q$ (where integer $|u| \leq \dfrac{l}{2}+1$), which is our desired formula for $\hat\chi$. Therefore, $\hat\chi = \textsf{FastBConv}(\{\chi_{k+i}\}_{i=1}^{l}, b, q)$.
 
-Note that $\hat\chi \ll \dfrac{q}{2}-1$ and $-\dfrac{q}{2} \ll \hat\chi$, because $\Big||\chi|_b + u\cdot b\Big| < \left(\dfrac{l}{2} + 1\right)\cdot b + \dfrac{b}{2} \ll \dfrac{q}{2}$ (here we assume that $b \ll q$, as we assume the modulus switch operation is used to remove only a single prime factor from the large base $q$). Therefore, the magnitude of the error generated by computing $\tilde b \cdot (\chi - \hat\chi)$ is approximately $\left\lceil\dfrac{\hat\chi}{b}\right\rfloor <  \left\lceil\dfrac{\left(\dfrac{l}{2} + 1\right)\cdot b + \dfrac{b}{2}}{b}\right\rfloor = \left\lceil\dfrac{lb + 3b}{2b}\right\rfloor = \left\lceil\dfrac{l + 3}{2}\right\rfloor < \dfrac{l}{2} + 2$. 
+Note that $\hat\chi \ll \dfrac{q}{2}-1$ and $-\dfrac{q}{2} \ll \hat\chi$, because $\Big||\chi|_b + u\cdot b\Big| < \left(\dfrac{l}{2} + 1\right)\cdot b + \dfrac{b}{2} \ll \dfrac{q}{2}$ (here we assume that $b \ll q$, as we assume the modulus switch operation is used to remove only a single prime factor from the large base $q$). Therefore, the magnitude of the error generated by computing $ b^{-1} \cdot (\chi - \hat\chi)$ is approximately $\left\lceil\dfrac{\hat\chi}{b}\right\rfloor <  \left\lceil\dfrac{\left(\dfrac{l}{2} + 1\right)\cdot b + \dfrac{b}{2}}{b}\right\rfloor = \left\lceil\dfrac{lb + 3b}{2b}\right\rfloor = \left\lceil\dfrac{l + 3}{2}\right\rfloor < \dfrac{l}{2} + 2$. 
 
 %the relationship between $\$
 
@@ -296,7 +297,7 @@ We summarize the \textsf{ModSwitch\textsubscript{RNS}} operation as follows:
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-modswitch}} \textsf{ModSwitch\textsubscript{RNS}}}}]
 
 
-\textbf{\underline{Input}:} $(\chi_1, \chi_2, \cdots, \chi_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}, \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l} $ 
+\textbf{\underline{Input}:} $(\chi_1, \chi_2, \cdots, \chi_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l} $ 
 
 \textcolor{red}{ \# which represents $\chi = \left(\sum\limits_{i=1}^{k}\left|\chi_i\cdot\left(\dfrac{qb}{q_i}\right)^{-1}\right|_{q_i}\cdot\dfrac{qb}{q_i}\right) + \left(\sum\limits_{j=k+1}^{k+l}\left|\chi_j\cdot\left(\dfrac{qb}{b_j}\right)^{-1}\right|_{b_j}\cdot\dfrac{qb}{b_j}\right) \bmod qb$} 
 
@@ -333,7 +334,7 @@ $ $
 
 \subsubsection{Comparing \textsf{ModSwitch\textsubscript{RNS}}, \textsf{ModRaise\textsubscript{RNS}}, and \textsf{ModDrop\textsubscript{RNS}}}
 
-Given a big value $x \in \mathbb{Z}_q$ in an RNS vector, \textsf{ModSwitch\textsubscript{RNS}} reduces its modulus from $q \rightarrow  q'$ as well as explicitly decreases the modulo value $x$ by the proportion of $\dfrac{q'}{q}$ (i.e., updates $x$ to $x \cdot \left\lceil\dfrac{q'}{q}\right\rfloor$). On the other hand, \textsf{ModDrop\textsubscript{RNS}} from $q \rightarrow q'$ updates the modulo value from $x \rightarrow |x|_{q'}$ (where $q'$ divides $q$), which is different from decreasing $x$ by the proportion of $\dfrac{q'}{q}$ like modulus switch. \textsf{ModRaise\textsubscript{RNS}} from $q \rightarrow qb$ (where $q$ divides $qb$) increases the modulus without explicitly modifying the modulo value $x$, but generates some $q$-overflow noise. \textsf{ModSwitch\textsubscript{RNS}} and \textsf{ModRaise\textsubscript{RNS}} generate some noise, whereas \textsf{ModDrop\textsubscript{RNS}} does not generate any noise. %All these 3 types of operations introduce some level of additional noise (or decrease the noise budget), which has to be handled during decryption. 
+Given a big value $x \in \mathbb{Z}_q$ in an RNS vector, \textsf{ModSwitch\textsubscript{RNS}} reduces its modulus from $q \rightarrow  q'$ as well as explicitly decreases the modulo value $x$ by the proportion of $\dfrac{q'}{q}$ (i.e., updates $x$ to $ \left\lceil x \cdot \dfrac{q'}{q}\right\rfloor$). On the other hand, \textsf{ModDrop\textsubscript{RNS}} from $q \rightarrow q'$ updates the modulo value from $x \rightarrow |x|_{q'}$ (where $q'$ divides $q$), which is different from decreasing $x$ by the proportion of $\dfrac{q'}{q}$ like modulus switch. \textsf{ModRaise\textsubscript{RNS}} from $q \rightarrow qb$ (where $q$ divides $qb$) increases the modulus without explicitly modifying the modulo value $x$, but generates some $q$-overflow noise. \textsf{ModSwitch\textsubscript{RNS}} and \textsf{ModRaise\textsubscript{RNS}} generate some noise, whereas \textsf{ModDrop\textsubscript{RNS}} does not generate any noise. %All these 3 types of operations introduce some level of additional noise (or decrease the noise budget), which has to be handled during decryption. 
 
 
 
@@ -444,7 +445,7 @@ $= y$ \textcolor{red}{ \# let's denote the above expression as $y$}
 
 $ $
 
-Then, if $e'_s, e'_r, e'_d, u$ are small enough such that $|e'_s + e'_r + e'_d + u| < \gamma$, then $|y|_{\gamma} = -e'_s -e'_r - e'_d - u$ (as $|\gamma \cdot m|_{\gamma t} = 0$ as a multiple of $\gamma$). Therefore, we can effectively remove the noise terms $e'_s, e'_r, e'_d, u$ and derive $m$ as follows:
+Then, if $e'_s, e'_r, e'_d, u$ are small enough such that $|e'_s + e'_r + e'_d + u| < \gamma$, then $|y|_{\gamma} = -e'_s -e'_r - e'_d - u$ (as $|\gamma \cdot m|_{\gamma t} \bmod \gamma = 0$ as a multiple of $\gamma$). Therefore, we can effectively remove the noise terms $e'_s, e'_r, e'_d, u$ and derive $m$ as follows:
 
 $\bm{\Big|}(y - |y|_{\gamma}) \cdot |\gamma^{-1}|_t\bm{\Big|}_t$
 
@@ -691,7 +692,7 @@ $ $
 
 \end{tcolorbox}
                                         
-We will prove why $\Big|\textsf{FastBConv}(\hat{x}, b, q) - \beta_{\langle \hat{x}, b\rightarrow b_\alpha \rangle} \cdot b\Big|_q = |x|_q$. 
+We will prove why $\Big|\textsf{FastBConv}(\hat{x}, b, q) - \gamma \cdot b\Big|_q = |x|_q$. 
 
 \begin{myproof}
 

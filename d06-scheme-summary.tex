@@ -139,7 +139,7 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \textbf{CKKS}&$M = \left\lceil\dfrac{(B + A\cdot S \bmod q)}{\Delta}\right\rfloor_{\frac{1}{\Delta}}$\\
 &$\textcolor{white}{M} = \left\lceil\dfrac{\Delta M + E}{\Delta}\right\rfloor_{\frac{1}{\Delta}}$ \text{ } \textcolor{red}{ \# The final noise remains as $\dfrac{E}{\Delta}$ (increase $\Delta$ to reduce it)}\\\hline
 \textbf{BGV}&$M = (B + A\cdot S \bmod q) \bmod t$\\
-&$\textcolor{white}{M} = (M + \Delta E) \bmod t$ \text{ } \textcolor{red}{ \# $E$ gets zeroed out if $\Delta E$ is smaller than $q$}\\\hline
+&$\textcolor{white}{M} = (M + \Delta E) \bmod t$ \text{ } \textcolor{red}{ \# $E$ gets removed if $\Delta E$ is smaller than $q$}\\\hline
 \end{tabular}
 \caption{\textbf{Decryption Formula}}
 \end{table}

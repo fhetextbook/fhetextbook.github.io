@@ -8,200 +8,200 @@
 <meta content='index.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!-- l. 53 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption.html'>prev</a>][<a href='LWECryptosystem1.html#Decryption.html'>parent</a>]</p></div>
+   <!--  l. 53  --><div class='crosslinks'><p class='noindent'>[<a href='Encryption.html'>prev</a>][<a href='LWECryptosystem1.html#Decryption.html'>parent</a>]</p></div>
    <h4 class='subsectionHead' id='decryption'><span class='titlemark'>B-2.3   </span> <a id='x67-82000B-2.3'></a>Decryption</h4>
-<!-- l. 57 --><p class='noindent'>
+<!--  l. 57  --><p class='noindent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1. </dt><dd class='enumerate-enumitem'>Given the ciphertext <!-- l. 57 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>b</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-   where <!-- l. 57 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>,
-   compute <!-- l. 57 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math>,
-   which gives the same value as <!-- l. 57 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>.
+1. </dt><dd class='enumerate-enumitem'>Given the ciphertext <!--  l. 57  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>b</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   where <!--  l. 57  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>,
+   compute <!--  l. 57  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math>,
+   which gives the same value as <!--  l. 57  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>.
    </dd><dt class='enumerate-enumitem'>
-2. </dt><dd class='enumerate-enumitem'>Round <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
-   to the nearest multiple of <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
-   (i.e., round it as a base <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
-   number), which is denoted as <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>.
-   This rounding operation successfully eliminates <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
-   and gives <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi></mrow></math>,
-   provided <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
-   is small enough to be <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+2. </dt><dd class='enumerate-enumitem'>Round <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
+   to the nearest multiple of <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
+   (i.e., round it as a base <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
+   number), which is denoted as <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>.
+   This rounding operation successfully eliminates <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
+   and gives <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi></mrow></math>,
+   provided <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
+   is small enough to be <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>.
-   If <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>≥</mo><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+   If <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>≥</mo><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>,
-   then some of the higher bits of the noise <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
-   will overlap the plaintext <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>,
-   won’t be blown away and corrupt some lower bits of the plaintext <!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>.
+   then some of the higher bits of the noise <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
+   will overlap the plaintext <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>,
+   won’t be blown away and corrupt some lower bits of the plaintext <!--  l. 58  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>.
    </dd><dt class='enumerate-enumitem'>
-3. </dt><dd class='enumerate-enumitem'>Compute <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi>
+3. </dt><dd class='enumerate-enumitem'>Compute <!--  l. 59  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi>
  </mrow><mrow><mi mathvariant='normal'>Δ</mi> </mrow></mfrac></mstyle></math>,
-   which is equivalent to right-shifting <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>
-   by <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math>
+   which is equivalent to right-shifting <!--  l. 59  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>
+   by <!--  l. 59  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math>
    bits.</dd></dl>
-<!-- l. 62 --><p class='noindent'><!-- l. 62 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 64 --><p class='indent'>   The LWE decryption formula is summarized as follows:
-</p><!-- l. 66 --><p class='indent'>   <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<!--  l. 62  --><p class='noindent'><!--  l. 62  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!--  l. 64  --><p class='indent'>   The LWE decryption formula is summarized as follows:
+</p><!--  l. 66  --><p class='indent'>   <!--  l. 66  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-51'>     
 <div class='tcolorbox-title'>
-<!-- l. 83 --><p class='indent'>   <!-- l. 83 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-2.3</span><!-- l. 83 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!--  l. 83  --><p class='indent'>   <!--  l. 83  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-2.3</span><!--  l. 83  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>LWE Decryption</span></p></div> 
-<div class='tcolorbox-content'><!-- l. 70 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption Input</span></span><span class='rm-lmbx-10x-x-109'>:</span>
-<!-- l. 70 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>C</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>b</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mn>1</mn></mrow></msubsup></mrow></math>
-</p><!-- l. 72 --><p class='noindent'><!-- l. 72 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<div class='tcolorbox-content'><!--  l. 70  --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption Input</span></span><span class='rm-lmbx-10x-x-109'>:</span>
+<!--  l. 70  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>C</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>b</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mn>1</mn></mrow></msubsup></mrow></math>
+</p><!--  l. 72  --><p class='noindent'><!--  l. 72  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
      </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'><!-- l. 76 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mi>C</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mspace width='0.3em'></mspace><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='italic'>𝑚𝑜𝑑</mi><mspace width='0.3em'></mspace><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+1.  </dt><dd class='enumerate-enumitem'><!--  l. 76  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mi>C</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mspace width='0.3em'></mspace><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='italic'>𝑚𝑜𝑑</mi><mspace width='0.3em'></mspace><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
     </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'>Scale down <!-- l. 78 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+2.  </dt><dd class='enumerate-enumitem'>Scale down <!--  l. 78  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
    </mrow><mrow><mi mathvariant='normal'>Δ</mi>    </mrow></mfrac></mstyle><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌋</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>m</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math></dd></dl>
-<!-- l. 81 --><p class='noindent'>For correct decryption, the noise <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
-should be <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+<!--  l. 81  --><p class='noindent'>For correct decryption, the noise <!--  l. 81  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
+should be <!--  l. 81  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>.
 </p>
  
 </div> 
 </div>
-<!-- l. 85 --><p class='indent'>   During decryption, the secret key owner can subtract
-<!-- l. 85 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math> from
-<!-- l. 85 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>b</mi></math> because he can
-directly compute <!-- l. 85 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math> by
-using his secret key <!-- l. 85 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>.
-</p><!-- l. 87 --><p class='indent'>   The reason we scaled the plaintext <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
-by <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> is: (i) to
-left-shift <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> by
-<!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math> bits and separate it from the noise
-<!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> in the lower bits during encryption,
-whereas <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> is essential to make it
-hard for the attacker to guess <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
-or <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>; and (ii) to eliminate
-<!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> in the lower bits by
-right-shifting it by <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> bits
-without compromising <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
+<!--  l. 85  --><p class='indent'>   During decryption, the secret key owner can subtract
+<!--  l. 85  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math> from
+<!--  l. 85  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>b</mi></math> because he can
+directly compute <!--  l. 85  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math> by
+using his secret key <!--  l. 85  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>.
+</p><!--  l. 87  --><p class='indent'>   The reason we scaled the plaintext <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
+by <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> is: (i) to
+left-shift <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> by
+<!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math> bits and separate it from the noise
+<!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> in the lower bits during encryption,
+whereas <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> is essential to make it
+hard for the attacker to guess <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
+or <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>; and (ii) to eliminate
+<!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> in the lower bits by
+right-shifting it by <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> bits
+without compromising <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
 in the higher bits during decryption. The process of right-shifting (i.e., scaling) the plaintext
-<!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> by
-<!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math> bits followed by
-adding the noise <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
-is illustrated in <a href='LWECryptosystem.html#an-illustration-of-lwes-plaintext-scaling-and-adding-a-noise-delta-m-e-zq'>Figure 8<!-- tex4ht:ref: subsec:lwe-dec  --></a>.
+<!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> by
+<!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math> bits followed by
+adding the noise <!--  l. 87  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>
+is illustrated in <a href='LWECryptosystem.html#an-illustration-of-lwes-plaintext-scaling-and-adding-a-noise-delta-m-e-zq'>Figure 8<!--  tex4ht:ref: subsec:lwe-dec   --></a>.
    
 </p>
-   <h5 class='subsubsectionHead' id='in-the-case-of-t-not-dividing-q'><span class='titlemark'>B-2.3.1   </span> <a id='x67-83000B-2.3.1'></a>In the Case of <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
-not Dividing <!-- l. 89 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math></h5>
-<!-- l. 92 --><p class='noindent'>In Summary B-2.2 (<a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!-- tex4ht:ref: subsec:lwe-enc  --></a>), we assumed that <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
-divides <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>.
+   <h5 class='subsubsectionHead' id='in-the-case-of-t-not-dividing-q'><span class='titlemark'>B-2.3.1   </span> <a id='x67-83000B-2.3.1'></a>In the Case of <!--  l. 89  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+not Dividing <!--  l. 89  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math></h5>
+<!--  l. 92  --><p class='noindent'>In Summary B-2.2 (<a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!--  tex4ht:ref: subsec:lwe-enc   --></a>), we assumed that <!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+divides <!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>.
 In this case, there is no upper or lower limit on the size of plaintext
-<!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>: its value is allowed to
-wrap around modulo <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+<!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>: its value is allowed to
+wrap around modulo <!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
 indefinitely, yet the decryption works correctly. This is because any
-<!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> value greater than
+<!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> value greater than
                                                                                          
                                                                                          
-<!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> will be correctly
-modulo-reduced by <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> when
-we do modulo reduction by <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
+<!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> will be correctly
+modulo-reduced by <!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> when
+we do modulo reduction by <!--  l. 92  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
 during decryption.
-</p><!-- l. 94 --><p class='indent'>   On the other hand, suppose that <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
-does not divide <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. In such a case,
-we set the scaling factor as <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 94  --><p class='indent'>   On the other hand, suppose that <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+does not divide <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. In such a case,
+we set the scaling factor as <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>.
-Then, provided <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>, the decryption
-works correctly even if <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> is a
-large value that wraps around <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>.
+Then, provided <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>, the decryption
+works correctly even if <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> is a
+large value that wraps around <!--  l. 94  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>.
 We will show why this is so.
-</p><!-- l. 96 --><p class='indent'>   We can denote plaintext <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
-as <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>, where
-<!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math> and
-<!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math> are some integers we use to
-represent the modulo <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> wrap-around
-value portion of <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>. And we set
-the plaintext scaling factor as <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 96  --><p class='indent'>   We can denote plaintext <!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
+as <!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>, where
+<!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math> and
+<!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math> are some integers we use to
+represent the modulo <!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> wrap-around
+value portion of <!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>. And we set
+the plaintext scaling factor as <!--  l. 96  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>.
 Then, the noise-added scaled plaintext value is as follows:
-</p><!-- l. 98 --><p class='indent'>   <!-- l. 98 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 98  --><p class='indent'>   <!--  l. 98  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math> <span style='color:#FF0000;'> # by
-applying <!-- l. 98 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math></span>
-</p><!-- l. 100 --><p class='indent'>   <!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+applying <!--  l. 98  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math></span>
+</p><!--  l. 100  --><p class='indent'>   <!--  l. 100  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mo class='MathClass-open' stretchy='false'>(</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math> <span style='color:#FF0000;'> #
-where <!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+where <!--  l. 100  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mn>1</mn></mrow></math></span>
-</p><!-- l. 102 --><p class='indent'>   <!-- l. 102 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 102  --><p class='indent'>   <!--  l. 102  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑞𝑘</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mo class='MathClass-open' stretchy='false'>(</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>p</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math>
-</p><!-- l. 104 --><p class='indent'>   <!-- l. 104 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 106 --><p class='indent'>   We treat the above noisy scaled ciphertext as
-<!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 104  --><p class='indent'>   <!--  l. 104  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!--  l. 106  --><p class='indent'>   We treat the above noisy scaled ciphertext as
+<!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑞𝑘</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math>, where
-<!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>e</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>, the maximum possible
-value of <!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+<!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>e</mi></mrow><mrow><mi>′</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>, the maximum possible
+value of <!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>. In other words, we
-overestimate the noise caused by <!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+overestimate the noise caused by <!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>p</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>
-to <!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>,
+to <!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>,
 because the maximum value this term can become is less than
-<!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>.
-</p><!-- l. 108 --><p class='indent'>   Given the LWE decryption relation <!-- l. 108 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math>,
+<!--  l. 106  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝑘𝑡</mi></mrow></math>.
+</p><!--  l. 108  --><p class='indent'>   Given the LWE decryption relation <!--  l. 108  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math>,
 we can decrypt the above message by performing:
-</p><!-- l. 110 --><p class='indent'>   <!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
+</p><!--  l. 110  --><p class='indent'>   <!--  l. 110  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
 </mrow><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑞𝑘</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
-</p><!-- l. 112 --><p class='indent'>   <!-- l. 112 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
+</p><!--  l. 112  --><p class='indent'>   <!--  l. 112  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
 </mrow><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑞𝑘</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
-</p><!-- l. 114 --><p class='indent'>   <!-- l. 114 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
+</p><!--  l. 114  --><p class='indent'>   <!--  l. 114  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
 </mrow><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>−</mo><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
                                                                                          
                                                                                          
-</p><!-- l. 116 --><p class='indent'>   <!-- l. 116 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+</p><!--  l. 116  --><p class='indent'>   <!--  l. 116  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
  </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'>mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
-</p><!-- l. 118 --><p class='indent'>   <!-- l. 118 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></math> <span style='color:#FF0000;'> #
-provided <!-- l. 118 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+</p><!--  l. 118  --><p class='indent'>   <!--  l. 118  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>m</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></math> <span style='color:#FF0000;'> #
+provided <!--  l. 118  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
  </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math></span>
-</p><!-- l. 120 --><p class='indent'>   To summarize, if we set the plaintext’s scaling factor as
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 120  --><p class='indent'>   To summarize, if we set the plaintext’s scaling factor as
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math> where
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> does not
-divide <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>,
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> does not
+divide <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>,
 the decryption works correctly as far as the error bound
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
  </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> holds. This error bound can
-break if: (1) the noise <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> is too
-large; (2) the plaintext modulus <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
+break if: (1) the noise <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> is too
+large; (2) the plaintext modulus <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
 is too large; and (3) the plaintext value wraps around
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> too many times (i.e.,
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math> is too large). A solution to
-ensure <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> too many times (i.e.,
+<!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math> is too large). A solution to
+ensure <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
  </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
 <mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> is that the ciphertext
-modulus <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> is sufficiently large.
-To put it differently, if <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>,
+modulus <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> is sufficiently large.
+To put it differently, if <!--  l. 120  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>,
 then the error bound will hold.
-</p><!-- l. 122 --><p class='indent'>   Therefore, we can generalize the formula for the plaintext’s scaling factor in Summary B-2.2 (in <a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!-- tex4ht:ref: subsec:lwe-enc  --></a>) as
-<!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</p><!--  l. 122  --><p class='indent'>   Therefore, we can generalize the formula for the plaintext’s scaling factor in Summary B-2.2 (in <a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!--  tex4ht:ref: subsec:lwe-enc   --></a>) as
+<!--  l. 122  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></math> where
-<!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> does not
-necessarily divide <!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>.
+<!--  l. 122  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> does not
+necessarily divide <!--  l. 122  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>.
                                                                                          
                                                                                          
 </p>
-   <!-- l. 517 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption.html'>prev</a>][<a href='LWECryptosystem1.html#Decryption.html'>parent</a>]</p></div>
+   <!--  l. 517  --><div class='crosslinks'><p class='noindent'>[<a href='Encryption.html'>prev</a>][<a href='LWECryptosystem1.html#Decryption.html'>parent</a>]</p></div>
     
 </body> 
 </html>

@@ -16,7 +16,7 @@ local process = domfilter {
 
 }
 
-Make:match("html", process)
+--Make:match("html", process)
 -- for faster compilation, use $ make4ht -m draft -c config.cfg 00-main.tex
 if mode == "draft" then
   Make:htlatex {}

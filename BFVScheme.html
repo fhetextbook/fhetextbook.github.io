@@ -8,72 +8,72 @@
 <meta content='index.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!--  l. 615  --><div class='crosslinks'><p class='noindent'>[<a href='TFHEScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#BFVScheme.html'>parent</a>][<a href='CKKSScheme.html'>next</a>]</p></div>
+   <!-- l. 615 --><div class='crosslinks'><p class='noindent'>[<a href='TFHEScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#BFVScheme.html'>parent</a>][<a href='CKKSScheme.html'>next</a>]</p></div>
    <h3 class='sectionHead' id='bfv-scheme'><span class='titlemark'>D-2   </span> <a id='x111-140000D-2'></a>BFV Scheme</h3>
-<!--  l. 1  --><p class='noindent'>The BFV scheme is designed for homomorphic addition and multiplication of integers. BFV’s encoding
+<!-- l. 1 --><p class='noindent'>The BFV scheme is designed for homomorphic addition and multiplication of integers. BFV’s encoding
 scheme does not require such approximation issues because BFV is designed to encode only integers.
 Therefore, BFV guarantees exact encryption and decryption. BFV is suitable for use cases where the
 encrypted and decrypted values should exactly match (e.g., voting, financial computation), whereas
 CKKS is suitable for the use cases that tolerate tiny errors (e.g., data analytics, machine
 learning).
-</p><!--  l. 3  --><p class='indent'>   In BFV, each plaintext is encrypted as an RLWE ciphertext. Therefore, BFV’s ciphertext-to-ciphertext
+</p><!-- l. 3 --><p class='indent'>   In BFV, each plaintext is encrypted as an RLWE ciphertext. Therefore, BFV’s ciphertext-to-ciphertext
 addition, ciphertext-to-plaintext addition, and ciphertext-to-plaintext multiplication are
 implemented based on GLWE’s homomorphic addition and multiplication (as we learned in
-<!--  l. 3  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x86-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mi mathvariant='italic'>𝑃𝑎𝑟𝑡 𝐼𝐼𝐼</mi><!--  tex4ht:ref: subsec:tfhe-summary   --></mstyle><!--  endlabel  --></mrow></math>), with
-<!--  l. 3  --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> to
+<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x86-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mi mathvariant='italic'>𝑃𝑎𝑟𝑡 𝐼𝐼𝐼</mi><!-- tex4ht:ref: subsec:tfhe-summary  --></mstyle><!-- endlabel --></mrow></math>), with
+<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> to
 make GLWE an RLWE.
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-78'>     
 <div class='tcolorbox-title'>
                                                                                          
                                                                                          
-<!--  l. 41  --><p class='indent'>   <span class='rm-lmbx-10x-x-109'>Required Background</span></p></div> 
+<!-- l. 41 --><p class='indent'>   <span class='rm-lmbx-10x-x-109'>Required Background</span></p></div> 
 <div class='tcolorbox-content'>   <ul class='itemize1'>
-   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!--  tex4ht:ref: sec:modulo   --></a>
+   <li class='itemize'><a href='ModuloArithmetic.html#modulo-arithmetic'><span class='ts1-lmr10-x-x-109'>§</span>A-1<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='ModuloArithmetic.html#modulo-arithmetic'>Modulo Arithmetic<!-- tex4ht:ref: sec:modulo  --></a>
     </li>
-    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='Group.html#group'>Group<!--  tex4ht:ref: sec:group   --></a>
+    <li class='itemize'><a href='Group.html#group'><span class='ts1-lmr10-x-x-109'>§</span>A-2<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='Group.html#group'>Group<!-- tex4ht:ref: sec:group  --></a>
     </li>
-    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='Field.html#field'>Field<!--  tex4ht:ref: sec:field   --></a>
+    <li class='itemize'><a href='Field.html#field'><span class='ts1-lmr10-x-x-109'>§</span>A-3<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='Field.html#field'>Field<!-- tex4ht:ref: sec:field  --></a>
     </li>
-    <li class='itemize'><a href='Order.html#order'><span class='ts1-lmr10-x-x-109'>§</span>A-4<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='Order.html#order'>Order<!--  tex4ht:ref: sec:order   --></a>
+    <li class='itemize'><a href='Order.html#order'><span class='ts1-lmr10-x-x-109'>§</span>A-4<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='Order.html#order'>Order<!-- tex4ht:ref: sec:order  --></a>
     </li>
-    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!--  tex4ht:ref: sec:polynomial-ring   --></a>
+    <li class='itemize'><a href='PolynomialRing.html#polynomial-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-5<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='PolynomialRing.html#polynomial-ring'>Polynomial Ring<!-- tex4ht:ref: sec:polynomial-ring  --></a>
     </li>
-    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!--  tex4ht:ref: sec:decomp   --></a>
+    <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!-- tex4ht:ref: sec:decomp  --></a>
     </li>
-    <li class='itemize'><a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='RootsofUnity.html#roots-of-unity'>Roots of Unity<!--  tex4ht:ref: sec:roots   --></a>
+    <li class='itemize'><a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RootsofUnity.html#roots-of-unity'>Roots of Unity<!-- tex4ht:ref: sec:roots  --></a>
     </li>
-    <li class='itemize'><a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'>Cyclotomic Polynomial<!--  tex4ht:ref: sec:cyclotomic   --></a>
+    <li class='itemize'><a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'>Cyclotomic Polynomial<!-- tex4ht:ref: sec:cyclotomic  --></a>
     </li>
-    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'>Roots of Unity and Cyclotomic Polynomial over Rings<!--  tex4ht:ref: sec:cyclotomic-polynomial-integer-ring   --></a>
+    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'>Roots of Unity and Cyclotomic Polynomial over Rings<!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a>
     </li>
-    <li class='itemize'><a href='VectorandMatrix.html#vector-and-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='VectorandMatrix.html#vector-and-matrix'>Vector and Matrix<!--  tex4ht:ref: sec:matrix   --></a>
+    <li class='itemize'><a href='VectorandMatrix.html#vector-and-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='VectorandMatrix.html#vector-and-matrix'>Vector and Matrix<!-- tex4ht:ref: sec:matrix  --></a>
     </li>
-    <li class='itemize'><a href='EulersFormula.html#eulers-formula'><span class='ts1-lmr10-x-x-109'>§</span>A-11<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='EulersFormula.html#eulers-formula'>Euler’s Formula<!--  tex4ht:ref: sec:euler   --></a>
+    <li class='itemize'><a href='EulersFormula.html#eulers-formula'><span class='ts1-lmr10-x-x-109'>§</span>A-11<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='EulersFormula.html#eulers-formula'>Euler’s Formula<!-- tex4ht:ref: sec:euler  --></a>
     </li>
-    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!--  tex4ht:ref: sec:modulus-rescaling   --></a>
+    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!-- tex4ht:ref: sec:modulus-rescaling  --></a>
     </li>
-    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!--  tex4ht:ref: sec:chinese-remainder   --></a>
+    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!-- tex4ht:ref: sec:chinese-remainder  --></a>
     </li>
-    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!--  tex4ht:ref: sec:polynomial-interpolation   --></a>
+    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!-- tex4ht:ref: sec:polynomial-interpolation  --></a>
     </li>
-    <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!--  tex4ht:ref: sec:ntt   --></a>
+    <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!-- tex4ht:ref: sec:ntt  --></a>
     </li>
-    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!--  tex4ht:ref: sec:lattice   --></a>
+    <li class='itemize'><a href='LatticebasedCryptography.html#latticebased-cryptography'><span class='ts1-lmr10-x-x-109'>§</span>B-1<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='LatticebasedCryptography.html#latticebased-cryptography'>Lattice-based Cryptography<!-- tex4ht:ref: sec:lattice  --></a>
     </li>
-    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!--  tex4ht:ref: sec:rlwe   --></a>
+    <li class='itemize'><a href='RLWECryptosystem1.html#rlwe-cryptosystem1'><span class='ts1-lmr10-x-x-109'>§</span>B-3<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RLWECryptosystem1.html#rlwe-cryptosystem1'>RLWE Cryptosystem<!-- tex4ht:ref: sec:rlwe  --></a>
     </li>
-    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!--  tex4ht:ref: sec:glwe   --></a>
+    <li class='itemize'><a href='GLWECryptosystem.html#glwe-cryptosystem'><span class='ts1-lmr10-x-x-109'>§</span>B-4<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='GLWECryptosystem.html#glwe-cryptosystem'>GLWE Cryptosystem<!-- tex4ht:ref: sec:glwe  --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!--  tex4ht:ref: sec:glwe-add-cipher   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-1<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='GLWECiphertexttoCiphertextAddition.html#glwe-ciphertexttociphertext-addition'>GLWE Ciphertext-to-Ciphertext Addition<!-- tex4ht:ref: sec:glwe-add-cipher  --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!--  tex4ht:ref: sec:glwe-add-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'><span class='ts1-lmr10-x-x-109'>§</span>C-2<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition<!-- tex4ht:ref: sec:glwe-add-plain  --></a>
     </li>
-    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!--  tex4ht:ref: sec:glwe-mult-plain   --></a>
+    <li class='itemize'><a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>C-3<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication<!-- tex4ht:ref: sec:glwe-mult-plain  --></a>
     </li>
-    <li class='itemize'><a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.4<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching<!--  tex4ht:ref: subsec:modulus-switch-rlwe   --></a>
+    <li class='itemize'><a href='RLWEModulusSwitching.html#rlwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.4<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching<!-- tex4ht:ref: subsec:modulus-switch-rlwe  --></a>
     </li>
-    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!--  tex4ht:ref: subsec:tfhe-summary   --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!--  tex4ht:ref: sec:glwe-key-switching   --></a></li></ul>
+    <li class='itemize'><a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching<!-- tex4ht:ref: sec:glwe-key-switching  --></a></li></ul>
  
 </div> 
 </div>                                                               
@@ -117,7 +117,7 @@ Polynomials</a></span>
 <br />   <span class='subsubsectionToc'>D-2.11.6 <a href='NoiseBootstrapping1.html#scaling-factor-reinterpretation'>Scaling Factor Re-interpretation</a></span>
 <br />   <span class='subsubsectionToc'>D-2.11.7 <a href='NoiseBootstrapping1.html#summary3'>Summary</a></span>
    </div>
-<!--  l. 45  --><p class='indent'>   
+<!-- l. 45 --><p class='indent'>   
 
 
 
@@ -131,7 +131,7 @@ Polynomials</a></span>
                                                                                          
                                                                                          
 </p>
-   <!--  l. 621  --><div class='crosslinks'><p class='noindent'>[<a href='TFHEScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#BFVScheme.html'>parent</a>][<a href='CKKSScheme.html'>next</a>]</p></div>
+   <!-- l. 621 --><div class='crosslinks'><p class='noindent'>[<a href='TFHEScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#BFVScheme.html'>parent</a>][<a href='CKKSScheme.html'>next</a>]</p></div>
     
 </body> 
 </html>

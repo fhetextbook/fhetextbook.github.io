@@ -5,8 +5,9 @@
 
 
 \subsection{Overview}
+\label{subsec:modulo-overview} 
 
-\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:group-def}} Integer Modulo}}]
+\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:modulo-overview}} Integer Modulo}}]
 
 \begin{itemize}
 
@@ -42,9 +43,66 @@ This means that $a$ and $b$ are congruent modulo $q$ if and only if $a$ and $b$ 
 \subsection{Modulo Arithmetic}
 \label{subsec:modulo-arithmetic}
 
-\revise{Based on the modulo operations in Theorem~\ref*{subsec:group-def}.1, we can derive the following properties of modulo arithmetic:}
+The supported modulo operations are addition, subtraction, and multiplication. The properties of these modulo operations are as follows:
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:group-def}.2} Properties of Modulo Arithmetic}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:modulo-arithmetic}.1} Properties of Modulo Operations}}]
+For any integer $x$, the following is true:
+
+\begin{enumerate}
+\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a + x\equiv b + x\bmod q$
+
+\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a - x\equiv b - x\bmod q$
+
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a \cdot x\equiv b \cdot x\bmod q$
+
+\end{enumerate}
+
+\end{tcolorbox}
+
+\begin{proof}
+
+$ $
+
+For any integer $x$,
+
+\begin{enumerate}
+
+
+\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$) \textcolor{red}{ \text{ } \# $a$ and $b$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a + x = b + k\cdot q + x$
+
+$\Longleftrightarrow a + x = b + x + k\cdot q$ \textcolor{red}{ \text{ }  \# $a+x$ and $b+x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a + x \equiv b + x \bmod q$
+
+$ $
+
+\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+
+$\Longleftrightarrow a - x = b + k\cdot q - x$
+
+$\Longleftrightarrow a - x = b - x + k\cdot q$  \textcolor{red}{ \text{ }  \# $a-x$ and $b-x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a - x \equiv b - x \bmod q$
+
+$ $
+
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+
+$\Longleftrightarrow a \cdot x = b \cdot x + k\cdot q \cdot x$
+
+$\Longleftrightarrow a \cdot x = b \cdot x + k_x\cdot q$ (where $k_x = k \cdot x$)  \textcolor{red}{ \text{ }  \# $a\cdot x$ and $b\cdot x$ differ by some multiple of $q$}
+
+$\Longleftrightarrow a \cdot x = b \cdot x \pmod q$
+
+\end{enumerate}
+\end{proof}
+
+Based on the modulo operations in Theorem\ref*{subsec:modulo-arithmetic}.1, we can also derive the following properties of modulo arithmetic:
+
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:modulo-arithmetic}.2} Properties of Modulo Arithmetic}}]
 
 \begin{enumerate}
 \item \textbf{Associative:} $(a \cdot b) \cdot c \equiv a \cdot (b \cdot c) \bmod q$
@@ -67,7 +125,7 @@ $(a \cdot c) \equiv (b \cdot d) \equiv (a \cdot d) \equiv (b \cdot c) \bmod q$
 
 \end{tcolorbox}
 
-The proof of Theorem~\ref*{subsec:group-def}.2 is similar to that of Theorem~\ref*{subsec:group-def}.1, which we leave as an exercise for the reader. 
+The proof of Theorem~\ref*{subsec:modulo-arithmetic}.2 is similar to that of Theorem~\ref*{subsec:modulo-arithmetic}.1, which we leave as an exercise for the reader. 
 
 
 \subsubsection{Inverse}

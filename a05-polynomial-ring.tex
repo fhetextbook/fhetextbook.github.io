@@ -58,7 +58,7 @@ Recall that in a ring $\mathbb{Z}_p$, a big number $b$ can be divided by $p$ and
 $f_{big} = (X^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
 
 \noindent, whereas $f_q$ is a quotient polynomial and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated and $f_r$ (i.e., the simplified version of $f_{big}$) can be interchangeably used for polynomial operations $(+, \cdot)$ in the polynomial ring. 
-Polynomial simplification in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$, because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$ where $p \equiv 0$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
+Polynomial simplification (i.e., reduction) in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$, because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$ where we reduce a number by substituting $0$ to $p$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
 
 For a polynomial modulo, we normally choose a cyclotomic polynomial $x^n + 1$ (where $n$ is $2^p$ for some integer $p$) as the divisor, as it provides computational efficiency. 
 

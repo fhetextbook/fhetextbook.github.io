@@ -52,7 +52,7 @@ Given $k \text{ } | \text{ } n$, $\textsf{ord}_{\mathbb{F}}(a) = kn$ if and only
 \begin{myproof}
 \begin{enumerate}
     \item \textit{Forward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a) = kn$, and given Theorem~\ref*{subsec:order-theorem}.2, $\textsf{ord}_{\mathbb{F}}(a^k) = \dfrac{nk}{\text{gcd}(k, nk)} = \dfrac{nk}{k} = n$.
-    \item \textit{Backward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a^k) = n$, we should prove that $\textsf{ord}_{\mathbb{F}}(a) = nk$. Let $\textsf{ord}_{\mathbb{F}}(a) = m$. Then, by Theorem\ref*{subsec:order-theorem}.2, $\textsf{ord}_{\mathbb{F}}(a^k) = \dfrac{m}{\text{gcd}(m, k)}$, which is $n$. In other words, $m = n \cdot \text{gcd}(m, k)$. But as $k \text{ } | \text{ } n$, it is also true that $k \text{ } | \text{ } m$. Then, $\text{gcd}(m, k) = k$. Therefore, $m = n \cdot \text{gcd}(m, k) = nk$.
+    \item \textit{Backward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a^k) = n$, we should prove that $\textsf{ord}_{\mathbb{F}}(a) = nk$. Let $\textsf{ord}_{\mathbb{F}}(a) = m$. Then, by Theorem~\ref*{subsec:order-theorem}.2, $\textsf{ord}_{\mathbb{F}}(a^k) = \dfrac{m}{\text{gcd}(m, k)}$, which is $n$. In other words, $m = n \cdot \text{gcd}(m, k)$. But as $k \text{ } | \text{ } n$, it is also true that $k \text{ } | \text{ } m$. Then, $\text{gcd}(m, k) = k$. Therefore, $m = n \cdot \text{gcd}(m, k) = nk$.
 \end{enumerate}
 \end{myproof}
 

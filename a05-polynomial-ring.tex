@@ -53,9 +53,9 @@ $f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
 To make the notation simple, we denote the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, q \rangle}$
 \end{tcolorbox}
 
-Recall that in a ring $\mathbb{Z}_p$, a big number $b$ can be divided by $p$ and $b = q \cdot p + r \equiv r \bmod p$ (the quotient $q$ gets eliminated). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by a polynomial modulo $x^n + 1$, which gives:
+Recall that in a ring $\mathbb{Z}_p$, a big number $b$ can be divided by $p$ and $b = q \cdot p + r \equiv r \bmod p$ (the quotient $q$ gets eliminated). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which gives:
 
-$f_{big} = (X^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
+$f_{big} = (x^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
 
 \noindent, whereas $f_q$ is a quotient polynomial and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated and $f_r$ (i.e., the simplified version of $f_{big}$) can be interchangeably used for polynomial operations $(+, \cdot)$ in the polynomial ring. 
 Polynomial simplification (i.e., reduction) in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$, because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$ where we reduce a number by substituting $0$ to $p$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
@@ -112,7 +112,7 @@ $ $
  & & Then, $f_a \cdot f_b$ is computed as: \\
  & & $f_c = \sum\limits_{i=0}^{d_a+d_b}\sum\limits_{j=0}^{i}a_jb_{i-j}x^i$ \\
 \hline
-& For $a, b \in \mathbb{Z}_p$ & For $f_a, f_b \in \mathbb{Z}_p[X]/(x^x + 1)$,\\
+& For $a, b \in \mathbb{Z}_p$ & For $f_a, f_b \in \mathbb{Z}_p[x]/(x^n + 1)$,\\
 \textbf{{Commutative}}  & $ a + b = b + a$ & $f_a + f_b = f_b + f_a$\\
 \textbf{{Associative}} & $(a + b) + c = a + (b + c)$ & $(f_a + f_b) + f_c = f_a + (f_b + f_c)$\\
 \textbf{{Distributive}} & $a \cdot (b + c) = a\cdot b + a\cdot c$ & $f_a \cdot (f_b + f_c) = f_a\cdot f_b + f_a\cdot f_c$\\

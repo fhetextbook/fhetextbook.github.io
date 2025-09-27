@@ -73,7 +73,7 @@
 .rm-lmtt-10x-x-109{ font-family: monospace,monospace;}
 .rm-lmri-10x-x-109{ font-style:italic;}
 .rm-lmbxi-10x-x-109{ font-style:italic; font-weight: bold;}
-.rm-lmssbx-10x-x-109{ font-family: sans-serif; font-weight: bold;}
+.rm-lmr-10{font-size:90%;}
 .rm-lmr-9{font-size:81%;}
 .rm-lmr-5{font-size:45%;}
 .lmmi-9{font-size:81%;}
@@ -81,11 +81,11 @@
 .lmsy9-{font-size:81%;}
 .lmsy5-{font-size:45%;}
 .msbm-10x-x-90{font-size:81%;}
+.rm-lmssbx-10x-x-109{ font-family: sans-serif; font-weight: bold;}
 .rm-lmtt-9{font-size:81%; font-family: monospace,monospace;}
 .rm-lmtt-9{ font-family: monospace,monospace;}
 .rm-lmbx-9{font-size:81%; font-weight: bold;}
 .rm-lmss-9{font-size:81%; font-family: sans-serif;}
-.rm-lmr-10{font-size:90%;}
 .rm-lmri-8{font-size:72%; font-style:italic;}
 .lmmib-10x-x-90{font-size:81%;font_weight:bold;}
 .lmmib-10x-x-90{font_weight:bold;}

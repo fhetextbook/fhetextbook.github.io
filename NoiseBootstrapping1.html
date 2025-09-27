@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 1816 --><div class='crosslinks'><p class='noindent'>[<a href='ApplicationMatrixMultiplication.html'>prev</a>][<a href='BFVScheme.html#NoiseBootstrapping1.html'>parent</a>]</p></div>
-   <h4 class='subsectionHead' id='noise-bootstrapping1'><span class='titlemark'>D-2.11   </span> <a id='x122-166000D-2.11'></a>Noise Bootstrapping</h4>
+   <h4 class='subsectionHead' id='noise-bootstrapping1'><span class='titlemark'>D-2.11   </span> <a id='x123-166000D-2.11'></a>Noise Bootstrapping</h4>
 <!-- l. 1819 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 1: </span><a href='https://eprint.iacr.org/2022/1363.pdf'>Bootstrapping for BGV and BFV Revisited</a> <span class='cite'>[<a href='refname.html#Xcryptoeprint_2022_1363'>14</a>]</span>
 </p><!-- l. 1823 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 2: </span><a href='https://eprint.iacr.org/2014/873.pdf'>Bootstrapping for HELib</a> <span class='cite'>[<a href='refname.html#X10.1007_s00145-020-09368-7'>15</a>]</span>
 </p><!-- l. 1826 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 3: </span><a href='https://arxiv.org/pdf/1906.02867'>A Note on Lower Digits Extraction Polynomial for Bootstrapping</a> <span class='cite'>[<a href='refname.html#Xhuo2019notelowerdigitsextraction'>16</a>]</span>
@@ -20,7 +20,7 @@ manner, and once the noise overflows the message bits, then the message gets cor
 a process of resetting the grown noise.
    
 </p>
-   <h5 class='subsubsectionHead' id='highlevel-idea1'><span class='titlemark'>D-2.11.1   </span> <a id='x122-167000D-2.11.1'></a>High-level Idea</h5>
+   <h5 class='subsubsectionHead' id='highlevel-idea1'><span class='titlemark'>D-2.11.1   </span> <a id='x123-167000D-2.11.1'></a>High-level Idea</h5>
 <!-- l. 1845 --><p class='noindent'>In this subsection, we will assume the plaintext modulus
 <!-- l. 1845 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>p</mi></mrow></math>, a prime number.
 Although <!-- l. 1845 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> can
@@ -216,7 +216,7 @@ been eliminated. On the other hand, the homomorphic operation of <span class='rm
 </p><!-- l. 1927 --><p class='indent'>   Next, we will explain each step more in detail.
    
 </p>
-   <h5 class='subsubsectionHead' id='modulus-switch'><span class='titlemark'>D-2.11.2   </span> <a id='x122-168000D-2.11.2'></a>Modulus Switch</h5>
+   <h5 class='subsubsectionHead' id='modulus-switch'><span class='titlemark'>D-2.11.2   </span> <a id='x123-168000D-2.11.2'></a>Modulus Switch</h5>
 <!-- l. 1932 --><p class='noindent'>The first step of the BFV bootstrapping is to do a modulus switch from
 <!-- l. 1932 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> to some prime
 power modulus <!-- l. 1932 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></math>
@@ -234,7 +234,7 @@ The goal of the BFV bootstrapping is to zero out this noise
 <!-- l. 1932 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>E</mi></mrow><mrow><mi>′</mi></mrow></msup></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='homomorphic-decryption'><span class='titlemark'>D-2.11.3   </span> <a id='x122-169000D-2.11.3'></a>Homomorphic Decryption</h5>
+   <h5 class='subsubsectionHead' id='homomorphic-decryption'><span class='titlemark'>D-2.11.3   </span> <a id='x123-169000D-2.11.3'></a>Homomorphic Decryption</h5>
 <!-- l. 1937 --><p class='noindent'>Let’s denote the modulus-switched noisy plaintext as
 <!-- l. 1937 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>Z</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mi>′</mi></mrow></msup><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'>mod</mo><mspace width='0.2em'></mspace> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></mrow></math>. We further denote
 polynomial <!-- l. 1937 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>Z</mi></math>’s each
@@ -352,7 +352,7 @@ based on the values stored in the input vector slots of a ciphertext.
 coefficients into input vector slots of a ciphertext <span class='rm-lmri-10x-x-109'>homomorphically</span>.
    
 </p>
-   <h5 class='subsubsectionHead' id='coefftoslot-and-slottocoeff'><span class='titlemark'>D-2.11.4   </span> <a id='x122-170000D-2.11.4'></a><span class='rm-lmss-10x-x-109'>CoeffToSlot </span>and <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></h5>
+   <h5 class='subsubsectionHead' id='coefftoslot-and-slottocoeff'><span class='titlemark'>D-2.11.4   </span> <a id='x123-170000D-2.11.4'></a><span class='rm-lmss-10x-x-109'>CoeffToSlot </span>and <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></h5>
 <!-- l. 1995 --><p class='noindent'>The goal of the <span class='rm-lmss-10x-x-109'>CoeffToSlot </span>step is to homomorphically move polynomial
 <!-- l. 1995 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>Z</mi></math>’s
 coefficients <!-- l. 1995 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>z</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
@@ -440,7 +440,7 @@ BFV, the noise elimination polynomial, based on the digit extraction polynomial
 <!-- l. 2035 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>G</mi></mrow><mrow><mi>𝜀</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='digit-extraction'><span class='titlemark'>D-2.11.5   </span> <a id='x122-171000D-2.11.5'></a>Digit Extraction</h5>
+   <h5 class='subsubsectionHead' id='digit-extraction'><span class='titlemark'>D-2.11.5   </span> <a id='x123-171000D-2.11.5'></a>Digit Extraction</h5>
 <!-- l. 2042 --><p class='noindent'>Remember we defined polynomial <!-- l. 2042 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>Z</mi></math>
 as the scaled noisy plaintext: <!-- l. 2042 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>Z</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi>K</mi><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mi>′</mi></mrow></msup><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'>mod</mo><mspace width='0.2em'></mspace> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></mrow></math>,
 and each <!-- l. 2042 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>z</mi></mrow><mrow><mi>i</mi></mrow></msub></math> is
@@ -861,7 +861,7 @@ times.
 </p><!-- l. 2273 --><p class='indent'>   <!-- l. 2273 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
    
 </p>
-   <h5 class='subsubsectionHead' id='scaling-factor-reinterpretation'><span class='titlemark'>D-2.11.6   </span> <a id='x122-172000D-2.11.6'></a>Scaling Factor Re-interpretation</h5>
+   <h5 class='subsubsectionHead' id='scaling-factor-reinterpretation'><span class='titlemark'>D-2.11.6   </span> <a id='x123-172000D-2.11.6'></a>Scaling Factor Re-interpretation</h5>
 <!-- l. 2281 --><p class='noindent'>Remember that homomorphically decrypting <!-- l. 2281 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>A</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>B</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 outputs an encryption of <!-- l. 2281 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <mi>K</mi><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></mrow></math>, whose
 entire value is bigger than <!-- l. 2281 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></math>.
@@ -942,7 +942,7 @@ using a small <!-- l. 2316 --><math display='inline' xmlns='http://www.w3.org/19
 generates a smaller noise during the homomorphic operations.
    
 </p>
-   <h5 class='subsubsectionHead' id='summary3'><span class='titlemark'>D-2.11.7   </span> <a id='x122-173000D-2.11.7'></a>Summary</h5>
+   <h5 class='subsubsectionHead' id='summary3'><span class='titlemark'>D-2.11.7   </span> <a id='x123-173000D-2.11.7'></a>Summary</h5>
 <!-- l. 2322 --><p class='noindent'>We summarize the BFV bootstrapping procedure (with the generalization of
 <!-- l. 2322 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>r</mi></mrow></msup></mrow></math>) as
 follows.

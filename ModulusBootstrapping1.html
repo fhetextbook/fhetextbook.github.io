@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 617 --><div class='crosslinks'><p class='noindent'>[<a href='HomomorphicRotationofInputVectorSlots2.html'>prev</a>][<a href='BGVScheme.html#ModulusBootstrapping1.html'>parent</a>]</p></div>
-   <h4 class='subsectionHead' id='modulus-bootstrapping1'><span class='titlemark'>D-4.11   </span> <a id='x148-218000D-4.11'></a>Modulus Bootstrapping</h4>
+   <h4 class='subsectionHead' id='modulus-bootstrapping1'><span class='titlemark'>D-4.11   </span> <a id='x149-218000D-4.11'></a>Modulus Bootstrapping</h4>
 <!-- l. 620 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference: </span><a href='https://eprint.iacr.org/2022/1363.pdf'>Bootstrapping for BGV and BFV Revisited</a> <span class='cite'>[<a href='refname.html#Xcryptoeprint_2022_1363'>14</a>]</span>
 </p><!-- l. 623 --><p class='indent'>   BGV’s bootstrapping shares some common aspects with both BFV and CKKS’s bootstrapping. The
 goal of BGV’s bootstrapping is the same as that of CKKS, but the internal technique is closer to
@@ -237,7 +237,7 @@ the ciphertext modulus of the current multiplicative level.
    denotes the maximum absolute coefficient value of polynomial <!-- l. 741 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>P</mi></math>).
    </dd></dl>
    
-   <h5 class='subsubsectionHead' id='the-reason-for-modulus-switch-from-ql-q'><span class='titlemark'>D-4.11.1   </span> <a id='x148-219000D-4.11.1'></a>The Reason for Modulus Switch from
+   <h5 class='subsubsectionHead' id='the-reason-for-modulus-switch-from-ql-q'><span class='titlemark'>D-4.11.1   </span> <a id='x149-219000D-4.11.1'></a>The Reason for Modulus Switch from
                                                                                          
                                                                                          
 <!-- l. 747 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>→</mo><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math></h5>
@@ -253,7 +253,7 @@ from the plaintext modulus’s perspective due to the special property
 plaintext modulus).
    
 </p>
-   <h5 class='subsubsectionHead' id='modraise-instead-of-homomorphic-decryption'><span class='titlemark'>D-4.11.2   </span> <a id='x148-220000D-4.11.2'></a><span class='rm-lmss-10x-x-109'>ModRaise </span>instead of Homomorphic Decryption</h5>
+   <h5 class='subsubsectionHead' id='modraise-instead-of-homomorphic-decryption'><span class='titlemark'>D-4.11.2   </span> <a id='x149-220000D-4.11.2'></a><span class='rm-lmss-10x-x-109'>ModRaise </span>instead of Homomorphic Decryption</h5>
 <!-- l. 754 --><p class='noindent'>In the case of BFV’s bootstrapping, we need homomorphic decryption (<a href='NoiseBootstrapping1.html#homomorphic-decryption'><span class='ts1-lmr10-x-x-109'>§</span>D-2.11.3<!-- tex4ht:ref: subsec:field-def  --></a>)
 because we need to simultaneously change the ciphertext’s plaintext scaling factor from
 <!-- l. 754 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>→</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
@@ -271,7 +271,7 @@ while keeping the noise scaling factor (i.e., the plaintext modulus)
 <!-- l. 754 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></mrow></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='the-choice-of-'><span class='titlemark'>D-4.11.3   </span> <a id='x148-221000D-4.11.3'></a>The Choice of <!-- l. 757 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜀</mi></math></h5>
+   <h5 class='subsubsectionHead' id='the-choice-of-'><span class='titlemark'>D-4.11.3   </span> <a id='x149-221000D-4.11.3'></a>The Choice of <!-- l. 757 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜀</mi></math></h5>
 <!-- l. 759 --><p class='noindent'>The larger <!-- l. 759 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜀</mi></math> is, the
 greater the (base-<!-- l. 759 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>p</mi></math>)
 digit-wise gap between <!-- l. 759 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup><mi>M</mi></mrow></math>
@@ -284,7 +284,7 @@ means the digit extraction operation would be more expensive.
                                                                                          
                                                                                          
 </p>
-   <h5 class='subsubsectionHead' id='generalization-to-delta-pr'><span class='titlemark'>D-4.11.4   </span> <a id='x148-222000D-4.11.4'></a>Generalization to <!-- l. 761 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>r</mi></mrow></msup></mrow></math></h5>
+   <h5 class='subsubsectionHead' id='generalization-to-delta-pr'><span class='titlemark'>D-4.11.4   </span> <a id='x149-222000D-4.11.4'></a>Generalization to <!-- l. 761 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>p</mi></mrow><mrow><mi>r</mi></mrow></msup></mrow></math></h5>
 <!-- l. 763 --><p class='noindent'>Like the case of BFV’s bootstrapping (Summary D-2.11.7 in <a href='NoiseBootstrapping1.html#summary3'><span class='ts1-lmr10-x-x-109'>§</span>D-2.11.7<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>), we can generalize the plaintext modulus (i.e.,
 noise scaling factor) to <!-- l. 763 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>p</mi></mrow><mrow><mi>r</mi></mrow></msup></math>
 where <!-- l. 763 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>p</mi></math> is a

@@ -8,12 +8,12 @@
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:group-def}} Group}}]
 \noindent \textbf{\underline{Set Elements}}
 \begin{itemize}
-\item \textbf{Set ($\mathbb{S}$):} A bundle of elements: $\mathbb{S} = \{a, b, c, \gap{$\cdots$}, n\}$
-\item \textbf{Set Operations $\bm{(+, \cdot)}$:} A set defines two operations between any two elements $a, b \in \mathbb{S}$ as operands: addition $(+)$ and multiplication $(\cdot)$
-\item \textbf{Additive Identity ($1_{(+)}$):} An element $i \in \mathbb{S}$ is an additive identity if for all $a \in \mathbb{S}$, $i + a = a$.
-\item \textbf{Multiplicative Identity ($1_{(\cdot)}$):} An element $i \in \mathbb{S}$ is a multiplicative identity if for all $a \in \mathbb{S}$, $i \cdot a = a$
-\item \textbf{Additive Inverse ($a^{-1}$):} For each $a \in \mathbb{S}$, its additive inverse $a^{-1}$ is defined as an element such that $a + a^{-1} = 1_{(+)}$ (i.e., additive identity)
-\item \textbf{Multiplicative Inverse ($a^{-1}$):} For each $a \in \mathbb{S}$ except for $a = 0$, its multiplicative inverse $a^{-1}$ is defined as an element such that $a \cdot a^{-1} = 1_{(\cdot)}$ (i.e., multiplicative identity)
+\item \textbf{Set ($\mathbb{S}$):} A bundle of elements: $\mathbb{S} = \{a, b, c, \ldots\}$
+\item \textbf{Set Operations $\bm{(+, \cdot)}$:} We consider two operations on $\mathbb{S}$ between any two elements $a, b \in \mathbb{S}$ as operands: addition $(+)$ and multiplication $(\cdot)$
+\item \textbf{Additive Identity ($0_{(+)}$ often written $0$):} An element $i \in \mathbb{S}$ is an additive identity if for all $a \in \mathbb{S}$, $i + a = a$.
+\item \textbf{Multiplicative Identity ($1_{(\cdot)}$ often written $1$):} An element $i \in \mathbb{S}$ is a multiplicative identity if for all $a \in \mathbb{S}$, $i \cdot a = a$
+\item \textbf{Additive Inverse ($a^{-1}_{(+)}$):} For each $a \in \mathbb{S}$, its additive inverse $a^{-1}_{(+)}$, often written $-a$, is defined as an element such that $a + a^{-1}_{(+)} = 0_{(+)}$ (i.e., additive identity)
+\item \textbf{Multiplicative Inverse ($a^{-1}_{(\cdot)}$):} For each $a \in \mathbb{S}$ that is invertible with respect to $(\cdot)$, its multiplicative inverse $a^{-1}_{(\cdot)}$, often written $a^{-1}$, is defined as an element such that $a \cdot a^{-1}_{(\cdot)} = 1_{(\cdot)}$ (i.e., multiplicative identity)
 \end{itemize}
 
 $ $
@@ -23,7 +23,7 @@ $ $
 \item \textbf{Closed:} A set $\mathbb{S}$ is closed under the $(+)$ operation if for every $a, b \in \mathbb{S}$, it is the case that $a + b \in \mathbb{S}$. Likewise, a set $\mathbb{S}$ is closed under the $(\cdot)$ operation if for every $a, b \in \mathbb{S}$, it is the case that $a \cdot b \in \mathbb{S}$. 
 \item \textbf{Associative:} $(a + b) + c = a + (b + c)$
 \item \textbf{Commutative:} $a + b = b + a$
-\item \textbf{Distributive:} $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$
+\item \textbf{Distributive:} When both $(+)$ and $(\cdot)$ are defined, $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$
 \end{itemize}
 
 
@@ -32,10 +32,10 @@ $ $
 \noindent \textbf{\underline{Group Types}}
 \begin{itemize}
 \item \textbf{Semigroup:} A semigroup is a set of elements which is closed and associative on a single operation ($+$ or $\cdot$)
-\item \textbf{Monoid:} A monoid is a semigroup, plus it has an identity element, which returns the other operand over the set operation.
+\item \textbf{Monoid:} A monoid is a semigroup, plus it has an identity element $e$, which returns the other operand over the set operation.
 
 (e.g., $0$ is the identity element for $+$ operator, $1$ is the identity element for the $\cdot$ operator)
-\item \textbf{Group:} A group is a monoid, plus every element has an inverse (except for that of 0, the identity)
+\item \textbf{Group:} A group is a monoid, and every element has an inverse with respect to the operation.
 \item \textbf{Abelian Group:} An abelian group is a group, plus its operation is commutative.
 \end{itemize}
 \end{tcolorbox}
@@ -59,14 +59,14 @@ $ $
 \item \textbf{Closed:} For any integer $a, b \in \mathbb{Z}$, $a \cdot b = c$ is also an integer ($\in \mathbb{Z}$).
 \item \textbf{Associative:} For any integer $a, b, c \in \mathbb{Z}$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
 \item \textbf{Identity:} The multiplicative identity is 1, because for any $a \in \mathbb{Z}$, $a \cdot 1 = a$.
-\item \textbf{NO Inverse:} For an integer $a \in \mathbb{Z}$, its multiplicative inverse is $\dfrac{1}{a}$, but this is not necessarily an integer ($\not\in \mathbb{Z}$), and thus breaks the closure property.
+\item \textbf{NO Inverse:} For an integer $a \in \mathbb{Z}$, its multiplicative inverse is $\dfrac{1}{a}$, but this is not necessarily an integer ($\notin \mathbb{Z}$), therefore not every element has a multiplicative inverse, so $(\mathbb{Z},\cdot)$ is not a group (though it is a monoid).
 \end{itemize}
 $ $
 
-\noindent $\mathbb{R}$ (i.e., the set of all real numbers) is an abelian group under multiplication ($\cdot$), because: 
+\noindent $\mathbb{R}^\times$ (i.e., the set of all nonzero real numbers) is an abelian group under multiplication ($\cdot$), because:
 \begin{itemize}
-\item \textbf{Closed:} For any real number $a, b \in \mathbb{R}$, $a \cdot b = c$ is also a real number ($\in \mathbb{R}$).
-\item \textbf{Associative:} For any real number $a, b, c \in \mathbb{R}$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
-\item \textbf{Identity:} The multiplicative identity is 1, as for any real number $a \in \mathbb{R}$, $a \cdot 1 = a$.
-\item \textbf{Inverse:} For each real number $a \in \mathbb{R}$ (except for 0, the identity), its multiplicative inverse is $\dfrac{1}{a}$, which is a real number ($\in \mathbb{R}$).
+\item \textbf{Closed:} For any real number $a, b \in \mathbb{R}^\times$, $a \cdot b = c$ is also a real number ($\in \mathbb{R}^\times$).
+\item \textbf{Associative:} For any real number $a, b, c \in \mathbb{R}^\times$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+\item \textbf{Identity:} The multiplicative identity is 1, as for any real number $a \in \mathbb{R}^\times$, $a \cdot 1 = a$.
+\item \textbf{Inverse:} For each real number $a \in \mathbb{R}^\times$, its multiplicative inverse is $\dfrac{1}{a}$, which is a real number ($\in \mathbb{R}$).
 \end{itemize}

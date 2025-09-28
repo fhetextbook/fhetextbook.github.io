@@ -6,12 +6,12 @@
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:field-def}} Field Definitions}}]
 \begin{itemize}
-\item \textbf{Ring:} A set of elements which is an abelian group under the + operator, and closed, associative, and distributive on the ($+, \cdot$) operators. 
-\item \textbf{Field:} A set of elements which is an abelian group under both the $(+, \cdot)$ operators (i.e., the set has an identity element and multiplicative inverses for all non-zero elements), and distributive on those operators.
-\item \textbf{Galois Field ($\text{GF}(p^n)$):} A field with a finite number of elements (whose number must be $p^n$ for some prime $p$ and a positive integer $n$).
-\item \textbf{$\mathbb{Z}_p$ ($\mathbb{Z}/p\mathbb{Z}$):} The finite field of integers modulo $p$, which is $\{0, 1, 2, \cdots... \text{ } p - 1\}$ where $p$ is a prime number. If $p$ is a prime number, $\mathbb{Z}_p$ is always a finite field. This is also called a quotient ring of $p$.
-\end{itemize}
+\item \textbf{Ring:} A set $R$ that is an abelian group under addition $(+)$, equipped with a multiplication $(\cdot)$ that is closed and associative, and such that multiplication distributes over addition on both sides: $a\cdot(b+c)=a\cdot b+a\cdot c$ and $(a+b)\cdot c=a\cdot c+b\cdot c$ for all $a,b,c\in R$. \emph{(Multiplication don't not be commutative, an identity element for $(\cdot)$ is optional unless stated “ring with unity”.)}
+\item \textbf{Field:} A set $F$ that is an abelian group under $(+)$, whose nonzero elements $F^\times=F\setminus\{0\}$ form an abelian group under $(\cdot)$, with multiplication distributing over addition.
+\item \textbf{Galois Field ($\mathrm{GF}(p^n)$):} A field with a finite number of elements, necessarily $p^n$ for some prime $p$ and positive integer $n$.
+\item \textbf{$\mathbb{Z}_p$ ($\mathbb{Z}/p\mathbb{Z}$):} For a prime $p$, the set $\{0,1,\ldots,p-1\}$ with addition and multiplication modulo $p$ forms a finite field. More generally, for any integer $m\ge 2$, $\mathbb{Z}_m$ is a commutative ring, and it is a field iff $m$ is prime.\end{itemize}
 \end{tcolorbox}
+
 $ $
 
 \subsection{Examples}
@@ -21,19 +21,18 @@ $\mathbb{Z}$ (the set of all integers) is a ring, but not a field, because not a
 
 $ $
 
-\noindent $\mathbb{R}$ (the set of all real numbers) is a field. As shown in \autoref{subsec:group-ex}, it is an abelian group over the $(+)$ and $(\cdot)$ operators, and its elements are distributive over the $(+, \cdot)$ operators.
-
+\noindent $\mathbb{R}$ (the set of all real numbers) is a field. As shown in \autoref{subsec:group-ex}, it is an abelian group under $(+)$, its nonzero elements form an abelian group under $(\cdot)$, and multiplication distributes over addition.
 
 $ $
 
 \noindent $\mathbb{Z}_7 = \{0, 1, 2, 3, 4, 5, 6\}$ is a finite field because:
 \begin{itemize}
-\item \textbf{Closed:} For any $a, b \in \mathbb{Z}_7$, there exists some $c_1 \in \mathbb{Z}_7$ such that $a + b \equiv c_1 \bmod 7$ and, some $c_2 \in \mathbb{Z}_7$ such that $a \cdot b \equiv c_2 \bmod 7$.
-\item \textbf{Associative:} For any $a, b, c \in \mathbb{Z}_7$, $ (a + b) + c = a + (b + c)$ and $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
-\item \textbf{Commutative:} For any $a, b \in \mathbb{Z}_7$, $ a + b = b + a$, and $a \cdot b = b \cdot a$.
-\item \textbf{Distributive:} For any $a, b, c \in \mathbb{Z}_7$, $ (a + b) \cdot c = a \cdot c + b \cdot c$.
-\item \textbf{Identity:} For any $a \in \mathbb{Z}_7$, its additive identity is $0$, and its multiplicative identity is $1$.
-\item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists an additive inverse $a_1' \in \mathbb{Z}_7$ such that $a_1 + a_1' \equiv 0 \bmod 7$. For example, if $a_1 = 3$, then its additive inverse $a_1' = 4$, because $3 + 4 = 7 \equiv 0 \bmod 7$. Also, for any $a_2 \in \mathbb{Z}_7$ (except for 0), there exists a multiplicative inverse $a_2' \in \mathbb{Z}_7$ such that $a_2 \cdot a_2' \equiv 1 \bmod 7$. For example, if $a_2 = 3$, then its multiplicative inverse $a_2' = 5$, because $3 \cdot 5 = 15 \equiv 1 \bmod 7$. 
+\item \textbf{Closed:} For any $a,b \in \mathbb{Z}_7$, there exist $c_1,c_2 \in \mathbb{Z}_7$ such that $a+b \equiv c_1 \pmod{7}$ and $a\cdot b \equiv c_2 \pmod{7}$.
+\item \textbf{Associative:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)+c=a+(b+c)$ and $(a\cdot b)\cdot c=a\cdot(b\cdot c)$.
+\item \textbf{Commutative:} For any $a,b \in \mathbb{Z}_7$, $a+b=b+a$ and $a\cdot b=b\cdot a$.
+\item \textbf{Distributive:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)\cdot c=a\cdot c+b\cdot c$.
+\item \textbf{Identity:} The additive identity is $0$ and the multiplicative identity is $1$.
+\item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists $a' \in \mathbb{Z}_7$ such that $a+a' \equiv 0 \pmod{7}$ (e.g., the additive inverse of $3$ is $4$ since $3+4\equiv0 \pmod{7}$). For any $a \in \mathbb{Z}_7^\times=\{1,\dots,6\}$, there exists $b \in \mathbb{Z}_7$ such that $ab \equiv 1 \pmod{7}$ (e.g., $3\cdot5=15\equiv1 \pmod{7}$).
 \end{itemize}
 
 \subsection{Theorems}
@@ -41,7 +40,7 @@ $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:field-theorem}} Field Theorems}}]
 \begin{enumerate}
-\item \textbf{Size of Finite Field:} A finite field is called Galois field and always has $p^n$ elements (where $p$ is a prime and $n$ is a positive integer).
-\item \textbf{Isomorphic Fields:} Any two finite fields, $\mathbb{F}_1$ and $\mathbb{F}_2$ with the same number of elements are isomorphic (i.e., there exists a bi-jective one-to-one mapping function $f : \mathbb{F}_1 \rightarrow \mathbb{F}_2$ and the algebraic operations $(+, \cdot)$ preserve correctness among newly mapped elements). In other words, there exists a mapping function $f : \mathbb{F}_1 \rightarrow \mathbb{F}_2$ comprised of the field operators ($+$, $\cdot$). For such an isomorphic function $f$, for any $a, b \in \mathbb{F}_1$, $f(a+b) = f(a) + f(b)$ and $f(a \cdot b) = f(a) \cdot f(b)$
+\item \textbf{Size of Finite Field:} Every finite field has $p^n$ elements for some prime $p$ and positive integer $n$, conversely, for each $p^n$ there exists a finite field of that size (unique up to isomorphism).
+\item \textbf{Isomorphic Fields:} Any two finite fields $\mathbb{F}_1$ and $\mathbb{F}_2$ with the same number of elements are isomorphic, i.e., there exists a bijection $f:\mathbb{F}_1\to\mathbb{F}_2$ such that for all $a,b\in\mathbb{F}_1$, $f(a+b)=f(a)+f(b)$ and $f(ab)=f(a)f(b)$.
 \end{enumerate}
 \end{tcolorbox}

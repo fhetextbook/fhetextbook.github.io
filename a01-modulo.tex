@@ -11,29 +11,29 @@
 
 \begin{itemize}
 
-\item \textbf{Modulo} \revise{is the operation of computing the remainder obtained when one number is divided by another}. \textbf{modulo} is often abbreviated as \textbf{mod}.
+\item \textbf{Modulo} is the operation of computing the remainder obtained when one number is divided by another. \textbf{modulo} is often abbreviated as \textbf{mod}.
 
 $ $
 
-\item \textbf{$\bm{a}$ mod $\bm{q}$ (i.e., $\bm{a} \bm{\text{ modulo } q}$)} is the remainder after dividing $a$ by $q$, which is always \revise{an element of} $\{0, 1, 2, 3, \cdots, q-1\}$. For example, $7 \bmod 5 = 2$, because the remainder of dividing 7 by 5 is 2. 
+\item \textbf{$\bm{a}$ mod $\bm{q}$ (i.e., $\bm{a} \bm{\text{ modulo } q}$)} is the remainder after dividing $a$ by $q$, which is always an element of $\{0, 1, 2, 3, \cdots, q-1\}$. For example, $7 \bmod 5 = 2$, because the remainder of dividing 7 by 5 is 2. 
 
 $ $
 
-\item \textbf{Modulus:} Given $\bm{a}$ mod $\bm{q}$, we call \revise{the divisor} $q$ the modulus, whereas \revise{\emph{modulo} refers to the operation}.
+\item \textbf{Modulus:} Given $\bm{a}$ mod $\bm{q}$, we call the divisor $q$ the modulus, whereas \emph{modulo} refers to the operation.
 
 $ $
 
-\item \textbf{Modulo Congruence ($\bm{\equiv}$):} $a$ is congruent \revise{to} $b$ modulo \revise{$q$} (i.e., $a \equiv b \textbf{ mod } q$) if they have the same remainder when divided by \revise{$q$}. For example, $5 \equiv 12 \bmod 7$, because $5 \bmod 7 = 5$ and $12 \bmod 7 = 5$. In mathematics, the notation $a \equiv b \bmod q$ is identical to $a = b \pmod q$, meaning that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. \revise{Note that this notation differs from $a = b \bmod q$, which states that $a$ equals the remainder of $b$ divided by $q$.}
+\item \textbf{Modulo Congruence ($\bm{\equiv}$):} $a$ is congruent to $b$ modulo $q$ (i.e., $a \equiv b \textbf{ mod } q$) if they have the same remainder when divided by $q$. For example, $5 \equiv 12 \bmod 7$, because $5 \bmod 7 = 5$ and $12 \bmod 7 = 5$. In mathematics, the notation $a \equiv b \bmod q$ is identical to $a = b \pmod q$, meaning that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Note that this notation differs from $a = b \bmod q$, which states that $a$ equals the remainder of $b$ divided by $q$.
 
 $ $
 
-\item \textbf{Congruence \textit{\revise{vs.}} Equality:} 
+\item \textbf{Congruence \textit{vs.} Equality:} 
 
 $a \equiv b \bmod q \Longleftrightarrow a = b + k\cdot q$ \text{ } (for some integer $k$)
 
 $ $
 
-This means that $a$ and $b$ are congruent modulo $q$ if and only if $a$ and $b$ \revise{differ by} some multiple of $q$. For example, $5 \equiv 12 \bmod 7 \Longleftrightarrow 5 = 12 + (-1)\cdot 7$
+This means that $a$ and $b$ are congruent modulo $q$ if and only if $a$ and $b$ differ by some multiple of $q$. For example, $5 \equiv 12 \bmod 7 \Longleftrightarrow 5 = 12 + (-1)\cdot 7$
 
 \end{itemize}
 
@@ -118,7 +118,7 @@ Based on the modulo operations in Theorem~\ref*{subsec:modulo-arithmetic}.1, we 
 
 \item \textbf{Distributive:} $(a \cdot (b + c)) \equiv ((a \cdot b) + (a \cdot c))  \bmod q$
 
-\item \textbf{Interchangeable:} Congruent values are interchangeable \revise{in modulo arithmetic}. 
+\item \textbf{Interchangeable:} Congruent values are interchangeable in modulo arithmetic. 
 
 For example, suppose $(a \equiv b \bmod q)$ and $(c \equiv d \bmod q)$. Then, $a$ and $b$ are interchangeable, and $c$ and $d$ are interchangeable in modulo arithmetic as follows:
 
@@ -144,9 +144,9 @@ In modulo $q$ (i.e., in the world of remainders where all numbers have been divi
 
 \begin{itemize}
 
-\item \textbf{Additive Inverse} of $a$ is denoted as $a_+^{-1}$ \revise{which satisfies} $a + a_+^{-1} \equiv 0 \bmod q$. For example, in modulo 11, $3_+^{-1} = 8$, because $3 + 8 \equiv 0 \bmod 11$.
+\item \textbf{Additive Inverse} of $a$ is denoted as $a_+^{-1}$ which satisfies $a + a_+^{-1} \equiv 0 \bmod q$. For example, in modulo 11, $3_+^{-1} = 8$, because $3 + 8 \equiv 0 \bmod 11$.
 
-\item \textbf{Multiplicative Inverse} of $a$ is denoted as $a_*^{-1}$ \revise{which satisfies} $a \cdot a_*^{-1} \equiv 1 \bmod{q}$. \revise{Such an inverse exists if and only if $\gcd(a,q)=1$.} For example, modulo 11, $3_*^{-1} = 4$, because $3 \cdot 4 \equiv 1 \bmod{11}$.
+\item \textbf{Multiplicative Inverse} of $a$ is denoted as $a_*^{-1}$ which satisfies $a \cdot a_*^{-1} \equiv 1 \bmod{q}$. Such an inverse exists if and only if $\gcd(a,q)=1$. For example, modulo 11, $3_*^{-1} = 4$, because $3 \cdot 4 \equiv 1 \bmod{11}$.
 
 \end{itemize}
 
@@ -155,12 +155,12 @@ In modulo $q$ (i.e., in the world of remainders where all numbers have been divi
 \subsubsection{Modulo Division}
 \label{subsec:modulo-division}
 
-In modulo arithmetic, \textit{modulo division} is different from regular numeric division. \revise{Strictly speaking, there is no such thing as \textit{modulo division} because the modulo operation itself is a form of division that returns only the remainder.} \revise{In practice, one uses “modulo division” to mean multiplying by a modular inverse when it exists, i.e., when $\gcd(a,q)=1$.} \textit{Modulo division} of $b$ by $a$ modulo $q$ is equivalent to computing the \textit{modular} multiplication $b \cdot a^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives \revise{an integer (a residue modulo $q$)} (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed \revise{using the} extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}).
+In modulo arithmetic, \textit{modulo division} is different from regular numeric division. Strictly speaking, there is no such thing as \textit{modulo division} because the modulo operation itself is a form of division that returns only the remainder. In practice, one uses “modulo division” to mean multiplying by a modular inverse when it exists, i.e., when $\gcd(a,q)=1$. \textit{Modulo division} of $b$ by $a$ modulo $q$ is equivalent to computing the \textit{modular} multiplication $b \cdot a^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives an integer (a residue modulo $q$) (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed using the extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}).
 
 \subsubsection{Centered Residue Representation}
 \label{subsec:modulo-centered}
 
-Throughout this section, we have assumed that the residues are positive integers. For example, the possible residues \revise{modulo $q$} are assumed to be $\{0, 1, \cdots, q-1\}$. This system is called \revise{the canonical} (i.e., unsigned) residue representation. On the other hand, there is also a counterpart system that assumes signed (i.e., centered) residues $\left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$\footnote{Here we assume $q$ is an even number. In the case where $q$ is an odd number, the residues are $\left\{ -\dfrac{q-1}{2}, -\dfrac{q-3}{2}, \cdots, 0, \cdots, \dfrac{q-3}{2}, \dfrac{q-1}{2}\right\}$}, where the residues are centered around $0$ and \revise{the total number of residues is the same, namely $q$}. In both systems, a modulo operation changes a given value to another value within the system's residue range such that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the modulus $q$; (2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus $q$. The only difference between these two (canonical and centered) systems is their upper bounds and lower bounds: $0$ and $q-1$ in the canonical residue system, whereas $-\dfrac{q}{2}$ and $\dfrac{q}{2} - 1$ in the centered residue system. The canonical residue representation assumes that $\mathbb{Z}_q = \{0, 1, \cdots, q-1\}$, whereas the centered residue system assumes that $\mathbb{Z}_q = \left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$. 
+Throughout this section, we have assumed that the residues are positive integers. For example, the possible residues modulo $q$ are assumed to be $\{0, 1, \cdots, q-1\}$. This system is called the canonical (i.e., unsigned) residue representation. On the other hand, there is also a counterpart system that assumes signed (i.e., centered) residues $\left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$\footnote{Here we assume $q$ is an even number. In the case where $q$ is an odd number, the residues are $\left\{ -\dfrac{q-1}{2}, -\dfrac{q-3}{2}, \cdots, 0, \cdots, \dfrac{q-3}{2}, \dfrac{q-1}{2}\right\}$}, where the residues are centered around $0$ and the total number of residues is the same, namely $q$. In both systems, a modulo operation changes a given value to another value within the system's residue range such that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the modulus $q$; (2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus $q$. The only difference between these two (canonical and centered) systems is their upper bounds and lower bounds: $0$ and $q-1$ in the canonical residue system, whereas $-\dfrac{q}{2}$ and $\dfrac{q}{2} - 1$ in the centered residue system. The canonical residue representation assumes that $\mathbb{Z}_q = \{0, 1, \cdots, q-1\}$, whereas the centered residue system assumes that $\mathbb{Z}_q = \left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$. 
 
 In both systems, the same modulo property of addition, subtraction, multiplication, and division holds, which can be proved by applying the same reasoning described in \autoref{subsec:modulo-arithmetic}: the same properties hold in both systems because any two congruent residues in the centered system are separated by the $kq$ gaps (for some integer $k$) in both systems. 
 

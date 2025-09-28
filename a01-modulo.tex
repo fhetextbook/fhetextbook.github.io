@@ -1,7 +1,7 @@
 
 \noindent \textbf{- Reference} 
 
-\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube -- Extended Euclidean Algorithm Tutorial}
+\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube -- Extended Euclidean Algorithm Tutorial}.
 
 
 \subsection{Overview}
@@ -11,7 +11,7 @@
 
 \begin{itemize}
 
-\item \textbf{modulo} \revise{is the operation of computing the remainder obtained when one number is divided by another}. \textbf{modulo} is often abbreviated as \textbf{mod}.
+\item \textbf{Modulo} \revise{is the operation of computing the remainder obtained when one number is divided by another}. \textbf{modulo} is often abbreviated as \textbf{mod}.
 
 $ $
 
@@ -19,7 +19,7 @@ $ $
 
 $ $
 
-\item \textbf{modulus:} Given $\bm{a}$ mod $\bm{q}$, we call \revise{the divisor} $q$ the modulus, whereas \revise{\emph{modulo} refers to the operation}.
+\item \textbf{Modulus:} Given $\bm{a}$ mod $\bm{q}$, we call \revise{the divisor} $q$ the modulus, whereas \revise{\emph{modulo} refers to the operation}.
 
 $ $
 
@@ -53,7 +53,8 @@ For any integer $x$, the following is true:
 
 \item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a - x\equiv b - x\bmod q$
 
-\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a \cdot x\equiv b \cdot x\bmod q$
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a \cdot x \equiv b \cdot x \bmod q$. 
+This equivalence holds provided that $\gcd(x,q)=1$. Without this assumption, only the implication $a \equiv b \bmod q \Rightarrow a \cdot x \equiv b \cdot x \bmod q$ is guaranteed.
 
 \end{enumerate}
 
@@ -68,7 +69,7 @@ For any integer $x$,
 \begin{enumerate}
 
 
-\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$) \textcolor{red}{ \text{ } \# $a$ and $b$ differ by some multiple of $q$}
+\item \textbf{Addition:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some integer $k$) \textcolor{red}{ \text{ } \# $a$ and $b$ differ by some multiple of $q$}
 
 $\Longleftrightarrow a + x = b + k\cdot q + x$
 
@@ -78,7 +79,7 @@ $\Longleftrightarrow a + x \equiv b + x \bmod q$
 
 $ $
 
-\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+\item \textbf{Subtraction:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some integer $k$)
 
 $\Longleftrightarrow a - x = b + k\cdot q - x$
 
@@ -88,13 +89,19 @@ $\Longleftrightarrow a - x \equiv b - x \bmod q$
 
 $ $
 
-\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some $k$)
+\item \textbf{Multiplication:} $a \equiv b \bmod q \Longleftrightarrow a = b + k q $ (for some integer $k$)
 
-$\Longleftrightarrow a \cdot x = b \cdot x + k\cdot q \cdot x$
+$\Longrightarrow a \cdot x = b \cdot x + k\cdot q \cdot x$
 
-$\Longleftrightarrow a \cdot x = b \cdot x + k_x\cdot q$ (where $k_x = k \cdot x$)  \textcolor{red}{ \text{ }  \# $a\cdot x$ and $b\cdot x$ differ by some multiple of $q$}
+$\Longrightarrow a \cdot x = b \cdot x + k_x\cdot q$ (where $k_x = k \cdot x$)  \textcolor{red}{ \text{ }  \# $a\cdot x$ and $b\cdot x$ differ by some multiple of $q$}
 
-$\Longleftrightarrow a \cdot x = b \cdot x \pmod q$
+$\Longrightarrow a \cdot x \equiv b \cdot x \bmod q$
+
+Conversely, if $x$ and $q$ are coprime (i.e., $\gcd(x,q)=1$), then $x$ has a multiplicative inverse $x^{-1}$ modulo $q$. From $a \cdot x \equiv b \cdot x \bmod q$
+
+$\Longrightarrow a \cdot x \cdot x^{-1} \equiv b \cdot x \cdot x^{-1} \bmod q$
+
+$\Longrightarrow a \equiv b \bmod q$
 
 \end{enumerate}
 \end{proof}
@@ -139,7 +146,7 @@ In modulo $q$ (i.e., in the world of remainders where all numbers have been divi
 
 \item \textbf{Additive Inverse} of $a$ is denoted as $a_+^{-1}$ \revise{which satisfies} $a + a_+^{-1} \equiv 0 \bmod q$. For example, in modulo 11, $3_+^{-1} = 8$, because $3 + 8 \equiv 0 \bmod 11$.
 
-\item \textbf{Multiplicative Inverse} of $a$ is denoted as $a_*^{-1}$ \revise{which satisfies} $a \cdot a_*^{-1} \equiv 1 \bmod q$. For example, in modulo 11, $3_*^{-1} = 4$, because $3 \cdot 4 \equiv 1 \bmod 11$.
+\item \textbf{Multiplicative Inverse} of $a$ is denoted as $a_*^{-1}$ \revise{which satisfies} $a \cdot a_*^{-1} \equiv 1 \bmod{q}$. \revise{Such an inverse exists if and only if $\gcd(a,q)=1$.} For example, modulo 11, $3_*^{-1} = 4$, because $3 \cdot 4 \equiv 1 \bmod{11}$.
 
 \end{itemize}
 
@@ -148,7 +155,7 @@ In modulo $q$ (i.e., in the world of remainders where all numbers have been divi
 \subsubsection{Modulo Division}
 \label{subsec:modulo-division}
 
-In modulo arithmetic, \textit{modulo division} is different from regular numeric division. \revise{Strictly speaking, there is no such thing as \textit{modulo division} because the modulo operation itself is a form of division that returns only the remainder.} \textit{modulo division} of $b$ by $a \bmod q$ is equivalent to computing the modulo multiplication $b \cdot a_*^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives \revise{an integer} (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed \revise{using the} extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial})
+In modulo arithmetic, \textit{modulo division} is different from regular numeric division. \revise{Strictly speaking, there is no such thing as \textit{modulo division} because the modulo operation itself is a form of division that returns only the remainder.} \revise{In practice, one uses “modulo division” to mean multiplying by a modular inverse when it exists, i.e., when $\gcd(a,q)=1$.} \textit{Modulo division} of $b$ by $a$ modulo $q$ is equivalent to computing the \textit{modular} multiplication $b \cdot a^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives \revise{an integer (a residue modulo $q$)} (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed \revise{using the} extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}).
 
 \subsubsection{Centered Residue Representation}
 \label{subsec:modulo-centered}

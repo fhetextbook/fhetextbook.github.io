@@ -6,7 +6,7 @@
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:field-def}} Field Definitions}}]
 \begin{itemize}
-\item \textbf{Ring:} A set $R$ that is an abelian group under addition $(+)$, equipped with a multiplication $(\cdot)$ that is closed and associative, and such that multiplication distributes over addition on both sides: $a\cdot(b+c)=a\cdot b+a\cdot c$ and $(a+b)\cdot c=a\cdot c+b\cdot c$ for all $a,b,c\in R$. \emph{(Multiplication don't not be commutative, an identity element for $(\cdot)$ is optional unless stated “ring with unity”.)}
+\item \textbf{Ring:} A set $R$ that is an abelian group under addition $(+)$, equipped with a multiplication $(\cdot)$ that is closed and associative, and such that multiplication distributes over addition on both sides: $a\cdot(b+c)=a\cdot b+a\cdot c$ and $(a+b)\cdot c=a\cdot c+b\cdot c$ for all $a,b,c\in R$. \emph{(Multiplication is not necessarily commutative (e.g., a matrix multiplication), and an identity element for $(\cdot)$ is optional unless stated “ring with unity”.)}
 \item \textbf{Field:} A set $F$ that is an abelian group under $(+)$, whose nonzero elements $F^\times=F\setminus\{0\}$ form an abelian group under $(\cdot)$, with multiplication distributing over addition.
 \item \textbf{Galois Field ($\mathrm{GF}(p^n)$):} A field with a finite number of elements, necessarily $p^n$ for some prime $p$ and positive integer $n$.
 \item \textbf{$\mathbb{Z}_p$ ($\mathbb{Z}/p\mathbb{Z}$):} For a prime $p$, the set $\{0,1,\ldots,p-1\}$ with addition and multiplication modulo $p$ forms a finite field. More generally, for any integer $m\ge 2$, $\mathbb{Z}_m$ is a commutative ring, and it is a field iff $m$ is prime.\end{itemize}
@@ -40,7 +40,7 @@ $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:field-theorem}} Field Theorems}}]
 \begin{enumerate}
-\item \textbf{Size of Finite Field:} Every finite field has $p^n$ elements for some prime $p$ and positive integer $n$, conversely, for each $p^n$ there exists a finite field of that size (unique up to isomorphism).
+\item \textbf{Size of Finite Field:} Every finite field is called a Galois Field and it has $p^n$ elements for some prime $p$ and positive integer $n$, conversely, for each $p^n$ there exists a finite field of that size (unique up to isomorphism).
 \item \textbf{Isomorphic Fields:} Any two finite fields $\mathbb{F}_1$ and $\mathbb{F}_2$ with the same number of elements are isomorphic, i.e., there exists a bijection $f:\mathbb{F}_1\to\mathbb{F}_2$ such that for all $a,b\in\mathbb{F}_1$, $f(a+b)=f(a)+f(b)$ and $f(ab)=f(a)f(b)$.
 \end{enumerate}
 \end{tcolorbox}

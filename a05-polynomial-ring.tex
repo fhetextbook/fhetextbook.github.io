@@ -17,23 +17,25 @@ A polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$ is the set of all polynomials 
 For a polynomial $f \in \mathbb{Z}_q[x] / (x^n + 1)$ where $f = c_0 + c_1x^1 + \gap{$\cdots$} + c_{n-1}x^{n-1}$:
 
 \begin{itemize}
-\item \textbf{Coefficient Ring:} $f_i$'s each polynomial coefficient $c_j$ is in integer modulo $q$ (i.e., $c_j + q \equiv c_j \gap{\text{mod}} q$). 
+\item \textbf{Coefficient Ring:} each coefficient $c_j \in \mathbb{Z}_q$.
 
 $ $
 
-\item \textbf{Degree Ring:} Any polynomial $f'$ can be broken down to: 
+\item \textbf{Degree Ring:} Any $f' \in \mathbb{Z}_q[x]$ can be written
 
 $ $
 
-$f' = (x^n + 1)(f_q) + f_r \equiv f_r \in \mathbb{Z}_q[x]/(x^n + 1)$
+$f'=(x^n+1)f_q+f_r,\qquad \deg f_r < n,$
 
 $ $
 
-, where $f_q$ is called a quotient polynomial and $f_r$ is called a remainder polynomial resulting from the polynomial division of $f'$ divided by $x^n + 1$.
+so in the quotient ring $\mathbb{Z}_q[x]/(x^n+1)$ we have $f' \equiv f_r \pmod{x^n+1}$. $f_q$ is called a quotient polynomial and $f_r$ is called a remainder polynomial resulting from the polynomial division of $f'$ divided by $x^n + 1$.
 
 $ $
 
 \item \textbf{Polynomial Congruence:} If two polynomials are congruent, they belong to the same equivalence class, in which case they are interchangeable in the polynomial operations ($+, \cdot$) in the polynomial ring. For example, if: 
+
+$ $
 
 $f' \equiv f_{r1} \in \mathbb{Z}_q[x] / (x^n + 1)$
 
@@ -43,7 +45,7 @@ $f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
 
 $ $
 
-, then the polynomial operation result of $f' + f''$ is in the same equivalence class as: 
+Then the polynomial operation result of $f' + f''$ is in the same equivalence class as: 
 
 $f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
 
@@ -53,7 +55,7 @@ $f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
 To make the notation simple, we denote the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, q \rangle}$
 \end{tcolorbox}
 
-Recall that in a ring $\mathbb{Z}_p$, a big number $b$ can be divided by $p$ and $b = q \cdot p + r \equiv r \bmod p$ (the quotient $q$ gets eliminated). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which gives:
+Recall that in $\mathbb{Z}_p$, any $b$ writes $b = mp + r$ with $0\le r<p$, hence $b \equiv r \pmod{p}$ (the quotient $m$ disappears). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which gives:
 
 $f_{big} = (x^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
 
@@ -70,7 +72,7 @@ $ $
 
 $f = (x^2)\cdot(x^2) + 3x\cdot(x^2) + 11x^2 + 6x + 10$ 
 
-$ \equiv (-1)(-1) + 3x(-1) +  (11 \gap{\text{mod}} 7)(-1) + 6x + (10 \gap{\text{mod}} 7)$
+$ \equiv (-1)(-1) + 3x(-1) +  (11 \bmod 7)(-1) + 6x + (10 \bmod 7)$
 
 $ = 3x \in \mathbb{Z}_7[x] / (x^2 + 1)$
 
@@ -93,7 +95,7 @@ $ $
 \hline
 \textbf{{Set Elements}} & number & polynomial \\
 \hline
-\textbf{{Ring Notation}} & $\mathbb{Z}_p = \{0, 1, \gap{$\cdots$}, p - 1\}$  & $\mathbb{Z}_p[x] / (x^n + 1)$ \\
+\textbf{{Ring Notation}} & $\mathbb{Z}_p = \{0, 1, \ldots, p - 1\}$  & $\mathbb{Z}_p[x] / (x^n + 1)$ \\
 \textbf{{\& Definition}} & The set of all integers between $0$ and $p$ & The set of all polynomials $f$ such that\\
 && $f= c_0 + c_1x^1 + c_2x^2 \cdots + c_{n-1}x^{n-1}$ \\
 && where each coefficient $c_i \in \mathbb{Z}_p$ \\
@@ -134,11 +136,11 @@ $ $
 
 \para{Congruency:} If two numbers are congruent, they are in the same \textit{congruency class}. The same is true for two congruent polynomials. If the computation results of two mathematical formulas belong to the same congruency class, then their computations wrap around within modulo of their congruency. This is a useful property for cryptographic schemes where encryption \& decryption computations wrap around their values within a limited set of binary bits. Congruency is useful for simplifying computation. For example, a big number or a complex polynomial can be \textit{normalized} to a simpler number or polynomial by using the congruency rule, which reduces the computation overhead. 
 
-\para{Polynomial Evaluation:} Note that two numbers that belong to the same congruency class are not necessarily the same number. For example, $5 \equiv 10$ modulo 5, but these two numbers are not the same. Likewise, two congruent polynomials are not the same. While two congruent polynomials in a polynomial ring can be interchangeably used for polynomial operations supported in the ring (i.e., $(+, \cdot)$), such as $f_1 + f_2$ or $f_1 \cdot (f_2 - f_3)$, two congruent polynomials do not necessarily give the same result when they are evaluated for a certain variable value $x = a$. For example, in the previous example of \autoref{subsubsec:poly-ring-ex}, the two polynomials $x^4 + 3x^3 + 11x^2 + 6x + 10$ and $3x$ are congruent in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$. However, these two polynomials do not give the same evaluation results for $x = 0$: the original polynomial gives 10, whereas the reduced (i.e., simplified) polynomial gives 0. This discrepancy in evaluation occurs because we defined two polynomials $M_1$ and $M_2$ to be congruent over $x^n + 1$ (i.e., $M_1 \equiv M_2$) if their remainder is the same after being divided by $X^n + 1$ (i.e., $M_1 = Q \cdot (X^n + 1) + M_2$ for some polynomial $Q$). Therefore, $M_1$ and $M_2$ will be evaluated to the same polynomial $M_2$ if they are evaluated at the $x$ values such that $X^n = -1$, which make the $X^n +1$ term 0. The solutions for $x^n = -1$ are called the $n$-th roots of unity, which we will learn in \autoref{sec:roots} and \autoref{sec:cyclotomic-polynomial-integer-ring}. We summarize as follows: 
+\para{Polynomial Evaluation:} Note that two numbers that belong to the same congruency class are not necessarily the same number. For example, $5 \equiv 10$ modulo 5, but these two numbers are not the same. Likewise, two congruent polynomials are not the same. While two congruent polynomials in a polynomial ring can be interchangeably used for polynomial operations supported in the ring (i.e., $(+, \cdot)$), such as $f_1 + f_2$ or $f_1 \cdot (f_2 - f_3)$, two congruent polynomials do not necessarily give the same result when they are evaluated for a certain variable value $x = a$. For example, in the previous example of \autoref{subsubsec:poly-ring-ex}, the two polynomials $x^4 + 3x^3 + 11x^2 + 6x + 10$ and $3x$ are congruent in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$. However, these two polynomials do not give the same evaluation results for $x = 0$: the original polynomial gives 10, whereas the reduced (i.e., simplified) polynomial gives 0. This discrepancy in evaluation occurs because we defined two polynomials $M_1$ and $M_2$ to be congruent over $x^n + 1$ (i.e., $M_1 \equiv M_2$) if their remainder is the same after being divided by $x^n + 1$ (i.e., $M_1 = Q \cdot (x^n + 1) + M_2$ for some polynomial $Q$). Therefore, $M_1$ and $M_2$ will be evaluated to the same polynomial $M_2$ if they are evaluated at the $x$ values such that $x^n = -1$, which make the $x^n +1$ term 0. The solutions for $x^n = -1$ are called the $n$-th roots of unity, which we will learn in \autoref{sec:roots} and \autoref{sec:cyclotomic-polynomial-integer-ring}. We summarize as follows: 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:polynomial-ring-discuss}} Polynomial Evaluation over Polynomial Ring}}]
 
-Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n + 1$. This is equivalent to the following relation: $M_1 = Q \cdot (X^n + 1) + M_2$ $Q$ for some polynomial $Q$. Then, $M_1(X)$ and $M_2(X)$ are guaranteed to be evaluated to the same value if $X=x_i$ is the solution for $X^n + 1$ (i.e., $X$ is the $n$-th root of unity). That is , $M_1(x_i) = M_2(x_i)$. 
+Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n + 1$. This is equivalent to the following relation: $M_1 = Q \cdot (x^n + 1) + M_2$ $Q$ for some polynomial $Q$. Then, $M_1(X)$ and $M_2(X)$ are guaranteed to be evaluated to the same value if $X=x_i$ is the solution for $x^n + 1$ (i.e., $X$ is the $n$-th root of unity). That is , $M_1(x_i) = M_2(x_i)$. 
 
 \end{tcolorbox}
 
@@ -194,7 +196,7 @@ Note that the coefficient signs change when they rotate around the boundary of $
 
 Suppose we have a polynomial $f \in \mathbb{Z}_8[x] / (x^4 + 1)$ as follows:
 
-$\mathbb{Z}_8 = \{-4, -3, -2, -1, 0, 1, 2, 3\}$
+We use the centered residue system for $\mathbb{Z}_8$, i.e., $\{-4,-3,-2,-1,0,1,2,3\}$.
 
 $f = 2 + 3x - 4x^2 -x^3$
 

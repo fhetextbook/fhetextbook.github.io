@@ -2,15 +2,16 @@ Decomposition is a mathematical technique to convert a large-base number into a 
 
 \subsection{Number Decomposition}
 \label{subsec:number-decomp}
-Suppose we have the number $\gamma$ modulo $q$. Number decomposition expresses $\gamma$ as a sum of multiple numbers in base $\beta$ as follows: 
+We fix a modulus $q\ge 2$ and write $\mathbb{Z}_q=\mathbb{Z}/q\mathbb{Z}$. Let $\gamma\in\mathbb{Z}_q$. Number decomposition expresses $\gamma$ as a sum of multiple numbers in base $\beta$ as follows: 
 
 $ $
 
-$\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \gamma_l \dfrac{q}{\beta^l}  $
+$\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \gamma_\ell \dfrac{q}{\beta^\ell}  $
 
 $ $
 
-\noindent , where each of the $\gamma_i$ term represents a base-$\beta$ value shifted $i$ bits (which is a multiple of $\text{log}_2 \beta$) to the left. We call $l$ the level of decomposition. This is visually shown in \autoref{fig:decomp}. %We will cover the GLev ciphertext formula in \autoref{sec:glev}.
+\noindent where $\beta\ge 2$ is a base and $\ell\ge 1$ the decomposition level. We assume $\beta^\ell \mid q$ and take digits $\gamma_i\in\{0,1,\ldots,\beta-1\}$, under these conditions the decomposition is unique. This is visually shown in \autoref{fig:decomp}. (If $\beta^\ell\nmid q$, see \autoref{subsec:approx-decomp}.) 
+Each $\gamma_i$ represents a base-$\beta$ digit at position $i$. When $q$ is a power of two, this corresponds to a shift by $i\cdot \log_2\beta$ bits.
 
 \begin{figure}[h!]
     \centering
@@ -19,12 +20,12 @@ $ $
   \label{fig:decomp}
 \end{figure}
 
-We define the decomposition of number $\gamma$ into base $\beta$ with level $l$ as follows:
+We define the decomposition of number $\gamma$ into base $\beta$ with level $\ell$ as follows:
 
 
 $ $
 
-$\textsf{Decomp}^{\beta, l}(\gamma) = (\gamma_1, \gamma_2, \text{ } \cdots , \text{ } \gamma_l)$.
+$\textsf{Decomp}^{\beta, \ell}(\gamma) = (\gamma_1, \gamma_2, \text{ } \cdots , \text{ } \gamma_\ell)$.
  
 $ $
 
@@ -33,7 +34,7 @@ Number decomposition is also called radix decomposition, where the base $\beta$ 
 
 \subsubsection{Example}
 
-Suppose we have the number $\gamma = 13 \bmod q$, where $q = 16$. Suppose we want to decompose 13 with the base $\beta = 2$ and level $l = 4$. Then, 13 is decomposed as follows:
+Suppose we take $\gamma=13$ in $\mathbb{Z}_{16}$. Suppose we want to decompose 13 with the base $\beta = 2$ and level $\ell = 4$. Then, 13 is decomposed as follows:
 
 $ $
 
@@ -47,24 +48,29 @@ $\textsf{Decomp}^{2, 4}(13) = (1, 1, 0, 1)$
 \subsection{Polynomial Decomposition}
 \label{subsec:poly-decomp}
 
-This time, suppose we have polynomial $f$ in the polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$. Therefore, each coefficient $c_i$ of $f$ is an integer modulo $q$. Polynomial decomposition expresses $f$ as a sum of multiple polynomials in base $\beta$ and level $l$ as follows:
+This time, suppose we have polynomial $f$ in the polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$. Therefore, each coefficient $c_i$ of $f$ is an integer modulo $q$. Polynomial decomposition expresses $f$ as a sum of multiple polynomials in base $\beta$ and level $\ell$ as follows:
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:poly-decomp}} Polynomial Decomposition}}]
 
-Given $f \in \mathbb{Z}_q[x]/(x^n+1)$, where:
+Given $f\in \mathbb{Z}_q[x]/(x^n+1)$, fix $\beta\ge 2$ and $\ell\ge 1$ with $\beta^\ell\mid q$. We write
 
 $ $
 
-$f = f_1 \dfrac{q}{\beta^1} + f _2\dfrac{q}{\beta^2} + \cdots + f_l \dfrac{q}{\beta^l}  $
+$
+f=\sum\limits_{i=1}^{\ell} f_i\,\dfrac{q}{\beta^i}, \qquad f_i\in \mathbb{Z}_q[x]/(x^n+1)
+$
 
 $ $
 
-We denote the decomposition of the polynomial $f$ into the base $\beta$ with the level $l$ as follows:
+where each $f_i$ is obtained by decomposing every coefficient of $f$ in base $\beta$. If $f=\sum\limits_j c_j x^j$ with $c_j\in\mathbb{Z}_q$, then
+$c_j=\sum\limits_{i=1}^{\ell} c_{j,i}\,\dfrac{q}{\beta^i}$ with $c_{j,i}\in\{0,\ldots,\beta-1\}$,
+and $f_i=\sum_j c_{j,i} x^j$.
+We denote the decomposition of the polynomial $f$ into the base $\beta$ with the level $\ell$ as follows:
 
 $ $
 
-$\textsf{Decomp}^{\beta, l}(f) = (f_1, f_2, \text{ } \cdots , \text{ } f_l)$
+$\textsf{Decomp}^{\beta, \ell}(f) = (f_1, f_2, \text{ } \cdots , \text{ } f_\ell)$
  $ $
 \end{tcolorbox}
 
@@ -81,7 +87,7 @@ $f = 6x^3 + 3x^2 + 14x + 7 \in \mathbb{Z}_{16}[x] / (x^4 + 1)$
 
 $ $
 
-Suppose we want to decompose the above polynomial with base $\beta = 4$ and level $l = 2$. Then, each degree's coefficient of the polynomial $f$ is decomposed as follows:
+Suppose we want to decompose the above polynomial with base $\beta = 4$ and level $\ell = 2$. Then, each degree's coefficient of the polynomial $f$ is decomposed as follows:
 
 $ $
 
@@ -118,8 +124,14 @@ Note that after decomposition, the original coefficients of the polynomial got r
   \label{fig:decomp3}
 \end{figure}
 
-If the base $\beta$ does not divide the modulo $q$, then there exists no level $l$ such that $\beta^l \text{ } | \text{ } q$, thus some lower bits of $q$ have to be drawn away during decomposition, as shown in \autoref{fig:decomp3}. Such lower bits can be rounded to the nearest multiple of $\dfrac{q}{\beta^l}$ during decomposition. In such a case, the decomposition is an approximate decomposition. 
-
+If no level $\ell$ satisfies $\beta^\ell \mid q$, then some lower bits of $q$ must be discarded during decomposition, as shown in \autoref{fig:decomp3}. Such lower bits can be rounded to the nearest multiple of $\dfrac{q}{\beta^\ell}$ during decomposition. In such a case, the decomposition is an approximate decomposition. 
+Formally, when $\beta^\ell\nmid q$ we can write
+$$
+\gamma=\sum_{i=1}^{\ell}\gamma_i\,\frac{q}{\beta^{i}}+\varepsilon,\qquad
+\gamma_i\in\{0,\ldots,\beta-1\},\quad
+|\varepsilon|\le \frac{q}{2\beta^{\ell}}
+$$
+(using nearest-integer rounding and identifying $\gamma$ with its integer representative). The polynomial case is analogous, coefficient-wise.
 
 
 
@@ -128,17 +140,17 @@ If the base $\beta$ does not divide the modulo $q$, then there exists no level $
 
 Gadget decomposition is a generalized form of number decomposition (\autoref{subsec:number-decomp}). In number decomposition, a number $\gamma$ is decomposed as follows: 
 
-$\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \gamma_l \dfrac{q}{\beta^l} $
+$\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \gamma_\ell \dfrac{q}{\beta^\ell} $
 
 $ $
 
 In gadget decomposition, we decompose $\gamma$ as follows: 
 
-$\gamma = \gamma_1 g_1 + \gamma_2 g_2 + \cdots + \gamma_l g_l $
+$\gamma = \gamma_1 g_1 + \gamma_2 g_2 + \cdots + \gamma_\ell g_\ell $
 
 $ $
 
-We denote $\vec{g} = (g_1, g_2, \cdots, g_l)$ as a gadget vector, and $\textsf{Decomp}^{\vec{g}}(\gamma) = (\gamma_1, \gamma_2, \text{ } \cdots , \text{ } \gamma_l) $
+We denote $\vec{g} = (g_1, g_2, \cdots, g_\ell)$ as a gadget vector, and $\textsf{Decomp}^{\vec{g}}(\gamma) = (\gamma_1, \gamma_2, \text{ } \cdots , \text{ } \gamma_\ell) $
 
 $ $
 
@@ -146,4 +158,4 @@ Then, $\gamma = \langle \textsf{Decomp}^{\vec{g}}(\gamma), \vec{g} \rangle $
 
 $ $
 
-In the case of number decomposition (\autoref{subsec:number-decomp}), its gadget vector is $\vec{g} = \Bigg(\dfrac{q}{\beta}, \dfrac{q}{\beta^2}, \cdots, \dfrac{q}{\beta^l}\Bigg)$.
+In the case of number decomposition (\autoref{subsec:number-decomp}), its gadget vector is $\vec{g} = \Bigg(\dfrac{q}{\beta}, \dfrac{q}{\beta^2}, \cdots, \dfrac{q}{\beta^\ell}\Bigg)$.

@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 536 --><div class='crosslinks'><p class='noindent'>[<a href='CoefficientExtraction.html'>prev</a>][<a href='TFHEScheme.html#NoiseBootstrapping.html'>parent</a>][<a href='TFHEonaDiscreteTorus.html'>next</a>]</p></div>
-   <h4 class='subsectionHead' id='noise-bootstrapping'><span class='titlemark'>D-1.8   </span> <a id='x110-128000D-1.8'></a>Noise Bootstrapping</h4>
+   <h4 class='subsectionHead' id='noise-bootstrapping'><span class='titlemark'>D-1.8   </span> <a id='x113-128000D-1.8'></a>Noise Bootstrapping</h4>
 <!-- l. 540 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference: </span><a href='https://www.zama.ai/post/tfhe-deep-dive-part-4'>TFHE Deep Dive - Part IV - Programmable Bootstrapping</a> <span class='cite'>[<a href='refname.html#Xtfhe-4'>10</a>]</span>
 </p><!-- l. 543 --><p class='indent'>   <!-- l. 543 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 545 --><p class='indent'>   Continuing homomorphic additions of TFHE ciphertexts does not necessarily increase the noise
@@ -53,7 +53,7 @@ is a re-initialized noise.
                                                                                          
                                                                                          
 </p>
-   <h5 class='subsubsectionHead' id='overview3'><span class='titlemark'>D-1.8.1   </span> <a id='x110-129000D-1.8.1'></a>Overview</h5>
+   <h5 class='subsubsectionHead' id='overview3'><span class='titlemark'>D-1.8.1   </span> <a id='x113-129000D-1.8.1'></a>Overview</h5>
 <!-- l. 577 --><p class='noindent'>To implement noise bootstrapping, we create a specially designed
 <!-- l. 577 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree polynomial
 <!-- l. 577 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> called a Lookup Table
@@ -177,7 +177,7 @@ in a <span class='rm-lmri-10x-x-109'>proportionally </span>correct way. For this
 use the LWE modulus switching technique learned from <a href='LWEModulusSwitching.html#lwe-modulus-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-4.1<!-- tex4ht:ref: subsec:coeff-rotation  --></a>.
    
 </p>
-   <h5 class='subsubsectionHead' id='modulus-switch-for-noise-bootstrapping'><span class='titlemark'>D-1.8.2   </span> <a id='x110-130000D-1.8.2'></a>Modulus Switch for Noise Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='modulus-switch-for-noise-bootstrapping'><span class='titlemark'>D-1.8.2   </span> <a id='x113-130000D-1.8.2'></a>Modulus Switch for Noise Bootstrapping</h5>
 <!-- l. 616 --><p class='noindent'>To avoid using the giant <!-- l. 616 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree
 polynomial <!-- l. 616 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>V</mi> </mrow><mrow><mi>q</mi></mrow></msub></math>, we will
 compress <!-- l. 616 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> possible
@@ -258,7 +258,7 @@ is to guarantee an enough security level– the higher the polynomial degree
 safer our scheme is against attacks.
    
 </p>
-   <h5 class='subsubsectionHead' id='halving-the-plaintext-space-to-be-used'><span class='titlemark'>D-1.8.3   </span> <a id='x110-131000D-1.8.3'></a>Halving the Plaintext Space To be Used</h5>
+   <h5 class='subsubsectionHead' id='halving-the-plaintext-space-to-be-used'><span class='titlemark'>D-1.8.3   </span> <a id='x113-131000D-1.8.3'></a>Halving the Plaintext Space To be Used</h5>
 <!-- l. 643 --><p class='noindent'>Problematically, the LUT polynomial <!-- l. 643 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 rotates <span class='rm-lmri-10x-x-109'>negacyclically</span>, that is, <!-- l. 643 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 (i.e., coefficients flip their signs with the rotation period of
@@ -455,7 +455,7 @@ from making more than 1 full-cycle rotation that triggers a negacyclic problem.
 </div> 
 </div>
    
-   <h5 class='subsubsectionHead' id='blind-rotation'><span class='titlemark'>D-1.8.4   </span> <a id='x110-132000D-1.8.4'></a>Blind Rotation</h5>
+   <h5 class='subsubsectionHead' id='blind-rotation'><span class='titlemark'>D-1.8.4   </span> <a id='x113-132000D-1.8.4'></a>Blind Rotation</h5>
 <!-- l. 754 --><p class='noindent'>Blind rotation refers to rotating an <span class='rm-lmri-10x-x-109'>encrypted </span>polynomial’s coefficients so that it is not possible to know
 how many positions the polynomial’s coefficients are rotated, and after the rotation, it is not
 possible to see which coefficient has moved to which degree term. Blind rotation uses the basic
@@ -600,8 +600,8 @@ positions to avoid coefficient extraction of any double-signed contradicting coe
                                                                                          
                                                                                          
                                                                                          
-<!-- l. 784 --><p class='noindent' id='an-illustration-of-the-mux-logic-gate-'> <img alt='PIC' src='figures/mux-.png' /> <a id='x110-132006r13'></a></p>
-<figcaption class='caption'><span class='id'>Figure 13: </span><span class='content'>An illustration of the MUX logic gate                                             </span></figcaption><!-- tex4ht:label?: x110-132006r13  -->
+<!-- l. 784 --><p class='noindent' id='an-illustration-of-the-mux-logic-gate-'> <img alt='PIC' src='figures/mux-.png' /> <a id='x113-132006r13'></a></p>
+<figcaption class='caption'><span class='id'>Figure 13: </span><span class='content'>An illustration of the MUX logic gate                                             </span></figcaption><!-- tex4ht:label?: x113-132006r13  -->
                                                                                          
                                                                                          
    </figure>
@@ -619,7 +619,7 @@ effectively implements a homomorphic MUX gate, where the two inputs are LWE-encr
 selection bit is GGSW-encrypted.
    
 </p>
-   <h5 class='subsubsectionHead' id='coefficient-extraction1'><span class='titlemark'>D-1.8.5   </span> <a id='x110-133000D-1.8.5'></a>Coefficient Extraction</h5>
+   <h5 class='subsubsectionHead' id='coefficient-extraction1'><span class='titlemark'>D-1.8.5   </span> <a id='x113-133000D-1.8.5'></a>Coefficient Extraction</h5>
 <!-- l. 794 --><p class='noindent'>Finally, we use the coefficient extraction technique (<a href='CoefficientExtraction.html#coefficient-extraction'><span class='ts1-lmr10-x-x-109'>§</span>D-1.7<!-- tex4ht:ref: subsec:coeff-rotation  --></a>) to extract the rotated polynomial
 <!-- l. 794 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>V</mi> </mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>’s constant term’s coefficient
 as an encryption of <!-- l. 794 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>:
@@ -640,7 +640,7 @@ rather makes the system less secure, because it becomes more vulnerable to latti
 attacks.
    
 </p>
-   <h5 class='subsubsectionHead' id='noise-bootstrapping-summary'><span class='titlemark'>D-1.8.6   </span> <a id='x110-134000D-1.8.6'></a>Noise Bootstrapping Summary</h5>
+   <h5 class='subsubsectionHead' id='noise-bootstrapping-summary'><span class='titlemark'>D-1.8.6   </span> <a id='x113-134000D-1.8.6'></a>Noise Bootstrapping Summary</h5>
 <!-- l. 806 --><p class='noindent'>TFHE’s noise bootstrapping procedure is summarized as follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-78'>     
@@ -705,7 +705,7 @@ positions that cause coefficient extraction of double-signed contradicting coeff
                                                                                          
                                                                                          
    
-   <h5 class='subsubsectionHead' id='example-noise-bootstrapping'><span class='titlemark'>D-1.8.7   </span> <a id='x110-135000D-1.8.7'></a>Example: Noise Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='example-noise-bootstrapping'><span class='titlemark'>D-1.8.7   </span> <a id='x113-135000D-1.8.7'></a>Example: Noise Bootstrapping</h5>
 <!-- l. 867 --><p class='noindent'>Suppose the GLWE security setup: <!-- l. 867 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>16</mn></mrow></math>,
 <!-- l. 867 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8</mn></mrow></math>,
 <!-- l. 867 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>64</mn></mrow></math>,
@@ -784,7 +784,7 @@ for correct decryption)
    that maps <!-- l. 937 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mover accent='true'><mrow><mi>e</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>
    to <!-- l. 937 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi></mrow></math>.
    <div class='table'>
-   <!-- l. 940 --><p class='noindent'></p><figure class='float' id='x110-135003r4'><span id='the-lookup-table-for-n-q-t-lwe-setup-orangeorange-is-the-plaintext-ms-bits-greengreen-is-the-noise-es-bits-'></span>
+   <!-- l. 940 --><p class='noindent'></p><figure class='float' id='x113-135003r4'><span id='the-lookup-table-for-n-q-t-lwe-setup-orangeorange-is-the-plaintext-ms-bits-greengreen-is-the-noise-es-bits-'></span>
    <!-- tex4ht:inline --><div class='tabular'> <table class='tabular' id='TBL-37' rules='groups'><colgroup id='TBL-37-1g'><col id='TBL-37-1' /></colgroup><colgroup id='TBL-37-2g'><col id='TBL-37-2' /></colgroup><colgroup id='TBL-37-3g'><col id='TBL-37-3' /></colgroup><colgroup id='TBL-37-4g'><col id='TBL-37-4' /></colgroup><colgroup id='TBL-37-5g'><col id='TBL-37-5' /></colgroup><colgroup id='TBL-37-6g'><col id='TBL-37-6' /></colgroup><colgroup id='TBL-37-7g'><col id='TBL-37-7' /></colgroup><colgroup id='TBL-37-8g'><col id='TBL-37-8' /></colgroup><colgroup id='TBL-37-9g'><col id='TBL-37-9' /></colgroup><colgroup id='TBL-37-10g'><col id='TBL-37-10' /></colgroup><colgroup id='TBL-37-11g'><col id='TBL-37-11' /></colgroup><tr class='hline'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr id='TBL-37-1-'><td class='td11' colspan='7' id='TBL-37-1-1' style='text-align:center; white-space:nowrap;'></td> <div class='multicolumn' style='text-align:left; white-space:nowrap;'><!-- l. 947 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <msub><mrow><mi>v</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>v</mi></mrow><mrow><mn>1</mn></mrow></msub><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>v</mi></mrow><mrow><mn>2</mn></mrow></msub><msup><mrow><mi>X</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>v</mi></mrow><mrow>
 <mn>3</mn></mrow></msub><msup><mrow><mi>X</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>v</mi></mrow><mrow>
 <mn>4</mn></mrow></msub><msup><mrow><mi>X</mi></mrow><mrow><mn>4</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>v</mi></mrow><mrow>
@@ -820,7 +820,7 @@ for correct decryption)
 <figcaption class='caption'><span class='id'>Table 4: </span><span class='content'>The Lookup Table for <!-- l. 974 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>16</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>64</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8</mn></mrow></math>
 LWE setup. <span style='color:#FF8000;'>Orange</span> is the plaintext <!-- l. 974 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>’s
 bits. <span style='color:#00FF00;'>Green</span> is the noise <!-- l. 974 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math>’s
-bits.                                                                                      </span></figcaption><!-- tex4ht:label?: x110-135003r4  -->
+bits.                                                                                      </span></figcaption><!-- tex4ht:label?: x113-135003r4  -->
    </figure>
    </div>
    <!-- l. 978 --><p class='noindent'>Note that <!-- l. 978 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>’s
@@ -898,7 +898,7 @@ bits.                                                                           
 </mrow></math></td></tr></table>
    </dd></dl>
    
-   <h5 class='subsubsectionHead' id='discussion6'><span class='titlemark'>D-1.8.8   </span> <a id='x110-136000D-1.8.8'></a>Discussion</h5>
+   <h5 class='subsubsectionHead' id='discussion6'><span class='titlemark'>D-1.8.8   </span> <a id='x113-136000D-1.8.8'></a>Discussion</h5>
    <ul class='itemize1'>
    <li class='itemize'><span class='rm-lmbx-10x-x-109'>Programmable  Bootstrapping</span>:  While  the  bootstrapping  (<a href='#noise-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8<!-- tex4ht:ref: subsec:tfhe-summary  --></a>)  uses  a  simple  Lookup
    Table <!-- l. 1062 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
@@ -923,7 +923,7 @@ bits.                                                                           
                                                                                          
                                                                                          
    
-   <h5 class='subsubsectionHead' id='application-gate-bootstrapping'><span class='titlemark'>D-1.8.9   </span> <a id='x110-137000D-1.8.9'></a>Application: Gate Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='application-gate-bootstrapping'><span class='titlemark'>D-1.8.9   </span> <a id='x113-137000D-1.8.9'></a>Application: Gate Bootstrapping</h5>
 <!-- l. 1070 --><p class='noindent'>Besides implementing the homomorphic MUX logic gate used during blind rotation (<a href='#blind-rotation'><span class='ts1-lmr10-x-x-109'>§</span>D-1.8.4<!-- tex4ht:ref: subsec:tfhe-summary  --></a>), it is possible to leverage
 the LUT polynomial <!-- l. 1070 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 to implement other homomorphic logic gates such as AND, NAND, OR, XOR, etc. When implementing
@@ -943,7 +943,7 @@ and <!-- l. 1070 --><math display='inline' xmlns='http://www.w3.org/1998/Math/Ma
    <div class='table'>
                                                                                          
                                                                                          
-<!-- l. 1073 --><p class='indent'>   </p><figure class='float' id='x110-137001r5'><span id='an-example-truth-table-for-an-and-operation-with-an-additional-encoding'></span>
+<!-- l. 1073 --><p class='indent'>   </p><figure class='float' id='x113-137001r5'><span id='an-example-truth-table-for-an-and-operation-with-an-additional-encoding'></span>
                                                                                          
                                                                                          
 <!-- tex4ht:inline --><div class='tabular'> <table class='tabular' id='TBL-39' rules='groups'><colgroup id='TBL-39-1g'><col id='TBL-39-1' /><col id='TBL-39-2' /></colgroup><colgroup id='TBL-39-3g'><col id='TBL-39-3' /><col id='TBL-39-4' /></colgroup><colgroup id='TBL-39-5g'><col id='TBL-39-5' /></colgroup><colgroup id='TBL-39-6g'><col id='TBL-39-6' /></colgroup><colgroup id='TBL-39-7g'><col id='TBL-39-7' /></colgroup><colgroup id='TBL-39-8g'><col id='TBL-39-8' /></colgroup><tr class='hline'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr id='TBL-39-1-'><td class='td11' colspan='7' id='TBL-39-1-1' style='text-align:center; white-space:nowrap;'></td>                                                                                                                                                                                                                                                                                                            <div class='multicolumn' style='text-align:center; white-space:nowrap;'>Lookup Table Polynomial <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>V</mi> <mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>4</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>5</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>6</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><msup><mrow><mi>X</mi></mrow><mrow><mn>7</mn></mrow></msup></mrow></math></div>
@@ -957,7 +957,7 @@ and <!-- l. 1070 --><math display='inline' xmlns='http://www.w3.org/1998/Math/Ma
 </tr><tr id='TBL-39-7-'><td class='td11' id='TBL-39-7-1' style='text-align:center; white-space:nowrap;'>                                         1                                                                 </td><td class='td11' id='TBL-39-7-2' style='text-align:center; white-space:nowrap;'>                                         1                                                                 </td><td class='td11' id='TBL-39-7-3' style='text-align:right; white-space:nowrap;'> <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>  </td><td class='td11' id='TBL-39-7-4' style='text-align:right; white-space:nowrap;'> <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>  </td><td class='td11' id='TBL-39-7-5' style='text-align:center; white-space:nowrap;'> <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>  </td><td class='td11' id='TBL-39-7-6' style='text-align:center; white-space:nowrap;'> <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>2</mn></math>  </td><td class='td11' id='TBL-39-7-7' style='text-align:center; white-space:nowrap;'> constant term’s coeff. is <!-- l. 1124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>1</mn></math>  </td><td class='td11' id='TBL-39-7-8' style='text-align:center; white-space:nowrap;'>                                         1                                                                 </td>
 </tr><tr class='hline'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
 
-<figcaption class='caption'><span class='id'>Table 5: </span><span class='content'>An example truth table for an AND operation with an additional encoding.            </span></figcaption><!-- tex4ht:label?: x110-137001r5  -->
+<figcaption class='caption'><span class='id'>Table 5: </span><span class='content'>An example truth table for an AND operation with an additional encoding.            </span></figcaption><!-- tex4ht:label?: x113-137001r5  -->
                                                                                          
                                                                                          
    </figure>
@@ -1016,15 +1016,15 @@ by designing a linear combination formula, similar to the linear combination tha
 processing 2 input bits of an AND gate.
    
 </p>
-   <h5 class='subsubsectionHead' id='application-neural-networks-bootstrapping'><span class='titlemark'>D-1.8.10   </span> <a id='x110-138000D-1.8.10'></a>Application: Neural Networks Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='application-neural-networks-bootstrapping'><span class='titlemark'>D-1.8.10   </span> <a id='x113-138000D-1.8.10'></a>Application: Neural Networks Bootstrapping</h5>
    <figure class='figure'> 
 
                                                                                          
                                                                                          
                                                                                          
                                                                                          
-<!-- l. 1151 --><p class='noindent' id='an-illustration-of-neural-networks-'> <img alt='PIC' src='figures/neural-network-.png' /> <a id='x110-138001r14'></a></p>
-<figcaption class='caption'><span class='id'>Figure 14: </span><span class='content'>An illustration of neural networks                                                </span></figcaption><!-- tex4ht:label?: x110-138001r14  -->
+<!-- l. 1151 --><p class='noindent' id='an-illustration-of-neural-networks-'> <img alt='PIC' src='figures/neural-network-.png' /> <a id='x113-138001r14'></a></p>
+<figcaption class='caption'><span class='id'>Figure 14: </span><span class='content'>An illustration of neural networks                                                </span></figcaption><!-- tex4ht:label?: x113-138001r14  -->
                                                                                          
                                                                                          
    </figure>
@@ -1034,8 +1034,8 @@ processing 2 input bits of an AND gate.
                                                                                          
                                                                                          
                                                                                          
-<!-- l. 1158 --><p class='noindent' id='an-illustration-of-neural-networkss-programmable-bootstrapping'> <img alt='PIC' src='figures/nn-homomorphic-.png' /> <a id='x110-138002r15'></a></p>
-<figcaption class='caption'><span class='id'>Figure 15: </span><span class='content'>An illustration of neural networks’s programmable bootstrapping                    </span></figcaption><!-- tex4ht:label?: x110-138002r15  -->
+<!-- l. 1158 --><p class='noindent' id='an-illustration-of-neural-networkss-programmable-bootstrapping'> <img alt='PIC' src='figures/nn-homomorphic-.png' /> <a id='x113-138002r15'></a></p>
+<figcaption class='caption'><span class='id'>Figure 15: </span><span class='content'>An illustration of neural networks’s programmable bootstrapping                    </span></figcaption><!-- tex4ht:label?: x113-138002r15  -->
                                                                                          
                                                                                          
    </figure>

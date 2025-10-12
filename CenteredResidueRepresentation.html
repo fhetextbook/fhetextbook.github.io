@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>Centered Residue Representation</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
+</head><body>
+   <!-- l. 160 --><div class='crosslinks'><p class='noindent'>[<a href='ModuloDivision.html'>prev</a>][<a href='ModuloArithmetic.html#CenteredResidueRepresentation.html'>parent</a>]</p></div>
+   <h4 class='subsectionHead' id='centered-residue-representation'><span class='titlemark'>A-1.5   </span> <a id='x10-10000A-1.5'></a>Centered Residue Representation</h4>
+<!-- l. 163 --><p class='noindent'>Throughout this section, we have assumed that the residues are positive integers. For example, the possible residues
+modulo <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> are
+assumed to be <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>{</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>.
+This system is called the canonical (i.e., unsigned) residue representation. On the other
+hand, there is also a counterpart system that assumes signed (i.e., centered) residues
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>{</mo><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>2</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mo fence='true' form='postfix'>}</mo></mrow></math><span class='footnote-mark'><a href='index11.html#fn1x0' role='doc-noteref'><sup class='textsuperscript'>1</sup></a></span><a id='x10-10001f1'></a>,
+where the residues are centered around <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math>
+and the total number of residues is the same, namely
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. In both
+systems, a modulo operation changes a given value to another value within the system’s residue range such
+that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the
+modulus <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>;
+(2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. The only
+difference between these two (canonical and centered) systems is their upper bounds and lower bounds:
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math> and
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math> in the canonical residue
+system, whereas <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>
+and <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>
+in the centered residue system. The canonical residue representation assumes that
+<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>{</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>, whereas the centered
+residue system assumes that <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>{</mo><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>2</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mo fence='true' form='postfix'>}</mo></mrow></mrow></math>.
+</p><!-- l. 165 --><p class='indent'>   In both systems, the same modulo property of addition, subtraction, multiplication, and division
+holds, which can be proved by applying the same reasoning described in <a href='ModuloArithmetic1.html#modulo-arithmetic1'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2<!-- tex4ht:ref: subsec:modulo-inverse  --></a>: the same properties hold
+in both systems because any two congruent residues in the centered system are separated by the
+<!-- l. 165 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝑘𝑞</mi></mrow></math> gaps (for
+some integer <!-- l. 165 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math>)
+in both systems.
+</p><!-- l. 167 --><p class='indent'>   Also, the same property holds for an inverse: an inverse of
+<!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>a</mi></math> modulo
+<!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math> is
+                                                                                         
+                                                                                         
+<!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>a</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup></math> such
+that <!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>a</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow></math>.
+</p><!-- l. 169 --><p class='indent'>   Using a signed residue representation is useful in certain cases. In an example
+of canonical (i.e., unsigned) residue representation, suppose we have the relation
+<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow></math> and we know that in
+a given application, <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi></mrow></math> is
+guaranteed to be within the <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>[</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>]</mo></mrow></math>
+range (i.e., <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>q</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>).
+Then, <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+= <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>b</mi></mrow></math>,
+and thus we can remove the modulo operation, simplifying the relation. Now, suppose a
+different example of centered (i.e., signed) residue representation where we have the relation
+<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow></math>, and we know that in a given
+application, <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi></mrow></math> is guaranteed
+to be within the range <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>[</mo><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mo fence='true' form='postfix'>]</mo></mrow></math>.
+Then, <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi></mrow></math>. However, notice
+that if the relation <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow></math>
+were in a canonical residue representation, then we cannot remove the modulo operation, because if
+<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi></mrow></math> is
+negative, then this becomes smaller than the lower bound of the canonical residue system (i.e.,
+<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math>), and thus a modulo reduction
+(i.e., addition by one or more <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>)
+is needed.
+</p><!-- l. 171 --><p class='indent'>   In <a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!-- tex4ht:ref: subsec:modulo-inverse  --></a>, we design the <span class='rm-lmss-10x-x-109'>FastBConvEx </span>operation based on this beneficial property
+of centered residue representation: in this algorithm design, we can simplify
+<!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> to
+<!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi></mrow></math>, because we
+know that <!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub>
+ </mrow><mrow><mn>2</mn> </mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub>
+ </mrow><mrow><mn>2</mn> </mrow></mfrac></mstyle></mrow></math>.
+                                                                                         
+                                                                                         
+</p>
+   <!-- l. 375 --><div class='crosslinks'><p class='noindent'>[<a href='ModuloDivision.html'>prev</a>][<a href='ModuloArithmetic.html#CenteredResidueRepresentation.html'>parent</a>]</p></div>
+    
+</body> 
+</html>

@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 636 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>parent</a>][<a href='FHESchemeComparisonandSummary.html'>next</a>]</p></div>
-   <h3 class='sectionHead' id='rnsvariant-fhe-schemes'><span class='titlemark'>D-5   </span> <a id='x150-223000D-5'></a>RNS-variant FHE Schemes</h3>
+   <h3 class='sectionHead' id='rnsvariant-fhe-schemes'><span class='titlemark'>D-5   </span> <a id='x153-223000D-5'></a>RNS-variant FHE Schemes</h3>
 <!-- l. 1 --><p class='noindent'>FHE parameters of BFV, BGV, or CKKS schemes which are secure enough sometimes require
 the ring size of polynomial coefficients to be 1000 bits or more, which consumes much
 computational resources for 64-bit CPU architectures. To make the computation efficient, we
@@ -31,14 +31,14 @@ which compactly fits in 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE
 Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS.
 </p><!-- l. 5 --><p class='indent'>   Particularly in this section, we assume the modulo reduction
 <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mi>a</mi><msub><mrow><mo class='MathClass-rel' stretchy='false'>|</mo></mrow><mrow><mi>q</mi></mrow></msub></mrow></math> implicitly
-uses a centered (i.e., signed) residue representation (<a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>) whose modulo overflow &amp; underflow boundaries
+uses a centered (i.e., signed) residue representation (<a href='CenteredResidueRepresentation.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.5<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>) whose modulo overflow &amp; underflow boundaries
 are <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math> and
 <!-- l. 5 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>,
 respectively. This assumption is necessary to eliminate a certain modulo reduction operation when
 designing <span class='rm-lmss-10x-x-109'>FastBconvEx </span>(<a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>)– by using the assumption of limiting the possible range of certain residue
-arithmetic as discussed in <a href='ModuloArithmetic1.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.2.3<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>.
+arithmetic as discussed in <a href='CenteredResidueRepresentation.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.5<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>.
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-114'>     
 <div class='tcolorbox-title'>

@@ -135,7 +135,7 @@ $(a \cdot c) \equiv (b \cdot d) \equiv (a \cdot d) \equiv (b \cdot c) \bmod q$
 The proof of Theorem~\ref*{subsec:modulo-arithmetic}.2 is similar to that of Theorem~\ref*{subsec:modulo-arithmetic}.1, which we leave as an exercise for the reader. 
 
 
-\subsubsection{Inverse}
+\subsection{Inverse}
 \label{subsec:modulo-inverse}
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:modulo-inverse}} Inverse in Modulo Arithmetic}}]
@@ -152,12 +152,12 @@ In modulo $q$ (i.e., in the world of remainders where all numbers have been divi
 
 \end{tcolorbox}
 
-\subsubsection{Modulo Division}
+\subsection{Modulo Division}
 \label{subsec:modulo-division}
 
 In modulo arithmetic, \textit{modulo division} is different from regular numeric division. Strictly speaking, there is no such thing as \textit{modulo division} because the modulo operation itself is a form of division that returns only the remainder. In practice, one uses “modulo division” to mean multiplying by a modular inverse when it exists, i.e., when $\gcd(a,q)=1$. \textit{Modulo division} of $b$ by $a$ modulo $q$ is equivalent to computing the \textit{modular} multiplication $b \cdot a^{-1} \bmod q$. The result of \textit{modulo division} is different from that of numeric division, because \textit{modulo division} always gives an integer (a residue modulo $q$) (as it multiplies two integers modulo $q$), whereas numeric division gives a real number. The inverse of an integer modulo $q$ can be computed using the extended Euclidean algorithm (\href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}).
 
-\subsubsection{Centered Residue Representation}
+\subsection{Centered Residue Representation}
 \label{subsec:modulo-centered}
 
 Throughout this section, we have assumed that the residues are positive integers. For example, the possible residues modulo $q$ are assumed to be $\{0, 1, \cdots, q-1\}$. This system is called the canonical (i.e., unsigned) residue representation. On the other hand, there is also a counterpart system that assumes signed (i.e., centered) residues $\left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$\footnote{Here we assume $q$ is an even number. In the case where $q$ is an odd number, the residues are $\left\{ -\dfrac{q-1}{2}, -\dfrac{q-3}{2}, \cdots, 0, \cdots, \dfrac{q-3}{2}, \dfrac{q-1}{2}\right\}$}, where the residues are centered around $0$ and the total number of residues is the same, namely $q$. In both systems, a modulo operation changes a given value to another value within the system's residue range such that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the modulus $q$; (2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus $q$. The only difference between these two (canonical and centered) systems is their upper bounds and lower bounds: $0$ and $q-1$ in the canonical residue system, whereas $-\dfrac{q}{2}$ and $\dfrac{q}{2} - 1$ in the centered residue system. The canonical residue representation assumes that $\mathbb{Z}_q = \{0, 1, \cdots, q-1\}$, whereas the centered residue system assumes that $\mathbb{Z}_q = \left\{-\dfrac{q}{2}, -\dfrac{q}{2} + 1, \cdots, 0, \cdots, \dfrac{q}{2} - 2, \dfrac{q}{2} - 1\right\}$. 

@@ -20,13 +20,13 @@ hand, there is also a counterpart system that assumes signed (i.e., centered) re
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>2</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mo fence='true' form='postfix'>}</mo></mrow></math><span class='footnote-mark'><a href='index11.html#fn1x0' role='doc-noteref'><sup class='textsuperscript'>1</sup></a></span><a id='x10-10001f1'></a>,
-where the residues are centered around <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math>
+with the residues centered around <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math>,
 and the total number of residues is the same, namely
 <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. In both
 systems, a modulo operation changes a given value to another value within the system’s residue range such
-that: (1) if the given value is bigger than the upper bound of the residue range, the value is subtracted by the
+that: (1) if the given value is greater than the upper bound of the residue range, the value is subtracted by the
 modulus <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>;
-(2) if the value is smaller than the lower bound of the residue range, the value is added by the modulus
+(2) if the value is less than the lower bound of the residue range, the value is increased by the modulus
 <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. The only
 difference between these two (canonical and centered) systems is their upper bounds and lower bounds:
 <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math> and
@@ -72,7 +72,7 @@ to be within the range <!-- l. 169 --><math display='inline' xmlns='http://www.w
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mo fence='true' form='postfix'>]</mo></mrow></math>.
 Then, <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi></mrow></math>. However, notice
 that if the relation <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi></mrow></math>
-were in a canonical residue representation, then we cannot remove the modulo operation, because if
+were in a canonical residue representation, then we cannot remove the modulo operation because if
 <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>b</mi></mrow></math> is
 negative, then this becomes smaller than the lower bound of the canonical residue system (i.e.,
 <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mn>0</mn></math>), and thus a modulo reduction
@@ -81,7 +81,7 @@ is needed.
 </p><!-- l. 171 --><p class='indent'>   In <a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!-- tex4ht:ref: subsec:modulo-inverse  --></a>, we design the <span class='rm-lmss-10x-x-109'>FastBConvEx </span>operation based on this beneficial property
 of centered residue representation: in this algorithm design, we can simplify
 <!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> to
-<!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi></mrow></math>, because we
+<!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi></mrow></math> because we
 know that <!-- l. 171 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub>
  </mrow><mrow><mn>2</mn> </mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>μ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>u</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>b</mi></mrow><mrow><mi>α</mi></mrow></msub>
  </mrow><mrow><mn>2</mn> </mrow></mfrac></mstyle></mrow></math>.

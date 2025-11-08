@@ -10,15 +10,14 @@
 </head><body>
    <!-- l. 530 --><div class='crosslinks'><p class='noindent'>[<a href='GLWECryptosystem.html'>prev</a>][<a href='PostquantumCryptography.html#GLev.html'>parent</a>][<a href='GGSW.html'>next</a>]</p></div>
    <h3 class='sectionHead' id='glev'><span class='titlemark'>B-5   </span> <a id='x82-95000B-5'></a>GLev</h3>
-<!-- l. 1 --><p class='noindent'>A GLev ciphertext is a list of GLWE ciphertexts which encrypts the list of plaintext
+<!-- l. 1 --><p class='noindent'>A GLev ciphertext is a list of GLWE ciphertexts that encrypts the list of plaintexts
 <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mn>1</mn></mrow></msup></mrow></mfrac></mstyle><mi>M</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mstyle><mi>M</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext></mtext><mstyle class='math'><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace></mstyle><mtext></mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>l</mi></mrow></msup></mrow></mfrac></mstyle><mi>M</mi></mrow></math>, where
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>
-is a plaintext encoded in a polynomial. Note a GLev ciphertext’s each
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>-th
-GLWE ciphertext uses a different plaintext scaling factor, which is:
+<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math> is a plaintext encoded in a
+polynomial. Note that each <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>-th
+GLWE ciphertext of a GLev ciphertext uses a different plaintext scaling factor, which is:
 <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></mfrac></mstyle></mrow></math>. The
 structure of GLev ciphertext is visually depicted in <a href='Encryption3.html#an-illustration-of-a-glev-ciphertext-'>Figure 9<!-- tex4ht:ref: subsec:glwe-enc  --></a>.
@@ -26,8 +25,8 @@ structure of GLev ciphertext is visually depicted in <a href='Encryption3.html#a
 be some value between <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
 and <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. Especially,
 <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> should be smaller
-than <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math>, because
-if <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> is greater than
+than <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math> because if
+<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math> is greater than
 <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math>, then the higher
 bits of <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math> will
 overflow beyond <!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>

@@ -10,7 +10,7 @@
 </head><body>
    <!-- l. 48 --><div class='crosslinks'><p class='noindent'>[<a href='NumberDecomposition.html'>prev</a>][<a href='Decomposition.html#PolynomialDecomposition.html'>parent</a>][<a href='ApproximateDecomposition.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='polynomial-decomposition'><span class='titlemark'>A-6.2   </span> <a id='x27-30000A-6.2'></a>Polynomial Decomposition</h4>
-<!-- l. 51 --><p class='noindent'>This time, suppose we have polynomial <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
+<!-- l. 51 --><p class='noindent'>This time, suppose we have a polynomial <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
 in the polynomial ring <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
 Therefore, each coefficient <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>c</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
 of <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math> is an integer modulo
@@ -97,11 +97,11 @@ is decomposed as follows:
    
 </p>
    <h5 class='subsubsectionHead' id='discussion1'><span class='titlemark'>A-6.2.2   </span> <a id='x27-32000A-6.2.2'></a>Discussion</h5>
-<!-- l. 114 --><p class='noindent'>Note that after decomposition, the original coefficients of the polynomial got reduced to smaller numbers.
-This characteristic is importantly used in homomorphic encryption’s multiplication, for reducing the
-growth rate of the noise. Normally, the polynomial coefficients of ciphertexts are large because
-they are uniformly random numbers. Reducing such big constants is important to reduce
-the noise growth during homomorphic multiplication. We will discuss this more in detail in
+<!-- l. 114 --><p class='noindent'>Note that after decomposition, the original coefficients of the polynomial have been reduced to smaller
+numbers. This characteristic is importantly used in the multiplication of polynomials in FHE ciphertexts
+to reduce the growth rate of the noise. Normally, the polynomial coefficients of ciphertexts are large
+because they are uniformly random numbers. Reducing such large constants is important for reducing
+the noise growth during homomorphic multiplication. We will discuss this in more detail in
 <a href='HomomorphicCiphertexttoCiphertextMultiplication.html#homomorphic-ciphertexttociphertext-multiplication'><span class='ts1-lmr10-x-x-109'>§</span>D-1.6<!-- tex4ht:ref: subsec:poly-decomp  --></a>.
                                                                                          
                                                                                          

@@ -212,15 +212,15 @@ The equation in the 1st step of the decryption process is derived as follows:
 
 $\textsf{GLWE}^{-1}_{S,\sigma}\bm{(}\text{ } C = (B, \vec{D}) \text{ }\bm{)} = B - \vec{D}\cdot\vec{S}$
 
-$ = (\mathit{PK}_1\cdot U + \Delta  M + E_2) - (\vv{\mathit{PK}}_2 \cdot U + \vec{E}_2)\cdot \vec{S} $
+$ = (\mathit{PK}_1\cdot U + \Delta  M + E_1) - (\vv{\mathit{PK}}_2 \cdot U + \vec{E}_2)\cdot \vec{S} $
 
-$=  (\vec{A} \cdot \vec{S} + E)\cdot U + \Delta M + E_2 - (\vec{A}\cdot U)\cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
+$=  (\vec{A} \cdot \vec{S} + E)\cdot U + \Delta M + E_1 - (\vec{A}\cdot U)\cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
 
-$=  (U\cdot\vec{A}) \cdot \vec{S} + E \cdot U + \Delta M + E_2 - (U\cdot \vec{A}) \cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
+$=  (U\cdot\vec{A}) \cdot \vec{S} + E \cdot U + \Delta M + E_1 - (U\cdot \vec{A}) \cdot \vec{S} - \vec{E}_2\cdot\vec{S}$
 
-$= \Delta M + E \cdot U + E_2 - \vec{E}_2\cdot\vec{S}$
+$= \Delta M + E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$
 
-$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{all}} = E \cdot U + E_2 - \vec{E}_2\cdot\vec{S}$} 
+$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{all}} = E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$} 
 
 
 $ $

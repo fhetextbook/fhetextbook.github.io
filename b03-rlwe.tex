@@ -16,7 +16,7 @@ Notice that RLWE's setup parameters are similar to that of LWE. One difference i
 \item Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{\langle n, t \rangle}$ whose coefficients represent the plaintext numbers to encrypt. 
 \item Randomly pick an $(n-1)$-degree polynomial $A \in \mathcal{R}_{\langle n,q \rangle}$ as a one-time public key (denoted as $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$). 
 \item Randomly pick a small polynomial $E \in \mathcal{R}_{\langle n,q \rangle}$ as a one-time noise, whose $n$ coefficients are small numbers in $\mathbb{Z}_q$ randomly sampled from the Gaussian distribution $\chi_\sigma$ (denoted as $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$). 
-\item Scale $M$ by $\Delta$, which is to compute $\Delta \cdot M$. This converts $M \in \mathcal{R}_{\langle n,p \rangle}$ into $\Delta \cdot M \in \mathcal{R}_{\langle n,q \rangle}$.
+\item Scale $M$ by $\Delta$, which is to compute $\Delta \cdot M$. This converts $M \in \mathcal{R}_{\langle n,t \rangle}$ into $\Delta \cdot M \in \mathcal{R}_{\langle n,q \rangle}$.
 \item Compute $B = A \cdot S + \Delta \cdot M + E \bmod \mathcal{R}_{\langle n,q \rangle}$ (i.e., reduce the degree by $n$ and the coefficient by modulo $q$). 
 \item The final ciphertext is $(A, B)$.
 \end{enumerate}
@@ -68,7 +68,7 @@ $ $
 \begin{enumerate}
 
 \item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B - A \cdot S = \Delta  M + E \text{ } (\bmod \mathcal{R}_{\langle n,q \rangle})$ 
-\item Scale down $\Bigg\lceil\dfrac{ \Delta M + E}{\Delta}\Bigg\rfloor \bmod t = M \text{ } \in \mathcal{R}_{\langle n,p \rangle}$
+\item Scale down $\Bigg\lceil\dfrac{ \Delta M + E}{\Delta}\Bigg\rfloor \bmod t = M \text{ } \in \mathcal{R}_{\langle n,t \rangle}$
 
 \end{enumerate}
 

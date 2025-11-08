@@ -17,21 +17,21 @@ $ $
 \subsection{Examples}
 \label{subsec:field-ex}
 
-$\mathbb{Z}$ (the set of all integers) is a ring, but not a field, because not all of its elements have a multiplicative inverse (as shown in \autoref{subsec:group-ex}). 
+$\mathbb{Z}$ (the set of all integers) is a ring but not a field, because not all of its elements have a multiplicative inverse (as shown in \autoref{subsec:group-ex}). 
 
 $ $
 
-\noindent $\mathbb{R}$ (the set of all real numbers) is a field. As shown in \autoref{subsec:group-ex}, it is an abelian group under $(+)$, its nonzero elements form an abelian group under $(\cdot)$, and multiplication distributes over addition.
+\noindent $\mathbb{R}$ (the set of all real numbers) is a field. As shown in \autoref{subsec:group-ex}, it is an abelian group under $(+)$; its nonzero elements form an abelian group under $(\cdot)$, and multiplication distributes over addition.
 
 $ $
 
 \noindent $\mathbb{Z}_7 = \{0, 1, 2, 3, 4, 5, 6\}$ is a finite field because:
 \begin{itemize}
 \item \textbf{Closed:} For any $a,b \in \mathbb{Z}_7$, there exist $c_1,c_2 \in \mathbb{Z}_7$ such that $a+b \equiv c_1 \pmod{7}$ and $a\cdot b \equiv c_2 \pmod{7}$.
-\item \textbf{Associative:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)+c=a+(b+c)$ and $(a\cdot b)\cdot c=a\cdot(b\cdot c)$.
-\item \textbf{Commutative:} For any $a,b \in \mathbb{Z}_7$, $a+b=b+a$ and $a\cdot b=b\cdot a$.
+\item \textbf{Associative:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)+c=a+(b+c)$, and $(a\cdot b)\cdot c=a\cdot(b\cdot c)$.
+\item \textbf{Commutative:} For any $a,b \in \mathbb{Z}_7$, $a+b=b+a$, and $a\cdot b=b\cdot a$.
 \item \textbf{Distributive:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)\cdot c=a\cdot c+b\cdot c$.
-\item \textbf{Identity:} The additive identity is $0$ and the multiplicative identity is $1$.
+\item \textbf{Identity:} The additive identity is $0$, and the multiplicative identity is $1$.
 \item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists $a' \in \mathbb{Z}_7$ such that $a+a' \equiv 0 \pmod{7}$ (e.g., the additive inverse of $3$ is $4$ since $3+4\equiv0 \pmod{7}$). For any $a \in \mathbb{Z}_7^\times=\{1,\dots,6\}$, there exists $b \in \mathbb{Z}_7$ such that $ab \equiv 1 \pmod{7}$ (e.g., $3\cdot5=15\equiv1 \pmod{7}$).
 \end{itemize}
 

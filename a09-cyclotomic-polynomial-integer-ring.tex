@@ -2,9 +2,9 @@
 In \autoref{sec:roots} and \autoref{sec:cyclotomic}, we learned about the definition and properties of the $\mu$-th roots of unity and the $\mu$-th cyclotomic polynomial over complex numbers (i.e., $X \in \mathbb{C}$) as follows: 
 
 \begin{itemize}
-\item \textbf{The $\bm \mu$-th roots of unity} are the solutions for $X^\mu = 1$ over $X \in \mathbb{C}$ (complex numbers). The formula for the $\mu$-th root of unity is $X = e^{2 \pi i k / \mu}$ for all integer $k$ such that $0 \leq k \leq \mu - 1$. 
+\item \textbf{The $\bm \mu$-th roots of unity} are the solutions for $X^\mu = 1$ over $X \in \mathbb{C}$ (complex numbers). The formula for the $\mu$-th root of unity is $X = e^{2 \pi i k / \mu}$ for all integers $k$ such that $0 \leq k \leq \mu - 1$. 
 \item \textbf{The primitive $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are those $\mu$-th roots of unity whose order (\autoref{subsec:order-def}) is $\mu$ (i.e., $\omega^{\mu} = 1$ and $\omega^{\frac{\mu}{2}} \neq 1$). 
-\item Given any primitive $\mu$-th roots of unity $\omega$, it can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$ (Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:order-theorem}). 
+\item Given any primitive $\mu$-th roots of unity $\omega$, one can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$ (Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:order-theorem}). 
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
 \end{itemize}
 
@@ -52,9 +52,9 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \label{tab:cyclotomic-polynomial-comparison}
 \end{table}
 
-Note that in the $\mu$-th cyclotomic polynomial in both cases of over $X \in \mathbb{C}$ and over $X \in \mathbb{Z}_p$, each of their roots $\omega$ (i.e., the primitive $\mu$-th root of unity) has the order $\mu$ (i.e., $\omega^{\mu} = 1$ over $X \in \mathbb{C}$, and $\omega^{\mu} \equiv 1 \bmod p$ over $X \in \mathbb{Z}_p$). Also note that each root $\omega$ can generate all roots of the $\mu$-th cyclotomic polynomial by computing $\omega^{k'}$ such that $\textsf{gcd}(k', \mu) = 1$.
+Note that in the $\mu$-th cyclotomic polynomial, in both cases of over $X \in \mathbb{C}$ and over $X \in \mathbb{Z}_p$, each of their roots $\omega$ (i.e., the primitive $\mu$-th root of unity) has the order $\mu$ (i.e., $\omega^{\mu} = 1$ over $X \in \mathbb{C}$, and $\omega^{\mu} \equiv 1 \bmod p$ over $X \in \mathbb{Z}_p$). Also note that each root $\omega$ can generate all roots of the $\mu$-th cyclotomic polynomial by computing $\omega^{k'}$ such that $\textsf{gcd}(k', \mu) = 1$.
 
-\autoref{tab:cyclotomic-polynomial-comparison} compares the properties of the roots of unity and the $\mu$-th cyclotomic polynomial over $X \in \mathbb{C}$ (complex numbers) and over $X \in \mathbb{Z}_p$ (ring).
+\autoref{tab:cyclotomic-polynomial-comparison} compares the properties of the roots of unity and the $\mu$-th cyclotomic polynomial over $X \in \mathbb{C}$ (the complex numbers) and over $X \in \mathbb{Z}_p$ (the ring).
 
 
 

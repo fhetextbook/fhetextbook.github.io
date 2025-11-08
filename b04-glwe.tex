@@ -150,7 +150,7 @@ Even if the $A_iS_i$ terms flip their signs, the decryption stage cancels out th
 \label{subsec:glwe-public-key-enc}
 
 
-The encryption scheme in \autoref{subsec:glwe-enc} assumes that it is the secret key owner who encrypts each plaintext. In this section, we explain a public key encryption scheme where we create a public key counterpart of the secret key and anyone who knows the public key can encrypt the plaintext in such a way that only the secret key owner can decrypt it. The high-level idea is that a portion of the components to be used in the encryption stage is pre-computed at the setup stage and published as a public key. At the actual encryption stage, the public key is multiplied by an additional randomness ($U$) and added with additional noises ($E_1, \vec{E}_2$) to create unpredictable randomness to each encrypted ciphertext. The actual scheme is as follows: 
+The encryption scheme in \autoref{subsec:glwe-enc} assumes that it is the secret key owner who encrypts each plaintext. In this section, we explain a public key encryption scheme in which we create a public key counterpart of the secret key Anyone who knows the public key can encrypt the plaintext in such a way that only the secret key owner can decrypt it. The high-level idea is that a portion of the components to be used in the encryption stage is pre-computed at the setup stage and published as a public key. At the actual encryption stage, the public key is multiplied by an additional randomness ($U$) and added to additional noise ($E_1, \vec{E}_2$) to create unpredictable randomness for each encrypted ciphertext. The actual scheme is as follows: 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:glwe-enc}} GLWE Public Key Encryption}}]
 
@@ -225,7 +225,7 @@ $= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{al
 
 $ $
 
-\para{Security:} The GLWE encryption scheme's encryption formula (Summary~\ref{subsec:glwe-enc} in \autoref{subsec:glwe-enc}) was as follows: 
+\para{Security:} The GLWE encryption scheme's encryption formula (Summary~\ref{subsec:glwe-enc} in \autoref{subsec:glwe-enc}) is as follows: 
 
 $\textsf{GLWE}_{S, \sigma}(\Delta M) = \bm{(} \text{ } \vec{A}, \text{ } B = \vec{A}\cdot\vec{S} + \Delta M + E \text{ }\bm{)}$
 

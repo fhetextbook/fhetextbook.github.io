@@ -1,7 +1,7 @@
-A GLev ciphertext is a list of GLWE ciphertexts which encrypts the list of plaintext $\dfrac{q}{\beta^1}M, \dfrac{q}{\beta^2}M, \gap{$\cdots$}, \dfrac{q}{\beta^l}M$, where $M$ is a plaintext encoded in a polynomial. Note  a GLev ciphertext's each $i$-th GLWE ciphertext uses a different plaintext scaling factor, which is: $\Delta_i = \dfrac{q}{\beta^i}$. The structure of GLev ciphertext is visually depicted in \autoref{fig:glev}.
+A GLev ciphertext is a list of GLWE ciphertexts that encrypts the list of plaintexts $\dfrac{q}{\beta^1}M, \dfrac{q}{\beta^2}M, \gap{$\cdots$}, \dfrac{q}{\beta^l}M$, where $M$ is a plaintext encoded in a polynomial. Note that each $i$-th GLWE ciphertext of a GLev ciphertext uses a different plaintext scaling factor, which is: $\Delta_i = \dfrac{q}{\beta^i}$. The structure of GLev ciphertext is visually depicted in \autoref{fig:glev}.
 
 %Note that $t < \beta < q$ should hold. Especially, $t$ should be smaller than $\beta$, because if $t > \beta$, then the higher bits of $M$ will overflow beyond $q$ after computing $\dfrac{q}{\beta^1}M$. 
-Note that $\beta$ should be some value between $t$ and $q$. Especially, $t$ should be smaller than $\beta$, because if $t$ is greater than $\beta$, then the higher bits of $M$ will overflow beyond $q$ when computing $\dfrac{q}{\beta^1}M$. 
+Note that $\beta$ should be some value between $t$ and $q$. Especially, $t$ should be smaller than $\beta$ because if $t$ is greater than $\beta$, then the higher bits of $M$ will overflow beyond $q$ when computing $\dfrac{q}{\beta^1}M$. 
 
 
 \subsection{Encryption}
@@ -46,7 +46,7 @@ $ $
 
 \subsection{Decryption}
 
-It is sufficient to decrypt the GLev ciphertext's any $i$-th GLWE ciphertext by using the secret $S$, with the scaling factor $\Delta_i = \dfrac{q}{\beta^i}$.
+It is sufficient to decrypt any $i$-th GLWE ciphertext of the GLev ciphertext by using the secret $S$, with the scaling factor $\Delta_i = \dfrac{q}{\beta^i}$.
 
 
 \subsection{Lev and RLev}

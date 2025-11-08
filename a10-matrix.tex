@@ -3,7 +3,7 @@
 \subsection{Vector Arithmetic}
 \label{subsec:vector-arithmetic}
 
-This section explains basic arithmetic of vector and matrix computations, and advanced concepts such as vector/plane projection and basis of planes (or spaces). 
+This section explains the basic arithmetic of vector and matrix computations, as well as advanced concepts such as vector/plane projection and the basis of planes (or spaces). 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:vector-arithmetic}} Vector Arithmetic}}]
@@ -260,7 +260,7 @@ $AB \neq BA$
 
 $ $
 
-The properties described in \ref*{subsec:matrix-arithmetic} can be demonstrated by expanding the formulas of both sides each equation by using a variable representation for each element in the vectors/matrices and comparing the resulting formulas. We leave this expansion as an exercise for the reader.
+The properties described in \ref*{subsec:matrix-arithmetic} can be demonstrated by expanding the formulas on both sides of each equation using a variable representation for each element in the vectors/matrices and comparing the resulting formulas. We leave this expansion as an exercise for the reader.
 
 \end{proof}
 
@@ -290,7 +290,7 @@ There are two types of projections: a vector projection and an orthogonal (i.e.,
 
 \para{Vector Projection:} Given two vectors $\vec{a}$ and $\vec{b}$ in the same $n$-dimensional vector space, the vector projection $\textsf{Proj}_{\vec{b}}(\vec{a})$ measures how much $\vec{a}$ contains the element of $\vec{b}$ (i.e., filtering $\vec{a}$ by $\vec{b}$). In the example of \autoref{fig:vector-projection}, $\vec{a}$'s projection on $\vec{b}$ is $\vec{a}_1$, where the length of $\vec{a}_1$ is geometrically $||a_1|| = ||a|| \cos \theta = ||a||\dfrac{a \cdot b}{||a||\cdot||b||} = \dfrac{a \cdot b}{||b||}$. Let $\vec{b'}$ be a unit vector of $\vec{b}$, that is $\vec{b'} = \dfrac{\vec{b}}{||b||}$. Then, $\vec{a}_1 = ||a_1||\cdot\vec{b'} = \dfrac{a \cdot b}{||b||} \cdot \dfrac{\vec{b}}{||b||} = \dfrac{a \cdot b}{||b||^2}\vec{b}$. Thus, $\textsf{Proj}_{\vec{b}}(\vec{a}) = \dfrac{a \cdot b}{||b||^2}\vec{b}$.
 
-\para{Orthogonal Projection:} Given the vector $\vec{x}$ and a set of mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ which span the plane (or subspace) $P$, the orthogonal projection $\textsf{Proj}_P(\vec{x})$ measures how much element of plane $P$ is contained in $\vec{x}$ (i.e., filtering $\vec{x}$ by plane $P$). In the example of \autoref{fig:orthogonal-projection}, vector $\vec{x}$'s projection on plane $P$ is shown as a red arrow, which is computed by summing the projection of $\vec{x}$ on each of the mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span plane $P$. This is equivalent to $\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=0}^{n-1} \textsf{Proj}_{\vec{p}_i}(\vec{a})$. The computation of $\textsf{Proj}_P(\vec{x})$ can be thought of transforming $\vec{v}$ into a different coordinate system that expresses the vector space in terms of $n$ mutually orthogonal vectors. 
+\para{Orthogonal Projection:} Given the vector $\vec{x}$ and a set of mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span the plane (or subspace) $P$, the orthogonal projection $\textsf{Proj}_P(\vec{x})$ measures how much of the element of the plane $P$ is contained in $\vec{x}$ (i.e., filtering $\vec{x}$ by the plane $P$). In the example of \autoref{fig:orthogonal-projection}, vector $\vec{x}$'s projection onto plane $P$ is shown as a red arrow, which is computed by summing the projections of $\vec{x}$ onto each of the mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span plane $P$. This is equivalent to $\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=0}^{n-1} \textsf{Proj}_{\vec{p}_i}(\vec{a})$. The computation of $\textsf{Proj}_P(\vec{x})$ can be thought of as transforming $\vec{v}$ into a different coordinate system that expresses the vector space in terms of $n$ mutually orthogonal vectors. 
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:projection}} Vector and Orthogonal Projections}}]
 
@@ -336,9 +336,9 @@ $\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=1}^n \textsf{Proj}_{\vec{p}_i}(\vec{a
 
 Based on the definition of orthogonal projection, the following properties are derived:  
 
-\para{Orthogonal Basis:} In an $n$-dimensional vector space, any mutually orthogonal $n$ vectors in the vector space span a plane (or subspace) $P$ that is identical to the entire vector space. Further, an orthogonal projection of any vector in the vector space on $P$ is guaranteed to be a unique vector.
+\para{Orthogonal Basis:} In an $n$-dimensional vector space, any mutually orthogonal $n$ vectors in the vector space span a plane (or subspace) $P$ that is identical to the entire vector space. Further, the orthogonal projection of any vector in the vector space on $P$ is guaranteed to be a unique vector.
 
-\para{Non-orthogonal Basis:} In an $n$-dimensional vector space, suppose some $n$ non-orthogonal vectors satisfy the following two conditions: (i) they span the entire vector space; (ii) they are linearly independent (i.e., one vector cannot be expressed as a linear combination of the other vectors). Then, the $n \times n$ matrix $P$ comprised of these $n$ vectors forms a basis of the entire vector space $V$, and the matrix-to-vector multiplication $P\vec{v}$ for each $\vec{v}$ in the vector space is guaranteed to give a unique vector. However, the formula $\textsf{Proj}_P(\vec{v})$ is not a valid geometric projection of the vector $\vec{\vec{v}}$ on $P$, because the $n$ basis vectors are non-orthogonal. Yet, the computation of $P\vec{v}$ can be thought of as uniquely transforming $\vec{v}$ into a different coordinate system that expresses the vector space in respect to $n$ non-orthogonal vectors in $P$. 
+\para{Non-orthogonal Basis:} In an $n$-dimensional vector space, suppose some $n$ non-orthogonal vectors satisfy the following two conditions: (i) they span the entire vector space; (ii) they are linearly independent (i.e., one vector cannot be expressed as a linear combination of the other vectors). Then, the $n \times n$ matrix $P$ comprised of these $n$ vectors forms a basis for the entire vector space $V$, and the matrix-to-vector multiplication $P\vec{v}$ for each $\vec{v}$ in the vector space is guaranteed to yield a unique vector. However, the formula $\textsf{Proj}_P(\vec{v})$ is not a valid geometric projection of the vector $\vec{\vec{v}}$ on $P$, because the $n$ basis vectors are non-orthogonal. Yet, the computation of $P\vec{v}$ can be thought of as uniquely transforming $\vec{v}$ into a different coordinate system that expresses the vector space with respect to $n$ non-orthogonal vectors in $P$. 
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:projection}} Uniqueness of Transformed Vectors}}]
 
@@ -354,12 +354,12 @@ Based on the definition of orthogonal projection, the following properties are d
 \subsection{Basis of a Polynomial Ring}
 \label{subsec:polynomial-ring-basis}
 
-Given an $(n-1)$-degree polynomial ring $\mathbb{Z}[X] / (X^n + 1)$, a basis of the polynomial ring is defined to be a set of polynomials that satisfy the following two requirements:
+Given an $(n-1)$-degree polynomial ring $\mathbb{Z}[X] / (X^n + 1)$, a basis of the polynomial ring is defined as a set of polynomials that satisfies the following two requirements:
 
 \begin{itemize}
 
 \item \textbf{Linear Independence}: Each polynomial in the basis set cannot be expressed as a linear combination of the other polynomials in the same set
-\item \textbf{Spanning the Polynomial Ring:} A linear combinations of the polynomials in the basis set can express any polynomials in the polynomial ring
+\item \textbf{Spanning the Polynomial Ring:} A linear combination of the polynomials in the basis set can express any polynomial in the polynomial ring
 \end{itemize}
 
 Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that form a basis of the polynomial ring is exactly $n$.
@@ -370,15 +370,15 @@ Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that f
 
 
 
-Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) form the mapping's output vector. Technically, $\sigma$ is defined as:
+Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
 
 $\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
-Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$ and the algebraic operations $(+, \cdot)$ of the mapped elements preserve correctness with homomorphism.
+Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$, and the algebraic operations $(+, \cdot)$ of the mapped elements preserve correctness with homomorphism.
 
 $ $
 
-\para{Bijective:} In the $(n-1)$-degree polynomial ring, a list of $y$ values evaluated at some statically chosen $n$ distinct $x$ coordinates defines a unique polynomial, because algebraically there exists only one $(n-1)$-degree (or a lesser degree) polynomial that passes each given set of $n$ distinct $(x, y)$ coordinates. We proved this in Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}). 
+\para{Bijective:} In the $(n-1)$-degree polynomial ring, a list of $y$ values evaluated at some statically chosen $n$ distinct $x$ coordinates defines a unique polynomial because, algebraically, there exists only one $(n-1)$-degree (or a lesser degree) polynomial that passes through each given set of $n$ distinct $(x, y)$ coordinates. We proved this in Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}). 
 
 $ $
 
@@ -420,7 +420,7 @@ $= \bm{\sigma(}f_a(X)\bm{)} + \bm{\sigma(}f_b(X)\bm{)}$
 
 $ $
 
-Also, we can see that $\sigma$ preservers homomorphism on the $(\cdot)$ operation as follows:
+Also, we can see that $\sigma$ preserves homomorphism on the $(\cdot)$ operation as follows:
 
 
 $\bm{\sigma(}f_a(X)\cdot f_b(X)\bm{)} = \bm{\sigma\bigg(}\left(\sum\limits_{i=0}^{n-1}a_iX^i\right)\cdot\left( \sum\limits_{i=0}^{n-1}b_iX^i\right)\bm{\bigg)}$
@@ -477,15 +477,15 @@ $= (v_0, v_1, \cdots, v_{n-1}) \odot (u_0, u_1, \cdots, u_{n-1}) $
 
 $ $
 
-As shown above, even if $f_a(X) \cdot f_b(X)$ results in a polynomial with a degree higher than $n-1$, it can be decoded into the expected correct vector. However, the $\sigma$ mapping loses the property of isomorphism between a polynomial and a vector, because if a polynomial's degree is higher than $n-1$, then there can be more than 1 polynomial that passes through the given $n$ distinct $X$ coordinates: $\{x_0, x_1, \cdots, x_{n-1}\}$. This is a problem, because if the $\sigma$ mapping supports only polynomial-to-vector mappings and not vector-to-polynomial mappings, then we cannot convert vectors into polynomials in the first place and do isomorphic computations. Another minor issue is that if the polynomial degree term is higher than $n-1$, then the computation overhead of decoding (i.e., polynomial evaluation) becomes larger than before. 
+As shown above, even if $f_a(X) \cdot f_b(X)$ results in a polynomial with a degree higher than $n-1$, it can be decoded into the expected correct vector. However, the $\sigma$ mapping loses the property of isomorphism between a polynomial and a vector because if a polynomial's degree is higher than $n-1$, then there can be more than 1 polynomial that passes through the given $n$ distinct $X$ coordinates: $\{x_0, x_1, \cdots, x_{n-1}\}$. This is a problem because, if the $\sigma$ mapping supports only polynomial-to-vector mappings and not vector-to-polynomial mappings, then we cannot convert vectors into polynomials in the first place and do isomorphic computations. Another minor issue is that if the polynomial degree term is higher than $n-1$, then the computational overhead of decoding (i.e., polynomial evaluation) becomes larger than before. 
 
-To resolve these two minor issues, we let the $n$ distinct $X$ coordinates of evaluation to be the solutions of the polynomial ring modulo $X^n + 1$ (where $n$ is some power of 2), and reduce $f_a(X) \cdot f_b(X)$ to a new polynomial modulo $X^n + 1$ whose degree is at most $n - 1$. Let $f_{ab}(X) = f_a(X) \cdot f_b(X)$, and $f'_{ab}(X)$ is the reduced polynomial such that $f_{ab}(X) = Q(X)\cdot (X^n + 1) + f'_{ab}(X)$ for some quotient polynomial $Q(X)$. Then, as illustrated in Summary \ref*{subsubsec:polynomial-ring-discuss} (\autoref{subsubsec:polynomial-ring-discuss}), $f_{ab}(X)$ and $f'_{ab}(X)$ evaluate to the same value if they are evaluated at the roots of $X^n + 1$ (by zeroing out the $Q(X)$ term). Therefore, if we let the $n$ distinct evaluating points $\{x_0, x_1, \cdots, x_{n-1}\}$ to be the roots of $X^n + 1$, then we can ensure that the decoded vector of $f'_{ab}(X)$ is identical to that of $f_{ab}(X)$ which we expect. Therefore, we can replace the higher-degree polynomial $f_{ab}(X)$ with the reduced polynomial $f'_{ab}(X)$ and continue with any further polynomial additions or multiplications by using $f'_{ab}(X)$. Also, by applying polynomial ring reduction, we can enhance the computational efficiency of polynomial addition/multiplication as well as preserve the isomorphism of the $\sigma$ mapping, and therefore we can freely convert between vectors \& polynomials and do additions/multiplications. 
+To resolve these two minor issues, we let the $n$ distinct $X$ coordinates of evaluation be the solutions of the polynomial ring modulo $X^n + 1$ (where $n$ is some power of 2) and reduce $f_a(X) \cdot f_b(X)$ to a new polynomial modulo $X^n + 1$ whose degree is at most $n - 1$. Let $f_{ab}(X) = f_a(X) \cdot f_b(X)$, and $f'_{ab}(X)$ be the reduced polynomial such that $f_{ab}(X) = Q(X)\cdot (X^n + 1) + f'_{ab}(X)$ for some quotient polynomial $Q(X)$. Then, as illustrated in Summary \ref*{subsubsec:polynomial-ring-discuss} (\autoref{subsubsec:polynomial-ring-discuss}), $f_{ab}(X)$ and $f'_{ab}(X)$ evaluate to the same value if they are evaluated at the roots of $X^n + 1$ (by zeroing out the $Q(X)$ term). Therefore, if we let the $n$ distinct evaluating points $\{x_0, x_1, \cdots, x_{n-1}\}$ be the roots of $X^n + 1$, then we can ensure that the decoded vector of $f'_{ab}(X)$ is identical to that of $f_{ab}(X)$, which we expect. Therefore, we can replace the higher-degree polynomial $f_{ab}(X)$ with the reduced polynomial $f'_{ab}(X)$ and continue with any further polynomial additions or multiplications using $f'_{ab}(X)$. Also, by applying polynomial ring reduction, we can enhance the computational efficiency of polynomial addition and multiplication, as well as preserve the isomorphism of the $\sigma$ mapping. Therefore, we can freely convert between vectors \& polynomials and perform additions and multiplications. 
 
-For applying this polynomial ring reduction, the polynomial modulus can be any polynomial as far as it has at least $n$ distinct roots. In practice, we often choose $X^n + 1$ as the polynomial ring modulus, which is the $(\mu=2n)$-th cyclotomic polynomial (\autoref{subsec:cyclotomic-def}). The reason why we let the polynomial ring modulus be a cyclotomic polynomial (especially the $(\mu=2n)$-th cyclotomic polynomial, $X^n + 1$) is because its $n$ distinct roots are well-defined (i.e., primitive $(\mu=2n)$-th roots of unity) and thus can be quickly computed even in the case $n$ is large.
+For applying this polynomial ring reduction, the polynomial modulus can be any polynomial as long as it has at least $n$ distinct roots. In practice, we often choose $X^n + 1$ as the polynomial ring modulus, which is the $(\mu=2n)$-th cyclotomic polynomial (\autoref{subsec:cyclotomic-def}). The reason we let the polynomial ring modulus be a cyclotomic polynomial (especially the $(\mu=2n)$-th cyclotomic polynomial, $X^n + 1$) is that its $n$ distinct roots are well-defined (i.e., primitive $(\mu=2n)$-th roots of unity) and thus can be quickly computed even when $n$ is large.
 
 $ $
 
-\para{Polynomial Coefficient Modulo Reduction:} In addition, we often reduce the polynomial coefficients based on some modulus $t$, to keep the size of the coefficients lower than a certain limit for the purpose of computational efficiency. Suppose two polynomials $f_c(X)$ and $f_d(X)$ have congruent coefficients modulo $t$ as follows:
+\para{Polynomial Coefficient Modulo Reduction:} In addition, we often reduce the polynomial coefficients based on some modulus $t$ to keep the size of the coefficients lower than a certain limit for the purpose of computational efficiency. Suppose two polynomials $f_c(X)$ and $f_d(X)$ have congruent coefficients modulo $t$ as follows:
 
 $f_c(X) = w_0 + w_1\cdot x_i + w_2\cdot x_i^2 + \cdots + w_{n-1}\cdot x_i^{n-1}$
 
@@ -520,7 +520,7 @@ To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/X^n + 1$ into an $n$
 
 We start with two constraints: (1) we choose $t$ only such that $t$ is a prime number $p$; (2) $t – 1$ is some multiple of $2n$ (i.e., $(t – 1) = k \cdot 2n$ for some integer $k$). 
 
-We learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}) the following: $a^{t - 1} \equiv 1 \bmod t$ if and only if $a$ and $t$ are co-prime. This means that if $t$ is a prime, then $a^{t - 1} \equiv 1 \bmod t$ for all $a \in \mathbb{Z}_t^{\times}$ (i.e., $\mathbb{Z}_t$ without $\{0\}$). Suppose $g$ is the generator of $\mathbb{Z}_t^{\times}$ whose powered values generate all elements of $\mathbb{Z}_t^{\times}$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, and $g^{t - 1} \equiv 1 \bmod t$. Since $t - 1 = k \cdot 2n$ for some $k$, $g^{k\cdot2n} \equiv (g^{k})^{2n} \equiv 1 \bmod t$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) \leq 2n$. However, since $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, for all $a$ such that $a < t – 1 = k \cdot 2n$, $g^a \not\equiv 1 \bmod t$. In other words, for all $b$ such that $b < 2n$, $(g^k)^b \not\equiv 1 \bmod t$. Thus, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) = 2n$. 
+We learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}) the following: $a^{t - 1} \equiv 1 \bmod t$ if and only if $a$ and $t$ are co-prime. This means that if $t$ is a prime, then $a^{t - 1} \equiv 1 \bmod t$ for all $a \in \mathbb{Z}_t^{\times}$ (i.e., $\mathbb{Z}_t$ without $\{0\}$). Suppose $g$ is the generator of $\mathbb{Z}_t^{\times}$ whose powered values generate all elements of $\mathbb{Z}_t^{\times}$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$ and $g^{t - 1} \equiv 1 \bmod t$. Since $t - 1 = k \cdot 2n$ for some $k$, $g^{k\cdot2n} \equiv (g^{k})^{2n} \equiv 1 \bmod t$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) \leq 2n$. However, since $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, for all $a$ such that $a < t – 1 = k \cdot 2n$, $g^a \not\equiv 1 \bmod t$. In other words, for all $b$ such that $b < 2n$, $(g^k)^b \not\equiv 1 \bmod t$. Thus, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) = 2n$. 
 
 Let $c = g^k$. Since $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$, $c^{2n} \equiv 1 \bmod t$. In other words, $(c^n)^2 \equiv 1 \bmod t$. 
 Now, $c^n$ can be only 1 or -1. The reason is that in the relation $X^2 \equiv 1 \bmod t$, $X$ can be mathematically only $1$ or $-1 \equiv t – 1 \bmod t$. If we substitute $X = c^n$, then $c^n$ can be only $1$ or $-1 \equiv t - 1 \bmod t$. But $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$, thus $c^n$ cannot be 1 (because $1^1 = 1$ and 1 is smaller than the order of $c$: $2n > 1$). Thus, $c^n$ can be only $-1 \equiv t – 1 \bmod t$. If $c^n = -1 \equiv t - 1 \bmod t$, then $c$ is the root of $X^n + 1 \bmod t$, because $X^n + 1 = c^n + 1 \equiv (t - 1) + 1 \equiv 0 \bmod t$. 

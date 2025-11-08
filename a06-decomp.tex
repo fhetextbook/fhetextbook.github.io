@@ -1,4 +1,4 @@
-Decomposition is a mathematical technique to convert a large-base number into a mathematical formula expressing the same value in a smaller base. This section will explain number decomposition and polynomial decomposition. 
+Decomposition is a mathematical technique used to convert a large-base number into a mathematical formula that expresses the same value in a smaller base. This section will explain number decomposition and polynomial decomposition. 
 
 \subsection{Number Decomposition}
 \label{subsec:number-decomp}
@@ -10,7 +10,7 @@ $\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \
 
 $ $
 
-\noindent where $\beta\ge 2$ is a base and $\ell\ge 1$ the decomposition level. We assume $\beta^\ell \mid q$ and take digits $\gamma_i\in\{0,1,\ldots,\beta-1\}$, under these conditions the decomposition is unique. This is visually shown in \autoref{fig:decomp}. (If $\beta^\ell\nmid q$, see \autoref{subsec:approx-decomp}.) 
+\noindent where $\beta\ge 2$ is a base and $\ell\ge 1$ is the decomposition level. We assume $\beta^\ell \mid q$ and take digits $\gamma_i\in\{0,1,\ldots,\beta-1\}$; under these conditions, the decomposition is unique. This is visually shown in \autoref{fig:decomp}. (If $\beta^\ell\nmid q$, see \autoref{subsec:approx-decomp}.) 
 Each $\gamma_i$ represents a base-$\beta$ digit at position $i$. When $q$ is a power of two, this corresponds to a shift by $i\cdot \log_2\beta$ bits.
 
 \begin{figure}[h!]
@@ -20,7 +20,7 @@ Each $\gamma_i$ represents a base-$\beta$ digit at position $i$. When $q$ is a p
   \label{fig:decomp}
 \end{figure}
 
-We define the decomposition of number $\gamma$ into base $\beta$ with level $\ell$ as follows:
+We define the decomposition of the number $\gamma$ into base $\beta$ with level $\ell$ as follows:
 
 
 $ $
@@ -29,7 +29,7 @@ $\textsf{Decomp}^{\beta, \ell}(\gamma) = (\gamma_1, \gamma_2, \text{ } \cdots , 
  
 $ $
 
-Number decomposition is also called radix decomposition, where the base $\beta$ is called a radix. 
+Number decomposition is also called radix decomposition, where the base $\beta$ is referred to as a radix. 
 
 
 \subsubsection{Example}
@@ -48,7 +48,7 @@ $\textsf{Decomp}^{2, 4}(13) = (1, 1, 0, 1)$
 \subsection{Polynomial Decomposition}
 \label{subsec:poly-decomp}
 
-This time, suppose we have polynomial $f$ in the polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$. Therefore, each coefficient $c_i$ of $f$ is an integer modulo $q$. Polynomial decomposition expresses $f$ as a sum of multiple polynomials in base $\beta$ and level $\ell$ as follows:
+This time, suppose we have a polynomial $f$ in the polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$. Therefore, each coefficient $c_i$ of $f$ is an integer modulo $q$. Polynomial decomposition expresses $f$ as a sum of multiple polynomials in base $\beta$ and level $\ell$ as follows:
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:poly-decomp}} Polynomial Decomposition}}]
@@ -111,7 +111,7 @@ $\textsf{Decomp}^{4, 2}(6x^3 + 3x^2 + 14x + 7) = (1x^3 + 0x^2 + 3x + 1, 2x^3 + 3
 
 \subsubsection{Discussion}
 
-Note that after decomposition, the original coefficients of the polynomial got reduced to smaller numbers. This characteristic is importantly used in homomorphic encryption's multiplication, for reducing the growth rate of the noise. Normally, the polynomial coefficients of ciphertexts are large because they are uniformly random numbers. Reducing such big constants is important to reduce the noise growth during homomorphic multiplication. We will discuss this more in detail in \autoref{subsec:tfhe-mult-cipher}.
+Note that after decomposition, the original coefficients of the polynomial have been reduced to smaller numbers. This characteristic is importantly used in the multiplication of polynomials in FHE ciphertexts to reduce the growth rate of the noise. Normally, the polynomial coefficients of ciphertexts are large because they are uniformly random numbers. Reducing such large constants is important for reducing the noise growth during homomorphic multiplication. We will discuss this in more detail in \autoref{subsec:tfhe-mult-cipher}.
 
 
 \subsection{Approximate Decomposition}
@@ -131,7 +131,7 @@ $$
 \gamma_i\in\{0,\ldots,\beta-1\},\quad
 |\varepsilon|\le \frac{q}{2\beta^{\ell}}
 $$
-(using nearest-integer rounding and identifying $\gamma$ with its integer representative). The polynomial case is analogous, coefficient-wise.
+(using nearest-integer rounding and identifying $\gamma$ with its integer representative)The polynomial case is analogous, coefficient-wise.
 
 
 

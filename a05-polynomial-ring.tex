@@ -55,12 +55,12 @@ $f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
 To make the notation simple, we denote the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, q \rangle}$
 \end{tcolorbox}
 
-Recall that in $\mathbb{Z}_p$, any $b$ writes $b = mp + r$ with $0\le r<p$, hence $b \equiv r \pmod{p}$ (the quotient $m$ disappears). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which gives:
+Recall that in $\mathbb{Z}_p$, any $b$ writes $b = mp + r$ with $0\le r<p$, hence $b \equiv r \pmod{p}$ (the quotient $m$ disappears). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which yields:
 
 $f_{big} = (x^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
 
-\noindent, whereas $f_q$ is a quotient polynomial and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated and $f_r$ (i.e., the simplified version of $f_{big}$) can be interchangeably used for polynomial operations $(+, \cdot)$ in the polynomial ring. 
-Polynomial simplification (i.e., reduction) in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$, because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$ where we reduce a number by substituting $0$ to $p$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
+\noindent, whereas $f_q$ is a quotient polynomial, and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., it is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated, and $f_r$ (i.e., the simplified version of $f_{big}$) can be used interchangeably for polynomial operations $(+, \cdot)$ in the polynomial ring. 
+Polynomial simplification (i.e., reduction) in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$ because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$, where we reduce a number by substituting $0$ for $p$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
 
 For a polynomial modulo, we normally choose a cyclotomic polynomial $x^n + 1$ (where $n$ is $2^p$ for some integer $p$) as the divisor, as it provides computational efficiency. 
 
@@ -134,9 +134,9 @@ $ $
 \label{tab:ring-comparison}
 \end{table}
 
-\para{Congruency:} If two numbers are congruent, they are in the same \textit{congruency class}. The same is true for two congruent polynomials. If the computation results of two mathematical formulas belong to the same congruency class, then their computations wrap around within modulo of their congruency. This is a useful property for cryptographic schemes where encryption \& decryption computations wrap around their values within a limited set of binary bits. Congruency is useful for simplifying computation. For example, a big number or a complex polynomial can be \textit{normalized} to a simpler number or polynomial by using the congruency rule, which reduces the computation overhead. 
+\para{Congruency:} If two numbers are congruent, they belong to the same \textit{congruence class}. The same is true for two congruent polynomials. If the computation results of two mathematical formulas belong to the same congruency class, then their computations wrap around within the modulus of their congruency. This is a useful property for cryptographic schemes where encryption \& decryption computations wrap around their values within a limited set of binary bits. Congruency is useful for simplifying computations. For example, a large number or a complex polynomial can be \textit{normalized} to a simpler number or polynomial by using the congruency rule, which reduces the computational overhead. 
 
-\para{Polynomial Evaluation:} Note that two numbers that belong to the same congruency class are not necessarily the same number. For example, $5 \equiv 10$ modulo 5, but these two numbers are not the same. Likewise, two congruent polynomials are not the same. While two congruent polynomials in a polynomial ring can be interchangeably used for polynomial operations supported in the ring (i.e., $(+, \cdot)$), such as $f_1 + f_2$ or $f_1 \cdot (f_2 - f_3)$, two congruent polynomials do not necessarily give the same result when they are evaluated for a certain variable value $x = a$. For example, in the previous example of \autoref{subsubsec:poly-ring-ex}, the two polynomials $x^4 + 3x^3 + 11x^2 + 6x + 10$ and $3x$ are congruent in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$. However, these two polynomials do not give the same evaluation results for $x = 0$: the original polynomial gives 10, whereas the reduced (i.e., simplified) polynomial gives 0. This discrepancy in evaluation occurs because we defined two polynomials $M_1$ and $M_2$ to be congruent over $x^n + 1$ (i.e., $M_1 \equiv M_2$) if their remainder is the same after being divided by $x^n + 1$ (i.e., $M_1 = Q \cdot (x^n + 1) + M_2$ for some polynomial $Q$). Therefore, $M_1$ and $M_2$ will be evaluated to the same polynomial $M_2$ if they are evaluated at the $x$ values such that $x^n = -1$, which make the $x^n +1$ term 0. The solutions for $x^n = -1$ are called the $n$-th roots of unity, which we will learn in \autoref{sec:roots} and \autoref{sec:cyclotomic-polynomial-integer-ring}. We summarize as follows: 
+\para{Polynomial Evaluation:} Note that two numbers that belong to the same congruence class are not necessarily the same number. For example, $5 \equiv 10$ modulo 5, but these two numbers are not the same. Likewise, two congruent polynomials are not the same. While two congruent polynomials in a polynomial ring can be interchangeably used for polynomial operations supported in the ring (i.e., $(+, \cdot)$), such as $f_1 + f_2$ or $f_1 \cdot (f_2 - f_3)$, two congruent polynomials do not necessarily yield the same result when evaluated for a certain variable value $x = a$. For example, in the previous example of \autoref{subsubsec:poly-ring-ex}, the two polynomials $x^4 + 3x^3 + 11x^2 + 6x + 10$ and $3x$ are congruent in the polynomial ring $\mathbb{Z}_7[x] / (x^2 + 1)$. However, these two polynomials do not give the same evaluation results for $x = 0$: the original polynomial gives 10, whereas the reduced (i.e., simplified) polynomial gives 0. This discrepancy in evaluation occurs because we defined two polynomials $M_1$ and $M_2$ to be congruent over $x^n + 1$ (i.e., $M_1 \equiv M_2$) if their remainder is the same after being divided by $x^n + 1$ (i.e., $M_1 = Q \cdot (x^n + 1) + M_2$ for some polynomial $Q$). Therefore, $M_1$ and $M_2$ will be evaluated to the same polynomial $M_2$ if they are evaluated at the $x$ values such that $x^n = -1$, which makes the $x^n +1$ term 0. The solutions for $x^n = -1$ are called the $n$-th roots of unity, which we will learn in \autoref{sec:roots} and \autoref{sec:cyclotomic-polynomial-integer-ring}. We summarize as follows: 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:polynomial-ring-discuss}} Polynomial Evaluation over Polynomial Ring}}]
 
@@ -150,7 +150,7 @@ Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n 
 \subsection{Coefficient Rotation}
 \label{subsec:coeff-rotation}
 
-Coefficient rotation is a process of shifting the entire coefficients of a polynomial (either to the left or right) in a polynomial ring. In order to rotate the entire coefficients of a polynomial by $h$ positions to the left, we multiply $x^{-h}$ to the polynomial. 
+Coefficient rotation is a process of shifting the entire coefficients of a polynomial (either to the left or right) in a polynomial ring. In order to rotate the entire coefficients of a polynomial by $h$ positions to the left, we multiply $x^{-h}$ with the polynomial. 
 
 For example, suppose we have a polynomial as follows:
 
@@ -184,9 +184,9 @@ $\equiv c_h + c_{h+1}x + c_{h+2}x^2 + \gap{$\cdots$} + c_{n-1}x^{n-1-h} - c_0x^{
 
 $ $
 
-Note that multiplying the two polynomials $f$ and $x^{-h}$ will have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. Therefore, the rotated polynomial, which is the result of $f \cdot x^{-h}$, will also have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. 
+Note that multiplying the two polynomials $f$ and $x^{-h}$ will yield a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. Therefore, the rotated polynomial, which is the result of $f \cdot x^{-h}$, will also have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. 
 
-Note that the coefficient signs change when they rotate around the boundary of $x^n (= -1)$, as the computation is done in the polynomial ring $Z_q[x] / (x^n + 1)$.
+Note that the coefficient signs change when they rotate around the boundary of $x^n (= -1)$, as the computation is conducted in the polynomial ring $Z_q[x] / (x^n + 1)$.
 
 
 
@@ -205,7 +205,7 @@ $f = 2 + 3x - 4x^2 -x^3$
 
 $ $
 
-The polynomial ring $\mathbb{Z}_8[x] / (x^4 + 1)$ has the following 4  congruence relationships: 
+The polynomial ring $\mathbb{Z}_8[x] / (x^4 + 1)$ has the following 4 congruence relationships: 
 
 {\boldmath{$x^4 \equiv -1$}}
 

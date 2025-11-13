@@ -6,15 +6,15 @@ $ $
 
 Suppose we have two GLWE ciphertexts encrypting two different plaintexts $M^{\langle 1 \rangle}, M^{\langle 2 \rangle}$:
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = C^{\langle 1 \rangle} = ( A_1^{\langle 1 \rangle}, A_2^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = C^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = C^{\langle 2 \rangle} = ( A_1^{\langle 2 \rangle}, A_2^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = C^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $ $
 
 \noindent Let's define the following TFHE ciphertext addition operation: 
 
-$C^{\langle 1 \rangle} + C^{\langle 2 \rangle} = ( A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
+$C^{\langle 1 \rangle} + C^{\langle 2 \rangle} = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
 
 $ $
 
@@ -39,8 +39,8 @@ $ $
 \begin{myproof}
 \begin{enumerate}
 \item Define the following notations: \\
+$A_0^{\langle 3 \rangle} = A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}$ \\
 $A_1^{\langle 3 \rangle} = A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}$ \\
-$A_2^{\langle 3 \rangle} = A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}$ \\
 ... \\
 $A_{k-1}^{\langle 3 \rangle} = A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}$ \\
 $E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ \\
@@ -52,11 +52,11 @@ $= \sum\limits_{i=0}^{k-1}{((A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}) 
 $= \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$ \\
 \item Since $B^{\langle 3 \rangle} = \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$, 
 
-this means that $(A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$. \\
+this means that $(A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$. \\
 \item Thus, \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle}) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle})$ \\
-$ = ( A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } A_2^{\langle 1 \rangle} + A_2^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
-$ = ( A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
+$ = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
+$ = ( A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
 $ = ( \{A_i^{\langle 3 \rangle}\}_{i=0}^{k-1}, B^{\langle 3 \rangle})$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$
 
@@ -74,7 +74,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangl
 
 $ $
 
-\para{Noise Growth:} Note that after decryption, the original ciphertext $C$'s noise has increased from $E^{\langle 1 \rangle}$ and $E^{\langle 2 \rangle}$ to $E^{\langle 3 \rangle} = E^{\langle 2 \rangle} + E^{\langle 2 \rangle}$. However, if the noise is sampled from a Gaussian distribution with the mean $\mu = 0$, then the addition of multiple noises will converge to 0. Therefore, there is not much issue of noise growth in the homomorphic addition of two ciphertexts. 
+\para{Noise Growth:} Note that after decryption, the original ciphertext $C$'s noise has increased from $E^{\langle 1 \rangle}$ and $E^{\langle 2 \rangle}$ to $E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$. However, if the noise is sampled from a Gaussian distribution with the mean $\mu = 0$, then the addition of multiple noises will converge to 0. Therefore, there is not much issue of noise growth in the homomorphic addition of two ciphertexts. 
 
 $ $
 

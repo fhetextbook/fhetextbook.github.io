@@ -106,9 +106,9 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 &\multicolumn{1}{c|}{\textbf{Encryption}}\\\hline\hline
 \textbf{TFHE}&$(\vec{a}, b)$ \text{ } where $\vec{a} \xleftarrow{\$} \mathbb{Z}_q^k$, $\text{ } b = \Delta m + e - a\cdot s \bmod q$, \text{ } $e \xleftarrow{\chi} \mathbb{Z}_q$\\
 &\text{ } \text{ } \textcolor{red}{ \# After using $e$ each time, throw it away}\\\hline
-\textbf{BFV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = \Delta M + E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q$\\
+\textbf{BFV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = \Delta M + E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q[X]/(X^n+1)$\\
 \textbf{CKKS}&\text{ } \text{ }\textcolor{red}{ \# After using $E$ each time, throw it away}\\\hline
-\textbf{BGV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = M + \Delta E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q$\\
+\textbf{BGV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = M + \Delta E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q[X]/(X^n+1)$\\
 &\text{ } \text{ }\textcolor{red}{ \# After using $E$ each time, throw it away}\\\hline
 \end{tabular}
 \caption{\textbf{Encryption}}
@@ -213,10 +213,10 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 &- Plaintext polynomial $C \in \mathbb{Z}_t[X]/(X^n + 1)$\\
 &$\textsf{RLWE}_{S, \sigma}(\Delta (M_1 \cdot C)) =(A_1 \cdot C, \text{ } B_1 \cdot C)$\\\hline
 \textbf{CKKS}&- Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_1) = (A_1, B_1)  \bmod q_l$\\
-&- Plaintext polynomial $C \in \mathbb{R}/(X^n + 1)$\\
+&- Plaintext polynomial $C \in \mathbb{R}[X]/(X^n + 1)$\\
 &1. \underline{Basic Multiplication}\\
 &\textcolor{white}{1. } $\textsf{ct} = \textsf{RLWE}_{S, \sigma}(\Delta^2 (M_1 \cdot C)) =(A_1 \cdot \Delta C, \text{ } B_1 \cdot \Delta  C)  \bmod q_l$\\
-&2. \underline{Rescaling} by $\dfrac{1}{\Delta}$: $\left\lceil\dfrac{\textsf{ct}}{\Delta}\right\rfloor = \textsf{RLWE}_{S, \sigma}(\Delta M_1 M_2) \bmod q_{l-1}$\\\hline
+&2. \underline{Rescaling} by $\dfrac{1}{\Delta}$: $\left\lceil\dfrac{\textsf{ct}}{\Delta}\right\rfloor = \textsf{RLWE}_{S, \sigma}(\Delta M_1 C) \bmod q_{l-1}$\\\hline
 \textbf{BGV}&- Ciphertext $\textsf{RLWE}_{S, \sigma}(M_1) = (A_1, B_1) \bmod q_l$\\
 &- Plaintext polynomial $C \in \mathbb{Z}_t[X]/(X^n + 1)$\\
 &$\textsf{RLWE}_{S, \sigma}(M_1 \cdot C) =(A_1 \cdot C, \text{ } B_1\cdot C)  \bmod q_l$\\\hline
@@ -236,7 +236,7 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 &\textcolor{white}{1. } Convert $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2)$ into $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$.\\
 &2. \underline{Homomorphic Multiplication}:\\
 &\textcolor{white}{2. } Compute $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) \cdot \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$\\
-&\text{ }$ = \sum\limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(a_{1,0}),  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_i\cdot m_2) \rangle + \langle \textsf{Decomp}^{\beta, l}(b_{1}),  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) \rangle$ \\
+&\text{ }$ = \sum\limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(a_{1,i}),  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_i\cdot m_2) \rangle + \langle \textsf{Decomp}^{\beta, l}(b_{1}),  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) \rangle$ \\
 &\text{ } $ = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 m_2)$\\\hline
 \textbf{BFV}&- Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_1) = (A_1, B_1)  \bmod q$\\
 &- Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_2) = (A_2, B_2)  \bmod q$\\
@@ -404,7 +404,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 & \text{ } \text{ } which outputs an encryption of $\Delta M + E$ in the plaintext slots.\\
 &4. \underline{\textsf{SlotToCoeff}}: Move $\Delta M + E$ to the polynomial coefficient positions\\
 &\text{ } \text{ } to get $\textsf{RLWE}_{S, \sigma}(\Delta M + E)$.\\\hline
-\textbf{BGV}&1. \underline{Modulus Switch} from $q_0 \rightarrow \hat{q}$ to convert\\
+\textbf{BGV}&1. \underline{Modulus Switch} from $q_{l} \rightarrow \hat{q}$ to convert\\
 &\text{ } \text{ } $\textsf{RLWE}_{S, \sigma}(M) = (A, B) \bmod q_0 \rightarrow \textsf{RLWE}_{S, \sigma}(M) = (\hat{A}, \hat{B}) \bmod \hat{q}$\\ 
 &\text{ } \text{ }, where $\hat{q} \equiv 1 \bmod p^\varepsilon$\\
 &2. \underline{Ciphertext Coefficient Multiplication} by $p^{\varepsilon-1}$:\\
@@ -432,7 +432,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Noise Management}}\\\hline\hline
-\textbf{THFE}&Their bootstrapping resets the noise.\\
+\textbf{TFHE}&Their bootstrapping resets the noise.\\
 \textbf{BFV}&\\\hline
 \textbf{CKKS}&- The noise grows without stopping, because its bootstrapping resets only the\\
 & modulus chain. To slow down the noise growth, we should increase the plaintext's\\

@@ -1,7 +1,7 @@
 Suppose we have a GLWE ciphertext $C$ and a new plaintext polynomial $\Lambda$ as follows: 
 
 
-$C = \textsf{GLWE}_{S, \sigma}(\Delta M) = ( A_1, A_2, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$C = \textsf{GLWE}_{S, \sigma}(\Delta M) = ( A_0, A_1, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $\Lambda$: a new plaintext polynomial
 
@@ -11,7 +11,7 @@ $ $
 
 \noindent Let's define the following TFHE ciphertext-to-plaintext addition operation: 
 
-$C + \Delta\Lambda = ( A_1, \text{ } A_2, \gap{$\cdots$}, A_{k-1}, \text{ } B + \Delta \Lambda)$
+$C + \Delta\Lambda = ( A_0, \text{ } A_1, \gap{$\cdots$}, A_{k-1}, \text{ } B + \Delta \Lambda)$
 
 $ $
 
@@ -40,8 +40,7 @@ This means that a plaintext polynomial to a TFHE ciphertext and decrypting it gi
 
 $B + \Delta \cdot \Lambda = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E + \Delta \cdot \Lambda = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot (M + \Lambda) + E$  \\
 
-This means that $(A_1, A_2, ... \text{ } A_{k-1}
-, B + \Delta \Lambda)$ form the ciphertext $\textsf{GLWE}_{S, \sigma}(\Delta (\Lambda + M))$
+This means that $(A_0, A_1, ... \text{ } A_{k-1}, B + \Delta \Lambda)$ form the ciphertext $\textsf{GLWE}_{S, \sigma}(\Delta (\Lambda + M))$
 \item Thus, \\
 $\textsf{GLWE}_{S, \sigma}(\Delta M) + \Delta\Lambda$ \\
 $ = (A_0, \text { } A_1, ... \text{ } A_{k-1}, \text { } B + \Delta \Lambda)$ \\

@@ -443,7 +443,7 @@ GLWE modulus switching is done as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:modulus-switch-glwe}} GLWE Modulus Switching}}]
 
-Given a GLWE ciphertext $(\vec A, B)$ where $B = \vec A\cdot \vec S + \Delta M + E \bmod q$ and $M \in \mathbb{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\vec A, B)$ to $(\hat{\vec A}, \hat B)$ as follows:
+Given a GLWE ciphertext $(\vec A, B)$ where $B = \vec A\cdot \vec S + \Delta M + E \bmod q$ and $M \in \mathcal{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\vec A, B)$ to $(\hat{\vec A}, \hat B)$ as follows:
 
 
 $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a}_{i, {n-1}}X^{n-1}$, where each $\hat{a}_{i,j} = \Big\lceil a_{i,j}\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ 

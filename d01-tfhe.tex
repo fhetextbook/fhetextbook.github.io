@@ -202,7 +202,7 @@ $ $
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-mult-cipher}} TFHE Ciphertext-to-Ciphertext Multiplication}}]
 $\textsf{ct} = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (a_0, a_1, \cdots, a_{k-1}, b)$
 
-$\bar{\textsf{ct}} = \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \bm( \textsf{Lev}_{\vec{s}, \sigma}(-s_0\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_1\cdot m_2), \cdots, \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_{k-1}\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2)  \bm)$
+$\bar{\textsf{ct}} = \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \bm( \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_0\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_1\cdot m_2), \cdots, \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_{k-1}\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2)  \bm)$
 
 $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) \cdot \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(\textsf{ct}_i), \bar{\textsf{ct}}_i \rangle = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 m_2)$
 \end{tcolorbox}
@@ -358,7 +358,7 @@ $= \textsf{GLWE}_{\vec{S}, \sigma} \left (B_1M_{2}\dfrac{q}{\beta^1} + B_2M_{2}\
 $= \textsf{GLWE}_{\vec{S}, \sigma} \left (M_{2} \cdot \left ( B_1\dfrac{q}{\beta^1} + B_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + B_l\dfrac{q}{\beta^l} \right)\right)$ \\
 $= \textsf{GLWE}_{\vec{S}, \sigma} (M_{2}B)$ \textcolor{red}{\# from \autoref{subsec:poly-decomp}}
 \item For $0 \leq i \leq (k - 1)$: \\
-$\textsf{Decomp}^{\beta, l}(A_i) = (A_{\langle i, 0 \rangle}, A_{\langle i, 1 \rangle}, \gap{$\cdots$}, A_{\langle i, l \rangle})$, where $A_i = A_{\langle i, 0 \rangle}\dfrac{q}{\beta^1} + A_{\langle i, 1 \rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + A_{\langle i, l \rangle}\dfrac{q}{\beta^l}$ \\
+$\textsf{Decomp}^{\beta, l}(A_i) = (A_{\langle i, 1 \rangle}, A_{\langle i, 2 \rangle}, \gap{$\cdots$}, A_{\langle i, l \rangle})$, where $A_i = A_{\langle i, 1 \rangle}\dfrac{q}{\beta^1} + A_{\langle i, 2 \rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + A_{\langle i, l \rangle}\dfrac{q}{\beta^l}$ \\
 $\bar{C_i} =  \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(-S_iM_2) = \left(\textsf{GLWE}_{\vec{S}, \sigma}\left(-S_iM_2\dfrac{q}{\beta^1}\right), \textsf{GLWE}_{\vec{S}, \sigma}\left(-S_iM_2\dfrac{q}{\beta^2}\right), \gap{$\cdots$}, \textsf{GLWE}_{\vec{S}, \sigma}\left(-S_iM_2\dfrac{q}{\beta^l}\right) \right)$ \\
 
 $ $
@@ -371,7 +371,7 @@ $= \sum\limits_{i=0}^{k-1}\textsf{GLWE}_{\vec{S}, \sigma}\left(-A_{\langle i, 1\
 $= \sum\limits_{i=0}^{k-1}\textsf{GLWE}_{\vec{S}, \sigma}\left(-S_iM_2 \cdot \left(A_{\langle i, 1\rangle}\dfrac{q}{\beta^1} + A_{\langle i, 2\rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + A_{\langle i, l\rangle}\dfrac{q}{\beta^l}\right)\right)$ \\
 $= \sum\limits_{i=0}^{k-1}\textsf{GLWE}_{\vec{S}, \sigma}(-S_iM_2A_i)$
 \item According to step 2 and 3, \\
-$\sum\limits_{i=0}^{k=k}\langle \textsf{Decomp}^{\beta, l}(C_i), \bar{C_i} \rangle$ \\
+$\sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(C_i), \bar{C_i} \rangle$ \\
 $= \sum\limits_{i=0}^{k-1}\textsf{GLWE}_{\vec{S}, \sigma}(-S_iM_2A_i) + \textsf{GLWE}_{\vec{S}, \sigma} (M_{2}B)$ \\ 
 $= \textsf{GLWE}_{\vec{S}, \sigma}\Big(\sum\limits_{i=0}^{k-1}(-S_iM_2A_i) + M_{2}B\Big)$ \textcolor{red}{\# addition of two GLWE ciphertexts} \\ 
 $= \textsf{GLWE}_{\vec{S}, \sigma}\Big(BM_2 - \sum\limits_{i=0}^{k-1}M_2A_iS_i\Big)$  \\ 
@@ -433,7 +433,7 @@ $ = (b_0 + b_1X + \gap{$\cdots$} + b_{n-1}X^{n-1} )$
 
 $ - (a_{0,0} + a_{0,1}X + \gap{$\cdots$} + a_{0, n-1}X^{n-1})(s_{0,0} + s_{0,1}X + \gap{$\cdots$} + s_{0, n-1}X^{n-1})$ 
 
-$ - (a_{1,0} + a_{1,1}X + \gap{$\cdots$} + a_{_1, n-1}X^{n-1})(s_{1,0} + s_{1,1}X + \gap{$\cdots$} + s_{1, n-1}X^{n-1})$ 
+$ - (a_{1,0} + a_{1,1}X + \gap{$\cdots$} + a_{1, n-1}X^{n-1})(s_{1,0} + s_{1,1}X + \gap{$\cdots$} + s_{1, n-1}X^{n-1})$
 
 $ - \gap{$\cdots$} $ 
 
@@ -619,7 +619,7 @@ $ $
 
 $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta} m) = (\hat{a}_0, \hat{a}_1, \gap{$\cdots$} \hat{a}_{k-1}, \hat{b}) \in \mathbb{Z}_{2n}^{k+1}$
 
-$\vec{s} = (s_0, s_1, \gap{$\cdots$} s_k) \in \mathbb{Z}_2^{k}$  \textcolor{red}{\# the secret key stays the same, as each $s_i$ is binary}
+$\vec{s} = (s_0, s_1, \gap{$\cdots$} s_{k-1}) \in \mathbb{Z}_2^{k}$  \textcolor{red}{\# the secret key stays the same, as each $s_i$ is binary}
 
 $\hat{\Delta} = \Delta\dfrac{2n}{q} = \dfrac{2n}{t} \in \mathbb{Z}_{2n}$
 
@@ -824,7 +824,7 @@ $V_1 = V_0 \cdot X^{\hat{a}_0s_0} = s_0 \cdot (V_0 \cdot X^{\hat{a}_0} - V_0) + 
 
 \text{ } $\vdots$
 
-$V_k = V_{k-1} \cdot X^{\hat{a}_{k-1}s_{k-1}} = s_{k-1} \cdot (V_{k-1} \cdot X^{\hat{a}_0} - V_0) + V_{k-1}$
+$V_k = V_{k-1} \cdot X^{\hat{a}_{k-1}s_{k-1}} = s_{k-1} \cdot (V_{k-1} \cdot X^{\hat{a}_{k-1}} - V_{k-1}) + V_{k-1}$
 
 $= V_0 \cdot X^{\hat{a}_0s_0}X^{\hat{a}_1s_1}\cdots X^{\hat{a}_{k-1}s_{k-1}}$
 
@@ -836,7 +836,7 @@ $ $
 
 \noindent Each step of the actual blind rotation above is computed as the following TFHE ciphertext-to-ciphertext multiplication and addition:
 
-$\textsf{GLWE}_{\vec{S}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(s_i) \cdot (\textsf{GLWE}_{\vec{S}, \sigma}(V_i) \cdot X^{a_0} - \textsf{GLWE}_{\vec{S}, \sigma}(V_i)) + \textsf{GLWE}_{\vec{S}, \sigma}(V_i)$
+$\textsf{GLWE}_{\vec{S}_{bk}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i) \cdot (\textsf{GLWE}_{\vec{S}_{bk}, \sigma}(V_i) \cdot X^{\hat{a}_i} - \textsf{GLWE}_{\vec{S}_{bk}, \sigma}(V_i)) + \textsf{GLWE}_{\vec{S}_{bk}, \sigma}(V_i)$
 
 $ $
 
@@ -1044,10 +1044,10 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k'
 
 \[
     \text{, where } a'_{n \cdot i + j} =   
-\begin{cases}
-    a_{i,0 - j} \text{ (if } 0 \leq j \leq 0\text{)}\\
-    a_{i,n + 0 - j} \text{ (if } 0+1 \leq j \leq n-1\text{)}\\
-\end{cases}
+    \begin{cases}
+      a_{i,0 - j} \text{ (if } 0 \leq j \leq 0\text{)}\\
+      -a_{i,n + 0 - j} \text{ (if } 0+1 \leq j \leq n-1\text{)}\\
+  \end{cases}
 , b_0 \text{ is obtained from the polynomial } B
 \]
 
@@ -1163,11 +1163,11 @@ Besides the AND gate, other logic gates can be built in a similar manner, each o
 Homomorphic encryption can be applied to the neurons of deep neural networks, in which each neuron is generally comprised of two steps of computation: 
 
 \begin{enumerate}
-\item \textbf{Linear Combination of Input Values:} An input feature value (or intermediate value) set $(x_1, x_2, \gap{$\cdots$}, x_n)$, a weight set $(w_1, w_2, \gap{$\cdots x$}, w_n)$, and a bias $b$ are computed as: $y = \sum\limits_{i=1}^{n}a_0w_0 + b$. 
+  \item \textbf{Linear Combination of Input Values:} An input feature value (or intermediate value) set $(x_1, x_2, \gap{$\cdots$}, x_n)$, a weight set $(w_1, w_2, \gap{$\cdots$}, w_n)$, and a bias $b$ are computed as: $y = \sum\limits_{i=1}^{n}x_iw_i + b$.
 \item \textbf{Activation Function:} $f(y)$ is computed, where $f$ is a non-linear activation function such as the $\sin$ function, ReLU, sigmoid, hyperbolic tangent, etc. 
 \end{enumerate}
 
-TFHE can homomorphically compute the 1st step's linear combination formula: $y = \sum\limits_{i=1}^{n}a_0w_0 + b$ as $\sum\limits_{i=1}^{n}\textsf{LWE}_{\vec{s}, \sigma}(a_0) \cdot w_0 + b$, which can be implemented as ciphertext addition (\autoref{sec:glwe-add-cipher}) and ciphertext-to-plaintext multiplication (\autoref{sec:glwe-mult-plain}). 
+TFHE can homomorphically compute the 1st step's linear combination formula: $y = \sum\limits_{i=1}^{n}x_iw_i + b$ as $\sum\limits_{i=1}^{n}\textsf{LWE}_{\vec{s}, \sigma}(x_i) \cdot w_i + b$, which can be implemented as ciphertext addition (\autoref{sec:glwe-add-cipher}) and ciphertext-to-plaintext multiplication (\autoref{sec:glwe-mult-plain}). 
 
 However, the 2nd step's non-linear functions cannot be expressed as addition and multiplication of ciphertexts. To address this issue, the activation function can be evaluated as a programmable bootstrapping, such that the output of the bootstrapping matches or (or is similar) to the output of the activation function. If we use bootstrapping at the 2nd step, noises can be refreshed at the end of every neuron, thus we can potentially handle neural networks of any depth without worrying about the noise growth.
 

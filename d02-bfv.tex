@@ -97,9 +97,9 @@ $ $
 
 $\sigma (m_1 \cdot m_2) = \sigma\left(\sum\limits_{i=0}^{n-1}(b_{1, i} \cdot 2^i) \cdot \sum\limits_{i=0}^{n-1}(b_{2,i} \cdot 2^i)\right)$
 
-$= \sigma\left(\sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-1})\cdot 2^i\right)$
+$= \sigma\left(\sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-j})\cdot 2^i\right)$
 
-$= \sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-1})\cdot X^i$
+$= \sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-j})\cdot X^i$
 
 $ = \sum\limits_{i=0}^{n-1} b_{1,i}\cdot X^i \cdot \sum\limits_{i=0}^{n-1} b_{2,i}\cdot X^i$
 
@@ -1260,7 +1260,7 @@ $ $
 
 Remember that in the RLWE cryptosystem (\autoref{sec:rlwe})'s alternative version (\autoref{subsec:glwe-alternative}), the plaintext and ciphertext pair have the following relation:
 
-$\Delta M(X) + E(X) = A(X)\cdot S(S) + B(X) \approx \Delta M(X)$
+$\Delta M(X) + E(X) = A(X)\cdot S(X) + B(X) \approx \Delta M(X)$
 
 $ $
 

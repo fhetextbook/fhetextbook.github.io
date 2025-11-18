@@ -1,4 +1,4 @@
-The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that contain imaginary numbers. Therefore, unlike BFV, GBV, or TFHE, which can only compute over integers, CKKS can compute real-world floating point arithmetic, such as machine learning. 
+The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that contain imaginary numbers. Therefore, unlike BFV, BGV, or TFHE, which can only compute over integers, CKKS can compute real-world floating point arithmetic, such as machine learning.
 
 
 The CKKS scheme's goal is to homomorphically compute addition and multiplication of complex numbers. However, while our targeted inputs are complex numbers, CKKS's plaintext space is defined as a $(n-1)$-degree polynomial ring with real-number coefficients having a limited precision, that is, $\mathcal{R}_{\langle n \rangle} = \mathbb{R}[x] / (x^n + 1)$. Therefore, CKKS designs its unique encoding scheme which converts the input complex numbers into integers which can be used as coefficients of a polynomial in $\mathcal{R}_{\langle n \rangle}$. 

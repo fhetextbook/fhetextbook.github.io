@@ -41,12 +41,12 @@ If $\textsf{ord}_{\mathbb{F}}(a) = k$, then for any $n \geq 1$, $\textsf{ord}_{\
 \end{myproof}
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:order-theorem}.3} Order Property (III)}}]
-$\textsf{ord}_{\mathbb{F}}(a) = kn$ if and only if $\textsf{ord}_{\mathbb{F}}(a^k) = n$.
+Suppose $k$ divides $n$.  Then, $\textsf{ord}_{\mathbb{F}}(a) = kn$ if and only if $\textsf{ord}_{\mathbb{F}}(a^k) = n$.
 \end{tcolorbox}
 \begin{myproof}
 \begin{enumerate}
     \item \textit{Forward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a) = kn$, and given Theorem~\ref*{subsec:order-theorem}.2, $\textsf{ord}_{\mathbb{F}}(a^k) = \dfrac{nk}{\gcd(k, nk)} = \dfrac{nk}{k} = n$.
-    \item \textit{Backward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a^k)=n$ and letting $\textsf{ord}_{\mathbb{F}}(a)=m$, Theorem~\ref*{subsec:order-theorem}.2 gives $m/\gcd(m,k)=n$, so $m=n\,\gcd(m,k)$. In particular $k\mid m$, hence $m=nk$.
+    \item \textit{Backward Proof:} Given $\textsf{ord}_{\mathbb{F}}(a^k)=n$ and letting $\textsf{ord}_{\mathbb{F}}(a)=m$, Theorem~\ref*{subsec:order-theorem}.2 gives $\textsf{ord}_{\mathbb{F}}(a^k)=\dfrac{m}{\gcd(m,k)}=n$, so $m=n\cdot\gcd(m,k)$ (i.e., $m$ is some multiple of $n$). But since $k$ divides $n$, $k$ also divides $m$. This means that $\gcd(m,k) = k$. Hence, $\textsf{ord}_{\mathbb{F}}(a)=m=n\cdot\gcd(m,k)=nk$.
 \end{enumerate}
 \end{myproof}
 

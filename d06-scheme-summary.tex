@@ -405,7 +405,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &4. \underline{\textsf{SlotToCoeff}}: Move $\Delta M + E$ to the polynomial coefficient positions\\
 &\text{ } \text{ } to get $\textsf{RLWE}_{S, \sigma}(\Delta M + E)$.\\\hline
 \textbf{BGV}&1. \underline{Modulus Switch} from $q_{l} \rightarrow \hat{q}$ to convert\\
-&\text{ } \text{ } $\textsf{RLWE}_{S, \sigma}(M) = (A, B) \bmod q_0 \rightarrow \textsf{RLWE}_{S, \sigma}(M) = (\hat{A}, \hat{B}) \bmod \hat{q}$\\ 
+&\text{ } \text{ } $\textsf{RLWE}_{S, \sigma}(M) = (A, B) \bmod q_l \rightarrow \textsf{RLWE}_{S, \sigma}(M) = (\hat{A}, \hat{B}) \bmod \hat{q}$\\ 
 &\text{ } \text{ }, where $\hat{q} \equiv 1 \bmod p^\varepsilon$\\
 &2. \underline{Ciphertext Coefficient Multiplication} by $p^{\varepsilon-1}$:\\
 & \text{ } \text{ } Compute $(p^{\varepsilon-1}\hat{A}, p^{\varepsilon-1}\hat{B}) = (A', B') \bmod \hat{q}$ (where $\hat{q} \equiv 1 \bmod p^\varepsilon$)\\

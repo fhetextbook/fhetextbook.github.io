@@ -9,7 +9,7 @@ $\Delta \Lambda$: a $\Delta$-scaled new plaintext polynomial
 
 $ $
 
-\noindent Let's define the following TFHE ciphertext-to-plaintext addition operation: 
+\noindent Let's define the following ciphertext-to-plaintext addition operation: 
 
 $C + \Delta\Lambda = ( A_1, \text{ } A_2, \gap{$\cdots$}, A_{k-1}, \text{ } B + \Delta \Lambda)$
 
@@ -28,7 +28,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M + \Lambda) )$
 \end{tcolorbox}
 
 
-This means that a plaintext polynomial to a TFHE ciphertext and decrypting it gives the same result as adding two original plaintexts. 
+This means that adding a ($\Delta$-scaled) plaintext polynomial $\Lambda$ to a GLWE ciphertext that encrypts $M$ and decrypting it yields $M + \Lambda$. 
 
 
 

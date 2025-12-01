@@ -35,7 +35,7 @@ To solve this efficiency problem, this section will introduce an efficient techn
 \subsection{Forward FFT (or NTT)}
 \label{subsec:ntt-forward}
 
-We assume a polynomial ring of $\mathbb{R}[X]/ X^n + 1$ for FTT, and $\mathbb{Z}_p[X]/ X^n + 1$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are the $n$ distinct roots of $X^n + 1$, which are $\omega^1$, $\omega^3, \ldots, \omega^{2n-1}$, where $\omega$ is the primitive $2n$-th root of unity. Then, the point-value representation of the polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
+We assume a polynomial ring of $\mathbb{R}[X]/ (X^n + 1)$ for FTT, and $\mathbb{Z}_p[X]/ (X^n + 1)$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are the $n$ distinct roots of $X^n + 1$, which are $\omega^1$, $\omega^3, \ldots, \omega^{2n-1}$, where $\omega$ is the primitive $2n$-th root of unity. Then, the point-value representation of the polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
 
 ${y}_i^{\langle a \rangle} = A(\omega^{2i + 1}) = \sum\limits_{j=0}^{n-1}a_{j}\cdot (\omega^{2i + 1})^j = \sum\limits_{j=0}^{n-1}a_{j}\cdot \omega^{(2i + 1)\cdot j}$. 
 
@@ -52,7 +52,7 @@ $A(X) = a_0 + a_1X + a_2X^2 + \cdots + a_{n-1}X^{n - 1}$
 $\textcolor{white}{A(X) }= A_0(X^2) + X \cdot A_1(X^2)$
 $A_0(X) = a_0 + a_2X + a_4X^2 + \cdots + a_{n-2}X^{\frac{n}{2} - 1}$
 
-$A_1(X) = a_1 + a_3X + a_5X^2 + \cdots + a_{n-2}X^{\frac{n}{1} - 1}$
+$A_1(X) = a_1 + a_3X + a_5X^2 + \cdots + a_{n-1}X^{\frac{n}{2} - 1}$
 
 The above method of splitting a polynomial into two half-degree polynomials is called the Cooley-Tukey step. As we split $A(X)$ into two smaller-degree polynomials $A_0(X)$ and $A_1(X)$, evaluating $A(X)$ at the odd-powered primitive $2n$-th roots of unity $\{\omega^1, \omega^3, \omega^5, \cdots, \omega^{2n-1}\}$ is equivalent to evaluating $A_0(X)$ and $A_1(X)$ at $n$ distinct \textit{squared} $n$-th roots of unity $\{(\omega^2)^1, (\omega^2)^3, (\omega^2)^5, \ldots, (\omega^2)^{2n-1}\}$ and computing $A_0(X^2) + X\cdot A_1(X^2)$. However, remember that the primitive $2n$-th root of unity $\omega$ has order $2n$ (i.e., $\omega^{2n} = 1$ and $\omega^m \neq 1$ for all $m < 2n$). Therefore, the second half of $\{(\omega^2)^1, (\omega^2)^3, (\omega^2)^5, \ldots, (\omega^2)^{2n-1}\}$ is a repetition of the first half. This implies that we only need to evaluate $A_0(X)$ and $A_1(X)$ at $\dfrac{n}{2}$ distinct $x$ coordinates each, instead of $n$ distinct coordinates, because the polynomial evaluation results for the other half are the same as those of the first half (as their input $x$ to the polynomial is the same). 
 
@@ -61,12 +61,12 @@ We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and eval
 \subsubsection{Details}
 \label{subsec:ntt-forward-details}
 
-Suppose we have a polynomial ring that is either $\mathbb{Z}_{p}[X] / X^8 + 1$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / X^8 + 1$ (over complex numbers). 
+Suppose we have a polynomial ring that is either $\mathbb{Z}_{p}[X] / (X^8 + 1)$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / (X^8 + 1)$ (over complex numbers). 
 %$g = 3$ is the generator of $\mathbb{Z}_{17}^* = \{1, 2, \cdots, 16\}$. 
 We denote the primitive $(2n=8)$-th roots of unity as $\omega$, and 
 %which is $\omega = e^{\frac{i 2\pi}{n}}$ and %$ = g^{\frac{p - 1}{n}}$.
 %= 3^{\frac{17 - 1}{8}} = 9$. 
-the $n$ distinct $(n=8)$-th roots of $X^n + 1$ are: $\{\omega^1, \omega^3, \omega^5, \omega^7, \omega^9, \omega^11, \omega^13, \omega^15\}$.
+the $n$ distinct $(n=8)$-th roots of $X^n + 1$ are: $\{\omega^1, \omega^3, \omega^5, \omega^7, \omega^9, \omega^{11}, \omega^{13}, \omega^{15}\}$.
 %$ \bmod 17 \equiv \{1, 9, 13, 15, 16, 8, 4, 2\} \bmod 17$. 
 
 $ $
@@ -112,12 +112,12 @@ To evaluate $A(X)$ at the $n$ distinct roots $X = \{\omega^1, \omega^3, \ldots, 
 
 $ $
 
-\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$ to $X^4$ results in only 2 distinct values: $\omega^0$ and $\omega^8$. This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4$. Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 1}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
+\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$ to $X^4$ results in only 2 distinct values: $\omega^0$ and $\omega^8$. This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4$. Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 0}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
 
 $ $
 
 \para{FFT Level $\bm{l = 2}$:} Based on the evaluation results from FFT Level 1 as building blocks, we evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$ to $X^2$ results in only 4 distinct values: $\omega^1$, $\omega^5$, $\omega^9$, and $\omega^{13}$.
-This is because the order of $\omega$ is $n$ (i.e., $\omega^n = 1$), and thus $(\omega^1)^2 = (\omega^9)^2$, $(\omega^3)^2 = (\omega^{11})^2$, $(\omega^5)^2 = (\omega^{13})^2$, and $(\omega^7)^2 = (\omega^{15})^2$. Therefore, we only need to evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at 4 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition (where we use the results from FFT Level 1 as building blocks, and the computational structure of FFT Level 2 is the same as that of FFT Level 1). There are a total of 2 polynomials to evaluate (i.e., $A_{0}(X^2), A_{1}(X^2)$); thus, we compute the FFT a total of $2 \cdot 4 = 8$ times. 
+This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^2 = (\omega^9)^2$, $(\omega^3)^2 = (\omega^{11})^2$, $(\omega^5)^2 = (\omega^{13})^2$, and $(\omega^7)^2 = (\omega^{15})^2$. Therefore, we only need to evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at 4 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition (where we use the results from FFT Level 1 as building blocks, and the computational structure of FFT Level 2 is the same as that of FFT Level 1). There are a total of 2 polynomials to evaluate (i.e., $A_{0}(X^2), A_{1}(X^2)$); thus, we compute the FFT a total of $2 \cdot 4 = 8$ times. 
 
 $ $
 
@@ -125,7 +125,11 @@ $ $
 
 $ $
 
-\para{Generalization:} Suppose that the degree of the target polynomial to evaluate is bounded by $n$ degree, and we define $L = \log n$ (i.e., the total number of FFT levels). Then, the forward FFT operation requires a total of $L$ FFT levels, where each $l$-th level requires the evaluation of $2^{L - l}$ polynomials at $2^l$ distinct $X$ values. Therefore, the total number of FFT computations for the forward FFT is: $\log (n) \cdot (2^{L - l} \cdot 2^l) = 2^L \log n = n \log n$. Therefore, the time complexity of the forward FFT is $O(n \log n)$.
+\para{Generalization:} Suppose that the degree of the target polynomial to evaluate is bounded by $n$ degree, and we define $L = \log n$ (i.e., the total number of FFT levels). Then, the forward FFT operation requires a total of $L$ FFT levels, where each $l$-th level requires the evaluation of $2^{L - l}$ polynomials at $2^l$ distinct $X$ values. Therefore, the total number of FFT computations for the forward FFT is: $\sum_{l=1}^{L}(2^{L-l} \cdot 2^l) = L \cdot 2^L = n \log n$
+%$\log (n) \cdot (2^{L - l} \cdot 2^l) = 2^L \log n = n \log n$
+. Therefore, the time complexity of the forward FFT is $O(n \log n)$.
+
+
 
 Using the FFT technique, we reduce the number of $x$ points to evaluate to half as the level decreases (while the number of polynomials to evaluate doubles), and their growth and reduction cancel each other, resulting in $O(n)$ for each level. Since there are $\log n$ such levels, the total time complexity is $O(n \log n)$. The core enabler of this optimization is the special property of the $x$ evaluation coordinates: its power (i.e., $\omega^i$) is cyclic. To enforce this cyclic property, FFT requires the evaluation points of $x$ to be the odd-powered primitive $2n$-th roots of unity. 
 
@@ -133,7 +137,7 @@ Using the FFT technique, we reduce the number of $x$ points to evaluate to half 
 \subsection{Point-wise Multiplication}
 \label{subsec:pointwise-multiplication}
 
-Once we have applied the forward FFT operation (\autoref{subsec:ntt-forward}) to polynomial $A(X)$ and $B(X)$ as $\vec{y}^{\langle a \rangle}$ and $\vec{y}^{\langle b \rangle}$, computing the point-value representation of $C(X) = A(X) \cdot B(X)$ can be done in $O(\log n)$ using the Hadamard product $ \vec{y}^{\langle c \rangle} = \vec{y}^{\langle a \rangle} \odot \vec{y}^{\langle b \rangle}$ (as explained in \autoref{subsec:ntt-motivation}).
+Once we have applied the forward FFT operation (\autoref{subsec:ntt-forward}) to polynomial $A(X)$ and $B(X)$ as $\vec{y}^{\langle a \rangle}$ and $\vec{y}^{\langle b \rangle}$, computing the point-value representation of $C(X) = A(X) \cdot B(X)$ can be done in $O(n)$ using the Hadamard product $ \vec{y}^{\langle c \rangle} = \vec{y}^{\langle a \rangle} \odot \vec{y}^{\langle b \rangle}$ (as explained in \autoref{subsec:ntt-motivation}).
 
 \subsection{Inverse FFT (or NTT)}
 \label{subsec:ntt-backward}

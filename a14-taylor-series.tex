@@ -1,7 +1,7 @@
-The Taylor series is a mathematical formula to approximate a complex equation as a polynomial. Formally speaking, the Taylor series of a function is an infinite sum of the evaluation of the function's derivatives at a single point. Given function $f(X)$, its Taylor series evaluated at $X=a$ is expressed as follows:
+The Taylor series is a way to represent a sufficiently smooth function near a point using an infinite power series. Truncating this series gives polynomial approximations to the function. Formally speaking, the Taylor series of a function is an infinite sum of the evaluations of the function's derivatives at a single point. Given function $f(X)$, its Taylor series centered at $a$ is expressed as follows:
 
 $
 f(a) + \dfrac{f'(a)}{1!}(X - a) + \dfrac{f''(a)}{2!}(X - a)^2 + \dfrac{f'''(a)}{3!}(X - a)^3 + \cdots = \sum\limits_{d=0}^{\infty}\dfrac{f^{(d)}(a)}{d!}(X - a)^d
 $
 
-For a target function, the Taylor series can aggregate a finite number of terms, $D$, instead of $\infty$ terms. Such a $D$-degree polynomial is also called the $D$-th Taylor polynomial approximating $f(X)$. The higher the total number of degrees $D$ is, the more accurate the approximation of $f(X)$ becomes. The accuracy of the approximation is higher for those coordinates nearby $X=a$, and lower for those coordinates away from $X=a$. To increase the accuracy for further-away coordinates, we need to increase $D$. 
+For a target function, the Taylor series can aggregate a finite number of terms, $D$, instead of $\infty$ terms. Such a $D$-degree polynomial is also called the $D$-th Taylor polynomial approximating $f(X)$. Generally, the higher the total number of degrees $D$ is, the more accurate the approximation of $f(X)$ becomes. The accuracy of the approximation is higher for those coordinates nearby $X=a$, and lower for those coordinates away from $X=a$. To increase the accuracy for farther coordinates, we need to increase $D$. 

@@ -2,7 +2,7 @@
 \subsection{Rescaling Modulo of Congruence Relations}
 \label{subsec:modulo-rescaling}
 
-Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $k$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differ by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
+Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $q$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differ by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
 
 In this section, we introduce another way of describing the relationship between numbers. We will describe two numbers $a$ and $b$ in terms of a different modulo $q'$ instead of the original modulo $q$. Such a change of modulo of a congruence relation is called modulo scaling. When we rescale the modulo of a congruence relation, we also need to rescale the numbers involved in the congruence relation. 
 
@@ -57,7 +57,7 @@ $\Longleftrightarrow a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
 
 \begin{enumerate}
-\item If $q$ divides all of $aq'$, $bq'$, $cq'$, and $dq'$, then $a \cdot \dfrac{q'}{q} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $b \cdot \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+\item If $q$ divides all of $aq'$ and $bq'$, then $a \cdot \dfrac{q'}{q} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $b \cdot \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
 
 $a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
@@ -67,7 +67,7 @@ $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b
 
 $ $
 
-\item If $q$ does not divide any of $aq'$, $bq'$, $cq'$, or $dq'$, then $a \cdot \dfrac{q'}{q} \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \cdot \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+\item If $q$ does not divide any of $aq'$ and $bq'$, then $a \cdot \dfrac{q'}{q} \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \cdot \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
 
 $a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
@@ -79,7 +79,7 @@ $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\
 
 $ $
 
-\item $a + c\equiv b + d\bmod q$ $\Longleftrightarrow$ $a + c = b + d + q\cdot k$ (for some integer $q$)
+\item $a + c\equiv b + d\bmod q$ $\Longleftrightarrow$ $a + c = b + d + k\cdot q$ (for some integer $k$)
 
 $\Longleftrightarrow a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + d \cdot \dfrac{q'}{q}  + q\cdot k \cdot \dfrac{q'}{q}$
 
@@ -97,7 +97,7 @@ $a \cdot \dfrac{q'}{q} + c \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + d \cdot
 
 $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor + k\cdot q'$
 
-$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a \equiv b \bmod q)$
+$\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ \text{ } $(\Longleftrightarrow a + c \equiv b + d \bmod q)$
 
 $ $
 
@@ -117,7 +117,7 @@ $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfra
 
 $ $
 
-\item $a \cdot c\equiv b \cdot d\bmod q$ $\Longleftrightarrow$ $a \cdot c = b \cdot d + q\cdot k$ (for some integer $q$)
+\item $a \cdot c\equiv b \cdot d\bmod q$ $\Longleftrightarrow$ $a \cdot c = b \cdot d + k\cdot q$ (for some integer $k$)
 
 $\Longleftrightarrow ac \cdot \dfrac{q'}{q}  = bd \cdot \dfrac{q'}{q} + q\cdot k \cdot \dfrac{q'}{q}$
 

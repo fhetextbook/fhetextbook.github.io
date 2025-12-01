@@ -8,7 +8,7 @@
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{sec:chinese-remainder}.1} Chinese Remainder Theorem}}]
 
-Suppose we have positive coprime integers $n_0, n_1, n_2, \cdots, n_k$. Let $N = n_1 n_2 \cdots n_k$. We sample $k + 1$ random integers $a_0, a_1, a_2, \cdots, a_k$ from each modulo domain $n_0, n_1, n_2, \dots, n_k$ (i.e., $a_0 \in \mathbb{Z}_{n_0}$, $a_1 \in \mathbb{Z}_{n_1}$, $\cdots$, $a_k \in \mathbb{Z}_{n_k}$). Then, there exists one and only one solution $x \bmod N$ such that $x$ is congruent with $a_0, a_1, a_2, \cdots, a_k$ in each modulo $n_0, n_1, n_2, \cdots, n_k$. That is: 
+Suppose we have positive coprime integers $n_0, n_1, n_2, \cdots, n_k$. Let $N = n_0 n_1 \cdots n_k$. We sample $k + 1$ random integers $a_0, a_1, a_2, \cdots, a_k$ from each modulo domain $n_0, n_1, n_2, \dots, n_k$ (i.e., $a_0 \in \mathbb{Z}_{n_0}$, $a_1 \in \mathbb{Z}_{n_1}$, $\cdots$, $a_k \in \mathbb{Z}_{n_k}$). Then, there exists one and only one solution $x \bmod N$ such that $x$ is congruent with $a_0, a_1, a_2, \cdots, a_k$ in each modulo $n_0, n_1, n_2, \cdots, n_k$. That is: 
 
 \text{ } $x \equiv a_0 \bmod n_0$
 
@@ -67,7 +67,7 @@ Alternatively, note that the following is also true:
 
 $x \text{ } \text{mod } n_i = \sum\limits_{i=0}^k |a_i z_i|_{n_i} y_i \text{ } (\text{mod } n_i)$
 
-$= |a_0 z_0|_{n_0} y_0 + |a_1 z_1|_{n_1} y_1 + |a_2 z_2|_{n_2} y_2 + \cdots + |a_k y_k|_{n_k} y_k \text{ } \text{mod } n_i$
+$= |a_0 z_0|_{n_0} y_0 + |a_1 z_1|_{n_1} y_1 + |a_2 z_2|_{n_2} y_2 + \cdots + |a_k z_k|_{n_k} y_k \text{ } \text{mod } n_i$
 
 $= |a_i z_i|_{n_i} y_i \text{ } \text{mod } n_i$ 
 
@@ -99,11 +99,11 @@ $ $
 
 $ $
 
-In the case of modulo $n_i$, $y_iz_i \equiv 1 \bmod n_i$, since $z_i$ is an inverse of $y_i$ modulo $n_j$. In the case of all other modulo $n_j$ where $i \neq j$, $y_iz_i \equiv 0 \bmod n_j$, because $y_i = \dfrac{N}{n_i}$ and thus $n_j$ divides $y_i$. 
+In the case of modulo $n_i$, $y_iz_i \equiv 1 \bmod n_i$, since $z_i$ is an inverse of $y_i$ modulo $n_i$. In the case of all other modulo $n_j$ where $i \neq j$, $y_iz_i \equiv 0 \bmod n_j$, because $y_i = \dfrac{N}{n_i}$ and thus $n_j$ divides $y_i$. 
 
 $ $
 
-By squaring both sides of $(y_iz_i) \equiv 1 \bmod n_i$, we get $(y_iz_i)^2 \equiv 1 \bmod n_i$. Similarly, by squaring both sides of $(y_iz_i) \equiv 1 \bmod n_j$, we get $(y_iz_i)^2 \equiv 0 \bmod n_j$.
+By squaring both sides of $(y_iz_i) \equiv 1 \bmod n_i$, we get $(y_iz_i)^2 \equiv 1 \bmod n_i$. Similarly, by squaring both sides of $(y_iz_i) \equiv 0 \bmod n_j$, we get $(y_iz_i)^2 \equiv 0 \bmod n_j$.
 
 $ $
 
@@ -124,8 +124,7 @@ Then, we do the similar reasoning as step 2: since every co-prime $n_j$ divides 
 In a modern processor, each data size is a maximum of 64 bits. If the data size exceeds 64 bits, its computations can be handled efficiently by using the Chinese remainder theorem such that each co-prime modulus $\log_2n_i \leq 64$ (where $N = n_0\cdot n_1\cdots\cdot n_k$) can be used to represent a big value $a \bmod N$ as $\vec{a}_{\mathit{crt}} = (a_0, a_1, \cdots , a_k)$, where $a \equiv a_i \bmod n_i$. Then, for any pair of big numbers $a$ and $b \bmod N$, we can compute $a + b \bmod N$ and $a \cdot b \bmod N$ as follows: 
 
 \begin{itemize}
-\item $a + b  \equiv \sum\limits_{i=0}^k a_i y_i z_i + \sum\limits_{i=0}^k b_i y_i z_i \equiv \sum\limits_{i=0}^k a_i y_i z_i + b_i y_i z_i \equiv 
- \sum\limits_{i=0}^k (a_i + b_i) y_i z_i \bmod N $
+\item $a + b \equiv \sum\limits_{i=0}^k a_i y_i z_i + \sum\limits_{i=0}^k b_i y_i z_i \equiv \sum\limits_{i=0}^k (a_i y_i z_i + b_i y_i z_i) \equiv \sum\limits_{i=0}^k (a_i + b_i) y_i z_i \bmod N $
 
 $ $
 

@@ -3,7 +3,7 @@ In \autoref{sec:roots} and \autoref{sec:cyclotomic}, we learned about the defini
 
 \begin{itemize}
 \item \textbf{The $\bm \mu$-th roots of unity} are the solutions for $X^\mu = 1$ over $X \in \mathbb{C}$ (complex numbers). The formula for the $\mu$-th root of unity is $X = e^{2 \pi i k / \mu}$ for all integers $k$ such that $0 \leq k \leq \mu - 1$. 
-\item \textbf{The primitive $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are those $\mu$-th roots of unity whose order (\autoref{subsec:order-def}) is $\mu$ (i.e., $\omega^{\mu} = 1$ and $\omega^{\frac{\mu}{2}} \neq 1$). 
+\item \textbf{The primitive $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are those $\mu$-th roots of unity whose order (\autoref{subsec:order-def}) is $\mu$ (i.e., $\omega^{\mu} = 1$ and $\omega^d \neq 1$ for any $1 \le d < \mu$ with $d \mid \mu$).
 \item Given any primitive $\mu$-th roots of unity $\omega$, one can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$ (Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:order-theorem}). 
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
 \end{itemize}
@@ -15,7 +15,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 
 \begin{itemize}
 \item \textbf{The $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are the solutions for $X^\mu \equiv 1 \bmod p$. Note that these solutions are not $X = \omega^{2 \pi i k / \mu}$ (the formula for the solutions over $X \in \mathbb{C}$). 
-\item \textbf{The primitive $\bm \mu$-th roots of unity} are defined as those $\mu$-th roots of unity whose order (\autoref{subsec:order-def}) is $\mu$ (i.e., $\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{\lceil \frac{\mu}{2} \rfloor} \not\equiv 1 \bmod p$). 
+\item \textbf{The primitive $\bm \mu$-th roots of unity} are defined as those $\mu$-th roots of unity whose order is $\mu$ (i.e., $\omega^{\mu} \equiv 1 \bmod p$, and $\omega^d \not\equiv 1 \bmod p$ for any $1 \le d < \mu$ with $d \mid \mu$). 
 \item Given any primitive $\mu$-th roots of unity $\omega$, it can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$.
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
 \end{itemize}
@@ -32,8 +32,8 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \textbf{$\bm \mu$-th}&where $0 \leq k \leq \mu - 1$)&\\
 \textbf{Root of Unity}&&\\\hline
 \textbf{Definition}&Those $\mu$-th roots of unity $\omega$ such that&Those $\mu$-th roots of unity $\omega$ such that\\
-\textbf{of the}&$\omega^{\mu} = 1$, and $\omega^{\frac{\mu}{2}} \neq 1$&$\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{\frac{\mu}{2}} \not\equiv 1 \bmod p$\\
-\textbf{Primitive}&&\\
+\textbf{of the}&$\omega^{\mu} = 1$, and $\omega^{\frac{\mu}{2}} \neq 1$&$\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{d} \not\equiv 1 \bmod p$\\
+\textbf{Primitive}&&for any $1 \le d < \mu$ with $d \mid \mu$\\
 \textbf{$\bm \mu$-th}&&\\
 \textbf{Root of}&&\\
 \textbf{Unity}&&\\\hline

@@ -23,13 +23,13 @@ $ $
 
 \item \textbf{Dot Product:} Given two $n$-dimensional vectors:
 
-$\vec{a} = (a_0, a_1, \gap{$\cdots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\cdots$}, b_{n-1})$
+$\vec{a} = (a_0, a_1, \gap{$\ldots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\ldots$}, b_{n-1})$
 
 $ $
 
 Dot product is defined as: 
 
-$\langle \vec{a}, \vec{b} \rangle =  \vec{a} \cdot \vec{b} = a_0 b_0 + a_1 b_1 + \gap{$\cdots$}, + a_{n-1} b_{n-1}$.
+$\langle \vec{a}, \vec{b} \rangle =  \vec{a} \cdot \vec{b} = a_0 b_0 + a_1 b_1 + \gap{$\cdots$} + a_{n-1} b_{n-1}$.
 
 More formally, $\vec{a} \cdot \vec{b} = |a||b|\cos\theta$, where $\theta$ is the angle between the two vectors. As $\vec{a}$ and $\vec{b}$ point at the same direction, $\vec{a} \cdot \vec{b}$ convergest to a maximized value. As $\vec{a}$ and $\vec{b}$ have an orthogonal direction, $\vec{a} \cdot \vec{b}$ converges to  0. 
 
@@ -38,7 +38,7 @@ $ $
 
 \item \textbf{Hadamard Product:} Given two $n$-dimensional vectors:
 
-$\vec{a} = (a_0, a_1, \gap{$\cdots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\cdots$}, b_{n-1})$
+$\vec{a} = (a_0, a_1, \gap{$\ldots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\ldots$}, b_{n-1})$
 
 $ $
 
@@ -50,9 +50,9 @@ $ $
 
 \item \textbf{Hermitian Product:} Given two $n$-dimensional complex vectors:
 
-$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\cdots$},\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
+$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\ldots$},\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
 
-$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ } \gap{$\cdots$}, \text{ } b_{n-1} + i\cdot b'_{n-1})$
+$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ } \gap{$\ldots$}, \text{ } b_{n-1} + i\cdot b'_{n-1})$
 
 $ $
 
@@ -173,7 +173,7 @@ $A = \begin{bmatrix}
 
 $ $
 
-The result of $A \cdot \vec{x}$ is an $n$-dimensional vector computed as:
+The result of $A \cdot \vec{x}$ is an $m$-dimensional vector computed as:
 
 $A \cdot \vec{x} = \Big(\vec{a}_{\langle 1, * \rangle} \cdot \vec{x}, \text{ } \vec{a}_{\langle 2, * \rangle} \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{\langle m, * \rangle} \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{ } \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{ } \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
 
@@ -236,13 +236,15 @@ $ $
 
 $A(x + y) = Ax + Ay$
 
-$A(x \odot y) = Ax \odot Ay $
+%$A(x \odot y) = Ax \odot Ay $
 
-$A\langle x, y\rangle = \langle Ax, Ay\rangle$
+%$A\langle x, y\rangle = \langle Ax, Ay\rangle$
 
-$A\langle \langle x, y\rangle\rangle = \langle\langle Ax, Ay\rangle\rangle$
+%$A\langle \langle x, y\rangle\rangle = \langle\langle Ax, Ay\rangle\rangle$
 
-(However, $Ax \cdot Ay \neq A(x \cdot y)$, because the resulting dimensions do not match. Also, $A(x \odot y) \neq Ax \odot Ay $)
+$ $
+
+However, $Ax \cdot Ay \neq A(x \cdot y)$, because the resulting dimensions do not match. Also, $A(x \odot y) \neq Ax \odot Ay $. Further, note that $A\langle x, y\rangle \neq \langle Ax, Ay\rangle$, and $A\langle \langle x, y\rangle\rangle \neq \langle\langle Ax, Ay\rangle\rangle$.
 
 $ $
 
@@ -302,7 +304,7 @@ $\textsf{Proj}_{\vec{b}}(\vec{a}) = \vec{a}_p = \vec{a} \cos \theta = \dfrac{\ve
 
 $ $
 
-\item \textbf{Orthogonal Basis:} If the $n$-dimensional plane (or subspace) $P$ is spanned by the mutually orthogonal $n$-dimensional vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_n$, 
+\item \textbf{Orthogonal Basis:} If the $n$-dimensional plane (or subspace) $P$ is spanned by the mutually orthogonal $n$-dimensional vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$, 
 
 then the matrix $P = \begin{bmatrix} 
 \vec{p}_0\\
@@ -324,7 +326,7 @@ $,
 
 vector $\vec{a}$'s orthogonal projection on $P$ is:
 
-$\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=1}^n \textsf{Proj}_{\vec{p}_i}(\vec{a})$
+$\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=0}^{n-1} \textsf{Proj}_{\vec{p}_i}(\vec{a})$
 
 
 
@@ -558,7 +560,7 @@ We summarize our findings as follows:
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:polynomial-ring-basis}} Isomorphism between Polynomials and Vectors over Integer (Ring)}}]
 
 \begin{itemize}
-\item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and we have an $n$-dimensional modulo $p$ vector space $\vec{v} \in \mathbb{Z}_t$. We define mapping $\sigma$ between this polynomial ring and vector space as follows:
+\item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and we have an $n$-dimensional modulo $p$ vector space $\vec{v} \in \mathbb{Z}_t^n$. We define mapping $\sigma$ between this polynomial ring and vector space as follows:
 
 $\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
 
@@ -607,7 +609,7 @@ $ $
 
 \para{Bijective:} Technically, $\mathbb{\hat{C}}^{n}$ is bijective to $\mathbb{C}^{\frac{n}{2}}$, because the second-half $\frac{n}{2}$ elements of each vector in $\mathbb{{\hat C}}^{n}$ are passively (automatically) determined by the first-half $\frac{n}{2}$ elements. Therefore, each vector in $\mathbb{\hat{C}}^{n}$ has one-to-one correspondences with some unique vector in $\mathbb{{C}}^{\frac{n}{2}}$, and thus these two vector spaces are bijective. 
 
-\para{Homomorphic:} To demonstrate their homomorphism over the $(+, \odot)$ operations, we can apply the following reasoning: for all $\vec{\hat{v}} \in \mathbb{\hat{C}}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$, there exists an $\dfrac{n}{2} \times n$ linear transformation matrix $M$ that satisfies $M \cdot \vec{\hat{v}} = \vec{v}$. Such $M$ is an $\dfrac{n}{2} \times n$ matrix comprising horizontal concatenation of $I_{\frac{n}{2}}$ and $[0]_{\frac{n}{2}}$, where $I_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ identity matrix and $[0]_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ zero matrix. Also, there exists an $n \times \dfrac{n}{2}$ (non-linear) transformation matrix $N$ that satisfies $N \cdot \vec{{v}} = \vec{\hat v}$. Such $N$ is a vertical concatenation of $I_{\frac{n}{2}}$ and $\bm{\emptyset}_{\frac{n}{2}}^R$, where $\bm{\emptyset}_{\frac{n}{2}}^R$ is an $\frac{n}{2} \times \frac{n}{2}$ matrix whose reverse-diagonal elements are unary conjugate operators and all other elements are zero. For example, if $n = 4$, then $M$ and $N$ are structured as follows:
+\para{Homomorphic:} To demonstrate their homomorphism over the $(+, \odot)$ operations, we can apply the following reasoning: for all $\vec{\hat{v}} \in \mathbb{\hat{C}}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$, there exists an $\dfrac{n}{2} \times n$ linear transformation matrix $M$ that satisfies $M \cdot \vec{\hat{v}} = \vec{v}$. Such $M$ is an $\dfrac{n}{2} \times n$ matrix comprising horizontal concatenation of $I_{\frac{n}{2}}$ and $[0]_{\frac{n}{2}}$, where $I_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ identity matrix and $[0]_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ zero matrix. Also, there exists an $n \times \dfrac{n}{2}$ (non-linear) transformation matrix $N$ that satisfies $N \cdot \vec{{v}} = \vec{\hat v}$. Such $N$ is a vertical concatenation of $I_{\frac{n}{2}}$ and $\bm{\emptyset}_{\frac{n}{2}}^R$, where $\bm{\emptyset}_{\frac{n}{2}}^R$ is an $\frac{n}{2} \times \frac{n}{2}$ matrix whose reverse-diagonal elements are unary conjugate operators and all other elements are zero. For example, if $n = 8$, then $M$ and $N$ are structured as follows:
 
 $M = \begin{bmatrix}
 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -657,7 +659,7 @@ Now, we will demonstrate $\sigma_c$'s isomorphism (i.e., bijective and homomorph
 
 $ $
 
-\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., imaginary number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
+\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
 
 $\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
 
@@ -665,13 +667,13 @@ $ $
 
 Since $f(\overline{X}) = \overline{f(X)}$, we can rewrite $\sigma$ as: 
 
-$\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-3}) f(\omega^{n-1}), \overline{f(\omega^{n-1})}, \overline{f(\omega^{n-3})}, \cdots, \overline{f(\omega^3)}, \overline{f(\omega))}$
+$\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-3}), f(\omega^{n-1}), \overline{f(\omega^{n-1})}, \overline{f(\omega^{n-3})}, \cdots, \overline{f(\omega^3)}, \overline{f(\omega))}$
 
 $ $
 
 This structure of vector exactly aligns with the definition of $\hat{\mathbb{C}}^n$: the first half of the elements of the $n$-dimensional vector $\vec{\hat v}$ is a conjugate of the second half.
 
-For bijectiveness, we also need to demonstrate that every $f(X) \in \mathbb{R}[X] /X^n + 1$ is mapped to some $\vec{\hat v} \in \hat{\mathbb{C}}^{\frac{n}{2}}$, and no two different $f_1(X), f_2(X) \in \mathbb{R}[X] / X^n + 1$ map to the same $\vec{\hat v} \in \hat{\mathbb{C}}^{n}$. The first requirement is satisfied because each polynomial $f(X) \in \mathbb{R}[X] /X^n + 1$ can be evaluated at the $n$ distinct roots of $X^n + 1$ to a valid number. The second requirement is also satisfied because in the $(n-1)$-degree polynomial ring, each list of $n$ distinct $(x, y)$ coordinates (where we fix the $X$ values to the $n$ distinct roots of $X^2 + 1$ as $\{\omega, \omega^3, \cdots, \omega^{2n - 1}\}$) can be mapped only to a single polynomial within the $(n-1)$-degree polynomial ring, as proved by Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}).
+For bijectiveness, we also need to demonstrate that every $f(X) \in \mathbb{R}[X] /X^n + 1$ is mapped to some $\vec{\hat v} \in \hat{\mathbb{C}}^{\frac{n}{2}}$, and no two different $f_1(X), f_2(X) \in \mathbb{R}[X] / X^n + 1$ map to the same $\vec{\hat v} \in \hat{\mathbb{C}}^{n}$. The first requirement is satisfied because each polynomial $f(X) \in \mathbb{R}[X] /X^n + 1$ can be evaluated at the $n$ distinct roots of $X^n + 1$ to a valid number. The second requirement is also satisfied because in the $(n-1)$-degree polynomial ring, each list of $n$ distinct $(x, y)$ coordinates (where we fix the $X$ values as the $n$ distinct roots of $X^n + 1$ as $\{\omega, \omega^3, \cdots, \omega^{2n - 1}\}$) can be mapped only to a single polynomial within the $(n-1)$-degree polynomial ring, as proved by Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}).
 
 $ $
 

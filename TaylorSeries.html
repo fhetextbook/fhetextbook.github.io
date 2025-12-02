@@ -10,9 +10,10 @@
 </head><body>
    <!-- l. 452 --><div class='crosslinks'><p class='noindent'>[<a href='ChineseRemainderTheorem.html'>prev</a>][<a href='BasicMath.html#TaylorSeries.html'>parent</a>][<a href='LagrangesPolynomialInterpolation.html'>next</a>]</p></div>
    <h3 class='sectionHead' id='taylor-series'><span class='titlemark'>A-14   </span> <a id='x56-65000A-14'></a>Taylor Series</h3>
-<!-- l. 1 --><p class='noindent'>The Taylor series is a way to represent a sufficiently smooth function near a point using an infinite power series.
-Truncating this series gives polynomial approximations to the function. Formally speaking, the Taylor series of
-a function is an infinite sum of the evaluations of the function’s derivatives at a single point. Given function
+<!-- l. 1 --><p class='noindent'>The Taylor series is a way to represent an analytic function near a point by an infinite power series
+(assuming the series converges to the function in that neighborhood). Truncating this series gives
+polynomial approximations of the function. Formally speaking, the Taylor series of a function is an
+infinite sum of the evaluations of the function’s derivatives at a single point. Given function
 <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, its Taylor series
 centered at <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>a</mi></math>
 is expressed as follows:
@@ -22,14 +23,14 @@ is expressed as follows:
   </mrow><mrow><mn>3</mn><mo class='MathClass-punc' stretchy='false'>!</mo>  </mrow></mfrac></mstyle><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mo class='MathClass-rel' stretchy='false'>⋯</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
   </mrow><mrow><mi>d</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>∞</mi></mrow></munderover><mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>f</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>d</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo>
    </mrow><mrow><mi>d</mi><mo class='MathClass-punc' stretchy='false'>!</mo>    </mrow></mfrac></mstyle><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mi>d</mi></mrow></msup></mrow></math>
-</p><!-- l. 7 --><p class='indent'>   For a target function, the Taylor series can aggregate a finite number of terms,
-<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>, instead of
-<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>∞</mi></math> terms. Such a
-<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>-degree polynomial is also called the
-<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>-th Taylor polynomial approximating
-<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>. Generally, the higher the total
-number of degrees <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math> is, the more
-accurate the approximation of <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+</p><!-- l. 7 --><p class='indent'>   For a given function, one can truncate the Taylor series to a finite number of terms (up to degree
+<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math> instead of an infinite number of
+terms). Such a <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>-degree polynomial
+is also called the <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>-th Taylor
+polynomial approximating <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+Generally, the larger the degree <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>D</mi></math>
+(i.e. the more terms we include), the more accurate the approximation of
+<!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 becomes. The accuracy of the approximation is higher for those coordinates nearby
 <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi></mrow></math>, and lower for those
 coordinates away from <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi></mrow></math>.

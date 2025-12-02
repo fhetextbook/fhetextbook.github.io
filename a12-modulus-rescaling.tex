@@ -4,7 +4,7 @@
 
 Remember from \autoref{sec:modulo} that $a \bmod q$ is the remainder of $a$ divided by $q$, and the congruence relation $a \equiv b \bmod q$ means that the remainder of $a$ divided by $q$ is the same as the remainder of $b$ divided by $q$. Its equivalent numeric equation is  $a = b + k\cdot q$, meaning that $a$ and $b$ differ by some multiple of $q$. The congruence and equation are two different ways of describing the relationship between two numbers $a$ and $b$. 
 
-In this section, we introduce another way of describing the relationship between numbers. We will describe two numbers $a$ and $b$ in terms of a different modulo $q'$ instead of the original modulo $q$. Such a change of modulo of a congruence relation is called modulo scaling. When we rescale the modulo of a congruence relation, we also need to rescale the numbers involved in the congruence relation. 
+In this section, we introduce another way of describing the relationship between numbers. We will describe two numbers $a$ and $b$ in terms of a different modulo $q'$ instead of the original modulo $q$. Such a change of modulo in a congruence relation is called modulo scaling. When we rescale the modulo of a congruence relation, we also need to rescale the numbers involved in the congruence relation. 
 
 Suppose we have the following congruence relations: 
 
@@ -14,7 +14,7 @@ $a + c \equiv b + d\bmod q$
 
 $a \cdot c \equiv b \cdot d\bmod q$
 
-Now, suppose we want to rescale the modulo of the above congruence relations from $q \rightarrow q'$, where $q' \mid q$ (i.e., $q'$ divides all of $q$, or $q$ is a multiple of $q'$). Then, the accordingly updated congruence relations are as shown in \autoref{tab:rescaling}.
+Now, suppose we want to rescale the modulo of the above congruence relations from $q \rightarrow q'$, where $q' \mid q$ (meaning $q$ is a multiple of $q'$). Then, the accordingly updated congruence relations are as shown in \autoref{tab:rescaling}.
 
 
 
@@ -27,17 +27,17 @@ Now, suppose we want to rescale the modulo of the above congruence relations fro
 \textbf{Relation} & \textbf{-- Exact} & \textbf{-- Approximate} \\
 \hline\hline
 $a \equiv b \bmod q$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor \bmod q'$\\
-&(if $q$ divides all of: $aq', bq'$)&(if $q$ does not divide:  $aq' \text{ or } bq'$)\\
+&(if $q$ divides both $aq'$ and $bq'$)&(if $q$ does not divide either $aq' \text{ or } bq'$)\\
 \hline
 $a + c \equiv b + d \bmod q$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor \cong \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor \bmod q'$\\
-&(if $q$ divides all of: $aq', bq', cq', dq'$)&(if $q$ does not divide:  $aq', bq', cq',$ or $dq'$)\\
+&(if $q$ divides all of $aq', bq', cq'$ and $dq'$)&(if $q$ does not divide:  $aq', bq', cq',$ or $dq'$)\\
 \hline
 $a \cdot c \equiv b \cdot d \bmod q$ & $\Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor  \equiv \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor \bmod q'$ & $\Bigg\lceil ac\dfrac{q'}{q}\Bigg\rfloor  \cong \Bigg\lceil bd\dfrac{q'}{q}\Bigg\rfloor  \bmod q'$\\
-&(if $q$ divides both: $acq', bdq'$)&(if $q$ does not divide:  $acq'$ or $bdq'$)\\
+&(if $q$ divides both $acq'$ and $bdq'$)&(if $q$ does not divide either  $acq'$ or $bdq'$)\\
 \hline
 \end{tabular} \par
 }
-\caption{Rescaling the congruence relations  from modulo $q\rightarrow q'$ (where $\lceil \rfloor$ rounds to the nearest integer)}
+\caption{Rescaling the congruence relations  from modulo $q\rightarrow q'$ (where $\lceil \rfloor$ denotes rounding to the nearest integer)}
 \label{tab:rescaling}
 \end{table}
 
@@ -57,7 +57,7 @@ $\Longleftrightarrow a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
 
 \begin{enumerate}
-\item If $q$ divides all of $aq'$ and $bq'$, then $a \cdot \dfrac{q'}{q} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, $b \cdot \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+\item If $q$ divides both $aq'$ and $bq'$, then $a \cdot \dfrac{q'}{q} = \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, and $b \cdot \dfrac{q'}{q} = \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
 
 $a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
@@ -67,7 +67,7 @@ $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor \equiv \Bigg\lceil b
 
 $ $
 
-\item If $q$ does not divide any of $aq'$ and $bq'$, then $a \cdot \dfrac{q'}{q} \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \cdot \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
+\item If $q$ does not divide either $aq'$ or $bq'$, then $a \cdot \dfrac{q'}{q} \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \cdot \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor$. Therefore:
 
 $a \cdot \dfrac{q'}{q} = b \cdot \dfrac{q'}{q} + k\cdot q'$
 
@@ -101,7 +101,7 @@ $\Longleftrightarrow \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfra
 
 $ $
 
-\item If $q$ does not divide any of $aq'$, $bq'$, $cq'$, or $dq'$, then
+\item If $q$ does not divide at least one of $aq'$, $bq'$, $cq'$, and $dq'$, then
 
 $a \dfrac{q'}{q} + c  \dfrac{q'}{q}  \approx \Bigg\lceil a\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil c\dfrac{q'}{q}\Bigg\rfloor$, \text{ } $b \dfrac{q'}{q} + d \dfrac{q'}{q} \approx \Bigg\lceil b\dfrac{q'}{q}\Bigg\rfloor + \Bigg\lceil d\dfrac{q'}{q}\Bigg\rfloor$
 
@@ -214,7 +214,7 @@ $4 \equiv 7 \bmod 3$
 
 $ $
 
-As shown above, the rescaled congruence relation preserves correctness, because all rescaled values are divisible by the rescaling factor. By contrast, if $\dfrac{q}{q'} = \dfrac{30}{3} = 10$ did not divide any of $a\cdot s$, $\Delta m$, or $e$, then the rescaled congruence relation would be an approximate (i.e., $\cong$) congruence relation. 
+As shown above, the rescaled congruence relation preserves correctness, because all rescaled values are divisible by the rescaling factor. By contrast, if $\dfrac{q}{q'} = \dfrac{30}{3} = 10$ did not divide at least one of $a\cdot s$, $\Delta m$, or $e$, then the rescaled congruence relation would be an approximate (i.e., $\cong$) congruence relation. 
 
 
 

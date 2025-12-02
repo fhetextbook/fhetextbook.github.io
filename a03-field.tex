@@ -30,9 +30,9 @@ $ $
 \item \textbf{Closed:} For any $a,b \in \mathbb{Z}_7$, there exist $c_1,c_2 \in \mathbb{Z}_7$ such that $a+b \equiv c_1 \pmod{7}$ and $a\cdot b \equiv c_2 \pmod{7}$.
 \item \textbf{Associative:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)+c=a+(b+c)$, and $(a\cdot b)\cdot c=a\cdot(b\cdot c)$.
 \item \textbf{Commutative:} For any $a,b \in \mathbb{Z}_7$, $a+b=b+a$, and $a\cdot b=b\cdot a$.
-\item \textbf{Distributive:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)\cdot c=a\cdot c+b\cdot c$.
+\item \textbf{Distributive:} For any $a,b,c \in \mathbb{Z}_7$, $(a+b)\cdot c=a\cdot c+b\cdot c$, and $a\cdot(b+c)=a\cdot b+a\cdot c$.
 \item \textbf{Identity:} The additive identity is $0$, and the multiplicative identity is $1$.
-\item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists $a' \in \mathbb{Z}_7$ such that $a+a' \equiv 0 \pmod{7}$ (e.g., the additive inverse of $3$ is $4$ since $3+4\equiv0 \pmod{7}$). For any $a \in \mathbb{Z}_7^\times=\{1,\dots,6\}$, there exists $b \in \mathbb{Z}_7$ such that $ab \equiv 1 \pmod{7}$ (e.g., $3\cdot5=15\equiv1 \pmod{7}$).
+\item \textbf{Inverse:} For any $a \in \mathbb{Z}_7$, there exists $a' \in \mathbb{Z}_7$ such that $a+a' \equiv 0 \pmod{7}$ (e.g., the additive inverse of $3$ is $4$ since $3+4\equiv0 \pmod{7}$). For any $a \in \mathbb{Z}_7^\times=\{1,\dots,6\}$, there exists $b \in \mathbb{Z}_7^{\times}$ such that $ab \equiv 1 \pmod{7}$ (e.g., $3\cdot5=15\equiv1 \pmod{7}$).
 \end{itemize}
 
 \subsection{Theorems}
@@ -40,7 +40,7 @@ $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:field-theorem}} Field Theorems}}]
 \begin{enumerate}
-\item \textbf{Size of Finite Field:} Every finite field is called a Galois Field and it has $p^n$ elements for some prime $p$ and positive integer $n$, conversely, for each $p^n$ there exists a finite field of that size (unique up to isomorphism).
+\item \textbf{Size of Finite Field:} Every finite field (also called a Galois Field) has $p^n$ elements for some prime $p$ and positive integer $n$, conversely, for each such prime power $p^n$, there exists a finite field of order $p^n$ (unique up to isomorphism).
 \item \textbf{Isomorphic Fields:} Any two finite fields $\mathbb{F}_1$ and $\mathbb{F}_2$ with the same number of elements are isomorphic, i.e., there exists a bijection $f:\mathbb{F}_1\to\mathbb{F}_2$ such that for all $a,b\in\mathbb{F}_1$, $f(a+b)=f(a)+f(b)$ and $f(ab)=f(a)f(b)$.
 \end{enumerate}
 \end{tcolorbox}

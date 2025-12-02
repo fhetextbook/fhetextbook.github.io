@@ -2,19 +2,19 @@
 In \autoref{sec:roots} and \autoref{sec:cyclotomic}, we learned about the definition and properties of the $\mu$-th roots of unity and the $\mu$-th cyclotomic polynomial over complex numbers (i.e., $X \in \mathbb{C}$) as follows: 
 
 \begin{itemize}
-\item \textbf{The $\bm \mu$-th roots of unity} are the solutions for $X^\mu = 1$ over $X \in \mathbb{C}$ (complex numbers). The formula for the $\mu$-th root of unity is $X = e^{2 \pi i k / \mu}$ for all integers $k$ such that $0 \leq k \leq \mu - 1$. 
+\item \textbf{The $\bm \mu$-th roots of unity} are the solutions in $\mathbb{C}$ to the equation $X^\mu = 1$. In other words, all $\mu$-th roots of unity can be written as $X = e^{2 \pi i k / \mu}$ for integers $k$ with $0 \le k < \mu$.
 \item \textbf{The primitive $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are those $\mu$-th roots of unity whose order (\autoref{subsec:order-def}) is $\mu$ (i.e., $\omega^{\mu} = 1$ and $\omega^d \neq 1$ for any $1 \le d < \mu$ with $d \mid \mu$).
 \item Given any primitive $\mu$-th roots of unity $\omega$, one can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$ (Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:order-theorem}). 
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
 \end{itemize}
 
-In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (ring), which is structured as follows: 
+In this section, we will explain the $\mu$-th cyclotomic polynomial over $\mathbb{Z}_p$ (with $p$ prime), which is structured as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{sec:cyclotomic-polynomial-integer-ring}} Roots of Unity and Cyclotomic Polynomial over Rings $\mathbb{Z}_p$}}]
 
 
 \begin{itemize}
-\item \textbf{The $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are the solutions for $X^\mu \equiv 1 \bmod p$. Note that these solutions are not $X = \omega^{2 \pi i k / \mu}$ (the formula for the solutions over $X \in \mathbb{C}$). 
+\item \textbf{The $\bm \mu$-th roots of unity (denoted as $\bm \omega$)} are the solutions for $X^\mu \equiv 1 \bmod p$. Note that in contrast to the complex case, these solutions cannot be expressed as $X = e^{2 \pi i k / \mu}$. 
 \item \textbf{The primitive $\bm \mu$-th roots of unity} are defined as those $\mu$-th roots of unity whose order is $\mu$ (i.e., $\omega^{\mu} \equiv 1 \bmod p$, and $\omega^d \not\equiv 1 \bmod p$ for any $1 \le d < \mu$ with $d \mid \mu$). 
 \item Given any primitive $\mu$-th roots of unity $\omega$, it can generate all primitive $\mu$-th roots of unity by computing $\omega^{k'}$ such that $k'$ is an integer $0 < k' < \mu$ and $\textsf{gcd}(k', \mu) = 1$.
 \item \textbf{The $\bm \mu$-th cyclotomic polynomial} is defined as a polynomial whose roots are the primitive $\mu$-th roots of unity. That is, \[ \Phi_{\mu}(x) = \prod_{\omega \in P({\mu})} (x - \omega) = \prod_{\substack{0 \leq k \leq {\mu}-1,\\ \text{gcd}(k, {\mu}) = 1}} (x - \omega^k) \]
@@ -32,8 +32,8 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \textbf{$\bm \mu$-th}&where $0 \leq k \leq \mu - 1$)&\\
 \textbf{Root of Unity}&&\\\hline
 \textbf{Definition}&Those $\mu$-th roots of unity $\omega$ such that&Those $\mu$-th roots of unity $\omega$ such that\\
-\textbf{of the}&$\omega^{\mu} = 1$, and $\omega^{\frac{\mu}{2}} \neq 1$&$\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{d} \not\equiv 1 \bmod p$\\
-\textbf{Primitive}&&for any $1 \le d < \mu$ with $d \mid \mu$\\
+\textbf{of the}&$\omega^{\mu} = 1$, and $\omega^{d} \neq 1$ &$\omega^{\mu} \equiv 1 \bmod p$, and $\omega^{d} \not\equiv 1 \bmod p$\\
+\textbf{Primitive}&for any $1 \le d < \mu$ with $d \mid \mu$&for any $1 \le d < \mu$ with $d \mid \mu$\\
 \textbf{$\bm \mu$-th}&&\\
 \textbf{Root of}&&\\
 \textbf{Unity}&&\\\hline
@@ -42,7 +42,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \textbf{$\bm \mu$-th}&\multicolumn{2}{|c|}{}\\
 \textbf{Cyclotomic}&\multicolumn{2}{|c|}{}\\
 \textbf{Polynomial}&\multicolumn{2}{|c|}{}\\\hline
-\textbf{Finding}&For $\omega = e^{2 \pi i/ \mu}$, compute all ${\omega}^k$ such that&Find one satisfactory $\omega$ that is a root of\\
+\textbf{Finding}&For $\omega = e^{2 \pi i/ \mu}$, compute all ${\omega}^k$ such that&Find one primitive $\omega$ that is a root of\\
 \textbf{Primitive}&$0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$&the $\mu$-th cyclotomic polynomial, and\\
 \textbf{$\bm \mu$-th}&(Theorem~\ref*{subsec:roots-theorem}.4 in \autoref{subsec:roots-theorem})&compute all $\omega^k \bmod p$ such that\\
 \textbf{Roots of}&&$0 < k < \mu $ and $\textsf{gcd}(k, \mu) = 1$\\
@@ -51,6 +51,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $X \in 
 \caption{The roots of unity and cyclotomic polynomials over $X \in \mathbb{C}$ v.s. over $X \in \mathbb{Z}_p$}
 \label{tab:cyclotomic-polynomial-comparison}
 \end{table}
+
 
 Note that in the $\mu$-th cyclotomic polynomial, in both cases of over $X \in \mathbb{C}$ and over $X \in \mathbb{Z}_p$, each of their roots $\omega$ (i.e., the primitive $\mu$-th root of unity) has the order $\mu$ (i.e., $\omega^{\mu} = 1$ over $X \in \mathbb{C}$, and $\omega^{\mu} \equiv 1 \bmod p$ over $X \in \mathbb{Z}_p$). Also note that each root $\omega$ can generate all roots of the $\mu$-th cyclotomic polynomial by computing $\omega^{k'}$ such that $\textsf{gcd}(k', \mu) = 1$.
 

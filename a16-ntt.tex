@@ -10,7 +10,7 @@ $A(X) = \sum\limits_{i=0}^{n-1}a_iX^i$, \textcolor{white}{...} $B(X) = \sum\limi
 
 , the polynomial multiplication $C(X) = A(X)\cdot B(X)$ is computed as follows:
 
-$C(X) = \sum\limits_{i=0}^{2n-1}c_iX^{i}$, where $c_i = \sum\limits_{k=0}^{i}a_kb_{i-k}$
+$C(X) = \sum\limits_{i=0}^{2n-2}c_iX^{i}$, where $c_i = \sum\limits_{k=0}^{i}a_kb_{i-k}$
 
 This operation of computing $\vec{c} = (c_0, c_1, \cdots, c_{2n-1})$ is also called the convolution of $\vec a$ and $\vec b$, denoted as $\vec{c} = \vec{a} \otimes \vec{b}$. The time complexity of this operation (i.e., the total number of multiplications between two numbers) is $O(n^2)$. 
 
@@ -26,16 +26,16 @@ Then, the point-value representation of the polynomial $C(X) = A(X) \cdot B(X)$ 
 
 $C(X)$ : $\bm ( ({x}_0, {y}_0^{\langle c \rangle}), ({x}_1, {y}_1^{\langle c \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle c \rangle}) \bm )$, where ${y}_i^{\langle c \rangle} = {y}_i^{\langle a \rangle} \cdot {y}_i^{\langle b \rangle}$
 
-However, we cannot derive polynomial $C(X)$ based on these $n$ coordinates because the degree of $C(X)$ is $2n-2$ (or less than $2n-2$). But if we regard all polynomials (including $A(X), B(X)$ and $C(X)$) to be in the polynomial ring $\mathbb{R}[X]/ X^n + 1$ (or $\mathbb{Z}_p[X]/ X^n + 1$), then we can reduce the $(2n-2)$-degree polynomial $C(X)$ to a congruent $(n-1)$-degree (or lesser degree) polynomial in the ring. Then, the $n-1$ coordinates of $C(X)$ are sufficient to derive $C(X)$. 
+However, we cannot derive polynomial $C(X)$ based on these $n$ coordinates because the degree of $C(X)$ is $2n-2$ (or less than $2n-2$). But if we regard all polynomials (including $A(X), B(X)$ and $C(X)$) to be in the polynomial ring $\mathbb{R}[X]/ (X^n + 1)$ (or $\mathbb{Z}_p[X]/(X^n + 1)$), then we can reduce the $(2n-2)$-degree polynomial $C(X)$ to a congruent $(n-1)$-degree (or lesser degree) polynomial in the ring. Then, the $n$ coordinates of $C(X)$ are sufficient to derive $C(X)$. 
 
 However, the time complexity of this new method is still $O(n^2)$. The Hadamard product between two polynomials' point-value representations takes $O(n)$, but evaluating a polynomial at $n$ distinct $x$ values takes $O(n^2)$ (because each polynomial has $n$ terms, and we have to compute each term for $n$ distinct $x$ values). The polynomial interpolation for deriving $C(X)$ also takes $O(n^2)$. 
 
-To solve this efficiency problem, this section will introduce an efficient technique for polynomial evaluation, which can evaluate a polynomial at $n$ distinct roots of unity in $O(n \log n)$. This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic Transform(NTT). These two types are technically almost the same, with the only difference being that the FFT assumes a polynomial ring over complex numbers (\autoref{sec:roots}), whereas the NTT assumes a polynomial ring over the integers (\autoref{sec:cyclotomic-polynomial-integer-ring}). Polynomial multiplication based on FFT (or NTT) comprises 3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT (or NTT). 
+To solve this efficiency problem, this section will introduce an efficient technique for polynomial evaluation, which can evaluate a polynomial at $n$ distinct roots of unity in $O(n \log n)$. This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic Transform(NTT). These two types are technically almost the same, with the only difference being that the FFT assumes a polynomial ring over complex numbers (\autoref{sec:roots}), whereas the NTT assumes a polynomial ring over a finite field (e.g., integers modulo a prime) (\autoref{sec:cyclotomic-polynomial-integer-ring}). Polynomial multiplication based on FFT (or NTT) comprises 3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT (or NTT). 
 
 \subsection{Forward FFT (or NTT)}
 \label{subsec:ntt-forward}
 
-We assume a polynomial ring of $\mathbb{R}[X]/ (X^n + 1)$ for FTT, and $\mathbb{Z}_p[X]/ (X^n + 1)$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are the $n$ distinct roots of $X^n + 1$, which are $\omega^1$, $\omega^3, \ldots, \omega^{2n-1}$, where $\omega$ is the primitive $2n$-th root of unity. Then, the point-value representation of the polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
+We assume a polynomial ring of $\mathbb{R}[X]/ (X^n + 1)$ for FFT, and $\mathbb{Z}_p[X]/ (X^n + 1)$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are the $n$ distinct roots of $X^n + 1$, which are $\omega^1$, $\omega^3, \ldots, \omega^{2n-1}$, where $\omega$ is the primitive $2n$-th root of unity. Then, the point-value representation of the polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
 
 ${y}_i^{\langle a \rangle} = A(\omega^{2i + 1}) = \sum\limits_{j=0}^{n-1}a_{j}\cdot (\omega^{2i + 1})^j = \sum\limits_{j=0}^{n-1}a_{j}\cdot \omega^{(2i + 1)\cdot j}$. 
 
@@ -56,17 +56,17 @@ $A_1(X) = a_1 + a_3X + a_5X^2 + \cdots + a_{n-1}X^{\frac{n}{2} - 1}$
 
 The above method of splitting a polynomial into two half-degree polynomials is called the Cooley-Tukey step. As we split $A(X)$ into two smaller-degree polynomials $A_0(X)$ and $A_1(X)$, evaluating $A(X)$ at the odd-powered primitive $2n$-th roots of unity $\{\omega^1, \omega^3, \omega^5, \cdots, \omega^{2n-1}\}$ is equivalent to evaluating $A_0(X)$ and $A_1(X)$ at $n$ distinct \textit{squared} $n$-th roots of unity $\{(\omega^2)^1, (\omega^2)^3, (\omega^2)^5, \ldots, (\omega^2)^{2n-1}\}$ and computing $A_0(X^2) + X\cdot A_1(X^2)$. However, remember that the primitive $2n$-th root of unity $\omega$ has order $2n$ (i.e., $\omega^{2n} = 1$ and $\omega^m \neq 1$ for all $m < 2n$). Therefore, the second half of $\{(\omega^2)^1, (\omega^2)^3, (\omega^2)^5, \ldots, (\omega^2)^{2n-1}\}$ is a repetition of the first half. This implies that we only need to evaluate $A_0(X)$ and $A_1(X)$ at $\dfrac{n}{2}$ distinct $x$ coordinates each, instead of $n$ distinct coordinates, because the polynomial evaluation results for the other half are the same as those of the first half (as their input $x$ to the polynomial is the same). 
 
-We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and evaluate them at half-counted $n$-th roots of unity. Then, the total number of rounds of splitting is $\log n$, and the maximum number of root-to-coefficient multiplications in each round is $n$, which aggregates to $O(n \log n)$. 
+We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and evaluate them at half-counted (i.e., $n/2$) $n$-th roots of unity. Then, the total number of rounds of splitting is $\log n$, and the maximum number of root-to-coefficient multiplications in each round is $n$, which aggregates to $O(n \log n)$. 
 
 \subsubsection{Details}
 \label{subsec:ntt-forward-details}
 
 Suppose we have a polynomial ring that is either $\mathbb{Z}_{p}[X] / (X^8 + 1)$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / (X^8 + 1)$ (over complex numbers). 
 %$g = 3$ is the generator of $\mathbb{Z}_{17}^* = \{1, 2, \cdots, 16\}$. 
-We denote the primitive $(2n=8)$-th roots of unity as $\omega$, and 
+We denote by $\omega$ a primitive $(2n=16)$-th root of unity, and 
 %which is $\omega = e^{\frac{i 2\pi}{n}}$ and %$ = g^{\frac{p - 1}{n}}$.
 %= 3^{\frac{17 - 1}{8}} = 9$. 
-the $n$ distinct $(n=8)$-th roots of $X^n + 1$ are: $\{\omega^1, \omega^3, \omega^5, \omega^7, \omega^9, \omega^{11}, \omega^{13}, \omega^{15}\}$.
+the 8 distinct roots of $X^8 + 1$ are: $\{\omega^1, \omega^3, \omega^5, \omega^7, \omega^9, \omega^{11}, \omega^{13}, \omega^{15}\}$.
 %$ \bmod 17 \equiv \{1, 9, 13, 15, 16, 8, 4, 2\} \bmod 17$. 
 
 $ $
@@ -108,15 +108,15 @@ $\mathcolor{white}{A(X)} = \underbrace{\underbrace{(\underbrace{A_{0,0}(X^4)}_{\
 
 $ $
 
-To evaluate $A(X)$ at the $n$ distinct roots $X = \{\omega^1, \omega^3, \ldots, \omega^15\}$, we evaluate each FFT level of the above formula at $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$, starting from level $1 \leq l \leq 3$. 
+To evaluate $A(X)$ at the $n$ distinct roots $X = \{\omega^1, \omega^3, \ldots, \omega^{15}\}$, we evaluate each FFT level of the above formula at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$, starting from level $1 \leq l \leq 3$. 
 
 $ $
 
-\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$ to $X^4$ results in only 2 distinct values: $\omega^0$ and $\omega^8$. This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4$. Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 0}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
+\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^4$ results in only 2 distinct values: $\omega^0$ and $\omega^8$. This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4$. Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 0}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
 
 $ $
 
-\para{FFT Level $\bm{l = 2}$:} Based on the evaluation results from FFT Level 1 as building blocks, we evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^15\}$ to $X^2$ results in only 4 distinct values: $\omega^1$, $\omega^5$, $\omega^9$, and $\omega^{13}$.
+\para{FFT Level $\bm{l = 2}$:} Based on the evaluation results from FFT Level 1 as building blocks, we evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^2$ results in only 4 distinct values: $\omega^1$, $\omega^5$, $\omega^9$, and $\omega^{13}$.
 This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^2 = (\omega^9)^2$, $(\omega^3)^2 = (\omega^{11})^2$, $(\omega^5)^2 = (\omega^{13})^2$, and $(\omega^7)^2 = (\omega^{15})^2$. Therefore, we only need to evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at 4 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition (where we use the results from FFT Level 1 as building blocks, and the computational structure of FFT Level 2 is the same as that of FFT Level 1). There are a total of 2 polynomials to evaluate (i.e., $A_{0}(X^2), A_{1}(X^2)$); thus, we compute the FFT a total of $2 \cdot 4 = 8$ times. 
 
 $ $
@@ -125,7 +125,7 @@ $ $
 
 $ $
 
-\para{Generalization:} Suppose that the degree of the target polynomial to evaluate is bounded by $n$ degree, and we define $L = \log n$ (i.e., the total number of FFT levels). Then, the forward FFT operation requires a total of $L$ FFT levels, where each $l$-th level requires the evaluation of $2^{L - l}$ polynomials at $2^l$ distinct $X$ values. Therefore, the total number of FFT computations for the forward FFT is: $\sum_{l=1}^{L}(2^{L-l} \cdot 2^l) = L \cdot 2^L = n \log n$
+\para{Generalization:} Suppose that the degree of the target polynomial to evaluate is at most $n-1$ (with $n$ terms), and we define $L = \log n$ (i.e., the total number of FFT levels). Then, the forward FFT operation requires a total of $L$ FFT levels, where each $l$-th level requires the evaluation of $2^{L - l}$ polynomials at $2^l$ distinct $X$ values. Therefore, the total number of FFT computations for the forward FFT is: $\sum_{l=1}^{L}(2^{L-l} \cdot 2^l) = L \cdot 2^L = n \log n$
 %$\log (n) \cdot (2^{L - l} \cdot 2^l) = 2^L \log n = n \log n$
 . Therefore, the time complexity of the forward FFT is $O(n \log n)$.
 

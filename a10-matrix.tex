@@ -17,7 +17,7 @@ $ $
 
 Vector addition is defined as: 
 
-$ \vec{a} + \vec{b} = (a_0 + b_0, \text{ } a_1  +  b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1}  +  b_{n-1})$
+$ \vec{a} + \vec{b} = (a_0 + b_0, \text{} a_1  +  b_1, \text{} \gap{$\cdots$}, \text{} a_{n-1}  +  b_{n-1})$
 
 $ $
 
@@ -31,7 +31,7 @@ Dot product is defined as:
 
 $\langle \vec{a}, \vec{b} \rangle =  \vec{a} \cdot \vec{b} = a_0 b_0 + a_1 b_1 + \gap{$\cdots$} + a_{n-1} b_{n-1}$.
 
-More formally, $\vec{a} \cdot \vec{b} = |a||b|\cos\theta$, where $\theta$ is the angle between the two vectors. As $\vec{a}$ and $\vec{b}$ point at the same direction, $\vec{a} \cdot \vec{b}$ convergest to a maximized value. As $\vec{a}$ and $\vec{b}$ have an orthogonal direction, $\vec{a} \cdot \vec{b}$ converges to  0. 
+$\vec{a} \cdot \vec{b}$ can also be expressed as $\|\vec{a}\|\,\|\vec{b}\|\cos\theta$, where $\theta$ is the angle between $\vec{a}$ and $\vec{b}$. If $\vec{a}$ and $\vec{b}$ point in the same direction, $\vec{a}\cdot\vec{b}$ attains its maximum value ($\|\vec{a}\|\,\|\vec{b}\|$). If $\vec{a}$ and $\vec{b}$ are orthogonal, then $\vec{a}\cdot\vec{b} = 0$.
 
 $ $
 
@@ -44,15 +44,15 @@ $ $
 
 Hadamard product is defined as: 
 
-$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1} b_{n-1})$
+$\vec{a} \odot \vec{b} = (a_0 b_0, \text{} a_1 b_1, \text{} \gap{$\cdots$}, \text{} a_{n-1} b_{n-1})$
 
 $ $
 
 \item \textbf{Hermitian Product:} Given two $n$-dimensional complex vectors:
 
-$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\ldots$},\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
+$\vec{a} = (a_0 + i \cdot a'_0, \text{} a_1+ i\cdot a'_1, \text{} \gap{$\ldots$},\text{}  a_{n-1}+ i\cdot a'_{n-1})$ 
 
-$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ } \gap{$\ldots$}, \text{ } b_{n-1} + i\cdot b'_{n-1})$
+$\vec{b} = (b_0 + i\cdot b'_0, \text{} b_1 + i\cdot b'_1, \text{} \gap{$\ldots$}, \text{} b_{n-1} + i\cdot b'_{n-1})$
 
 $ $
 
@@ -60,7 +60,7 @@ Hermitian product is a dot product with the 2nd operand as a conjugate (\autoref
 
 $\langle\langle \vec{a}, \vec{b} \rangle\rangle =  \vec{a} \cdot \overline{\vec{b}} $
 
-$ = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\cdots$},\text{ } a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{ } b_1 - i\cdot b'_1, \text{ } \gap{$\cdots$}, \text{ } b_{n-1} - i\cdot b'_{n-1})$
+$ = (a_0 + i \cdot a'_0, \text{} a_1+ i\cdot a'_1, \text{} \gap{$\cdots$},\text{} a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{} b_1 - i\cdot b'_1, \text{} \gap{$\cdots$}, \text{} b_{n-1} - i\cdot b'_{n-1})$
 
 
 
@@ -157,25 +157,25 @@ Matrix-to-vector multiplication and matrix-to-matrix multiplication are defined 
 
 
 $A = \begin{bmatrix}
- a_{\langle 1, 1\rangle} & a_{\langle 1, 2\rangle} & a_{\langle 1, 3\rangle} & \cdots & a_{\langle 1, n\rangle}\\
- a_{\langle 2, 1\rangle} & a_{\langle 2, 2\rangle} & a_{\langle 2, 3\rangle} & \cdots & a_{\langle 2, n\rangle} \\
- a_{\langle 3, 1\rangle} & a_{\langle 3, 2\rangle} & a_{\langle 3, 3\rangle} & \cdots & a_{\langle 3, n\rangle} \\
+ a_{1, 1} & a_{1, 2} & a_{1, 3} & \cdots & a_{1, n}\\
+ a_{2, 1} & a_{2, 2} & a_{2, 3} & \cdots & a_{2, n} \\
+ a_{3, 1} & a_{3, 2} & a_{3, 3} & \cdots & a_{3, n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
- a_{\langle m, 1\rangle} & a_{\langle m, 2\rangle} & a_{\langle m, 3\rangle} & \cdots & a_{\langle m, n\rangle} \\
+ a_{m, 1} & a_{m, 2} & a_{m, 3} & \cdots & a_{m, n} \\
 \end{bmatrix} = \begin{bmatrix} 
-\vec{a}_{\langle 1, * \rangle} \\ 
-\vec{a}_{\langle 2, * \rangle} \\ 
-\vec{a}_{\langle 3, * \rangle} \\ 
+\vec{a}_{1, * } \\ 
+\vec{a}_{2, * } \\ 
+\vec{a}_{3, * } \\ 
 \vdots\\
-\vec{a}_{\langle m, * \rangle} \\ 
-\end{bmatrix}, \text{ } \vec{x} = (x_1, x_2, \cdots, x_{n})$
+\vec{a}_{m, * } \\ 
+\end{bmatrix}, \text{} \vec{x} = (x_1, x_2, \cdots, x_{n})$
 
 
 $ $
 
 The result of $A \cdot \vec{x}$ is an $m$-dimensional vector computed as:
 
-$A \cdot \vec{x} = \Big(\vec{a}_{\langle 1, * \rangle} \cdot \vec{x}, \text{ } \vec{a}_{\langle 2, * \rangle} \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{\langle m, * \rangle} \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{ } \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{ } \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
+$A \cdot \vec{x} = \Big(\vec{a}_{1, * } \cdot \vec{x}, \text{} \vec{a}_{2, * } \cdot \vec{x}, \text{}\cdots,\text{} \vec{a}_{m, * } \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{} \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{} \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
 
 
 $ $
@@ -186,17 +186,17 @@ $ $
 
 
 $A = \begin{bmatrix}
- a_{\langle 1, 1\rangle} & a_{\langle 1, 2\rangle} & a_{\langle 1, 3\rangle} & \cdots & a_{\langle 1, n\rangle}\\
- a_{\langle 2, 1\rangle} & a_{\langle 2, 2\rangle} & a_{\langle 2, 3\rangle} & \cdots & a_{\langle 2, n\rangle} \\
- a_{\langle 3, 1\rangle} & a_{\langle 3, 2\rangle} & a_{\langle 3, 3\rangle} & \cdots & a_{\langle 3, n\rangle} \\
+ a_{1, 1} & a_{1, 2} & a_{1, 3} & \cdots & a_{1, n}\\
+ a_{2, 1} & a_{2, 2} & a_{2, 3} & \cdots & a_{2, n} \\
+ a_{3, 1} & a_{3, 2} & a_{3, 3} & \cdots & a_{3, n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
- a_{\langle m, 1\rangle} & a_{\langle m, 2\rangle} & a_{\langle m, 3\rangle} & \cdots & a_{\langle m, n\rangle} \\
+ a_{m, 1} & a_{m, 2} & a_{m, 3} & \cdots & a_{m, n} \\
 \end{bmatrix}$, $B = \begin{bmatrix}
- b_{\langle 1, 1\rangle} & b_{\langle 1, 2\rangle} & b_{\langle 1, 3\rangle} & \cdots & b_{\langle 1, k\rangle}\\
- b_{\langle 2, 1\rangle} & b_{\langle 2, 2\rangle} & b_{\langle 2, 3\rangle} & \cdots & b_{\langle 2, k\rangle} \\
- b_{\langle 3, 1\rangle} & b_{\langle 3, 2\rangle} & b_{\langle 3, 3\rangle} & \cdots & b_{\langle 3, k\rangle} \\
+ b_{1, 1} & b_{1, 2} & b_{1, 3} & \cdots & b_{1, k}\\
+ b_{2, 1} & b_{2, 2} & b_{2, 3} & \cdots & b_{2, k} \\
+ b_{3, 1} & b_{3, 2} & b_{3, 3} & \cdots & b_{3, k} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
- b_{\langle n, 1\rangle} & b_{\langle n, 2\rangle} & b_{\langle n, 3\rangle} & \cdots & b_{\langle n, k\rangle} \\
+ b_{n, 1} & b_{n, 2} & b_{n, 3} & \cdots & b_{n, k} \\
 \end{bmatrix}$
 
 $ $
@@ -204,12 +204,12 @@ $ $
 The result of $A \cdot B$ is a $m \times k$ matrix computed as:
 
 $A \cdot B = \begin{bmatrix}
-\sum\limits_{i=1}^{n}a_{\langle 1, i\rangle}b_{\langle i, 1\rangle} & \sum\limits_{i=1}^{n}a_{\langle 1, i\rangle}b_{\langle i, 2\rangle} & \sum\limits_{i=1}^{n}a_{\langle 1, i\rangle}b_{\langle i, 3\rangle} & \cdots & \sum\limits_{i=1}^{n}a_{\langle 1, i\rangle}b_{\langle i, k\rangle} \\
-\sum\limits_{i=1}^{n}a_{\langle 2, i\rangle}b_{\langle i, 1\rangle} & \sum\limits_{i=1}^{n}a_{\langle 2, i\rangle}b_{\langle i, 2\rangle} & \sum\limits_{i=1}^{n}a_{\langle 2, i\rangle}b_{\langle i, 3\rangle} & \cdots & \sum\limits_{i=1}^{n}a_{\langle 2, i\rangle}b_{\langle i, k\rangle} \\
-\sum\limits_{i=1}^{n}a_{\langle 3, i\rangle}b_{\langle i, 1\rangle} & \sum\limits_{i=1}^{n}a_{\langle 3, i\rangle}b_{\langle i, 2\rangle} & \sum\limits_{i=1}^{n}a_{\langle 3, i\rangle}b_{\langle i, 3\rangle} & \cdots & \sum\limits_{i=1}^{n}a_{\langle 3, i\rangle}b_{\langle i, k\rangle} \\
+\sum\limits_{i=1}^{n}a_{1, i}b_{i, 1} & \sum\limits_{i=1}^{n}a_{1, i}b_{i, 2} & \sum\limits_{i=1}^{n}a_{1, i}b_{i, 3} & \cdots & \sum\limits_{i=1}^{n}a_{1, i}b_{i, k} \\
+\sum\limits_{i=1}^{n}a_{2, i}b_{i, 1} & \sum\limits_{i=1}^{n}a_{2, i}b_{i, 2} & \sum\limits_{i=1}^{n}a_{2, i}b_{i, 3} & \cdots & \sum\limits_{i=1}^{n}a_{2, i}b_{i, k} \\
+\sum\limits_{i=1}^{n}a_{3, i}b_{i, 1} & \sum\limits_{i=1}^{n}a_{3, i}b_{i, 2} & \sum\limits_{i=1}^{n}a_{3, i}b_{i, 3} & \cdots & \sum\limits_{i=1}^{n}a_{3, i}b_{i, k} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
-\sum\limits_{i=1}^{n}a_{\langle m, i\rangle}b_{\langle i, 1\rangle}
-& \sum\limits_{i=1}^{n}a_{\langle m, i\rangle}b_{\langle i, 2\rangle} & \sum\limits_{i=1}^{n}a_{\langle m, i\rangle}b_{\langle i, 3\rangle} & \cdots & \sum\limits_{i=1}^{n}a_{\langle m, i\rangle}b_{\langle i, k\rangle} \\
+\sum\limits_{i=1}^{n}a_{m, i}b_{i, 1}
+& \sum\limits_{i=1}^{n}a_{m, i}b_{i, 2} & \sum\limits_{i=1}^{n}a_{m, i}b_{i, 3} & \cdots & \sum\limits_{i=1}^{n}a_{m, i}b_{i, k} \\
 \end{bmatrix}$
 
 
@@ -290,9 +290,9 @@ There are two types of projections: a vector projection and an orthogonal (i.e.,
 \end{figure}
 
 
-\para{Vector Projection:} Given two vectors $\vec{a}$ and $\vec{b}$ in the same $n$-dimensional vector space, the vector projection $\textsf{Proj}_{\vec{b}}(\vec{a})$ measures how much $\vec{a}$ contains the element of $\vec{b}$ (i.e., filtering $\vec{a}$ by $\vec{b}$). In the example of \autoref{fig:vector-projection}, $\vec{a}$'s projection on $\vec{b}$ is $\vec{a}_1$, where the length of $\vec{a}_1$ is geometrically $||a_1|| = ||a|| \cos \theta = ||a||\dfrac{a \cdot b}{||a||\cdot||b||} = \dfrac{a \cdot b}{||b||}$. Let $\vec{b'}$ be a unit vector of $\vec{b}$, that is $\vec{b'} = \dfrac{\vec{b}}{||b||}$. Then, $\vec{a}_1 = ||a_1||\cdot\vec{b'} = \dfrac{a \cdot b}{||b||} \cdot \dfrac{\vec{b}}{||b||} = \dfrac{a \cdot b}{||b||^2}\vec{b}$. Thus, $\textsf{Proj}_{\vec{b}}(\vec{a}) = \dfrac{a \cdot b}{||b||^2}\vec{b}$.
+\para{Vector Projection:} Given two vectors $\vec{a}$ and $\vec{b}$ in the same $n$-dimensional vector space, the vector projection $\textsf{Proj}_{\vec{b}}(\vec{a})$ measures the component of $\vec{a}$ in the direction of $\vec{b}$ (i.e., the part of $\vec{a}$ that is parallel to $\vec{b}$). In the example of \autoref{fig:vector-projection}, $\vec{a}$'s projection on $\vec{b}$ is $\vec{a}_1$, where the length of $\vec{a}_1$ is geometrically $||a_1|| = ||a|| \cos \theta = ||a||\dfrac{a \cdot b}{||a||\cdot||b||} = \dfrac{a \cdot b}{||b||}$. Let $\vec{b'}$ be a unit vector of $\vec{b}$, that is $\vec{b'} = \dfrac{\vec{b}}{||b||}$. Then, $\vec{a}_1 = ||a_1||\cdot\vec{b'} = \dfrac{a \cdot b}{||b||} \cdot \dfrac{\vec{b}}{||b||} = \dfrac{a \cdot b}{||b||^2}\vec{b}$. Thus, $\textsf{Proj}_{\vec{b}}(\vec{a}) = \dfrac{a \cdot b}{||b||^2}\vec{b}$.
 
-\para{Orthogonal Projection:} Given the vector $\vec{x}$ and a set of mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span the plane (or subspace) $P$, the orthogonal projection $\textsf{Proj}_P(\vec{x})$ measures how much of the element of the plane $P$ is contained in $\vec{x}$ (i.e., filtering $\vec{x}$ by the plane $P$). In the example of \autoref{fig:orthogonal-projection}, vector $\vec{x}$'s projection onto plane $P$ is shown as a red arrow, which is computed by summing the projections of $\vec{x}$ onto each of the mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span plane $P$. This is equivalent to $\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=0}^{n-1} \textsf{Proj}_{\vec{p}_i}(\vec{a})$. The computation of $\textsf{Proj}_P(\vec{x})$ can be thought of as transforming $\vec{v}$ into a different coordinate system that expresses the vector space in terms of $n$ mutually orthogonal vectors. 
+\para{Orthogonal Projection:} Given the vector $\vec{x}$ and a set of mutually orthogonal vectors $\vec{p}_0, \vec{p}_1, \cdots, \vec{p}_{n-1}$ that span the subspace $P$, the orthogonal projection $\textsf{Proj}_P(\vec{x})$ measures how much of $\vec{x}$ lies in $P$ (i.e., the component of $\vec{x}$ within $P$). In the example, $\vec{x}$’s projection onto $P$ (red arrow) equals the sum of the projections of $\vec{x}$ onto each orthogonal basis vector $\vec{p}_i$ spanning $P$: $\textsf{Proj}_P(\vec{x}) = \sum\limits_{i=0}^{n-1}\textsf{Proj}_{\vec{p}_i}(\vec{x})$. This computation can be viewed as expressing $\vec{x}$ in a coordinate system defined by the $n$ orthogonal vectors.
 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:projection}} Vector and Orthogonal Projections}}]
 
@@ -300,7 +300,7 @@ There are two types of projections: a vector projection and an orthogonal (i.e.,
 
 \item \textbf{Vector Projection:} Given two vectors $\vec{a}$ and $\vec{b}$ in the same vector space, the vector projection of $\vec{a}$ on $\vec{b}$ is:
 
-$\textsf{Proj}_{\vec{b}}(\vec{a}) = \vec{a}_p = \vec{a} \cos \theta = \dfrac{\vec{a} \cdot \vec{b}}{||b||^2} \vec{b}$
+$\textsf{Proj}_{\vec{b}}(\vec{a}) = \vec{a}_p  = \dfrac{\vec{a} \cdot \vec{b}}{||b||^2} \vec{b}$ \textcolor{red}{\# where $||\vec{a}_p|| = ||\vec{a}|| \cos \theta$}
 
 $ $
 
@@ -338,9 +338,9 @@ $\textsf{Proj}_P(\vec{a}) = \sum\limits_{i=0}^{n-1} \textsf{Proj}_{\vec{p}_i}(\v
 
 Based on the definition of orthogonal projection, the following properties are derived:  
 
-\para{Orthogonal Basis:} In an $n$-dimensional vector space, any mutually orthogonal $n$ vectors in the vector space span a plane (or subspace) $P$ that is identical to the entire vector space. Further, the orthogonal projection of any vector in the vector space on $P$ is guaranteed to be a unique vector.
+\para{Orthogonal Basis:} In an $n$-dimensional vector space, any mutually orthogonal $n$ vectors in the vector space span the subspace $P$ that is identical to the entire vector space. Further, the orthogonal projection of any vector in the vector space on $P$ is guaranteed to be a unique vector.
 
-\para{Non-orthogonal Basis:} In an $n$-dimensional vector space, suppose some $n$ non-orthogonal vectors satisfy the following two conditions: (i) they span the entire vector space; (ii) they are linearly independent (i.e., one vector cannot be expressed as a linear combination of the other vectors). Then, the $n \times n$ matrix $P$ comprised of these $n$ vectors forms a basis for the entire vector space $V$, and the matrix-to-vector multiplication $P\vec{v}$ for each $\vec{v}$ in the vector space is guaranteed to yield a unique vector. However, the formula $\textsf{Proj}_P(\vec{v})$ is not a valid geometric projection of the vector $\vec{\vec{v}}$ on $P$, because the $n$ basis vectors are non-orthogonal. Yet, the computation of $P\vec{v}$ can be thought of as uniquely transforming $\vec{v}$ into a different coordinate system that expresses the vector space with respect to $n$ non-orthogonal vectors in $P$. 
+\para{Non-orthogonal Basis:} In an $n$-dimensional vector space, suppose some $n$ non-orthogonal vectors satisfy the following two conditions: (i) they span the entire vector space; (ii) they are linearly independent (i.e., one vector cannot be expressed as a linear combination of the other vectors). Then, the $n \times n$ matrix $P$ comprised of these $n$ vectors forms a basis for the entire vector space $V$, and the matrix-to-vector multiplication $P\vec{v}$ for each $\vec{v}$ in the vector space is guaranteed to yield a unique vector. However, the formula $\textsf{Proj}_P(\vec{v})$ is not a valid geometric projection of the vector $\vec{v}$ on $P$, because the $n$ basis vectors are non-orthogonal. Yet, the computation of $P\vec{v}$ can be thought of as uniquely transforming $\vec{v}$ into a different coordinate system that expresses the vector space with respect to $n$ non-orthogonal vectors in $P$. 
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:projection}} Uniqueness of Transformed Vectors}}]
 
@@ -374,9 +374,9 @@ Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that f
 
 Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
 
-$\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+$\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
-Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$, and the algebraic operations $(+, \cdot)$ of the mapped elements preserve correctness with homomorphism.
+Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$, and it preserves the algebraic operations $(+, \cdot)$ (i.e., $\sigma$ is a homomorphism for addition and multiplication).
 
 $ $
 
@@ -388,7 +388,7 @@ $ $
 
 $\sigma(f_a(X) + f_b(X)) = \sigma(f_a(X)) + \sigma(f_b(X))$
 
-$\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$ \textcolor{red}{ \text{ } \# $\odot$ is Hadamard vector multiplication (Summary~\ref*{subsec:vector-arithmetic})}
+$\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$ \textcolor{red}{\text{} \# $\odot$ is Hadamard vector multiplication (Summary~\ref*{subsec:vector-arithmetic})}
 
 $ $
 
@@ -412,11 +412,11 @@ Given the above setup, we can see that $\sigma$ preserves homomorphism on the $(
 
 $\bm{\sigma}\bm{(}f_a(X) + f_b(X)\bm{)} = \bm{\sigma\bigg(}(a_0 + b_0) + (a_1 + b_1)X + (a_2 + b_2)X^2 + \cdots + (a_{n-1} + b_{n-1})X^{n-1}\bm{\bigg)}$
 
-$= \left(\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_0)^i, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_1)^i, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_2)^i, \cdots, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_{n-1})^i\right)$
+$= \left(\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_0)^i, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_1)^i, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_2)^i, \cdots, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_{n-1})^i\right)$
 
-$= \left(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{ }\sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{ }\sum\limits_{i=0}^{n-1}a_i(x_2)^i, \cdots, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\right)$
+$= \left(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{}\sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{}\sum\limits_{i=0}^{n-1}a_i(x_2)^i, \cdots, \text{} \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\right)$
 
-\text{ } $+ \left(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_2)^i, \cdots, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\right)$
+\text{} $+ \left(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{} \sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{} \sum\limits_{i=0}^{n-1}b_i(x_2)^i, \cdots, \text{} \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\right)$
 
 $= \bm{\sigma(}f_a(X)\bm{)} + \bm{\sigma(}f_b(X)\bm{)}$
 
@@ -429,22 +429,22 @@ $\bm{\sigma(}f_a(X)\cdot f_b(X)\bm{)} = \bm{\sigma\bigg(}\left(\sum\limits_{i=0}
 
 $ $
 
-$= \Bigg( \left(\sum\limits_{i=0}^{n-1}a_ix_0^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_0^i\right), \text{ }
-\left(\sum\limits_{i=0}^{n-1}a_ix_1^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_1^i\right), \text{ }
+$= \Bigg( \left(\sum\limits_{i=0}^{n-1}a_ix_0^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_0^i\right), \text{}
+\left(\sum\limits_{i=0}^{n-1}a_ix_1^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_1^i\right), \text{}
 \left(\sum\limits_{i=0}^{n-1}a_ix_2^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_2^i\right),$
 
-$  \text{ } \text{ } \text{ } \text{ } \text{ } \text{ }
+$  \text{} \text{} \text{} \text{} \text{} \text{}
 \cdots,
 \left(\sum\limits_{i=0}^{n-1}a_ix_{n-1}^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_{n-1}^i\right)
 \Bigg)$
 
 $ $
 
-$ = \Bigg(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{ } \cdots, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\Bigg)$
+$ = \Bigg(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{} \sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{} \cdots, \text{} \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\Bigg)$
 
-$  \text{ } \text{ } \text{ } \text{ }  \odot  \Bigg(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{ } 
-\sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{ }
-\cdots, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\Bigg)$
+$  \text{} \text{} \text{} \text{}  \odot  \Bigg(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{} 
+\sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{}
+\cdots, \text{} \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\Bigg)$
 
 $ $
 
@@ -518,9 +518,9 @@ $ $
 \subsubsection{Finding Appropriate Modulus $t$} 
 \label{subsubsec:poly-vector-transformation-modulus}
 
-To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/X^n + 1$ into an $n$-dimensional vector, we need to evaluate the polynomial at $n$ distinct roots of $X^n + 1 \bmod t$. However, $X^n + 1 \bmod t$ does not have $n$ distinct roots for all combinations of (degree, modulus) $ = (n, t)$. For example, if $n = 2$ and $t = 3$, then $X^2+ 1 \not\equiv 0 \bmod 3$ for any possible values of $X = \{0, 1, 2\}$. Therefore, our goal is to find a satisfactory $t$ given a fixed $n$ such that $n$ distinct roots of $X^n + 1 \pmod t$ exist, in order to use the isomorphic $\sigma$ mapping. 
+To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/X^n + 1$ into an $n$-dimensional vector, we need to evaluate the polynomial at $n$ distinct roots of $X^n + 1 \bmod t$. However, $X^n + 1 \bmod t$ does not have $n$ distinct roots for all combinations of (degree, modulus) $ = (n, t)$. For example, if $n = 2$ and $t = 3$, then $X^2+ 1 \not\equiv 0 \bmod 3$ for any possible values of $X = \{0, 1, 2\}$. Therefore, our goal is to find a satisfactory $t$ given a fixed $n$ such that $n$ distinct roots of $X^n + 1 \pmod t$ exist in order to use the isomorphic $\sigma$ mapping. 
 
-We start with two constraints: (1) we choose $t$ only such that $t$ is a prime number $p$; (2) $t – 1$ is some multiple of $2n$ (i.e., $(t – 1) = k \cdot 2n$ for some integer $k$). 
+We start with two constraints: (1) choose $t$ to be a prime number; (2) ensure $t-1$ is a multiple of $2n$.
 
 We learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}) the following: $a^{t - 1} \equiv 1 \bmod t$ if and only if $a$ and $t$ are co-prime. This means that if $t$ is a prime, then $a^{t - 1} \equiv 1 \bmod t$ for all $a \in \mathbb{Z}_t^{\times}$ (i.e., $\mathbb{Z}_t$ without $\{0\}$). Suppose $g$ is the generator of $\mathbb{Z}_t^{\times}$ whose powered values generate all elements of $\mathbb{Z}_t^{\times}$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$ and $g^{t - 1} \equiv 1 \bmod t$. Since $t - 1 = k \cdot 2n$ for some $k$, $g^{k\cdot2n} \equiv (g^{k})^{2n} \equiv 1 \bmod t$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) \leq 2n$. However, since $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, for all $a$ such that $a < t – 1 = k \cdot 2n$, $g^a \not\equiv 1 \bmod t$. In other words, for all $b$ such that $b < 2n$, $(g^k)^b \not\equiv 1 \bmod t$. Thus, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) = 2n$. 
 
@@ -529,7 +529,7 @@ Now, $c^n$ can be only 1 or -1. The reason is that in the relation $X^2 \equiv 1
 
 In conclusion, given a cyclotomic polynomial $X^n + 1$, if we choose a prime $t$ such that $t – 1 = k \cdot 2n$ for some integer $k$, then one root of $X^n + 1 \bmod t$ is: $X = c = g^k$. 
 
-Once we have found one root of $X^n + 1$, then we can derive all $n$ distinct roots of $X^n + 1$. Suppose $\omega$ is one root of $X^n + 1 \bmod t$. Then, we derive the following:
+Once we have found one root of $X^n + 1$, then we can derive all $n$ distinct roots of $X^n + 1$. Suppose $\omega$ is one root of $X^n + 1 \bmod t$. Then we derive the following:
 
 $\omega^n + 1 \equiv 0 \bmod t$
 
@@ -560,9 +560,9 @@ We summarize our findings as follows:
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:polynomial-ring-basis}} Isomorphism between Polynomials and Vectors over Integer (Ring)}}]
 
 \begin{itemize}
-\item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and we have an $n$-dimensional modulo $p$ vector space $\vec{v} \in \mathbb{Z}_t^n$. We define mapping $\sigma$ between this polynomial ring and vector space as follows:
+\item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and an $n$-dimensional vector space $\mathbb{Z}_t^n$ (integers mod $t$) with vector $\vec{v}$.
 
-$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
+$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
 
 $ $
 
@@ -575,11 +575,11 @@ $\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$
 
 $ $
 
-\item If the $n$-degree polynomial $F(x)$ has a fewer number of roots than $n$, then isomorphism between the vectors and polynomials over the $(+, \cdot)$ operations holds without modulo $t$ as follows:
+%\item If the $n$-degree polynomial $F(x)$ has a fewer number of roots than $n$, then isomorphism between the vectors and polynomials over the $(+, \cdot)$ operations holds without modulo $t$ as follows:
 
-$\sigma': f(x) \in \mathbb{Z}[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+%$\sigma': f(x) \in \mathbb{Z}[X] / F(X) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
-$ $
+%$ $
 
 \item Suppose we have the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1 \bmod t$ such that $t$ is a prime and $t - 1$ is some multiple of $2n$, and $g$ is a generator of $\mathbb{Z}_t^{\times}$. Then, $n$ distinct roots of $X^n + 1$ (i.e., primitive $(\mu=2n)$-th roots of unity) can be efficiently computed as: $\{\omega^{2i + 1}\}_{i=0}^{n-1}$ where $\omega = g^{\frac{t-1}{2n}} \bmod t$. 
 
@@ -617,7 +617,7 @@ $M = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
 \end{bmatrix}
-$, \text{ } $N = 
+$, \text{} $N = 
 \begin{bmatrix}
 1 & 0 & 0 & 0\\
 0 & 1 & 0 & 0\\
@@ -633,9 +633,9 @@ $ $
 
 The reason $N$ is not a linear transformation matrix is because it contains conjugate operators $\emptyset$. Yet, notice that the following homomorphism holds between $\vec{\hat v} \in \mathbb{\hat C}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$:
 
-$N\cdot (M\cdot\vec{\hat v}_1 + M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 + \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 + N\cdot\vec{v}_2) = \vec{v}_1 + \vec{v}_2$
+$N\cdot (M\cdot\vec{\hat v}_1 + M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 + \vec{\hat v}_2$, \text{} $M\cdot (N\cdot\vec{v}_1 + N\cdot\vec{v}_2) = \vec{v}_1 + \vec{v}_2$
 
-$N\cdot (M\cdot\vec{\hat v}_1 \odot M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 \odot \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 \odot N\cdot\vec{v}_2) = \vec{v}_1 \odot \vec{v}_2$
+$N\cdot (M\cdot\vec{\hat v}_1 \odot M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 \odot \vec{\hat v}_2$, \text{} $M\cdot (N\cdot\vec{v}_1 \odot N\cdot\vec{v}_2) = \vec{v}_1 \odot \vec{v}_2$
 
 Thus, the $\mathbb{\hat C}^n$ and $\mathbb{C}^{\frac{n}{2}}$ vector spaces are bijective and homomorphic over the $(+, \odot)$ operations, and therefore they preserve isomorphism. 
 
@@ -659,7 +659,7 @@ Now, we will demonstrate $\sigma_c$'s isomorphism (i.e., bijective and homomorph
 
 $ $
 
-\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
+\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{} \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
 
 $\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
 
@@ -690,7 +690,7 @@ Since $\sigma_c$ is both bijective and homomorphic over the $(+, \cdot)$ operati
 
 The following mapping $\sigma_c$ between polynomials and vectors over complex numbers is isomorphic:
 
-$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{ } (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
+$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{} (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
 
 $ $
 
@@ -746,7 +746,7 @@ $= \begin{bmatrix}
 (\omega)^{n-1} & (\omega^3)^{n-1} & (\omega^5)^{n-1} & \cdots & (\omega^{2n-1})^{n-1}\\
 \end{bmatrix}$
 
-\text{ } \text{ }  $= \begin{bmatrix}
+\text{} \text{}  $= \begin{bmatrix}
 1 & 1 & 1 & \cdots & 1\\
 (\omega) & (\omega^3) & \cdots & (\overline{\omega})^3 & (\overline{\omega})\\
 (\omega)^2 & (\omega^3)^2 & \cdots & (\overline{\omega}^3)^2 & (\overline{\omega})^2\\

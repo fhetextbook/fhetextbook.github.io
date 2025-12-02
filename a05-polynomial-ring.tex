@@ -21,7 +21,7 @@ For a polynomial $f \in \mathbb{Z}_q[x] / (x^n + 1)$ where $f = c_0 + c_1x^1 + \
 
 $ $
 
-\item \textbf{Degree Ring:} Any $f' \in \mathbb{Z}_q[x]$ can be written
+\item \textbf{Degree Bound:} Any $f' \in \mathbb{Z}_q[x]$ can be written as:
 
 $ $
 
@@ -140,7 +140,7 @@ $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:polynomial-ring-discuss}} Polynomial Evaluation over Polynomial Ring}}]
 
-Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n + 1$. This is equivalent to the following relation: $M_1 = Q \cdot (x^n + 1) + M_2$ $Q$ for some polynomial $Q$. Then, $M_1(X)$ and $M_2(X)$ are guaranteed to be evaluated to the same value if $X=x_i$ is the solution for $x^n + 1$ (i.e., $X$ is the $n$-th root of unity). That is , $M_1(x_i) = M_2(x_i)$. 
+Suppose polynomials $M_1$ and $M_2$ are congruent over the polynomial ring $x^n + 1$. This is equivalent to the following relation: $M_1 = Q \cdot (x^n + 1) + M_2$ for some polynomial $Q$. Then, $M_1(X)$ and $M_2(X)$ are guaranteed to be evaluated to the same value if $X=x_i$ is the solution for $x^n + 1$ (i.e., $X$ is the $n$-th root of unity). That is , $M_1(x_i) = M_2(x_i)$. 
 
 \end{tcolorbox}
 
@@ -233,7 +233,7 @@ $ $
 
 
 
-Then, based on the coefficient rotation technique in Summary~\ref*{subsec:coeff-rotation}.1, rotating 1 position to the left is equivalent to computing $f \cdot x^{-1}$ as follows:
+Then, based on the coefficient rotation technique in Summary~\ref*{subsec:coeff-rotation}, rotating 1 position to the left is equivalent to computing $f \cdot x^{-1}$ as follows:
 
 $f\cdot x^{-1} = 2\cdot(x^{-1}) + 3x\cdot(x^{-1}) - 4x^2\cdot(x^{-1}) - x^3\cdot(x^{-1})$
 

@@ -1,4 +1,4 @@
-Decomposition is a mathematical technique used to convert a large-base number into a mathematical formula that expresses the same value in a smaller base. This section will explain number decomposition and polynomial decomposition. 
+Decomposition is a mathematical technique used to represent a number in a smaller base (radix) while preserving its value. This section will explain number decomposition and polynomial decomposition. 
 
 \subsection{Number Decomposition}
 \label{subsec:number-decomp}
@@ -11,7 +11,7 @@ $\gamma = \gamma_1 \dfrac{q}{\beta^1} + \gamma_2 \dfrac{q}{\beta^2} + \cdots + \
 $ $
 
 \noindent where $\beta\ge 2$ is a base and $\ell\ge 1$ is the decomposition level. We assume $\beta^\ell \mid q$ and take digits $\gamma_i\in\{0,1,\ldots,\beta-1\}$; under these conditions, the decomposition is unique. This is visually shown in \autoref{fig:decomp}. (If $\beta^\ell\nmid q$, see \autoref{subsec:approx-decomp}.) 
-Each $\gamma_i$ represents a base-$\beta$ digit at position $i$. When $q$ is a power of two, this corresponds to a shift by $i\cdot \log_2\beta$ bits.
+Each $\gamma_i$ is a digit in the base-$\beta$ representation of $\gamma$, where $i=1$ is the most significant digit. When $q$ is a power of two, this corresponds to a shift by $i\cdot \log_2\beta$ bits.
 
 \begin{figure}[h!]
     \centering
@@ -124,7 +124,7 @@ Note that after decomposition, the original coefficients of the polynomial have 
   \label{fig:decomp3}
 \end{figure}
 
-If no level $\ell$ satisfies $\beta^\ell \mid q$, then some lower bits of $q$ must be discarded during decomposition, as shown in \autoref{fig:decomp3}. Such lower bits can be rounded to the nearest multiple of $\dfrac{q}{\beta^\ell}$ during decomposition. In such a case, the decomposition is an approximate decomposition. 
+If no level $\ell$ satisfies $\beta^\ell \mid q$, then some lower-order digits of $q$ (in base $\beta$) must be discarded during decomposition, as shown in \autoref{fig:decomp3}. Such lower bits can be rounded to the nearest multiple of $\dfrac{q}{\beta^\ell}$ during decomposition. In such a case, the decomposition is an approximate decomposition. 
 Formally, when $\beta^\ell\nmid q$ we can write
 $$
 \gamma=\sum_{i=1}^{\ell}\gamma_i\,\frac{q}{\beta^{i}}+\varepsilon,\qquad

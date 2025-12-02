@@ -17,7 +17,7 @@ $ $
 
 Vector addition is defined as: 
 
-$ \vec{a} + \vec{b} = (a_0 + b_0, \text{} a_1  +  b_1, \text{} \gap{$\cdots$}, \text{} a_{n-1}  +  b_{n-1})$
+$ \vec{a} + \vec{b} = (a_0 + b_0, \text{ } a_1  +  b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1}  +  b_{n-1})$
 
 $ $
 
@@ -44,15 +44,15 @@ $ $
 
 Hadamard product is defined as: 
 
-$\vec{a} \odot \vec{b} = (a_0 b_0, \text{} a_1 b_1, \text{} \gap{$\cdots$}, \text{} a_{n-1} b_{n-1})$
+$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1} b_{n-1})$
 
 $ $
 
 \item \textbf{Hermitian Product:} Given two $n$-dimensional complex vectors:
 
-$\vec{a} = (a_0 + i \cdot a'_0, \text{} a_1+ i\cdot a'_1, \text{} \gap{$\ldots$},\text{}  a_{n-1}+ i\cdot a'_{n-1})$ 
+$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\ldots$},\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
 
-$\vec{b} = (b_0 + i\cdot b'_0, \text{} b_1 + i\cdot b'_1, \text{} \gap{$\ldots$}, \text{} b_{n-1} + i\cdot b'_{n-1})$
+$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ } \gap{$\ldots$}, \text{ } b_{n-1} + i\cdot b'_{n-1})$
 
 $ $
 
@@ -60,7 +60,7 @@ Hermitian product is a dot product with the 2nd operand as a conjugate (\autoref
 
 $\langle\langle \vec{a}, \vec{b} \rangle\rangle =  \vec{a} \cdot \overline{\vec{b}} $
 
-$ = (a_0 + i \cdot a'_0, \text{} a_1+ i\cdot a'_1, \text{} \gap{$\cdots$},\text{} a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{} b_1 - i\cdot b'_1, \text{} \gap{$\cdots$}, \text{} b_{n-1} - i\cdot b'_{n-1})$
+$ = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\cdots$},\text{ } a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{ } b_1 - i\cdot b'_1, \text{ } \gap{$\cdots$}, \text{ } b_{n-1} - i\cdot b'_{n-1})$
 
 
 
@@ -168,14 +168,14 @@ $A = \begin{bmatrix}
 \vec{a}_{3, * } \\ 
 \vdots\\
 \vec{a}_{m, * } \\ 
-\end{bmatrix}, \text{} \vec{x} = (x_1, x_2, \cdots, x_{n})$
+\end{bmatrix}, \text{ } \vec{x} = (x_1, x_2, \cdots, x_{n})$
 
 
 $ $
 
 The result of $A \cdot \vec{x}$ is an $m$-dimensional vector computed as:
 
-$A \cdot \vec{x} = \Big(\vec{a}_{1, * } \cdot \vec{x}, \text{} \vec{a}_{2, * } \cdot \vec{x}, \text{}\cdots,\text{} \vec{a}_{m, * } \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{} \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{} \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
+$A \cdot \vec{x} = \Big(\vec{a}_{1, * } \cdot \vec{x}, \text{ } \vec{a}_{2, * } \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{m, * } \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{ } \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{ } \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
 
 
 $ $
@@ -374,7 +374,7 @@ Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that f
 
 Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
 
-$\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+$\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
 Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$, and it preserves the algebraic operations $(+, \cdot)$ (i.e., $\sigma$ is a homomorphism for addition and multiplication).
 
@@ -388,7 +388,7 @@ $ $
 
 $\sigma(f_a(X) + f_b(X)) = \sigma(f_a(X)) + \sigma(f_b(X))$
 
-$\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$ \textcolor{red}{\text{} \# $\odot$ is Hadamard vector multiplication (Summary~\ref*{subsec:vector-arithmetic})}
+$\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$ \textcolor{red}{\text{ } \# $\odot$ is Hadamard vector multiplication (Summary~\ref*{subsec:vector-arithmetic})}
 
 $ $
 
@@ -412,11 +412,11 @@ Given the above setup, we can see that $\sigma$ preserves homomorphism on the $(
 
 $\bm{\sigma}\bm{(}f_a(X) + f_b(X)\bm{)} = \bm{\sigma\bigg(}(a_0 + b_0) + (a_1 + b_1)X + (a_2 + b_2)X^2 + \cdots + (a_{n-1} + b_{n-1})X^{n-1}\bm{\bigg)}$
 
-$= \left(\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_0)^i, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_1)^i, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_2)^i, \cdots, \text{}\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_{n-1})^i\right)$
+$= \left(\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_0)^i, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_1)^i, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_2)^i, \cdots, \text{ }\sum\limits_{i=0}^{n-1}(a_i + b_i)(x_{n-1})^i\right)$
 
-$= \left(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{}\sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{}\sum\limits_{i=0}^{n-1}a_i(x_2)^i, \cdots, \text{} \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\right)$
+$= \left(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{ }\sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{ }\sum\limits_{i=0}^{n-1}a_i(x_2)^i, \cdots, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\right)$
 
-\text{} $+ \left(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{} \sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{} \sum\limits_{i=0}^{n-1}b_i(x_2)^i, \cdots, \text{} \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\right)$
+\text{ } $+ \left(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_2)^i, \cdots, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\right)$
 
 $= \bm{\sigma(}f_a(X)\bm{)} + \bm{\sigma(}f_b(X)\bm{)}$
 
@@ -429,22 +429,22 @@ $\bm{\sigma(}f_a(X)\cdot f_b(X)\bm{)} = \bm{\sigma\bigg(}\left(\sum\limits_{i=0}
 
 $ $
 
-$= \Bigg( \left(\sum\limits_{i=0}^{n-1}a_ix_0^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_0^i\right), \text{}
-\left(\sum\limits_{i=0}^{n-1}a_ix_1^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_1^i\right), \text{}
+$= \Bigg( \left(\sum\limits_{i=0}^{n-1}a_ix_0^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_0^i\right), \text{ }
+\left(\sum\limits_{i=0}^{n-1}a_ix_1^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_1^i\right), \text{ }
 \left(\sum\limits_{i=0}^{n-1}a_ix_2^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_2^i\right),$
 
-$  \text{} \text{} \text{} \text{} \text{} \text{}
+$  \text{ } \text{ } \text{ } \text{ } \text{ } \text{ }
 \cdots,
 \left(\sum\limits_{i=0}^{n-1}a_ix_{n-1}^i\right)\left( \sum\limits_{i=0}^{n-1}b_ix_{n-1}^i\right)
 \Bigg)$
 
 $ $
 
-$ = \Bigg(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{} \sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{} \cdots, \text{} \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\Bigg)$
+$ = \Bigg(\sum\limits_{i=0}^{n-1}a_i(x_0)^i, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_1)^i, \text{ } \cdots, \text{ } \sum\limits_{i=0}^{n-1}a_i(x_{n-1})^i\Bigg)$
 
-$  \text{} \text{} \text{} \text{}  \odot  \Bigg(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{} 
-\sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{}
-\cdots, \text{} \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\Bigg)$
+$  \text{ } \text{ } \text{ } \text{ }  \odot  \Bigg(\sum\limits_{i=0}^{n-1}b_i(x_0)^i, \text{ } 
+\sum\limits_{i=0}^{n-1}b_i(x_1)^i, \text{ }
+\cdots, \text{ } \sum\limits_{i=0}^{n-1}b_i(x_{n-1})^i\Bigg)$
 
 $ $
 
@@ -562,7 +562,7 @@ We summarize our findings as follows:
 \begin{itemize}
 \item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and an $n$-dimensional vector space $\mathbb{Z}_t^n$ (integers mod $t$) with vector $\vec{v}$.
 
-$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
+$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
 
 $ $
 
@@ -577,7 +577,7 @@ $ $
 
 %\item If the $n$-degree polynomial $F(x)$ has a fewer number of roots than $n$, then isomorphism between the vectors and polynomials over the $(+, \cdot)$ operations holds without modulo $t$ as follows:
 
-%$\sigma': f(x) \in \mathbb{Z}[X] / F(X) \text{} \longrightarrow \text{} (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+%$\sigma': f(x) \in \mathbb{Z}[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
 %$ $
 
@@ -617,7 +617,7 @@ $M = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
 \end{bmatrix}
-$, \text{} $N = 
+$, \text{ } $N = 
 \begin{bmatrix}
 1 & 0 & 0 & 0\\
 0 & 1 & 0 & 0\\
@@ -633,9 +633,9 @@ $ $
 
 The reason $N$ is not a linear transformation matrix is because it contains conjugate operators $\emptyset$. Yet, notice that the following homomorphism holds between $\vec{\hat v} \in \mathbb{\hat C}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$:
 
-$N\cdot (M\cdot\vec{\hat v}_1 + M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 + \vec{\hat v}_2$, \text{} $M\cdot (N\cdot\vec{v}_1 + N\cdot\vec{v}_2) = \vec{v}_1 + \vec{v}_2$
+$N\cdot (M\cdot\vec{\hat v}_1 + M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 + \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 + N\cdot\vec{v}_2) = \vec{v}_1 + \vec{v}_2$
 
-$N\cdot (M\cdot\vec{\hat v}_1 \odot M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 \odot \vec{\hat v}_2$, \text{} $M\cdot (N\cdot\vec{v}_1 \odot N\cdot\vec{v}_2) = \vec{v}_1 \odot \vec{v}_2$
+$N\cdot (M\cdot\vec{\hat v}_1 \odot M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 \odot \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 \odot N\cdot\vec{v}_2) = \vec{v}_1 \odot \vec{v}_2$
 
 Thus, the $\mathbb{\hat C}^n$ and $\mathbb{C}^{\frac{n}{2}}$ vector spaces are bijective and homomorphic over the $(+, \odot)$ operations, and therefore they preserve isomorphism. 
 
@@ -659,7 +659,7 @@ Now, we will demonstrate $\sigma_c$'s isomorphism (i.e., bijective and homomorph
 
 $ $
 
-\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{} \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
+\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
 
 $\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
 
@@ -690,7 +690,7 @@ Since $\sigma_c$ is both bijective and homomorphic over the $(+, \cdot)$ operati
 
 The following mapping $\sigma_c$ between polynomials and vectors over complex numbers is isomorphic:
 
-$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{} (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
+$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{ } (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
 
 $ $
 
@@ -746,7 +746,7 @@ $= \begin{bmatrix}
 (\omega)^{n-1} & (\omega^3)^{n-1} & (\omega^5)^{n-1} & \cdots & (\omega^{2n-1})^{n-1}\\
 \end{bmatrix}$
 
-\text{} \text{}  $= \begin{bmatrix}
+\text{ } \text{ }  $= \begin{bmatrix}
 1 & 1 & 1 & \cdots & 1\\
 (\omega) & (\omega^3) & \cdots & (\overline{\omega})^3 & (\overline{\omega})\\
 (\omega)^2 & (\omega^3)^2 & \cdots & (\overline{\omega}^3)^2 & (\overline{\omega})^2\\

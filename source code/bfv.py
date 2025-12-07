@@ -26,15 +26,16 @@ is_homogeneous_rotation = True
 
 
 # Testcase 2
-N = 8
+N = 4
 P = 17
-bfv_vector = [0, 0, 0, 0, 0, 0, 0, 0]
-bfv_vector2 = [1, 2, 3, 4, 5, 6, 7, 8]
+bfv_vector = [10, 3, 5, 13]
+bfv_vector2 = [2, 4, 3, 6]
 rotation_offset = 3
 
 
-scale = 2
-Q = P*scale*scale
+Q = 2**8
+scale = math.floor(Q / P)
+print('scale : ' + str(scale))
 
 def EvaluateTargetedCyclotomicPolynomial(x):
 	return (x ** N) + 1
@@ -112,7 +113,7 @@ def GenerateParam():
 			if IsPowerOf2(power):
 				 N = power
 				 P = random.randint(P_LOWER, P_UPPER)
-				 scale = random.randint(scale_LOWER, scale_UPPER)
+				 #scale = random.randint(scale_LOWER, scale_UPPER)
 				 M = N * 2
 				 break
 			rotation_offset = random.randint(0, N // 2 - 1)
@@ -139,7 +140,9 @@ def GenerateParam():
 			P = nextprime(P)
 	print("Final P: " + str(P))
 	N_inverse = ModInv(N, P) # If P is a prime, the multiplicative inverse of N (< P) is guaranteed to exist (by Fermit's Little theorem)
-	Q = P*scale*scale
+	#Q = P*scale*scale
+	#print(Q)
+	#print(scale)
 	root_values = []
 
 	# [OPTION 1]: A brute-force way of finding the primitiev (M=2N)-th root of unity (i.e., the solution for X^N + 1 = 0 mod P)
@@ -451,7 +454,7 @@ def encode(self, input_vector: np.array) -> Polynomial:
 
 @patch_to(BFVEncoder)
 def decode(self, p: Polynomial) -> np.array:
-	rescaled_p = p / scale
+	rescaled_p = round_polynomial((p / scale))
 	#print(self.sigma_R_basis)
 	#print(rescaled_p.coef)
 	coef = rescaled_p.coef
@@ -467,6 +470,16 @@ def decode(self, p: Polynomial) -> np.array:
 	#print()
 
 	return z
+
+
+def round_polynomial(poly):
+	degree = 0
+	new_coef = []
+	coef = poly.coef
+	for co in coef:
+		new_coef.append(round(co))
+	poly.coef = new_coef
+	return poly
 
 def reduce_polynomial(poly, n, q):
 	degree = 0
@@ -508,6 +521,7 @@ def main():
 	global M
 	global N_inverse
 	global primitive_root_of_unity
+	global scale
 
 	GenerateParam()
 	encoder = BFVEncoder()
@@ -535,12 +549,20 @@ def main():
 	p3_rotated = rotate_homomorphic(p3_rotated, rotation_offset, N) # divide by a redundant scale factor
 	p4 = reduce_polynomial((p * p2), N, Q)/scale # divide by a redundant scale factor
 
-	print('polynomial 1: ' + str(p))
-	print('polynomial 2: ' + str(p2))
+	scale_back = scale
+	scale = 1
+	encoder_1 = BFVEncoder()
+	scale = scale_back
+	print('unscaled polynomial 1: ' + str(encoder_1.encode(z)))
+	print('unscaled polynomial 2: ' + str(encoder_1.encode(z2)))
+	#print('unscaled polynomial 1 + 2: ' + str(reduce_polynomial(encoder_1.encode(z) + encoder_1.encode(z2), N, Q)))
+	print()
+	print('scaled polynomial 1: ' + str(p))
+	print('scaled polynomial 2: ' + str(p2))
 	print()
 	#print("before polynomial reduction of 1 + 2: " + str(p + p2))
-	print('after polynomial reduction of 1 + 2: ' + str(p3))
-	print('after polynomial rotation by ' + str(rotation_offset) + ' positions and reduction of 1 + 2: ' + str(p3_rotated))
+	print('after q-reduction of polynomial 1 + polynomial 2: ' + str(reduce_polynomial(p + p2, N, Q)))
+	print('after polynomial rotation by ' + str(rotation_offset) + ' positions and q-reduction of polynomial 1 + polynomial 2: ' + str(p3_rotated))
 	print()
 	#print('before polynomial reduction of 1 * 2: ' + str(p * p2))
 	#print('after polynomial reduction of 1 * 2: ' + str(reduce_polynomial(p * p2, N, Q)))
@@ -570,7 +592,7 @@ def main():
 		print("[FINAL DECODED RESULT " + str(test_index) + "] : " + str(z3) + " == " + str(decoded_z3) + " <---- CORRECT")
 		print()
 	for i in range(len(z3)//2):
-		print(f'Compare {i} vs {i + rotation_offset % (len(z3)//2)}');
+		#print(f'Compare {i} vs {i + rotation_offset % (len(z3)//2)}');
 		original_index = i
 		rotated_index = (i - rotation_offset) % (len(z3)//2)
 		if z3[original_index] != decoded_z3_rotated[rotated_index] or z3[original_index + len(z3)//2] != decoded_z3_rotated[rotated_index + len(z3)//2]:
@@ -588,4 +610,3 @@ if __name__ == "__main__":
 
 	if is_random_param:
 		print("Total " + str(test_index) + " Tests Passed")
-

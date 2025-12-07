@@ -40,10 +40,10 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Plaintext}}\\\hline\hline
-\textbf{TFHE}&Number $m \in \mathbb{Z}_t$ \text{ } \textcolor{red}{ \# $t$ is a power of 2}\\\hline
-\textbf{BFV}&Polynomial $M \in \mathbb{Z}_t[X]/X^n+1$ \text{ } \textcolor{red}{ \# $t$ is a prime, and $n$ is a power of 2}\\\hline
-\textbf{CKKS}&Polynomial $M \in \mathbb{R}[X]/X^n+1$ \text{ }\textcolor{red}{ \# $n$ is a power of 2}\\\hline
-\textbf{BGV}&Polynomial $M \in \mathbb{Z}_t[X]/X^n+1$ \text{ } \textcolor{red}{ \# $t$ is a prime, and $n$ is a power of 2}\\\hline
+\textbf{TFHE}&Number $m \in \mathbb{Z}_t$ \text{ } \textcolor{red}{ $\rhd$ $t$ is a power of 2}\\\hline
+\textbf{BFV}&Polynomial $M \in \mathbb{Z}_t[X]/X^n+1$ \text{ } \textcolor{red}{ $\rhd$ $t$ is a prime, and $n$ is a power of 2}\\\hline
+\textbf{CKKS}&Polynomial $M \in \mathbb{R}[X]/X^n+1$ \text{ }\textcolor{red}{ $\rhd$ $n$ is a power of 2}\\\hline
+\textbf{BGV}&Polynomial $M \in \mathbb{Z}_t[X]/X^n+1$ \text{ } \textcolor{red}{ $\rhd$ $t$ is a prime, and $n$ is a power of 2}\\\hline
 \end{tabular}
 \caption{\textbf{Plaintext}}
 \end{table}
@@ -52,7 +52,7 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Secret Key}}\\\hline\hline
-\textbf{TFHE}&Vector $\vec{s} \xleftarrow{\$} \mathbb{Z}_2^k$ \text{ } \textcolor{red}{ \# $\$$ is a uniform random distribution}\\\hline
+\textbf{TFHE}&Vector $\vec{s} \xleftarrow{\$} \mathbb{Z}_2^k$ \text{ } \textcolor{red}{ $\rhd$ $\$$ is a uniform random distribution}\\\hline
 \textbf{BFV}&\\
 \textbf{CKKS}&Polynomial $S \xleftarrow{\$} \mathbb{Z}_3[X]/X^n+1$, where we set $\mathbb{Z}_3 = \{-1, 0, 1\}$\\
 \textbf{BGV}&\\\hline
@@ -64,9 +64,9 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Ciphertext}}\\\hline\hline
-\textbf{TFHE}&(Vector $\vec{a}$, Number $b$) = $(\vec{a} \xleftarrow{\$} \mathbb{Z}_q^k$, $\text{ } b \in \mathbb{Z}_q)$ \text{ } \textcolor{red}{ \# $q \gg t$, and $t$ divides $q$}\\\hline
+\textbf{TFHE}&(Vector $\vec{a}$, Number $b$) = $(\vec{a} \xleftarrow{\$} \mathbb{Z}_q^k$, $\text{ } b \in \mathbb{Z}_q)$ \text{ } \textcolor{red}{ $\rhd$ $q \gg t$, and $t$ divides $q$}\\\hline
 \textbf{BFV}&\\
-\textbf{CKKS}&(Polynomial $A, B$) = $(A \xleftarrow{\$} \mathbb{Z}_q[X]/X^n+1$, \text{ }  $B \in \mathbb{Z}_q[X]/X^n+1)$ \text{ } \textcolor{red}{ \# $q \gg t$}\\
+\textbf{CKKS}&(Polynomial $A, B$) = $(A \xleftarrow{\$} \mathbb{Z}_q[X]/X^n+1$, \text{ }  $B \in \mathbb{Z}_q[X]/X^n+1)$ \text{ } \textcolor{red}{ $\rhd$ $q \gg t$}\\
 \textbf{BGV}&\\\hline
 \end{tabular}
 \caption{\textbf{Ciphertext}}
@@ -77,7 +77,7 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Noise}}\\\hline\hline
-\textbf{TFHE}&Number $e \xleftarrow{\chi} \mathbb{Z}_q$ \text{ } \textcolor{red}{ \# $\chi$ is a Gaussian random distribution}\\\hline
+\textbf{TFHE}&Number $e \xleftarrow{\chi} \mathbb{Z}_q$ \text{ } \textcolor{red}{ $\rhd$ $\chi$ is a Gaussian random distribution}\\\hline
 \textbf{BFV}&\\
 \textbf{CKKS}&Polynomial $E \xleftarrow{\chi} \mathbb{Z}_q[X]/X^n+1$\\
 \textbf{BGV}&\\\hline
@@ -90,11 +90,11 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Scaling Factor}}\\\hline\hline
-\textbf{TFHE}&Used for $\Delta m$, \text{ } where $\Delta = \dfrac{q}{t}$ \text{ } \textcolor{red}{\# $t$ divides $q$}\\\hline
-\textbf{BFV}&Used for $\Delta M$, \text{ } where $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$  \text{ } \textcolor{red}{\# $t$ is a prime}\\\hline
+\textbf{TFHE}&Used for $\Delta m$, \text{ } where $\Delta = \dfrac{q}{t}$ \text{ } \textcolor{red}{ $\rhd$ $t$ divides $q$}\\\hline
+\textbf{BFV}&Used for $\Delta M$, \text{ } where $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$  \text{ } \textcolor{red}{ $\rhd$ $t$ is a prime}\\\hline
 \textbf{CKKS}&Used for $\Delta M$, \text{ } where $\Delta \cdot ||M||_\infty \ll q_0$\\
-& \text{ } \textcolor{red}{\# $q_0$ is the lowest multiplicative level's ciphertext modulus}\\\hline
-\textbf{BGV}&Used for $\Delta E$, \text{ } where $\Delta = t$ \text{ } \textcolor{red}{ \#$t$ is a prime}\\\hline
+& \text{ } \textcolor{red}{ $\rhd$ $q_0$ is the lowest multiplicative level's ciphertext modulus}\\\hline
+\textbf{BGV}&Used for $\Delta E$, \text{ } where $\Delta = t$ \text{ } \textcolor{red}{ $\rhd$$t$ is a prime}\\\hline
 \end{tabular}
 \caption{\textbf{Scaling Factor}}
 \end{table}
@@ -105,11 +105,11 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \hline
 &\multicolumn{1}{c|}{\textbf{Encryption}}\\\hline\hline
 \textbf{TFHE}&$(\vec{a}, b)$ \text{ } where $\vec{a} \xleftarrow{\$} \mathbb{Z}_q^k$, $\text{ } b = \Delta m + e - a\cdot s \bmod q$, \text{ } $e \xleftarrow{\chi} \mathbb{Z}_q$\\
-&\text{ } \text{ } \textcolor{red}{ \# After using $e$ each time, throw it away}\\\hline
+&\text{ } \text{ } \textcolor{red}{ $\rhd$ After using $e$ each time, throw it away}\\\hline
 \textbf{BFV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = \Delta M + E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q[X]/(X^n+1)$\\
-\textbf{CKKS}&\text{ } \text{ }\textcolor{red}{ \# After using $E$ each time, throw it away}\\\hline
+\textbf{CKKS}&\text{ } \text{ }\textcolor{red}{ $\rhd$ After using $E$ each time, throw it away}\\\hline
 \textbf{BGV}&$(A, B)$ \text{ } where $A \xleftarrow{\$} \mathbb{Z}_q[X] / (X^n + 1)$, $\text{ } B = M + \Delta E - A\cdot S \bmod q$, \text{ } $E \xleftarrow{\chi} \mathbb{Z}_q[X]/(X^n+1)$\\
-&\text{ } \text{ }\textcolor{red}{ \# After using $E$ each time, throw it away}\\\hline
+&\text{ } \text{ }\textcolor{red}{ $\rhd$ After using $E$ each time, throw it away}\\\hline
 \end{tabular}
 \caption{\textbf{Encryption}}
 \end{table}
@@ -118,11 +118,11 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Cryptographic Relation}}\\\hline\hline
-\textbf{TFHE}&$b + a\cdot s = \Delta m + e \pmod q$, \text{ } where $\Delta = \dfrac{q}{t}$  \text{ } \textcolor{red}{\# $t$ divides $q$}\\\hline
-\textbf{BFV}&$B + A\cdot S = \Delta M + E \pmod q$, \text{ } where $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ \text{ } \textcolor{red}{\# $t$ is a prime}\\\hline
+\textbf{TFHE}&$b + a\cdot s = \Delta m + e \pmod q$, \text{ } where $\Delta = \dfrac{q}{t}$  \text{ } \textcolor{red}{ $\rhd$ $t$ divides $q$}\\\hline
+\textbf{BFV}&$B + A\cdot S = \Delta M + E \pmod q$, \text{ } where $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ \text{ } \textcolor{red}{ $\rhd$ $t$ is a prime}\\\hline
 \textbf{CKKS}&$B + A\cdot S = \Delta M + E \pmod q$, \text{ } where $\Delta \cdot ||M||_\infty \ll q_0$\\
-& \text{ } \textcolor{red}{\# $q_0$ is the lowest multiplicative level's ciphertext modulus}\\\hline
-\textbf{BGV}&$B + A\cdot S = M + \Delta E \pmod q$, \text{ } where $\Delta = t$  \text{ } \textcolor{red}{\# $t$ is a prime}\\\hline
+& \text{ } \textcolor{red}{ $\rhd$ $q_0$ is the lowest multiplicative level's ciphertext modulus}\\\hline
+\textbf{BGV}&$B + A\cdot S = M + \Delta E \pmod q$, \text{ } where $\Delta = t$  \text{ } \textcolor{red}{ $\rhd$ $t$ is a prime}\\\hline
 \end{tabular}
 \caption{\textbf{Cryptographic Relation}}
 \end{table}
@@ -133,13 +133,13 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \hline
 &\multicolumn{1}{c|}{\textbf{Decryption Formula}}\\\hline\hline
 \textbf{TFHE}&$m = \left\lceil\dfrac{(b + a\cdot s \bmod q)}{\Delta}\right\rfloor \bmod t$\\
-&$\textcolor{white}{m} = \left\lceil\dfrac{(\Delta m + e)}{\Delta}\right\rfloor \bmod t$ \text{ } \textcolor{red}{ \# $e$ gets eliminated if $e < \dfrac{\Delta}{2}$}\\\hline
+&$\textcolor{white}{m} = \left\lceil\dfrac{(\Delta m + e)}{\Delta}\right\rfloor \bmod t$ \text{ } \textcolor{red}{ $\rhd$ $e$ gets eliminated if $e < \dfrac{\Delta}{2}$}\\\hline
 \textbf{BFV}&$M = \left\lceil\dfrac{(B + A\cdot S \bmod q)}{\Delta}\right\rfloor  \bmod t$\\
-&$\textcolor{white}{M} = \left\lceil\dfrac{(\Delta M + E)}{\Delta}\right\rfloor  \bmod t$ \text{ } \textcolor{red}{ \# $E$ gets eliminated if $||E||_\infty < \dfrac{\Delta}{2}$}\\\hline
+&$\textcolor{white}{M} = \left\lceil\dfrac{(\Delta M + E)}{\Delta}\right\rfloor  \bmod t$ \text{ } \textcolor{red}{ $\rhd$ $E$ gets eliminated if $||E||_\infty < \dfrac{\Delta}{2}$}\\\hline
 \textbf{CKKS}&$M = \left\lceil\dfrac{(B + A\cdot S \bmod q)}{\Delta}\right\rfloor_{\frac{1}{\Delta}}$\\
-&$\textcolor{white}{M} = \left\lceil\dfrac{\Delta M + E}{\Delta}\right\rfloor_{\frac{1}{\Delta}}$ \text{ } \textcolor{red}{ \# The final noise remains as $\dfrac{E}{\Delta}$ (increase $\Delta$ to reduce it)}\\\hline
+&$\textcolor{white}{M} = \left\lceil\dfrac{\Delta M + E}{\Delta}\right\rfloor_{\frac{1}{\Delta}}$ \text{ } \textcolor{red}{ $\rhd$ The final noise remains as $\dfrac{E}{\Delta}$ (increase $\Delta$ to reduce it)}\\\hline
 \textbf{BGV}&$M = (B + A\cdot S \bmod q) \bmod t$\\
-&$\textcolor{white}{M} = (M + \Delta E) \bmod t$ \text{ } \textcolor{red}{ \# $E$ gets removed if $\Delta E < q$}\\\hline
+&$\textcolor{white}{M} = (M + \Delta E) \bmod t$ \text{ } \textcolor{red}{ $\rhd$ $E$ gets removed if $\Delta E < q$}\\\hline
 \end{tabular}
 \caption{\textbf{Decryption Formula}}
 \end{table}
@@ -148,13 +148,13 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Ciphertext Modulus}}\\\hline\hline
-\textbf{TFHE}&A single number $q$ \text{ } \textcolor{red}{ \# $q \gg t$, and $t$ divides $q$}\\\hline
-\textbf{BFV}&A single number $q$ \text{ } \textcolor{red}{ \# $q \gg t$}\\\hline
+\textbf{TFHE}&A single number $q$ \text{ } \textcolor{red}{ $\rhd$ $q \gg t$, and $t$ divides $q$}\\\hline
+\textbf{BFV}&A single number $q$ \text{ } \textcolor{red}{ $\rhd$ $q \gg t$}\\\hline
 \textbf{CKKS}&An $L$-multiplicative-level modulus chain $\{q_0, q_1, \cdots, q_L\}$\\
-& \text{ } \textcolor{red}{ \# each $q_i = \prod\limits_{j=0}^{l}w_j$, and each $w_j$ is a CRT modulus}\\
+& \text{ } \textcolor{red}{ $\rhd$ each $q_i = \prod\limits_{j=0}^{l}w_j$, and each $w_j$ is a CRT modulus}\\
 &\text{ } \text{ } \text{ } \textcolor{red}{ having the property: $w_0 \gg \Delta \cdot ||M||_{\infty}, \text{ } w_j \approx \Delta$ (for $1 \leq j \leq L$)}\\\hline
 \textbf{BGV}&An $L$-multiplicative-level modulus chain $\{q_0, q_1, \cdots, q_L\}$\\
-&\text{ } \textcolor{red}{ \# each $q_i = \prod\limits_{j=0}^{l}w_j$, and each $w_j$ is a CRT modulus}\\
+&\text{ } \textcolor{red}{ $\rhd$ each $q_i = \prod\limits_{j=0}^{l}w_j$, and each $w_j$ is a CRT modulus}\\
 &\text{ } \text{ } \text{ } \textcolor{red}{ having the property: $w_0 \equiv w_1 \equiv \cdots \equiv w_L \bmod t$}\\\hline
 \end{tabular}
 \caption{\textbf{Ciphertext Modulus}}
@@ -265,8 +265,8 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$\\
 &\textcolor{white}{3. Relinearization: } $\textsf{ct}_\alpha + \textsf{ct}_\beta = \textsf{ct}_{\alpha + \beta} = \textsf{RLWE}_{S, \sigma}( M_1 M_2) \bmod q_l$\\
 &3. (Optional) \underline{Rescaling} by $\dfrac{1}{\Delta}$: $\left\lceil\dfrac{\textsf{ct}_{\alpha+\beta}}{\Delta}\right\rfloor_t = \textsf{RLWE}_{S, \sigma}(M_1 M_2) \bmod q_{l-1}$\\
-&\textcolor{red}{\# $\lceil\rfloor_t$ means rounding to the nearest multiple of $t$}\\
-&\textcolor{red}{\# The future noise growth rate gets reduced if the ciphertext is rescaled}\\\hline
+&\textcolor{red}{ $\rhd$ $\lceil\rfloor_t$ means rounding to the nearest multiple of $t$}\\
+&\textcolor{red}{ $\rhd$ The future noise growth rate gets reduced if the ciphertext is rescaled}\\\hline
 \end{tabular}
 \caption{\textbf{Ciphertext-to-Ciphertext Multiplication}}
 \end{table}
@@ -363,7 +363,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 \hline
 &\multicolumn{1}{c|}{\textbf{Bootstrapping Details}}\\\hline\hline
 \textbf{TFHE}&1. \underline{Modulus Switch} from $q \rightarrow 2n$ to convert $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m) \rightarrow \textsf{LWE}_{\vec{s}, \sigma}(\hat\Delta m) = ( \vec{\hat a}, \hat b) \bmod 2n $,\\
-&\text{ } \text{ } where $\hat\Delta = \dfrac{2n}{t}$. \text{ } \textcolor{red}{ \# where $t$ divides $2n$}\\
+&\text{ } \text{ } where $\hat\Delta = \dfrac{2n}{t}$. \text{ } \textcolor{red}{ $\rhd$ where $t$ divides $2n$}\\
 &2. \underline{Blind Rotation}: Homomorphically rotate the GLWE-encrypted look-up table\\
 &\text{ } \text{ }   polynomial $\textsf{GLWE}_{\vec{S},\sigma}(\Delta V)$ by $\Delta m + e$ positions to the left. This is done by\\
 &\text{ } \text{ }  by homomorphically deriving $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta V_k)$ as follows:\\

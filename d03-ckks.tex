@@ -144,7 +144,7 @@ M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \text{ } M(\omega^{J(2)}), \cdots, 
 $\textcolor{white}{\vec{v}_{'}} =  \bm{(} \text{ } 
 M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \text{ } M(\omega^{J(2)}), \cdots,  M(\omega^{J(\frac{n}{2}-1)}), \text{ } M(\overline\omega^{J(0)}), \text{ } M(\overline\omega^{J(1)}), \cdots,  M(\overline\omega^{J(\frac{n}{2}-1)}) \text{ } \bm{)}$ 
 
-\textcolor{red}{ \# because $\omega^{-1} = (e^{\frac{i\pi}{n}})^{-1} = e^{\frac{-i\pi}{n}} = \overline\omega$}
+\textcolor{red}{ $\rhd$ because $\omega^{-1} = (e^{\frac{i\pi}{n}})^{-1} = e^{\frac{-i\pi}{n}} = \overline\omega$}
 
 , which decodes to a \textit{forward-ordered} (not reverse-ordered) Hermitian vector as follows:
 
@@ -185,7 +185,7 @@ $ $
 (\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$}}
 
-\textcolor{red}{ \# where $\omega = e^{i\pi/n} = \cos \left(\dfrac{\pi}{n}\right) + i\sin \left(\dfrac{\pi}{n}\right)$}
+\textcolor{red}{ $\rhd$ where $\omega = e^{i\pi/n} = \cos \left(\dfrac{\pi}{n}\right) + i\sin \left(\dfrac{\pi}{n}\right)$}
 
 \small{\noindent $ = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
@@ -195,7 +195,7 @@ $ $
 (\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\overline\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\overline\omega^{J(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\overline\omega^{J(0)})^{n-1}
 \end{bmatrix}$}
 
-\textcolor{red}{ \# because $\omega^{-1} = e^{\frac{-i\pi}{n}} = \overline{e^{\frac{i\pi}{n}}} = \overline\omega$}
+\textcolor{red}{ $\rhd$ because $\omega^{-1} = e^{\frac{-i\pi}{n}} = \overline{e^{\frac{i\pi}{n}}} = \overline\omega$}
 
 $ $
 
@@ -490,7 +490,7 @@ $\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } 
 
 $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = \left\lceil\dfrac{B + A \cdot S \bmod q}{\Delta}\right\rfloor_{\frac{1}{\Delta}} = \left\lceil\dfrac{\Delta M + E}{\Delta}\right\rfloor_{\frac{1}{\Delta}} \approx M$
 
-\textcolor{red}{\# $\lceil x\rfloor_{k}$ means rounding $x$ to the nearest multiple of $k$}
+\textcolor{red}{ $\rhd$ $\lceil x\rfloor_{k}$ means rounding $x$ to the nearest multiple of $k$}
 %\item Scale down $\Bigl\lceil \dfrac{ \Delta  M + E }{\Delta}\Bigr\rfloor = M  \text{ } \in \mathcal{R}_{\langle n, t \rangle}$
 
 
@@ -608,7 +608,7 @@ $ $
 
 $ = \textsf{RLWE}^{-1}_{S, \sigma}(\text{ }  \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle}) \text{ } ) \cdot \textsf{RLWE}^{-1}_{S, \sigma}(\text{ } \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 2 \rangle})  \text{ } )$
 
-\textcolor{red}{\# where $(\Delta \cdot M^{\langle 1 \rangle} + E^{\langle 1 \rangle} ) \cdot ( \Delta \cdot M^{\langle 2 \rangle} + E^{\langle 2 \rangle} ) = \Delta^2\cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle} + \Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle} + \Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle} + E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$, where $E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ is small enough to be eliminated upon decryption, and $\Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $\Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ will be scaled down to $M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ upon modulus switch later, becoming small enough to be enough to be eliminated during decryption}
+\textcolor{red}{ $\rhd$ where $(\Delta \cdot M^{\langle 1 \rangle} + E^{\langle 1 \rangle} ) \cdot ( \Delta \cdot M^{\langle 2 \rangle} + E^{\langle 2 \rangle} ) = \Delta^2\cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle} + \Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle} + \Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle} + E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$, where $E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ is small enough to be eliminated upon decryption, and $\Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $\Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ will be scaled down to $M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ upon modulus switch later, becoming small enough to be enough to be eliminated during decryption}
 
 $ $
 
@@ -639,7 +639,7 @@ $ $
 
 $ = \underbrace{B^{\langle 1 \rangle}B^{\langle 2 \rangle}}_{D_0}  + \underbrace{(B^{\langle 2 \rangle}A^{\langle 1 \rangle} + B^{\langle 1 \rangle}A^{\langle 2 \rangle})}_{D_1} \cdot S + \underbrace{(A^{\langle 1 \rangle} \cdot A^{\langle 2 \rangle})}_{D_2} \cdot \underbrace{(S \cdot S)}_{ S^2}$
 
-%\textcolor{red}{ \# where $\otimes$ is a vector outer-product such that for $\vec{u} = (u_0, u_1, \cdots, u_{k-1})$ and $\vec{v} = (v_0, v_1, \cdots, v_{k-1})$,}
+%\textcolor{red}{ $\rhd$ where $\otimes$ is a vector outer-product such that for $\vec{u} = (u_0, u_1, \cdots, u_{k-1})$ and $\vec{v} = (v_0, v_1, \cdots, v_{k-1})$,}
 
 %\textcolor{red}{ \text{ } $\vec{u} \otimes \vec{v} = (u_0v_0, u_0v_1, \cdots, \text{ } u_1v_0, u_1v_1, \cdots, \text{ } u_{k-1}v_0, u_{k-1}v_1,  \cdots, u_{k-1}v_{k-1})$}
 
@@ -658,7 +658,7 @@ In the final step above, we converted $D_0 + D_1\cdot S$ into $\textsf{RLWE}_{S,
 
 As explained in BFV's ciphertext-to-ciphertext multiplication (\autoref{subsubsec:bfv-mult-cipher-relinearization}), relinearization is a process of converting the polynomial triplet $(D_0, D_1, D_2) \in \mathcal{R}_{\langle n, q \rangle}^{3}$, which can be decrypted into $\Delta M$ using $S$ and $S^2$ as keys, into the polynomial pairs $(C_\alpha, C_\beta)\in \mathcal{R}_{\langle n, q \rangle}^{2}$, which can be decrypted into the same $\Delta M$ by using $S$ as key. In the previous subsection, we explained that we can convert $D_0$ and $D_1$ into $C_\alpha$ simply by viewing $D_0$ and $D_1$ as  $C_\alpha = (D_1, D_0)$. The process of converting $D_2$ into $C_\beta$ is exactly the same as the technique explained in \autoref{subsubsec:bfv-mult-cipher-relinearization}, which applies the gadget decomposition (\autoref{subsec:gadget-decomposition}) on $D_2$ and computes an inner product with the RLev encryption (\autoref{sec:glev}) of $S^2$. Specifically, we compute the following:
 
-$\textsf{RLWE}_{S, \sigma}^{-1}(C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ \# the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
+$\textsf{RLWE}_{S, \sigma}^{-1}(C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ $\rhd$ the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
 
 $= D_{2,1}(E_1' +  S^2\dfrac{q}{\beta}) + D_{2,2}(E_2' +  S^2\dfrac{q}{\beta^2}) + \cdots + D_{2,l}(E_l' +  S^2\dfrac{q}{\beta^l})$
 
@@ -872,7 +872,7 @@ The above update of $(\{A_i\}_{i=0}^{k-1}, B)$ to $(\{\hat{A}_i\}_{i=0}^{k-1}, \
 
 $\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_j = \Big\lceil e_j\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_j}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ \# If we treat $\hat\Delta$ as $\Delta$, the rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same $M$}
+$\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ $\rhd$ If we treat $\hat\Delta$ as $\Delta$, the rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same $M$}
 
 $ $
 
@@ -984,7 +984,7 @@ The above update of $(A, B)$ to $(\hat{A}, \hat B)$ effectively changes $\Delta,
 
 $\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_i = \Big\lceil e_i\dfrac{\hat{q}}{q} \Big\rfloor = \Big\lceil \dfrac{e_i}{w_l} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ \# This rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same plaintext $M$}
+$\hat{\Delta} = \left\lceil\Delta^2\dfrac{\hat{q}}{q}\right\rfloor = \left\lceil\dfrac{\Delta^2}{w_l}\right\rfloor \approx \Delta$ \textcolor{red}{ $\rhd$ This rounding error slightly increases the noise $\hat E$ to $\hat E + E_\Delta$, while the decryption of $(\hat A, \hat B)$ outputs the same plaintext $M$}
 
 $ $
 
@@ -1055,7 +1055,7 @@ Remember that CKKS's ciphertext decryption relation is as follows:
 
 $\Delta M + E = A \cdot S + B \bmod q_l$
 
-$\Delta M + E = A \cdot S + B - K\cdot q_l$ \textcolor{red}{ \# where $K\cdot q_l$ represents a modulo reduction by $q_l$}
+$\Delta M + E = A \cdot S + B - K\cdot q_l$ \textcolor{red}{ $\rhd$ where $K\cdot q_l$ represents a modulo reduction by $q_l$}
 
 $ $
 
@@ -1068,13 +1068,13 @@ $= (A \bmod q_{l-1}) \cdot S + (B \bmod q_{l-1}) - K\cdot q_l$
 $= (A - K_A\cdot q_{l-1}) \cdot S + (B - K_B\cdot q_{l-1}) - K\cdot q_l$ 
 
 $= A\cdot S + B - (K_A + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
-\textcolor{red}{ \# where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-the prime element of $q_L$)}
+\textcolor{red}{ $\rhd$ where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-the prime element of $q_L$)}
 
-$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ \# where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
+$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ $\rhd$ where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
 
 $= A\cdot S + B \bmod q_{l-1}$
 
-$= \Delta M + E$ \textcolor{red}{\# since $\Delta M + E < q_0 < q_{l-1}$}
+$= \Delta M + E$ \textcolor{red}{ $\rhd$ since $\Delta M + E < q_0 < q_{l-1}$}
 
 $ $
 
@@ -1321,17 +1321,17 @@ As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ck
 
 $\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1}, {v}_{\frac{n}{2}-1}, \cdots, {v}_1, {v}_0)$
 
-$= \bm{(}M(\overline{\omega})), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega^{n-1}), \cdots, M(\omega^{3}), M(\omega)\bm{)}$ \textcolor{red}{ \# where $\omega = e^{\frac{i\pi}{n}}$}
+$= \bm{(}M(\overline{\omega})), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega^{n-1}), \cdots, M(\omega^{3}), M(\omega)\bm{)}$ \textcolor{red}{ $\rhd$ where $\omega = e^{\frac{i\pi}{n}}$}
 
 %$= \bm{(}M((\omega)^{2n-1}), M(\omega^{2n-3}), \cdots, M(\omega^{n+1}), M(\overline{\omega^{n+1}}), \cdots, M(\overline{\omega^{n+3}}), M((\overline{\omega})^{2n-1})\bm{)}$
 
 $= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M((\overline{\omega^{n-1}})^{-1}), \cdots, M((\overline{\omega^{3}})^{-1}), M((\overline{\omega})^{-1})\bm{)}$ 
 
-\textcolor{red}{ \# since $\overline{\omega^k} = e^{\overline{\frac{ki\pi}{n}}} = e^{-\frac{ki\pi}{n}} = \omega^{-k}$ and $\omega^{k} = (\overline{\omega^k})^{-1}$ for $k = \{1, 3, \cdots, n-1\}$}
+\textcolor{red}{ $\rhd$ since $\overline{\omega^k} = e^{\overline{\frac{ki\pi}{n}}} = e^{-\frac{ki\pi}{n}} = \omega^{-k}$ and $\omega^{k} = (\overline{\omega^k})^{-1}$ for $k = \{1, 3, \cdots, n-1\}$}
 
 $ $
 
-$=\{M(X^{-1})\}$ \textcolor{red}{ \# where $X = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \overline{\omega^{n - 1}}, \cdots, \overline{\omega^3}, \overline{\omega} \} = \{\omega^{1}, \omega^{3}, \cdots, \omega^{2n - 1}\}$}
+$=\{M(X^{-1})\}$ \textcolor{red}{ $\rhd$ where $X = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \overline{\omega^{n - 1}}, \cdots, \overline{\omega^3}, \overline{\omega} \} = \{\omega^{1}, \omega^{3}, \cdots, \omega^{2n - 1}\}$}
 
 $ $
 
@@ -1382,7 +1382,7 @@ To decode $M(X)$ into an input vector, we need to evaluate $M(X)$ at $\frac{n}{2
 $\bm{(} \text{ } 
 M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \cdots,  M(\omega^{J(\frac{n}{2}-1)})\bm{)}$ 
 
-\textcolor{red}{ \# where $\omega=e^{\frac{i\pi}{n}}$, the base and generator of the primitive ($\mu=2n$)-th roots of unity}
+\textcolor{red}{ $\rhd$ where $\omega=e^{\frac{i\pi}{n}}$, the base and generator of the primitive ($\mu=2n$)-th roots of unity}
 
 $ $
 
@@ -1401,7 +1401,7 @@ $ $
 $= \bm{(} \text{ } 
 M_Y(\xi^{J(0)}), \text{ } M_Y(\xi^{J(1)}), \cdots,  M_Y(\xi^{J(\frac{n}{2}-1)})\bm{)}$ 
 
-\textcolor{red}{ \# where $\xi = e^{\frac{i\pi}{n'}}$, the base and generator of the primitive $(\mu=2n')$-th roots of unity}
+\textcolor{red}{ $\rhd$ where $\xi = e^{\frac{i\pi}{n'}}$, the base and generator of the primitive $(\mu=2n')$-th roots of unity}
 
 $ $
 
@@ -1634,7 +1634,7 @@ Suppose we have a ciphertext $(A, B)$ with multiplicative depth 0. If we decrypt
 
 $\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$
 
-$ = B + A\cdot S = \Delta M + E + q_0\cdot K$ \textcolor{red}{ \# since $B + A\cdot S \bmod q_0 = \Delta M + E$}
+$ = B + A\cdot S = \Delta M + E + q_0\cdot K$ \textcolor{red}{ $\rhd$ since $B + A\cdot S \bmod q_0 = \Delta M + E$}
 
 , where $q_0 \cdot K$ accounts for wrap-around modulo $q_0$ values-- each coefficient of polynomial $q_0K$ is some multiple of $q_0$. CKKS's bootstrapping procedure is equivalent to \textit{safely} transforming a ciphertext's modulus from $q_0$ to $q_L$ (where $q_L \gg q_0$).
 
@@ -1717,11 +1717,11 @@ We will mathematically walk through how the bootstrapping procedure (\autoref{ta
 
 For ease of understanding, we will first explain how we would do modulus bootstrapping for a ciphertext with multiplicative level 0 (i.e., its modulus is $q_0$) in case we have access to the secret key $S(X)$. Using this key, we can decrypt the ciphertext as follows:
 
-$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+$\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)}$ \textcolor{red}{ $\rhd$ where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
 
 $ = B + A\cdot S = \Delta M + E \bmod q_0$ 
 
-$ = \Delta M + E + q_0K$ \textcolor{red}{\# where $q_0K$ accounts for any potential wrap-around modulo $q_0$ values}
+$ = \Delta M + E + q_0K$ \textcolor{red}{ $\rhd$ where $q_0K$ accounts for any potential wrap-around modulo $q_0$ values}
 
 Our initial goal is to bootstrap the modulus of the ciphertext from $q_0$ to $q_L$ by using only the following three tools:
 
@@ -1748,13 +1748,13 @@ $ $
 
 \para{\textsf{\textbf{\underline{CoeffToSlot}:}}} This step generates a new plaintext polynomial whose each $i$-th input vector slot stores the corrupted coefficient $(m_i + e_i + q_0k_i)$. The trick of doing this is to apply CKKS's batch-encoding mapping $\sigma^{-1}$ (which represents the transformation $\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$ as explained in \autoref{subsec:ckks-encoding-decoding}) to the input vector slots that encode the polynomial $\Delta M + E + q_0 K \bmod q_L$. Let $\vec{v}_c$ be the input vector that corresponds to polynomial $\Delta M + E + q_0 K$. Then, $\vec{v}_c$ and $\Delta M + E + q_0 K$ satisfy the following relation over the encoding mapping $\sigma^{-1}$: 
 
-$\sigma^{-1}\bm(\vec{v}_c\bm) = M_c = \sum\limits_{i=0}^{n-1}(\Delta m_i + e_i + q_0k_i)\cdot X^{i}$ \textcolor{red}{ \# i.e., polynomial $\Delta M + E + q_0K$} 
+$\sigma^{-1}\bm(\vec{v}_c\bm) = M_c = \sum\limits_{i=0}^{n-1}(\Delta m_i + e_i + q_0k_i)\cdot X^{i}$ \textcolor{red}{ $\rhd$ i.e., polynomial $\Delta M + E + q_0K$} 
 
 This implies that if we \textit{homomorphically} apply the $\sigma^{-1}$ transformation to the elements of the input vector $\vec{v}_c$, then the resulting input vector $\vec{v}_s$ will store $\vec{v}_c$'s encoded polynomial coefficient values as follows:
 
 $\sigma^{-1} \circ \vec{v}_c = \vec{v}_s = (\Delta m_0 + e_0 + q_0k_0, \text{ } \Delta m_1 + e_1 + q_0k_1, \text{ } \cdots, \text{ } \Delta m_{n-1} + e_{n-1} + q_0k_{n-1})$  
 
-\textcolor{red}{ \# where $\circ$ represents a linear transformation operation comprising $(+, \cdot)$}
+\textcolor{red}{ $\rhd$ where $\circ$ represents a linear transformation operation comprising $(+, \cdot)$}
 
 $ $
 
@@ -1764,7 +1764,7 @@ $ $
 However, remember that at the end of the \textsf{ModRaise} step, we get the decrypted (but corrupted by $q_0k$) polynomial $M_c = \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\bm) = \Delta M + E + q_0K$ and we are not allowed to decode it into $\vec{v}_c$. Therefore, we will instead \textit{encode} the matrix $\hathat W \cdot I_n^R$ in the encoding transformation $\sigma^{-1}$ ($\vec{m} = \dfrac{\hathat W \cdot I_n^R \cdot \vec{v}_{'}}{n}$) into its equivalent polynomials (treating a matrix as a combination of vectors) and then perform batched slot-wise $(+, \cdot)$ operation between $M_c$ and the polynomial version of $\hathat W \cdot I_n^R$. We express this polynomial-based computation as follows:
 
 $M_s = \sigma^{-1}_{\sigma^{-1}} \circ M_c \bmod q_L$
-\textcolor{red}{ \# $\sigma^{-1}_{\sigma^{-1}}$ is the polynomial-encoded version of the $\sigma^{-1}$ transformation}
+\textcolor{red}{ $\rhd$ $\sigma^{-1}_{\sigma^{-1}}$ is the polynomial-encoded version of the $\sigma^{-1}$ transformation}
 
 Then, the resulting polynomial $M_s$'s corresponding input vector slots (i.e., the decoded version of $M_s$) will store $\vec{v}_s = (\Delta m_0 + e_0 + q_0k_0, \text{ } \Delta m_1 + e_1 + q_0k_1, \text{ } \cdots, \text{ } \Delta m_{n-1} + e_{n-1} + q_0k_{n-1})$. In other words, the above computation effectively \textit{moves} the coefficients of $M_c$ to the input vector slots of a new plaintext polynomial. 
 
@@ -1775,7 +1775,7 @@ $ $
 \para{\textsf{\textbf{\underline{EvalExp}:}}}
 Our next step is to update $\vec{v}_s$'s each element $m_i + e_i + q_0k_i$ to $m_i + e_i$ by evaluating it with the sine function $f(x)$. Since the output of the \textsf{CoeffToSlot} step is polynomial $M_s$ (technically $M_{s1}$ and $M_{s2}$), we need to apply the evaluation transformation in an encoded form. First, we approximate $f(x)$ as a linear combination comprising only $(+, \cdot)$ operations by using the Taylor series and Euler's formula (will be explained later). Then, we encode (i.e., $\sigma$) the approximated formula into a polynomial form, and we denote it as $\sigma_f$. Finally, we apply the $\sigma_f$ transformation to $M_s$ as follows: 
 
-$\sigma^{-1}_f \circ M_s \bmod q_L$  \textcolor{red}{ \# Applying the sine function's linear transformation to $\vec{v}_s$'s each slot storing $\Delta m_i + e_i + q_0k_i$}
+$\sigma^{-1}_f \circ M_s \bmod q_L$  \textcolor{red}{ $\rhd$ Applying the sine function's linear transformation to $\vec{v}_s$'s each slot storing $\Delta m_i + e_i + q_0k_i$}
 
 $= M_t = \sigma\bm{(}\vec{v}_t\bm{)} = \sigma\bm{(}(\Delta m_i + e_i)_{i=0}^{n-1}\bm{)} \bmod q_L$
 
@@ -1787,11 +1787,11 @@ After the linear transformation by the sine function, notice that each $q_0 k_i$
 
 %Suppose $f$ is an approximate linear transformation that eliminates the multiples of $q$ from the input $\Delta M + E + q_0 \cdot K$ where $\Delta M + E \ll q$ (e.g., a sine function with period $q$), and $\sigma^{-1}_f$ is an batch-encoded form of $f$ for homomorphic computation. By $\sigma^{-1}_f \text{ } \circ$, we denote applying linear transformation of $f$ in a batch-encoded manner to the right-hand-side expression. Now, we apply this linear transformation to the decrypted result of ciphertext $\textsf{ct} = (A, B) \bmod q_L$, which gives us:
 
-%$\sigma^{-1}_f \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$  \textcolor{red}{ \# Applying the linear transformation to $\Delta M + E + q_0k$}
+%$\sigma^{-1}_f \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$  \textcolor{red}{ $\rhd$ Applying the linear transformation to $\Delta M + E + q_0k$}
 
 %$= \sigma^{-1}_f\bm{(}\Delta M + E + q_0 \cdot K\bm{)} \bmod q_L$
 
-%$ = \Delta M + E + E' = \Delta M + E'' \bmod q_L$ \textcolor{red}{ \# The $q_0 K$ term is eliminated (i.e. modulo reduction by $q$)}
+%$ = \Delta M + E + E' = \Delta M + E'' \bmod q_L$ \textcolor{red}{ $\rhd$ The $q_0 K$ term is eliminated (i.e. modulo reduction by $q$)}
 
 $ $
 
@@ -1799,7 +1799,7 @@ $ $
 Now that we have a polynomial $M_t$ whose corresponding input vector $\vec{v}_t$'s slots store garbage-removed coefficients of (i.e., $\Delta m_i + e_i$) our initial plaintext polynomial, our next step is to put these coefficients stored in $\vec{v}_t$ back to the polynomial. This is an exact reverse operation of \textsf{CoeffToSlot} as follows:
 
 $\sigma^{-1}_{\sigma} \circ M^t = M_b$ 
-\textcolor{red}{ \# $\sigma^{-1}_{\sigma}$ is a polynomial-encoded form of the batch-decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ (\autoref{subsec:ckks-encoding-decoding})}
+\textcolor{red}{ $\rhd$ $\sigma^{-1}_{\sigma}$ is a polynomial-encoded form of the batch-decoding formula $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$ (\autoref{subsec:ckks-encoding-decoding})}
 
 The result is polynomial $M_b$ whose coefficients are garbage-eliminated (i.e., $q_0k_i$-free) versions of $M_c$. Finally, we re-encrypt $M_b$ as $\textsf{RLWE}_{S, \sigma}(M_b)$ as the final modulus-bootstrapped ciphertext. 
 
@@ -1809,7 +1809,7 @@ $ $
 \para{\textsf{\textbf{\underline{Bootstrapping Without a Secret Key}:}}} So far, we have assumed that we have access to the secret key $S$. With decryption and re-encryption enabled, the above bootstrapping steps described are mathematically equivalent to computing the following:
 
 \begin{enumerate}
-\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ $\rhd$ where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
 
 \item \textsf{\textbf{\underline{ModRaise}:}} $\textsf{ct} = (A, B) \bmod q_L$
 
@@ -1838,7 +1838,7 @@ $ $
 
 After \textsf{ModRaise} to $(A, B) \bmod q_L$, its decryption relation is as follows:
 
-$A\cdot S + B = \Delta M + E + Kq_0 \bmod q_L = \Delta M + E + Kq_0$ \textcolor{red}{\# because $\Delta M + E + Kq_0 \ll q_L$}
+$A\cdot S + B = \Delta M + E + Kq_0 \bmod q_L = \Delta M + E + Kq_0$ \textcolor{red}{ $\rhd$ because $\Delta M + E + Kq_0 \ll q_L$}
 
 $ $
 
@@ -1851,7 +1851,7 @@ Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_
 
 %, but having access only to a RLev encryption of $S$ (i.e., $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$), which we call a \textit{bootstrapping key}. With this bootstrapping key, we can compute the following:
 
-%$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B \bmod q_L$ \textcolor{red}{ \# where the plaintext scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}(S) = \{\textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta}S_1\right), \textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta^2}S_2\right), \cdots \}$ are all 1}
+%$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B \bmod q_L$ \textcolor{red}{ $\rhd$ where the plaintext scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}(S) = \{\textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta}S_1\right), \textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta^2}S_2\right), \cdots \}$ are all 1}
 
 %$ $
 
@@ -1859,7 +1859,7 @@ Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_
 
 %$ = \textsf{RLWE}_{S, \sigma}(AS + B) \bmod q_L$
 
-%$ = \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$ \textcolor{red}{ \# the plaintext is $\Delta M + E + q_0K$ and the scaling factor is 1}
+%$ = \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$ \textcolor{red}{ $\rhd$ the plaintext is $\Delta M + E + q_0K$ and the scaling factor is 1}
 
 %In the above homomorphic decryption computation (without scaling down by $\Delta$, we treat $A$ and $B$ as plaintext polynomials whose coefficients are in $\mathbb{Z}_{q_0}$, whereas the ciphertext modulus is $\mathbb{Z}_{q_L}$. We consider $\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle$ as ciphertext-to-plaintext multiplication, and adding $B$ to the result is considered as ciphertext-to-plaintext addition. 
 %As each coefficient of polynomial $A$ and $B$ is in $[0, q_0 - 1]$ and each coefficient of $S$ is in $[-1, 1]$, and these polynomials have degree $n$, the result the above homomorphic computation will be a ciphertext that encrypts the plaintext polynomial $A\cdot S + B$ whose coefficients are guaranteed to be much smaller than $q_L$ (i.e., does not wrap around $q_L$). Therefore, we can consider the above homomorphic computation to output a ciphertext that encrypts the plaintext $\Delta M + E + q_0K$ for some integer polynomial $K$. 
@@ -1871,7 +1871,7 @@ Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_
 
 %$ $
 
-%\textcolor{red}{ \# Replace the initial decryption and final re-encryption by homomorphic decryption using $\textsf{RLWE}_{S, \sigma}(S)$}
+%\textcolor{red}{ $\rhd$ Replace the initial decryption and final re-encryption by homomorphic decryption using $\textsf{RLWE}_{S, \sigma}(S)$}
 
 %$= \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \bm(A\cdot \textsf{RLWE}_{S, \sigma}(S) + B\bm) \textbf{)}) \bmod q_L$
 
@@ -1889,14 +1889,14 @@ Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_
 
 %$ $
 
-%\textcolor{red}{ \# Encryption and decryption cancel each other}
+%\textcolor{red}{ $\rhd$ Encryption and decryption cancel each other}
 
 %$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
 
 
 %$ $
 
-%\textcolor{red}{ \# Regardless of whether the $\sigma^{-1}_{\sigma}, \sigma^{-1}_{f}$ and $ \sigma^{-1}_{\sigma^{-1}}$ operands are RLWE plaintexts or RLWE ciphertexts, the computational result is the same}
+%\textcolor{red}{ $\rhd$ Regardless of whether the $\sigma^{-1}_{\sigma}, \sigma^{-1}_{f}$ and $ \sigma^{-1}_{\sigma^{-1}}$ operands are RLWE plaintexts or RLWE ciphertexts, the computational result is the same}
 
 %$\stackrel{q_L}{\equiv} \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
 
@@ -1930,7 +1930,7 @@ $ $
 
 $ $
 
-\textcolor{red}{ \# where the rotation helper function $J(h) = 5^h \bmod 2n$}
+\textcolor{red}{ $\rhd$ where the rotation helper function $J(h) = 5^h \bmod 2n$}
 
 $ $
 
@@ -2116,7 +2116,7 @@ We summarize the CKKS bootstrapping procedure as follows.
 \setlist[itemize]{leftmargin=*}
 \setlist[enumerate]{leftmargin=*}
 \begin{enumerate}
-\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ \# where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
+\item \textsf{\textbf{\underline{INPUT}:}} $\textsf{ct} = (A, B) \bmod q_0$ \textcolor{red}{ $\rhd$ where $\textsf{ct}=(A, B) = \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm)$}
 
 $ $
 

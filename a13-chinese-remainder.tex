@@ -30,7 +30,7 @@ $ $
 
 Note that each $y_i$'s inverse (i.e., $y_i^{-1}$) can be computed by using the Extended Euclidean algorithm (watch the \href{https://www.youtube.com/watch?v=fz1vxq5ts5I}{YouTube tutorial}). Then, the unique solution $x$ can be computed as follows:
 
-$x = \sum\limits_{i=0}^k a_i y_i z_i $ \textcolor{red}{ \# Alternatively, we can compute $ x = \sum\limits_{i=0}^k |a_i z_i|_{n_i} y_i$ (where $|a_i z_i|_{n_i} = a_i z_i \bmod n_i$)}
+$x = \sum\limits_{i=0}^k a_i y_i z_i $ \textcolor{red}{ $\rhd$ Alternatively, we can compute $ x = \sum\limits_{i=0}^k |a_i z_i|_{n_i} y_i$ (where $|a_i z_i|_{n_i} = a_i z_i \bmod n_i$)}
 
 $ $
 
@@ -52,9 +52,9 @@ $x \bmod n_i = \sum\limits_{j=0}^k a_j y_j z_j \bmod n_i$
 
 $= a_0 y_0 z_0 + a_1 y_1 z_1 + a_2 y_2 z_2 + \cdots + a_k y_k z_k \bmod n_i$
 
-$= a_i y_i z_i \bmod n_i$ \textcolor{red}{ \# because $y_j \equiv 0 \bmod n_i$ for all $j \neq i$, as they are a multiple of $n_i$}
+$= a_i y_i z_i \bmod n_i$ \textcolor{red}{ $\rhd$ because $y_j \equiv 0 \bmod n_i$ for all $j \neq i$, as they are a multiple of $n_i$}
 
-$= a_i$ \textcolor{red}{ \# because $y_i z_i \equiv y_i y_i^{-1} \equiv 1 \bmod n_i$}
+$= a_i$ \textcolor{red}{ $\rhd$ because $y_i z_i \equiv y_i y_i^{-1} \equiv 1 \bmod n_i$}
 
 $ $
 
@@ -130,7 +130,7 @@ $ $
 
 \item $a \cdot b \equiv \sum\limits_{i=0}^k a_i y_i z_i \cdot \sum\limits_{i=0}^k b_i y_i z_i \equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i)^2  + \sum\limits_{i\neq j}^k (a_i \cdot b_j) y_i z_iy_j z_j \equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i)^2$
 
-\textcolor{red}{\# Note that all terms $y_iz_iy_jz_j$ where $i \neq j$ are 0 modulo $N$, because $y_iy_j \bmod N \equiv 0$. \\
+\textcolor{red}{ $\rhd$ Note that all terms $y_iz_iy_jz_j$ where $i \neq j$ are 0 modulo $N$, because $y_iy_j \bmod N \equiv 0$. \\
 This is because $y_i = n_0n_1\cdots n_{i-1}n_{i+1}\cdots$ and $y_j = n_0n_1\cdots n_{j-1}n_{j+1}\cdots$. \\
 Thus $y_iy_j$ is a multiple of $N$.}
 
@@ -138,7 +138,7 @@ $ $
 
 $\equiv \sum\limits_{i=0}^k (a_i \cdot b_i) (y_i z_i) \bmod N$
 
-\textcolor{red}{\# This is because $(y_i z_i) \equiv (y_i z_i)^2$ as shown in step 3 in the proof of Theorem~\ref*{sec:chinese-remainder}.1}
+\textcolor{red}{ $\rhd$ This is because $(y_i z_i) \equiv (y_i z_i)^2$ as shown in step 3 in the proof of Theorem~\ref*{sec:chinese-remainder}.1}
 
 
 \end{itemize}

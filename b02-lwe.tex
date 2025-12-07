@@ -95,15 +95,15 @@ On the other hand, suppose that $t$ does not divide $q$. In such a case, we set 
 
 We can denote plaintext $m \bmod t$ as $m = m' + kt$, where $m' \in \mathbb{Z}_t$ and $k$ are integers used to represent the modulo $t$ wrap-around value portion of $m$. And we set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added scaled plaintext value is as follows:
 
-$\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e = \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ \# by applying $m = m' + kt$}
+$\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e = \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ $\rhd$ by applying $m = m' + kt$}
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$  \textcolor{red}{ \# where $0 \leq \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor < 1$}
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$  \textcolor{red}{ $\rhd$ where $0 \leq \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor < 1$}
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - (\dfrac{q}{p} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$
 
 $ $
 
-We treat the above noisy scaled ciphertext as $= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - e' + e$, where $e' = kt$ is the maximum possible value of $\left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$. In other words, we overestimate the noise caused by $(\dfrac{q}{p} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$ to $kt$, because the maximum value this term can attain is less than $kt$.
+We treat the above noisy scaled ciphertext as $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - e' + e$, where $e' = kt$ is the maximum possible value of $(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$. In other words, we overestimate the noise caused by $(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt$ to $kt$, because the maximum value this term can attain is less than $kt$.
 
 Given the LWE decryption relation $b - \vec{a}\cdot \vec{s} \bmod q = \Delta m + e$, we can decrypt the above message by performing:
 
@@ -115,7 +115,7 @@ $= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\
 
 $= \left\lceil m'  - \dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$
 
-$= m'$  \textcolor{red}{ \# provided $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$}
+$= m'$  \textcolor{red}{ $\rhd$ provided $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$}
 
 To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$, where $t$ does not divide $q$, the decryption works correctly as long as the error bound $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ holds. This error bound can break if: (1) the noise $e$ is too large; (2) the plaintext modulus $t$ is too large; and (3) the plaintext value wraps around $t$ too many times (i.e., $k$ is too large). A solution to ensure $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is that the ciphertext modulus $q$ is sufficiently large. To put it differently, if $q \gg t$, then the error bound will hold. 
 

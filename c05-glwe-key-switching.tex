@@ -62,7 +62,7 @@ $ =  A_{\langle i,1 \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left (
  \dfrac{q}{\beta^1}S_i \right ) + A_{\langle i,2 \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
  \dfrac{q}{\beta^2}S_i \right ) + \gap{$\cdots$} + A_{\langle i,l \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
  \dfrac{q}{\beta^l}S_i \right ) $ 
-\textcolor{red}{ \# where each \textsf{GLWE} ciphertext is an encryption of $S_i\dfrac{q}{\beta}, S_i\dfrac{q}{\beta^2}, \cdots, S_i\dfrac{q}{\beta^l}$ as plaintext with the plaintext scaling factor 1}
+\textcolor{red}{ $\rhd$ where each \textsf{GLWE} ciphertext is an encryption of $S_i\dfrac{q}{\beta}, S_i\dfrac{q}{\beta^2}, \cdots, S_i\dfrac{q}{\beta^l}$ as plaintext with the plaintext scaling factor 1}
 
 $ $
  
@@ -96,7 +96,7 @@ $ $
 
 $\textsf{GLWE}_{S', \sigma}(B) - \textsf{GLWE}_{S', \sigma} \left(\sum \limits_{i=0}^{k-1} (A_i  S_i)\right)$
 
-$ = (\overbrace{0, 0, \gap{$\cdots$}}^k, B) - (\overbrace{A'_0, A'_1, \gap{$\cdots$}, A'_k}^k, B')  $ \text { } \textcolor{red}{ \# where $B' = \sum\limits_{i=0}^{k-1} A'_iS'_i + \sum\limits_{i=0}^{k-1} A_iS_i + E'$}
+$ = (\overbrace{0, 0, \gap{$\cdots$}}^k, B) - (\overbrace{A'_0, A'_1, \gap{$\cdots$}, A'_k}^k, B')  $ \text { } \textcolor{red}{ $\rhd$ where $B' = \sum\limits_{i=0}^{k-1} A'_iS'_i + \sum\limits_{i=0}^{k-1} A_iS_i + E'$}
 
 $(\overbrace{-A'_0, -A'_1, \gap{$\cdots$}, -A'_k}^k, \text{ } B - B')$
 

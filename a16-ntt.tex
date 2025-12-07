@@ -198,7 +198,7 @@ $x \cdot S_n - S_n = (x + x^2 + x^3 + \cdots + x^{n}) - (1 + x + x^2 + \cdots + 
 
 $S_n\cdot (x - 1) = x^n - 1$
 
-$S_n = \dfrac{x^n - 1}{x - 1}$ \textcolor{red}{ \# with the constraint that $x \neq 1$}
+$S_n = \dfrac{x^n - 1}{x - 1}$ \textcolor{red}{ $\rhd$ with the constraint that $x \neq 1$}
 
 \end{tcolorbox}
 
@@ -208,9 +208,9 @@ $\sum\limits_{k=0}^{n-1}\omega^{(i-j)\cdot k} = \dfrac{(\omega^{i - j})^n - 1}{\
 
 $= \dfrac{(\omega^n)^{i - j} - 1}{\omega^{i - j} - 1}$
 
-$= \dfrac{(1)^{i - j} - 1}{\omega^{i - j} - 1}$ \textcolor{red}{ \# since the order of $\omega$ is $n$}
+$= \dfrac{(1)^{i - j} - 1}{\omega^{i - j} - 1}$ \textcolor{red}{ $\rhd$ since the order of $\omega$ is $n$}
 
-\textcolor{red}{ \# Here, the denominator can't be 0, since $i \neq j$ and $-n < i - j < n$ (as $0 \leq i < n$ and $0 \leq j < n$)}
+\textcolor{red}{ $\rhd$ Here, the denominator can't be 0, since $i \neq j$ and $-n < i - j < n$ (as $0 \leq i < n$ and $0 \leq j < n$)}
 
 $= 0$
 
@@ -225,12 +225,12 @@ The above inverse FFT computation is equivalent to evaluating the polynomial $\h
 \begin{algorithm}[t]
 \algrenewcommand\algorithmicindent{1em} % Adjust indentation herei.e., 
 \begin{algorithmic}[1]
-\State \textsf{FFT}$(\vec{a}):$ %\textcolor{red}{\# an RLWE ciphertext storing $k$ zeros and non-zero random numbers, whose ratio varies}
+\State \textsf{FFT}$(\vec{a}):$ %\textcolor{red}{ $\rhd$ an RLWE ciphertext storing $k$ zeros and non-zero random numbers, whose ratio varies}
 \State $n' \gets$ length of $\vec{a}$
 \If{$n' = 1$}
     \State \textbf{return} $a$
 \EndIf
-\State $\omega = e^{\frac{2\pi}{k}}$ \textcolor{red}{ \# or $\omega = g^{\frac{p-1}{n}}$ in the case of NTT}
+\State $\omega = e^{\frac{2\pi}{k}}$ \textcolor{red}{ $\rhd$ or $\omega = g^{\frac{p-1}{n}}$ in the case of NTT}
 \State $\omega' = 1$
 \State $\vec{a}^{\langle 0 \rangle} = (a_0, a_2, \cdots, a_{n'-2})$
 \State $\vec{a}^{\langle 1 \rangle} = (a_1, a_3, \cdots, a_{n'-1})$

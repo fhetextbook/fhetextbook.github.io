@@ -340,7 +340,7 @@ $ $
 
 \item The specific noise bound is as explained in \autoref{subsubsec:scaling-factor-computation}:
 
-$\dfrac{k_i t + e_i}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ \textcolor{red}{ \# $k_i t$ accounts for the plaintext $m_i$'s wrapped-around value as multiples of $t$}
+$\dfrac{k_i t + e_i}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ \textcolor{red}{ $\rhd$ $k_i t$ accounts for the plaintext $m_i$'s wrapped-around value as multiples of $t$}
  
 \end{enumerate}
 
@@ -368,6 +368,97 @@ $ = ( A^{\langle 1 \rangle} + A^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rang
 
 $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) )$
 \end{tcolorbox}
+
+
+\subsubsection{Noise Bound Analysis}
+\label{subsubsec:bfv-noise-analysis}
+
+In the last part of Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}, we explained the conditions for BFV's correct decryption. In this subsection, we will explain why this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
+
+Let's denote the homomorphically added ciphertext as follows: 
+
+$ ( A^{\langle 3 \rangle}, \text{ } B^{\langle 3 \rangle}) = ( A^{\langle 1 \rangle} + A^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} ) \bmod q$
+
+$ $
+
+Applying the first step of decryption to it yields the following intermediate result:
+
+$B^{\langle 3 \rangle} + A^{\langle 3 \rangle}\cdot S \bmod q$
+
+$B^{\langle 1 \rangle} + B^{\langle 2 \rangle} + A^{\langle 1 \rangle}\cdot S + A^{\langle 2 \rangle}\cdot S \bmod q$
+
+$= (-A^{\langle 1 \rangle}\cdot S + \Delta M^{\langle 1\rangle} + E^{\langle 1 \rangle}) + (- A^{\langle 2 \rangle}\cdot S  + \Delta M^{\langle 2\rangle}  + E^{\langle 2 \rangle}) + A^{\langle 1 \rangle}\cdot S + A^{\langle 2 \rangle}\cdot S \bmod q$
+
+$= \Delta M^{\langle 1\rangle} + E^{\langle 1 \rangle} + \Delta M^{\langle 2\rangle} + E^{\langle 2 \rangle} \bmod q $
+
+$ $
+
+The second step of decryption is to divide each coefficient of the above intermediate polynomial by $\Delta$, round it, and reduce it modulo $t$ as follows:
+
+$ $
+
+$\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$
+
+$ $
+
+Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final value. Let's define $\epsilon = \left\lceil\dfrac{q}{t}\right\rfloor - \left\lfloor\dfrac{q}{t}\right\rfloor = \left\lceil\dfrac{q}{t}\right\rfloor - \Delta$. Given $q \gg t$, $\epsilon$ is a very small decimal value (i.e., almost 0). Now, we can re-write the above decryption term as follows:
+
+$ $
+
+$\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+
+$ $
+
+$\left\lceil\dfrac{(\left\lceil\frac{q}{t}\right\rfloor - \epsilon)\cdot (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ applying $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor = \left\lceil\dfrac{q}{t}\right\rfloor - \epsilon$}
+
+$ $
+
+$ = \left\lceil\dfrac{(\left\lceil\frac{q}{t}\right\rfloor - \epsilon)\cdot (M^{\langle 1 + 2\rangle} + t\cdot K) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+
+\textcolor{red}{ $\rhd$ where $t \cdot K$ represents any possible $t$-overflows caused by adding $M^{\langle 1\rangle} + M^{\langle 2\rangle}$ }
+
+$ $
+
+$ $
+
+$ = \left\lceil\dfrac{\left\lceil\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  + \left\lceil\frac{q}{t}\right\rfloor \cdot t\cdot K  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+
+$ $
+
+$ = \left\lceil\dfrac{\left\lceil\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+
+\textcolor{red}{ $\rhd$ since $\left\lceil\frac{q}{t}\right\rfloor\cdot t = q$, and $q\cdot K \bmod q = 0$}
+
+$ $
+
+$ $
+
+
+$ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle} + \epsilon \cdot M^{\langle 1 + 2\rangle} - \epsilon \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$  
+
+\textcolor{red}{ $\rhd$ applying  $\left\lceil\dfrac{q}{t}\right\rfloor = \left\lfloor\dfrac{q}{t}\right\rfloor + \epsilon$}
+
+$ $
+
+$ $
+
+
+$ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle} - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$  
+
+$ $
+
+$ = M^{\langle 1 + 2\rangle} + \left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor \bmod t$  \textcolor{red}{ $\rhd$ since  $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, and $\lceil M^{\langle 1 + 2\rangle} \rfloor = M^{\langle 1 + 2\rangle}$}
+
+$ $
+
+$ $
+
+The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, the second term is guaranteed to be zero if: (1) its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$. This conclusion on the error bound is a more concrete version of the ``Conditions for Correct Decryption" explained in Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}. 
+
+This error bound principle also applies to homomorphic multiplications and rotations, which will be explained in later subsections. For other operations, the term $E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ can be generalized as the cumulative noise across all homomorphic operations (e.g., additions, multiplications, rotations), and the term $\epsilon \cdot t\cdot K$ can be generalized as the amount of $t$-overflows of each coefficient of the plaintext polynomial computed across homomorphic operations. 
+
+
+
 
 \subsection{Ciphertext-to-Plaintext Addition}
 \label{subsec:bfv-add-plain}
@@ -429,7 +520,7 @@ For better understanding, we will explain BFV's ciphertext-to-ciphertext multipl
 
 We learned from Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}) that a BFV ciphertext whose ciphertext modulus is $q$ has the (decryption) relation: $\Delta M + E = A\cdot S + B - K \cdot q$, where $K \cdot q$ stands for modulo reduction by $q$. \textsf{ModRaise} is a process of forcibly modifying the modulus of a ciphertext from $q \rightarrow Q$, where $q \ll Q$. Suppose we modify the modulus of ciphertext $(A, B)$ from $q$ to $Q$, where $Q = q \cdot \Delta$ (remember $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$). Then, the decryption of the \textit{mod-raised} ciphertext will output $A\cdot S + B \bmod Q$. However, since each polynomial coefficient of $A$ and $B$ is less than $q$ and each polynomial coefficient of $S$ is either $\{-1, 0, 1\}$, the resulting polynomial of $A\cdot S + B$ is guaranteed to have each coefficient strictly less than $Q$ even without modulo reduction by $Q$-- this is because $(q-1)\cdot n + (q-1) < Q$, where $(q-1)\cdot n$ is the maximum possible coefficient of $A \cdot S$ and $(q-1)$ is the maximum possible coefficient of $B$. And as mentioned before, we know the relation: $A\cdot S + B = \Delta M + E + Kq$. Therefore, the decryption of the \textit{mod-raised} ciphertext $(A, B) \bmod Q$ is as follows:
 
-$\Delta M + E + Kq \bmod Q = \Delta M + E + Kq$ \textcolor{red}{ \#  since $\Delta M + E + Kq < Q$} 
+$\Delta M + E + Kq \bmod Q = \Delta M + E + Kq$ \textcolor{red}{ $\rhd$  since $\Delta M + E + Kq < Q$} 
 
 $ $
 
@@ -530,7 +621,7 @@ $= \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \left(D_{2,1}\dfrac{Q}{\beta} + D_{
 $= \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,1} \cdot \dfrac{Q}{\beta}\right) + \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,2} \cdot \dfrac{Q}{\beta^2}\right) + \cdots + \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,l} \cdot \dfrac{Q}{\beta^l}\right)$ 
 
 $= D_{2,1}\cdot\textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \dfrac{Q}{\beta}\right) + D_{2,2}\cdot\textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \dfrac{Q}{\beta^2}\right) + \cdots + D_{2,l}\cdot\textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \dfrac{Q}{\beta^l}\right)$ 
-\textcolor{red}{ \# where each \textsf{RLWE} ciphertext is an encryption of $S^2\dfrac{Q}{\beta}, S^2\dfrac{Q}{\beta^2}, \cdots, S^2\dfrac{Q}{\beta^l}$ as plaintext with the plaintext scaling factor $\Delta = 1$}
+\textcolor{red}{ $\rhd$ where each \textsf{RLWE} ciphertext is an encryption of $S^2\dfrac{Q}{\beta}, S^2\dfrac{Q}{\beta^2}, \cdots, S^2\dfrac{Q}{\beta^l}$ as plaintext with the plaintext scaling factor $\Delta = 1$}
 
 $ $
 
@@ -540,7 +631,7 @@ $ $
 
 If we decrypt the above, we get the following:
 
-$\textsf{RLWE}_{S, \sigma}^{-1}(\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ \# the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
+$\textsf{RLWE}_{S, \sigma}^{-1}(\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ $\rhd$ the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
 
 $= D_{2,1}\cdot\left(E_1' +  S^2\dfrac{Q}{\beta}\right) + D_{2,2}\cdot\left(E_2' +  S^2\dfrac{Q}{\beta^2}\right) + \cdots + D_{2,l}\cdot\left(E_l' +  S^2\dfrac{Q}{\beta^l}\right)$ \textcolor{red}{ \text{ } \# where each $E_i'$ is a noise embedded in $\textsf{RLWE}_{S, \sigma}\left(S^2\cdot\dfrac{Q}{\beta^i}\right)$}
 
@@ -563,17 +654,17 @@ $= (\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle} + K_1q) \cdot (\Delta M
 
 $ = (A^{\langle 1 \rangle} \cdot S + B^{\langle 1 \rangle}) \cdot (A^{\langle 2 \rangle} \cdot S + B^{\langle 2 \rangle})  \bmod Q$
 
-$ = D_0 + D_1\cdot S + D_2\cdot S^2  \bmod Q$ \textcolor{red}{ \# $D_0 = B^{\langle 1 \rangle} B^{\langle 2 \rangle}$, \text{ } $D_1 = A^{\langle 1 \rangle} B^{\langle 2 \rangle} + A^{\langle 2 \rangle} B^{\langle 1 \rangle}$, \text{ } $D_2 = A^{\langle 1 \rangle} A^{\langle 2 \rangle}$}
+$ = D_0 + D_1\cdot S + D_2\cdot S^2  \bmod Q$ \textcolor{red}{ $\rhd$ $D_0 = B^{\langle 1 \rangle} B^{\langle 2 \rangle}$, \text{ } $D_1 = A^{\langle 1 \rangle} B^{\langle 2 \rangle} + A^{\langle 2 \rangle} B^{\langle 1 \rangle}$, \text{ } $D_2 = A^{\langle 1 \rangle} A^{\langle 2 \rangle}$}
 
 $ = \textsf{RLWE}_{S, \sigma}^{-1}(\textsf{ct}_\alpha) + \textsf{RLWE}_{S, \sigma}^{-1}(\textsf{ct}_\beta) - \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})  \bmod Q$ 
 
-\textcolor{red}{ \# $\textsf{ct}_\alpha = (D_1, D_0) = (A_\alpha, B_\beta)$, \text{ } $\textsf{ct}_\beta = \langle \textsf{Decomp}^{\beta, l}(D_2), \textsf{RLev}_{S, \sigma}^{\beta, l}(S^2) \rangle = (A_\beta, B_\beta)$}
+\textcolor{red}{ $\rhd$ $\textsf{ct}_\alpha = (D_1, D_0) = (A_\alpha, B_\beta)$, \text{ } $\textsf{ct}_\beta = \langle \textsf{Decomp}^{\beta, l}(D_2), \textsf{RLev}_{S, \sigma}^{\beta, l}(S^2) \rangle = (A_\beta, B_\beta)$}
 
 $ $
 
 $ = \textsf{RLWE}_{S, \sigma}^{-1}(\textsf{ct}_\alpha + \textsf{ct}_\beta) - \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})  \bmod Q$
 
-$ = \textsf{RLWE}_{S, \sigma}^{-1}\bm((A_{\alpha+\beta}, B_{\alpha+\beta})\bm) - \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) \bmod Q$  \textcolor{red}{ \# $A_{\alpha+\beta} = A_{\alpha} + A_\beta$, \text{ } $B_{\alpha + \beta} = B_\alpha + B_\beta$}
+$ = \textsf{RLWE}_{S, \sigma}^{-1}\bm((A_{\alpha+\beta}, B_{\alpha+\beta})\bm) - \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) \bmod Q$  \textcolor{red}{ $\rhd$ $A_{\alpha+\beta} = A_{\alpha} + A_\beta$, \text{ } $B_{\alpha + \beta} = B_\alpha + B_\beta$}
 
 
 $ $
@@ -607,20 +698,20 @@ The rescaling step is equivalent to converting the ciphertext $(A_{\alpha+\beta}
 
 $ $
 
-$ \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor \bmod q$ \textcolor{red}{ \# decryption of ciphertext $\left(\left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor, \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor\right) \bmod q$}
+$ \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor \bmod q$ \textcolor{red}{ $\rhd$ decryption of ciphertext $\left(\left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor, \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor\right) \bmod q$}
 
 $ $
 
-$ = \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor + K_3q$ \textcolor{red}{ \# where $K_3q$ stands for modulo reduction by $q$}
+$ = \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor + K_3q$ \textcolor{red}{ $\rhd$ where $K_3q$ stands for modulo reduction by $q$}
 
 $ $
 
-$ = \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor + \dfrac{K_3Q}{\Delta}$ \textcolor{red}{ \# since $Q = \Delta \cdot q$}
+$ = \left\lceil\dfrac{A_{\alpha+\beta}}{\Delta}\right\rfloor \cdot S + \left\lceil\dfrac{B_{\alpha+\beta}}{\Delta}\right\rfloor + \dfrac{K_3Q}{\Delta}$ \textcolor{red}{ $\rhd$ since $Q = \Delta \cdot q$}
 
 
 $ $
 
-$ = \left\lceil\dfrac{1}{\Delta}\cdot (A_{\alpha+\beta}\cdot S + B_{\alpha+\beta} + K_3Q)\right\rfloor + E_r$ \textcolor{red}{ \# $E_r$ is a rounding error}
+$ = \left\lceil\dfrac{1}{\Delta}\cdot (A_{\alpha+\beta}\cdot S + B_{\alpha+\beta} + K_3Q)\right\rfloor + E_r$ \textcolor{red}{ $\rhd$ $E_r$ is a rounding error}
 
 $ $
 
@@ -633,7 +724,7 @@ $ = \Bigg\lceil\dfrac{1}{\Delta}\cdot ( \Delta^2M^{\langle 1 \rangle}M^{\langle 
 \text{ } \text{ } $ q\cdot(\Delta M^{\langle 1 \rangle}K_2 + \Delta M^{\langle 2 \rangle}K_1 + E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) + K_1 K_2 q^2 + E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) \bmod Q
 )\Bigg\rfloor + E_r$
 
-\textcolor{red}{ \# as we derived at the end of \autoref{subsubsec:bfv-mult-cipher-relinearization}}
+\textcolor{red}{ $\rhd$ as we derived at the end of \autoref{subsubsec:bfv-mult-cipher-relinearization}}
 
 $ $
 
@@ -642,7 +733,7 @@ $ = \Bigg\lceil\dfrac{1}{\Delta}\cdot ( \Delta^2M^{\langle 1 \rangle}M^{\langle 
 \text{ } \text{ } $ q\cdot(\Delta M^{\langle 1 \rangle}K_2 + \Delta M^{\langle 2 \rangle}K_1 + E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) + K_1 K_2 q^2 + E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) + K_4Q
 )\Bigg\rfloor + E_r$
 
-\textcolor{red}{ \# where $K_4Q$ stands for modulo reduction by $Q$}
+\textcolor{red}{ $\rhd$ where $K_4Q$ stands for modulo reduction by $Q$}
 
 
 $ $
@@ -656,7 +747,7 @@ $ = \Bigg\lceil\Delta M^{\langle 1 \rangle}M^{\langle 2 \rangle} + (M^{\langle 1
 \text{ } \text{ } $+ \dfrac{1}{\Delta}\cdot q\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) + \dfrac{1}{\Delta}\cdot (K_1K_2q^2 
  + E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})) + K_5q\Bigg\rfloor $ 
 
-\text{ } \text{ }  \textcolor{red}{ \# where $K_5q = K_4q + M^{\langle 1 \rangle}q K_2 + M^{\langle 2 \rangle} K_1q$}
+\text{ } \text{ }  \textcolor{red}{ $\rhd$ where $K_5q = K_4q + M^{\langle 1 \rangle}q K_2 + M^{\langle 2 \rangle} K_1q$}
 
 
 
@@ -670,7 +761,7 @@ $ = \Bigg\lceil\Delta M^{\langle 1 \rangle}M^{\langle 2 \rangle} + (M^{\langle 1
 \text{ } \text{ } $+  \dfrac{1}{\Delta}\cdot (K_1K_2q^2 
  + E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})) + K_5q\Bigg\rfloor $ 
 
-\text{ } \text{ }  \textcolor{red}{ \# where $\epsilon = \dfrac{q}{\Delta} - \dfrac{q}{\dfrac{q}{t}} = \dfrac{q}{\left\lfloor\dfrac{q}{t}\right\rfloor} - \dfrac{q}{\dfrac{q}{t}} \approx 0$, thus we substituted $\dfrac{q}{\Delta} = \epsilon + t$}
+\text{ } \text{ }  \textcolor{red}{ $\rhd$ where $\epsilon = \dfrac{q}{\Delta} - \dfrac{q}{\dfrac{q}{t}} = \dfrac{q}{\left\lfloor\dfrac{q}{t}\right\rfloor} - \dfrac{q}{\dfrac{q}{t}} \approx 0$, thus we substituted $\dfrac{q}{\Delta} = \epsilon + t$}
 
 
  $ $
@@ -682,7 +773,7 @@ $ = \Bigg\lceil\Delta M^{\langle 1 \rangle}M^{\langle 2 \rangle} + (M^{\langle 1
 \text{ } \text{ } $ + \dfrac{K_1K_2q^2}{\Delta}   
  + \dfrac{E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})}{\Delta} + K_5q\Bigg\rfloor $
 
-\text{ } \text{ }  \textcolor{red}{ \# Now, let $\epsilon' = \dfrac{K_1K_2q^2}{\Delta} - \dfrac{K_1K_2q^2}{\dfrac{q}{t}} = \dfrac{K_1K_2q^2}{\left\lfloor\dfrac{q}{t}\right\rfloor} - \dfrac{K_1K_2q^2}{\dfrac{q}{t}} \approx 0$.}
+\text{ } \text{ }  \textcolor{red}{ $\rhd$ Now, let $\epsilon' = \dfrac{K_1K_2q^2}{\Delta} - \dfrac{K_1K_2q^2}{\dfrac{q}{t}} = \dfrac{K_1K_2q^2}{\left\lfloor\dfrac{q}{t}\right\rfloor} - \dfrac{K_1K_2q^2}{\dfrac{q}{t}} \approx 0$.}
 
 \text{ } \text{ }  \textcolor{red}{ Thus, we will substitute $\dfrac{K_1K_2q^2}{\Delta} = \dfrac{K_1K_2q^2}{\dfrac{q}{t}} + \epsilon' = K_1K_2qt + \epsilon'$}
  
@@ -702,7 +793,7 @@ $ = \Delta M^{\langle 1 \rangle}M^{\langle 2 \rangle} + (M^{\langle 1 \rangle}E^
 $ = \Delta M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \epsilon'' + K_6q$
 
 
-\textcolor{red}{ \# where $K_6q = K_5q + q\cdot(M^{\langle 1 \rangle}K_2 +  M^{\langle 2 \rangle}K_1) + K_1K_2qt, $}
+\textcolor{red}{ $\rhd$ where $K_6q = K_5q + q\cdot(M^{\langle 1 \rangle}K_2 +  M^{\langle 2 \rangle}K_1) + K_1K_2qt, $}
 
 \textcolor{red}{$ \epsilon'' = M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle} + (t + \epsilon)\cdot(E^{\langle 1 \rangle}K_2 + E^{\langle 2 \rangle}K_1) + \Bigg\lceil\dfrac{E^{\langle 1 \rangle} E^{\langle 2 \rangle} + \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i})}{\Delta}\Bigg\rfloor$} 
 
@@ -896,7 +987,7 @@ $= \begin{bmatrix}
 
 , where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)
 
-\textcolor{red}{\# The encoding matrix that converts $\vec{v}$ into $\vec{m}$ ( i.e., $n$ coefficients of the plaintext polynomial $M(X)$ )}
+\textcolor{red}{ $\rhd$ The encoding matrix that converts $\vec{v}$ into $\vec{m}$ ( i.e., $n$ coefficients of the plaintext polynomial $M(X)$ )}
  
 
 
@@ -910,7 +1001,7 @@ $ $
 
 $\Delta M = \sum\limits_{i=0}^{n-1} ( \Delta m_i  X^i)$ 
 
-\textcolor{red}{\# The integer polynomial that isomorphically encodes the input vector $\vec{v}$}
+\textcolor{red}{ $\rhd$ The integer polynomial that isomorphically encodes the input vector $\vec{v}$}
 
 
 $ $
@@ -992,7 +1083,7 @@ $\sigma_J: M(X) \in \mathcal{R}_{\langle n, t \rangle} \longrightarrow  \bm{(}M(
 \textcolor{white}{$\sigma_J: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}$} $M(\omega^{J_*(0)}), \text{ } M(\omega^{J_*(1)}), \text{ } M(\omega^{J_*(2)}), \cdots, M(\omega^{J_*(\frac{n}{2} - 1}) \text{ } \bm{)} \in \mathbb{Z}^{n}$
 
 
-%\textcolor{red}{\# $J(h) + J_*(h) = 0 \bmod 2n$, which implies that $\omega^{J_*(h)}$ is a conjugate of $\omega^{J(h)}$ (i.e., $\omega^{J_*(h)} = \overline\omega^{J(h)}$)}
+%\textcolor{red}{ $\rhd$ $J(h) + J_*(h) = 0 \bmod 2n$, which implies that $\omega^{J_*(h)}$ is a conjugate of $\omega^{J(h)}$ (i.e., $\omega^{J_*(h)} = \overline\omega^{J(h)}$)}
 
 $ $
 
@@ -1011,7 +1102,7 @@ $ = \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdot
 $ $
 
 $= \bm{(} \text{ } W^T_0\cdot \vec{m}, \text{ } W^T_1\cdot \vec{m}, \text{ } W^T_2\cdot \vec{m}, \text{ } \cdots, \text{ } W^T_{n-1}\cdot \vec{m} \text{ } \bm{)} $ 
-$ $ \textcolor{red}{ \# where $W_i^T$ is the $(i+1)$-th row of $W^T$}
+$ $ \textcolor{red}{ $\rhd$ where $W_i^T$ is the $(i+1)$-th row of $W^T$}
 
 $ = W^T \vec{m} $
 %$= \dfrac{I_n^R}{n}\cdot \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots, M(\omega^{2n-3}), \text{ } M(\omega^{2n-1}) \text{ } )$
@@ -1125,7 +1216,7 @@ $ $
 $= \bm{(} \text{ } M((\omega^{J(h)})^{J(0)}), \text{ } M((\omega^{J(h)})^{J(1)}), \text{ } M((\omega^{J(h)})^{J(2)}), \cdots, M((\omega^{J(h)})^{J(\frac{n}{2}-1)}) \text{ } \bm{)}$
 
 
-\textcolor{red}{\# This is equivalent to evaluating the polynomial $M(X^{J(h)})$ at the following $\dfrac{n}{2}$ distinct $(\mu=2n)$-th roots of unity: $\omega^{J(0)}, \omega^{J(1)},  \omega^{J(2)}, \cdots, \omega^{J(\frac{n}{2} - 1)}$}
+\textcolor{red}{ $\rhd$ This is equivalent to evaluating the polynomial $M(X^{J(h)})$ at the following $\dfrac{n}{2}$ distinct $(\mu=2n)$-th roots of unity: $\omega^{J(0)}, \omega^{J(1)},  \omega^{J(2)}, \cdots, \omega^{J(\frac{n}{2} - 1)}$}
 
 $ $
 
@@ -1133,7 +1224,7 @@ $= \bm{(} \text{ } M(\omega^{J(h)\cdot J(0)}), \text{ } M(\omega^{J(h)\cdot J(1)
 
 $= \bm{(} \text{ } M(\omega^{5^h\cdot 5^0}), \text{ } M(\omega^{5^h\cdot 5^1}), \text{ } M(\omega^{5^h\cdot 5^2}), \cdots, M(\omega^{5^h\cdot 5^{n/2-1}}) \text{ } \bm{)}$
 
-$= \bm{(} \text{ } M(\omega^{5^{h}}), \text{ } M(\omega^{5^{h+1}}), \text{ } M(\omega^{5^{h+2}}), \cdots, M(\omega^{5^{h+n/2-1}}) \text{ } \bm{)}$ \textcolor{red}{ \# note that $5^{\frac{n}{2}} \bmod 2n = 1$}
+$= \bm{(} \text{ } M(\omega^{5^{h}}), \text{ } M(\omega^{5^{h+1}}), \text{ } M(\omega^{5^{h+2}}), \cdots, M(\omega^{5^{h+n/2-1}}) \text{ } \bm{)}$ \textcolor{red}{ $\rhd$ note that $5^{\frac{n}{2}} \bmod 2n = 1$}
 
 $ $
 
@@ -1164,7 +1255,7 @@ $ $
 $= \bm{(} \text{ } M((\omega^{J(h)})^{J_*(0)}), \text{ } M((\omega^{J(h)})^{J_*(1)}), \text{ } M((\omega^{J(h)})^{J_*(2)}), \cdots, M((\omega^{J(h)})^{J_*(\frac{n}{2}-1)}) \text{ } \bm{)}$
 
 
-\textcolor{red}{\# This is equivalent to evaluating the polynomial $M(X^{J(h)})$ at the following $\dfrac{n}{2}$ distinct $(\mu=2n)$-th roots of unity: $\omega^{J_*(0)}, \omega^{J_*(1)},  \omega^{J_*(2)}, \cdots, \omega^{J_*(\frac{n}{2} - 1)}$}
+\textcolor{red}{ $\rhd$ This is equivalent to evaluating the polynomial $M(X^{J(h)})$ at the following $\dfrac{n}{2}$ distinct $(\mu=2n)$-th roots of unity: $\omega^{J_*(0)}, \omega^{J_*(1)},  \omega^{J_*(2)}, \cdots, \omega^{J_*(\frac{n}{2} - 1)}$}
 
 $ $
 
@@ -1172,7 +1263,7 @@ $= \bm{(} \text{ } M(\omega^{J(h)\cdot J_*(0)}), \text{ } M(\omega^{J(h)\cdot J_
 
 $= \bm{(} \text{ } M(\omega^{5^h\cdot -5^0}), \text{ } M(\omega^{5^h\cdot -5^1}), \text{ } M(\omega^{5^h\cdot -5^2}), \cdots, M(\omega^{5^h\cdot -5^{n/2-1}}) \text{ } \bm{)}$
 
-$= \bm{(} \text{ } M(\omega^{-5^{h}}), \text{ } M(\omega^{-5^{h+1}}), \text{ } M(\omega^{-5^{h+2}}), \cdots, M(\omega^{-5^{h+n/2-1}}) \text{ } \bm{)}$ \textcolor{red}{ \# note that $-(5^{\frac{n}{2}} \bmod 2n) = -1$}
+$= \bm{(} \text{ } M(\omega^{-5^{h}}), \text{ } M(\omega^{-5^{h+1}}), \text{ } M(\omega^{-5^{h+2}}), \cdots, M(\omega^{-5^{h+n/2-1}}) \text{ } \bm{)}$ \textcolor{red}{ $\rhd$ note that $-(5^{\frac{n}{2}} \bmod 2n) = -1$}
 
 $ $
 
@@ -1208,7 +1299,7 @@ $ \hathat{W}^* \cdot \vec{m}^{\langle h \rangle}$
 
 $ =  \bm{(}\text{ } M( (\omega^{J(0)})^{J(h)} ), \text{ } M( (\omega^{J(1)})^{J(h)} ), \text{ } M( (\omega^{J(2)})^{J(h)} ), \cdots, \text{ } M( (\omega^{J(\frac{n}{2}-1)})^{J(h)} ), \text{ } M( (\overline{\omega}^{J(\frac{n}{2}-1)})^{J(h)}), $
 
-$  \text{ } \text{ }  \text{ } \text{ }  \text{ } \text{ }  \text{ } \text{ } \text{ } \text{ } \text{ } \cdots, M( (\overline\omega^{J(1)})^{J(h)} ), \text{ } M( (\overline\omega^{J(0)})^{J(h)} ) \text{ } \bm{)} $  \textcolor{red}{\# evaluating $M(X^{J(h)})$ at $n$ distinct $(\mu=2n)$-th primitive roots of unity: $\omega^{J(0)}, \omega^{J(1)}, \cdots,  \omega^{J(\frac{n}{2}-1)}, \overline\omega^{J(\frac{n}{2}-1)}, \cdots, \overline\omega^{J(1)}, \overline\omega^{J(0)} $}
+$  \text{ } \text{ }  \text{ } \text{ }  \text{ } \text{ }  \text{ } \text{ } \text{ } \text{ } \text{ } \cdots, M( (\overline\omega^{J(1)})^{J(h)} ), \text{ } M( (\overline\omega^{J(0)})^{J(h)} ) \text{ } \bm{)} $  \textcolor{red}{ $\rhd$ evaluating $M(X^{J(h)})$ at $n$ distinct $(\mu=2n)$-th primitive roots of unity: $\omega^{J(0)}, \omega^{J(1)}, \cdots,  \omega^{J(\frac{n}{2}-1)}, \overline\omega^{J(\frac{n}{2}-1)}, \cdots, \overline\omega^{J(1)}, \overline\omega^{J(0)} $}
 
 $ $
 
@@ -1224,7 +1315,7 @@ $ $
 
 $ =  \bm{(}\text{ } M( \omega^{5^h} ), \text{ } M( \omega^{5^{1+h}}), \text{ } M( \omega^{5^{2+h}}), \cdots, \text{ } M( \omega^{5^{h-1}}), \text{ } M(\overline{\omega}^{5^{h-1}} ),  \cdots, M( \overline\omega^{5^{1+h}} ), \text{ } M( \overline\omega^{5^{h}} ) \text{ }\bm{)} $ 
 
-\textcolor{red}{\# since $5^{\frac{n}{2}} \bmod 2n = 1$}
+\textcolor{red}{ $\rhd$ since $5^{\frac{n}{2}} \bmod 2n = 1$}
 
 $ $
 
@@ -1350,9 +1441,15 @@ $\textsf{RLWE}_{S(X),\sigma}\bm{(}\Delta M(X^{J(h)})\bm{)} = \bm{(} 0, B(X^{J(h)
 \subsubsection{Encoding Example}
 \label{subsubsec:bfv-batch-encoding-ex}
 
+%$bfv_vector = [10, 0, 5, 13]
+%bfv_vector2 = [2, 4, 8, 6]
+
+
+
+
 Suppose we have the following setup: 
 
-$\mu = 8, n = \dfrac{\mu}{2} = 4, \text{ } t = 17, \text{ } q = 2^6 = 64, \text{ } n^{-1} = 13, \text{ } \Delta = 2$
+$\mu = 8, \, n = \dfrac{\mu}{2} = 4, \, t = 17, \, q = 2^8 = 256, \, n^{-1} = 13, \, \Delta = \left\lfloor\dfrac{q}{t}\right\rfloor = 15$
 
 $ $
 
@@ -1442,11 +1539,11 @@ $ $
 
 Now suppose that we encode the following two input vectors (i.e., input vector slots) in $\mathbb{Z}_{17}$:
 
-$\vec{v}_1 = (10, 3, 5, 13)$
+$\vec{v}_1 = (10, 0, 5, 13)$
 
-$\vec{v}_2 = (2, 4, 3, 6)$
+$\vec{v}_2 = (2, 4, 8, 6)$
 
-$\vec{v}_1 + \vec{v}_2 = (10, 3, 5, 13) + (2, 4, 3, 6) \equiv (12, 7, 8, 2) \bmod 17$
+$\vec{v}_1 + \vec{v}_2 = (10, 0, 5, 13) + (2, 4, 8, 6) \equiv (12, 4, 13, 2) \bmod 17$
 
 $ $
 
@@ -1466,10 +1563,10 @@ $\vec{m}_1 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 1 & 0 & 0 & 0\\
 \end{bmatrix} \cdot \begin{bmatrix}
 10\\
-3\\
+0\\
 5\\
 13\\
-\end{bmatrix} \equiv (12, 11, 12,1)  \bmod 17$
+\end{bmatrix} \equiv (12, 11, 12, 1)  \bmod 17$
 
 $ $
 
@@ -1486,7 +1583,7 @@ $\vec{m}_2 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 \end{bmatrix} \cdot \begin{bmatrix}
 2\\
 4\\
-3\\
+8\\
 6\\
 \end{bmatrix} \equiv (8, 5, 14, 6) \bmod 17$
 
@@ -1494,57 +1591,45 @@ $ $
 
 $ $
 
-$\Delta M_1(X) = 2\cdot(12 + 11X + 12X^2 + 1X^3) = 24 + 22X + 24X^2 + 2X^3 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 64$}
+$\Delta M_1(X) = 15\cdot(12 + 11X + 12X^2 + 1X^3) = 180 + 165X + 180X^2 + 15X^3 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 256$}
 
-$\Delta M_2(X) = 2\cdot(8 + 5X + 14X^2 + 6X^3) = 16 + 10X + 28X^2 + 12X^3 \pmod{q}$
+$\Delta M_2(X) = 15\cdot(8 + 5X + 14X^2 + 6X^3) = 120 + 75X + 210X^2 + 90X^3 \pmod{q}$
 
-$\Delta M_{1+2}(X) = \Delta M_1(X) + \Delta M_2(X) = \Delta (M_1(X) + M_2(X)) = 40 + 32X + 52X^2 + 14X^3 \pmod{q}$
+$\Delta M_{1+2}(X) = \Delta M_1(X) + \Delta M_2(X) = \Delta (M_1(X) + M_2(X)) = 44 + 240X + 134X^2 + 105X^3 \pmod{q}$
 
-$ $
+$M_{1+2}(X) =\left\lceil\dfrac{44 + 240X + 134X^2 + 105X^3}{15}\right\rfloor \bmod 17$
 
-Note that the coefficients of the scaled polynomials $\Delta M_1(X)$ and $\Delta M_2(X)$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
+$= \left\lceil2.933 + 16X + 8.933X^2 + 7X^3\right\rfloor \bmod 17$
 
-We decode $M_1(X)$ and $M_2(X)$ as follows: 
-
-$\vec{m}_1 = \dfrac{\Delta \vec{m}_1}{\Delta} = \dfrac{(24, 22, 24, 2)}{2} = (12, 11, 12, 1)$
-
-$\vec{m}_2 = \dfrac{\Delta \vec{m}_2}{\Delta} = \dfrac{(16, 10, 28, 12)}{2} = (8, 5, 14, 6)$
-
-$\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_{1+2}}{\Delta} = \dfrac{(40, 32, 52, 14)}{2} = (20, 16, 26, 7)$
+$3 + 16X + 9X + 7X^3 \bmod 17 $
 
 $ $
 
+%Note that the coefficients of the scaled polynomials $\Delta M_1(X)$ and $\Delta M_2(X)$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
 
-$\vec{v}_1 = \hathat{W}^* \cdot \vec{m}_1 = \begin{bmatrix}
-1 & 9 & 13 & 15\\
-1 & 8 & 13 & 2\\
-1 & 2 & 4 & 8\\
-1 & 15 & 4 & 9\\
-\end{bmatrix} \cdot \begin{bmatrix}
-12\\11\\12\\1
-\end{bmatrix} = (10, 3, 5, 13) \pmod{17}$
+This polynomial matches the value of $\vec{m}_{1+2}$ as follows:
+
+$\vec{m}_1 + \vec{m}_2 = (12, 11, 12, 1) + (8, 5, 14, 6) = (20, 16, 30, 7) \equiv (3, 16, 9, 7) \bmod 17$
 
 $ $
 
-$\vec{v}_2 = \hathat{W}^* \cdot \vec{m}_2 = \begin{bmatrix}
-1 & 9 & 13 & 15\\
-1 & 8 & 13 & 2\\
-1 & 2 & 4 & 8\\
-1 & 15 & 4 & 9\\
-\end{bmatrix} \cdot \begin{bmatrix}8\\5\\14\\6\end{bmatrix} = (2, 4, 3, 6) \pmod{17}$
+Finally, we decode $M_{1+2}(X)$ as follows: 
+
+$\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_{1+2}}{\Delta} = \dfrac{(60, 48, 14, 21)}{3} \approx (20, 16, 5, 7)$
+
+$ $
+
 
 $\vec{v}_{1+2} = \hathat{W}^* \cdot \vec{m}_{1+2} = \begin{bmatrix}
 1 & 9 & 13 & 15\\
 1 & 8 & 13 & 2\\
 1 & 2 & 4 & 8\\
 1 & 15 & 4 & 9\\
-\end{bmatrix} \cdot \begin{bmatrix}20\\16\\26\\7\end{bmatrix} = (12, 7, 8, 2) \pmod{17}$
+\end{bmatrix} \cdot \begin{bmatrix}3\\16\\9\\7\end{bmatrix} = (12, 7, 8, 2) \bmod{17}$
 
 $ $
 
-The decoded $\vec{v}_1, \vec{v}_2,$ and $\vec{v}_{1+2}$ match the expected values.  
-
-
+This result matches the expected vector sum $\vec{v}_1 + \vec{v}_2$.
 
 
 \subsubsection{Rotation Example}
@@ -1552,7 +1637,7 @@ The decoded $\vec{v}_1, \vec{v}_2,$ and $\vec{v}_{1+2}$ match the expected value
 
 Suppose we have the following setup: 
 
-$\mu = 16, n = \dfrac{\mu}{2} = 8, \text{ } t = 17, \text{ } q = 2^6 = 64, \text{ } n^{-1} = 13, \text{ } \Delta = 2$
+$\mu = 16, n = \dfrac{\mu}{2} = 8, \text{ } t = 17, \text{ } q = 2^8 = 256, \text{ } n^{-1} = 13, \text{ } \Delta = 15$
 
 $ $
 
@@ -1704,22 +1789,28 @@ $ \equiv (13, 16, 10, 5, 9, 12, 7, 1)  \bmod 17$
 
 $ $
 
-$\Delta M(X) = 2\cdot(13 + 16X + 10X^2 + 5X^3 + 9X^4 + 12X^5 + 7X^6 + X^7)$
+$\Delta M(X) = 15\cdot(13 + 16X + 10X^2 + 5X^3 + 9X^4 + 12X^5 + 7X^6 + X^7)$
 
-$ = 26 + 32X + 20X^2 + 10X^3 + 18X^4 + 24X^5 + 14X^6 + 2X^7 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 64$}
+
+$ = 195 + 180X - 150X^2 - 15X^3 + 135^X⁴ - 240X^5 - 105X^6 + 75X^7 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 256$}
+
+$ $
+
+This polynomial matches the value of $\Delta M(X^{J(3)})$ as follows:
+
+$\Delta M(X^{J(3)}) = \Delta M(X^{13}) $
+
+$= 195 + 180X - 150X^2 - 15X^3 + 135X^4 - 240X^5 - 105X^6 + 75X^7 \pmod{q}$
 
 $ $
 
 
-$\Delta M(X^{J(3)}) = \Delta M(X^{13}) = 26 + 24X - 20X^2 - 2X^3 + 18X^4 - 32X^5 - 14X^6 + 10X^7 \pmod{q}$
 
-$ $
+%Note that the coefficients of the scaled polynomials $\Delta M(X^{J(3)})$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
 
-Note that the coefficients of the scaled polynomials $\Delta M(X^{J(3)})$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
+Now, we decode $M(X^{J(3)})$ as follows: 
 
-We decode $M(X^{J(3)})$ as follows: 
-
-$\vec{m}_{J(3)} = \dfrac{\Delta \vec{m}_{J(3)}}{\Delta} = \dfrac{(26, 24, -20, -2, 18, -32, -14, 10)}{2} = (13, 12, -10, -2, 18, -32, -14, 10) \pmod{17}$
+$\vec{m}_{J(3)} = \dfrac{\Delta \vec{m}_{J(3)}}{\Delta} = \dfrac{(195, 180, -150, -15, 135, -240, -105, 75)}{15} = (13, 12, -10, -1, 9, -16, -7, 5) \pmod{17}$
 
 $ $
 
@@ -1851,13 +1942,13 @@ $ $
 The technical details of the BFV bootstrapping procedure are as follows. Suppose we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}\bm(\Delta M\bm) \bmod q$, where $A\cdot S + B = \Delta M + E$, \text{ } $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ and $t = p$ (i.e., the plaintext modulus is a prime).
 
 \begin{enumerate}
-\item \textbf{Modulus Switch (\boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext modulus from $(A, B) \bmod q$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B') \bmod p^\varepsilon$, where $p^\varepsilon \ll q$. The purpose of this modulus switch is to change the plaintext modulus to $p^\varepsilon$, which is required to use the digit extraction polynomial $G_\varepsilon(x)$ (because we need to represent the input to $G_\varepsilon(x)$ as a base-$p$ number in order to interpret it as a $\bmod p^\varepsilon$ value). Notice that $\textsf{RLWE}_{S, \sigma}^{-1}\bm(\textsf{ct} = (A', B') \bm) = p^{\varepsilon-1}M + E'$, where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-1}\right)\cdot M$ \textcolor{red}{ \# the modulus switch error of $E \rightarrow E'$ plus the modulus switch error of the plaintext's scaling factor $\left\lfloor\dfrac{q}{t}\right\rfloor \rightarrow p^{\varepsilon-1}$}
+\item \textbf{Modulus Switch (\boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext modulus from $(A, B) \bmod q$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B') \bmod p^\varepsilon$, where $p^\varepsilon \ll q$. The purpose of this modulus switch is to change the plaintext modulus to $p^\varepsilon$, which is required to use the digit extraction polynomial $G_\varepsilon(x)$ (because we need to represent the input to $G_\varepsilon(x)$ as a base-$p$ number in order to interpret it as a $\bmod p^\varepsilon$ value). Notice that $\textsf{RLWE}_{S, \sigma}^{-1}\bm(\textsf{ct} = (A', B') \bm) = p^{\varepsilon-1}M + E'$, where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-1}\right)\cdot M$ \textcolor{red}{ $\rhd$ the modulus switch error of $E \rightarrow E'$ plus the modulus switch error of the plaintext's scaling factor $\left\lfloor\dfrac{q}{t}\right\rfloor \rightarrow p^{\varepsilon-1}$}
 
 $ $
 
 \item \textbf{Homomorphic Decryption:} Suppose we have the \textit{bootstrapping key} $\textsf{RLev}_{S, \sigma}^{\beta, l}(S) \bmod q$, which is the secret key $S$ encrypted by $S$ (itself) modulo $q$. Using this \textit{encrypted} secret key, we \textit{homomorphically} decrypt $(A', B')$ as follows:
 
-$A' \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' S\bm) + B'$ \textcolor{red}{ \# where $\textsf{RLWE}_{S, \sigma}(\Delta' S)$ is a modulo-$q$ ciphertext that encrypts a modulo-$p^\varepsilon$ plaintext $S$ whose scaling factor $\Delta' = \dfrac{q}{p^\varepsilon}$ }
+$A' \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' S\bm) + B'$ \textcolor{red}{ $\rhd$ where $\textsf{RLWE}_{S, \sigma}(\Delta' S)$ is a modulo-$q$ ciphertext that encrypts a modulo-$p^\varepsilon$ plaintext $S$ whose scaling factor $\Delta' = \dfrac{q}{p^\varepsilon}$ }
 
 $ $
 
@@ -1865,13 +1956,13 @@ $= \textsf{RLWE}_{S, \sigma}\bm(\Delta' (A' \cdot S)\bm) + B'  \bmod q$
 
 $= \textsf{RLWE}_{S, \sigma}(\Delta' \cdot \bm(A'\cdot S + B')\bm) \bmod q$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1} M  + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ \# $K$ is some integer polynomials to represent the coefficient values that wrap around $p^\varepsilon$}
+$ = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1} M  + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ $\rhd$ $K$ is some integer polynomials to represent the coefficient values that wrap around $p^\varepsilon$}
 
 %$ $
 
 %$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p} M  + \dfrac{q}{p^\varepsilon} E' + Kq\bm\right) \bmod q$
 
-%$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p} M  + E'' + Kq\bm\right) \bmod q$ \textcolor{red}{ \# where $E'' = \dfrac{q}{p^\varepsilon} E'$}
+%$ = \textsf{RLWE}_{S, \sigma}\bm\left(\dfrac{q}{p} M  + E'' + Kq\bm\right) \bmod q$ \textcolor{red}{ $\rhd$ where $E'' = \dfrac{q}{p^\varepsilon} E'$}
 
 $ $
 
@@ -1945,7 +2036,7 @@ Then, $z_i \bmod p^\varepsilon$ is a base-$p$ number comprising $\varepsilon$ di
 
 We assume that the highest base-$p$ digit index for the noise is $\varepsilon-2$, which is equivalent to the noise budget, and the pure plaintext portion solely resides at the base-$p$ digit index $\varepsilon-1$ (i.e., the most significant base-$p$ digit in modulo $p^\varepsilon$). Given this assumption, we extract the noise-free plaintext by computing the following:
 
-$\left\lceil \dfrac{z_i}{p^{\varepsilon-1}} \right\rfloor \bmod p = z_{i,\varepsilon-1}$ \textcolor{red}{ \# where the noise is assumed to be smaller than $\dfrac{p^{\varepsilon-1}}{2}$}
+$\left\lceil \dfrac{z_i}{p^{\varepsilon-1}} \right\rfloor \bmod p = z_{i,\varepsilon-1}$ \textcolor{red}{ $\rhd$ where the noise is assumed to be smaller than $\dfrac{p^{\varepsilon-1}}{2}$}
 
 The above formula is equivalent to shifting the base-$p$ number $z_i$ by $\varepsilon-1$ digits to the right (and rounding the decimal value). However, remember that we don't have direct access to polynomial $Z = p^{\varepsilon-1}M + E' \bmod p^\varepsilon$ unless we have the secret key $S$ to decrypt the ciphertext storing the plaintext. Instead, we can only derive $Z$ as an encrypted form. Specifically, we can \textit{homomorphically} decrypt the modulus-switched ciphertext $(A', B')$ by using the \textit{encrypted} secret key $\textsf{RLWE}_{S, \sigma}(\Delta' S)$ as a \textit{bootstrapping key}. For this ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta' S)$, the plaintext modulus is $p^\varepsilon$, the plaintext scaling factor is $\Delta' = \dfrac{q}{p^\varepsilon}$, and the ciphertext modulus is $q$. With this encrypted secret key $S$, we homomorphically decrypt the encrypted $Z$ as follows: 
 
@@ -1961,7 +2052,7 @@ $= \textsf{RLWE}_{S, \sigma}\bm(\Delta' (A' \cdot S)\bm) + B' \bmod q$
 
 $= \textsf{RLWE}_{S, \sigma}(\Delta' \cdot \bm(A'\cdot S + B')\bm) \bmod q$
 
-$ = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1} M  + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ \# $K$ is some integer polynomials to represent the coefficient values that wrap around modulo $p^\varepsilon$ as multiples of $p^\varepsilon$}
+$ = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-1} M  + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ $\rhd$ $K$ is some integer polynomials to represent the coefficient values that wrap around modulo $p^\varepsilon$ as multiples of $p^\varepsilon$}
 
 $ $
 
@@ -2007,7 +2098,7 @@ $\hathat{W} = \begin{bmatrix}
 
 $ $
 
-\textcolor{red}{ \# where the rotation helper function $J(h) = 5^h \bmod 2n$}
+\textcolor{red}{ $\rhd$ where the rotation helper function $J(h) = 5^h \bmod 2n$}
 
 $ $
 
@@ -2067,19 +2158,19 @@ $\underbrace{F_{\varepsilon-1} \cdots F_{3} \circ F_{2} \circ  F_{1}}_{\varepsil
 
 $ $
 
-\para{1st Recursion:} $F_{1}(z_i) = c_{i,\varepsilon-1}p^{\varepsilon-1} + c_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + c_{i, 2}p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ \# $F_{1}(z_i) \equiv z_{i,0} \bmod p^2$}
+\para{1st Recursion:} $F_{1}(z_i) = c_{i,\varepsilon-1}p^{\varepsilon-1} + c_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + c_{i, 2}p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ $\rhd$ $F_{1}(z_i) \equiv z_{i,0} \bmod p^2$}
 
 $ $
 
-\para{2nd Recursion:} $F_{2} \circ F_{1}(z_i) = c'_{i,\varepsilon-1}p^{\varepsilon-1} + c'_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$  \textcolor{red}{ \# $F_{1} \circ F_{2}(z_i) \equiv z_{i,0} \bmod p^3$} 
+\para{2nd Recursion:} $F_{2} \circ F_{1}(z_i) = c'_{i,\varepsilon-1}p^{\varepsilon-1} + c'_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$  \textcolor{red}{ $\rhd$ $F_{1} \circ F_{2}(z_i) \equiv z_{i,0} \bmod p^3$} 
 
 $ $
 
-\para{3rd Recursion:} $F_{3} \circ F_{2} \circ F_{1}(z_i) = c''_{i,\varepsilon-1}p^{\varepsilon-1} + c''_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + 0p^3 + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$  \textcolor{red}{ \# $F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^4$} 
+\para{3rd Recursion:} $F_{3} \circ F_{2} \circ F_{1}(z_i) = c''_{i,\varepsilon-1}p^{\varepsilon-1} + c''_{i,\varepsilon-2}p^{\varepsilon-2} + \cdots + 0p^3 + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$  \textcolor{red}{ $\rhd$ $F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^4$} 
 
 $\vdots$
 
-\para{$\bm{(\varepsilon-1)}$-th Recursion:} $\underbrace{F_{\varepsilon-1}  \circ \cdots \circ F_{3} \circ F_{2} \circ F_{1}}_{\varepsilon-1 \text{ times}}(z_i) = 0p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ \# $F_{\varepsilon-1} \cdots F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^\varepsilon$} 
+\para{$\bm{(\varepsilon-1)}$-th Recursion:} $\underbrace{F_{\varepsilon-1}  \circ \cdots \circ F_{3} \circ F_{2} \circ F_{1}}_{\varepsilon-1 \text{ times}}(z_i) = 0p^{\varepsilon-1} + 0p^{\varepsilon-2} + \cdots + 0p^2 + 0p + z_{i, 0} \bmod p^\varepsilon$ \textcolor{red}{ $\rhd$ $F_{\varepsilon-1} \cdots F_{3} \circ F_{2} \circ F_{1}(z_i) \equiv z_{i,0} \bmod p^\varepsilon$} 
 
 $ $
 
@@ -2153,7 +2244,7 @@ Fermat's Little Theorem states $a^{p-1} \equiv 1 \bmod p$ for all $a \in \mathbb
 
 \begin{myproof}
 \[
-(z_{i,0} + kp^{\varepsilon'})^p \bmod p^{\varepsilon'+1}= \sum\limits_{j=0}^{p}  \binom{p}{j}\cdot  z_{i,0}^{j} \cdot (kp^{\varepsilon'})^{p-j} \bmod p^{\varepsilon'+1} \text{\textcolor{red}{ \# binomial expansion formula}} \] 
+(z_{i,0} + kp^{\varepsilon'})^p \bmod p^{\varepsilon'+1}= \sum\limits_{j=0}^{p}  \binom{p}{j}\cdot  z_{i,0}^{j} \cdot (kp^{\varepsilon'})^{p-j} \bmod p^{\varepsilon'+1} \text{\textcolor{red}{ $\rhd$ binomial expansion formula}} \] 
 
 $= z_{i,0}^{p}$
 \end{myproof}
@@ -2232,9 +2323,9 @@ $f_j(z_{i,0}) \equiv f_j(z_i) \bmod p^{\varepsilon'}$
 
 $f_j(z_{i,0}) = f_j(z_i) + q\cdot p^{\varepsilon'}$ (for some integer $q$)
 
-$f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j + q\cdot p^{\varepsilon'}\cdot p^j$ \textcolor{red}{ \# multiplying $p^j$ to both sides}
+$f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j + q\cdot p^{\varepsilon'}\cdot p^j$ \textcolor{red}{ $\rhd$ multiplying $p^j$ to both sides}
 
-$f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j + q\cdot p^{j-1} \cdot p^{\varepsilon'+1}$ \textcolor{red}{ \# $f_j(z_{i,0})\cdot p^j$ and $f_j(z_i)\cdot p^j$ differ by some multiple of $p^{\varepsilon' + 1}$}
+$f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j + q\cdot p^{j-1} \cdot p^{\varepsilon'+1}$ \textcolor{red}{ $\rhd$ $f_j(z_{i,0})\cdot p^j$ and $f_j(z_i)\cdot p^j$ differ by some multiple of $p^{\varepsilon' + 1}$}
 
 $ $
 
@@ -2246,9 +2337,9 @@ Now, given step 5's claim ($z_i^p \equiv z_{i,0} + \sum\limits_{j=1}^{\varepsilo
 
 $z_i^p - \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i})\cdot p^j \bmod p^{\varepsilon' + 1}$
 
-$\equiv (z_{i,0} + \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i,0})\cdot p^j) - \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i})\cdot p^j \bmod p^{\varepsilon' + 1}$ \textcolor{red}{ \# applying step 5's claim}
+$\equiv (z_{i,0} + \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i,0})\cdot p^j) - \sum\limits_{j=1}^{\varepsilon'}f_j(z_{i})\cdot p^j \bmod p^{\varepsilon' + 1}$ \textcolor{red}{ $\rhd$ applying step 5's claim}
 
-$\equiv (z_{i,0} + \sum\limits_{j=1}^{\varepsilon'}f_j(z_i)\cdot p^j) - \sum\limits_{j=1}^{\varepsilon'}f_j(z_i)\cdot p^j \bmod p^{\varepsilon' + 1}$ \textcolor{red}{ \# since $f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j \bmod p^{\varepsilon' + 1}$}
+$\equiv (z_{i,0} + \sum\limits_{j=1}^{\varepsilon'}f_j(z_i)\cdot p^j) - \sum\limits_{j=1}^{\varepsilon'}f_j(z_i)\cdot p^j \bmod p^{\varepsilon' + 1}$ \textcolor{red}{ $\rhd$ since $f_j(z_{i,0})\cdot p^j = f_j(z_i)\cdot p^j \bmod p^{\varepsilon' + 1}$}
 
 $\equiv z_{i,0} \bmod p^{\varepsilon' + 1}$
 
@@ -2328,17 +2419,17 @@ Suppose we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}\bm(\Delt
 $ $
 
 \begin{enumerate}
-\item \textbf{\underline{Modulus Switch} (from \boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext from $(A, B)$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B')$ \textcolor{red}{ \# where $p^\varepsilon \ll q$} 
+\item \textbf{\underline{Modulus Switch} (from \boldmath$q \rightarrow p^\varepsilon$):} Scale down the ciphertext from $(A, B)$ to $\left(\left\lceil \dfrac{p^\varepsilon}{q}\cdot A\right\rfloor, \left\lceil \dfrac{p^\varepsilon}{q}\cdot B\right\rfloor\right) = (A', B')$ \textcolor{red}{ $\rhd$ where $p^\varepsilon \ll q$} 
 
 $ $
 
-$A'S + B' = p^{\varepsilon-r}M + E' \bmod p^\varepsilon$ \textcolor{red}{ \# where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-r}\right)\cdot M$, which is a modulus switch noise plus a rounding noise caused by treating $\Delta=\left\lfloor\dfrac{q}{p^r}\right\rfloor \approx \dfrac{q}{p^r}$.}
+$A'S + B' = p^{\varepsilon-r}M + E' \bmod p^\varepsilon$ \textcolor{red}{ $\rhd$ where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-r}\right)\cdot M$, which is a modulus switch noise plus a rounding noise caused by treating $\Delta=\left\lfloor\dfrac{q}{p^r}\right\rfloor \approx \dfrac{q}{p^r}$.}
 
 $ $
 
 \item \textbf{\underline{Homomorphic Decryption}:} With the bootstrapping key $\textsf{RLWE}_{S, \sigma}(\Delta' S) \bmod q$, homomorphically decrypt $(A', B') \bmod p^\varepsilon$ as follows:
 
-$A' \cdot \textsf{RLWE}_{S, \sigma}(\Delta' S)  + B' = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-r} M + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ \# where $\Delta' = \left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor$}
+$A' \cdot \textsf{RLWE}_{S, \sigma}(\Delta' S)  + B' = \textsf{RLWE}_{S, \sigma}\bm(\Delta' \cdot (p^{\varepsilon-r} M + E' + Kp^\varepsilon)\bm) \bmod q$ \textcolor{red}{ $\rhd$ where $\Delta' = \left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor$}
 
 $ $
 
@@ -2358,9 +2449,9 @@ $ $
 
 \item \textbf{\underline{Digit Extraction}:} We design a polynomial $G_{\varepsilon,v}(z_i)$ (a digit extraction polynomial) as follows:
 
-$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-r} d_* p^j\right)$ \textcolor{red}{ \# where $d_0 \in \mathbb{Z}_{p^r}$, and $\varepsilon'$ is $z_i$'s least significant base-$p$ digit index whose value is non-zero after digit index after digit index $r-1$}
+$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-r} d_* p^j\right)$ \textcolor{red}{ $\rhd$ where $d_0 \in \mathbb{Z}_{p^r}$, and $\varepsilon'$ is $z_i$'s least significant base-$p$ digit index whose value is non-zero after digit index after digit index $r-1$}
 
-$F_{\varepsilon'}(z_i) \equiv d_0 \bmod p^{\varepsilon'+1}$ \textcolor{red}{ \# a $(p-1)$-degree polynomial recursively used to finally extract the value $d_0 \bmod p^{\varepsilon}$}
+$F_{\varepsilon'}(z_i) \equiv d_0 \bmod p^{\varepsilon'+1}$ \textcolor{red}{ $\rhd$ a $(p-1)$-degree polynomial recursively used to finally extract the value $d_0 \bmod p^{\varepsilon}$}
 
 $G_{\varepsilon,v}(z_i) \equiv z_i - \underbrace{F_{\varepsilon-1} \circ F_{\varepsilon-2} \circ F_{\varepsilon-3} \cdots F_{1}}_{\varepsilon - 1 \text{ times}} (z_i) \bmod p^\varepsilon$
 

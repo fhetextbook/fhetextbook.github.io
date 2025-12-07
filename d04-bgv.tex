@@ -73,7 +73,7 @@ $ $
 (\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$}}
 
-\textcolor{red}{ \# where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)}
+\textcolor{red}{ $\rhd$ where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)}
 
 The final output is $M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_t[X] / (X^n + 1)$, 
 which we can also treat as 
@@ -146,7 +146,7 @@ BGV's encryption decryption process is described as follows:
 \begin{enumerate}
 \item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B + A \cdot S  = M + \Delta E \pmod q$
 
-\item $M = M + \Delta E \bmod t$ \textcolor{red}{ \# modulo reduction of $M + \Delta E$ by $t$}
+\item $M = M + \Delta E \bmod t$ \textcolor{red}{ $\rhd$ modulo reduction of $M + \Delta E$ by $t$}
 
 \end{enumerate}
 
@@ -226,7 +226,7 @@ BGV's \textsf{ModDrop} works similarly to that of CKKS's \textsf{ModDrop} (Summa
 
 $M + \Delta E = A \cdot S + B \bmod q_l$
 
-$M + \Delta E = A \cdot S + B - K\cdot q_l$ \textcolor{red}{ \# where $K\cdot q_l$ represents a modulo reduction by $q_l$}
+$M + \Delta E = A \cdot S + B - K\cdot q_l$ \textcolor{red}{ $\rhd$ where $K\cdot q_l$ represents a modulo reduction by $q_l$}
 
 BGV's \textsf{ModDrop} operation decreases its modulus from $q_l \rightarrow q_{l-1}$ is performed by updating the ciphertext $(A, B)$ to a new one: $\bm(A' = A \bmod q_{l-1}$, $B' = B \bmod q_{l-1})$. After the \textsf{ModDrop}, the ciphertext's modulus decreases from $q_l \rightarrow q_{l-1}$, yet its decryption relation still holds the same as follows:
 
@@ -237,13 +237,13 @@ $= (A \bmod q_{l-1}) \cdot S + (B \bmod q_{l-1}) - K\cdot q_l$
 $= (A - K_A\cdot q_{l-1}) \cdot S + (B - K_B\cdot q_{l-1}) - K\cdot q_l$ 
 
 $= A\cdot S + B - (K_A + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
-\textcolor{red}{ \# where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-th prime element of $q_L$)}
+\textcolor{red}{ $\rhd$ where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-th prime element of $q_L$)}
 
-$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ \# where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
+$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ $\rhd$ where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
 
 $= A\cdot S + B \bmod q_{l-1}$
 
-$= M + \Delta E$ \textcolor{red}{\# since $\Delta M + E < q_0 < q_{l-1}$}
+$= M + \Delta E$ \textcolor{red}{ $\rhd$ since $\Delta M + E < q_0 < q_{l-1}$}
 
 $ $
 
@@ -307,9 +307,9 @@ $ $
 
 , which we rewrite as follows:
 
-$\hat{q} A = q_{l} A' + q_{l}\epsilon_A = q_{l} A' + \epsilon'_A$ \textcolor{red}{ \# we denote $\epsilon'_A = q_{l}\epsilon_A$, where $\epsilon'_A \in \mathbb{Z}_{q_l}$}
+$\hat{q} A = q_{l} A' + q_{l}\epsilon_A = q_{l} A' + \epsilon'_A$ \textcolor{red}{ $\rhd$ we denote $\epsilon'_A = q_{l}\epsilon_A$, where $\epsilon'_A \in \mathbb{Z}_{q_l}$}
 
-$\hat{q} B = q_{l} B' + q_{l}\epsilon_B = q_{l} B' + \epsilon'_B$ \textcolor{red}{ \# we denote $\epsilon'_B = q_{l}\epsilon_B$, where $\epsilon'_B \in \mathbb{Z}_{q_l}$}
+$\hat{q} B = q_{l} B' + q_{l}\epsilon_B = q_{l} B' + \epsilon'_B$ \textcolor{red}{ $\rhd$ we denote $\epsilon'_B = q_{l}\epsilon_B$, where $\epsilon'_B \in \mathbb{Z}_{q_l}$}
 
 $ $
 
@@ -335,10 +335,10 @@ $ $
 
 $\hat{q}\cdot \textsf{ct} \bmod t = (\hat{q}A, \hat{q}B) \bmod t$
 
-$= (q_{l} A' + \epsilon'_A, \text{ } q_{l} B' + \epsilon'_B) \bmod t$ \textcolor{red}{ \# applying step 1's result: $\hat{q} A = q_{l}A' + \epsilon'_A$, \text{ }  $\hat{q} B = q_{l}B' + \epsilon'_B$}
+$= (q_{l} A' + \epsilon'_A, \text{ } q_{l} B' + \epsilon'_B) \bmod t$ \textcolor{red}{ $\rhd$ applying step 1's result: $\hat{q} A = q_{l}A' + \epsilon'_A$, \text{ }  $\hat{q} B = q_{l}B' + \epsilon'_B$}
 
 $ = (q_{l} A' + q_lH_A, \text{ } q_{l} B' + q_lH_B) \bmod t$ 
-\textcolor{red}{ \# applying step 2's result: $H_A = q_l^{-1}\cdot\epsilon'_A \bmod t$, \text{ } $H_B = q_l^{-1}\cdot\epsilon'_B \bmod t$}
+\textcolor{red}{ $\rhd$ applying step 2's result: $H_A = q_l^{-1}\cdot\epsilon'_A \bmod t$, \text{ } $H_B = q_l^{-1}\cdot\epsilon'_B \bmod t$}
 
 $ $
 
@@ -360,13 +360,13 @@ $ $
 
 \item We can derive the decryption relation of $\hat{\textsf{ct}}$ from the decryption relation of $\textsf{ct}$ as follows:
 
-$M = (A\cdot S + B \bmod q_l) \bmod t$ \textcolor{red}{ \# The BGV decryption relation of $\textsf{ct} = (A, B) \bmod q_l$}
+$M = (A\cdot S + B \bmod q_l) \bmod t$ \textcolor{red}{ $\rhd$ The BGV decryption relation of $\textsf{ct} = (A, B) \bmod q_l$}
 
-$= (A\cdot S + B - K\cdot q_l) \bmod t$ \textcolor{red}{ \# where $K\cdot q_l$ represents the modulo-$q_l$ reduction}
+$= (A\cdot S + B - K\cdot q_l) \bmod t$ \textcolor{red}{ $\rhd$ where $K\cdot q_l$ represents the modulo-$q_l$ reduction}
 
-$= ((A' + H_A)\cdot S + B' + H_B - K\cdot q_{l}) \bmod t$ \textcolor{red}{ \# applying step 4's result: $A \equiv A' + H_A \bmod t$, \text{ } $B \equiv B' + H_B \bmod t$}
+$= ((A' + H_A)\cdot S + B' + H_B - K\cdot q_{l}) \bmod t$ \textcolor{red}{ $\rhd$ applying step 4's result: $A \equiv A' + H_A \bmod t$, \text{ } $B \equiv B' + H_B \bmod t$}
 
-$= ((A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}) \bmod t$ \textcolor{red}{ \# since in BGV, $q_1\equiv q_2\equiv \cdots q_L \equiv 1 \bmod t$, and we chose $\hat{q}$ such that $\hat{q} \equiv 1 \bmod t$}
+$= ((A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}) \bmod t$ \textcolor{red}{ $\rhd$ since in BGV, $q_1\equiv q_2\equiv \cdots q_L \equiv 1 \bmod t$, and we chose $\hat{q}$ such that $\hat{q} \equiv 1 \bmod t$}
 
 $ $
 
@@ -380,11 +380,11 @@ $(A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$
 
 $ = |A' + H_A|_{\hat{q}}\cdot S + |B' + H_B|_{\hat{q}} \bmod \hat{q}$ 
 
-\textcolor{red}{\# where $|A' + H_A|_{\hat{q}} = A' + H_A \bmod \hat{q}$, \text{ } $|B' + H_B|_{\hat{q}} = B' + H_B \bmod \hat{q}$} 
+\textcolor{red}{ $\rhd$ where $|A' + H_A|_{\hat{q}} = A' + H_A \bmod \hat{q}$, \text{ } $|B' + H_B|_{\hat{q}} = B' + H_B \bmod \hat{q}$} 
 
 $ $
 
-$ = \hat{A}\cdot S + \hat{B} \bmod \hat{q}$ \textcolor{red}{ \# applying step 3: $\hat{A} = A' + H_A \bmod \hat{q}$, \text{ } $\hat{B} = B' + H_B \bmod \hat{q}$}
+$ = \hat{A}\cdot S + \hat{B} \bmod \hat{q}$ \textcolor{red}{ $\rhd$ applying step 3: $\hat{A} = A' + H_A \bmod \hat{q}$, \text{ } $\hat{B} = B' + H_B \bmod \hat{q}$}
 
 $ $
 
@@ -400,17 +400,17 @@ $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}$
 
 $ = (\dfrac{\hat{q}}{q_{l}}\cdot A - \dfrac{\epsilon'_A}{q_{l}} + H_A)\cdot S + (\dfrac{\hat{q}}{q_{l}}\cdot B - \dfrac{\epsilon'_B}{q_{l}} + H_B) - K\cdot \hat{q}$ 
 
-\textcolor{red}{ \# applying step 1's result: $A' = \dfrac{\hat{q}}{q_{l}}\cdot A - \dfrac{\epsilon'_A}{q_{l}}, \text{ } B' = \dfrac{\hat{q}}{q_{l}}\cdot B - \dfrac{\epsilon'_B}{q_{l}}$}
+\textcolor{red}{ $\rhd$ applying step 1's result: $A' = \dfrac{\hat{q}}{q_{l}}\cdot A - \dfrac{\epsilon'_A}{q_{l}}, \text{ } B' = \dfrac{\hat{q}}{q_{l}}\cdot B - \dfrac{\epsilon'_B}{q_{l}}$}
 
 $ $
 
 $ $
 
-$ = \left(\dfrac{\hat{q}}{q_{l}}\cdot A\cdot S + \dfrac{\hat{q}}{q_{l}}\cdot B  - K\cdot \hat{q}\right) + H_A\cdot S + H_B - \dfrac{\epsilon'_A}{q_{l}}\cdot S - \dfrac{\epsilon'_B}{q_{l}}$ \textcolor{red}{ \# rearranging the terms}
+$ = \left(\dfrac{\hat{q}}{q_{l}}\cdot A\cdot S + \dfrac{\hat{q}}{q_{l}}\cdot B  - K\cdot \hat{q}\right) + H_A\cdot S + H_B - \dfrac{\epsilon'_A}{q_{l}}\cdot S - \dfrac{\epsilon'_B}{q_{l}}$ \textcolor{red}{ $\rhd$ rearranging the terms}
 
-$ = \dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B  - K\cdot q_{l}) + H_A\cdot S + H_B - \dfrac{\epsilon'_A}{q_{l}}\cdot S - \dfrac{\epsilon'_B}{q_{l}}$ \textcolor{red}{ \# taking out the common factor $\dfrac{\hat{q}}{q_{l}}$}
+$ = \dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B  - K\cdot q_{l}) + H_A\cdot S + H_B - \dfrac{\epsilon'_A}{q_{l}}\cdot S - \dfrac{\epsilon'_B}{q_{l}}$ \textcolor{red}{ $\rhd$ taking out the common factor $\dfrac{\hat{q}}{q_{l}}$}
 
-$ = \dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B \bmod q_l) + H_A\cdot S + H_B - \dfrac{\epsilon'_A\cdot S + \epsilon'_B}{q_{l}}$ \textcolor{red}{ \# since $A\cdot S + B - K\cdot q_{l} = A\cdot S + B \bmod q_l$}
+$ = \dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B \bmod q_l) + H_A\cdot S + H_B - \dfrac{\epsilon'_A\cdot S + \epsilon'_B}{q_{l}}$ \textcolor{red}{ $\rhd$ since $A\cdot S + B - K\cdot q_{l} = A\cdot S + B \bmod q_l$}
 
 $ $
 
@@ -426,9 +426,9 @@ $ $
 
 $(\hat{A}\cdot S + \hat{B}) \bmod \hat{q} \bmod t$
 
-$= \bm((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}\bm) \bmod t$ \textcolor{red}{ \# by applying step 6}
+$= \bm((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}\bm) \bmod t$ \textcolor{red}{ $\rhd$ by applying step 6}
 
-$ = (A\cdot S + B \bmod q_l) \bmod t$ \textcolor{red}{ \# by applying step 7}
+$ = (A\cdot S + B \bmod q_l) \bmod t$ \textcolor{red}{ $\rhd$ by applying step 7}
 
 $ = M$
 
@@ -457,9 +457,9 @@ $(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l}\cdot A\right\rfloor, \left\lce
 
 $ $
 
-$\epsilon'_A = \hat{q}\cdot A - q_l\cdot A'$ \textcolor{red}{ \# where $\epsilon'_A \in \mathbb{Z}_{q_l}$}
+$\epsilon'_A = \hat{q}\cdot A - q_l\cdot A'$ \textcolor{red}{ $\rhd$ where $\epsilon'_A \in \mathbb{Z}_{q_l}$}
 
-$\epsilon'_B = \hat{q}\cdot B - q_l\cdot B'$ \textcolor{red}{ \# where $\epsilon'_B \in \mathbb{Z}_{q_l}$}
+$\epsilon'_B = \hat{q}\cdot B - q_l\cdot B'$ \textcolor{red}{ $\rhd$ where $\epsilon'_B \in \mathbb{Z}_{q_l}$}
 
 
 $ $
@@ -680,11 +680,11 @@ $ $
 
 $p^{\varepsilon-1} m_i + p^\varepsilon e_i + \hat{q}k'_i$
 
-$ = p^{\varepsilon-1} m_i + p^\varepsilon e_i + k'_i\cdot(k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1) $  \textcolor{red}{ \# applying $\hat{q} = k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1$}
+$ = p^{\varepsilon-1} m_i + p^\varepsilon e_i + k'_i\cdot(k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1) $  \textcolor{red}{ $\rhd$ applying $\hat{q} = k^{\langle \hat{q} \rangle } \cdot p^\varepsilon + 1$}
 
-$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon  \cdot (e_i + k'_i\cdot k^{\langle \hat{q} \rangle }) $ \textcolor{red}{ \# rearranging the terms}
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon  \cdot (e_i + k'_i\cdot k^{\langle \hat{q} \rangle }) $ \textcolor{red}{ $\rhd$ rearranging the terms}
 
-$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ \# where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k'_i\cdot k^{\langle \hat{q} \rangle } $}
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ $\rhd$ where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k'_i\cdot k^{\langle \hat{q} \rangle } $}
 
 $ = p^{\varepsilon-1} m_i + k'_i \bmod p^\varepsilon$
 
@@ -692,7 +692,7 @@ $ $
 
 To eliminate $k'_i$ from the above, we will use the same digit extraction polynomial $G_{\varepsilon, v}$ as in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}) :
 
-$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-1} d_* p^j\right)$ \textcolor{red}{ \# where $d_0 \in \mathbb{Z}_p$, \text{ } and $d_*$ can be any integer, \text{ } and $1 \leq \varepsilon' \leq w$}
+$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-1} d_* p^j\right)$ \textcolor{red}{ $\rhd$ where $d_0 \in \mathbb{Z}_p$, \text{ } and $d_*$ can be any integer, \text{ } and $1 \leq \varepsilon' \leq w$}
 
 $F_\varepsilon(z_i) \equiv d_0 \bmod p^{\varepsilon'+1}$
 

@@ -42,7 +42,7 @@ Based on this insight, the LWE cryptosystem's modulus switching from $q \rightar
 Given an LWE ciphertext $(A, b)$ where $b = A\cdot S + \Delta m + e \bmod q$ and $m \in \mathbb{Z}_t$, modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(A, b)$ to $(\hat A, \hat b)$ as follows:
 
 
-$\hat{A} = (\hat{a}_0, \hat{a}_1, \gap{$\cdots$} \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{\# $\lceil \rfloor$ means rounding to the nearest integer}
+$\hat{A} = (\hat{a}_0, \hat{a}_1, \gap{$\cdots$} \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$ $\lceil \rfloor$ means rounding to the nearest integer}
 
  $\hat{b} = \Big\lceil b \dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
@@ -55,7 +55,7 @@ The above update effectively changes $\hat e$ and $\hat \Delta$ as follows:
 
 $\hat{e} = \Big\lceil e\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$, \text{ }
 
-$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{\# which should be an integer}
+$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{ $\rhd$ which should be an integer}
 
 $ $
 
@@ -104,7 +104,7 @@ $= \sum\limits_{i=0}^{k-1}(\hat{a}_is_i - \epsilon_{a_i}s_i) + \hat{\Delta} m + 
 
 $= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \left( \hat{e} - \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i \right) \in \mathbb{Z}_{\hat{q}}$
 
-$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \hat{e} + \epsilon_{\textit{all}} \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{\#  where $\epsilon_{\textit{all}} = \left(- \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i \right)$}
+$= \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \hat{e} + \epsilon_{\textit{all}} \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$  where $\epsilon_{\textit{all}} = \left(- \epsilon_e + \epsilon_b - \sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i \right)$}
 
 $ $
 
@@ -267,7 +267,7 @@ $ $
 
 The above update effectively changes $\Delta$ and $E$ as follows:
 
-$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{\# which should be an integer}
+$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{ $\rhd$ which should be an integer}
 
 $\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_i = \Big\lceil e_i\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
@@ -312,7 +312,7 @@ $ + \left(b_2 - \left( \sum\limits_{i=0}^{2}(a_{2-i}s_{i}) - \sum\limits_{i=3}^{
 $\gap{$\vdots$}$ 
 
 
-$ + \left(b_{n-1} - \left(  \sum\limits_{i=0}^{n-1}(a_{n-1-i}s_{i}) -  \sum\limits_{i=n}^{n-1}(a_{n+n-1-i}s_{i})  \right) \right)\cdot X^{n-1}$ \textcolor{red}{\# Grouping the terms by same exponents}
+$ + \left(b_{n-1} - \left(  \sum\limits_{i=0}^{n-1}(a_{n-1-i}s_{i}) -  \sum\limits_{i=n}^{n-1}(a_{n+n-1-i}s_{i})  \right) \right)\cdot X^{n-1}$ \textcolor{red}{ $\rhd$ Grouping the terms by same exponents}
 
 $ $
 
@@ -382,7 +382,7 @@ $=  \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i)
 + \epsilon_{all} \in \mathbb{Z}_{\hat{q}}
 $
 
-\textcolor{red}{ \# where $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+\textcolor{red}{ $\rhd$ where $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i) \approx 0$}
 
@@ -460,7 +460,7 @@ The above update effectively changes $E$ and $\Delta$ as follows:
 $\hat{E} = \hat{e}_0 + \hat{e}_1X + \hat{e}_2X^2 + \cdots + \hat{e}_{n-1}X^{n-1}$, where each $\hat{e}_j = \Big\lceil e_j\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
 
-$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{\# which should be an integer}
+$\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{ $\rhd$ which should be an integer}
 
 $ $
 
@@ -477,7 +477,7 @@ $\epsilon_{j, all} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{l=0}^{k-1}\sum\limits_{i=0}^{j}(\epsilon_{a_{l,j-i}} \cdot s_{l,i})
 + \sum\limits_{l=0}^{k-1}\sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{l,n+j-i}} \cdot s_{l,i})$
 
-\textcolor{red}{ \# derived from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+\textcolor{red}{ $\rhd$ derived from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)$}
 

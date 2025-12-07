@@ -40,10 +40,11 @@ finite real number set: <!-- l. 1188 --><math display='inline' xmlns='http://www
 <mrow><mi>t</mi></mrow></mfrac> </mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>m</mi></mrow></math>,
 given <!-- l. 1216 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow> <mn>1</mn>
 </mrow><mrow><mn>2</mn><mi>t</mi></mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 1218 --><p class='indent'>   <span style='color:#FF0000;'># where <!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi>x</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mfrac><mrow><mn>1</mn></mrow>
-<mrow><mi>t</mi></mrow></mfrac> </mrow></msub></mrow></math> means
-rounding <!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> to the
-nearest multiple of <!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+</p><!-- l. 1218 --><p class='indent'>   <span style='color:#FF0000;'> <!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mo class='MathClass-rel' stretchy='false'>▹</mo></math>where
+<!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi>x</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mfrac><mrow><mn>1</mn></mrow>
+<mrow><mi>t</mi></mrow></mfrac> </mrow></msub></mrow></math> means rounding
+<!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> to the nearest
+multiple of <!-- l. 1218 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></math></span>
 </p><!-- l. 1220 --><p class='indent'>   <!-- l. 1220 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 1222 --><p class='indent'>   The original TFHE’s difference is that all values (either polynomial
@@ -55,9 +56,9 @@ This means the plaintext also has to be encoded as values within
 integers within <!-- l. 1222 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>[</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
 Note that in the original TFHE scheme, there is no need for the scaling factor
 <!-- l. 1222 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>, because the continuous
+                                                                                         
+                                                                                         
 domain of torus <!-- l. 1222 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>[</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> provides a
-                                                                                         
-                                                                                         
 floating-point precision up to <!-- l. 1222 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
 discrete decimal values, and its decryption process can successfully blow away the noise
 <!-- l. 1222 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math> as far as each coefficient

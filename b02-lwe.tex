@@ -87,46 +87,104 @@ During decryption, the secret key owner can subtract $\vec{a} \cdot \vec{s}$ fro
 The reason we scaled the plaintext $m$ by $\Delta$ is: (i) to left-shift $m$ by $\text{log}_2\Delta$ bits and separate it from the noise $e$ in the lower bits during encryption, whereas $e$ is essential to make it hard for the attacker to guess $m$ or $\vec{s}$; and (ii) to eliminate $e$ in the lower bits by right-shifting it by $\Delta$ bits without compromising $m$ in the higher bits during decryption. The process of right-shifting (i.e., scaling) the plaintext $m$ by $\text{log}_2\Delta$ bits, followed by adding the noise $e$, is illustrated in \autoref{fig:scaling}.
 
 \subsubsection{In the Case of $t$ not Dividing $q$}
-\label{subsubsec:scaling-factor-computation}
+\label{subsubsec:lwe-noise-bound}
 
-In Summary~\ref*{subsec:lwe-enc} (\autoref{subsec:lwe-enc}), we assumed that $t$ divides $q$. In this case, there is no upper or lower limit on the size of plaintext $m$: its value is allowed to wrap around modulo $t$ indefinitely, yet the decryption works correctly. This is because any $m$ value greater than $t$ will be correctly modulo-reduced by $t$ when we do modulo reduction by $q$ during decryption.
+In Summary~\ref*{subsec:lwe-enc} (\autoref{subsec:lwe-enc}), we assumed that $t$ divides $q$. In this case, there is no upper or lower limit on the size of plaintext $m$: its value is allowed to wrap around modulo $t$ indefinitely, yet the decryption works correctly. This is because any $m$ value greater than $t$ will be correctly modulo-reduced by $t$ when we perform modulo reduction by $q$ during decryption.
 
-On the other hand, suppose that $t$ does not divide $q$. In such a case, we set the scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, provided $q \gg t$, the decryption works correctly even if $m$ is a large value that wraps around $t$. We will show why this is so. 
+On the other hand, suppose that $t$ does not divide $q$. In such a case, we set the scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. 
+Then, provided $q \gg t$, the decryption works correctly even if $m$ is a large value that wraps around $t$. We will show why this is so. 
 
-We can denote plaintext $m \bmod t$ as $m = m' + kt$, where $m' \in \mathbb{Z}_t$, and $k$ is an integer that represents the modulo $t$ wrap-around overflow portion of $m$. And we set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added scaled plaintext value is as follows:
+In this subsection's analysis, we choose $t$ to be an odd (prime) number, which is the general FHE practice for computational efficiency reasons (see \autoref{subsubsec:poly-vector-transformation-modulus}). 
+We assume the use of the centered residue system, where the plaintext domain is $\left[-\dfrac{t-1}{2}, \dfrac{t-1}{2}\right]$ and the ciphertext domain is $\left[-\dfrac{q}{2}, \dfrac{q}{2} - 1\right]$.
+We denote plaintext $m \bmod t$ as $m = m' + kt$, where $m' \in \mathbb{Z}_t$, and $k$ is an integer that represents the $t$-overflow portions of $m$. We set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added and $\Delta$-scaled plaintext can be expressed as follows:
 
-$\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e = \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ $\rhd$ by applying $m = m' + kt$}
+$\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e $
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$  
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ $\rhd$ applying $m = m' + kt$}
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - (\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor)\cdot kt + e$
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot kt + e$  
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \epsilon \cdot kt + e$ \textcolor{red}{ $\rhd$ where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$, a very small decimal value close to 0 given $q \gg t$}
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot kt + e$
+
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \epsilon \cdot kt + e$ \textcolor{red}{ $\rhd$ where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$, a decimal value between between $[0, 1)$}
 
 $ $
 
-Remember that the LWE decryption relation $\dfrac{b - \vec{a}\cdot \vec{s} \bmod q}{\Delta} \bmod t = \dfrac{\Delta m + e \bmod q}{\Delta} \bmod t$. Therefore, from the above expression, we can decrypt the message by computing as follows:
+Remember that the LWE decryption relation: $\dfrac{b - \vec{a}\cdot \vec{s} \bmod q}{\Delta} \bmod t = \dfrac{\Delta m + e \bmod q}{\Delta} \bmod t$. Therefore, from the above expression, we can decrypt the message by computing as follows:
+
+
 
 $\left\lceil\dfrac{1}{\Delta} \cdot \left(b - \vec{a}\cdot\vec{s} \bmod q\right)\right\rfloor \bmod t$
 
 $= \left\lceil\dfrac{1}{\Delta} \cdot \left(\Delta m + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \epsilon kt + e \bmod q\right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot (m' + kt) + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q \right)\right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $qk = 0 \bmod q$}
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' \bmod q\right)  + \dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(-\epsilon  kt + e \bmod q \right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left(\dfrac{q}{t} - \epsilon \right)\cdot kt + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil \dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'\right) + \dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(- \epsilon  kt + e \bmod q \right)\right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $0 \leq \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' < q$ (as $m' < t$)}
-
-$= \left\lceil m' + \dfrac{-\epsilon  kt + e  \bmod q}{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ 
-
-$= m' + \left\lceil \dfrac{-\epsilon kt + e \bmod q}{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $\lceil m' \rfloor = m'$}
-
-$= m'$  \textcolor{red}{ $\rhd$ provided $0 \leq -\epsilon kt + e < q$, and $-\dfrac{1}{2} < \dfrac{-\epsilon kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$}
-
-To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$, where $t$ does not divide $q$, the decryption works correctly as long as the following two error-bounding conditions hold: (1) $0 \leq -\epsilon kt + e < q$ (or $-\dfrac{q}{2} \leq -\epsilon kt + e < \dfrac{q}{2}$ in a centered residue representation); and (2) $-\dfrac{1}{2} < \dfrac{-\epsilon kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$. The decryption breaks if: (1) the noise $e$ is too large relative to $q$; (2) the plaintext modulus $t$ is too large relative to $q$; or (3) the plaintext value wraps around $t$ too many times (i.e., $k$ is too large). A general solution to ensure all these error bound conditions is to set the ciphertext modulus $q$ to be sufficiently large. To put it differently, if $q \gg t$ and $q \gg e$, then the error bound holds. 
-
-We can generalize the formula for the plaintext's scaling factor in Summary~\ref*{subsec:lwe-enc} (in \autoref{subsec:lwe-enc}) as $\left\lfloor\dfrac{q}{t}\right\rfloor$, where $t$ does not necessarily divide $q$. 
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + kq - \epsilon kt + e \bmod q\right)\right\rfloor \bmod t$
 
 
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q \right)\right\rfloor \bmod t$ 
+
+$ $
+
+In order for the decryption to work, we ideally want to eliminate the inner modulo $q$ reduction. That is, assuming the centered residue system $\left[-\dfrac{q}{2}, \dfrac{q}{2}-1\right]$, we want $-\dfrac{q}{2} \leq \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e < \dfrac{q}{2}$, or more strictly, $\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e\right| < \dfrac{q}{2}$.
+
+$ $
+
+To ensure these conditions hold, we will make a special assumption: $|-\epsilon k t + e| < \dfrac{\Delta}{2}$. Applying this assumption to the expression above, we can derive the following relation:
+
+$\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e\right| $
+
+$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'\right| + \left|- \epsilon kt + e\right|$
+
+$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon kt + e\right|$ \textcolor{red}{ $\rhd$ we assume $t$ is an odd prime, as that's the general FHE practice}
+
+$ \leq \left|\dfrac{q}{t}\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon kt + e\right|$
+
+$ = \dfrac{q}{2} - \dfrac{q}{2t} + \left|- \epsilon kt + e\right|$
+
+$ < \dfrac{q}{2} - \dfrac{q}{2t} + \dfrac{\Delta}{2}$ \textcolor{red}{ $\rhd$ applying our special assumption $|-\epsilon k t + e| < \dfrac{\Delta}{2}$}
+
+$ = \dfrac{q}{2} + \dfrac{1}{2}\cdot \left(\Delta - \dfrac{q}{t}\right)$
+
+$< \dfrac{q}{2}$ \textcolor{red}{ $\rhd$ since $\Delta < \dfrac{q}{t}$}
+
+
+$ $
+
+Therefore, if we assume $|-\epsilon k t + e| < \dfrac{\Delta}{2}$, then $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q$ can be simplified to $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e$. We continue with the following derivation: 
+
+
+$\left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q \right)\right\rfloor \bmod t$ 
+
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \right)\right\rfloor \bmod t$ 
+
+
+
+$= \left\lceil m' + \dfrac{-\epsilon  kt + e  }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ 
+
+$= m' + \left\lceil \dfrac{-\epsilon kt + e }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $\lceil m' \rfloor = m'$}
+
+$= m' \bmod t$  \textcolor{red}{ $\rhd$ applying special assumption $|-\epsilon k t + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$}
+
+To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ and $t$ is an odd (prime) number, the decryption works correctly as long as the following  error-bounding condition holds: $|-\epsilon k t + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$. This condition (i.e.,  decryption) breaks if: (1) the noise $e$ is too large relative to $q$; (2) the plaintext modulus $t$ is too large relative to $q$; or (3) the plaintext value wraps around $t$ too many times (i.e., $k$ is too large). A general solution to ensure all these error bound conditions is to set the ciphertext modulus $q$ to be sufficiently large. To put it differently, if $q \gg t$ and $q \gg e$, then the error bound holds. 
+
+We can generalize the formula for the plaintext's scaling factor in Summary~\ref*{subsec:lwe-enc} (in \autoref{subsec:lwe-enc}) as $\left\lfloor\dfrac{q}{t}\right\rfloor$, where $t$ is an odd (prime) number. 
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:lwe-noise-bound}} Noise Budget for an Odd Plaintext Modulus $\bm{t}$}}]
+
+
+Given the plaintext's scaling factor $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ and $t$ is an odd (prime) number, the LWE decryption works correctly as long as the error-bounding condition holds: 
+
+$|-\epsilon k t + e| < \dfrac{\Delta}{2}$
+
+$ $
+
+, where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$ is a decimal value between $[0, 1)$, and $k$ accounts for the $t$-overflows of the plaintext $m$.
+
+\end{tcolorbox}

@@ -334,14 +334,7 @@ $ $
 
 \textbf{\underline{Conditions for Correct Decryption}:}
 
-As explained in \autoref{subsubsec:scaling-factor-computation}, the noise bound is as follows:
-
-\begin{enumerate}
-\item $0 \leq -\epsilon k_it + e_i < q$ (or $-\dfrac{q}{2} \leq -\epsilon k_it + e_i < \dfrac{q}{2}$ in a centered residue representation)
-\item $-\dfrac{1}{2} < \dfrac{-\epsilon k_it + e_i}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$
-\end{enumerate}
-
-, where $k_i$ is each coefficient of the polynomial $K$ that accounts $t$-overflowing coefficients accumulated across plaintext computations. 
+As explained in Summary~\ref*{subsubsec:lwe-noise-bound} (in \autoref{subsubsec:lwe-noise-bound}), the noise bound is $|-\epsilon k_i t + e_i| < \dfrac{\Delta}{2}$, where $k_i$ is each coefficient of the polynomial $K$ that accounts for the $t$-overflows of the coefficients of the plaintext polynomial updated across homomorphic operations. 
 
 \end{tcolorbox}
 
@@ -377,7 +370,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle
 \subsubsection{Noise Bound Analysis}
 \label{subsubsec:bfv-noise-analysis}
 
-In the last part of Summary~\ref{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
+In the last part of Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
 
 Let's denote the homomorphically added ciphertext as follows: 
 
@@ -405,7 +398,7 @@ $\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\la
 
 $ $
 
-Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final value. Let's define $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \Delta$. Given $q \gg t$, $\epsilon$ is a very small decimal value (i.e., almost 0). Now, we can re-write the above decryption term as follows:
+Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final polynomial. Let's define $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \Delta$. Given $q \gg t$, $\epsilon$ is a decimal value between $[0, 1)$. Now, we can re-write the above decryption term as follows:
 
 $ $
 
@@ -451,13 +444,31 @@ $ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 
 
 $ $
 
-$ = M^{\langle 1 + 2\rangle} + \left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor \bmod t$  \textcolor{red}{ $\rhd$ since  $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, and $\lceil M^{\langle 1 + 2\rangle} \rfloor = M^{\langle 1 + 2\rangle}$}
+$ $
+
+$ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle} - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle}}{\Delta}\right\rfloor \bmod t$  
+
+\textcolor{red}{ $\rhd$ applying the special assumption $\epsilon \cdot t \cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} < \dfrac{\Delta}{2}$ to all $n$ coefficients (see \autoref{subsubsec:lwe-noise-bound})}
 
 $ $
 
 $ $
 
-The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, this second term is guaranteed to be zero if: (1) each coefficient of its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$ (i.e., each coefficient of the final expression is rounded to 0). At a high level, the greater the ciphertext modulus $q$ compared to the plaintext modulus $t$, the greater the scaling factor $\Delta$ becomes, which can tolerate a greater noise budget ($E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$) and greater wrapping around $t$-overflows of the plaintext ($\epsilon \cdot t\cdot K$). 
+
+$ = M^{\langle 1 + 2\rangle} + \left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta}\right\rfloor \bmod t$  \textcolor{red}{ $\rhd$ since  $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, and $\lceil M^{\langle 1 + 2\rangle} \rfloor = M^{\langle 1 + 2\rangle}$}
+
+$ $
+
+$ $
+
+$ = M^{\langle 1 + 2\rangle} \bmod t$
+\textcolor{red}{ $\rhd$ applying the special assumption $\epsilon \cdot t \cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} < \dfrac{\Delta}{2}$ to all $n$ coefficients}
+
+
+$ $
+
+The above final expression implies that correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) is preserved if 
+the special assumption $\epsilon \cdot t \cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} < \dfrac{\Delta}{2}$ holds (for all $n$ coefficients of the polynomial). At a high level, the greater the ciphertext modulus $q$ becomes compared to the plaintext modulus $t$, the greater the scaling factor $\Delta$ becomes, which can sustain a greater noise budget ($E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$) and greater wrapping around $t$-overflows of the plaintext ($\epsilon \cdot t\cdot K$). 
 
 This noise bound principle not only applies to homomorphic addition but also to homomorphic multiplication and rotation, which will be explained in later subsections. The term $E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ can be generalized as the cumulative noise across all homomorphic operations (e.g., additions, multiplications, rotations), and the term $\epsilon \cdot t\cdot K$ can be generalized as the amount of $t$-overflows of each coefficient of the plaintext polynomial computed across homomorphic operations.
 

@@ -333,18 +333,22 @@ $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = \left\lceil\dfrac{B + A \cdot S \b
 $ $
 
 \textbf{\underline{Conditions for Correct Decryption}:}
+
+As explained in \autoref{subsubsec:scaling-factor-computation}, the noise bound is as follows:
+
 \begin{enumerate}
-\item Each noise coefficient $e_i$ growing during homomorphic operations should never exceed: $e_i < \dfrac{\Delta}{2}$. 
-
-\item Each plaintext coefficient $m_i$ being updated across homomorphic operations should never overflow or underflow $q$ (i.e., $m_i < q$)
-
-\item The specific noise bound is as explained in \autoref{subsubsec:scaling-factor-computation}:
-
-$\dfrac{k_i t + e_i}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ \textcolor{red}{ $\rhd$ $k_i t$ accounts for the plaintext $m_i$'s wrapped-around value as multiples of $t$}
- 
+\item $0 \leq -\epsilon k_it + e_i < q$ (or $-\dfrac{q}{2} \leq -\epsilon k_it + e_i < \dfrac{q}{2}$ in a centered residue representation)
+\item $-\dfrac{1}{2} < \dfrac{-\epsilon k_it + e_i}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$
 \end{enumerate}
 
+, where $k_i$ is each coefficient of the polynomial $K$ that accounts $t$-overflowing coefficients accumulated across plaintext computations. 
+
 \end{tcolorbox}
+
+
+We will explain the conditions for BFV's correct decryption in more detail in \autoref{subsubsec:bfv-noise-analysis}.
+
+%\autoref{subsubsec:scaling-factor-computation}
 
 
 %An important difference from the encryption and decryption process in \autoref{subsec:glwe-enc} is that the plaintext polynomial $M$ scales up during the encoding process and scales down during the decoding process, not during the encryption/decryption process. Therefore, the noise $E$ gets eliminated during the decoding process instead of during the decryption process. 
@@ -373,7 +377,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle
 \subsubsection{Noise Bound Analysis}
 \label{subsubsec:bfv-noise-analysis}
 
-In the last part of Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}, we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain why this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
+In the last part of Summary~\ref{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
 
 Let's denote the homomorphically added ciphertext as follows: 
 
@@ -401,7 +405,7 @@ $\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\la
 
 $ $
 
-Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final value. Let's define $\epsilon = \left\lceil\dfrac{q}{t}\right\rfloor - \left\lfloor\dfrac{q}{t}\right\rfloor = \left\lceil\dfrac{q}{t}\right\rfloor - \Delta$. Given $q \gg t$, $\epsilon$ is a very small decimal value (i.e., almost 0). Now, we can re-write the above decryption term as follows:
+Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final value. Let's define $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \Delta$. Given $q \gg t$, $\epsilon$ is a very small decimal value (i.e., almost 0). Now, we can re-write the above decryption term as follows:
 
 $ $
 
@@ -409,25 +413,25 @@ $\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\la
 
 $ $
 
-$\left\lceil\dfrac{(\left\lceil\frac{q}{t}\right\rfloor - \epsilon)\cdot (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ applying $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor = \left\lceil\dfrac{q}{t}\right\rfloor - \epsilon$}
+$\left\lceil\dfrac{(\frac{q}{t} - \epsilon)\cdot (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ applying $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \epsilon$}
 
 $ $
 
-$ = \left\lceil\dfrac{(\left\lceil\frac{q}{t}\right\rfloor - \epsilon)\cdot (M^{\langle 1 + 2\rangle} + t\cdot K) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+$ = \left\lceil\dfrac{(\frac{q}{t} - \epsilon)\cdot (M^{\langle 1 + 2\rangle} + t\cdot K) + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
 
-\textcolor{red}{ $\rhd$ where $t \cdot K$ represents any possible $t$-overflows caused by adding $M^{\langle 1\rangle} + M^{\langle 2\rangle}$ }
-
-$ $
+\textcolor{red}{ $\rhd$ where $t \cdot K$ represents the $t$-overflows generated by the modulo addition of $M^{\langle 1\rangle} + M^{\langle 2\rangle}$ }
 
 $ $
 
-$ = \left\lceil\dfrac{\left\lceil\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  + \left\lceil\frac{q}{t}\right\rfloor \cdot t\cdot K  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+$ $
+
+$ = \left\lceil\dfrac{\frac{q}{t} \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  + \frac{q}{t} \cdot t\cdot K  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
 
 $ $
 
-$ = \left\lceil\dfrac{\left\lceil\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
+$ = \left\lceil\dfrac{\frac{q}{t} \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$ 
 
-\textcolor{red}{ $\rhd$ since $\left\lceil\frac{q}{t}\right\rfloor\cdot t = q$, and $q\cdot K \bmod q = 0$}
+\textcolor{red}{ $\rhd$ since $\frac{q}{t}\cdot t = q$, and $q\cdot K \bmod q = 0$}
 
 $ $
 
@@ -436,7 +440,7 @@ $ $
 
 $ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle} + \epsilon \cdot M^{\langle 1 + 2\rangle} - \epsilon \cdot M^{\langle 1 + 2\rangle}  - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} \bmod q}{\Delta}\right\rfloor \bmod t$  
 
-\textcolor{red}{ $\rhd$ applying  $\left\lceil\dfrac{q}{t}\right\rfloor = \left\lfloor\dfrac{q}{t}\right\rfloor + \epsilon$}
+\textcolor{red}{ $\rhd$ applying  $\dfrac{q}{t} = \left\lfloor\dfrac{q}{t}\right\rfloor + \epsilon$}
 
 $ $
 
@@ -453,22 +457,16 @@ $ $
 
 $ $
 
-The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, the second term is guaranteed to be zero if: (1) its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$. At a high level, the greater the ciphertext modulus $q$ compared to the plaintext modulus $t$, the greater the scaling factor $\Delta$ becomes, which can tolerate a greater noise budget ($E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$) and greater wrapping around $t$-overflows of the plaintext ($\epsilon \cdot t\cdot K$). 
+The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, this second term is guaranteed to be zero if: (1) each coefficient of its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$ (i.e., each coefficient of the final expression is rounded to 0). At a high level, the greater the ciphertext modulus $q$ compared to the plaintext modulus $t$, the greater the scaling factor $\Delta$ becomes, which can tolerate a greater noise budget ($E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$) and greater wrapping around $t$-overflows of the plaintext ($\epsilon \cdot t\cdot K$). 
 
 This noise bound principle not only applies to homomorphic addition but also to homomorphic multiplication and rotation, which will be explained in later subsections. The term $E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ can be generalized as the cumulative noise across all homomorphic operations (e.g., additions, multiplications, rotations), and the term $\epsilon \cdot t\cdot K$ can be generalized as the amount of $t$-overflows of each coefficient of the plaintext polynomial computed across homomorphic operations.
-
-Note that the above noise bound expression is a concrete BFV-specialized version of the ``Conditions for Correct Decryption" explained in Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}. 
-
-
- 
-
 
 
 
 \subsection{Ciphertext-to-Plaintext Addition}
 \label{subsec:bfv-add-plain}
 
-BFV's ciphertext-to-plaintext addition uses RLWE's ciphertext-to-plaintext addition scheme with the sign of the $A\cdot S$ term flipped in the encryption and decryption formula. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) ciphertext-to-plaintext addition scheme (\autoref{sec:glwe-add-plain}) with $k = 1$.  
+BFV's ciphertext-to-plaintext addition uses RLWE's ciphertext-to-plaintext addition scheme with the sign of the $A\cdot S$ term flipped in the encryption and decryption formulas. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) ciphertext-to-plaintext addition scheme (\autoref{sec:glwe-add-plain}) with $k = 1$.  
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bfv-add-plain}} BFV Ciphertext-to-Plaintext Addition}}]

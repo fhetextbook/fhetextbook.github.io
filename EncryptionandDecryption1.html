@@ -18,7 +18,7 @@ Thus, BFV’s encryption and decryption formulas are as follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-83'>     
 <div class='tcolorbox-title'>
-<!-- l. 347 --><p class='indent'>   <!-- l. 347 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-2.3</span><!-- l. 347 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!-- l. 346 --><p class='indent'>   <!-- l. 346 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-2.3</span><!-- l. 346 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>BFV Encryption and Decryption</span></p></div> 
@@ -52,36 +52,32 @@ or ternary (i.e., <!-- l. 302 --><math display='inline' xmlns='http://www.w3.org
 gets eliminated by the rounding process)
 </p><!-- l. 333 --><p class='noindent'><!-- l. 333 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 335 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Conditions for Correct Decryption</span></span><span class='rm-lmbx-10x-x-109'>:</span>
-   </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'>Each noise coefficient <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-    growing       during       homomorphic       operations       should       never       exceed:
-    <!-- l. 337 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
-</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>.
-    </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'>Each plaintext coefficient <!-- l. 339 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-    being  updated  across  homomorphic  operations  should  never  overflow  or  underflow
-    <!-- l. 339 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
-   (i.e., <!-- l. 339 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>q</mi></mrow></math>)
-    </dd><dt class='enumerate-enumitem'>
-3.  </dt><dd class='enumerate-enumitem'>The specific noise bound is as explained in <a href='Decryption.html#in-the-case-of-t-not-dividing-q'><span class='ts1-lmr10-x-x-109'>§</span>B-2.3.1<!-- tex4ht:ref: subsec:bfv-enc-dec  --></a>:
-    <!-- l. 343 --><p class='noindent'><!-- l. 343 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub>
-   </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
-<mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo>  </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+</p><!-- l. 337 --><p class='noindent'>As explained in <a href='Decryption.html#in-the-case-of-t-not-dividing-q'><span class='ts1-lmr10-x-x-109'>§</span>B-2.3.1<!-- tex4ht:ref: subsec:bfv-enc-dec  --></a>, the noise bound is as follows:
+    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
+1.  </dt><dd class='enumerate-enumitem'><!-- l. 340 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mi>𝜖</mi><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mi>q</mi></mrow></math>
+   (or <!-- l. 340 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mi>𝜖</mi><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>
-    <span style='color:#FF0000;'> <!-- l. 343 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mo class='MathClass-rel' stretchy='false'>▹</mo></math>
-  <!-- l. 343 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi></mrow></math>
-   accounts for the plaintext <!-- l. 343 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math>’s
-    wrapped-around value as multiples of <!-- l. 343 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math></span>
+    in a centered residue representation)
+    </dd><dt class='enumerate-enumitem'>
+2.  </dt><dd class='enumerate-enumitem'><!-- l. 341 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mi>𝜖</mi><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mi>t</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub>
+     </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
+<mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo>   </mrow></mfrac></mstyle><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math></dd></dl>
+<!-- l. 344 --><p class='noindent'>, where <!-- l. 344 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub></math> is each coefficient
+of the polynomial <!-- l. 344 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>K</mi></math> that
+accounts <!-- l. 344 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>-overflowing
+coefficients accumulated across plaintext computations.
 </p>
-   </dd></dl>
  
 </div> 
 </div>
+<!-- l. 349 --><p class='indent'>   We will explain the conditions for BFV’s correct decryption in more detail in <a href='CiphertexttoCiphertextAddition.html#noise-bound-analysis'><span class='ts1-lmr10-x-x-109'>§</span>D-2.4.1<!-- tex4ht:ref: subsec:bfv-enc-dec  --></a>.
                                                                                          
                                                                                          
-                                                                                         
-                                                                                         
-   <!-- l. 356 --><div class='crosslinks'><p class='noindent'>[<a href='BatchEncoding.html'>prev</a>][<a href='BFVScheme.html#EncryptionandDecryption1.html'>parent</a>][<a href='CiphertexttoCiphertextAddition.html'>next</a>]</p></div>
+</p>
+   <!-- l. 360 --><div class='crosslinks'><p class='noindent'>[<a href='BatchEncoding.html'>prev</a>][<a href='BFVScheme.html#EncryptionandDecryption1.html'>parent</a>][<a href='CiphertexttoCiphertextAddition.html'>next</a>]</p></div>
     
 </body> 
 </html>

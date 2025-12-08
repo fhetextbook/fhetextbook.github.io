@@ -373,7 +373,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle
 \subsubsection{Noise Bound Analysis}
 \label{subsubsec:bfv-noise-analysis}
 
-In the last part of Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}, we explained the conditions for BFV's correct decryption. In this subsection, we will explain why this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
+In the last part of Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}, we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain why this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
 
 Let's denote the homomorphically added ciphertext as follows: 
 
@@ -453,9 +453,14 @@ $ $
 
 $ $
 
-The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, the second term is guaranteed to be zero if: (1) its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$. This conclusion on the error bound is a more concrete version of the ``Conditions for Correct Decryption" explained in Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}. 
+The above final expression implies that the correct decryption (i.e., $M^{\langle 1 + 2\rangle}$) holds if the second term $\left\lceil\dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K \bmod q}{\Delta}\right\rfloor$ zeros out. Specifically, the second term is guaranteed to be zero if: (1) its numerator $E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K$ is small enough not to overflow (or underflow) $q$; and (2) $-\dfrac{1}{2} < \dfrac{E^{\langle 1 \rangle} + E^{\langle 2 \rangle} - \epsilon \cdot t\cdot K}{\Delta} < \dfrac{1}{2}$. At a high level, the greater the ciphertext modulus $q$ compared to the plaintext modulus $t$, the greater the scaling factor $\Delta$ becomes, which can tolerate a greater noise budget ($E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$) and greater wrapping around $t$-overflows of the plaintext ($\epsilon \cdot t\cdot K$). 
 
-This error bound principle also applies to homomorphic multiplications and rotations, which will be explained in later subsections. For other operations, the term $E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ can be generalized as the cumulative noise across all homomorphic operations (e.g., additions, multiplications, rotations), and the term $\epsilon \cdot t\cdot K$ can be generalized as the amount of $t$-overflows of each coefficient of the plaintext polynomial computed across homomorphic operations. 
+This noise bound principle not only applies to homomorphic addition but also to homomorphic multiplication and rotation, which will be explained in later subsections. The term $E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ can be generalized as the cumulative noise across all homomorphic operations (e.g., additions, multiplications, rotations), and the term $\epsilon \cdot t\cdot K$ can be generalized as the amount of $t$-overflows of each coefficient of the plaintext polynomial computed across homomorphic operations.
+
+Note that the above noise bound expression is a concrete BFV-specialized version of the ``Conditions for Correct Decryption" explained in Summary~\ref{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}. 
+
+
+ 
 
 
 

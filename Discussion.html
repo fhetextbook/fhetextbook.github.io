@@ -24,16 +24,18 @@ and <!-- l. 77 --><math display='inline' xmlns='http://www.w3.org/1998/Math/Math
 <!-- l. 77 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>.
 However, if the noise is sampled from a Gaussian distribution with the mean
 <!-- l. 77 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn></mrow></math>, then
-the addition of multiple noises will converge to 0. Therefore, there is not much issue of noise growth in the
-homomorphic addition of two ciphertexts.
+the noise variance grows linearly with the number of additions and eventually consumes the budget
+<!-- l. 77 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mn>2</mn></mrow></math>.
+However, this growth rate is significantly lower than that of homomorphic multiplication, where noise
+typically grows multiplicatively.
 </p><!-- l. 79 --><p class='indent'>   <!-- l. 79 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 81 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Hard Threshold on the Plaintext’s Value Without Modulo Reduction</span>
 <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math><span class='rm-lmbx-10x-x-109'>:</span>
 During homomorphic operations (e.g., addition or multiplication) and decryption, the
 <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='italic'>𝐴𝑆</mi></mrow></math> and
-                                                                                         
-                                                                                         
 <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>B</mi></math> terms in the
+                                                                                         
+                                                                                         
 <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝐴𝑆</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑘𝑞</mi></mrow></math> relation are allowed to
 wrap around modulo <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
 indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always
@@ -46,10 +48,8 @@ that, we can correctly recover <!-- l. 81 --><math display='inline' xmlns='http:
 by computing <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi>
         </mrow><mrow><mi mathvariant='normal'>Δ</mi>        </mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></math>,
 eliminating the noise <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math>.
-However, as we explained in Summary <span class='rm-lmbx-10x-x-109'>??</span> in <span class='rm-lmbx-10x-x-109'>??</span>), if the error bound
-<!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
- </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
-<mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+However, as we explained in Summary B-2.3.1 (in <a href='Decryption.html#in-the-case-of-t-not-dividing-q'><span class='ts1-lmr10-x-x-109'>§</span>B-2.3.1<!-- tex4ht:ref: subsubsec:lwe-noise-bound  --></a>), if the error bound
+<!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mi mathvariant='italic'>𝜖𝑘𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
 </mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> breaks (where
 <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> can be any coefficient
 of <!-- l. 81 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math>), then modulo

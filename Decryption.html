@@ -36,7 +36,11 @@
  </mrow><mrow><mi mathvariant='normal'>Δ</mi> </mrow></mfrac></mstyle></math>,
    which is equivalent to right-shifting <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>
    by <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math>
-   bits.</dd></dl>
+   bits. (Here we assume <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
+   is a power of 2; if <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
+   is not a power of 2, scaling up or down <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
+   by <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>
+   is equivalent to multiplying or dividing the value by <!-- l. 59 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>.)</dd></dl>
 <!-- l. 62 --><p class='noindent'><!-- l. 62 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 64 --><p class='indent'>   The LWE decryption formula is summarized as follows:
 </p><!-- l. 66 --><p class='indent'>   <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
@@ -76,7 +80,7 @@ whereas <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/
 hard for the attacker to guess <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
 or <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover></math>; and (ii) to eliminate
 <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>e</mi></math> in the lower bits by
-right-shifting it by <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math> bits
+right-shifting it by <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math> bits
 without compromising <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
 in the higher bits during decryption. The process of right-shifting (i.e., scaling) the plaintext
 <!-- l. 87 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math> by
@@ -148,8 +152,8 @@ plaintext can be expressed as follows:
 <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mo class='MathClass-rel' stretchy='false'>▹</mo></math> where
 <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>𝜖</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
 </mrow><mrow><mi>t</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
-</mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>, a decimal value
-between between <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>[</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math></span>
+</mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>, a decimal
+value between <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>[</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math></span>
 </p><!-- l. 111 --><p class='indent'>   <!-- l. 111 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 113 --><p class='indent'>   Remember that the LWE decryption relation:
 <!-- l. 113 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi>

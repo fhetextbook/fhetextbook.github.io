@@ -52,9 +52,9 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 \begin{tabular}{|c||l|}
 \hline
 &\multicolumn{1}{c|}{\textbf{Secret Key}}\\\hline\hline
-\textbf{TFHE}&Vector $\vec{s} \xleftarrow{\$} \mathbb{Z}_2^k$ \text{ } \textcolor{red}{ $\rhd$ $\$$ is a uniform random distribution}\\\hline
+\textbf{TFHE}&Vector $\vec{s} \xleftarrow{\$} \mathbb{Z}_2^k$ sampled from $\{0, 1\}$ \textcolor{red}{ $\rhd$ $\$$ is a uniform random distribution}\\\hline
 \textbf{BFV}&\\
-\textbf{CKKS}&Polynomial $S \xleftarrow{\$} \mathbb{Z}_3[X]/X^n+1$, where we set $\mathbb{Z}_3 = \{-1, 0, 1\}$\\
+\textbf{CKKS}&Polynomial $S \xleftarrow{\$} \mathbb{Z}_3[X]/X^n+1$, where $\mathbb{Z}_3 = \{-1, 0, 1\}$\\
 \textbf{BGV}&\\\hline
 \end{tabular}
 \caption{\textbf{Secret Key}}

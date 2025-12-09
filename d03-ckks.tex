@@ -1,12 +1,12 @@
-The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that contain imaginary numbers. Therefore, unlike BFV, BGV, or TFHE, which can only compute over integers, CKKS can compute real-world floating point arithmetic, such as machine learning.
+The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that contain imaginary components. Therefore, unlike BFV, BGV, or TFHE, which can only compute over integers, CKKS can compute real-world floating point arithmetic, such as in machine learning.
 
 
-The CKKS scheme's goal is to homomorphically compute addition and multiplication of complex numbers. However, while our targeted inputs are complex numbers, CKKS's plaintext space is defined as a $(n-1)$-degree polynomial ring with real-number coefficients having a limited precision, that is, $\mathcal{R}_{\langle n \rangle} = \mathbb{R}[x] / (x^n + 1)$. Therefore, CKKS designs its unique encoding scheme which converts the input complex numbers into integers which can be used as coefficients of a polynomial in $\mathcal{R}_{\langle n \rangle}$. 
+The CKKS scheme's goal is to homomorphically compute addition and multiplication of complex numbers. However, while our targeted inputs are complex numbers, CKKS's plaintext space is defined as a $(n-1)$-degree polynomial ring with real-number coefficients having limited precision; that is, $\mathcal{R}_{\langle n \rangle} = \mathbb{R}[x] / (x^n + 1)$. Therefore, CKKS designs its unique encoding scheme which converts the input complex numbers into integers which can be used as coefficients of a polynomial in $\mathcal{R}_{\langle n \rangle}$. 
 
 
 $ $
 
-\noindent In overall, CKKS's encryption procedure is as follows:
+\noindent Overall, CKKS's encryption procedure is as follows:
 
 \begin{enumerate}
 \item \underline{\textsf{Encoding\textsubscript{1}}:} Encode the targeted input complex number into a real number
@@ -358,8 +358,8 @@ $= \dfrac{1}{4} \cdot
 3.5(\overline{\omega}^5 + \omega^5) - 1.4i(\overline{\omega}^5 - \omega^5)\\
 1.1(\overline{\omega}^2 + {\omega}^2) + 4.3i(\overline{\omega}^2 - {\omega}^2) +
 3.5(\overline{\omega}^2 + {\omega}^2) - 1.4i(\overline{\omega}^2 - {\omega}^2)\\
-1.1(\overline{\omega}^3 + \overline{\omega}^3) + 4.3i(\overline{\omega}^3 - \overline{\omega}^3) +
-3.5(\overline{\omega}^7 + \overline{\omega}^7) - 1.4i(\overline{\omega}^7 - \overline{\omega}^7)\\
+1.1(\overline{\omega}^3 + {\omega}^3) + 4.3i(\overline{\omega}^3 - {\omega}^3) +
+3.5(\overline{\omega}^7 + {\omega}^7) - 1.4i(\overline{\omega}^7 - {\omega}^7)\\
 \end{bmatrix}$
 
 $ $
@@ -468,7 +468,7 @@ CKKS's encryption and decryption schemes are similar to BFV's encryption and dec
 
 \textbf{\underline{Initial Setup}:} 
 
-$\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$. The coefficients of the polynomial $S$ can be either binary (i.e., $\{0, 1\}$) or ternary (i.e., $\{-1, 0, 1\}$).
+$\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of the polynomial $S$ are (i.e., $\{-1, 0, 1\}$).
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -549,13 +549,11 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta (M + \Lambda) )$
 \subsection{Homomorphic Ciphertext-to-Ciphertext Multiplication}
 \label{subsec:ckks-mult-cipher}
 
-CKKS's ciphertext-to-ciphertext multiplication is partially different from that of BFV. In the case of BFV, its ciphertext modulus stays the same after each multiplication. On the other hand, CKKS reduces its ciphertext modulus size by 1 after each multiplication (which is equivalent to reducing its multiplicative level by 1). When the level reaches 0, no more multiplication can be further done (unless we bootstrap the modulus). This difference happens because the two schemes use different strategies in handling their plaintext scaling factors-- BFV's $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, whereas CKKS's $\Delta$ can be any value such that $\Delta \ll q_0$ where $q_0$ is the lowest multiplicative level's ciphertext modulus. However, both schemes use the similar relinearization technique. 
+CKKS's ciphertext-to-ciphertext multiplication is partially different from that of BFV. In the case of BFV, its ciphertext modulus remains the same after each multiplication. On the other hand, CKKS reduces its ciphertext modulus size by 1 after each multiplication (which is equivalent to reducing its multiplicative level by 1). When the level reaches 0, no further multiplication can be performed (unless we bootstrap the modulus). This difference arises because the two schemes use different strategies in handling their plaintext scaling factors-- BFV's $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, whereas CKKS's $\Delta$ can be any value such that $\Delta \ll q_0$, where $q_0$ is the lowest multiplicative level's ciphertext modulus. However, both schemes use a similar relinearization technique. 
 
 To make it easy to understand, we will explain CKKS's ciphertext-to-ciphertext multiplication based on this alternate version of RLWE (Theorem~\ref*{subsec:glwe-alternative} in \autoref{subsec:glwe-alternative}),
 where the sign of the $AS$ term is flipped in the encryption and decryption formulas.
 
-
-%RLWE ciphertext-to-ciphertext multiplication is more complex than other types of homomorphic computation. To explain this, we will use the alternative version of RLWE encryption (\autoref{subsec:glwe-alternative}) for ease of understanding. 
 Suppose we have the following two (CKKS) RLWE ciphertexts:
 
 $\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle}) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$, \text{ } where $B^{\langle 1 \rangle} = -A^{\langle 1 \rangle} \cdot S + \Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}$
@@ -564,7 +562,7 @@ $\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle}) = (A^{\langle 2 \rangle
 
 $ $
 
-\noindent RLWE ciphertext-to-ciphertext multiplication is comprised of the following 2 steps:
+\noindent RLWE ciphertext-to-ciphertext multiplication comprises the following 2 steps:
 
 
 $ $
@@ -1245,53 +1243,6 @@ $ = \vec{v}^{\langle h=1 \rangle}$ \textcolor{red}{\text{ } \# The original inpu
 
 
 
-\begin{comment}  
-$ $
-
-Now, instead of directly updating the plaintext polynomial from $M(X) \rightarrow M(X^{J(h)})$, let's instead update the RLWE ciphertext components from $A(X) \rightarrow A(X^{J(h)})$ and $B(X) \rightarrow B(X^{J(h)})$, and then compute: 
-
-$\textsf{RLWE}_{S(X),\sigma}\bm{(}\Delta M(X^{J(h)})\bm{)} = \bm{(} 0, B(X^{J(h)}) \bm{)} + \bm{\langle}  \textsf{Decomp}^{\beta, l}\bm{(}A(X^{J(h)})\bm{)}, \text{ } \textsf{RLev}_{S(X), \sigma}^{\beta, l}\bm{(}S(X^{J(h)})\bm{)} \bm{\rangle}$. 
-
-$ $
-
-Suppose the secret key $S(X)$, random polynomial $A(X)$, and noise $E(X)$ are as follows: 
-
-$S(X) = 1 - X + X^2 + X^3$
-
-$A(X) = 374 + 3463X - 133X^2 - 35X^3$
-
-$E(X) = -1 + 2X - 3X^2 - 2X^3$
-
-(where $M(X) = 294 + 23X + 365X^2 + 240X^3$)
-
-$ $
-
-Then, $B(X)$ is computed as follows:
-
-$B(X) = -A(X)\cdot S(X) + \Delta M(X) + E(X)$
-
-$= -(374 + 3463X - 133X^2 - 35X^3)\cdot(1 - X + X^2 + X^3) + (294 + 23X + 365X^2 + 240X^3) + (-1 + 2X - 3X^2 - 2X^3)$
-
-$= 35X^6+168X^5-3365X^4-3697X^3+3584X^2-3064X-81$
-
-$= 3284 -3232X +3549X^2 -3697X^3$
-
-$ $
-
-Now, we update $A(X) \rightarrow A(X^{J(h)})$ and $B(X) \rightarrow B(X^{J(h)})$ (where $h = 1$ and $J(h) = 5$) as follows:
-
-$A(X^5) = 374 + 3463(X^5) - 133(X^5)^2 - 35(X^5)^3$ 
-
-$= 374 - 3463X - 133X^2 + 35X^3$
-
-$ $
-
-$B(X^5) = 3284 -3232(X^5) +3549(X^5)^2 -3697(X^5)^3$ 
-
-$= 3284 + 3232 + 3549X^2 + 3697X^3$
-\end{comment}
-
-
 $ $
 
 In practice, we do not directly update $\Delta M(X)$ to $\Delta M(X^{J(1)})$, because we would not have access to the plaintext polynomial $M(X)$ unless we have the secret key $S(X)$. Therefore, we instead update $\textsf{ct}=\bm(A(X), B(X)\bm)$ to $\textsf{ct}^{\langle h=1 \rangle}=\bm(A(X^{J(1)}), B(X^{J(1)})\bm)$, which is equivalent to homomorphically rotating the encrypted input vector slots. Then, decrypting $\textsf{ct}^{\langle h=1 \rangle}$ and decoding it would output $\vec{v}^{\langle h=1 \rangle}$.
@@ -1323,7 +1274,6 @@ $\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_
 
 $= \bm{(}M(\overline{\omega})), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega^{n-1}), \cdots, M(\omega^{3}), M(\omega)\bm{)}$ \textcolor{red}{ $\rhd$ where $\omega = e^{\frac{i\pi}{n}}$}
 
-%$= \bm{(}M((\omega)^{2n-1}), M(\omega^{2n-3}), \cdots, M(\omega^{n+1}), M(\overline{\omega^{n+1}}), \cdots, M(\overline{\omega^{n+3}}), M((\overline{\omega})^{2n-1})\bm{)}$
 
 $= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M((\overline{\omega^{n-1}})^{-1}), \cdots, M((\overline{\omega^{3}})^{-1}), M((\overline{\omega})^{-1})\bm{)}$ 
 
@@ -1353,7 +1303,7 @@ Homomorphic conjugation of the input vector of a ciphertext is equivalent to the
 \subsection{Sparsely Packing Ciphertexts}
 \label{subsec:ckks-sparse-packing}
 
-In \autoref{subsec:ckks-encoding-decoding}, we learned the CKKS encoding scheme which encodes an input vector with $\dfrac{n}{2}$ slots (i.e., $\dfrac{n}{2}$-dimensional input vector) into an $(n-1)$-degree polynomial. While the polynomial ring's degree $n$ is fixed at the setup stage of CKKS as a security parameter, some applications may only need to use fewer than $\dfrac{n}{2}$ input vector slots. Suppose we only need to use $\frac{n'}{2}$ slots out of $\frac{n}{2}$ slots, where $n'$ is some number that divides $n$. Then, the corresponding input vector and encoded polynomial get a special property as described below:
+In \autoref{subsec:ckks-encoding-decoding}, we learned the CKKS encoding scheme, which encodes an input vector with $\dfrac{n}{2}$ slots (i.e., $\dfrac{n}{2}$-dimensional input vector) into an $(n-1)$-degree polynomial. While the polynomial ring's degree $n$ is fixed at the setup stage of CKKS as a security parameter, some applications may only need to use fewer than $\dfrac{n}{2}$ input vector slots. Suppose we only need to use $\frac{n'}{2}$ slots out of $\frac{n}{2}$ slots, where $n'$ is some number that divides $n$. Then, the corresponding input vector and encoded polynomial acquire a special property as described below:
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-sparse-packing}} CKKS's Sparsely Packing Polynomial and Ciphertext}}]
@@ -1371,11 +1321,11 @@ Then, the following are true:
 
 \end{tcolorbox}
 
-We could show both directions of proof: (1) the forward (decoding-direction) proof; and (2) the backward (encoding-direction) proof. However, it is sufficient to prove only either direction, because the encoding ($\sigma^{-1}$) and decoding ($\sigma$) processes are isomorphic. Among these two, we will show only the forward proof for simplicity. 
+We could show both directions of proof: (1) the forward (decoding-direction) proof; and (2) the backward (encoding-direction) proof. However, it is sufficient to prove only either direction because the encoding ($\sigma^{-1}$) and decoding ($\sigma$) processes are isomorphic. Among these two, we will show only the forward proof for simplicity. 
 
 \subsubsection{Forward Proof: Decoding of Sparsely Packed Ciphertext}
 
-We will prove that for each $M_Y(Y) \in \mathbb{Z}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ which has non-zero constants only at those terms with a power of multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial gets decoded into some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
+We will prove that for each $M_Y(Y) \in \mathbb{Z}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has non-zero constants only at those terms with a power that is a multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial is decoded into some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
 
 To decode $M(X)$ into an input vector, we need to evaluate $M(X)$ at $\frac{n}{2}$ distinct roots of $X^n + 1$ (i.e., $n$ distinct primitive $(\mu=2n)$-th roots of unity), which are: 
 
@@ -1406,215 +1356,6 @@ M_Y(\xi^{J(0)}), \text{ } M_Y(\xi^{J(1)}), \cdots,  M_Y(\xi^{J(\frac{n}{2}-1)})\
 $ $
 
 Notice that $\xi = \omega^{\frac{n}{n'}}$. Therefore, the above evaluation of $M_Y(Y)$ outputs $\dfrac{n}{n'}$ repeated values of $M_Y(Y)$ evaluated at $\frac{n'}{2}$ distinct primitive $(\mu=2n')$-th roots of unity. 
-
-\begin{comment}
-\subsubsection{Backward Proof: Encoding of Sparsely Packed Ciphertext}
-
-In this subsection, we will prove that if an $\dfrac{n}{2}$-dimensional input vector comprises $\dfrac{n}{n'}$ repetitions of $\dfrac{n'}{2}$ consecutive slot values, then the vector gets encoded into some $M_Y(Y) \in \mathbb{Z}[Y] / (Y^{n'} + 1)$ where $Y=X^{\frac{n}{n'}}$, which is equivalent to some polynomial $M'(X)$ that has non-zero constants only at the terms with power of a multiple of $\dfrac{n}{n'}$ and zero constants at all other terms. Suppose $\vec{r}$ is the sub-vector slots (that we are interested in for encoding) out of the $\frac{n}{2}$-dimensional input vector $\vec{v}$. We will start with a simple case:
-
-
-\para{Case 1: $||\vec{r}|| = \dfrac{1}{2} ||\vec{v}||$}
-
-Suppose we need to encode only the first $\dfrac{n}{4}$ input slots out of $\dfrac{n}{2}$ vector slots, which are: $\vec{r} = (r_0, r_1, \cdots , r_{\frac{n}{4}-1})$. In this case, we will construct the $\dfrac{n}{l}$-dimensional input vector slots as 2 repetitions of $\vec{r}$ as follows: $\vec{v} = (\vec{r} ; \vec{r}) = (r_0, \text{ } r_1, \text{ } \cdots, \text{ } r_{\frac{n}{4}-1}, \text{ }r_0, \text{ } r_1, \text{ } \cdots, \text{ } r_{\frac{n}{4}-1})$. Now, given the general structure of its encoded polynomial $M(X) = m_0 + m_1X + m_2X^2 + \cdots + m_{n-1}X^{n-1}$, we will further concretize its specific structure. 
-
-$ $
-
-Based on Summary~\ref*{subsubsec:ckks-encoding-summary} (in \autoref{subsubsec:ckks-encoding-summary}) with the decoding matrix $\hathat{W}^*$ (in \autoref{subsubsec:ckks-rotation-summary}), we decode the polynomial $M(X)$ by evaluating it at $\dfrac{n}{2}$ (or $n$ in case of considering the conjugate values of the input vector as well) distinct primitive $(\mu=2n)$-th roots of unity as follows: $\vec{v} = \bm{(}\text{ } M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \text{ } \cdots, \text{ } M(\omega^{J(\frac{n}{2}-1)}) \text{ } \bm{)}$, where $J(h) = 5^h \bmod 2n$. Given the input vector of our interest $\vec{v} = (r_0, \text{ } r_1, \text{ } \cdots, \text{ } r_{\frac{n}{4}-1}, \text{ } r_0, \text{ } r_1, \text{ }\cdots, \text{ } r_{\frac{n}{4}-1})$, its encoded polynomial $M(X)$ is supposed to be decoded as follows: 
-
-$M(\omega^{J(0)}) = M(\omega^{J(\frac{n}{4})}) = r_0$
-
-$M(\omega^{J(1)}) = M(\omega^{J(\frac{n}{4} + 1)}) = r_1$
-
-\text{ } $\vdots$
-
-$M(\omega^{J(\frac{n}{4}-1)}) = M(\omega^{J(\frac{n}{2} - 1)}) = r_{\frac{n}{4}-1}$
-
-$ $
-
-The above equality relations hold because the input vector $\vec{v}$'s each $(i+\frac{n}{4})$-th slot has the same value as the same vector's $i$-th slot. When the polynomial $M(X)$ is evaluated at the left-half primitive $(\mu=2n)$-th roots of unity (i.e., $\omega^{J(0)}, \omega^{J(1)}, \cdots \omega^{J(\frac{n}{4}-1)}$) and the right-half $(\mu=2n)$-th roots of unity (i.e., $\omega^{J(\frac{n}{4})}, \omega^{J(\frac{n}{4}+1)}, \cdot \omega^{J(\frac{n}{2}-1)}$), the left-hand side and right-hand side's evaluated polynomial $M(X)$'s $d$-th term has the same value for both the left-hand side and the right-hand side for the term index $d = \{0, 2, 4, \cdots, n-2\}$. In other words, the following relations hold for the polynomial $M(X)$'s term index $d = \{0, 2, 4, \cdots, n-2\}$:
-
-$(X_a)^d = (X_b)^d$ \text{ } (for $X_a = \omega^{J(0)}$, \text{ } $X_b = \omega^{J(\frac{n}{4})}$)
-
-$(X_a)^d = (X_b)^d$ \text{ } (for $X_a = \omega^{J(1)}$, \text{ } $X_b = \omega^{J(\frac{n}{4}+1)}$)
-
-\text{ } $\vdots$
-
-$(X_a)^d = (X_b)^d$ \text{ } (for $X_a = \omega^{J(\frac{n}{4}-1)}$, \text{ } $X_b = \omega^{J(\frac{n}{2}-1)}$)
-
-$ $
-
-, which is equivalent to the following: 
-
-$(\omega^{J(0)})^d = (\omega^{J(\frac{n}{4})})^d$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-$(\omega^{J(1)})^d = (\omega^{J(\frac{n}{4} + 1)})^d$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-\text{ } $\vdots$
-
-$(\omega^{J(\frac{n}{4}-1)})^d = (\omega^{J(\frac{n}{2} - 1)})^d$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-$ $
-
-The above relations are true because their exponents of the left-hand side and the right-hand side are identical modulo $2n$ as follows: 
-
-$d\cdot J(0) \equiv d\cdot J(\frac{n}{4}) \bmod 2n$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-$d\cdot J(1) \equiv d\cdot J(\frac{n}{4}+1) \bmod 2n$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-\text{ } $\vdots$
-
-$d\cdot J(\frac{n}{4}-1) \equiv d\cdot J(\frac{n}{2}-1) \bmod 2n$ \text{ } (for $d = \{0, 2, 4, \cdots, n-2\}$)
-
-$ $
-
-We use modulo $2n$ for evaluating the exponents of $X$, because the order of $\omega = e^{\frac{\pi i}{n}}$ is $2n$ (i.e., $\omega^{2n} = 1$ and $\omega^{n} \neq 1$), as demonstrated below:  
-
-$\omega^{2n} = \omega^{\frac{2n \pi i}{n}} = \omega^{2 \pi i} = \cos(2\pi) + i\sin(2\pi) = 1$
-
-$\omega^{n} = \omega^{\frac{n \pi i}{n}} = \omega^{\pi i} = \cos(\pi) + i\sin(\pi) = -1 \neq 1$
-
-$ $
-
-We visually illustrated this in \autoref{fig:complex-plane} as well.
-
-
-
-$ $
-
-To summarize our findings, if the input vector $\vec{v}$ is constructed as 2 repetitions of $\vec{r}$, then its encoded polynomial $M(X)$ is supposed to be decoded as follows: 
-
-$M(\omega^{J(0)}) = M(\omega^{J(\frac{n}{4})}) = r_0$
-
-$M(\omega^{J(1)}) = M(\omega^{J(\frac{n}{4} + 1)}) = r_1$
-
-\text{ } $\vdots$
-
-$M(\omega^{J(\frac{n}{4}-1)}) = M(\omega^{J(\frac{n}{2} - 1)}) = r_{\frac{n}{4}-1}$
-
-$ $
-
-Meanwhile, as for the left-hand-side and the right-hand-side evaluations in the above equality relations, we have the guarantee (based on our proof) that the evaluated polynomial $M(X)$'s $d$-th term's values are identical for both the left-hand side and the right-hand side for $d = \{0, 2, 4, \cdots, n-2\}$. As for the other terms to be identical as well, their coefficients have to be zero. Based on these findings, we reach the conclusion that the polynomial $M(X)$ must have the following structure: 
-
-
-$M(X) = m_0 + m_2X^2 + m_4X^4 + \cdots + m_{n-2}X^{n-2}$ %$ = \sum\limits_{i=0}^{(n-2)/2}m_{2i}X^{2i}$
-
-
-$ $
-
-Note that we preserve only those $d$-th terms (where $d = \{0, 2, 4, \cdots, n-2\}$) whose evaluated values guaranteed to be equal in both the left-hand side and the right-hand polynomial evaluations of the above relations, while eliminating all other terms (by treating their coefficients as 0). 
-
-$ $
-
-\para{Case 2: $||\vec{r}|| = \dfrac{1}{4} ||\vec{v}||$} 
-
-Suppose we want to encode only the first $\dfrac{n}{8}$ slots out of $\dfrac{n}{2}$ input vector slots, which are: $\vec{r} = (r_0, r_1, \cdots , r_{\frac{n}{8}-1})$. In this case, we will construct the $\dfrac{n}{4}$-dimensional input vector as 4 repetitions of $\vec{r}$ as follows: $\vec{v} = (\vec{r} ; \vec{r}; \vec{r} ; \vec{r}) = (r_0, \text{ } \cdots, \text{ } r_{\frac{n}{8}-1}, \text{ }r_0, \text{ } \cdots, \text{ } r_{\frac{n}{8}-1}, \text{ }, r_0, \text{ } \cdots, \text{ } r_{\frac{n}{8}-1}, \text{ }, r_0, \text{ } \cdots, \text{ } r_{\frac{n}{8}-1})$. Then, its encoded polynomial $M(X)$ is supposed to be decoded as follows: 
-
-$M(\omega^{J(0)}) = M(\omega^{J(\frac{n}{8})}) = M(\omega^{J(\frac{2n}{8})}) = M(\omega^{J(\frac{3n}{8})}) = r_0$
-
-$M(\omega^{J(1)}) = M(\omega^{J(\frac{n}{8}+1)}) = M(\omega^{J(\frac{2n}{8}+1)}) = M(\omega^{J(\frac{3n}{8}+1)}) = r_1$
-
-\text{ } $\vdots$
-
-$M(\omega^{J(\frac{n}{8}-1)}) = M(\omega^{J(\frac{2n}{8}-1)}) = M(\omega^{J(\frac{3n}{8}-1)}) = M(\omega^{J(\frac{4n}{8}-1)}) = r_{\frac{n}{8}-1}$
-
-$ $
-
-The above equality relations hold, because each $(i+\frac{n}{8})$-th, $(i+\frac{2n}{8})$-th, and $(i+\frac{3n}{8})$-th slots in the input vector $\vec{v}$ are the same as its $i$-th slot. In the similar manner as we proved in Case 1, in the above relations, the evaluated polynomial $M(X)$'s $d$-th term has the same value for all 4 evaluations in each line of the above equality relation for the term index $d = \{0, 4, 8, \cdots, n-4\}$. In other words, the following relations hold for the polynomial $M(X)$'s term index  $d = \{0, 4, 8, \cdots, n-8\}$:
-
-
-$(X_1)^d = (X_2)^d = (X_3)^d = (X_4)^d$ \text{ } 
-
-(for $X_1 = \omega^{J(0)}$, \text{ } $X_2 = \omega^{J(\frac{n}{8})}$, \text{ }$X_3 = \omega^{J(\frac{2n}{8})}$, \text{ } $X_4 = \omega^{J(\frac{3n}{8})}$)
-
-$ $
-
-$(X_1)^d = (X_2)^d = (X_3)^d = (X_4)^d$ \text{ } 
-
-(for $X_1 = \omega^{J(1)}$, \text{ } $X_2 = \omega^{J(\frac{n}{8} + 1)}$, \text{ }$X_3 = \omega^{J(\frac{2n}{8} + 1)}$, \text{ } $X_4 = \omega^{J(\frac{3n}{8} + 1)}$)
-
-$ $
-
-\text{ } $\vdots$
-
-$ $
-
-$(X_1)^d = (X_2)^d = (X_3)^d = (X_4)^d$ \text{ } 
-
-(for $X_1 = \omega^{J(\frac{n}{8}-1)}$, \text{ } $X_2 = \omega^{J(\frac{2n}{8}-1)}$, \text{ }$X_3 = \omega^{J(\frac{3n}{8}-1)}$, \text{ } $X_4 = \omega^{J(\frac{4n}{8}-1)}$)
-
-$ $
-
-The above relations are equivalent to the following: 
-
-$(\omega^{J(0)})^d = (\omega^{J(\frac{n}{8})})^d = (\omega^{J(\frac{2n}{8})})^d = (\omega^{J(\frac{3n}{8})})^d$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-$(\omega^{J(1)})^d = (\omega^{J(\frac{n}{8}+1)})^d = (\omega^{J(\frac{2n}{8}+1)})^d = (\omega^{J(\frac{3n}{8}+1)})^d$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-\text{ } $\vdots$
-
-$(\omega^{J(\frac{n}{8}-1)})^d = (\omega^{J(\frac{2n}{8}-1)})^d = (\omega^{J(\frac{3n}{8}-1)})^d = (\omega^{J(\frac{4n}{8}-1)})^d$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-$ $
-
-The above relations are true, because their exponents are identical modulo $2n$ as follows: 
-
-$d\cdot J(0) \equiv d\cdot J(\frac{n}{8}) \equiv d\cdot J(\frac{2n}{8}) \equiv d\cdot J(\frac{3n}{8}) \bmod 2n$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-$d\cdot J(1) \equiv d\cdot J(\frac{n}{8}+1) \equiv d\cdot J(\frac{2n}{8}+1) \equiv d\cdot J(\frac{3n}{8}+1) \bmod 2n$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-\text{ } $\vdots$
-
-$d\cdot J(\frac{n}{8}-1) \equiv d\cdot J(\frac{2n}{8}-1) \equiv d\cdot J(\frac{3n}{8}-1) \equiv d\cdot J(\frac{4n}{8}-1) \bmod 2n$ \text{ } (for $d = \{0, 4, 8, \cdots, n-4\}$)
-
-$ $
-
-To summarize our findings, if the input vector $\vec{v}$ is constructed as 4 repetitions of $\vec{r}$, then its encoded polynomial $M(X)$ is supposed to be decoded as follows: 
-
-
-$M(\omega^{J(0)}) = M(\omega^{J(\frac{n}{8})}) = M(\omega^{J(\frac{2n}{8})}) = M(\omega^{J(\frac{3n}{8})}) = r_0$
-
-$M(\omega^{J(1)}) = M(\omega^{J(\frac{n}{8}+1)}) = M(\omega^{J(\frac{2n}{8}+1)}) = M(\omega^{J(\frac{3n}{8}+1)}) = r_1$
-
-\text{ } $\vdots$
-
-$M(\omega^{J(\frac{n}{8}-1)}) = M(\omega^{J(\frac{2n}{8}-1)}) = M(\omega^{J(\frac{3n}{8}-1)}) = M(\omega^{J(\frac{4n}{8}-1)}) = r_{\frac{n}{8}-1}$
-
-$ $
-
-
-Meanwhile, we have the guarantee (based on our proof) that the evaluated polynomial $M(X)$'s $d$-th term's values are identical for all 4 evaluations in each equality relation above for $d = \{0, 4, 8, \cdots, n-4\}$. Based on these findings, we reach the conclusion that the polynomial $M(X)$ must have the following structure: 
-
-
-$M(X) = m_0 + m_4X^4 + m_8X^8 + \cdots + m_{n-4}X^{n-4}$
-
-
-$ $
-
-Note that we preserve only those $d$-th terms (where $d = \{4, 8, 12, \cdots, n-4\}$) whose evaluated values are guaranteed to be equal in all 4 evaluated polynomials in the above relations, while eliminating all other terms (by treating their coefficients as 0). 
-
-$ $
-
-We can generalize the encoding scheme of the slots of a smaller-sized input vector $\vec{r}$ into a sparse polynomial (and thus into a sparse ciphertext) as follows:
-
-
-\para{Case $\bm{l}$: $\bm{||\vec{r}||} \bm = \dfrac{\bm 1}{\bm{l}} \bm{||\vec{v}||}$}
-
-Suppose we want to encode only the first $n' = \dfrac{n}{l}$ slots out of $\dfrac{n}{2}$ input vector slots, where $l$ is some value that divides $n$. Therefore, $\vec{r} = (r_0, r_1, \cdots , r_{n'})$. In this case, we will construct the $\dfrac{n}{2}$-dimensional input vector as $l$ repetitions of $\vec{r}$. Generalizing Case 1 and 2, its encoded polynomial $M'(X)$ has the following structure:
-
-$M'(X) = m_0 + m_{l}X^{l} + m_{2l}X^{2l} + \cdots +  m_{n-l}X^{n-l}$
-
-\end{comment}
-
-
-
-
-%We can express the polynomial $M'(X)$ in Summary~\ref*{subsec:ckks-sparse-packing} as a smaller-degree polynomial $\hat{M}(Y)$ such that:
-
-%$\hat{M}(Y) = \hat{m}_0 + \hat{m}_1Y + \hat{m}_2Y^2 + \cdots + \hat{m}_{n'-1}Y^{n'-1}$
-
-%$ $
-
-%, where $Y = X^l$ and $\hat{m}_i = m_{i \cdot l}$. Note that $\hat{M}(Y) \in \mathbb{Z}_t / (Y^{n'} + 1)$, whose polynomial ring size is smaller than ${M}(X) \in \mathbb{Z}_t / (X^{n} + 1)$, because $n' < n$. In general, the computation overhead of polynomial addition and multiplication becomes smaller if the polynomial ring's degree is lower. However, we need to preserve the same level of cryptographic security while reducing the polynomial degree. As an example that meets this requirement, we will leverage the technique of sparse ciphertext packing to design an efficient modulus bootstrapping scheme (\autoref{subsec:ckks-bootstrapping}). 
 
 
 
@@ -1784,15 +1525,6 @@ $ $
 After the linear transformation by the sine function, notice that each $q_0 k_i$ term gets eliminated from $\vec{v}_s$'s slots (i.e. modulo reduction by $q$) and the resulting vector $\vec{v}_t$ stores only the $\Delta m_i + e_i$ terms. 
 
 
-
-%Suppose $f$ is an approximate linear transformation that eliminates the multiples of $q$ from the input $\Delta M + E + q_0 \cdot K$ where $\Delta M + E \ll q$ (e.g., a sine function with period $q$), and $\sigma^{-1}_f$ is an batch-encoded form of $f$ for homomorphic computation. By $\sigma^{-1}_f \text{ } \circ$, we denote applying linear transformation of $f$ in a batch-encoded manner to the right-hand-side expression. Now, we apply this linear transformation to the decrypted result of ciphertext $\textsf{ct} = (A, B) \bmod q_L$, which gives us:
-
-%$\sigma^{-1}_f \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \bmod q_L$  \textcolor{red}{ $\rhd$ Applying the linear transformation to $\Delta M + E + q_0k$}
-
-%$= \sigma^{-1}_f\bm{(}\Delta M + E + q_0 \cdot K\bm{)} \bmod q_L$
-
-%$ = \Delta M + E + E' = \Delta M + E'' \bmod q_L$ \textcolor{red}{ $\rhd$ The $q_0 K$ term is eliminated (i.e. modulo reduction by $q$)}
-
 $ $
 
 \para{\textsf{\textbf{\underline{SlotToCoeff}:}}}
@@ -1843,68 +1575,6 @@ $A\cdot S + B = \Delta M + E + Kq_0 \bmod q_L = \Delta M + E + Kq_0$ \textcolor{
 $ $
 
 Therefore, the \textit{mod-raised} ciphertext $(A, B) \bmod q_L = \textsf{RLWE}_{S, \sigma}(\Delta M + Kq_0)$ with noise $E$. Thus, CKKS's \textit{homomorphic} bootstrapping strategy is to run the subsequent \textsf{CoeffToSlot}, \textsf{EvalExp}, and \textsf{SlotToCoeff} steps \textsf{homomorphically} based on the ciphertext $(A, B) \bmod q_L$. Running these 3 steps consumes a few multiplicative levels due to the ciphertext-to-ciphertext multiplication operations when homomorphically multiplying the coefficient-to-slot and slot-to-coefficient transformation matrices and homomorphically computing powers of $X$ (i.e., $X^k$) during sine approximation. Therefore, upon completion of these 3 steps, the ciphertext modulus reduces from $q_L \rightarrow q_l$ (where $l$ is some integer such that $l < L$).
-
-%$\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + K_1q) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \bmod Q$
-
-%$\textsf{RLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + K_2q) = (A^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \bmod Q$
-
-
-%, but having access only to a RLev encryption of $S$ (i.e., $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$), which we call a \textit{bootstrapping key}. With this bootstrapping key, we can compute the following:
-
-%$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B \bmod q_L$ \textcolor{red}{ $\rhd$ where the plaintext scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}(S) = \{\textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta}S_1\right), \textsf{RLWE}_{S, \sigma}^{\beta, l}\left(\dfrac{q}{\beta^2}S_2\right), \cdots \}$ are all 1}
-
-%$ $
-
-%$ = \textsf{RLWE}_{S, \sigma}(AS) + B \bmod q_L$ 
-
-%$ = \textsf{RLWE}_{S, \sigma}(AS + B) \bmod q_L$
-
-%$ = \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$ \textcolor{red}{ $\rhd$ the plaintext is $\Delta M + E + q_0K$ and the scaling factor is 1}
-
-%In the above homomorphic decryption computation (without scaling down by $\Delta$, we treat $A$ and $B$ as plaintext polynomials whose coefficients are in $\mathbb{Z}_{q_0}$, whereas the ciphertext modulus is $\mathbb{Z}_{q_L}$. We consider $\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle$ as ciphertext-to-plaintext multiplication, and adding $B$ to the result is considered as ciphertext-to-plaintext addition. 
-%As each coefficient of polynomial $A$ and $B$ is in $[0, q_0 - 1]$ and each coefficient of $S$ is in $[-1, 1]$, and these polynomials have degree $n$, the result the above homomorphic computation will be a ciphertext that encrypts the plaintext polynomial $A\cdot S + B$ whose coefficients are guaranteed to be much smaller than $q_L$ (i.e., does not wrap around $q_L$). Therefore, we can consider the above homomorphic computation to output a ciphertext that encrypts the plaintext $\Delta M + E + q_0K$ for some integer polynomial $K$. 
-
-%Based on the above technique of \textit{homomorphic} decryption (without modulo reduction by $q_0$) which generates $\textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$, we will derive the \textit{homomorphic} bootstrapping formula which achieves the same goal of bootstrapping without explicit decryption \& re-encryption, but based on \textit{homomorphic} decryption by using the bootstrapping key, as follows:
-
-
-%$\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}))\bm) \bmod q_L$
-
-%$ $
-
-%\textcolor{red}{ $\rhd$ Replace the initial decryption and final re-encryption by homomorphic decryption using $\textsf{RLWE}_{S, \sigma}(S)$}
-
-%$= \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \bm(A\cdot \textsf{RLWE}_{S, \sigma}(S) + B\bm) \textbf{)}) \bmod q_L$
-
-
-%$= \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + Kq\bm) \textbf{)})) \bmod q_L$
-
-%$= \textsf{RLWE}_{S, \sigma}\bm(\Delta M \bm) \bmod q_L$
-
-
-%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} \textbf{)}\bm)))$
-
-%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}} \circ \textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B))\bm)))$
-
-%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\textsf{RLWE}^{-1}\textbf{(}\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)\bm))))$
-
-%$ $
-
-%\textcolor{red}{ $\rhd$ Encryption and decryption cancel each other}
-
-%$\stackrel{q_L}{\equiv} \textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_f\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm(\sigma^{-1}_{\sigma^{-1}}\bm) \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
-
-
-%$ $
-
-%\textcolor{red}{ $\rhd$ Regardless of whether the $\sigma^{-1}_{\sigma}, \sigma^{-1}_{f}$ and $ \sigma^{-1}_{\sigma^{-1}}$ operands are RLWE plaintexts or RLWE ciphertexts, the computational result is the same}
-
-%$\stackrel{q_L}{\equiv} \sigma^{-1}_{\sigma} \circ (\sigma^{-1}_f \circ (\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))))$
-
-
-%Thus, homomorphically bootstrapping the modulus of a CKKS ciphertext (without any intermediate decryption and re-encryption) guarantees the same correctness of modulus bootstrapping. 
-%The actual homomorphic bootstrapping procedure is as follows:
-
-%\para{Necessity of Homomorphic Decryption:} Before the \textsf{CoeffToSlot} step, we homomorphically decrypt the ciphertext (without modulo reduction by $q_0$) using the bootstrapping key, which effectively updates the plaintext polynomial from $M$ to $\Delta M + E + q_0K$. If we did not perform this homomorphic decryption, then the subsequent \textsf{CoeffToSlot} step would move the coefficients of $M$ to the input vector slots instead of the coefficients of $\Delta M + E + q_0K$. Therefore, homomorphic decryption is necessary in order to pass the coefficients of $\Delta M + E + q_0K$ as inputs to the \textsf{EvalExp} step. 
 
 
 Note that the result of homomorphic bootstrapping is equal to the explicit bootstrapping based on decryption \& re-encryption (if we ignore the small differences in the final ciphertext modulus and the noise). In the following subsections, we will explain the algebraic details of \textsf{CoeffToSlot}, \textsf{EvalExp} and \textsf{SlotToCoeff} steps. 
@@ -2071,14 +1741,6 @@ $\textsf{ct\textsubscript{final}} = \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + 
 
 Note that we do not use $[\hathat W^*]_{21}$ and $[\hathat W^*]_{22}$, because we only need to derive the $\dfrac{n}{2}$ input vector slots whose decoding would result in the $n$ coefficients $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$ of the final $(n-1)$-degree polynomial. Once we generate a new ciphertext \textsf{ct\textsubscript{final}} whose $\dfrac{n}{2}$ input vector slots store $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$, then its latter $\dfrac{n}{2}$ conjugate slots get automatically filled with the conjugates of the first $\dfrac{n}{2}$ slot values.
 
-\begin{comment}
-\subsubsection{Details: Scaling Factor Re-interpretation}
-\label{subsubsec:ckks-bootstrapping-scaling-factor-reinterpretation}
-
-The output of the \textsf{SlotToCoeff} step is the ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M + E + E_b) \bmod q_l$, whose plaintext is $\Delta M + E + E_b$ with the scaling factor 1. Just like we did in BFV bootstrapping's scaling factor re-interpretation step (\autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation}), we can view $\textsf{RLWE}_{S, \sigma}(\Delta M + E + E_b) \bmod q_l$ as a ciphertext that encrypts plaintext $M$ with the scaling factor $\Delta$. This step does not require any additional computation, yet we restore the original plaintext scaling factor that was used before the bootstrapping. 
-
-\end{comment}
-
 \subsubsection{Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext}
 \label{subsubsec:ckks-bootstrapping-time-reduction}
 
@@ -2127,21 +1789,7 @@ $ $
 \item \textsf{\textbf{\underline{ModRaise}:}} View the polynomials $A$ and $B$ as plaintext polynomials whose each coefficient is in $\mathbb{Z}_{q_L}$ (i.e., $(A, B) \bmod q_L$). This change of viewpoint automatically changes the ciphertext as $\textsf{RLWE}_{S, \sigma}(\Delta M + Kq_0)$. The \textsf{ModRaise} step does not require any actual computation. 
 
 $ $
-\begin{comment}
-\item \textsf{\textbf{\underline{Homomorphic Decryption} (without scaling down by $\Delta$):}}
 
-With the bootstrapping key $\textsf{RLev}_{S, \sigma}^{\beta, l}(S)$ whose ciphertext modulus is $q_L$, perform homomorphic decryption (without modulo reduction by $q_L$) as follows: 
-
-$\langle \textsf{Decomp}^{\beta, l}(A), \textsf{RLev}_{S, \sigma}^{\beta, l}(S)\rangle + B$
-
-$= \textsf{RLWE}_{S, \sigma}(\Delta M + E + q_0K) \bmod q_L$
-
-$ $
-
-, where the encrypted plaintext this ciphertext is $\Delta M + E + q_0K$ with the scaling factor $1$.
-
-$ $
-\end{comment}
 \item \textsf{\textbf{\underline{CoeffToSlot}:}} 
 
 Move the coefficients of the encrypted plaintext $\Delta M + E + q_0K$ to the input vector slots by homomorphically multiplying $n^{-1}\cdot \hathat W \cdot I_n^R$ to it follows: 
@@ -2169,9 +1817,7 @@ Move the modulo-$q_0$-reduced plaintext value $\Delta M + E$ stored in the input
 $\textsf{RLWE}_{S, \sigma}(\Delta M + E) = \hathat W^* \cdot \textsf{RLWE}_{S, \sigma}(Z_2)  \bmod q_l$
 
 $ $
-\begin{comment}
-\item \textsf{\textbf{\underline{Scaling Factor Re-interpretation}:}} The ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M + E)$ is an encryption of plaintext $\Delta M + E$ with scaling factor 1. Like we did in BFV's bootstrapping (\autoref{subsubsec:bfv-bootstrapping-scaling-factor-reinterpretation}), without any additional computation, we can view this ciphertext as an encryption of plaintext $M$ with scaling factor $\Delta$ with a small noise $E$. Incorporating the small noise $E$ into the scaled plaintext $\Delta M$ can be tolerated due to CKKS's innate nature of approximate encryption. 
-\end{comment}
+
 \end{enumerate}
 \setlist[itemize]{leftmargin=\leftmargini}
 \setlist[enumerate]{leftmargin=\leftmargini}
@@ -2205,7 +1851,6 @@ As explained in \autoref{subsubsec:ckks-bootstrapping-evalexp-details}, the boot
 \item \underline{Type-3 Noise}: the \textsf{EvalExp} step's sine graph error (i.e., not exactly $y=x$ around $x=0$, but only $y \approx x$)
 \end{itemize}
 
-%\renewcommand{\labelenumi}{\arabic{enumi}.}
 
 $ $
 
@@ -2239,6 +1884,3 @@ $ $
 \para{Limitation in Noise Handling:} The above bootstrapping techniques can reduce the Type-3 noise, because the bootstrapping error is smaller than the plaintext message and a smaller input $x$ value to the approximating sine function outputs a value closer to $y=x$. Running this algorithm multiple times, the Type-3 noise becomes exponentially smaller, because the size of the target plaintext (i.e., the extracted bootstrapping error as the output of step 3 above) is much smaller than before. Meanwhile, Type-1 and Type-2 noises do not decrease over multiple bootstrapping rounds, relatively keeping  their same level, because each round generates new Type-1 and Type-2 noises. 
 
 
-
-%\para{Reducing All Types of Noises:}
-%\textcolor{purple}{In the RLWE cryptosystem, all types of noises can be reduced by the rescaling process during ciphertext-to-ciphertext multiplication (\autoref{subsec:glwe-mult-cipher-rescale}), where the scaling factor stays the same (or almost the same in case of using CRT) as $\Delta$, while the noise gets scaled down by $\Delta$ (or almost $\Delta$ in case of using CRT). Also note that CKKS's modulus bootstrapping does not change the plaintext's scaling factor, either.}

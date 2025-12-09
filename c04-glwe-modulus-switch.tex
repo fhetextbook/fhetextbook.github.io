@@ -14,9 +14,9 @@ $ $
 Recall that the LWE cryptosystem (\autoref{subsec:lwe-enc}) comprises the following components:
 
 \begin{itemize}
-\item \textbf{\underline{Setup}:} $\Delta = \dfrac{q}{t}$, \text{ } $S = (s_0, s_1, \gap{$\cdots$} s_{k-1}) \xleftarrow{\$} \mathbb{Z}_2^{k}$
+\item \textbf{\underline{Setup}:} $\Delta = \dfrac{q}{t}$, \text{ } $S = (s_0, s_1, \ldots, s_{k-1}) \xleftarrow{\$} \mathbb{Z}_2^{k}$
 
-\item \textbf{\underline{Encryption Input}:} $m \in \mathbb{Z}_t$, \text{ } $A = (a_0, a_1, \text{ } \gap{$\cdots$} a_{k-1}) \xleftarrow{\$} \mathbb{Z}_q^{k}$, \text{ } $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$
+\item \textbf{\underline{Encryption Input}:} $m \in \mathbb{Z}_t$, \text{ } $A = (a_0, a_1, \ldots, a_{k-1}) \xleftarrow{\$} \mathbb{Z}_q^{k}$, \text{ } $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$
 
 $ $
 
@@ -24,7 +24,7 @@ $ $
 
 $ $
 
-\item \textbf{\underline{Decryption}:} $\textsf{LWE}^{-1}_{S,\sigma}(C) = b - A\cdot S = \Delta  m + e \text{ } \text{ } \in \mathbb{Z}_q$
+\item \textbf{\underline{Decryption}:} $\textsf{LWE}^{-1}_{S,\sigma}(\textsf{ct}) = b - A\cdot S = \Delta  m + e \text{ } \text{ } \in \mathbb{Z}_q$
 
 \end{itemize}
 
@@ -42,11 +42,11 @@ Based on this insight, the LWE cryptosystem's modulus switching from $q \rightar
 Given an LWE ciphertext $(A, b)$ where $b = A\cdot S + \Delta m + e \bmod q$ and $m \in \mathbb{Z}_t$, modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(A, b)$ to $(\hat A, \hat b)$ as follows:
 
 
-$\hat{A} = (\hat{a}_0, \hat{a}_1, \gap{$\cdots$} \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$ $\lceil \rfloor$ means rounding to the nearest integer}
+$\hat{A} = (\hat{a}_0, \hat{a}_1, \ldots, \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$ $\lceil \rfloor$ means rounding to the nearest integer}
 
  $\hat{b} = \Big\lceil b \dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\textsf{LWE}_{{S},\sigma}(\hat{\Delta}  m) = (\hat{a}_0, \hat{a}_1, \gap{$\cdots$}, \hat{b}) \in \mathbb{Z}_{\hat{q}}^{k + 1}$ 
+$\textsf{LWE}_{{S},\sigma}(\hat{\Delta}  m) = (\hat{a}_0, \hat{a}_1, \ldots, \hat{b}) \in \mathbb{Z}_{\hat{q}}^{k + 1}$ 
 
 $ $
 
@@ -66,7 +66,7 @@ Meanwhile, $S$ and $m$ stay the same as before.
 
 $ $
 
- Note that in order for $(\hat{a}_0, \hat{a}_1, \gap{$\cdots$}, \hat{b}) \in \mathbb{Z}_{\hat{q}}^{k + 1}$ to be a valid LWE ciphertext of $\hat{\Delta}m$, we need to prove that the following relationship holds:
+ Note that in order for $(\hat{a}_0, \hat{a}_1, \ldots, \hat{b}) \in \mathbb{Z}_{\hat{q}}^{k + 1}$ to be a valid LWE ciphertext of $\hat{\Delta}m$, we need to prove that the following relationship holds:
 
 $\hat{b} = \sum\limits_{i=0}^{k-1}\hat{a}_i \cdot s_i + \hat{\Delta} m + \hat{e} \in \mathbb{Z}_{\hat{q}}$
 
@@ -112,9 +112,10 @@ The biggest possible value for $\epsilon_{\textit{all}}$ is,
 
 $\epsilon_{\textit{all}} = |-0.5| + |0.5| + |-0.5 \cdot k| = 1 + 0.5k$ 
 
-So, LWE modulus switching results in an approximate congruence relationship (\autoref{sec:modulus-rescaling}). However, if $\hat \Delta$ is large enough, $\epsilon_{\textit{all}} = 1 + 0.5k$ will be shifted to the right upon LWE decryption and get eliminated, and finally we can recover the original $m$. Also, in practice, the term $\sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i$ would converge to 0 for a sufficiently large $k$, because each $a_i$ is uniformly sampled and $s_i$ is also uniformly sampled. 
+So, LWE modulus switching results in an approximate congruence relationship (\autoref{sec:modulus-rescaling}). However, if $\hat \Delta$ is large enough, $\epsilon_{\textit{all}} = 1 + 0.5k$ will be shifted to the right upon LWE decryption and get eliminated, and finally we can recover the original $m$. Also, in practice, the term $\sum\limits_{i=0}^{k-1}\epsilon_{a_i}s_i$ would 
+remain small relative to the ciphertext modulus for a sufficiently large $k$, because each $a_i$ is uniformly sampled and $s_i$ is also uniformly sampled. 
 
-\para{Caution:} If $\hat \Delta$ is not large enough, then $\epsilon_{all}$ may not get eliminated during decryption and corrupt the plaintext $m$. Also, if $\Delta \rightarrow \hat\Delta$ shrinks too much, then the distance between $\hat\Delta m$ and $\hat e$ would become too narrow and the rounding process of $\hat e = \Big\lceil e \dfrac{\hat{q}}{q} \Big\rfloor$ may end up overlapping the least significant bit of $\hat \Delta m$, corrupting the plaintext. 
+\para{Caution:} If $\hat \Delta$ is not large enough, then $\epsilon_{\textit{all}}$ may not get eliminated during decryption and corrupt the plaintext $m$. Also, if $\Delta \rightarrow \hat\Delta$ shrinks too much, then the distance between $\hat\Delta m$ and $\hat e$ would become too narrow and the rounding process of $\hat e = \Big\lceil e \dfrac{\hat{q}}{q} \Big\rfloor$ may end up overlapping the least significant bit of $\hat \Delta m$, corrupting the plaintext. 
 
 $ $
 
@@ -122,7 +123,7 @@ $ $
 
 $\hat{b} = \sum\limits_{i=0}^{k-1}\hat{a}_is_i + \hat{\Delta} m + \hat{e} + \epsilon_{\textit{all}}  \approx \sum\limits_{i=0}^{k-1}\hat{a}_i  s_i + \hat{\Delta} m + \hat{e} \in \mathbb{Z}_{\hat{q}}$
 
-Thus, $(\hat{a}_0, \hat{a}_1, \gap{$\cdots$}, \hat{b}) = \textsf{LWE}_{{S},\sigma}(\hat{\Delta}  m)$, decrypting which will give us $m$.
+Thus, $(\hat{a}_0, \hat{a}_1, \ldots, \hat{b}) = \textsf{LWE}_{{S},\sigma}(\hat{\Delta}  m)$, decrypting which will give us $m$.
 
 %\begin{flushright}
 %\qedsymbol{} 
@@ -147,7 +148,7 @@ $\Delta = \dfrac{q}{t} = 16$
 
 $m = 1 \in \mathbb{Z}_t$
 
-$S = (s_0, s_1, s_2, s_3) = (0, 1, 1, 0) \in \mathbb{Z}_b^4$
+$S = (s_0, s_1, s_2, s_3) = (0, 1, 1, 0) \in \{-1, 0, 1\}^4$
 
 $A = (a_0, a_1, a_2, a_3) = (-25, 12, -3, 7) \in \mathbb{Z}_q^4$
 
@@ -155,7 +156,7 @@ $e = 1 \in \mathbb{Z}_q$
 
 $b = a_0s_0 + a_1s_1 + a_2s_2 + a_3s_3 + \Delta m + e = 26 \in \mathbb{Z}_q$
 
-$\textsf{LWE}_{S, \sigma}(\Delta m) = C = (a_0, a_1, a_2, a_3, b) = (-25, 12, -3, 7, 26) \in \mathbb{Z}_q^{n+1}$
+$\textsf{LWE}_{S, \sigma}(\Delta m) = \textsf{ct} = (a_0, a_1, a_2, a_3, b) = (-25, 12, -3, 7, 26) \in \mathbb{Z}_q^{n+1}$
 
 $ $
 
@@ -165,7 +166,7 @@ $\hat{\Delta} = \Delta\cdot\dfrac{32}{64} = 8$
 
 $\hat{e} = \Big\lceil 1 \cdot \dfrac{32}{64} \Big\rfloor = 1$
 
-$\textsf{LWE}_{S, \sigma}(\hat{\Delta} m) = \hat{C} = (\hat{a_0}, \hat{a_1}, \hat{a_2}, \hat{a_3}, \hat{b})$
+$\textsf{LWE}_{S, \sigma}(\hat{\Delta} m) = \hat{\textsf{ct}} = (\hat{a_0}, \hat{a_1}, \hat{a_2}, \hat{a_3}, \hat{b})$
 
 $ = \left(\Big\lceil -25\cdot\dfrac{32}{64}\Big\rfloor, \Big\lceil12\cdot\dfrac{32}{64}\Big\rfloor, \Big\lceil-3\cdot\dfrac{32}{64}\Big\rfloor, \Big\lceil7\cdot\dfrac{32}{64}\Big\rfloor, \Big\lceil26\cdot\dfrac{32}{64}\Big\rfloor\right)$
 
@@ -181,15 +182,15 @@ $13 = 0 + 6 - 1 + 0 + 8 \cdot 1 + 1 \in \mathbb{Z}_{32}$
 
 $13 \approx 14 \in \mathbb{Z}_{32}$
 
-We got this small difference of 1 due to the rounding drift error of 
+We got this small difference of 1 due to the rounding drift error of:
 
-$\hat {a_0} = \lceil -12.5 \rfloor = -12$ and $\hat{a_3} =  \lceil 3.5 \rfloor = 4$.
+$\hat {a_0} = \lceil -12.5 \rfloor = -12$, $\hat {a_2} = \lceil -1.5 \rfloor = -1$, $\hat{a_3} =  \lceil 3.5 \rfloor = 4$, and $\hat{e} = \lceil 0.5 \rfloor = 1 $
 
 $ $
 
 If we solve the LWE decryption formula:
 
-$\hat b - (\hat{a}_0s_0 + \hat{a}_1s_1 + \hat{a}_2s_2 + \hat{a}_3s_3) = 13 - 4 = 9 = \hat m + \hat e \in \mathbb{Z}_{32}$
+$\hat b - (\hat{a}_0s_0 + \hat{a}_1s_1 + \hat{a}_2s_2 + \hat{a}_3s_3) = 0(-12) + 1(6) + 1(-1) + 0(4) = 6 - 1 = 5 = \hat m + \hat e \in \mathbb{Z}_{32}$
 
 $ $
 
@@ -224,7 +225,7 @@ RLWE modulus switching is similar to LWE modulus switching. Recall that the RLWE
 
 \begin{itemize}
 \item \textbf{\underline{Setup}: } 
-$\Delta = \dfrac{q}{t}$, \text{ } $S = s_0 + s_1X + s_2X^2 + \cdots + s_{n-1}X^{n-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$
+$\Delta = \dfrac{q}{t}$, \text{ } $S = s_0 + s_1X + s_2X^2 + \cdots + s_{n-1}X^{n-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$
 
 $ $
 
@@ -245,7 +246,7 @@ $\textsf{RLWE}_{S,\sigma}(\Delta \cdot M) = (A, B) \in \mathcal{R}_{\langle n,q 
 
 $ $
 
-\item \textbf{\underline{Decryption}: } $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B - A \cdot S = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$ 
+\item \textbf{\underline{Decryption}: } $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B - A \cdot S = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$ 
 \end{itemize}
 
 $ $
@@ -297,7 +298,7 @@ $\hat{e}_i = \Big\lceil e_i \dfrac{\hat{q}}{q} \Big\rfloor = e_i\dfrac{\hat{q}}{
 
 $B - A\cdot S$ 
 
-$ = (b_0 + b_1X + \gap{$\cdots$} + b_{n-1}X^{n-1} ) - (a_{0} + a_{1}X + \gap{$\cdots$} + a_{n-1}X^{n-1})(s_{0} + s_{1}X + \gap{$\cdots$} + s_{n-1}X^{n-1})$ 
+$ = (b_0 + b_1X + \cdots + b_{n-1}X^{n-1} ) - (a_{0} + a_{1}X + \cdots + a_{n-1}X^{n-1})(s_{0} + s_{1}X + \cdots + s_{n-1}X^{n-1})$ 
 
 
 $ = \left(b_0 - \left( \sum\limits_{i=0}^{0}(a_{0-i}s_{i}) - \sum\limits_{i=1}^{n-1}(a_{n-i}s_{i}) \right)\right)$
@@ -379,10 +380,10 @@ $
 $=  \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i) 
 - \sum\limits_{i=j+1}^{n-1}(\hat{a}_{n+j-i}s_i)\right)
 + \hat{\Delta} m_j + \hat{e}_j 
-+ \epsilon_{all} \in \mathbb{Z}_{\hat{q}}
++ \epsilon_{\textit{all}} \in \mathbb{Z}_{\hat{q}}
 $
 
-\textcolor{red}{ $\rhd$ where $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+\textcolor{red}{ $\rhd$ where $\epsilon_{\textit{all}} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i) \approx 0$}
 
@@ -394,13 +395,13 @@ $ $
 $\hat{b}_j =  \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i) 
 - \sum\limits_{i=j+1}^{n-1}(\hat{a}_{n+j-i}s_i)\right)
 + \hat{\Delta} m_j + \hat{e}_j 
-+ \epsilon_{all}$
++ \epsilon_{\textit{all}}$
 
 $ \approx \left(\sum\limits_{i=0}^{j}(\hat{a}_{j-i}s_i) 
 - \sum\limits_{i=j+1}^{n-1}(\hat{a}_{n+j-i}s_i)\right)
 + \hat{\Delta} m_j + \hat{e}_j$
 
-Thus, $(\hat{a}_0, \hat{a}_1, \gap{$\cdots$}, \hat{b}) = \textsf{RLWE}_{{S},\sigma}(\hat{\Delta}  M)$, decrypting which will give us $M$.
+Thus, $(\hat{A}, \hat{B}) = \textsf{RLWE}_{{S},\sigma}(\hat{\Delta} M)$, decrypting which will give us $M$.
 
 \begin{flushright}
 \qedsymbol{} 
@@ -419,7 +420,7 @@ GLWE modulus switching is an extension of RLWE modulus switching. The only diffe
 Recall that the GLWE cryptosystem (\autoref{subsec:glwe-enc}) is comprised of the following components:
 
 \begin{itemize}
-\item \textbf{\underline{Initial Setup}: } $\Delta = \dfrac{q}{t}$, \text{ } $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$
+\item \textbf{\underline{Initial Setup}: } $\Delta = \dfrac{q}{t}$, \text{ } $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}^k$
 
 $ $
 
@@ -433,7 +434,7 @@ $ $
 
 $ $
 
-\item \textbf{\underline{Decryption}: } $\textsf{GLWE}^{-1}_{S,\sigma}(C) = B - \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
+\item \textbf{\underline{Decryption}: } $\textsf{GLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B - \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
 \end{itemize}
 
@@ -443,7 +444,7 @@ GLWE modulus switching is done as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:modulus-switch-glwe}} GLWE Modulus Switching}}]
 
-Given a GLWE ciphertext $(\vec A, B)$ where $B = \vec A\cdot \vec S + \Delta M + E \bmod q$ and $M \in \mathcal{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\vec A, B)$ to $(\hat{\vec A}, \hat B)$ as follows:
+Given a GLWE ciphertext $(\{A\}_{i=0}^{k-1}, B)$ where $B = \vec A\cdot \vec S + \Delta M + E \bmod q$ and $M \in \mathcal{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\{A\}_{i=0}^{k-1}, B)$ to $(\{\hat{A}\}_{i=0}^{k-1}, \hat B)$ as follows:
 
 
 $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a}_{i, {n-1}}X^{n-1}$, where each $\hat{a}_{i,j} = \Big\lceil a_{i,j}\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ 
@@ -451,7 +452,7 @@ $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a
 
 $\hat{B} = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_j = \Big\lceil b_j\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\hat{A}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{k+1}$ 
+$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M) = (\{\hat{A}\}_{i=0}^{k-1}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{k+1}$ 
 
 $ $
 
@@ -477,10 +478,10 @@ $\epsilon_{j, all} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{l=0}^{k-1}\sum\limits_{i=0}^{j}(\epsilon_{a_{l,j-i}} \cdot s_{l,i})
 + \sum\limits_{l=0}^{k-1}\sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{l,n+j-i}} \cdot s_{l,i})$
 
-\textcolor{red}{ $\rhd$ derived from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{all} = \epsilon_{b_j} - \epsilon_{e_j}
+\textcolor{red}{ $\rhd$ derived from the proof step 4 of Summary~\ref*{subsec:modulus-switch-rlwe}: $\epsilon_{\textit{all}} = \epsilon_{b_j} - \epsilon_{e_j}
 - \sum\limits_{i=0}^{j}(\epsilon_{a_{j-i}} s_i)
 + \sum\limits_{i=j+1}^{n-1}(\epsilon_{a_{n+j-i}} s_i)$}
 
 $ $
 
-Note that GLWE's modulus switching can have a bigger rounding drift error (about $k$ times) than that of RLWE's modulus switching. However, in the long run, they can cancel out and converge to 0 as they are sampled from the $\sigma$ distribution.
+Note that GLWE's modulus switching can have a bigger rounding drift error (about $k$ times) than that of RLWE's modulus switching. However, in the long run, the error remains relatively small to the ciphertext modulus, because the rounding errors are independent and uniform and their sum grows slowly (central limit theorem) relative to the modulus.

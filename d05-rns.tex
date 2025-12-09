@@ -1,8 +1,8 @@
-FHE parameters of BFV, BGV, or CKKS schemes which are secure enough sometimes require the ring size of polynomial coefficients to be 1000 bits or more, which consumes much computational resources for 64-bit CPU architectures. To make the computation efficient, we can alternatively represent the coefficients of ciphertext polynomials by the number residue system (RNS)~\autoref{subsec:crt-application}, which allows modulo addition and multiplication of elements from a large ring (e.g., 1000 bits) by the combination of values computed in small rings (e.g., 32$\sim$64 bits), each of which compactly fits in 64-bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt this RNS approach by default for efficient computation of large values. These are called RNS-variant FHE schemes.  
+The FHE parameters of BFV, BGV, or CKKS schemes, which are secure enough, sometimes require the ring size of polynomial coefficients to be 1000 bits or more, consuming significant computational resources for 64-bit CPU architectures. To make the computation efficient, we can alternatively represent the coefficients of ciphertext polynomials using the number residue system (RNS)~\autoref{subsec:crt-application}, which allows for modulo addition and multiplication of elements from a large ring (e.g., 1000 bits) by combining values computed in small rings (e.g., 32$\sim$64 bits), each of which compactly fits in 64 bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt this RNS approach by default for the efficient computation of large values. These are called RNS-variant FHE schemes.  
 
-While RNS can directly compute modulo addition and multiplication, it does not directly support other operations such as \textsf{ModRaise} or modulus switch, which are essential operations for all FHE schemes. This section explains how we can design such corner-case operations based on RNS to accomplish a complete design of RNS-based FHE schemes. Besides BFV, BGV, and CKKS, TFHE can also theoretically use RNS for representing its ciphertext coefficients. However, TFHE's practically used coefficient size is less than $2^{32}$ (or $2^{64}$), which compactly fits in 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE does not need RNS. Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS. 
+While RNS can directly compute modulo addition and multiplication, it does not directly support other operations such as \textsf{ModRaise} or modulus switching, which are essential for all FHE schemes. This section explains how we can design such corner-case operations based on RNS to accomplish a complete design of RNS-based FHE schemes. Besides BFV, BGV, and CKKS, TFHE can also theoretically use RNS for representing its ciphertext coefficients. However, TFHE's practically used coefficient size is less than $2^{32}$ (or $2^{64}$), which compactly fits within 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE does not need RNS. Thus, this section will focus on RNS-based operations for BFV, BGV, and CKKS. 
 
-Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}) whose modulo overflow \& underflow boundaries are $\dfrac{q}{2} - 1$ and $-\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex})-- by using the assumption of limiting the possible range of certain residue arithmetic as discussed in \autoref{subsec:modulo-centered}. 
+Particularly in this section, we assume that the modulo reduction $a \bmod q = |a|_q$ implicitly uses a centered (i.e., signed) residue representation (\autoref{subsec:modulo-centered}), whose modulo overflow \& underflow boundaries are $\dfrac{q}{2} - 1$ and $-\dfrac{q}{2}$, respectively. This assumption is necessary to eliminate a certain modulo reduction operation when designing \textsf{FastBconvEx} (\autoref{subsec:rns-fastbconvex}) by using the assumption of limiting the possible range of certain residue arithmetic, as discussed in \autoref{subsec:modulo-centered}. 
 
 \begin{tcolorbox}[
     title = \textbf{Required Background},    % box title
@@ -50,7 +50,7 @@ Particularly in this section, we assume the modulo reduction $a \bmod q = |a|_q$
 $ $
 
 
-Suppose we have $x \in \mathbb{Z}_q$ (where $q$ is a big modulus). Then, we can express $x$ by using RNS (\autoref{subsec:crt-application}) as $(x_1, x_2, \cdots, x_k)$, where each $x_i \in \mathbb{Z}_{q_i}$, $\prod\limits_{i=1}^k q_i = q$, and $\{q_1, q_2, \cdots, q_k\}$ are co-prime. In RNS, we define base conversion as an operation of converting the RNS residues $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ into $(c_1, c_2, \cdots, c_k) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$, where $\{b_1, b_2, \cdots, b_l\}$ are a new base, and $\{q_1, q_2, \cdots, q_k\}$ and $\{b_1, b_2, \cdots, b_l\}$ are all co-prime. The relationship between $x$ and $c$ is: $c = |x|_b$ (where $x \in \mathbb{Z}_{q}$ and $c \in \mathbb{Z}_b$). The standard way of performing base conversion is assembling $(x_1, x_2, \cdots, x_k)$ into $x$ by computing $x = \sum\limits_{i=1}^k |x_i z_i|_{q_i} \cdot y_i \bmod q$ (where $y_i = \dfrac{q}{q_i} \text{ and } z_i = y_i^{-1} \bmod q_i$), and then computing $c_j \equiv x \bmod b_j$ for $j \in [1, l]$. However, this computation is slow if the modulus $q$ is large. To compute the base conversion \textit{fast}, we design the fast base conversion operation $\textsf{FastBConv}$ as follows: 
+Suppose we have $x \in \mathbb{Z}_q$ (where $q$ is a big modulus). Then, we can express $x$ by using RNS (\autoref{subsec:crt-application}) as $(x_1, x_2, \cdots, x_k)$, where each $x_i \in \mathbb{Z}_{q_i}$, $\prod\limits_{i=1}^k q_i = q$, and $\{q_1, q_2, \cdots, q_k\}$ are co-prime. In RNS, we define base conversion as an operation of converting the RNS residues $(x_1, x_2, \cdots, x_k) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ into $(c_1, c_2, \cdots, c_k) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$, where $\{b_1, b_2, \cdots, b_l\}$ is a new base, and $\{q_1, q_2, \cdots, q_k\}$ and $\{b_1, b_2, \cdots, b_l\}$ are all co-prime. The relationship between $x$ and $c$ is: $c = |x|_b$ (where $x \in \mathbb{Z}_{q}$ and $c \in \mathbb{Z}_b$). The standard way of performing base conversion is assembling $(x_1, x_2, \cdots, x_k)$ into $x$ by computing $x = \sum\limits_{i=1}^k |x_i z_i|_{q_i} \cdot y_i \bmod q$ (where $y_i = \dfrac{q}{q_i} \text{ and } z_i = y_i^{-1} \bmod q_i$), and then computing $c_j \equiv x \bmod b_j$ for $j \in [1, l]$. However, this computation is slow if the modulus $q$ is large. To compute the base conversion \textit{fast}, we design the fast base conversion operation $\textsf{FastBConv}$ as follows: 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-fastbconv}} Fast Base Conversion: \textsf{FastBConv}}}]
@@ -240,7 +240,7 @@ Approximate Homomorphic Encryption}~\cite{rns-ckks}
 
 $ $
 
-\textsf{ModRaise} is an operation of raising a ciphertext's modulus from $q$ to $qb$ (where $q \ll qb$). We used \textsf{ModRaise} in BFV's ciphertext-to-ciphertext multiplication (Summary~\ref*{subsubsec:bfv-mult-cipher-summary} in \autoref{subsubsec:bfv-mult-cipher-summary}) and in CKKS's modulus bootstrapping (Summary~\ref*{subsubsec:ckks-bootstrapping-summary} in \autoref{subsubsec:ckks-bootstrapping-summary}). The RNS-based \textsf{ModRaise} operation is designed as follows:
+\textsf{ModRaise} is an operation that raises a ciphertext's modulus from $q$ to $qb$ (where $q \ll qb$). We used \textsf{ModRaise} in BFV's ciphertext-to-ciphertext multiplication (Summary~\ref*{subsubsec:bfv-mult-cipher-summary} in \autoref{subsubsec:bfv-mult-cipher-summary}) and in CKKS's modulus bootstrapping (Summary~\ref*{subsubsec:ckks-bootstrapping-summary} in \autoref{subsubsec:ckks-bootstrapping-summary}). The RNS-based \textsf{ModRaise} operation is designed as follows:
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rns-modraise}} \textsf{ModRaise\textsubscript{RNS}}}}]
@@ -294,13 +294,7 @@ $ $
 
 Our ideal goal of mod-raising $x \in \mathbb{Z}_q$ from $q \rightarrow qb$ is to derive an RNS vector of $x \bmod qb$. However, the above RNS vector represents $x' \bmod qb$, where $x' = x + uq$ (with integer $|u| \leq \dfrac{k}{2}+1$). Therefore, we can interpret the above RNS vector as representing $x \bmod qb$ with the additional noise $|uq|_{qb}$.
 
-%$ $
 
-%To summarize the notations, we denote $\chi = x' \bmod qb = (x + uq) \bmod qb$. In other words, the above RNS vector represents the big number $\chi \in [0, qb]$. Note that $x'$ is not the same as $\chi$, because $\chi \in [0, qb)$, whereas $x'$ can have $qb$-multiple overflows. We can derive $\chi$ by computing: 
-
-%$\chi = \bm\left(\left(\sum\limits_{i=1}^k x_i\cdot \hat{y}_i \cdot \hat{z}_i\right) + \left(\sum\limits_{i=1}^l c_i\cdot \hat{y}'_i \cdot \hat{z}'_i\right)\bm\right) \bmod qb$ 
-
-%\textcolor{red}{ $\rhd$ where $\hat{y}_i = \dfrac{qb}{q_i}$, $\hat{y}'_i = \dfrac{qb}{b_i}$, $\hat{z}_i = \hat{y}^{-1}_i$, and $\hat{z}'_i = \hat{y}'^{-1}_i$}
 
 \end{myproof}
 
@@ -450,7 +444,7 @@ $ $
 
 \subsubsection{Comparing \textsf{ModSwitch\textsubscript{RNS}}, \textsf{ModRaise\textsubscript{RNS}}, and \textsf{ModDrop\textsubscript{RNS}}}
 
-Given a big value $x \in \mathbb{Z}_q$ in an RNS vector, \textsf{ModSwitch\textsubscript{RNS}} reduces its modulus from $q \rightarrow  q'$ as well as explicitly decreases the modulo value $x$ by the proportion of $\dfrac{q'}{q}$ (i.e., updates $x$ to $ \left\lceil x \cdot \dfrac{q'}{q}\right\rfloor$). On the other hand, \textsf{ModDrop\textsubscript{RNS}} from $q \rightarrow q'$ updates the modulo value from $x \rightarrow |x|_{q'}$ (where $q'$ divides $q$), which is different from decreasing $x$ by the proportion of $\dfrac{q'}{q}$ like modulus switch. \textsf{ModRaise\textsubscript{RNS}} from $q \rightarrow qb$ (where $q$ divides $qb$) increases the modulus without explicitly modifying the modulo value $x$, but generates some $q$-overflow noise. \textsf{ModSwitch\textsubscript{RNS}} and \textsf{ModRaise\textsubscript{RNS}} generate some noise, whereas \textsf{ModDrop\textsubscript{RNS}} does not generate any noise. %All these 3 types of operations introduce some level of additional noise (or decrease the noise budget), which has to be handled during decryption. 
+Given a big value $x \in \mathbb{Z}_q$ in an RNS vector, \textsf{ModSwitch\textsubscript{RNS}} reduces its modulus from $q \rightarrow  q'$ and explicitly decreases the modulo value $x$ by the proportion of $\dfrac{q'}{q}$ (i.e., it updates $x$ to $ \left\lceil x \cdot \dfrac{q'}{q}\right\rfloor$). On the other hand, \textsf{ModDrop\textsubscript{RNS}} from $q \rightarrow q'$ updates the modulo value from $x \rightarrow |x|_{q'}$ (where $q'$ divides $q$), which is different from decreasing $x$ by the proportion of $\dfrac{q'}{q}$ like modulus switch. \textsf{ModRaise\textsubscript{RNS}} from $q \rightarrow qb$ (where $q$ divides $qb$) increases the modulus without explicitly modifying the modulo value $x$, but it generates some $q$-overflow noise. \textsf{ModSwitch\textsubscript{RNS}} and \textsf{ModRaise\textsubscript{RNS}} generate some noise, whereas \textsf{ModDrop\textsubscript{RNS}} does not generate any noise. 
 
 
 
@@ -480,32 +474,6 @@ $= \dfrac{t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q}{q} + e_r + e_d$
 
 $ $
 
-%The final step of decryption is applying modulo reduction $t$ to $M$: $|M|_t$. Applying modulo reduction $t$ to the above relation is equal to the following: 
-
-%$|m|_t = \left|\dfrac{t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q}{q} + e_r + e_d\right|_t$
-
-%$= \left|\dfrac{t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q}{q}\right|_t + |e_r|_t + |e_d|_t$
-
-%$= \left|\dfrac{t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q}{q}\right|_t + e_r + e_d$ \textcolor{red}{ $\rhd$ assuming $e_r$ and $e_d$ are small enough not to cause any $t$-overflow}
-
-%$= \left|(t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q)\cdot q^{-1}\right|_t + e_r + e_d$ \textcolor{red}{ $\rhd$ since $q$ divides $t\cdot |\textsf{ct}(s)|_q - |t\cdot \textsf{ct}(s)|_q$}
-
-%$= \left|- |t\cdot \textsf{ct}(s)|_q\cdot q^{-1}\right|_t + e_r + e_d$ \textcolor{red}{ $\rhd$ since $t\cdot |\textsf{ct}(s)|_q$ is a multiple of $t$}
-
-%$= ||t\cdot \textsf{ct}(s)|_q|_t \cdot |-q^{-1}|_t + e_r + e_d$
-
-%$= \bm(\textsf{FastBConv}(t\cdot \textsf{ct}(s), q, t) - uq\bm) \cdot |-q^{-1}|_t + e_r + e_d$ \textcolor{red}{ $\rhd$ note that the fast base conversion of $t\cdot \textsf{ct}(s)$ from $q\rightarrow t$ is $\textsf{FastBConv}(t\cdot \textsf{ct}(s), q, t) = t\cdot \textsf{ct}(s) + uq \bmod t$, where integer $|u| \leq \dfrac{l}{2}+1$ and the original base moduli are ${q_1, q_2, \cdots, q_l}$.}
-
-%$ $
-
-%$= \textsf{FastBConv}(t\cdot \textsf{ct}(s), q, t) \cdot |-q^{-1}|_t + e_r + e_d + u$
-
-
-%$ $
-
-%However, now the problem is that while we can compute the $\textsf{FastBConv}(t\cdot \textsf{ct}(s), q, t)$ term, we don't know what values the noises $e_r$, $e_d$, and $u$ are unless we manually (i.e., slowly) compute for them. Without knowing $e_r$, $e_d$, and $u$, we cannot compute $|m|_t$. Manually computing $e_r$, $e_d$, and $u$ ruins the point of using fast base conversion. To this end, our next task is to efficiently (not manually) compute $e_r + e_d + u$. 
-
-%To solve this problem, let's suppose we tentatively change our goal from computing $|m|_t$ to computing $|\gamma \cdot m|_t$ where $\gamma$ is a small co-prime to $q$. Then, we derive the expression for $\gamma \cdot m$ as follows:
 
 Now, we choose some prime number $\gamma$ which is co-prime to $t$ and $q$. Then, we derive the expression for $\gamma \cdot m$ as follows:
 
@@ -539,11 +507,6 @@ $= \left|-  |\gamma\cdot t\cdot \textsf{ct}(s)|_q\cdot q^{-1}\right|_{\gamma t} 
 
 $= \Big||\gamma\cdot t\cdot \textsf{ct}(s)|_q\Big|_{\gamma t} \cdot |-q^{-1}|_{\gamma t} + e'_s + e'_r + e'_d$
 
-%$= \bm(\textsf{FastBConv}(\gamma\cdot t\cdot \textsf{ct}(s), q, \{t,\gamma \}) - u'q\bm) \cdot |-q^{-1}|_{\gamma t} + e'_r + e'_d$ \textcolor{red}{ $\rhd$ note that the fast base conversion of $\gamma\cdot t\cdot \textsf{ct}(s)$ from $q\rightarrow t\cdot \gamma$ is $\textsf{FastBConv}(\gamma\cdot t\cdot \textsf{ct}(s), q, \{t, \gamma\}) = \gamma\cdot t\cdot \textsf{ct}(s) + u'q \bmod \gamma t$, where $|u'| \leq \dfrac{l}{2}+1$ and the original base moduli are ${q_1, q_2, \cdots, q_l}$.}
-
-%$ $
-
-%$= \textsf{FastBConv}(\gamma\cdot t\cdot \textsf{ct}(s), q, \{t,\gamma \}) \cdot |-q^{-1}|_{\gamma t} + e'_r + e'_d + u'$
 
 $ $
 
@@ -611,13 +574,6 @@ $ = (y_{\gamma}, y_{t}) \in \mathbb{Z}_{\gamma} \times \mathbb{Z}_{t}$
 \end{tcolorbox}
 
 
-\begin{comment}
-\subsection{RNS-based CKKS Decryption: $\textsf{Dec}_{\textsf{RNS}}^{\textsf{CKKS}}$}
-\label{subsec:rns-ckksdec}
-
-RNS-based decryption of CKKS ciphertexts is similar to that of BFV ciphertexts. CKKS's decryption formula is 
-\end{comment}
-
 \subsubsection{CKKS and BGV Decryption}
 \label{subsubsec:rns-dec-ckks-bgv}
 
@@ -671,7 +627,7 @@ $ $
 
 \textbf{\underline{Requirement}: } The size of $b_\alpha$ should be $b_{\alpha} \geq 2\cdot(l + \lambda)$, where $|x|_{b} = x + \mu \cdot b$, and $\mu \in [-\lambda, \lambda]$ (i.e., $\lambda$ and $-\lambda$ are the maximum and minimum possible values of $\mu$). 
 
-\textcolor{red}{ $\rhd$ The constraint that $b_\alpha > \mu$ implies that the input $x$ should be much smaller than its modulus $bb_\alpha$ (i.e., $|x| \ll \dfrac{bb_\alpha}{2}$)} %In order to satisfy $b_{\alpha} \geq 2\cdot(l + \lambda)$ where $l$ is fixed, $\lambda$ should be small. This means that $\mu \in [0, \lambda]$ has to be small, which consequently requires $x$ to be sufficiently small compared to $b\cdot b_\alpha$ (i.e., $x \ll b\cdot b_\alpha$). Therefore, a satisfactory $b_\alpha \geq 2\cdot(l + \lambda)$ can exist only if $x \ll b\cdot b_\alpha$. 
+\textcolor{red}{ $\rhd$ The constraint that $b_\alpha > \mu$ implies that the input $x$ should be much smaller than its modulus $bb_\alpha$ (i.e., $|x| \ll \dfrac{bb_\alpha}{2}$)}
 
 $ $
 
@@ -682,9 +638,9 @@ $ $
 \item $\hat{x} = |x|_b = \textsf{ModDrop}(x, bb_\alpha, b)$ 
 
 \item $x_\alpha = |x|_{b_\alpha} = \textsf{ModDrop}(x, bb_\alpha, b_\alpha)$
-%$\beta_{\langle \hat{x}, b\rightarrow b_\alpha \rangle} = |(\textsf{FastBConv}(\hat{x}, b, b_\alpha) - x_\alpha)\cdot b^{-1}|_{b_\alpha}$
+
 \item $\gamma = |(\textsf{FastBConv}(\hat{x}, b, b_\alpha) - x_\alpha)\cdot b^{-1}|_{b_\alpha}$
-%= |(\textsf{FastBConv}(\hat{x}, b, b_\alpha) - x_\alpha)\cdot b^{-1}|_{b_\alpha}$ \textcolor{red}{ $\rhd$ $ = |(\textsf{FastBConv}(x, b, b_\alpha) - x_\alpha)\cdot b^{-1}|_{b_\alpha} = |(\textsf{FastBConv}(\hat{x}, b, b_\alpha) - x_\alpha)\cdot b^{-1}|_{b_\alpha}$}
+
 
 \item $\textsf{FastBConvEx}(x, bb_\alpha, q) = \Big|\textsf{FastBConv}(\hat{x}, b, q) - \gamma \cdot b\Big|_q = |x|_q$
 
@@ -750,7 +706,7 @@ $ = |x|_q $
 \subsection{Decomposing Multiplication: \textsf{DecompMult\textsubscript{RNS}}}
 \label{subsec:rns-decompmult}
 
-In FHE, gadget decomposition (\autoref{subsec:gadget-decomposition}) is used to compute ciphertext-to-plaintext multiplication with a small noise. For example, BFV and CKKS's homomorphic key switching (Summary~\ref*{sec:glwe-key-switching} in \autoref{sec:glwe-key-switching}) uses gadget decomposition to compute $\textsf{RLWE}_{S',\sigma}(\Delta M) = B + A\cdot \textsf{RLWE}_{S', \sigma}(S)$ with a small noise (where each coefficient of the polynomial $A$ can be any value within the range of the ciphertext modulus $q$). As another example, the relinearization process of ciphertext-to-ciphertext multiplication in BFV (Summary~\ref*{subsubsec:bfv-mult-cipher-summary} in \autoref{subsubsec:bfv-mult-cipher-summary}), CKKS (Summary~\ref*{subsubsec:ckks-mult-cipher-summary} in \autoref{subsubsec:ckks-mult-cipher-summary}), and BGV (Summary~\ref*{subsec:bgv-mult-cipher} in \autoref{subsec:bgv-mult-cipher}) uses gadget decomposition to derive the synthetic ciphertext $\textsf{RLWE}_{S', \sigma}(D_2\cdot S^2)$ when computing $\textsf{RLWE}_{S',\sigma}(\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}) = D_0 + D_1\cdot S + D_2\cdot S^2 = \textsf{ct}_\alpha + \textsf{ct}_\beta$, where $\textsf{ct}_\alpha = (D_0, D_1)$, $\textsf{ct}_\beta = \textsf{RLWE}_{S', \sigma}(D_2\cdot S^2)$, $D_0 = B_1B_2$, $D_1 = A_1B_2 + A_2B_1$, and $D_2 = A_1A_2$. Using gadget decomposition, we showed the following relations: 
+In FHE, gadget decomposition (\autoref{subsec:gadget-decomposition}) is used to compute ciphertext-to-plaintext multiplication with small noise. For example, BFV and CKKS's homomorphic key switching (Summary~\ref*{sec:glwe-key-switching} in \autoref{sec:glwe-key-switching}) uses gadget decomposition to compute $\textsf{RLWE}_{S',\sigma}(\Delta M) = B + A\cdot \textsf{RLWE}_{S', \sigma}(S)$ with small noise (where each coefficient of the polynomial $A$ can be any value within the range of the ciphertext modulus $q$). As another example, the relinearization process of ciphertext-to-ciphertext multiplication in BFV (Summary~\ref*{subsubsec:bfv-mult-cipher-summary} in \autoref{subsubsec:bfv-mult-cipher-summary}), CKKS (Summary~\ref*{subsubsec:ckks-mult-cipher-summary} in \autoref{subsubsec:ckks-mult-cipher-summary}), and BGV (Summary~\ref*{subsec:bgv-mult-cipher} in \autoref{subsec:bgv-mult-cipher}) uses gadget decomposition to derive the synthetic ciphertext $\textsf{RLWE}_{S', \sigma}(D_2\cdot S^2)$ when computing $\textsf{RLWE}_{S',\sigma}(\Delta^2 M^{\langle 1 \rangle} M^{\langle 2 \rangle}) = D_0 + D_1\cdot S + D_2\cdot S^2 = \textsf{ct}_\alpha + \textsf{ct}_\beta$, where $\textsf{ct}_\alpha = (D_0, D_1)$, $\textsf{ct}_\beta = \textsf{RLWE}_{S', \sigma}(D_2\cdot S^2)$, $D_0 = B_1B_2$, $D_1 = A_1B_2 + A_2B_1$, and $D_2 = A_1A_2$. Using gadget decomposition, we showed the following relations: 
 
 $\textsf{RLWE}_{S', \sigma}(A\cdot S) = \bm{\langle} \textsf{Decomp}^{\beta, l}(A), \text{ } \textsf{RLev}_{S', \sigma}^{\beta, l}(S) \bm{\rangle}$ \textcolor{red}{ $\rhd$ used in key switching}
 
@@ -758,7 +714,7 @@ $\textsf{RLWE}_{S', \sigma}(D_2\cdot S^2) = \bm{\langle} \textsf{Decomp}^{\beta,
 
 $ $
 
-However, if we convert a value (e.g., $x$) into an RNS vector, then it cannot be directly expressed in a gadget-decomposed form based on the $\beta$ and $l$ parameters. Instead, given the relationship between the value $x$ and its RNS residues is $x = \sum\limits_{i=1}^k x \cdot \dfrac{q}{q_i} \cdot \left|\left(\dfrac{q}{q_i}^{-1}\right)\right|_{q_i} \bmod q$, we can treat each RNS residue as a gadget-decomposed element. For example, suppose our goal is to decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$, where the RNS vector of $A = (A_1, A_2, \cdots, A_k)$ and whose base moduli are $(q_1, q_2, \cdots, q_k)$. We can decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$ as follows:
+However, if we convert a value (e.g., $x$) into an RNS vector, then it cannot be directly expressed in a gadget-decomposed form based on the $\beta$ and $l$ parameters. Instead, given the relationship between the value $x$ and its RNS residues is $x = \sum\limits_{i=1}^k x \cdot \dfrac{q}{q_i} \cdot \left|\left(\dfrac{q}{q_i}^{-1}\right)\right|_{q_i} \bmod q$, we can treat each RNS residue as a gadget-decomposed element. For example, suppose our goal is to decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$, where the RNS vector of $A = (A_1, A_2, \cdots, A_k)$ has base moduli $(q_1, q_2, \cdots, q_k)$. We can decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$ as follows:
 
 $\textsf{RLWE}_{S', \sigma}(A\cdot S) \bmod q$
 
@@ -794,7 +750,7 @@ $ $
 
 $ $
 
-Applying the same reasoning as the above, we can also derive the following for relinearization:
+Applying the same reasoning as above, we can also derive the following for relinearization:
 
 $\textsf{RLWE}_{S, \sigma}(D_2 \cdot S^2) = \sum\limits_{i=1}^{k}\Bigg( D_{2, i}\cdot \textsf{RLWE}_{S, \sigma}\left(S^2 \cdot\dfrac{q}{q_i} \cdot \left| \left(\dfrac{q}{q_i}\right)^{-1}\right|_{q_i}\right)\Bigg) \bmod q$
 
@@ -865,7 +821,7 @@ This subsection will explain how the RNS primitives we have learned so far are u
 \subsubsection{Addition and Multiplication of Polynomials}
 \label{subsubsec:rns-application-basic}
 
-In BFV, CKKS, and BGV, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication are performed by only involving modulo additions and multiplications among polynomial coefficients. Therefore, we can represent each polynomial coefficient as an RNS residue vector and compute coefficient-wise additions and multiplications by using RNS-based addition and multiplication of residues as explained in Summary~\ref*{subsec:crt-application} (\autoref{subsec:crt-application}). For example, suppose we have the following two polynomials $P^{\langle 1 \rangle}$ and $P^{\langle 2 \rangle}$:
+In BFV, CKKS, and BGV, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication are performed by only involving modulo additions and multiplications among polynomial coefficients. Therefore, we can represent each polynomial coefficient as an RNS residue vector and compute coefficient-wise additions and multiplications by using RNS-based addition and multiplication of residues, as explained in Summary~\ref*{subsec:crt-application} (\autoref{subsec:crt-application}). For example, suppose we have the following two polynomials $P^{\langle 1 \rangle}$ and $P^{\langle 2 \rangle}$:
 
 $P^{\langle 1 \rangle} = \sum\limits_{a=0}^{n-1} c^{\langle 1 \rangle}_a \cdot X^a \in \mathcal{R}_{\langle n, q\rangle}$
 
@@ -873,7 +829,7 @@ $P^{\langle 2 \rangle} = \sum\limits_{b=0}^{n-1} c^{\langle 2 \rangle}_b \cdot X
 
 $ $
 
-In the RNS-variant FHE schemes, we express each polynomial's each coefficient as an RNS residue vector as follows:
+In the RNS-variant FHE schemes, we express each coefficient of the polynomial as an RNS residue vector as follows:
 
 $c^{\langle 1 \rangle}_a = (c^{\langle 1 \rangle}_{a,1}, c^{\langle 1 \rangle}_{a,2}, \cdots, c^{\langle 1 \rangle}_{a,k}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k}$ \textcolor{red}{ $\rhd$ for $a \in [0, n - 1]$}
 
@@ -970,19 +926,6 @@ $ $
 Let $b$ be a new RNS base where $b > \Delta$ so that $qb$ is large enough to prevent a multiplied scaled plaintext in ciphertexts (i.e., $\Delta^2M^{\langle 1 \rangle}M^{\langle 2 \rangle}$) from exceeding its allowed limit (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) during ciphertext-to-ciphertext multiplication. $b_\alpha$ is also added for exact fast base conversion to be performed later. 
 Specifically, we mod-raise the modulus of each polynomial coefficient of ciphertexts $(A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$ and $(A^{\langle 2 \rangle}, B^{\langle 2 \rangle})$ as follows:
 
-%$\textsf{ModRaise\textsubscript{RNS}}(x, q, qbb_\alpha)$ \textcolor{red}{ $\rhd$ where $b > q$ and $b \approx q$, and $x$ one coefficient of a ciphertext polynomial} 
-
-%$= (x_1, x_2, \cdots, x_{q_k}, \textsf{FastBConv}(x, q, b))$
-
-%$= (x_1, x_2, \cdots, x_{q_k}, c_1, c_2, \cdots, c_l)$ \textcolor{red}{ $\rhd$ where $c = x + uq \bmod b$ (where integer $|u| \leq \dfrac{k}{2}+1$)}
- 
-%$ 
-%= (\chi_1, \chi_2, \cdots, \chi_{k+l}) 
-%\text{ } \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$   
-
-%$ $ 
-
-%The above RNS vector represents the value $x + uq \bmod qb$  $(|u| \leq \dfrac{k}{2}+1)$. Since $b > q$, $|x + uq| \ll qb$. Therefore, $|x + uq|_{qb} = x + uq$. Accordingly, the ciphertexts ciphertexts $(A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$ and $(A^{\langle 2 \rangle}, B^{\langle 2 \rangle})$ get updated to the following:
 
 $(\hat{A}^{\langle 1 \rangle}, \hat{B}^{\langle 1 \rangle}) = (A^{\langle 1 \rangle} + U_A^{\langle 1 \rangle}q, B^{\langle 1 \rangle} + U_B^{\langle 1 \rangle}q) \bmod qbb_\alpha$
 
@@ -1040,31 +983,11 @@ $ t\cdot(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle} + U_A^{\langle 1 \
 
 $ $
 
-%$t\cdot (x_1, x_2, \cdots, x_{q_k}, c_1, c_2, \cdots, c_l) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
-
-%$ = 
-%(\nu_1, \nu_2, \cdots, \nu_{k+1}) (|t\cdot x_1|_{q_1}, |t\cdot x_2|_{q_2}, \cdots, |t\cdot x_{q_k}|_{q_k}, |t\cdot c_1|_{b_1}, |t\cdot c_2|_{b_2}, \cdots, |t\cdot c_l|_{b_l})$ 
-
-
-%$ = (\nu_1, \nu_2, \cdots, \nu_{k+l}) \in \mathbb{Z}_{q_1} \times \mathbb{Z}_{q_2} \times \cdots \times \mathbb{Z}_{q_k} \times \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
-
-%$ $
-
-%, where $\nu = t\cdot (x + u\cdot q) \bmod qb = |tx + tuq|_{qb}$. %Again, we assume that we chose a sufficiently large $b$ such that $t\cdot(x + uq) \ll qb$. Therefore, $|tx + tuq|_{qb} = tx + tuq$.
-
-%$ $
 
 \item \textbf{\underline{\textsf{ModSwitch\textsubscript{RNS}}} from $qbb_\alpha \rightarrow bb_\alpha$:}
 
 We switch the modulus of the ciphertext from $qb$ to $b$ by using  \textsf{ModSwitch\textsubscript{RNS}} as follows:
 
-%$\textsf{FastBConv\textsubscript{RNS}}\bm(\{|t\cdot c_i|_{q_i}\}_{i=1}^k, q, b\bm)$
-
-%$ = (\hat\nu_1, \hat\nu_2, \cdots, \hat\nu_l) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$ 
-
-%$ $
-
-%, where $\hat\nu = \Big||tx + tuq|_{q} + u'q\Big|_b = \Big||tx|_{q} + u'q\Big|_b$ \textcolor{red}{ $\rhd$ $|u'| \leq \dfrac{l}{2}+1$}
 
 $\left(\left\lceil\dfrac{t\cdot\hat{B}^{\langle 1 \rangle}\hat{B}^{\langle 2 \rangle}}{q}\right\rfloor, \left\lceil\dfrac{t\cdot\hat{A}^{\langle 1 \rangle}\hat{B}^{\langle 2 \rangle} + t\cdot\hat{A}^{\langle 2 \rangle}B^{\langle 1 \rangle}}{q}\right\rfloor, \left\lceil\dfrac{t\cdot\hat{A}^{\langle 1 \rangle}\hat{A}^{\langle 2 \rangle}}{q}\right\rfloor\right) \bmod bb_\alpha$
 
@@ -1084,26 +1007,6 @@ $= \left\lceil (M^{\langle 1 \rangle} + \dfrac{t}{q}\cdot E^{\langle 1 \rangle} 
 
 $ $
 
-%$\textsf{ModSwitch\textsubscript{RNS}}(\nu, qb, b)$
-
-%$ = \{|q^{-1}|_{b_j} \cdot (\nu_j - \hat{\nu}_j) \bmod b_j\}_{j=1}^{l} \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$ 
-
-%$ = (\tau_1, \tau_2, \cdots, \tau_l) \in \mathbb{Z}_{b_1} \times \mathbb{Z}_{b_2} \times \cdots \times \mathbb{Z}_{b_l}$
-
-%$ $
-
-%, where $\tau = |q^{-1}\cdot(\nu - \hat\nu)|_b$
-
-%$= \Big|q^{-1}\cdot((tx + tuq) - (|tx|_{q} + u'q))\Big|_b$
-
-%$ = \left|\dfrac{tx - |tx|_{q}}{q} + tu - u')\right|_b$ \textcolor{red}{ $\rhd$ where $\dfrac{tx - |tx|_{q}}{q}$ is an integer}
-
-%$ = \left|\left\lfloor\dfrac{tx}{q}\right\rfloor + tu - u')\right|_b$
-
-
-%$ $
-
-%$ $
 
 \item \textbf{\underline{\textsf{FastBConvEx\textsubscript{RNS}}} from $b \rightarrow q$:} 
 
@@ -1127,27 +1030,6 @@ $ \approx \Delta M^{\langle 1 \rangle} M^{\langle 2 \rangle} \bmod q $ \textcolo
 
 $ $
 
-%$\left(\left\lceil\dfrac{t\cdot\hat{B}^{\langle 1 \rangle}\hat{B}^{\langle 2 \rangle}}{q}\right\rfloor, \left\lceil\dfrac{t\cdot\hat{A}^{\langle 1 \rangle}\hat{B}^{\langle 2 \rangle} + t\cdot\hat{A}^{\langle 2 \rangle}B^{\langle 1 \rangle}}{q}\right\rfloor, \left\lceil\dfrac{t\cdot\hat{A}^{\langle 1 \rangle}\hat{A}^{\langle 2 \rangle}}{q}\right\rfloor\right) \bmod q$
-
-%$\hat{\tau} = \textsf{ModDrop}(\tau, b, \hat{b})$ 
-
-%$\beta_{\hat{\tau}} = (\textsf{FastBConv}(\hat{\tau}, \hat{b}, b_\alpha) - \hat{\tau})\cdot \hat{b}^{-1}$ \textcolor{red}{ $\rhd$ where $b_\alpha = \dfrac{b}{\hat b}$ is one prime factor of the base $b$}
-
-%$ $
-
-%$\textsf{FastBConvEx}(\tau, b, q) = \Big|\textsf{FastBConv}(\hat{\tau}, \hat{b}, q) - |\beta_{\hat{\tau}}|_{b_{\alpha}} \cdot\hat{b}\Big|_q $
-
-%$= |\tau|_q$
-
-%$ $
-
-%$ = \left|\left\lfloor\dfrac{tx}{q}\right\rfloor + tu + u')\right|_q$
-
-%$ $
-
-%$ = \left\lfloor\dfrac{tx}{q}\right\rfloor + tu + u'$
-
-%$ \approx \dfrac{x}{\Delta} + tu + u'$ \textcolor{red}{ $\rhd$ where $u$ and $u'$ can be reduced down to $\{-1, 0, 1\}$ by using \textsf{SmallMont} (\autoref{subsec:rns-smallmont})}
 
 
 \item \textbf{\underline{Relinearization}:} 
@@ -1249,36 +1131,15 @@ $= \textsf{RLWE}_{S, \sigma}\bm(\Delta M\bm) \bmod q$.
 
 \end{enumerate}
 
-\begin{comment}
-\begin{enumerate}
 
-
-\item Initially, the plaintext's scaling factor $\Delta = \left\lfloor\dfrac{q}{p^{r}}\right\rfloor$. We run \textsf{ModRaise\textsubscript{RNS}} from $q \rightarrow q\cdot b
-\cdot b_\alpha$, which generates an additional noise $u\cdot q$ (where integer $|u| \leq \dfrac{k}{2}+1$ without \textsf{SmallMont}, and $u \in \{-1, 0, 1\}$ with \textsf{SmallMont}).  
-
-\item Constant multiplication by $p^\varepsilon$ to the coefficients of the ciphertext polynomials $(A, B) \bmod qbb_\alpha$. The ciphertext modulus $qbb_\alpha$ is large enough to hold $\Delta M \cdot p^{\varepsilon}$ without overflowing $qbb_\alpha$.
-
-\item \textsf{ModSwitch\textsubscript{RNS}} $q\cdot b \cdot b_\alpha \rightarrow b \cdot b_\alpha$.  
-
-\item \textsf{FastBConvEx} from $b
-\cdot b_\alpha \rightarrow q$. We can use this function, because the input values (i.e,. the coefficients of $\left\lceil\dfrac{p^\varepsilon\cdot A}{q}\right\rfloor$ and $\left\lceil\dfrac{p^\varepsilon\cdot B}{q}\right\rfloor$) at this point are expected to be much smaller than $b
-\cdot b_\alpha$. After running \textsf{FastBConvEx}, we can view the plaintext's scaling factor to be equivalent to $\dfrac{q}{p^r} \cdot \dfrac{p^{\varepsilon}}{q} = p^{\varepsilon - r}$.
-
-\end{enumerate}
-
-$ $
-
-After the above steps, the remaining steps (i.e., homomorphic decryption, \textsf{CoeffToSlot}, \textsf{EvalExp}, \textsf{SlotToCoeff}, and re-interpretation) can be performed by regular RNS-based addition and multiplication operations. 
-
-\end{comment}
 
 
 \subsubsection{CKKS's Bootstrapping}
 \label{subsubsec:rns-ckks-bootstrapping}
 
 CKKS's original bootstrapping procedure (Summary~\ref*{subsubsec:ckks-bootstrapping-summary} in \autoref{subsubsec:ckks-bootstrapping-summary}) is as follows:
-(1) \textsf{Modraise}; (2) homomorphic decryption; (3) \textsf{CoeffToSlot}; (4) \textsf{EvalExp}; (5) \textsf{CoeffToSlot}; (6) Re-interpretation. In the RNS-based CKKS bootstrapping, we perform \textsf{ModRaise\textsubscript{RNS}} at step 1, and all other steps are computed by using regular RNS-based addition and multiplication operations. Step 1's \textsf{ModRaise\textsubscript{RNS}} operation generates a 
-$u\cdot q_0$ noise (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}) for each polynomial coefficient during \textsf{FastBConv}. Therefore, step 2's homomorphic decryption outputs $\Delta M + E + W\cdot q_0 + K\cdot q_0$, where $W\cdot q_0$ represents the aggregation of all coefficient noise terms which are multiplied with the $q_0$-overflow noises generated by \textsf{FastBConv} and \textsf{SmallMont}. The $W\cdot q_0 + K\cdot q_0$ term gets eliminated by step 4's \textsf{EvalExp} which performs approximated modulo reduction based on a sine-graph evaluation whose period is $q_0$. 
+(1) \textsf{Modraise}; (2) homomorphic decryption; (3) \textsf{CoeffToSlot}; (4) \textsf{EvalExp}; (5) \textsf{CoeffToSlot}; (6) Re-interpretation. In the RNS-based CKKS bootstrapping, we perform \textsf{ModRaise\textsubscript{RNS}} at step 1, and all other steps are computed using regular RNS-based addition and multiplication operations. Step 1's \textsf{ModRaise\textsubscript{RNS}} operation generates a 
+$u\cdot q_0$ noise (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}) for each polynomial coefficient during \textsf{FastBConv}. Therefore, step 2's homomorphic decryption outputs $\Delta M + E + W\cdot q_0 + K\cdot q_0$, where $W\cdot q_0$ represents the aggregation of all coefficient noise terms that are multiplied by the $q_0$-overflow noises generated by \textsf{FastBConv} and \textsf{SmallMont}. The $W\cdot q_0 + K\cdot q_0$ term is eliminated by step 4's \textsf{EvalExp}, which performs approximated modulo reduction based on a sine-graph evaluation whose period is $q_0$. 
 
 
 
@@ -1287,108 +1148,17 @@ $u\cdot q_0$ noise (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}) for eac
 \label{subsubsec:rns-bgv-bootstrapping}
 
 BGV's original bootstrapping procedure (\autoref{subsec:bgv-bootstrapping}) is as follows:
-(1) modulus switch from $q_l \rightarrow \hat{q}$; (2) ciphertext coefficient multiplication by $p^{\varepsilon - 1}$; (3) \textsf{ModRaise}; (4) \textsf{CoeffToSlot}; (5) \textsf{EvalExp}; (6) homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$; (7) \textsf{SlottToCoeff}; (8) noise term re-interpretation. Given this procedure, the RNS-based bootstrapping steps are as follows:
-
-$ $
-\begin{comment}
-\clearpage 
-
-
-Suppose the target BGV ciphertext to bootstrap is $(A, B) \bmod q_l$, where the plaintext modulus (i.e., noise scaling factor) is $p$.
-
-\begin{enumerate}
-
-\item \textsf{\textbf{\underline{ScaleUp}}} the ciphertext $(A, B) \bmod q_l$ to $(\hat{q}A, \hat{q}B) \bmod q_l\hat{q} = (A', B') \bmod q_l\hat{q}$, which satisfies the relation:
-
-$A'\cdot S + B' = \hat{q}M + \hat{q}pE + Kq_l\hat{q}$
+(1) modulus switch from $q_l \rightarrow \hat{q}$; (2) ciphertext coefficient multiplication by $p^{\varepsilon - 1}$; (3) \textsf{ModRaise}; (4) \textsf{CoeffToSlot}; (5) digit extraction; (6) homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$; (7) \textsf{SlotToCoeff}; (8) noise term re-interpretation. Given this procedure, the RNS-based bootstrapping steps are as follows.
 
 $ $
 
-We view the plaintext message $(\hat{q}M \bmod p)$ as $(M \bmod p)$ with the correction factor $\kappa = [\hat{q}]_p$. Note that \textsf{ScaleUp} by $\hat{q}$ is different from coefficient multiplication by $\hat{q}$, because \textsf{ScaleUp} by $\hat{q}$ does not reduce modulo $q_l$ during its operation, whereas coefficient multiplication by $\hat{q}$ reduces modulo $q_l$. 
-
-$ $
-
-\item \textbf{\underline{$\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$}} the ciphertext $(A', B') \bmod q_l\hat{q}$ to $(A'', B'') \bmod \hat{q}$, whose plaintext message is still $M \bmod p$ with the message correction factor $\kappa = [\hat{q}]_p$. The new ciphertext satisfies the relation:
-
-$A''\cdot S + B'' = M + \hat{q}pE'' + K\hat{q}$ \textcolor{red}{ $\rhd$ the noise factor increased from $E \rightarrow E''$, and the message correction factor $\kappa = \hat{q}$}
-
-$ $
-
-\item \textbf{\underline{Coefficient Multiplication}} by $p^{\varepsilon-1}$ to update the ciphertext $(A'', B'') \bmod \hat{q}$ to $(p^{\varepsilon-1}A'', p^{\varepsilon-1}B'') \bmod \hat{q} = (A''', B''') \bmod \hat{q}$. As of now, we view its plaintext to be scaled up from $M \bmod p$ to $p^{\varepsilon-1} \cdot M \bmod p^e$ (which also scales up the plaintext modulus and the noise scaling factor from $p \rightarrow p^\varepsilon$). The new ciphertext satisfies the relation: 
-
-$A'''\cdot S + B''' = p^{\varepsilon-1}M + p^\varepsilon \hat{q}pE'' + Kq_l\hat{q}$ \textcolor{red}{ $\rhd$ the noise factor increased from $E \rightarrow E''$, and the message correction factor is still $\kappa = \hat{q}$}
-
-$ $
-
-$ = p^{\varepsilon-1}M + p^\varepsilon E''' + K'''\hat{q} \pmod{\hat{q}}$ \textcolor{red}{ $\rhd$ where we denote $E''' = \hat{q}pE''$, and reduce $Kq_l \equiv K''' \bmod \hat{q}$, where $K''' \leq n$}
-
-$ $
-
-\item We do either: (i) \textsf{\underline{\textbf{FastBConv}}} from $\hat{q} \rightarrow q_L$ (if $\hat{q}$ does not divide $q_L$); or (ii) \textsf{\underline{\textbf{ModRaise\textsubscript{RNS}}}} (if $\hat{q}$ divides $q_L$). In both cases, we get a $\hat{q}$-overflow noise. 
-
-$ $
-
-\item We do \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff} to eliminate the $\hat{q}$-overflow noise. 
-
-$ $
-
-\item We multiply the polynomial coefficients of the final ciphertext with the inverse of the correction factor $[\hat{q}^{-1}]_p$, which resets the correction factor back to 1. 
-
-\end{enumerate}
-
-$ $
-
-\clearpage
-
-
-
-Suppose the target BGV ciphertext to bootstrap is $(A, B) \bmod q_l$, where the plaintext modulus (i.e., noise scaling factor) is $p$. 
-
-
-\begin{enumerate}
-
-\item \textbf{\underline{Coefficient Multiplication by $p^{\varepsilon-1}$}} to update $(A, B) \bmod q_l$ to $(p^{\varepsilon-1}A, p^{\varepsilon-1}B) \bmod q_l$, which we denote as $(A', B') \bmod q_l$. This ciphertext satisfies the relation:
-
-$A' \cdot S + B' = p^{\varepsilon-1}M + p^\varepsilon E + Kq_l$ \textcolor{red}{ $\rhd$ $||K||_\infty \leq n$ ($||K||_\infty$ denotes the maximum coefficient of $K$)}
-
-$ $
-
-
-\item \textbf{\underline{\textsf{ModRaise\textsubscript{RNS}}}} $(A', B') \bmod q_l$ from $q_l \rightarrow q_l\hat{q}$, where $\hat{q} \equiv 1 \bmod p^{\varepsilon}$. We denote the mod-raised ciphertext is $(A'', B'') \bmod q_l\hat{q}$, where each coefficient of $A''$ and $B''$ has at most one $\pm q_l$ overflow error. After \textsf{ModRaise\textsubscript{RNS}}, the new ciphertext satisfies the following relation:
-
-$A'' \cdot S + B'' = p^{\varepsilon-1}M + p^\varepsilon E + Uq_l \pmod{q_l\hat{q}}$ \textcolor{red}{ $\rhd$ where $Uq_l$ includes $Kq_l$ plus the noise generated by \textsf{ModRaise\textsubscript{RNS}}'s \textsf{FastBConv} with \textsf{SmallMont}}
-
-$ $
-
-\item \textbf{\underline{$\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$}} from $q_l\hat{q} \rightarrow \hat{q}$, \textcolor{blue}{which effectively divides the $Uq_l$ error term by $q_l$ \textit{(uncertain if this is true)}}. Since the coefficients of $U$ are small relative to $p^\varepsilon$, they will stay in the (base-$p^\varepsilon$) low-digit area of the plaintext encrypted in the mod-switched new ciphertext $(A''', B''') \bmod \hat{q}$. This new ciphertext satisfies the relation:
-
-$A'''S + B''' = p^{\epsilon-1}M + p^\varepsilon E' + U \pmod{\hat{q}}$ \textcolor{red}{ $\rhd$ $E\rightarrow E'$ is an increase due to BGV's \textsf{ModSwitch} noise}
-
-$ $
-
-\item We do either: (i) \textsf{\underline{\textbf{FastBConv}}} from $\hat{q} \rightarrow q_L$ (if $\hat{q}$ does not divide $q_L$); or (ii) \textsf{\underline{\textbf{ModRaise\textsubscript{RNS}}}} (if $\hat{q}$ divides $q_L$). In both cases, we get a $\hat{q}$-overflow noise. The new ciphertext $(A'''', B'''') \bmod q_L$ satisfies the relation:
-
-$A''''\cdot S + B'''' = p^{\varepsilon-1} M + p^{\varepsilon}E + U + U'\hat{q} \pmod{q_L}$ \textcolor{red}{ $\rhd$ where $U'\hat{q}$ is a noise generated by this step}
-
-$ $
-
-
-\item The noises $U$ and $U'\hat{q}$ get removed by \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff}. 
-
-\end{enumerate}
-
-\clearpage
-\end{comment}
 
 Suppose the target BGV ciphertext to bootstrap is $(A, B) \bmod q_l$, where the plaintext modulus (i.e., noise scaling factor) is $p$. 
 
 \begin{enumerate}
 
-\item \textbf{\underline{$\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$}} from $q_l \rightarrow \hat{q}$ where $\hat{q}$ is a special modulus satisfying the following requirements: $\hat{q} \equiv 1 \bmod p^\varepsilon$, $\hat{q} \equiv 1 \bmod p$, $\hat{q}$ and $q_l$ are co-prime, and $\hat{q} < q_l$. 
-\begin{comment}
-This modulus switch is done by performing  \textsf{ModRaise\textsubscript{RNS}} from $q_l \rightarrow q_l\hat{q}$ and then $\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$ from $q_l\hat{q} \rightarrow \hat{q}$. 
-The modulus switch updates the ciphertext from $(A, B) \bmod q_l$ to $(\hat{A}, \hat{B}) \bmod \hat{q}$.  Although \textsf{ModRaise\textsubscript{RNS}} from $q_l \rightarrow q_l\hat{q}$ would generate a $q_l$-multiple noise, the subsequent $\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$ $q_l\hat{q} \rightarrow \hat{q}$ divides this $q_l$-multiple noise by $q_l$, which will be later eliminated by the homomorphic digit extraction step. 
-\end{comment}
+\item \textbf{\underline{$\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$}} from $q_l \rightarrow \hat{q}$ where $\hat{q}$ is a special modulus satisfying the following requirements: $\hat{q} \equiv 1 \bmod p^\varepsilon$,  $\hat{q}$ is a prime and is co-prime with $q_l$, and $p^{\varepsilon} < \hat{q} < q_l$. 
+
 
 $ $
  
@@ -1396,7 +1166,7 @@ $ $
 
 $ $
 
-\item \textbf{\underline{\textsf{ModRaise\textsubscript{RNS}}}} from $\hat{q} \rightarrow q_L$, which generates an additional noise $|u\cdot \hat{q}|_{q_L}$ (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}). At this point, the ciphertext is $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^{\varepsilon}E + \hat{q}K) \bmod q_L$, whose underlying plaintext is:
+\item \textbf{\underline{\textsf{ModRaise\textsubscript{RNS}}}} from $\hat{q} \rightarrow q_L$, which generates additional noise $|u\cdot \hat{q}|_{q_L}$ (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}). At this point, the ciphertext is $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^{\varepsilon}E + \hat{q}K) \bmod q_L$, whose underlying plaintext is:
 
 $p^{\varepsilon-1} M + p^{\varepsilon}E + \hat{q}K$
 
@@ -1406,13 +1176,13 @@ $= p^{\varepsilon-1} M + K \bmod p^{\varepsilon}$ \textcolor{red}{ $\rhd$ since 
 
 $ $
 
-After the above steps, the remaining steps (i.e., \textsf{CoeffToSlot}, \textsf{EvalExp}, homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$, \textsf{SlotToCoeff}, and re-interpretation) can be performed by regular RNS-based addition and multiplication operations. 
+After the above steps, the remaining steps (i.e., \textsf{CoeffToSlot}, \textsf{EvalExp}, homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$, \textsf{SlotToCoeff}, and re-interpretation) can be performed using regular RNS-based addition and multiplication operations. 
 
 
 \subsubsection{Noise Impact of RNS Operations}
 \label{subsubsec:rns-noise}
 
-When RNS techniques are used in FHE operations, the noise generated by \textsf{FastBConvEx\textsubscript{RNS}}, \textsf{ModRaise\textsubscript{RNS}}, and \textsf{ModSwitch\textsubscript{RNS}} is directly added to each coefficient of the ciphertext polynomials $A$ and $B$. Since the decryption relation is $A\cdot S + B$, even the noise added to the coefficients of the polynomial $A$ gets multiplied by a large factor due to the polynomial multiplication with $S$. Therefore, it is important to always ensure to reduce the generated noise of each \textsf{FastBConvEx\textsubscript{RNS}} by using it with \textsf{SmallMont}. 
+When RNS techniques are used in FHE operations, the noise generated by \textsf{FastBConv}, \textsf{ModRaise\textsubscript{RNS}}, and \textsf{ModSwitch\textsubscript{RNS}} is directly added to each coefficient of the ciphertext polynomials $A$ and $B$. Since the decryption relation is $A\cdot S + B$, even the noise added to the coefficients of the polynomial $A$ is multiplied by a large factor due to the polynomial multiplication with $S$. Therefore, it is important to always ensure that the generated noise of each \textsf{FastBConvEx\textsubscript{RNS}} is reduced by using it with \textsf{SmallMont}. 
 
 \subsubsection{Python Source Code of RNS Primitives}
 \label{subsubsec:rns-source-code}
@@ -1422,7 +1192,7 @@ We provide a \href{https://github.com/fhetextbook/fhe-textbook/blob/main/source%
 \textsf{ModDrop\textsubscript{RNS}}, 
 \textsf{ModSwitch\textsubscript{RNS}},
 \textsf{SmallMont}, and 
-\textsf{BaseBConvEx}. 
+\textsf{FastBConvEx}. 
 
 
 

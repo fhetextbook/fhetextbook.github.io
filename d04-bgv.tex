@@ -121,7 +121,7 @@ BGV's encryption decryption process is described as follows:
 \item The ciphertext modulus $q$ is leveled like in CKKS: $q \in \{q_0, q_1, \cdots, q_L\}$, where each $q_l = \prod\limits_{i=0}^l w_i$ (each $w_i$ is a CRT modulus), and each $q_l \equiv 1 \bmod t$ (will be explained in \autoref{subsec:bgv-modulus-switch})
 
 \item The noise scaling factor $\Delta=t$ 
-\item The secret key $S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$. They coefficients of polynomial $S$ can be either binary (i.e., $\{0, 1\}$) or ternary (i.e., $\{-1, 0, 1\}$).
+\item The secret key $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of polynomial $S$ ternary (i.e., $\{-1, 0, 1\}$).
 
 \end{itemize}
 
@@ -620,9 +620,8 @@ $= \bm{(} 0, B(X^{J(h)}) \bm{)} \text{ } + \text{ } \bm{\langle}  \textsf{Decomp
 \noindent \textbf{- Reference:} 
 \href{https://eprint.iacr.org/2022/1363.pdf}{Bootstrapping for BGV and BFV Revisited}~\cite{cryptoeprint:2022/1363}
 
-BGV's bootstrapping shares some common aspects with both BFV and CKKS's bootstrapping. The goal of BGV's bootstrapping is the same as that of CKKS, but the internal technique is closer to that of BFV. Like CKKS, BGV's bootstrapping resets the depleted ciphertext modulus from $q_l \rightarrow q_L$ (strictly speaking, from $q_l \rightarrow q_{l'}$ such that $l < l' < L$ because the bootstrapping operation itself consumes some multiplicative levels). This modulus transition effectively not only resets the multiplicative level but also reduces the noise-to-ciphertext modulus ratio. To achieve this goal, one might think that BGV's bootstrapping can take the same \textsf{ModRaise} approach used by CKKS's bootstrapping. However, this is not a directly applicable solution, because CKKS uses the sine approximation technique to eliminate the $q_0$-overflows after the mod-raise. On the other hand, BGV is an exact encryption scheme which does not allow approximation of plaintext values. Therefore, BGV uses BFV's digit extraction approach to eliminate its modulus overflows. To use digit extraction, like in the case of BFV, BGV also has to modify the plaintext modulus to a specially prepared one, $p^\varepsilon$. To configure both the plaintext modulus and the ciphertext modulus to desired values (i.e., $p^\varepsilon$ and $q_L$), BGV uses the homomorphic decryption technique like BFV.  
+BGV's bootstrapping shares some common aspects with both BFV and CKKS's bootstrapping. The goal of BGV's bootstrapping is the same as that of CKKS, but the internal technique is closer to that of BFV. Like CKKS, BGV's bootstrapping resets the depleted ciphertext modulus from $q_l \rightarrow q_L$ (strictly speaking, from $q_l \rightarrow q_{l'}$ such that $l < l' < L$ because the bootstrapping operations between step 2$\sim$6 have consumed multiplicative levels). This modulus transition effectively not only resets the multiplicative level but also reduces the noise-to-ciphertext modulus ratio. To achieve this goal, one might think that BGV's bootstrapping can take the same \textsf{ModRaise} approach used by CKKS's bootstrapping. However, this is not a directly applicable solution because CKKS uses the sine approximation technique to eliminate the $q_0$-overflows after the mod-raise. On the other hand, BGV is an exact encryption scheme that does not allow the approximation of plaintext values. Therefore, BGV uses BFV's digit extraction approach to eliminate its modulus overflows. To use digit extraction, as in the case of BFV, BGV also has to modify the plaintext modulus to a specially prepared one, $p^\varepsilon$. To configure both the plaintext modulus and the ciphertext modulus to the desired values (i.e., $p^\varepsilon$ and $q_L$), BGV employs the homomorphic decryption technique, as BFV does.  
 
-%However, to achieve this bootstrapping goal, BGV internally uses the digit extraction polynomial used for BFV's bootstrapping (not the sine approximation polynomial used for CKKS's bootstrapping). 
 
 The technical details of BGV's bootstrapping are as follows. 
 
@@ -639,7 +638,7 @@ $ $
 $ $
 
 \item \textbf{\underline{Ciphertext Coefficient Multiplication by \boldmath$p^{\varepsilon-1}$}:} 
-The constant $p^{\varepsilon-1}$ is multiplied to each coefficient of the ciphertext polynomials, updating the ciphertext to $p^{\varepsilon-1} \cdot (\hat{A}, \hat{B}) = (A', B') \bmod \hat{q}$, where $A' = p^{\varepsilon-1}\hat{A}$ and $B' = p^{\varepsilon-1}\hat{B}$. This operation updates the original decryption relation $\hat{A}\cdot S + \hat{B} = M + p E + K\hat{q}$ to $A'\cdot S + B' = p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q}$ (where $K' = K \cdot p^{\varepsilon - 1}$). Notice that the plaintext modulus (i.e., noise's scaling factor) has been changed from $p \rightarrow p^\varepsilon$. When choosing $\varepsilon$, BGV enforces the following additional constraint: $\hat{q} > p^\varepsilon$ and $\hat{q}  \equiv 1 \bmod p^\varepsilon$.
+The constant $p^{\varepsilon-1}$ is multiplied to each coefficient of the ciphertext polynomials, updating the ciphertext to $p^{\varepsilon-1} \cdot (\hat{A}, \hat{B}) = (A', B') \bmod \hat{q}$, where $A' = p^{\varepsilon-1}\hat{A}$ and $B' = p^{\varepsilon-1}\hat{B}$. This operation updates the original decryption relation $\hat{A}\cdot S + \hat{B} = M + p E + K\hat{q}$ to $A'\cdot S + B' = p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q}$ (where $||K'||_{\infty} \leq n + 1$). Notice that the plaintext modulus (i.e., noise's scaling factor) has been changed from $p \rightarrow p^\varepsilon$. When choosing $\varepsilon$, BGV enforces the following additional constraint: $\hat{q} > p^\varepsilon$ and $\hat{q}  \equiv 1 \bmod p^\varepsilon$.
 
 $ $
 
@@ -650,25 +649,6 @@ $\hat{A}\cdot S + \hat{B} = p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q} \bm
 $ $
 
 Note that $K'\hat{q}$ is the $\hat{q}$-multiple overflow and does not get reduced modulo $q_L$, because $K'\hat{q} \ll q_L$. We saw the same situation in the CKKS bootstrapping's \textsf{ModRaise} (\autoref{subsubsec:ckks-bootstrapping-high-level}) which resets the ciphertext modulus from $q_0 \rightarrow q_L$ at the cost of incurring a $Kq_0$ overflow, which is to be removed by \textsf{EvalExp}'s homomorphic (approximate) sine graph evaluation (\autoref{subsubsec:ckks-bootstrapping-evalexp-details}). Likewise, BGV's mod-raised ciphertext $(\hat{A}, \hat{B}) \bmod q_L$ is $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}) \bmod q_L$, an encryption of $p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}$. In the later step, we will use digit extraction to homomorphically eliminate $K'\hat{q}$ like we did in BFV's bootstrapping. The reason BGV's bootstrapping uses digit extraction instead of approximated sine evaluation is that BGV is an exact encryption scheme like BFV (not an approximate scheme like CKKS). 
-
-%Suppose we have the bootstrapping key $\textsf{RLWE}_{S, \sigma}(S) \bmod q_L$ where $q_L$ is the highest multiplicative level's ciphertext modulus, noise scaling factor (i.e., the plaintext modulus) $\Delta = p^\varepsilon$. We homomorphically decrypt $(A', B') \bmod q_l$ with $\textsf{RLWE}_{S, \sigma}(S) \bmod q_L$ as follows:
-
-%$A' \cdot \textsf{RLWE}_{S, \sigma}(S) + B' = \textsf{RLWE}_{S, \sigma}(A'\cdot S + B') \bmod q_L$
-
-%$ = \textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K') \bmod q_L$
-
-%$ $
-
-%Note that $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K') = (A^{\langle L \rangle}, B^{\langle L \rangle}) \bmod q_L$ is a ciphertext that encrypts $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$. In other words, the following relation holds: 
-
-%$A^{\langle L \rangle} \cdot S + B^{\langle L \rangle} = p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' \bmod q_L$
-
-%$ $
-
-%, where $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' < q_L$. 
-%The above homomorphic decryption is almost the same as BFV's homomorphic decryption step. One difference is that BFV's homomorphic decryption outputs a ciphertext whose modulus is $q$ (i.e. BFV's original ciphertext modulus), whereas BGV's homomorphic decryption outputs a ciphertext whose modulus is $q_L$ (i.e., the highest multiplicative level's ciphertext modulus in BGV's modulus chain). Therefore, BGV's homomorphic decryption is equivalent to CKKS's \textsf{ModRaise} (\autoref{subsubsec:ckks-bootstrapping-high-level}) that changes the ciphertext modulus from $\hat{q} \rightarrow q_L$. 
-
-%Next, our goal is to convert the plaintext polynomial $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K' \bmod p^\varepsilon$ into $p^{\varepsilon-1} M + p^\varepsilon K''$ (for some small $K''$) by using homomorphic digit extraction, the same technique used for BFV's digit extraction. Before applying this technique, we need to first move them to the input vector slots by applying the \textsf{CoeffToSlot} step as we did in CKKS and BFV's bootstrapping.  
 
 $ $
 
@@ -690,7 +670,7 @@ $ = p^{\varepsilon-1} m_i + k'_i \bmod p^\varepsilon$
 
 $ $
 
-To eliminate $k'_i$ from the above, we will use the same digit extraction polynomial $G_{\varepsilon, v}$ as in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}) :
+To eliminate $k'_i$ from the above (where $|k'_i| \leq n + 1$), we will use the same digit extraction polynomial $G_{\varepsilon, v}$ as in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}) :
 
 $z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-1} d_* p^j\right)$ \textcolor{red}{ $\rhd$ where $d_0 \in \mathbb{Z}_p$, \text{ } and $d_*$ can be any integer, \text{ } and $1 \leq \varepsilon' \leq w$}
 
@@ -710,35 +690,20 @@ $= p^{\varepsilon-1}m_i + k_i''p^\varepsilon$
 
 $ $
 
-, where $k_i''p^\varepsilon$ is some multiple of $p^\varepsilon$ to account for the original $p^\varepsilon$-overflow term plus an additional $p^\varepsilon$-overflows generated during the digit extraction. Note that the digit extraction step reduces the ciphertext modulus from $q_L \rightarrow q_{l'}$ (where $l'$ is an integer smaller than $L$), because the homomorphic evaluation of the polynomial $G_{\varepsilon, v}$ requires some ciphertext-to-ciphertext multiplications, which consume some multiplicative levels. 
+, where $k_i''p^\varepsilon$ is some multiple of $p^\varepsilon$ to account for the original $p^\varepsilon$-overflow term plus an additional $p^\varepsilon$-overflows generated during the digit extraction. Note that the digit extraction step reduces the ciphertext modulus from $q_L \rightarrow q_{l'}$ (where $l'$ is an integer smaller than $L$), because the homomorphic evaluation of the polynomial $G_{\varepsilon, v}$ requires some ciphertext-to-ciphertext multiplications, which consume some multiplicative levels. The output of the digit extraction step is $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ stored in each input vector slot. 
 
 $ $
 
-\item \textbf{\underline{Homomorphic Multiplication by \boldmath$p^{-(\varepsilon-1)}$}:} 
-The output of the digit extraction step is $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ stored in each input vector slot. We homomorphically multiply $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to it, which is a modulo-$p^\varepsilon$ inverse of $p^{\varepsilon-1}$. 
-Note that $p^{-(\varepsilon-1)}$ is guaranteed to exist because $\mathbb{Z}_{p^\varepsilon}$ is a finite field (i.e., Galois field) whose every element is guaranteed to have its counterpart inverse (Theorem~\ref*{subsec:field-def} in \autoref{subsec:field-def}). Multiplying $p^{-(\varepsilon-1)}$ to $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is equivalent to an exact division of $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ by $p^{\varepsilon-1}$, because $p^{\varepsilon-1}m_i + k''ip^\varepsilon$ is exactly divisible by $p^{\varepsilon-1}$. We homomorphically compute the following:
-
-$|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) = m_i + k''_ip \pmod{p^\varepsilon}$ 
-
-$ $
-
-Note that the plaintext value $m_i + k''_ip \bmod p^\varepsilon$ is also equivalent to $m_i + k''_ip \bmod p$ (because $p$ divides $p^\varepsilon$), and is also equivalent to $m_i \bmod q$ (i.e., the message portion without the noise is $m_i$). Therefore, homomorphically multiplying $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to a ciphertext that encrypts $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ is equivalent to switching the plaintext modulus from $p^\varepsilon \rightarrow p$. 
-
-$ $
-
-In an alternative design, one can eliminate this step of homomorphic multiplication by $p^{-(\varepsilon-1)}$ by re-designing the digit extraction algorithm to gradually shift down the digits by total (base-$p$) $\varepsilon-1$ digits (by multiplying by $|p^{-1}|_{p^{\varepsilon}}$ at the end of each round of digit extraction). 
-
+\item \textbf{\underline{Slot Multiplication by \boldmath$|p^{-(\varepsilon-1)}|_{q_{l'}}$}:} To properly scale down the plaintext coefficients from $p^{\varepsilon-1}m_i \rightarrow m_i$ and the noise coefficients from $k''p^{\varepsilon} \rightarrow k''p$, we homomorphically multiply the slot values (resulted from the \textsf{SlotToCoeff} step) by $|p^{-(\varepsilon-1)}|_{q_{l'}}$. Here, we assume that $q_{l'}$ is the final ciphertext modulus after bootstrapping. Note that the inverse of $p^{(\varepsilon-1)} \bmod q_{l'}$ exists, because \textsf{gcd}$(p^{(\varepsilon-1)}, q_{l'}) = 1$. From the perspective of the ciphertext modulus $q_{l'}$, this modulo-$q_{l'}$ inverse multiplication results in $p^{-(\varepsilon-1)} \cdot (p^{\varepsilon-1}m_i + k''_ip^{\varepsilon}) = m_i + k''_{i}p \bmod q_{l'}$, successfully scaling down the coefficients of the plaintext and the noise polynomials. But for now, the output of this step is a ciphertext whose slots store $|p^{-(\varepsilon-1)}|_{q_{l'}} \cdot (p^{\varepsilon-1}m_i + k''_ip^{\varepsilon})$. 
 
 $ $
 
 
-\item \textbf{\textsf{\underline{SlotToCoeff}}:} This step works the same way as BFV's \textsf{SlotToCoeff} step: move $m_i + k''_ip$ stored in the input vector slots back to the polynomial coefficient positions by homomorphically multiplying with $\hathat W^*$. 
-
-Meanwhile, the coefficient domain is in modulo $q_L$. From modulo-$q_L$'s perspective, the result of step 5 is $|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) \bmod q_L$. It is guaranteed that $|p^{-(\varepsilon-1)}|_{p^\varepsilon} \cdot (p^{\varepsilon-1}m_i + k''_ip^\varepsilon) < q_L$, because $p^\varepsilon \ll q_L$. Therefore, result of \textsf{SlotToCoeff} is a set of polynomial coefficients whose noise is within the noise budget of $q_L$. 
+\item \textbf{\textsf{\underline{SlotToCoeff}}:} This step works the same way as BFV's \textsf{SlotToCoeff} step: move $|p^{-(\varepsilon-1)}|_{q_{l'}} \cdot (p^{\varepsilon-1}m_i + k''_ip^{\varepsilon})$ stored in the input vector slots back to the polynomial coefficient positions by homomorphically multiplying with $\hathat W^*$. Upon completing this step, the ciphertext modulus becomes $q_{l'}$, smaller than $q_L$, because the homomorphic operation of step $2\sim7$ have consumed a few multiplicative levels. From the perspective of the ciphertext modulus $q_{l'}$, the result of this step is a ciphertext that encrypts the plaintext polynomial whose coefficients are $|p^{-(\varepsilon-1)}|_{q_{l'}} \cdot (p^{\varepsilon-1}m_i + k''_ip^{\varepsilon}) = m_i + k''_ip \bmod q_{l'}$, where both the message and the noise are properly scaled down. Importantly, $m_i + k''_ip \bmod q_{l'}$ is guaranteed to be within the modulo-$q_{l'}$ range. That is, $p^{\varepsilon-1}m_i + k''_ip^\varepsilon$ does not overflow or underflow $q_{l'}$, because $p^\varepsilon \ll q_{l'}$. The output of this step is $\textsf{RLWE}_{S, \sigma}(M + K''p) \bmod q_{l'}$, which also implicitly contains an additional noise term $E'p$ generated during the homomorphic operations between step $2 \sim 7$. 
 
 $ $
 
-\item \textbf{\textsf{\underline{Noise Term Re-interpretation}}:} The output of the \textsf{SlotToCoeff} step is $\textsf{RLWE}_{S, \sigma}(M + K''p) \bmod q_{l'}$, which also contains some noise term $E'p$ generated during the homomorphic operations of step $2 \sim 6$. Therefore, we can view the $K''p$ term in the plaintext as part of the noise of the ciphertext. In other words, we can view $\textsf{RLWE}_{S, \sigma}(M + K''p)$ with some noise term $E'p$ as a ciphertext $\textsf{RLWE}_{S, \sigma}(M)$ with the noise term $E'p + K''p = (E' + K'')\cdot p$. This step does not require any additional computation. The size of the coefficients of $K''$ is upper-bounded because the operations of the \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff} steps are fixed. With a proper setup of the cryptographic parameters of BGV, we can guarantee that the noise-to-ciphertext modulus ratio always gets decreased after BGV's bootstrapping (i.e., $\dfrac{||E + K'||_{\infty}}{q_L} < \dfrac{||E' + K''||_{\infty}}{q_{l'}} < \dfrac{||E||_{\infty}}{\hat{q}}$, where $\hat{q} < q_l < q_{l'} < q_L$, and $||P||_\infty$ denotes the maximum absolute coefficient value of polynomial $P$).
+\item \textbf{\textsf{\underline{Noise Term Re-interpretation}}:} We can view the $K''p$ and $E'p$ terms in $\textsf{RLWE}_{S, \sigma}(M + K''p) \bmod q_{l'}$ as the total noise of the ciphertext. In other words, we can view $\textsf{RLWE}_{S, \sigma}(M + K''p)$ with some noise term $E'p$ as a BGV ciphertext $\textsf{RLWE}_{S, \sigma}(M)$ with the noise term $E'p + K''p = (E' + K'')\cdot p$. This step does not require any additional computation. The size of the coefficients of $K''$ and $E'$ is upper-bounded because the operations of the \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff} steps are fixed. With a proper setup of the cryptographic parameters of BGV, we can guarantee that the noise-to-ciphertext modulus ratio always decreases after BGV's bootstrapping. In other words, $\dfrac{||E + K'||_{\infty}}{q_L} < \dfrac{||E' + K''||_{\infty}}{q_{l'}} < \dfrac{||E||_{\infty}}{\hat{q}}$, where $\hat{q} < q_l < q_{l'} < q_L$, and $||P||_\infty$ denotes the maximum absolute coefficient value of polynomial $P$.
 
 \end{enumerate}
 
@@ -756,7 +721,7 @@ In the case of BFV's bootstrapping, we need homomorphic decryption (\autoref{sub
 
 \subsubsection{The Choice of $\varepsilon$} 
 
-The larger $\varepsilon$ is, the greater the (base-$p$) digit-wise gap between $p^{\varepsilon-1}M$ and $K'$ becomes, and thus the less likely it is that the decryption would fail (i.e., fail to zero out $K'$). But a larger $\varepsilon$ means the digit extraction operation would be more expensive. 
+The larger $\varepsilon$ is, the greater the (base-$p$) digit-wise gap between $p^{\varepsilon-1}M$ and $K'$ becomes; thus, the less likely it is that the decryption would fail (i.e., fail to zero out $K'$). However, a larger $\varepsilon$ means the digit extraction operation would be more expensive. 
 
 \subsubsection{Generalization to $\Delta = p^r$} 
 

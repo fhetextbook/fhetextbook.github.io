@@ -1,12 +1,12 @@
-The RLWE cryptosystem's ciphertext is a tuple $(A, B)$, where $B = S \cdot A + \Delta \cdot M + E$. The public key $A$ and the secret key $S$ are $(n-1)$-degree polynomials. The message $M$ and the noise $E$ are an $(n-1)$-degree polynomial, each. Like in LWE, a new public key $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(A, b)$ instead of $(A^{\langle i \rangle}, b^{\langle i \rangle})$ for simplicity.
+The RLWE cryptosystem's ciphertext is a tuple $(A, B)$, where $B = S \cdot A + \Delta \cdot M + E$. The random public mask $A$ and the secret key $S$ are $(n-1)$-degree polynomials. The message $M$ and the noise $E$ are $(n-1)$-degree polynomials. Like in LWE, a new random public mask $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(A, b)$ instead of $(A^{\langle i \rangle}, b^{\langle i \rangle})$ for simplicity.
 
 In RLWE, all polynomials are computed in the polynomial ring $\mathbb{Z}_q[x] / x^n + 1$, where $x^n + 1$ is a cyclotomic polynomial with $n = 2^f$ for some integer $f$ and the polynomial coefficients are in $\mathbb{Z}_q$. Thus, all polynomials in RLWE have the coefficient range $\mathbb{Z}_q$ and the maximum polynomial degree of $n -1$. For simplicity, we denote $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$.
 
 \subsection{Setup}
 
-Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, 2 \rangle}$ whose coefficients are binary numbers, 1 or -1, as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
+Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, q \rangle}$ whose coefficients are either ${-1, 0, 1}$ as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
 
-Notice that RLWE's setup parameters are similar to that of LWE. One difference is that $S$ is not a vector of length $k$, but an $(n-1)$-degree polynomial encoding $n$ secret coefficients, where each coefficient is a randomly picked binary number in $\{0, 1\}$ (denoted as $S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$).
+Notice that RLWE's setup parameters are similar to that of LWE. One difference is that $S$ is not a vector of length $k$ sampled from $\{-1, 0, 1\}$, but an $(n-1)$-degree polynomial encoding $n$ secret coefficients, where each coefficient is a randomly picked ternary number from $\{-1, 0, 1\}$ (denoted as $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$).
 
 
 \subsection{Encryption}
@@ -14,7 +14,7 @@ Notice that RLWE's setup parameters are similar to that of LWE. One difference i
 
 \begin{enumerate}
 \item Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{\langle n, t \rangle}$ whose coefficients represent the plaintext numbers to encrypt. 
-\item Randomly pick an $(n-1)$-degree polynomial $A \in \mathcal{R}_{\langle n,q \rangle}$ as a one-time public key (denoted as $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$). 
+\item Randomly pick an $(n-1)$-degree polynomial $A \in \mathcal{R}_{\langle n,q \rangle}$ as a one-time random public mask (denoted as $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$). 
 \item Randomly pick a small polynomial $E \in \mathcal{R}_{\langle n,q \rangle}$ as a one-time noise, whose $n$ coefficients are small numbers in $\mathbb{Z}_q$ randomly sampled from the Gaussian distribution $\chi_\sigma$ (denoted as $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$). 
 \item Scale $M$ by $\Delta$, which is to compute $\Delta \cdot M$. This converts $M \in \mathcal{R}_{\langle n,t \rangle}$ into $\Delta \cdot M \in \mathcal{R}_{\langle n,q \rangle}$.
 \item Compute $B = A \cdot S + \Delta \cdot M + E \bmod \mathcal{R}_{\langle n,q \rangle}$ (i.e., reduce the degree by $n$ and the coefficient by modulo $q$). 
@@ -27,13 +27,13 @@ The RLWE encryption formula is summarized as follows:
 
 $ $
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rlwe-enc}} RLWE Encryption}}]
-\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$
+\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$
 
 $ $
 
 $ $
 
-\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, t \rangle}$, $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$, $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, 2 \rangle}$
+\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, t \rangle}$, $A \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}$, $E \xleftarrow{\chi_\sigma} \mathcal{R}_{\langle n, q \rangle}$
 
 $ $
 
@@ -51,7 +51,7 @@ $ $
 \begin{enumerate}
 \item Given the ciphertext $(A, B)$ where $B = A \cdot S + \Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$, compute $B - A \cdot S = \Delta \cdot M + E$. 
 \item Round each coefficient of the polynomial $\Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$ to the nearest multiple of $\Delta$ (i.e., round it as a base $\Delta$ number), which is denoted as $\lceil \Delta \cdot M + E \rfloor_{\Delta}$.  This rounding operation successfully eliminates $E$ and gives $\Delta \cdot M$. One caveat is that the noise $E$'s each coefficient $e_i$ should be small enough to be $e_i < \dfrac{\Delta}{2}$ in order to be eliminated during the rounding. Otherwise, some of $e_i$'s higher bits will overlap and corrupt the plaintext $m_i$ coefficient's lower bits and won't be blown away.
-\item Compute $\dfrac{\Delta \cdot M}{\Delta}$, which is equivalent to right-shifting each polynomial coefficient in $\Delta \cdot M$ by $\text{log}_2 \Delta$ bits.
+\item Compute $\dfrac{\Delta \cdot M}{\Delta}$, which is equivalent to scaling down each polynomial coefficient in $\Delta \cdot M$ by $\Delta$ (or right-shifting each coefficient by $\text{log}_2 \Delta$ bits if $\Delta$ is a power of 2).
 \end{enumerate}
 
 $ $
@@ -61,13 +61,13 @@ In summary, the RLWE decryption formula is summarized as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rlwe-dec}} RLWE Decryption}}]
 
-\textbf{\underline{Decryption Input}:} $C = (A, B) \text{ } \in \mathbb{R}_{\langle n, r \rangle}^{2}$
+\textbf{\underline{Decryption Input}:} $C = (A, B) \text{ } \in \mathcal{R}_{\langle n, r \rangle}^{2}$
 
 $ $
 
 \begin{enumerate}
 
-\item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B - A \cdot S = \Delta  M + E \text{ } (\bmod \mathcal{R}_{\langle n,q \rangle})$ 
+\item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B - A \cdot S = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$ 
 \item Scale down $\Bigg\lceil\dfrac{ \Delta M + E}{\Delta}\Bigg\rfloor \bmod t = M \text{ } \in \mathcal{R}_{\langle n,t \rangle}$
 
 \end{enumerate}

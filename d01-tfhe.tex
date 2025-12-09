@@ -41,7 +41,7 @@ $ $
 \subsection{Encryption and Decryption}
 \label{subsec:tfhe-enc-dec}
 
-TFHE encrypts and decrypts ciphertexts based on the LWE cryptosystem (\autoref{sec:lwe}), which is equivalent to the GLWE cryptosystem (\autoref{sec:glwe}) with $n = 1$.
+TFHE encrypts and decrypts ciphertexts based on the LWE cryptosystem (\autoref{sec:lwe}), which is equivalent to the GLWE cryptosystem (\autoref{sec:glwe}) with $n = 1$. However, one distinction from the LWE cryptosystem is that TFHE samples the secret key elements from the binary set $\{0, 1\}$, not from the ternary set $\{-1, 0, 1\}$.
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-enc-dec}} TFHE Encryption and Decryption}}]
@@ -103,9 +103,9 @@ TFHE's ciphertext-to-plaintext addition (where $\lambda$ is a constant to add) u
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-add-plain}} TFHE Ciphertext-to-Plaintext Addition}}]
 $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m) + \Delta \lambda $
 
-$=  (\vec{a}, \text{ } B) + \Delta \lambda$
+$=  (\vec{a}, \text{ } b) + \Delta \lambda$
 
-$=  (\vec{a}, \text{ } B + \Delta\lambda)$
+$=  (\vec{a}, \text{ } b + \Delta\lambda)$
 
 $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m + \lambda) )$
 \end{tcolorbox}
@@ -133,10 +133,10 @@ $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m \cdot \lambda) )$
 \textbf{- Reference:} 
 \href{https://www.zama.ai/post/tfhe-deep-dive-part-3}{TFHE Deep Dive - Part III - Key switching and leveled multiplications}~\cite{tfhe-3}
 
-TFHE's key switching scheme changes an LWE ciphertext's secret key from $\vec{s}$ to $\vec{s}_{'}$. This scheme is essentially LWE's key switching scheme. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) key switching scheme (\autoref{sec:glwe-key-switching}) with $n = 1$ as follows:
+TFHE's key switching scheme changes an LWE ciphertext's secret key from $\vec{s}$ to $\vec{s}_{'}$, where the two key vectors may or may not have the same dimensions. This scheme is essentially LWE's key switching scheme. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) key switching scheme (\autoref{sec:glwe-key-switching}) with $n = 1$ as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-key-switching}} TFHE Key Switching}}]
-$\textsf{LWE}_{\vec{s}_{'},\sigma}(\Delta m) = (0, b) + \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{a}), \text{ } \textsf{Lev}_{\vec{s}_{'}, \sigma}^{\beta, l}(\vec{s}) \bm{\rangle}$
+$\textsf{LWE}_{\vec{s}_{'},\sigma}(\Delta m) = (0, b) - \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{a}), \text{ } \textsf{Lev}_{\vec{s}_{'}, \sigma}^{\beta, l}(\vec{s}) \bm{\rangle}$
 \end{tcolorbox}
 
 
@@ -175,7 +175,7 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (\vec{a}, b) \in \mathbb{Z}_{q}^{k
 
 $ $
 
-$\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \Bigr \{ \{ \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l} (-s_i \cdot m_2)  \}_{i=0}^{k-1}, \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) \Bigl \} \in \mathbb{Z}_{q }^{(k+1) \cdot l \cdot (k+1)}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:ggsw-enc}}
+$\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \Bigr \{ \{ \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l} (-s_i \cdot m_2)  \}_{i=0}^{k-1}, \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) \Bigl \} \in \mathbb{Z}_{q }^{(k+1) \cdot l \cdot (k'+1)}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:ggsw-enc}}
 
 $ $
 
@@ -296,11 +296,11 @@ $ $
 
 \noindent Remember the following: 
 
-$\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1) = (A_0, A_0, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{n, q}^{k + 1}$, where $B = \sum\limits_{i=0}^{k-1}(A_i \cdot S_i) + \Delta M_1 + E$ \\ \textcolor{red}{ $\rhd$ from \autoref{subsec:glwe-enc}} 
+$\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1) = (A_0, A_1, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{n, q}^{k + 1}$, where $B = \sum\limits_{i=0}^{k-1}(A_i \cdot S_i) + \Delta M_1 + E$ \\ \textcolor{red}{ $\rhd$ from \autoref{subsec:glwe-enc}} 
 
 $ $
 
-$\textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \Bigr \{ \{ \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l} (-S_i \cdot M_2)  \}_{i=0}^{k-1}, \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(M_2) \Bigl \} \in \mathcal{R}_{\langle n, q \rangle }^{(k+1) \cdot l \cdot (k+1)}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:ggsw-enc}}
+$\textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \Bigr \{ \{ \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l} (-S_i \cdot M_2)  \}_{i=0}^{k-1}, \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(M_2) \Bigl \} \in \mathcal{R}_{\langle n, q \rangle }^{(k+1) \cdot l \cdot (k'+1)}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:ggsw-enc}}
 
 $ $
 
@@ -478,10 +478,9 @@ $ $
 $S' = (s_{0,0}, s_{0,1}, \gap{$\cdots$}, s_{0,n-1}, s_{1,0}, s_{1,1}, \gap{$\cdots$}, s_{1, n-1}, \gap{$\cdots$}, s_{k-1, n-1}) = (s'_0, s'_1, \gap{$\cdots$}, s'_{nk-1} ) \in \mathbb{Z}_q^{nk}$
 
 
-$C_h = (a'_0, a'_1, \gap{$\cdots$}, a'_{nk-1}, b_h) \in \mathbb{Z}_q^{nk + 1}$
+$\textsf{ct}_h = (a'_0, a'_1, \gap{$\cdots$}, a'_{nk-1}, b_h) \in \mathbb{Z}_q^{nk + 1}$
 
 
-\begin{figure}[h]
 \[
     \text{, where } a'_{n \cdot i + j} =   
 \begin{cases}
@@ -490,7 +489,7 @@ $C_h = (a'_0, a'_1, \gap{$\cdots$}, a'_{nk-1}, b_h) \in \mathbb{Z}_q^{nk + 1}$
 \end{cases}
 \centering , b_h \text{ is directly obtained from the polynomial } B
 \]
-\end{figure}
+
 
 \noindent Note that $b_h - \sum\limits_{i=0}^{nk-1}s'_ia'_i = \Delta m_h + e_h$. This means that $C_h$ can be replaced by its encrypted version, $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$, an LWE ciphertext $\textsf{ct}_h$ encrypting the $h$-th coefficient of $M$. Therefore, we just extracted $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$ from $\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M)$. This operation is called coefficient extraction, which does not add any noise because it simply extracts an LWE ciphertext by reordering the polynomial of the GLWE ciphertext. 
 
@@ -499,7 +498,7 @@ Once we have $\textsf{LWE}_{\vec{s}_{'}, \sigma}(\Delta m_h)$, we can key-switch
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-extraction}} GLWE Ciphertext's Coefficient Extraction}}]
 Given the following GLWE ciphertext: 
 
-$M = \sum\limits_{j=0}^{n-1}m_jX^j \in \mathcal{R}_{\langle n, p \rangle}$
+$M = \sum\limits_{j=0}^{n-1}m_jX^j \in \mathcal{R}_{\langle n, t \rangle}$
 
 $\vec{S} = \left(S_0 = \sum\limits_{j=0}^{n-1}s_{0,j}X^j, S_1 = \sum\limits_{j=0}^{n-1}s_{1,j}X^j, \gap{$\cdots$}, S_{k-1} = \sum\limits_{j=0}^{n-1}s_{k-1,j}X^j \right)$
 
@@ -544,7 +543,7 @@ $ $
 
 Continuing homomorphic additions of TFHE ciphertexts does not necessarily increase the noise $e$, because $e$ is randomly generated over the Gaussian distribution, thus adding up many noises would give the mean value of 0. On the other hand, continuing homomorphic multiplications increases the noise, because the noise terms get multiplied, growing its magnitude. Thus, we need to somehow \textit{reset} the noise before it trespasses on the higher bits where plaintext $m$ resides (i.e., preventing the red noise bits from overflowing to the blue plaintext bits as shown in \autoref{fig:scaling}). The process of re-initializing the noise to a smaller value is called noise bootstrapping.
 
-As explained in the beginning of this section, TFHE uses LWE (which is GLWE with $n = 1$) to encrypt \& decrypt a plaintext. That is, each plaintext is $m$ (a single number), encoded as a zero-degree polynomial. Further, the secret key S that encrypts each $m$ is a vector $ \{s_0, s_1, \text{ } \cdots \text{ }, s_{k-1} \}$ instead of a polynomial. On the other hand, TFHE's noise bootstrapping uses homomorphic addition between GLWE ciphertexts and homomorphic multiplication between GLWE and GGSW ciphertexts.  
+As explained in the beginning of this section, TFHE uses LWE (which is GLWE with polynomial degree 0) to encrypt \& decrypt a plaintext. That is, each plaintext is $m$ (a single number), encoded as a zero-degree polynomial. Further, the secret key S that encrypts each $m$ is a vector $ \{s_0, s_1, \text{ } \cdots \text{ }, s_{k-1} \}$ instead of a polynomial. On the other hand, TFHE's noise bootstrapping uses homomorphic addition between GLWE ciphertexts and homomorphic multiplication between GLWE and GGSW ciphertexts.  
 
 %Nonetheless, the reason why we explained TFHE ciphertext addition (\autoref{subsec:glwe-add} and \autoref{subsec:glwe-add-plain}), multiplication (\autoref{subsec:tfhe-mult-cipher} and \autoref{subsec:glwe-mult-plain}), and polynomial rotation (\autoref{subsec:coeff-rotation}) in terms of GLWE is because the bootstrapping procedure we will explain in this subsection requires homomorphic addition and multiplication of GLWE ciphertexts.
 
@@ -588,9 +587,9 @@ $V_q(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{q-1}X^{q-1}$
 
 $ $
 
-In the above formula, each $m_i$ and $e_k$ represent every possible plaintext message and error values (where $m_i \in \mathbb{Z}_t$ and $e_k \in \mathbb{Z}_{\Delta}$). %Note that $\mathbb{Z}_{q} = \{0, 1, \cdots, q-1\} = \{\Delta m_0 + e_0, \Delta m_0 + e_1, \cdots, \Delta m_{t-1} + e_{\Delta - 1}\}$. 
+In the above formula, each $m_i$ and $e_k$ represents every possible plaintext message and error values (where $m_i \in \mathbb{Z}_t$ and $e_k \in \mathbb{Z}_{\Delta}$). %Note that $\mathbb{Z}_{q} = \{0, 1, \cdots, q-1\} = \{\Delta m_0 + e_0, \Delta m_0 + e_1, \cdots, \Delta m_{t-1} + e_{\Delta - 1}\}$. 
 
-We design $V_q(X)$ to have the special property that each $v_{j}X^{j}$ term represents the special mapping (exponent, coefficient) $= (\Delta m_i + e_{*}, m_i)$, where $e_*$ can be any value in $\mathbb{Z}_{\Delta}$. During the TFHE setup stage, we GLWE-encrypt $V_q(X)$ by using our newly defined GLWE key $\vec{S}_{bk}$, a \textit{bootstrapping key}, which is different from the LWE secret key $\vec{s}$. $\vec{S}_{bk}$ is a list of $(n-1)$-degree polynomials with binary coefficients. Later, during the noise bootstrapping stage, we will rotate the coefficients of $V$ by $\Delta m + e$ positions to the left by computing $V \cdot X^{-(\Delta m + e)} = V'$, by using the polynomial coefficient rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation}.1 in \autoref{subsec:coeff-rotation}). Then, we will extract the polynomial's constant term's coefficient (i.e., the left-most 0-degree term's coefficient in the rotated polynomial $V'$) by using the coefficient extraction technique (\autoref{subsec:tfhe-extraction}). Further, we will encrypt $V_q(X)$ as a GLWE ciphertext at the TFHE setup stage, and thus the rotated $V'_q(X)$'s extracted constant term's coefficient is an LWE encryption of $m$ (i.e., $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$) with a re-initialized (i.e., completely reduced) noise. 
+We design $V_q(X)$ to have the special property that each $v_{j}X^{j}$ term represents the special mapping (exponent, coefficient) $= (\Delta m_i + e_{*}, m_i)$, where $e_*$ can be any value in $\mathbb{Z}_{\Delta}$. During the TFHE setup stage, we GLWE-encrypt $V_q(X)$ by using our newly defined GLWE key $\vec{S}_{bk}$, a \textit{bootstrapping key}, which is different from the LWE secret key $\vec{s}$. $\vec{S}_{bk}$ is a list of $(n-1)$-degree polynomials with binary coefficients. Later, during the noise bootstrapping stage, we will rotate the coefficients of $V$ by $\Delta m + e$ positions to the left by computing $V \cdot X^{-(\Delta m + e)} = V'$, using the polynomial coefficient rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation}.1 in \autoref{subsec:coeff-rotation}). Then, we will extract the polynomial's constant term's coefficient (i.e., the left-most 0-degree term's coefficient in the rotated polynomial $V'$) by using the coefficient extraction technique (\autoref{subsec:tfhe-extraction}). Further, we will encrypt $V_q(X)$ as a GLWE ciphertext at the TFHE setup stage, and thus the rotated $V'_q(X)$'s extracted constant term's coefficient is an LWE encryption of $m$ (i.e., $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$) with a re-initialized (i.e., completely reduced) noise. 
 
 To summarize, the noise bootstrapping procedure can be conceptually understood (at least for now) as follows: 
 
@@ -606,7 +605,7 @@ $ $
 
 $ $
 
-The output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ encrypts the same plaintext message as the input ciphertext, but with completely reduced noise. Therefore, the output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ can be used for subsequent TFHE homomorphic operations (e.g., addition or multiplication). During this noise bootstrapping process, the polynomial $V_q$ is used as a \textit{dictionary} that contains the mappings from the noisy plaintext $\Delta m + e$ (i.e., as $\Delta m + e = j$ where $v_jX^j$) to the noise-free plaintext $m$ (i.e., as $m = v_j$ where $v_jX^j$). Therefore, $V_q$ is called the Lookup Table (LUT). 
+The output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ encrypts the same plaintext message as the input ciphertext, but with completely reduced noise. Therefore, the output $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ can be used for subsequent TFHE homomorphic operations (e.g., addition or multiplication). During this noise bootstrapping process, the polynomial $V_q$ is used as a \textit{dictionary} that contains the mappings from the noisy plaintext $\Delta m + e$ (i.e., as $\Delta m + e = j$ where $v_jX^j$) to the noise-free plaintext $m$ (i.e., as $m = v_j$ where $v_jX^j$). Therefore, $V_q$ is called the Lookup Table (LUT).  
 
 Then, what should be the degree of $V_q(X)$? In order for $V_q(X)$ to encode all possible mappings from $\Delta m + e \in \mathbb{Z}_q$ to $m \in \mathbb{Z}_t$, $V_q(X)$ should be a $(q-1)$-degree polynomial. However, $q$ is a very big number, and it is computationally infeasible to manage a $(q-1)$-degree polynomial. Thus, in practice, we instead use a much smaller polynomial $V(X)$ whose degree is only $n-1$. Remember that according to our TFHE setup, $n \ll q$. Therefore, we need a way to \textit{compress} the big ciphertext space $\Delta m + e \in \mathbb{Z}_q$ into a much smaller space $\mathbb{Z}_n$ and encode the compressed values as the exponents of $X^j$ in a \textit{proportionally} correct way. For this proportional compression of $\mathbb{Z}_q \rightarrow \mathbb{Z}_n$, we will use the LWE modulus switching technique learned from \autoref{subsec:modulus-switch-lwe}. 
 
@@ -697,9 +696,9 @@ As we can see above, the rotated $V'(X)$'s constant term's coefficient shows a n
 To summarize the problem, $V(X)$ has a limitation in becoming a perfect LUT, because it preserves the correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat{e}, m)$ only for one half of $i \in \mathbb{Z}_t$, not for the other half. 
 
 \para{Solution:} 
-Good news is that we have observed that $V(X)$'s mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, \Delta m)$ preserve their ring-pattern consistency if $V(X)$ is rotated no more than $n-1$ positions (i.e., the first-half rotation group). Therefore, the easiest solution to avoid the negacyclic problem of the LUT polynomial rotation is that the application of TFHE restricts $V(X)$ to be rotated no more than $n-1$ positions \textit{by design} during the noise bootstrapping. To enforce this, when the TFHE application's computation pipeline processes plaintext values (in its original plaintext computation logic before considering any homomorphic operations), the application should ensure to involve only some pre-defined continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$ as the possible inputs and outputs of each computation step. This constraint effectively ensures the possible values of $\hat\Delta m + \hat e$ to be continuous $n$ values within $\mathbb{Z}_{2n}$. Since the LUT polynomial $V(X)$ gets rotated by computing $V(X)\cdot X^{-(\hat\Delta m + \hat e)}$, as the application restricts $\hat\Delta m + \hat e$ to be at most $n-1$ (out of $2n - 1$) by its application design, $V(X)$ will be rotated at most $n-1$ positions during the noise bootstrapping. Thus, we can prevent the occurrences of the problematic $\{n, n+1, \gap{$\cdots$}, 2n -1 \}$ rotations that flip the signs of coefficients.  
+Good news is that we have observed that $V(X)$'s mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, \Delta m)$ preserve their ring-pattern consistency if $V(X)$ is rotated no more than $n-1$ positions (i.e., the first-half rotation group). Therefore, the easiest solution to avoid the negacyclic problem of the LUT polynomial rotation is that the application of TFHE restricts $V(X)$ to be rotated no more than $n-1$ positions \textit{by design} during the noise bootstrapping. To enforce this, when the TFHE application's computation pipeline processes plaintext values (in its original plaintext computation logic before considering any homomorphic operations), the application should ensure to involve only some pre-defined contiguous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$ as the possible inputs and outputs of each computation step. This constraint effectively ensures the possible values of $\hat\Delta m + \hat e$ to be contiguous $n$ values within $\mathbb{Z}_{2n}$. Since the LUT polynomial $V(X)$ gets rotated by computing $V(X)\cdot X^{-(\hat\Delta m + \hat e)}$, as the application restricts $\hat\Delta m + \hat e$ to be at most $n-1$ (out of $2n - 1$) by its application design, $V(X)$ will be rotated at most $n-1$ positions during the noise bootstrapping. Thus, we can prevent the occurrences of the problematic $\{n, n+1, \gap{$\cdots$}, 2n -1 \}$ rotations that flip the signs of coefficients.  
 
-To summarize, at the cost of halving the application's usable plaintext values to some continuous $\dfrac{t}{2}$ values within $\mathbb{Z}_t$, we can prevent $V(X)$'s negacyclic rotation problem, and thereby preserve $V(X)$'s correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, m)$.
+To summarize, at the cost of halving the application's usable plaintext values to some contiguous $\dfrac{t}{2}$ values within $\mathbb{Z}_t$, we can prevent $V(X)$'s negacyclic rotation problem, and thereby preserve $V(X)$'s correct mappings of (exponent, coefficient) = $(\hat{\Delta} m + \hat e, m)$.
 
 \begin{comment}
 Meanwhile, the ciphertext space $q$ is unmodified, because If we take a simple example of $t = 8$, our TFHE application can design the following encoding scheme:
@@ -742,16 +741,17 @@ $V(X) = v_0 + v_1X^1 + v_2X^2 + \gap{$\cdots$} + v_{n-1}X^{n-1}$
 
 $ $
 
-\noindent , where $\hat\Delta = \Delta \cdot \dfrac{2n}{q} = \dfrac{2n}{t}$. The application should ensure that $m_0, m_1, \cdots, m_{t/2 - 1}$ are some continuous modulo-$\dfrac{t}{2}$ values in $\mathbb{Z}_t$. This constraint ensures $V(X)$'s rotation positions $\hat{\Delta} m_i + \hat {e}_{*}$ (where $e_* \in \mathbb{Z}_{\hat{\Delta}}$) to be most $n$ continuous possibilities, preventing $V(X)$ from making more than 1 full-cycle rotation that triggers a negacyclic problem. 
+\noindent , where $\hat\Delta = \Delta \cdot \dfrac{2n}{q} = \dfrac{2n}{t}$. The application should ensure that $m_0, m_1, \cdots, m_{t/2 - 1}$ are some contiguous modulo-$\dfrac{t}{2}$ values in $\mathbb{Z}_t$. This constraint ensures $V(X)$'s rotation positions $\hat{\Delta} m_i + \hat {e}_{*}$ (where $e_* \in \mathbb{Z}_{\hat{\Delta}}$) to be most $n$ contiguous possibilities, preventing $V(X)$ from making more than 1 full-cycle rotation that triggers a negacyclic problem. 
 
 
 \end{tcolorbox}
 
+Another name for the LUT polynomial $V(X)$ is an accumulator.
 
 \subsubsection{Blind Rotation}
 \label{subsec:bootstrapping-blind-rotation} 
 
-Blind rotation refers to rotating an \textit{encrypted} polynomial's coefficients so that it is not possible to know how many positions the polynomial's coefficients are rotated, and after the rotation, it is not possible to see which coefficient has moved to which degree term. Blind rotation uses the basic polynomial rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation} in \autoref{subsec:coeff-rotation}), with the difference that the $V(X)\cdot X^{-i}$ computation is done homomorphically. 
+Blind rotation refers to rotating the coefficients of an \textit{encrypted} polynomial so that it is not possible to know how many positions the polynomial's coefficients have been rotated. After the rotation, it is not possible to see which coefficient has moved to which degree term. Blind rotation uses the basic polynomial rotation method 1 technique (Summary~\ref*{subsec:coeff-rotation} in \autoref{subsec:coeff-rotation}), with the difference that the $V(X)\cdot X^{-i}$ computation is done homomorphically. 
 
 Note that $X^{\hat{\Delta} m + \hat{e}_b} = X^{\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}}$, so we can rotate $V$ by computing $V \cdot X^{-(\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i})} = V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$. In fact, we cannot directly compute the LWE decryption formula $-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ (or $\hat{b} - \sum_{i=0}^{k-1}{\hat{a}_is_i}$) without the knowledge of the LWE secret key $S$. Nevertheless, there is a mathematical work-around to compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ without the knowledge of the secret key $S$, provided we are given $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ at the TFHE setup stage. Note that $\{GGSW_{\vec{S}_{bk}, \sigma}^{\beta, l}(s_i)\}_{i=0}^{k-1}$ is a GGSW encryption of the LWE secret key $S$, encrypted by the GLWE secret key $\vec{S}_{bk}$ (i.e., a \textit{bootstrapping} key). We use $\vec{S}_{bk}$ to homomorphically compute $V \cdot X^{-\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}}$ (i.e., blindly rotate the coefficients of $V$ to the left by $\hat{b} + \sum_{i=0}^{k-1}{\hat{a}_is_i}$ positions), according to the following procedure:
 
@@ -777,7 +777,7 @@ $\text{ } = V \cdot X^{-(\hat{\Delta} m + \hat{e}_b)}$
 
 This means that the GLWE encryption of the final polynomial $V_k$ will have the coefficient $m$ in its constant term, as $V(X)$ is designed to have the mapping ($\hat\Delta m + \hat e_{*}, m$).
 
-Note that while we restrict the application's plaintext space usage to some continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$ (\autoref{subsec:tfhe-zero-padding}), this restriction does not exist in the ciphertext space. That is, it is okay for blind rotations to rotate $V(X)$ more than $n$ positions during the intermediate steps, because their invalid positions can be brought back to valid ones by their subsequent steps. Therefore, what matters for the noise bootstrapping correctness is only the completed state $V_k(X)$. The rotation-completed $V_k(X)$ must have been rotated $\hat\Delta m + \hat e$ positions to the left. Therefore, we only need to ensure that  $\hat\Delta m + \hat e$ falls within our pre-defined continuous $\dfrac{t}{2}$ modulo range within the $\mathbb{Z}_t$ domain, which is equivalent to ensuring that the aggregate rotation count is at most $n-1$ positions to avoid coefficient extraction of any double-signed contradicting coefficients. 
+Note that while we restrict the application's plaintext space usage to some contiguous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$ (\autoref{subsec:tfhe-zero-padding}), this restriction does not exist in the ciphertext space. That is, it is acceptable for blind rotations to rotate $V(X)$ more than $n$ positions during the intermediate steps because their invalid positions can be brought back to valid ones by subsequent steps. Therefore, what matters for the noise bootstrapping correctness is only the completed state $V_k(X)$. The rotation-completed $V_k(X)$ must have been rotated $\hat\Delta m + \hat e$ positions to the left. Therefore, we only need to ensure that  $\hat\Delta m + \hat e$ falls within our pre-defined contiguous $\dfrac{t}{2}$ modulo range within the $\mathbb{Z}_t$ domain, which is equivalent to ensuring that the aggregate rotation count is at most $n-1$ positions to avoid the extraction of any double-signed contradicting coefficients. 
 
 \begin{figure}[h!]
     \centering
@@ -788,15 +788,19 @@ Note that while we restrict the application's plaintext space usage to some cont
 
 \para{Homomorphic MUX Logic Gate:} In step 3, the formula $s_0 \cdot (V_0 \cdot X^{\hat{a}_0} - V_0) + V_0$ implements the MUX logic gate as shown in \autoref{fig:mux}, where in our case $s_0$ is the selection bit that chooses between the two inputs: $V_0$ and $V_0 \cdot X^{\hat{a}_0}$. If $s_0$ is 1, then the output is $V_0 \cdot X^{\hat{a}_0}$; otherwise, the output is $V_0$. In our design, the homomorphic computation of $s_0 \cdot (V_0 \cdot X^{\hat{a}_0} - V_0) + V_0$ effectively implements a homomorphic MUX gate, where the two inputs are LWE-encrypted and the selection bit is GGSW-encrypted.
 
+\para{Dimensions of the GLWE and GGSW Ciphertexts:} The GLWE ciphertext that encrypts the LUT polynomial $V(X)$ has a $k' \times n$ dimension, where $k'$ is the length of $\vec{A}$ (i.e., the number of public mask polynomials) and $n$ is the polynomial degree of $A, B,$ and $V$. The dimension of the GGSW ciphertext that encrypts each element of $\vec{S}_{\textit{bk}}$ (i.e., each coefficient of the bootstrapping key polynomials) is $(k' + 1) \times l \times (k' + 1)$. In practice, we let $k' = 1$, which simplifies these ciphertexts as RLWE and RGSW ciphertexts. The reason we set $k' = 1$ is for computational efficiency. 
 
 \subsubsection{Coefficient Extraction}
 
-Finally, we use the coefficient extraction technique (\autoref{subsec:tfhe-extraction}) to extract the rotated polynomial $V'(X)$'s constant term's coefficient as an encryption of $m$: $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$. At this point, the original $\textsf{LWE}$ ciphertext's old noise $\hat{e}_b$ has gone, and the bootstrapped new ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m)$ has a newly generated small noise $e_s$. 
+Next, we use the coefficient extraction technique (\autoref{subsec:tfhe-extraction}) to extract the constant term's coefficient of the rotated polynomial $V'(X)$' as an encryption of $m$: $\textsf{LWE}_{\vec{s}', \sigma}(\Delta m)$, where $\vec{s}'$ is a vector of length $k'\cdot n$. At this point, the original $\textsf{LWE}$ ciphertext's old noise $\hat{e}_b$ has disappeared, and the bootstrapped new ciphertext $\textsf{LWE}_{\vec{s}', \sigma}(\Delta m)$ has newly generated small noise $e_s$. 
 
-In fact, the homomorphic MUX logic in the blind rotation procedure (\autoref{subsec:bootstrapping-blind-rotation}) involves lots of ciphertext multiplications and additions, which can accumulate additional noise until we reach the point of coefficient extraction. In order to limit the accumulating noise during the series of MUX logic, we can carefully adjust the security parameters. For example, we can design a narrower Gaussian distribution for sampling the noise $e$, while designing a sufficiently large $n$ to compensate for the reduced noise. Meanwhile, increasing $q$ rather makes the system less secure, because it becomes more vulnerable to lattice reduction attacks. 
+In fact, the homomorphic MUX logic in the blind rotation procedure (\autoref{subsec:bootstrapping-blind-rotation}) involves numerous ciphertext multiplications and additions, which can accumulate additional noise until we reach the point of coefficient extraction. To limit the accumulating noise during the series of MUX logic operations, we can carefully adjust the security parameters. For example, we can design a narrower Gaussian distribution for sampling the noise $e$, while designing a sufficiently large $n$ to compensate for the reduced noise. Meanwhile, increasing $q$ can make the system less secure because it becomes more vulnerable to lattice reduction attacks. 
 
 
+\subsubsection{Key Switching}
+\label{subsec:bootstrapping-key-switch} 
 
+The output of the key extraction is $\textsf{LWE}_{\vec{s}', \sigma}(\Delta m)$, which is encrypted by a secret key $\vec{s}'$ whose length is $k'\cdot n$. For consistency, we need to switch its key from $\vec{s}' \rightarrow \vec{s}$, where $\vec{s}$ is our original $k$-length key. This key switching can be done by using the technique explained in Summary~\ref*{subsec:tfhe-key-switching} (in \autoref{subsec:tfhe-key-switching}).
 
 
 
@@ -807,9 +811,8 @@ TFHE's noise bootstrapping procedure is summarized as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-summary}} TFHE Noise Bootstrapping Procedure}}]
 
-\textbf{\underline{Lookup Table Encryption}:} Encrypt the LUT polynomial $V(X)$ as a GLWE ciphertext by using the bootstrapping key $\vec{S}_{bk}$.
+\textbf{\underline{Lookup Table Encryption}:} Encrypt the LUT polynomial $V(X)$ as a GLWE ciphertext by using the bootstrapping key $\vec{S}_{bk}$ whose length is $k'$. 
 
-$ $
   
 \begin{enumerate}
 \item \textbf{\underline{Modulus Switch}:} Change the modulus of the TFHE ciphertext $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e_b)$ from $q \rightarrow 2n$ to get $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta} m + \hat e_b)$, where $\hat\Delta = \Delta \cdot \dfrac{2n}{q} = \dfrac{2n}{t}$.
@@ -840,7 +843,12 @@ $\textsf{GLWE}_{\vec{S}_{bk}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}_{bk}, \s
 
 $ $
 
-\item \textbf{\underline{Coefficient Extraction}:} Homomorphically extract the constant term's coefficient $m$ from the rotated polynomial $V_k$, which is $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m)$. 
+\item \textbf{\underline{Coefficient Extraction}:} Homomorphically extract the constant term's coefficient $m$ from the rotated polynomial $V_k$, which is $\textsf{LWE}_{\vec{s}', \sigma}(\Delta m)$, where $\vec{s}'$ is a vector of length $k' \cdot n$. 
+
+$ $
+
+\item \textbf{\underline{Key Switching}:} Homomorphically switch the key of the LWE ciphertext from $\vec{s}' \rightarrow \vec{s}$. 
+
 %\item \textbf{Rescaling:} Multiply $\textsf{LWE}_{\vec{s}, \sigma}(\hat{\Delta}m)$ by $\dfrac{q}{2n}$ to get:  
 
 %$\dfrac{q}{2n} \cdot LWE_{S, \sigma}(\hat{\Delta}m)$
@@ -854,7 +862,11 @@ $ $
 
 $ $
 
-\para{\underline{Halving the Usable Plaintext Range}: } Problematically, the LUT polynomial V rotates negacyclically. To avoid this problem, we require the application to ensure that the plaintext $m$ uses only continuous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$. This way, we avoid rotating $V(X)$ more than $n-1$ positions that cause coefficient extraction of double-signed contradicting coefficients. 
+\para{\underline{Halving the Usable Plaintext Range}: } Problematically, the LUT polynomial V rotates negacyclically. To avoid this problem, we require the application to ensure that the plaintext $m$ uses only contiguous $\dfrac{t}{2}$ modulo values within $\mathbb{Z}_t$. This way, we avoid rotating $V(X)$ more than $n-1$ positions that cause coefficient extraction of double-signed contradicting coefficients. 
+
+$ $
+
+\para{\underline{Choice of $k'$}:} For computational efficiency, $k'$ is set to be 1, which simplifies the GLWE and GGSW ciphertexts as RLWE and RGSW ciphertexts.  
 %\item Piping the LUT output to a \textbf{negacyclic function}.
 %\item Multiplying the LUT output with \textbf{another negacyclically rotating polynomial}. 
 %\end{itemize}
@@ -934,7 +946,7 @@ This small difference in $\hat b$ comes from the aggregated noises of rounding $
 
 $ $
 
-\item \textbf{Blind Rotation:} We assume that the application avoids the problem of negacyclic polynomial rotation by ensuring that the usable plaintext values are the following continuous $\dfrac{8}{2}$ modulo values within $\mathbb{Z}_8 = \{-4, -3, -2, -1, 0, 1, 2, 3\}$, which are $\{-2, -1, 0, 1\}$. This implies that the only possible values of $i=\hat\Delta m + \hat e$ in $V(X)\cdot X^{i}$ will be: $i = \{-8, -7, \cdots, 6, 7\}$. Based on these requirements, \autoref{tab:lut} is the Lookup Table polynomial $V(X)$ that maps $\hat{\Delta} m + \hat{e}$ to $\Delta m$. 
+\item \textbf{Blind Rotation:} We assume that the application avoids the problem of negacyclic polynomial rotation by ensuring that the usable plaintext values are the following contiguous $\dfrac{8}{2}$ modulo values within $\mathbb{Z}_8 = \{-4, -3, -2, -1, 0, 1, 2, 3\}$, which are $\{-2, -1, 0, 1\}$. This implies that the only possible values of $i=\hat\Delta m + \hat e$ in $V(X)\cdot X^{i}$ will be: $i = \{-8, -7, \cdots, 6, 7\}$. Based on these requirements, \autoref{tab:lut} is the Lookup Table polynomial $V(X)$ that maps $\hat{\Delta} m + \hat{e}$ to $\Delta m$. 
 
 
 \begin{table}[h]
@@ -1135,7 +1147,7 @@ Besides implementing the homomorphic MUX logic gate used during blind rotation (
 %\end{figure}
 
 
-\autoref{tab:gate-and} is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT polynomial $V$ as $V(X) = \sum\limits_{i=0}^{7}-X^i$. The LUT polynomial $V(X)$ maps one half of the plaintext domain to $-1$, while the other half to $-1$ (as the terms wrap around the boundary of $n=7$). In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate inputs 0 and 1 are encoded as $-1$ and $1$, respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2) - 1$. Its output is positive if both inputs are positive (i.e. $1$, in which case the blind rotation will rotate $V$ to the left by $\hat\Delta\cdot 1 + e$ positions and the constant term's coefficient will be $1$. Thus, the output of blind rotation and coefficient extraction will be $\textsf{LWE}_{\vec{s}, \sigma}(\Delta \cdot 1)$ with a reduced noise, which is an encoding of $1$. This design can tolerate the maximum noise of $|e| = 1$. To endure bigger noises, we should increase $q$ and $n$. 
+\autoref{tab:gate-and} is a programmable bootstrapping design for an AND logic gate. For this application, we define the LUT polynomial $V$ as $V(X) = \sum\limits_{i=0}^{7}X^i$. The LUT polynomial $V(X)$ maps one half of the plaintext domain to $1$, while the other half to $-1$ (as the terms wrap around the boundary of $X^7$). In this design setup, each bit is separately encrypted as independent TFHE ciphertext. Gate inputs 0 and 1 are encoded as $-1$ and $1$, respectively. The linear combination (i.e., homomorphic computation formula) for an AND gate is $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2) - 1$. Its output is positive if both inputs are positive (i.e. $1$, in which case the blind rotation will rotate $V$ to the left by $\hat\Delta\cdot 1 + e$ positions and the constant term's coefficient will be $1$. Thus, the output of blind rotation and coefficient extraction will be $\textsf{LWE}_{\vec{s}, \sigma}(\Delta \cdot 1)$ with a reduced noise, which is an encoding of $1$. This design can tolerate the maximum noise of $|e| = 1$. To endure bigger noises, we should increase $q$ and $n$. 
 
 Note that the AND gate's LUT layout is negacyclic, which is a special case, thus we could use the entire $2n=16$ coefficient states in $V(X)$ for the AND gate mapping function's outputs, by leveraging $V(X)$'s innate property of negacyclic rotation. However, in many use cases, the LUT layout is not necessarily negacyclic like this AND gate example. Even our noise bootstrapping's LUT layout (\autoref{subsec:bootstrapping-overview}) was not negacyclic, but a unity function (as it simply removes the noise). Thus, for most use cases, we need to use only $\dfrac{t}{2}$ out of $t$ plaintext space to avoid more than $n-1$ rotations of $V(X)$ (\autoref{subsec:tfhe-zero-padding}). 
 

@@ -6,15 +6,15 @@ $ $
 
 Suppose we have two GLWE ciphertexts encrypting two different plaintexts $M^{\langle 1 \rangle}, M^{\langle 2 \rangle}$:
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = C^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = \textsf{ct}^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = C^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $ $
 
 \noindent Let's define the following ciphertext addition operation: 
 
-$C^{\langle 1 \rangle} + C^{\langle 2 \rangle} = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
+$\textsf{ct}^{\langle 1 \rangle} + \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
 
 $ $
 
@@ -74,10 +74,10 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangl
 
 $ $
 
-\para{Noise Growth:} Note that after decryption, the original ciphertext $C$'s noise has increased from $E^{\langle 1 \rangle}$ and $E^{\langle 2 \rangle}$ to $E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$. However, if the noise is sampled from a Gaussian distribution with the mean $\mu = 0$, then the addition of multiple noises will converge to 0. Therefore, there is not much issue of noise growth in the homomorphic addition of two ciphertexts. 
+\para{Noise Growth:} Note that after decryption, the original ciphertext $C$'s noise has increased from $E^{\langle 1 \rangle}$ and $E^{\langle 2 \rangle}$ to $E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$. However, if the noise is sampled from a Gaussian distribution with the mean $\mu = 0$, then the noise variance grows linearly with the number of additions and eventually consumes the budget $\Delta/2$. However, this growth rate is significantly lower than that of homomorphic multiplication, where noise typically grows multiplicatively.
 
 $ $
 
-\para{Hard Threshold on the Plaintext's Value Without Modulo Reduction $t$:} During homomorphic operations (e.g., addition or multiplication) and decryption, the $AS$ and $B$ terms in the $B = AS + \Delta M + E + kq$ relation are allowed to wrap around modulo $q$ indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always subtract $B$ by $AS$, outputting $\Delta M + E + k'q = \Delta M + E \pmod q$, and the $k'q$ term is always exactly eliminated by modulo reduction by $q$. After that, we can correctly recover $M$ by computing $\left\lceil \dfrac{\Delta M + E \bmod q}{\Delta}\right\rfloor$, eliminating the noise $E$. However, as we explained in Summary~\ref*{subsubsec:scaling-factor-computation} in \autoref{subsubsec:scaling-factor-computation}), if the error bound $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ breaks (where $e$ can be any coefficient of $E$), then modulo reduction by $q$ starts to contaminate the scaled plaintext bits. This violation of the error bound occurs when the noise $e$ grows too much over homomorphic operations, or the ciphertext modulus $q$ is not sufficiently larger than the plaintext modulus $t$. If $q \gg t$, the scheme can take on a big $kt$ value (i.e., the plaintext value can wrap around the plaintext modulus $t$ many times across its homomorphic operations). The error bound constraint  $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is used in the BFV scheme.  %This requirement on the valid range of the plaintext term is needed also to accomplish correct modulus switch of FHE ciphertexts to be later explained in \autoref{sec:modulus-rescaling}.  
+\para{Hard Threshold on the Plaintext's Value Without Modulo Reduction $t$:} During homomorphic operations (e.g., addition or multiplication) and decryption, the $AS$ and $B$ terms in the $B = AS + \Delta M + E + kq$ relation are allowed to wrap around modulo $q$ indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always subtract $B$ by $AS$, outputting $\Delta M + E + k'q = \Delta M + E \pmod q$, and the $k'q$ term is always exactly eliminated by modulo reduction by $q$. After that, we can correctly recover $M$ by computing $\left\lceil \dfrac{\Delta M + E \bmod q}{\Delta}\right\rfloor$, eliminating the noise $E$. However, as we explained in Summary~\ref*{subsubsec:lwe-noise-bound} (in \autoref{subsubsec:lwe-noise-bound}), if the error bound $|-\epsilon k t + e| < \dfrac{\Delta}{2}$ breaks (where $e$ can be any coefficient of $E$), then modulo reduction by $q$ starts to contaminate the scaled plaintext bits. This violation of the error bound occurs when the noise $e$ grows too much over homomorphic operations, or the ciphertext modulus $q$ is not sufficiently larger than the plaintext modulus $t$. If $q \gg t$, the scheme can take on a big $kt$ value (i.e., the plaintext value can wrap around the plaintext modulus $t$ many times across its homomorphic operations). The error bound constraint  $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is used in the BFV scheme.  %This requirement on the valid range of the plaintext term is needed also to accomplish correct modulus switch of FHE ciphertexts to be later explained in \autoref{sec:modulus-rescaling}.  
 
  

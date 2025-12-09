@@ -1,10 +1,10 @@
-The GLWE cryptosystem is a generalized form to encompass both the LWE and RLWE cryptosystems. The GLWE cryptosystem's ciphertext is a tuple $(\{A_i\}_{i=0}^{k-1}, B)$, where $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$. The public key $\{A_i\}_{i=0}^{k-1}$ and the secret key $\{S_i\}_{i=0}^{k-1}$ are a list of $k$ $(n-1)$-degree polynomials, each. The message $M$ and the noise $E$ are an $(n-1)$-degree polynomial, each. Like in LWE and GLWE, a new public key $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(\{A_i\}_{i=0}^{k-1}, B)$ instead of $(\{A_i\}_{i=0}^{k-1, \langle j \rangle}, B^{\langle j \rangle})$ for simplicity.
+The GLWE cryptosystem is a generalized form to encompass both the LWE and RLWE cryptosystems. The GLWE cryptosystem's ciphertext is a tuple $(\{A_i\}_{i=0}^{k-1}, B)$, where $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$. The public key $\{A_i\}_{i=0}^{k-1}$ and the secret key $\{S_i\}_{i=0}^{k-1}$ are a list of $k$ $(n-1)$-degree polynomials, each. The message $M$ and the noise $E$ are $(n-1)$-degree polynomials, each. Like in LWE and RLWE, a random public mask $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(\{A_i\}_{i=0}^{k-1}, B)$ instead of $(\{A_i\}_{i=0}^{k-1, \langle j \rangle}, B^{\langle j \rangle})$ for simplicity.
 
 
 
 
 \subsection{Setup}
-Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a list of $k$ $(n-1)$-degree polynomials as a secret key, where each polynomial coefficient is a randomly picked binary number in $\{0, 1\}$ (i.e., $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$). Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
+Let $t$ be the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a list of $k$ $(n-1)$-degree polynomials as a secret key, where each polynomial coefficient is a randomly picked ternary number in $\{-1, 0, 1\}$ (i.e., $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}^k$). Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ be the scaling factor of plaintext.
 
 Notice that GLWE's setup parameters are similar to that of RLWE. One difference is that $S$ is not an $(n-1)$-degree polynomial encoding $n$ secret coefficients, but a list of $k$ such $(n-1)$-degree polynomials encoding total $n \cdot k$ secret coefficients.
 
@@ -12,7 +12,7 @@ Notice that GLWE's setup parameters are similar to that of RLWE. One difference 
 \subsection{Encryption}
 \label{subsec:glwe-enc}
 
-Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{(n, t)}$ whose coefficients represent the plaintext numbers to encrypt.
+Suppose we have an $(n-1)$-degree polynomial $M \in \mathcal{R}_{\langle n, t \rangle}$ whose coefficients represent the plaintext numbers to encrypt.
 
 
 \begin{enumerate}
@@ -30,7 +30,7 @@ $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:glwe-enc}} GLWE Encryption}}]
 
-\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$
+\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}^k$
 
 $ $
 
@@ -60,7 +60,7 @@ $ $
 \begin{enumerate}
 \item Given the ciphertext $(\{A_i\}_{i=0}^{k-1}, B)$ where $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$, compute $B - \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} = \Delta \cdot M + E$. 
 \item Round each coefficient of the polynomial $\Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$ to the nearest multiple of $\Delta$ (i.e., round it as a base $\Delta$ number), which is denoted as $\lceil \Delta \cdot M + E \rfloor_{\Delta}$. This operation successfully eliminates $E$ and gives $\Delta \cdot M$. One caveat is that $E$'s each coefficient $e_i$ has to be $e_i < \dfrac{\Delta}{2}$ to be eliminated during the rounding. Otherwise, some of $e_i$'s higher bits will overlap the plaintext $m_i$ coefficient's lower bit and won't be eliminated during decryption, corrupting the plaintext $m_1$.
-\item Compute $\dfrac{\Delta \cdot M} {\Delta}$, which is equivalent to right-shifting each polynomial coefficient in $\Delta \cdot M$ by $\text{log}_2 \Delta$ bits. 
+\item Compute $\dfrac{\Delta \cdot M} {\Delta}$, which is equivalent to scaling down each polynomial coefficient in $\Delta \cdot M$ by $\Delta$. 
 \end{enumerate}
 
 $ $
@@ -93,7 +93,7 @@ For correct decryption, every noise coefficient $e_i$ of polynomial $E$ should b
 %\item \textbf{Size of $\bm{q}$:} Increasing $q$ increases the ciphertext molulus space, making it hard to attack the cryptosystem. 
 %Also, a large modulo space creates an enough separation between the plaintext bits and the noise bits in the ciphertext, which reduces the growth rate of the noise bits across ciphertext multiplications (will be discussed in \autoref{subsubsec:glwe-mult-plain-discussion}) and thus we can do a more number of ciphertext multiplications before the noise bits overflow to the plaintext bit area. 
 \item \textbf{Size of $\bm{k}$:} A large $k$ increases the number of the secret key polynomials $(S_0, S_1, \gap{$\cdots$}, S_k)$ and the number of the one-time public key polynomials $(A_0, A_1, \gap{$\cdots$}, A_k)$, which makes it more difficult for the attacker to guess the complete secret keys. Meanwhile, there is only a single $M$ and $E$ polynomials per GLWE ciphertext, regardless of the size of $k$. 
-\item \textbf{Reducing the Ciphertext Size:} The public key $\{A_i\}_{i=0}^{k-1}$ has to be created for each ciphertext, which is a big size. To reduce this size, each ciphertext can instead include the seed $d$ for the pseudo-random number generation hash function $H$. Then, the public key can be lively computed $k-1$ times upon each encryption \& decryption as $\{H(s), H(H(s)), H(H(H(s)), \gap{$\cdots$} \}$. Note that $H$, by nature, generates the same sequence of numbers given the same random initial seed $d$. 
+\item \textbf{Reducing the Ciphertext Size:} The public key $\{A_i\}_{i=0}^{k-1}$ has to be created for each ciphertext, which is a big size. To reduce this size, each ciphertext can instead include the seed $d$ for the pseudo-random number generation hash function $H$. Then, the public key can be dynamically computed $k-1$ times upon each encryption \& decryption as $\{H(s), H(H(s)), H(H(H(s)), \gap{$\cdots$} \}$. Note that $H$, by nature, generates the same sequence of numbers given the same random initial seed $d$. 
 \end{enumerate}
 
 \subsection{An Alternative Version of GLWE}
@@ -103,7 +103,7 @@ The following is an alternative version of \tboxlabel{\ref*{subsec:glwe-enc}}, w
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:glwe-alternative}} An Alternative GLWE Cryptosystem}}]
 
-\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$
+\textbf{\underline{Initial Setup}:} $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, $\{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}^k$
 
 $ $
 
@@ -157,10 +157,10 @@ The encryption scheme in \autoref{subsec:glwe-enc} assumes that it is the secret
 \textbf{\underline{Initial Setup}:} 
 \begin{itemize}
 \item The scaling factor $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$
-\item The secret key $\vec{S} = \{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}^k$
+\item The secret key $\vec{S} = \{S_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}^k$
 \item The public key pair $(\mathit{PK}_1, \vv{\mathit{PK}}_2) \in \mathcal{R}_{\langle n, q \rangle}^{k+1}$ is generated as follows:
 
-$\vec{A} = \{A_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}^k$, \text{ } $E \xleftarrow{\sigma} \mathcal{R}_{\langle n, q \rangle}$
+$\vec{A} = \{A_i\}_{i=0}^{k-1} \xleftarrow{\$} \mathcal{R}_{\langle n, q \rangle}^k$, \text{ } $E \xleftarrow{\chi_{\sigma}} \mathcal{R}_{\langle n, q \rangle}$
 
 $\mathit{PK}_1 = \vec{A} \cdot \vec{S} + E \in \mathcal{R}_{\langle n, q \rangle}$
 
@@ -170,7 +170,7 @@ $\vv{\mathit{PK}}_2 = \vec{A} \in \mathcal{R}_{\langle n, q \rangle}^{k}$
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, t \rangle}$, \text{ } $U \xleftarrow{\$} \mathcal{R}_{\langle n,2 \rangle}, \text{ } E_1 \xleftarrow{\sigma} \mathcal{R}_{\langle n,q \rangle}, \text{ } \vec{E}_2 \xleftarrow{\sigma} \mathcal{R}_{\langle n,q \rangle}^k$
+\textbf{\underline{Encryption Input}:} $M \in \mathcal{R}_{\langle n, t \rangle}$, \text{ } $U \xleftarrow{\$} \mathcal{R}_{\langle n,\textit{tern} \rangle}, \text{ } E_1 \xleftarrow{\chi_{\sigma}} \mathcal{R}_{\langle n,q \rangle}, \text{ } \vec{E}_2 \xleftarrow{\chi_{\sigma}} \mathcal{R}_{\langle n,q \rangle}^k$
 
 $ $
 
@@ -182,7 +182,7 @@ $ $
 
 $B = \mathit{PK}_1\cdot U + \Delta  M + E_1 \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
-$\vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2 \in \mathcal{R}_{\langle n,q \rangle}^{k}$ \textcolor{red}{\text{ } \# $\vv{\mathit{PK}}_2 \cdot U$ multiplies $U$ to each element of $\vv{\mathit{PK}}_2$}
+$\vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2 \in \mathcal{R}_{\langle n,q \rangle}^{k}$ \textcolor{red}{\text{ } \# $\vv{\mathit{PK}}_2 \cdot U$ multiplies each element of $\vv{\mathit{PK}}_2$ by $U$}
 
 \item $\textsf{GLWE}_{S,\sigma}(\Delta M) = (\vec{D}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k+1}$ 
 

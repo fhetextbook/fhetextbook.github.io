@@ -297,9 +297,9 @@ BFV encrypts and decrypts ciphertexts based on the RLWE cryptosystem (\autoref{s
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bfv-enc-dec}} BFV Encryption and Decryption}}]
 
-\textbf{\underline{Initial Setup}:} $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, 2 \rangle}$
+\textbf{\underline{Initial Setup}:} $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$
 
-, where plaintext modulus $t$ is either a prime ($p$) or a power of prime ($p^r$), and ciphertext modulus $q \gg t$. As for the coefficients of polynomial $S$, they can be either binary (i.e., $\{0, 1\}$) or ternary (i.e., $\{-1, 0, 1\}$).
+, where plaintext modulus $t$ is either a prime ($p$) or a power of prime ($p^r$), and ciphertext modulus $q \gg t$. As for the coefficients of polynomial $S$, they are ternary (i.e., $\{-1, 0, 1\}$).
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -326,9 +326,6 @@ $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = \left\lceil\dfrac{B + A \cdot S \b
 (The noise $E = \sum\limits_{i=0}^{n-1}e_iX^i$ gets eliminated by the rounding process) 
 
 
-%\item Scale down $\Bigl\lceil \dfrac{ \Delta  M + E }{\Delta}\Bigr\rfloor = M  \text{ } \in \mathcal{R}_{\langle n, t \rangle}$
-
-
 
 $ $
 
@@ -340,13 +337,6 @@ As explained in Summary~\ref*{subsubsec:lwe-noise-bound} (in \autoref{subsubsec:
 
 
 We will explain the conditions for BFV's correct decryption in more detail in \autoref{subsubsec:bfv-noise-analysis}.
-
-%\autoref{subsubsec:scaling-factor-computation}
-
-
-%An important difference from the encryption and decryption process in \autoref{subsec:glwe-enc} is that the plaintext polynomial $M$ scales up during the encoding process and scales down during the decoding process, not during the encryption/decryption process. Therefore, the noise $E$ gets eliminated during the decoding process instead of during the decryption process. 
-
-%Another important difference from \autoref{subsec:glwe-enc} is that after eliminating the noise $E$, we apply modulo reduction by $t$ in order to keep the plaintext polynomial's every coefficient within modulo $t$ for their correct decoding into input vector slots. Because we apply modulo reduction by $t$ at this point, the plaintext polynomial's each coefficient $\Delta m_i$ should never overflow or underflow the ciphertext modulus $q_l$, because otherwise, when we apply a ciphertext modulo reduction by $q_l$ to a ciphertext in the middle of some homomorphic operation, the plaintext polynomial's coefficients will get wrapped around out-of-sync. In fact, this out-of-sync modulo wrapping of plaintext coefficients can be avoided if every multiplicative level's ciphertext modulus $q_l$ is divisible by the plaintext modulus $t$, because in that case, modulo reduction by $q_l$ will align (i.e., sync) with modulo reduction by $t$. However, if we use CRT for designing the modulus chain of ciphertexts, it's not the case that $q_l$ is divisible by $t$, because each $q_l$ is a prime number. Therefore, we instead enforce each $\Delta m_i$ never to overflow or underflow its ciphertext's current multiplicative level's ciphertext modulus $q_l$. 
 
 
 

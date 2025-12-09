@@ -7,11 +7,11 @@ Key switching is a process to change a GLWE ciphertext's secret key from $S$ to 
 
 $ $
 
-\noindent Remember that $\textsf{GLWE}_{S,\sigma}(\Delta M) = (A_0, A_1, \gap{$\cdots$} , A_{k-1}, B) \in \mathcal{R}_{\langle n, q \rangle }^{k + 1}$
+\noindent Remember that $\textsf{GLWE}_{S,\sigma}(\Delta M) = (A_0, A_1, \ldots , A_{k-1}, B) \in \mathcal{R}_{\langle n, q \rangle }^{k + 1}$
 
 , where $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$
 
-, and the secret key $S$ is a list of $k$ polynomials: $S = (S_0, S_1, \gap{$\cdots$} S_{k-1})$
+, and the secret key $S$ is a list of $k$ polynomials: $S = (S_0, S_1, \ldots, S_{k-1})$
 
 $ $
 
@@ -21,23 +21,23 @@ $\textsf{GLev}_{S, \sigma}^{\beta, l}(M) = \Bigl \{\text{GLWE}_{S, \sigma}\Bigl 
 
 $ $
 
-\noindent Now, let's denote each of the $k$ key-switching keys as follows:
+\noindent Now, let us denote each of the $k$ key-switching keys as follows:
 
 $\mathit{KSK}_i = \textsf{GLev}_{S', \sigma}^{\beta, l}(S_i)$ \\
 $ = \left ( \textsf{GLWE}_{S', \sigma} \left ( 
  \dfrac{q}{\beta^1}S_i \right ), \textsf{GLWE}_{S', \sigma} \left ( 
- \dfrac{q}{\beta^2}S_i \right ), \gap{$\cdots$}, \textsf{GLWE}_{S', \sigma} \left ( 
- \dfrac{q}{\beta^l}S_i \right ) \right ) \in \mathcal{R}_{\langle n, q \rangle }^{(k + 1) \cdot l}$
+ \dfrac{q}{\beta^2}S_i \right ), \ldots, \textsf{GLWE}_{S', \sigma} \left ( 
+ \dfrac{q}{\beta^l}S_i \right ) \right ) \in \mathcal{R}_{\langle n, q \rangle }^{(k' + 1) \cdot l}$
 
 $ $
 
-\noindent, which is a list of GLWE encryptions of the secret key $S$ by $S'$. Then, the GLWE ciphertext's key can be switched from $S \rightarrow S'$ as follows: 
+\noindent , which is a list of GLWE encryptions of the secret key $S$ by $S'$, and the new secret key $S'$ is a list of $k'$ polynomials, $(S'_0, S'_1, \ldots, S'_{k'-1})$. Then, the GLWE ciphertext's key can be switched from $S \rightarrow S'$ as follows: 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{sec:glwe-key-switching}} GLWE Key Switching}}]
-$\textsf{GLWE}_{S',\sigma}(\Delta M) = (\overbrace{0, 0, \gap{$\cdots$} 0}^k, B) - \sum \limits_{i=0}^{k-1} A_i \cdot S_i$
+$\textsf{GLWE}_{S',\sigma}(\Delta M) = (\overbrace{0, 0, \ldots, 0}^{k'}, B) - \sum \limits_{i=0}^{k-1} A_i \cdot S_i$
 
-\text{ } \text{ } $ = (0, 0, \gap{$\cdots$} 0, B) - \sum \limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(A_i), \mathit{KSK}_i \rangle$
+\text{ } \text{ } $ = (0, 0, \ldots, 0, B) - \sum \limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(A_i), \mathit{KSK}_i \rangle$
 \end{tcolorbox}
 
 
@@ -49,7 +49,7 @@ $\textsf{GLWE}_{S',\sigma}(\Delta M) = (\overbrace{0, 0, \gap{$\cdots$} 0}^k, B)
 
 $ $
 
-$\textsf{Decomp}^{\beta, l}(A_i) = (A_{\langle i,1 \rangle}, A_{\langle i,2 \rangle}, \gap{$\cdots$} A_{\langle i,l \rangle})$, where
+$\textsf{Decomp}^{\beta, l}(A_i) = (A_{\langle i,1 \rangle}, A_{\langle i,2 \rangle}, \ldots, A_{\langle i,l \rangle})$, where
 
 $ $
 
@@ -60,14 +60,14 @@ $ $
 \item $\langle \textsf{Decomp}^{\beta, l}(A_i), \mathit{KSK}_i \rangle $ \\
 $ =  A_{\langle i,1 \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
  \dfrac{q}{\beta^1}S_i \right ) + A_{\langle i,2 \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
- \dfrac{q}{\beta^2}S_i \right ) + \gap{$\cdots$} + A_{\langle i,l \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
+ \dfrac{q}{\beta^2}S_i \right ) + \cdots + A_{\langle i,l \rangle} \cdot \textsf{GLWE}_{S', \sigma} \left ( 
  \dfrac{q}{\beta^l}S_i \right ) $ 
 \textcolor{red}{ $\rhd$ where each \textsf{GLWE} ciphertext is an encryption of $S_i\dfrac{q}{\beta}, S_i\dfrac{q}{\beta^2}, \cdots, S_i\dfrac{q}{\beta^l}$ as plaintext with the plaintext scaling factor 1}
 
 $ $
  
 $= \textsf{GLWE}_{S', \sigma} \left ( 
- \left ( A_{\langle i,1 \rangle} \dfrac{q}{\beta^1} + A_{\langle i,2 \rangle} \dfrac{q}{\beta^2} + \gap{$\cdots$} A_{\langle i,l \rangle} \dfrac{q}{\beta^l} \right ) \cdot S_i \right )$ 
+ \left ( A_{\langle i,1 \rangle} \dfrac{q}{\beta^1} + A_{\langle i,2 \rangle} \dfrac{q}{\beta^2} + \cdots + A_{\langle i,l \rangle} \dfrac{q}{\beta^l} \right ) \cdot S_i \right )$ 
 
  
 $= \textsf{GLWE}_{S', \sigma} \left ( 
@@ -84,7 +84,7 @@ $ $
 
 $ $
  
- \item $B$ is equivalent to a trivial GLWE encryption with $S'$, where its every $A_1, A_2, \cdots$ is 0. That is, $\textsf{GLWE}_{S', \sigma}(B) = (\overbrace{0, 0, \gap{$\cdots$}}^k, B)$. Note that $\textsf{GLWE}_{S', \sigma}(B)$ can be created without the knowledge of $S'$, because its all $A_iS_i$ terms are $0$. 
+ \item $B$ is equivalent to a trivial GLWE encryption with $S'$, where its every $A_0, A_1, \ldots, A_{k'-1}$ is 0. That is, $\textsf{GLWE}_{S', \sigma}(B) = (\overbrace{0, 0, \ldots}^{k'}, B)$. Note that $\textsf{GLWE}_{S', \sigma}(B)$ can be created without the knowledge of $S'$, because its all $A_iS_i$ terms are $0$. 
 
 $ $
  
@@ -96,19 +96,19 @@ $ $
 
 $\textsf{GLWE}_{S', \sigma}(B) - \textsf{GLWE}_{S', \sigma} \left(\sum \limits_{i=0}^{k-1} (A_i  S_i)\right)$
 
-$ = (\overbrace{0, 0, \gap{$\cdots$}}^k, B) - (\overbrace{A'_0, A'_1, \gap{$\cdots$}, A'_k}^k, B')  $ \text { } \textcolor{red}{ $\rhd$ where $B' = \sum\limits_{i=0}^{k-1} A'_iS'_i + \sum\limits_{i=0}^{k-1} A_iS_i + E'$}
+$ = (\overbrace{0, 0, \ldots}^{k'}, B) - (\overbrace{A'_0, A'_1, \ldots, A'_{k'-1}}^{k'}, B')  $ \text { } \textcolor{red}{ $\rhd$ where $B' = \sum\limits_{i=0}^{k'-1} A'_iS'_i + \sum\limits_{i=0}^{k-1} A_iS_i + E'$}
 
-$(\overbrace{-A'_0, -A'_1, \gap{$\cdots$}, -A'_k}^k, \text{ } B - B')$
+$(\overbrace{-A'_0, -A'_1, \ldots, -A'_{k'-1}}^{k'}, \text{ } B - B')$
 
 $ $
 
 The decryption of the above ciphertext gives us:
 
-$ \textsf{GLWE}_{S', \sigma}^{-1} \bm{\Big(} \text{ } (\overbrace{-A'_0, -A'_1, \gap{$\cdots$}, -A'_k}^k, \text{ } B - B') \text{ } \bm{\Big)}$
+$ \textsf{GLWE}_{S', \sigma}^{-1} \bm{\Big(} \text{ } (\overbrace{-A'_0, -A'_1, \ldots, -A'_{k'-1}}^{k'}, \text{ } B - B') \text{ } \bm{\Big)}$
 
-$ = B -  B' - \sum\limits_{i=0}^{k-1} -A'_iS_i'$
+$ = B -  B' - \sum\limits_{i=0}^{k'-1} -A'_iS_i'$
 
-$= B - \sum\limits_{i=0}^{k-1} A'_iS'_i - \sum\limits_{i=0}^{k-1} A_iS_i - E' + \sum\limits_{i=0}^{k-1} A'_iS_i'$
+$= B - \sum\limits_{i=0}^{k'-1} A'_iS'_i - \sum\limits_{i=0}^{k-1} A_iS_i - E' + \sum\limits_{i=0}^{k'-1} A'_iS_i'$
 
 $= B - \sum\limits_{i=0}^{k-1} A_iS_i - E'$
 
@@ -118,7 +118,7 @@ Strictly speaking, $B - \sum\limits_{i=0}^{k-1} A_iS_i = \Delta M + E + Kq$ wher
 
 $ $
 
-\item Thus, $ (0, 0, \gap{$\cdots$} , B) - \sum \limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(A_i), \mathit{KSK}_i \rangle \approx \textsf{GLWE}_{S',\sigma}(\Delta M) $ 
+\item Thus, $ (0, 0, \ldots , B) - \sum \limits_{i=0}^{k-1} \langle \textsf{Decomp}^{\beta, l}(A_i), \mathit{KSK}_i \rangle \approx \textsf{GLWE}_{S',\sigma}(\Delta M) $ 
 
 $\textsf{GLWE}_{S',\sigma}(\Delta M)$ is an encryption of plaintext $\Delta M$ with the plaintext scaling factor 1. However, we can theoretically see this as an encryption of plaintext $M$ with the plaintext scaling factor $\Delta$. This way, we can recover the ciphertext's original scaling factor $\Delta$ without any additional computation. 
 \end{enumerate}

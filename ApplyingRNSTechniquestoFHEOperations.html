@@ -9,12 +9,12 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 815 --><div class='crosslinks'><p class='noindent'>[<a href='DecomposingMultiplicationtextsfDecompMulttextsubscriptRNS.html'>prev</a>][<a href='RNSvariantFHESchemes.html#ApplyingRNSTechniquestoFHEOperations.html'>parent</a>]</p></div>
-   <h4 class='subsectionHead' id='applying-rns-techniques-to-fhe-operations'><span class='titlemark'>D-5.10   </span> <a id='x162-238000D-5.10'></a>Applying RNS Techniques to FHE Operations</h4>
+   <h4 class='subsectionHead' id='applying-rns-techniques-to-fhe-operations'><span class='titlemark'>D-5.10   </span> <a id='x162-237000D-5.10'></a>Applying RNS Techniques to FHE Operations</h4>
 <!-- l. 818 --><p class='noindent'>This subsection will explain how the RNS primitives we have learned so far are used to handle FHE
 operations for RNS-based ciphertexts in BFV, CKKS, and BGV.
    
 </p>
-   <h5 class='subsubsectionHead' id='addition-and-multiplication-of-polynomials'><span class='titlemark'>D-5.10.1   </span> <a id='x162-239000D-5.10.1'></a>Addition and Multiplication of Polynomials</h5>
+   <h5 class='subsubsectionHead' id='addition-and-multiplication-of-polynomials'><span class='titlemark'>D-5.10.1   </span> <a id='x162-238000D-5.10.1'></a>Addition and Multiplication of Polynomials</h5>
 <!-- l. 824 --><p class='noindent'>In BFV, CKKS, and BGV, ciphertext-to-plaintext addition, ciphertext-to-ciphertext addition,
 and ciphertext-to-plaintext multiplication are performed by only involving modulo additions
 and multiplications among polynomial coefficients. Therefore, we can represent each
@@ -60,7 +60,7 @@ ciphertext-to-ciphertext addition, and ciphertext-to-plaintext multiplication of
 (e.g., 1000 bits big) based on small RNS residues (e.g., 30 bits each).
    
 </p>
-   <h5 class='subsubsectionHead' id='key-switching1'><span class='titlemark'>D-5.10.2   </span> <a id='x162-240000D-5.10.2'></a>Key Switching</h5>
+   <h5 class='subsubsectionHead' id='key-switching1'><span class='titlemark'>D-5.10.2   </span> <a id='x162-239000D-5.10.2'></a>Key Switching</h5>
 <!-- l. 862 --><p class='noindent'>In BFV or CKKS, an RNS-based ciphertext’s key-switching operation from
 <!-- l. 862 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup></mrow></math> is
 performed by computing the following formula in RNS vectors:
@@ -77,7 +77,7 @@ performed by computing the following in RNS vectors:
 </p><!-- l. 875 --><p class='indent'>   <!-- l. 875 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi>M</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow><mi>β</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>l</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖾𝗏</mtext></mstyle></mrow><mrow><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mi>β</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>l</mi></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mi>S</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></mrow></math>
    
 </p>
-   <h5 class='subsubsectionHead' id='input-slot-rotation'><span class='titlemark'>D-5.10.3   </span> <a id='x162-241000D-5.10.3'></a>Input Slot Rotation</h5>
+   <h5 class='subsubsectionHead' id='input-slot-rotation'><span class='titlemark'>D-5.10.3   </span> <a id='x162-240000D-5.10.3'></a>Input Slot Rotation</h5>
 <!-- l. 881 --><p class='noindent'>In BFV or CKKS, an RNS-based ciphertext’s input slot rotation is performed by computing the following
 formulas in RNS vectors:
 </p><!-- l. 883 --><p class='indent'>   <!-- l. 883 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
@@ -118,7 +118,7 @@ following formulas in RNS vectors:
 CKKS.
    
 </p>
-   <h5 class='subsubsectionHead' id='bfvs-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.4   </span> <a id='x162-242000D-5.10.4'></a>BFV’s Ciphertext-to-Ciphertext Multiplication</h5>
+   <h5 class='subsubsectionHead' id='bfvs-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.4   </span> <a id='x162-241000D-5.10.4'></a>BFV’s Ciphertext-to-Ciphertext Multiplication</h5>
 <!-- l. 917 --><p class='noindent'>BFV’s ciphertext-to-ciphertext multiplication (Summary D-2.7.5 in <a href='CiphertexttoCiphertextMultiplication.html#summary1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7.5<!-- tex4ht:ref: subsubsec:bfv-mult-cipher-summary  --></a>) comprises <span class='rm-lmss-10x-x-109'>ModRaise</span>
 <!-- l. 917 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>→</mo></mrow></math> polynomial
 multiplication <!-- l. 917 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-rel' stretchy='false'>→</mo></mrow></math>
@@ -254,7 +254,7 @@ corresponds to the rescaling operation. We will explain how each of these steps 
 </p>
    </dd></dl>
    
-   <h5 class='subsubsectionHead' id='ckkss-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.5   </span> <a id='x162-243000D-5.10.5'></a>CKKS’s Ciphertext-to-Ciphertext Multiplication</h5>
+   <h5 class='subsubsectionHead' id='ckkss-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.5   </span> <a id='x162-242000D-5.10.5'></a>CKKS’s Ciphertext-to-Ciphertext Multiplication</h5>
 <!-- l. 1045 --><p class='noindent'>CKKS’s ciphertext-to-ciphertext multiplication (Summary D-3.5.6 in <a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#summary4'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.6<!-- tex4ht:ref: subsubsec:ckks-mult-cipher-summary  --></a>) is almost the same as BFV’s, except
 that CKKS does not need the <span class='rm-lmss-10x-x-109'>ModRaise </span>operation in the beginning (because each multiplicative level’s modulus
 <!-- l. 1045 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub></math> is large enough to hold a
@@ -269,7 +269,7 @@ ciphertext-to-ciphertext multiplication only needs to perform a modulus switch t
 level.
    
 </p>
-   <h5 class='subsubsectionHead' id='bgvs-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.6   </span> <a id='x162-244000D-5.10.6'></a>BGV’s Ciphertext-to-Ciphertext Multiplication</h5>
+   <h5 class='subsubsectionHead' id='bgvs-ciphertexttociphertext-multiplication'><span class='titlemark'>D-5.10.6   </span> <a id='x162-243000D-5.10.6'></a>BGV’s Ciphertext-to-Ciphertext Multiplication</h5>
 <!-- l. 1053 --><p class='noindent'>BGV’s ciphertext-to-ciphertext multiplication (Summary D-4.8 in <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.8<!-- tex4ht:ref: subsec:bgv-mult-cipher  --></a>) is
 almost the same as CKKS’s, except that BGV uses its own modulus switch
 (<!-- l. 1053 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖬𝗈𝖽𝖲𝗐𝗂𝗍𝖼𝗁</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖦𝖵</mtext></mstyle></mrow></msubsup></math> as
@@ -279,7 +279,7 @@ ciphertext-to-ciphertext multiplication is the same as CKKS’s, except that <sp
 <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖦𝖵</mtext></mstyle></mrow></msubsup></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='bfvs-bootstrapping'><span class='titlemark'>D-5.10.7   </span> <a id='x162-245000D-5.10.7'></a>BFV’s Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='bfvs-bootstrapping'><span class='titlemark'>D-5.10.7   </span> <a id='x162-244000D-5.10.7'></a>BFV’s Bootstrapping</h5>
 <!-- l. 1059 --><p class='noindent'>BFV’s original bootstrapping procedure (Summary D-2.11.7 in <a href='NoiseBootstrapping1.html#summary3'><span class='ts1-lmr10-x-x-109'>§</span>D-2.11.7<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>) is as follows: (1) modulus switch
 from <!-- l. 1059 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi></mrow></msup></mrow></math>;
 (2) homomorphic decryption; (3) <span class='rm-lmss-10x-x-109'>CoeffToSlot</span>; (4) <span class='rm-lmss-10x-x-109'>EvalExp</span>; (5) <span class='rm-lmss-10x-x-109'>SlotToCoeff</span>; and (6) re-interpretation.
@@ -392,7 +392,7 @@ would decrypt to:
 </p>
    </dd></dl>
    
-   <h5 class='subsubsectionHead' id='ckkss-bootstrapping'><span class='titlemark'>D-5.10.8   </span> <a id='x162-246000D-5.10.8'></a>CKKS’s Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='ckkss-bootstrapping'><span class='titlemark'>D-5.10.8   </span> <a id='x162-245000D-5.10.8'></a>CKKS’s Bootstrapping</h5>
 <!-- l. 1140 --><p class='noindent'>CKKS’s original bootstrapping procedure (Summary D-3.13.7 in <a href='ModulusBootstrapping.html#summary5'><span class='ts1-lmr10-x-x-109'>§</span>D-3.13.7<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>) is as follows: (1) <span class='rm-lmss-10x-x-109'>Modraise</span>; (2)
 homomorphic decryption; (3) <span class='rm-lmss-10x-x-109'>CoeffToSlot</span>; (4) <span class='rm-lmss-10x-x-109'>EvalExp</span>; (5) <span class='rm-lmss-10x-x-109'>CoeffToSlot</span>; (6) Re-interpretation. In the
 RNS-based CKKS bootstrapping, we perform <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub> at step 1, and all other steps are computed using
@@ -409,7 +409,7 @@ term is eliminated by step 4’s <span class='rm-lmss-10x-x-109'>EvalExp</span>,
 whose period is <!-- l. 1142 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='bgvs-bootstrapping'><span class='titlemark'>D-5.10.9   </span> <a id='x162-247000D-5.10.9'></a>BGV’s Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='bgvs-bootstrapping'><span class='titlemark'>D-5.10.9   </span> <a id='x162-246000D-5.10.9'></a>BGV’s Bootstrapping</h5>
 <!-- l. 1150 --><p class='noindent'>BGV’s original bootstrapping procedure (<a href='ModulusBootstrapping1.html#modulus-bootstrapping1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.11<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>) is as follows: (1) modulus switch from
 <!-- l. 1151 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>→</mo><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>; (2) ciphertext coefficient
 multiplication by <!-- l. 1151 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mi>p</mi></mrow><mrow><mi>𝜀</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup></math>;
@@ -459,7 +459,7 @@ are as follows.
 operations.
    
 </p>
-   <h5 class='subsubsectionHead' id='noise-impact-of-rns-operations'><span class='titlemark'>D-5.10.10   </span> <a id='x162-248000D-5.10.10'></a>Noise Impact of RNS Operations</h5>
+   <h5 class='subsubsectionHead' id='noise-impact-of-rns-operations'><span class='titlemark'>D-5.10.10   </span> <a id='x162-247000D-5.10.10'></a>Noise Impact of RNS Operations</h5>
 <!-- l. 1185 --><p class='noindent'>When RNS techniques are used in FHE operations, the noise generated by <span class='rm-lmss-10x-x-109'>FastBConv</span>, <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>,
 and <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub> is directly added to each coefficient of the ciphertext polynomials
 <!-- l. 1185 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>A</mi></math> and
@@ -474,7 +474,7 @@ by using it with <span class='rm-lmss-10x-x-109'>SmallMont</span>.
 </p>
                                                                                          
                                                                                          
-   <h5 class='subsubsectionHead' id='python-source-code-of-rns-primitives'><span class='titlemark'>D-5.10.11   </span> <a id='x162-249000D-5.10.11'></a>Python Source Code of RNS Primitives</h5>
+   <h5 class='subsubsectionHead' id='python-source-code-of-rns-primitives'><span class='titlemark'>D-5.10.11   </span> <a id='x162-248000D-5.10.11'></a>Python Source Code of RNS Primitives</h5>
 <!-- l. 1190 --><p class='noindent'>We provide a <a href='https://github.com/fhetextbook/fhe-textbook/blob/main/source%20code/rns.py'><span class='underline'>Python script</span></a> implementing the following exemplary RNS primitives: <span class='rm-lmss-10x-x-109'>FastBConv</span>,
 <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>SmallMont</span>, and <span class='rm-lmss-10x-x-109'>FastBConvEx</span>.
                                                                                          

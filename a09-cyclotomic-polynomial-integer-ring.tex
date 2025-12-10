@@ -1,4 +1,3 @@
-
 In \autoref{sec:roots} and \autoref{sec:cyclotomic}, we learned about the definition and properties of the $\mu$-th roots of unity and the $\mu$-th cyclotomic polynomial over complex numbers (i.e., $X \in \mathbb{C}$) as follows: 
 
 \begin{itemize}
@@ -26,102 +25,7 @@ In this section, we will explain the $\mu$-th cyclotomic polynomial over $\mathb
 \begin{tabular}{|c||c||c|}
 \hline \hline
 & \textbf{Polynomial over $\bm{X} \bm{\in} \bm{\mathbb{C}}$} & \textbf{Polynomial over $\bm{X} \in \bm{\mathbb{Z}}_{\bm{p}}$} \\ 
-& \textbf{(C\textbf{- Reference:} 
-\href{https://e.math.cornell.edu/people/belk/numbertheory/CyclotomicPolynomials.pdf}{Fields and Cyclotomic Polynomials}~\cite{cyclotomic-polynomial}
-
-\subsection{Definitions}
-\label{subsec:cyclotomic-def}
-\begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:cyclotomic-def}} Cyclotomic Polynomial}}]
- \textbf{The $\bm{n}$-th Cyclotomic Polynomial:} is a polynomial whose roots are the primitive $n$-th roots of unity, that is: 
- 
- \[ \Phi_n(x) = \prod_{\zeta \in P(n)} (x - \zeta)  = \prod_{\substack{0 \leq k \leq n-1,\\ 
- \text{gcd}(k, n) = 1}} (x - \omega^k) \textcolor{white}{......} \text{, where } \omega = e^{2\pi i/n} \]
-
- Remember the Euler's formula: $e^{2k\pi i/n} = \cos\left(\dfrac{2k\pi}{n}\right) + i\cdot\sin\left(\dfrac{2k\pi}{n}\right)$
-
-$ $
-
-A few pre-computed cyclotomic polynomials are as follows:
- 
-\begin{multicols}{2}
-$\Phi_1(x) = x - 1$
-\newline $\Phi_2(x) = x + 1$
-\newline $\Phi_3(x) = x^2 + x + 1$
-\newline $\Phi_4(x) = x^2 + 1$
-\newline $\Phi_5(x) = x^4 + x^3 + x^2 + x + 1$
-\newline $\Phi_6(x) = x^2 - x + 1$
-\newline $\Phi_7(x) = x^6 + x^5 + x^4 + x^3 + x^2 + x + 1$
-\newline $\Phi_8(x) = x^4 + 1$
-\newline $\Phi_9(x) = x^6 + x^3 + 1$
-\newline $\Phi_{10}(x) = x^4 - x^3 + x^2 - x + 1$
-\end{multicols}
-\end{tcolorbox}
-
-
-As one example, 
-
-\[\Phi_4(x) = \prod_{\substack{0 \leq k \leq 3,\\ 
- \text{gcd}(k, 4) = 1}} (x - \omega^k) = (x - \omega^1)(x - \omega^3) = (x - e^{2\pi i / 4})(x - e^{2\cdot3\pi i / 4}) = (x - e^{\pi i / 2})(x - e^{3\pi i / 2})\]
-
-$= \left(x - \left(\cos\left(\dfrac{\pi}{2}\right) + i \cdot \sin\left(\dfrac{\pi}{2}\right) \right) \right) \cdot \left(x - \left(\cos\left(\dfrac{3\pi}{2}\right) + i \cdot \sin\left(\dfrac{3\pi}{2}\right) \right) \right)$
-
-$= (x - i)(x + i) = x^2 + 1$
-
-
-
-\subsection{Theorems}
-\label{subsec:cyclotomic-theorem}
-
-
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:cyclotomic-theorem}.1} Roots of the $M$-th Cyclotomic Polynomial}}]
-
-Suppose that $M$ is a power of 2 and the $M$-th cyclotomic polynomial $\Phi_M(x) = x^n + 1$ (where $M = 2n$). Then, the roots of the $M$-th cyclotomic polynomial are $\omega, \omega^3, \omega^5, \cdots, \omega^{2n-1}$, where $\omega = e^{i\pi/n}$
-
-\end{tcolorbox}
-
-\begin{proof}
-
-According to Definition~\ref*{subsec:cyclotomic-def} in \autoref{subsec:cyclotomic-def}, the roots of $\Phi_M(x)$ are $e^{2k\pi i/M} = e^{2k\pi i/(2n)} = e^{k\pi i/n}$ where $0 \leq k < M = 2n$ and $\textsf{gcd}(k, M = 2n) = 1$, thus $k = \{1, 3, 5, \cdots, 2n-1\}$. If we let $\omega = e^{i\pi/n}$, then the roots of $\Phi_M(x)$ are $\omega, \omega^3, \omega^5, \cdots, \omega^{2n-1}$.
-
-\end{proof}
-
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:cyclotomic-theorem}.2} Polynomial Decomposition into Cyclotomic Polynomials}}]
-For any positive integer $n$, \[ x^n - 1 = \prod_{d \mid n} \Phi_d(x) \]
-\end{tcolorbox}
-\begin{myproof}
-\begin{enumerate}
-    \item The roots of $x^n - 1$ are all the $n$-th roots of unity. Thus, $x^n - 1 = (x - \omega^0)(x - \omega^1)...(x - \omega^{n-1})$, where $\zeta = \omega^k$.
-    \item Theorem~\ref*{subsec:roots-theorem}.3 states that each $n$-th root of unity ($\omega^k$) is a primitive $d$-th root of unity for some $d$ that divides $n$. In other words, each $n$-th root of unity belongs to some $P(d)$ where $d \mid n$. Meanwhile, by definition, $\Phi_d(x) = \Pi_{\zeta \in P(d)} (x - \zeta)$. Therefore, $x^n - 1$ is the product of all $\Phi_d(x)$ such that $d \mid n$. 
-\end{enumerate}
-\end{myproof}
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:cyclotomic-theorem}.3} Integer Coefficients of Cyclotomic Polynomials}}]
-A cyclotomic polynomial has only integer coefficients.
-\end{tcolorbox}
-\begin{myproof}
-\begin{enumerate}
-    \item We prove by induction. When $n=1$, $\Phi_1(x) = x - 1$, where each coefficient is an integer.
-    \item Let $x^n - 1 = f(x) \cdot g(x) = (\Sigma_{i=0}^{p}a_ix^i)(\Sigma_{j=0}^{q}b_jx^j)$. As an induction hypothesis 1, we will prove that if $f(x)$ has only integer coefficients, then $g(x)$ will also have only integer coefficients. Given our target equation is $x^n - 1$, we know that $a_px^p \cdot b_qx^q = x^n$, and thus $a_pb_q = 1$, which means $a_p = \pm 1$ (as we hypothesized that $f(x)$ has only integer coefficients). We also know that $a_0b_0 = -1$. All the other coefficients should be 0. Thus, for any $r < q$, the coefficients are either: (i) $a_pb_{r} + a_{p-1}b_{r + 1} + ... + a_{p-q+r}b_{q} = 0$; or (ii) $a_pb_{r} + a_{p-1}b_{r + 1} + ... + a_{0}b_{r+p} = 0$. Both case (i) and (ii) represent $f(x)\cdot g(x)$'s computed coefficient of some $x^i$ where $0 < i < n$. Now, we propose another induction hypothesis 2, which is that $b_{q}, ... \text{ } b_{r+1}$ are all integers.
-    \item In the case of (i), $a_pb_{r} = -(a_{p-1}b_{r + 1} + ... + a_{p-q+r}b_{q})$, and dividing both sides by $a_p$ (which is either $1$ or $-1$), $b_{r} = \pm(a_{p-1}b_{r + 1} + ... + a_{p-q+r}b_{q})$, as every $a_i$ is an integer based on our hypothesis. By induction hypothesis 1 and 2, $b_r$ is an integer. The same is true in the case of (ii). 
-    \item We set $b_q$ (an integer coefficient) as the starting point for induction hypothesis 2. Then, according to induction proof 2, all of $b_j$ for $0 \leq j \leq q$ are integers.
-    \item Now, we set $\Phi_1(x)$ (an integer coefficient polynomial) as the starting point for induction hypothesis 1. Let $x^n - 1 = \Phi_{d_1}(x)\Phi_{d_2}(x)...\Phi_{d_k}(x)\Phi_{n}(x)$, where each $d_i \mid n$ (Theorem~\ref*{subsec:cyclotomic-theorem}.2). We know that $\Phi_{d_1}(x)\Phi_{d_2}(x)\cdots\Phi_{d_k}(x)$ forms an integer coefficient polynomial. We treat $\Phi_{d_1}(x)\Phi_{d_2}(x)\cdots\Phi_{d_k}(x)$ as $f(x)$, and $\Phi_n(x)$ as $g(x)$.
-    Then, according to step 4's induction proof, $\Phi_{n}(x)$ is an integer coefficient polynomial (also note that $\Phi_n(x)$ is monic, whose the highest degree's coefficient is 1). 
-    \item As we marginally increase $n$ to $n+1$ to compute $x^{n+1} - 1 = \Phi_{d'_1}(x)\Phi_{d'_2}(x)...\Phi_{d'_k}(x)\Phi_{n+1}(x)$ (where each $d'_i \mid (n+1)$), we know that $\Phi_{d'_1}(x)\Phi_{d'_2}(x)\cdots\Phi_{d'_k}(x)$ is a monic polynomial, as proved by the previous induction step. Thus, $\Phi_{n+1}(x)$ is also monic. 
-\end{enumerate}
-\end{myproof}
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:cyclotomic-theorem}.4} Formula for $\bm{\Phi_{nk}(x)}$}}]
-If $k \mid n$, then $\Phi_{nk}(x) = \Phi_n(x^k)$.
-\end{tcolorbox}
-\begin{myproof}
-\begin{enumerate}
-    \item Theorem~\ref*{subsec:order-theorem}.3 states that given $k \mid n$, $\text{ord}_{\mathbb{F}}(a) = kn$ if and only if $\text{ord}_{\mathbb{F}}(a^k) = n$. This means that for $\zeta \in \mathbb{C}$, $\text{ord}_{\mathbb{C}}(\zeta) = nk$ if and only if $\text{ord}_{\mathbb{C}}(\zeta^k) = n$. In other words, $\zeta$ is a primitive $nk$-th root of unity if and only if $\zeta^k$ is the primitive $n$-th root of unity. This implies that $\zeta$ is a root of $\Phi_{nk}(x)$ if and only if $\zeta^k$ is a root of $\Phi_{n}(x)$. 
-    \item Let $\Phi_{nk}(x) = (x - \zeta_1)(x - \zeta_2)...(x - \zeta_p)$, where $P(nk)$ has $p$ primitive $nk$-th roots of unity.
-    \item $\Phi_{n}(x) = (x - \zeta_1^k)(x - \zeta_2^k)...(x - \zeta_p^k)$. 
-    %Note that $P(n)$ should also have $p$ primitive $n$-th roots of unity, because elements of $P(nk)$ are isomorphic to the elements of $P(n)$ (as they preserved if and only if relationships in step 2). 
-    Note that raising each element of $P(nk)$ to the $k$-th power yields an element of $P(n)$, thus mapping $P(nk)$ onto $P(n)$ (by the result of step 2).
-    Now, it's also true that $\Phi_{n}(y) = (y - \zeta_1^k)(y - \zeta_2^k)...(y - \zeta_p^k)$, where $y = x^k$. In this case, $x = \{\zeta_1, \zeta_2, ... \zeta_p\}$.
-    \item $\Phi_{nk}(x)$ and $\Phi_{n}(y) = \Phi_{n}(x^k)$ have the same roots with the same coefficients. Therefore, $\Phi_{nk}(x) = \Phi_{n}(y) = \Phi_{n}(x^k)$. 
-\end{enumerate}
-\end{myproof}omplex Number)} & \textbf{(Ring)} \\ \hline \hline
+& \textbf{(Complex Number)} & \textbf{(Ring)} \\ \hline \hline
 \textbf{Definition}&All $X \in \mathbb{C}$ such that $X^\mu = 1$, (which are&All $X \in \mathbb{Z}_p$ such that $X^\mu \equiv 1 \bmod p$\\
 \textbf{of the}&computed as $X = e^{2 \pi i k / \mu}$ for integer $k$&\\
 \textbf{$\bm \mu$-th}&where $0 \leq k \leq \mu - 1$)&\\
@@ -151,9 +55,3 @@ If $k \mid n$, then $\Phi_{nk}(x) = \Phi_n(x^k)$.
 Note that in the $\mu$-th cyclotomic polynomial, in both cases of over $X \in \mathbb{C}$ and over $X \in \mathbb{Z}_p$, each of their roots $\omega$ (i.e., the primitive $\mu$-th root of unity) has the order $\mu$ (i.e., $\omega^{\mu} = 1$ over $X \in \mathbb{C}$, and $\omega^{\mu} \equiv 1 \bmod p$ over $X \in \mathbb{Z}_p$). Also note that each root $\omega$ can generate all roots of the $\mu$-th cyclotomic polynomial by computing $\omega^{k'}$ such that $\textsf{gcd}(k', \mu) = 1$.
 
 \autoref{tab:cyclotomic-polynomial-comparison} compares the properties of the roots of unity and the $\mu$-th cyclotomic polynomial over $X \in \mathbb{C}$ (the complex numbers) and over $X \in \mathbb{Z}_p$ (the ring).
-
-
-
-
-
-

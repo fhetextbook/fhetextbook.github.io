@@ -352,7 +352,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &\multicolumn{1}{c|}{\textbf{Bootstrapping Goal}}\\\hline\hline
 \textbf{TFHE}&To reset the noise.\\
 \textbf{BFV}&\\\hline
-\textbf{CKKS}&To reset the ciphertext modulus from $q_0 \rightarrow q_L$.\\
+\textbf{CKKS}&To reset the ciphertext modulus from $q_0 \rightarrow q_L$ (technically, to $q_{l'}$ where $q_0 < q_{l'} < q_L$).\\
 \textbf{BGV}&\\\hline
 \end{tabular}
 \caption{\textbf{Bootstrapping Goal}}
@@ -377,7 +377,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &\text{ } \text{ } $B + A\cdot \textsf{RLWE}_{S, \sigma}(\Delta' S) = \textsf{RLWE}_{S, \sigma}(\Delta' \cdot(p^{\varepsilon-1}M + E + Kp^\varepsilon)) \bmod q$, where $\Delta' = \left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor$\\
 &3. \underline{\textsf{CoeffToSlot}}: Multiply to the ciphertext by $n^{-1}\cdot I_n^R \cdot \hathat W$ to move\\
 & \text{ } \text{ } the plaintext coefficients of $p^{\varepsilon-1} M + E + Kp^\varepsilon$ to the input slots.\\
-&4. \underline{\textsf{EvalExp}}: Given the digit extraction polynomial $G_{\varepsilon, v}(x)$, homomorphically compute:\\
+&4. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{\varepsilon, v}(x)$, homomorphically compute:\\
 &\text{ } \text{ } $G_{\varepsilon, 1} \circ G_{\varepsilon, 2}\circ \cdots \circ G_{\varepsilon, w-1} (p^{\varepsilon-1} M + E + Kp^\varepsilon)$\\
 &\text{ } \text{ }, and then the output $p^{\varepsilon-1}M + K'p^\varepsilon$ gets stored in the plaintext slots.\\
 &5. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $p^{\varepsilon-1}M + K'p^\varepsilon$ to the \\
@@ -414,14 +414,14 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 & \text{ } \text{ } , which is the ciphertext $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1}M + p^\varepsilon E + K\hat{q}) \bmod q_L$.\\
 &4. \underline{\textsf{CoeffToSlot}}: Multiply to the ciphertext by $n^{-1}\cdot I_n^R \cdot \hathat W$ to move\\
 & \text{ } \text{ } the plaintext coefficients of $p^{\varepsilon-1}M + p^\varepsilon E + K\hat{q}$ to the input slots.\\
-&5. \underline{\textsf{EvalExp}}: Given the digit extraction polynomial $G_{w, v}(x)$, homomorphically compute:\\
+&5. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{w, v}(x)$, homomorphically compute:\\
 &\text{ } \text{ } $\bm(\text{ } G_{w, 1} \circ G_{w, 2}\circ \cdots \circ G_{w, w-1} (p^{\varepsilon-1} M + p^\varepsilon E + K\hat{q})\text{ } \bm) \cdot p^{\varepsilon-1}$\\
 &\text{ } \text{ } , and then the output $Mp^{\varepsilon - 1} + K'p^\varepsilon$ gets stored in the plaintext slots.\\
-&6. \underline{Homomorphic Multiplication} by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$ to all slots to update the plaintext \\
-&\text{ } \text{ }  from $Mp^{\varepsilon - 1} + K'p^\varepsilon \pmod{p^\varepsilon}$ to $M + K'p \pmod{p^\varepsilon}$.\\
+&6. \underline{Homomorphic Multiplication} by $|p^{-(\varepsilon-1)}|_{q_{l'}}$ to all slots to update the plaintext \\
+&\text{ } \text{ }  from $Mp^{\varepsilon - 1} + K'p^\varepsilon \pmod{q_{l'}}$ to $M + K'p \pmod{q^{l'}}$.\\
 &7. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K'p$ to the \\
-&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K'p) \bmod q_L$.\\
-&8. \underline{Noise Term Re-interpretation}: View $\textsf{RLWE}_{S, \sigma}(M + K'p) \bmod q_L$ as\\
+&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K'p) \bmod q_{l'}$.\\
+&8. \underline{Noise Term Re-interpretation}: View $\textsf{RLWE}_{S, \sigma}(M + K'p) \bmod q_{l'}$ as\\
 &\text{ } \text{ }  $\textsf{RLWE}_{S, \sigma}(M) \bmod q_L$, an encryption of $M$ with noise $E' = K'$ having the\\
 & \text{ } \text{ } noise scaling factor (i.e., plaintext modulus) $\Delta = p$.\\\hline
 \end{tabular}

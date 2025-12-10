@@ -1,7 +1,7 @@
 The CKKS scheme is designed for homomorphic addition and multiplication of complex numbers that contain imaginary components. Therefore, unlike BFV, BGV, or TFHE, which can only compute over integers, CKKS can compute real-world floating point arithmetic, such as in machine learning.
 
 
-The CKKS scheme's goal is to homomorphically compute addition and multiplication of complex numbers. However, while our targeted inputs are complex numbers, CKKS's plaintext space is defined as a $(n-1)$-degree polynomial ring with real-number coefficients having limited precision; that is, $\mathcal{R}_{\langle n \rangle} = \mathbb{R}[x] / (x^n + 1)$. Therefore, CKKS designs its unique encoding scheme which converts the input complex numbers into integers which can be used as coefficients of a polynomial in $\mathcal{R}_{\langle n \rangle}$. 
+The CKKS scheme's goal is to homomorphically compute the addition and multiplication of complex numbers. However, while our targeted inputs are complex numbers, CKKS's plaintext space is defined as a $(n-1)$-degree polynomial ring with real-number coefficients having limited precision; that is, $\mathcal{R}_{\langle n \rangle} = \mathbb{R}[x] / (x^n + 1)$. Therefore, CKKS designs its unique encoding scheme, which converts the input complex numbers into integers that can be used as coefficients of a polynomial in $\mathcal{R}_{\langle n \rangle}$. 
 
 
 $ $
@@ -9,9 +9,9 @@ $ $
 \noindent Overall, CKKS's encryption procedure is as follows:
 
 \begin{enumerate}
-\item \underline{\textsf{Encoding\textsubscript{1}}:} Encode the targeted input complex number into a real number
-\item \underline{\textsf{Encoding\textsubscript{2}}:} Encode the real number into an integer
-\item \underline{\textsf{Encryption}:} Encrypt the integer by RLWE 
+\item \underline{\textsf{Encoding\textsubscript{1}}:} Encode the targeted input complex number as a real number
+\item \underline{\textsf{Encoding\textsubscript{2}}:} Encode the real number as an integer
+\item \underline{\textsf{Encryption}:} Encrypt the integer using RLWE 
 \end{enumerate}
 The encrypted RLWE ciphertext supports homomorphic addition and multiplication. 
 

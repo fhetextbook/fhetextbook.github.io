@@ -1148,7 +1148,7 @@ $u\cdot q_0$ noise (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}) for eac
 \label{subsubsec:rns-bgv-bootstrapping}
 
 BGV's original bootstrapping procedure (\autoref{subsec:bgv-bootstrapping}) is as follows:
-(1) modulus switch from $q_l \rightarrow \hat{q}$; (2) ciphertext coefficient multiplication by $p^{\varepsilon - 1}$; (3) \textsf{ModRaise}; (4) \textsf{CoeffToSlot}; (5) digit extraction; (6) homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$; (7) \textsf{SlotToCoeff}; (8) noise term re-interpretation. Given this procedure, the RNS-based bootstrapping steps are as follows.
+(1) modulus switch from $q_l \rightarrow \hat{q}$; (2) ciphertext coefficient multiplication by $p^{\varepsilon - 1}$; (3) \textsf{ModRaise}; (4) \textsf{CoeffToSlot}; (5) digit extraction; (6) homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{q^{l'}}$; (7) \textsf{SlotToCoeff}; (8) noise term re-interpretation. Given this procedure, the RNS-based bootstrapping steps are as follows.
 
 $ $
 
@@ -1176,7 +1176,7 @@ $= p^{\varepsilon-1} M + K \bmod p^{\varepsilon}$ \textcolor{red}{ $\rhd$ since 
 
 $ $
 
-After the above steps, the remaining steps (i.e., \textsf{CoeffToSlot}, \textsf{EvalExp}, homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{p^\varepsilon}$, \textsf{SlotToCoeff}, and re-interpretation) can be performed using regular RNS-based addition and multiplication operations. 
+After the above steps, the remaining steps (i.e., \textsf{CoeffToSlot}, \textsf{EvalExp}, homomorphic multiplication by $|p^{-(\varepsilon-1)}|_{q^{l'}}$, \textsf{SlotToCoeff}, and re-interpretation) can be performed using regular RNS-based addition and multiplication operations. 
 
 
 \subsubsection{Noise Impact of RNS Operations}

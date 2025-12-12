@@ -2210,62 +2210,28 @@ Now, we define the digit extraction function $G_{\varepsilon, v}(z_i)$ as follow
 $G_{\varepsilon}(z_i) = \left\lfloor\dfrac{z_i}{p}\right\rfloor_p = (z_i - (\underbrace{F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{3} \cdots \circ F_{2}  \cdots \circ F_{1}}_{\varepsilon - 1 \text{ times}}(z_i)) \cdot |p^{-1}|_{q} $
 
 
-, where $\left\lfloor\right\rfloor_p$ denotes division by $p$ and rounding down to the nearest multiple of $p$. Verbally speaking, $G_{\varepsilon, v}(z_i)$ is equivalent to zeroing out the least significant base-$p$ digit of $z_i$ and then shifting to the right by 1 base-$p$ digit. The shifting is done by inverse $p$ multiplication (i.e., $|p^{-1}|_{q}$). Notice that the last base-$p$ digit of $z_i - (F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{1}(z_i))$ is 0, which is is exactly divisible by $p$. Thus, multiplying by the inverse $p$ has the effect of exact division (i.e., shifting the whole base-$p$ representation by 1 digit to the right). The reason why the inverse $p$ is in modulo $q$ is that we are currently under the BFV ciphertext relation: $\textsf{CoeffToSlot}\bm((A', B')\bm) = (A^{\langle c\rightarrow s \rangle}, B^{\langle c\rightarrow s \rangle}) \bmod q$, whose plaintext slots store the coefficients of $\Delta' \cdot (p^{\varepsilon - 1}M + E' + Kp^{\varepsilon}) \bmod q$. Upon homomorphically computing $(z_i - (F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{3} \cdots \circ F_{2}  \cdots \circ F_{1})$ as part of the 1st round of digit extraction, the ciphertext is updated to $(A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \bmod q$, whose plaintext slots store the coefficients of $\Delta' \cdot (p^{\varepsilon - 1}M + \lfloor E' \rfloor_p + Kp^{\varepsilon}) \bmod q$, where $\lfloor E' \rfloor_p$ is equivalent to rounding $E'$ down to the nearest multiple of $p$. Therefore, to right-shift these coefficient values stored in slots by 1 (base-$p$) digit, we need to homomorphically multiply the slot values by $|p^{-1}|_q$. This is equivalent to performing the ciphertext-to-plaintext multiplication (\autoref{subsec:bfv-mult-plain}) as follows: 
+, where $\left\lfloor\right\rfloor_p$ denotes division by $p$ and rounding down to the nearest multiple of $p$. Verbally speaking, $G_{\varepsilon, v}(z_i)$ is equivalent to zeroing out the least significant base-$p$ digit of $z_i$ and then shifting to the right by 1 base-$p$ digit. The shifting is done by inverse $p$ multiplication (i.e., $|p^{-1}|_{q}$). Notice that the last base-$p$ digit of $z_i - (F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{1}(z_i))$ is 0, which is exactly divisible by $p$. Thus, multiplying by the inverse $p$ has the effect of exact division (i.e., shifting the whole base-$p$ representation by 1 digit to the right). The reason why the inverse $p$ is in modulo $q$ is that we are currently under the BFV ciphertext relation: $\textsf{CoeffToSlot}\bm((A', B')\bm) = (A^{\langle c\rightarrow s \rangle}, B^{\langle c\rightarrow s \rangle}) \bmod q$, whose plaintext slots store the coefficients of $\Delta' \cdot (p^{\varepsilon - 1}M + E' + K^{\langle 1 \rangle}p^{\varepsilon}) \bmod q$. Upon homomorphically computing $(z_i - (F_{\varepsilon-1}  \circ F_{\varepsilon-2}  \circ F_{\varepsilon-3}  \cdots \circ F_{3} \cdots \circ F_{2}  \cdots \circ F_{1})$ as part of the 1st round of digit extraction, the ciphertext is updated to $(A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \bmod q$, whose plaintext slots store the coefficients of $\Delta' \cdot (p^{\varepsilon - 1}M + \lfloor E' \rfloor_p + K^{\langle 1 \rangle}p^{\varepsilon}) \bmod q$, where $\lfloor E' \rfloor_p$ is equivalent to rounding $E'$ down to the nearest multiple of $p$. At this point (i.e., just before inverse-$p$ multiplication in the first round), the ciphertext holds the following relation:
 
-$(A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \cdot \textsf{Encode}(p^{-1}) \bmod q$
+$A^{\langle g_1 \rangle}\cdot S  + B^{\langle g_1 \rangle} = \Delta' \cdot (p^{\varepsilon - 1}M + \left\lfloor{E'}\right\rfloor_p + K^{\langle 1 \rangle}p^{\varepsilon}) + E^{\langle g_1 \rangle} \bmod q$
 
-$= (A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \cdot p^{-1} \bmod q$ \textcolor{red}{ $\rhd$ since $\textsf{Encode}(p^{-1}) = p^{-1} + 0X + 0X^2 + \cdots + 0X^{n-1}$ }
-
-$= (p^{-1}A^{\langle g_1 \rangle}, p^{-1}B^{\langle g_1 \rangle}) \bmod q$
 
 $ $
 
-Therefore, by multiplying the coefficients of two BFV ciphertext polynomials $A'$ and $B'$ by $|p^{-1}|_{q}$, we obtain the following effect: 
-
-$(|p^{-1}|_{q} \cdot A^{\langle g_1 \rangle})\cdot S + (|p^{-1}|_{q} \cdot B^{\langle g_1 \rangle}) \bmod q$
-
-$= \Delta' \cdot |p^{-1}|_{q} \cdot (p^{\varepsilon - 1}M + \left\lfloor{E'}\right\rfloor_p + Kp^{\varepsilon}) \bmod q$
-
-
-$= \Delta' \cdot (p^{\varepsilon - 2}M + \left\lfloor\dfrac{E'}{p}\right\rfloor + Kp^{\varepsilon-1}) \bmod q $
-
-$ $
-
-Verbally speaking, the above inverse-$p$ multiplication to all polynomial coefficients of $(A^{\langle g_1 \rangle}, B^{\langle g_2 \rangle})$ has the following two effects: (2) scales down the plaintext by $p$; and (2) reduces the noise $E'$ to $\left\lfloor\dfrac{E'}{p}\right\rfloor$ (i.e., right-shift by 1 base-$p$ digit). 
-
-$ $
-
-For now, the digit extraction procedure can be understood as recursively evaluating $G_{\varepsilon}$ with the input $z_i$ by decreasing $\varepsilon$ by 1 at each round (total $\varepsilon-1$ rounds) as follows:
-
-\textbf{Input:} $\left\lfloor\dfrac{q}{p^{\varepsilon-1}}\right\rfloor \cdot (p^{\varepsilon - 1}M + E' + Kp^{\varepsilon}) \bmod q$
-
-\textbf{1st Round:} $G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \Delta' \cdot (p^{\varepsilon - 2}M + \left\lfloor\dfrac{E'}{p}\right\rfloor + K^{\langle 1 \rangle}p^{\varepsilon-1}) \bmod q$
-
-\textbf{2nd Round:} $G_{\varepsilon-1} \circ G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \Delta' \cdot (p^{\varepsilon - 3}M + \left\lfloor\dfrac{E'}{p^2}\right\rfloor + K^{\langle 2 \rangle}p^{\varepsilon-2}) \bmod q$
-
-\textbf{3rd Round:} $G_{\varepsilon-2} \circ G_{\varepsilon-1} \circ G_{\varepsilon}(z_i)  \xRightarrow{\text{effect}} \Delta' \cdot (p^{\varepsilon - 4}M + \left\lfloor\dfrac{E'}{p^3}\right\rfloor + K^{\langle 3 \rangle}p^{\varepsilon-3}) \bmod q$
-
-$\vdots$
-
-\textbf{$\bm{\varepsilon - 1}$-th Round:} $G_{2}\circ \cdots \circ G_{\varepsilon} (z_i) \xRightarrow{\text{effect}} \Delta' \cdot (M + K^{\langle \varepsilon - 1 \rangle}p) \bmod q$
-
-$ $
-
-As shown above, the entire digit extraction procedure results in two effects on the values stored in the plaintext slots: (1) scales down the message $p^{\varepsilon - 1}M$ back to $M$; and (2) zeros out the noise $E'$ (i.e., $\left\lfloor\dfrac{E'}{p^{\varepsilon - 1}}\right\rfloor = 0$); and. The reason why $K$ gets updated to $K^{\langle 1 \rangle}, K^{\langle 2 \rangle}, \cdots, K^{\langle \varepsilon -1 \rangle}$ across rounds is that each $i$-th round's evaluation of function $F$ and $G$ is done modulo $p^{\varepsilon - i}$, which produces new $p^{\varepsilon - i}$-multiple overflow garbage values each time. 
+, where $E^{\langle g_1 \rangle}$ is the combined noise of the \textsf{SlotToCoeff} step and the first part of the 1st round of digit extraction. We could consider multiplying $|p^{-1}|_q$ to both sides of the relation to scale down $p^{\varepsilon - 1}M, \left\lfloor{E'}\right\rfloor_p,$ and $K^{\langle 1 \rangle}p^{\varepsilon}$ by $p$. However, this causes a noise explosion problem, because this scaling will be also applied to the $E^{\langle g_1 \rangle}$ term, and $|p^{-1}|_qE^{\langle g_1 \rangle}$ is a huge value. To selectively apply the inverse-$p$ multiplication only to those terms of interest, we use the scaling factor re-interpretation technique. 
 
 $ $
 
 
-\para{Scaling Factor Re-interpretation:} Although we explained above that each round $G_{\varepsilon}$ involves the multiplication of $|p^{-1}|_{q}$, technically, this multiplication is skipped, and instead, we conceptually re-interpret the scaling factor $\Delta'$ to be changed to $\left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor \rightarrow \left\lfloor\dfrac{q}{p^\varepsilon-1}\right\rfloor \rightarrow \left\lfloor\dfrac{q}{p^\varepsilon-2}\right\rfloor \rightarrow \cdots, \left\lfloor\dfrac{q}{p}\right\rfloor$ across $\varepsilon-1$ rounds of digit extraction. This implies that at each round of digit extraction, the plaintext operands used for ciphertext-to-plaintext homomorphic operations should encode their values by using the correct scaling factor at each moment in time. At the end of digit extraction, the final plaintext scaling factor becomes $\Delta' = \left\lfloor\dfrac{q}{p}\right\rfloor$, the desired setup for BFV ciphertexts. Applying the scaling factor re-interpretation, the true digit extraction procedure (without explicit multiplication by $|p^{-1}|_q$ at each round) is performed as follows:
+\para{Scaling Factor Re-interpretation:} Although we previously explained that  $G_{\varepsilon}$ involves the multiplication by $|p^{-1}|_{q}$, technically, we skip this multiplication and instead conceptually re-interpret the scaling factor $\Delta'$ as $\left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor \rightarrow \left\lfloor\dfrac{q}{p^\varepsilon-1}\right\rfloor \rightarrow \left\lfloor\dfrac{q}{p^\varepsilon-2}\right\rfloor \rightarrow \cdots, \left\lfloor\dfrac{q}{p}\right\rfloor$ across $\varepsilon-1$ rounds of digit extraction. During this re-interpretation, each step's $p$ being decreased in the denominator of the scaling factor is conceptually placed back into the bracket. Applying the re-interpretation of the scaling factor, the digit extraction procedure (without explicit multiplication by $|p^{-1}|_q$ at each round) is performed as follows:
 
 
-\textbf{Input:} $\left\lfloor\dfrac{q}{p^{\varepsilon-1}}\right\rfloor \cdot (p^{\varepsilon - 1}M + E' + Kp^{\varepsilon}) \bmod q$
+\textbf{Input:} $\left\lfloor\dfrac{q}{p^{\varepsilon}}\right\rfloor \cdot (p^{\varepsilon - 1}M + E' + Kp^{\varepsilon}) \bmod q$
 
-\textbf{1st Round:} $G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-2}}\right\rfloor \cdot (p^{\varepsilon - 2}M + \left\lfloor\dfrac{E'}{p}\right\rfloor + K^{\langle 1 \rangle}p^{\varepsilon-1}) \bmod q$
+\textbf{1st Round:} $G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-1}}\right\rfloor \cdot (p^{\varepsilon - 2}M + \left\lfloor\dfrac{E'}{p}\right\rfloor + K^{\langle 1 \rangle}p^{\varepsilon-1}) \bmod q$
 
-\textbf{2nd Round:} $G_{\varepsilon-1} \circ G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-3}}\right\rfloor \cdot (p^{\varepsilon - 3}M + \left\lfloor\dfrac{E'}{p^2}\right\rfloor + K^{\langle 2 \rangle}p^{\varepsilon-2}) \bmod q$
+\textbf{2nd Round:} $G_{\varepsilon-1} \circ G_{\varepsilon}(z_i) \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-2}}\right\rfloor \cdot (p^{\varepsilon - 3}M + \left\lfloor\dfrac{E'}{p^2}\right\rfloor + K^{\langle 2 \rangle}p^{\varepsilon-2}) \bmod q$
 
-\textbf{3rd Round:} $G_{\varepsilon-2} \circ G_{\varepsilon-1} \circ G_{\varepsilon}(z_i)  \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-4}}\right\rfloor \cdot (p^{\varepsilon - 4}M + \left\lfloor\dfrac{E'}{p^3}\right\rfloor + K^{\langle 3 \rangle}p^{\varepsilon-3}) \bmod q$
+\textbf{3rd Round:} $G_{\varepsilon-2} \circ G_{\varepsilon-1} \circ G_{\varepsilon}(z_i)  \xRightarrow{\text{effect}} \left\lfloor\dfrac{q}{p^{\varepsilon-3}}\right\rfloor \cdot (p^{\varepsilon - 4}M + \left\lfloor\dfrac{E'}{p^3}\right\rfloor + K^{\langle 3 \rangle}p^{\varepsilon-3}) \bmod q$
 
 $\vdots$
 
@@ -2280,8 +2246,15 @@ $ $
 $ $
 
 
-Notice that at the end of the final round, the plaintext scaling factor becomes $\left\lfloor\dfrac{q}{p}\right\rfloor$, the desired plaintext scaling factor for standard BFV ciphertexts. Therefore, the scaling factor re-interpretation has two benefits: (1) we can skip explicit multiplication by $|p^{-1}|_q$ at each round; (2) at the end of all rounds, the plaintext scaling factor becomes the desired value for standard BFV ciphertexts, gracefully completing the bootstrapping procedure. 
+Note that the scaling factor re-interpretation does not involve any actual computation, but only changes our way of interpreting the scaling factor. Notice that at the end of the final round, the plaintext scaling factor becomes $\left\lfloor\dfrac{q}{p}\right\rfloor$, which is the desired plaintext scaling factor for standard BFV ciphertexts. Therefore, the scaling factor re-interpretation has three benefits: (1) we skip explicit multiplication by $|p^{-1}|_q$ at each round; (2) we prevent noise explosion; (3) at the end of all rounds, the plaintext scaling factor becomes the desired value for standard BFV ciphertexts, gracefully completing the bootstrapping procedure. 
 
+Meanwhile, there are two important points to be aware of. First, each $i$-th round of scaling factor re-interpretation creates a small drift error in the scaling factor due to the difference $\epsilon_i = p^{-1}\cdot \left\lfloor\dfrac{q}{p^{\varepsilon - i}}\right\rfloor - \left\lfloor\dfrac{q}{p^{\varepsilon - i + 1}}\right\rfloor$, where $0 \leq \epsilon_i < p$. Therefore, an additional drift error $E_i^{\langle \text{re} \rangle}$ is created at each $i$-th round, which is small enough to be bounded by: 
+
+$E_i^{\langle \text{re} \rangle} \leq \epsilon_i\cdot (p^{\varepsilon - i-1}M + \left\lfloor\dfrac{E'}{p^{i}}\right\rfloor + K^{\langle i \rangle} p^{\varepsilon - i}) < p^{\varepsilon-1}M + \left\lfloor\dfrac{E'}{p}\right\rfloor + K^{\langle i \rangle}p^{\varepsilon + 1} \ll \left\lfloor\dfrac{q}{p^{\varepsilon}}\right\rfloor$
+
+$ $
+
+Second, at each $i$-th round of digit extraction, the plaintext operands used for ciphertext-to-plaintext homomorphic operations should encode their values with the specific scaling factor interpreted at that round: $\Delta_i' = \left\lfloor\dfrac{q}{p^{\varepsilon-i+1}}\right\rfloor$. 
 
 $ $
 

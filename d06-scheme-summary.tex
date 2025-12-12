@@ -418,10 +418,10 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &\text{ } \text{ }  homomorphically compute:\\
 &\text{ } \text{ } $\bm(\text{ } G_{2} \circ G_{3}\circ \cdots \circ G_{\varepsilon} (p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q})\text{ } \bm)$\\
 &\text{ } \text{ } , and then the output $M + K''p$ is stored in the plaintext slots.\\
-&\text{ } \text{ } To handle inverse-$p$ multiplication in each $i$-th round, multiply $|p^{-1}|_{q_{\hat{l}}}$ to all\\
+&\text{ } \text{ } To handle inverse-$p$ multiplication in each $i$-th round, multiply $|p^{-1}|_{q^{\langle i \rangle}}$ to all\\
 &\text{ } \text{ }  ciphertext polynomial coefficients to update their plaintext portion from\\
-&\text{ } \text{ }  $Mp^{\varepsilon - i} + K'''p^{\varepsilon - i + 1} \pmod{q_{\hat{l}}}$ to $M^{\varepsilon - i - 1} + K^{\langle i \rangle}p^{\varepsilon - i} \pmod{q_{\hat{l}}}$\\
-&\text{ } \text{ }   \textcolor{red}{ $\rhd$ where $q_{\hat{l}}$ is the ciphertext modulus at each specific round}\\
+&\text{ } \text{ }  $Mp^{\varepsilon - i} + K'''p^{\varepsilon - i + 1} \pmod{q^{\langle i \rangle}}$ to $M^{\varepsilon - i - 1} + K^{\langle i \rangle}p^{\varepsilon - i} \pmod{q^{\langle i \rangle}}$\\
+&\text{ } \text{ }   \textcolor{red}{ $\rhd$ where $q^{\langle i \rangle}$ is the ciphertext modulus at each specific round}\\
 &6. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K^{\langle \varepsilon - 1 \rangle}p$ to the \\
 &\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K^{\langle \text{last} \rangle}p)$\\
 &\text{ } \text{ } $ = \textsf{RLWE}_{S, \sigma}(M) \bmod q_{l'}$ \textcolor{red}{ $\rhd$ where $\Delta = p$, and the final noise is $K^{\langle \text{last} \rangle}$}\\\hline

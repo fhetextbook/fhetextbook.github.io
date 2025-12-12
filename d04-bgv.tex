@@ -692,11 +692,67 @@ $ $
 
 $ $
 
-\para{\underline{Handling the Divisions by $p$}:} Unlike in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}), we cannot use scaling factor re-interpretation because the scaling factor setup of BGV is different from that of BFV. In BGV's digit extraction, each round should explicitly multiply the ciphertext's polynomial coefficients by $|p^{-`}|_{q_{\hat{l}}}$, where $q_{\hat{l}}$ is the ciphertext modulus at each specific round of digit extraction. Beneficially, the $\varepsilon - 1$ rounds of inverse-$p$ multiplications yields the effect of scaling down the plaintext $p^{\varepsilon-1}m_i \rightarrow m_i$, and the noise $k''p^{\varepsilon} \rightarrow k''p$, which has the desired noise scaling factor $p$ for standard BGV ciphertexts. 
+\para{\underline{Handling the Divisions by $p$}:} Unlike in BFV (\autoref{subsubsec:bfv-bootstrapping-digit-extraction}), we cannot use scaling factor re-interpretation because the scaling factor setup of BGV is different from that of BFV. In BGV's digit extraction, each round should explicitly homomorphically multiply the slot values by $|p^{-1}|_{q^{\langle i \rangle}}$, where $q^{\langle i \rangle}$ is the ciphertext modulus at the $i$-th round of digit extraction. Given $(A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \bmod q^{\langle 1 \rangle}$ is the ciphertext at the  1st round of digit extraction just before inverse-$p$ division, the actual division-by-$p$ is equivalent to performing the ciphertext-to-plaintext multiplication (\autoref{subsec:bfv-mult-plain}) as follows: 
+
+$(A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \cdot \textsf{Encode}(p^{-1}) \bmod q^{\langle 1 \rangle}$
+
+$= (A^{\langle g_1 \rangle}, B^{\langle g_1 \rangle}) \cdot p^{-1} \bmod q^{\langle 1 \rangle}$ \textcolor{red}{ $\rhd$ since $\textsf{Encode}(p^{-1}) = p^{-1} + 0X + 0X^2 + \cdots + 0X^{n-1}$ }
+
+$= (p^{-1}A^{\langle g_1 \rangle}, p^{-1}B^{\langle g_1 \rangle}) \bmod q^{\langle 1 \rangle}$
+
+$ $
+
+Therefore, by multiplying the coefficients of two BGV ciphertext polynomials $A^{\langle g_1 \rangle}$ and $B^{\langle g_1 \rangle}$ by $|p^{-1}|_{q^{\langle 1 \rangle}}$, we obtain the following effect: 
+
+$(|p^{-1}|_{q^{\langle 1 \rangle}} \cdot A^{\langle g_1 \rangle})\cdot S + (|p^{-1}|_{q^{\langle 1 \rangle}} \cdot B^{\langle g_1 \rangle}) \bmod q^{\langle 1 \rangle}$
+
+$= |p^{-1}|_{q^{\langle 1 \rangle}} \cdot (p^{\varepsilon - 1}M + \left\lfloor{K'}\right\rfloor_p + K''p^{\varepsilon}) \bmod q^{\langle 1 \rangle}$
+
+
+$= p^{\varepsilon - 2}M + \left\lfloor\dfrac{K'}{p}\right\rfloor + K''p^{\varepsilon-1} \bmod q^{\langle 1 \rangle} $
+
+$ $
+
+Verbally speaking, the above inverse-$p$ multiplication to all polynomial coefficients of $(A^{\langle g_1 \rangle}, B^{\langle g_2 \rangle})$ has the following two effects: (2) scales down the plaintext and the noise by $p$; and (2) reduces the modulus garbage term $K'$ to $\left\lfloor\dfrac{K'}{p}\right\rfloor$ (i.e., right-shift by 1 base-$p$ digit). 
+
+$ $
+
+BGV's digit extraction procedure is equivalent to recursively evaluating $G_{\varepsilon}$ with the input $z_i$ by decreasing $\varepsilon$ by 1 at each round (total $\varepsilon-1$ rounds) as follows:
+
+\textbf{Input:} $p^{\varepsilon - 1}M + K' + K''p^{\varepsilon} \bmod \hat{q}$
+
+\textbf{1st Round:} $G_{\varepsilon}(z_i) \xRightarrow{\text{effect}}  p^{\varepsilon - 2}M + \left\lfloor\dfrac{K'}{p}\right\rfloor + K''^{\langle 1 \rangle}p^{\varepsilon-1} \bmod q^{\langle 1 \rangle}$
+
+\textbf{2nd Round:} $G_{\varepsilon-1} \circ G_{\varepsilon}(z_i) \xRightarrow{\text{effect}}  p^{\varepsilon - 3}M + \left\lfloor\dfrac{K'}{p^2}\right\rfloor + K''^{\langle 2 \rangle}p^{\varepsilon-2} \bmod q^{\langle 2 \rangle}$
+
+\textbf{3rd Round:} $G_{\varepsilon-2} \circ G_{\varepsilon-1} \circ G_{\varepsilon}(z_i)  \xRightarrow{\text{effect}}  p^{\varepsilon - 4}M + \left\lfloor\dfrac{K'}{p^3}\right\rfloor + K''^{\langle 3 \rangle}p^{\varepsilon-3} \bmod q^{\langle 3 \rangle}$
+
+$\vdots$
+
+\textbf{$\bm{\varepsilon - 1}$-th Round:} $G_{2}\circ \cdots \circ G_{\varepsilon} (z_i) \xRightarrow{\text{effect}}  M + K''^{\langle \varepsilon - 1 \rangle}p \bmod q^{\langle \varepsilon - 1 \rangle}$
+
+$ $
+
+As shown above, the entire digit extraction procedure results in two effects on the values stored in the plaintext slots: (1) scales down the message $p^{\varepsilon - 1}M$ to $M$; and (2) zeros out the modulus garbage $K'$ (i.e., $\left\lfloor\dfrac{K'}{p^{\varepsilon - 1}}\right\rfloor = 0$); and. The reason why $K''$ gets updated to $K''^{\langle 1 \rangle}, K''^{\langle 2 \rangle}, \cdots, K''^{\langle \varepsilon -1 \rangle}$ across rounds is that each $i$-th round's evaluation of function $F_{\epsilon'}$ and $G_{\epsilon}$ is done modulo $p^{\varepsilon - i}$, which produces new $p^{\varepsilon - i}$-multiple overflow garbage values each time. 
+
+$ $
+
+
+
+
+
+
+
+
+
+
+
+
+Beneficially, the $\varepsilon - 1$ rounds of inverse-$p$ multiplications yields the effect of scaling down the plaintext $p^{\varepsilon-1}m_i \rightarrow m_i$, and the noise $k''p^{\varepsilon} \rightarrow k''p$, which has the desired noise scaling factor $p$ for standard BGV ciphertexts. 
 
 %To properly scale down the plaintext coefficients from $p^{\varepsilon-1}m_i \rightarrow m_i$ and the noise coefficients from $k'''p^{\varepsilon} \rightarrow k'''p$, we multiply the ciphertext's polynomial coefficients by $|p^{-(\varepsilon-1)}|_{q_{l'}}$. Note that the inverse of $p^{(\varepsilon-1)} \bmod q_{l'}$ exists because \textsf{gcd}$(p^{(\varepsilon-1)}, q_{l'}) = 1$. This operation results in $p^{-(\varepsilon-1)} \cdot (p^{\varepsilon-1}m_i + k'''_ip^{\varepsilon}) = m_i + k'''_{i}p \bmod q_{l'}$, successfully scaling down the coefficients of the plaintext and the noise polynomials. The output ciphertext is $\textsf{RLWE}_{S, \sigma}(M + K'''p) \bmod q_{l'}$.
 
-%the scaling factor must be computed as the inverse modulo $q_{\hat{l}}$, where $q_{\hat{l}}$ denotes the specific ciphertext modulus at the end of the digit extraction step (rather than the final modulus $q_{l'}$). Furthermore, although we are conceptually scaling the values stored in the slots, we do not need to encode the inverse into a plaintext vector. Due to the linearity of the scheme, simply multiplying the ciphertext's polynomial coefficients by the scalar integer $|p^{-(\varepsilon-1)}|_{q_{\hat{l}}}$ effectively scales the underlying slot values efficiently.
+%the scaling factor must be computed as the inverse modulo $q^{\langle i \rangle}$, where $q^{\langle i \rangle}$ denotes the specific ciphertext modulus at the end of the digit extraction step (rather than the final modulus $q_{l'}$). Furthermore, although we are conceptually scaling the values stored in the slots, we do not need to encode the inverse into a plaintext vector. Due to the linearity of the scheme, simply multiplying the ciphertext's polynomial coefficients by the scalar integer $|p^{-(\varepsilon-1)}|_{q^{\langle i \rangle}}$ effectively scales the underlying slot values efficiently.
 
 $ $
 
@@ -736,7 +792,7 @@ $ $
 \subsubsection{Comparing the Bootstrapping in BFV, BGV, and CKKS} 
 \label{subsubsec:bootstrapping-differences}
 
-Both BFV and BGV's bootstrapping use digit extraction, but for different purposes. In BFV, digit extraction is used to eliminate the noise in the lower-bit area. In BGV, digit extraction is used to eliminate the modulus garbage values in the lower-bit area generated by \textsf{ModRaise} from $\hat{q}\rightarrow q_L$. In addition, at each round of BGV's digit extraction, we explicitly multiply the coefficients of the ciphertext polynomials by $|p^{-1}|_{q_{\hat{l}}}$. In BFV, this explicit inverse-$p$ multiplication is skipped and we only conceptually re-interpret the scaling factor. 
+Both BFV and BGV's bootstrapping use digit extraction, but for different purposes. In BFV, digit extraction is used to eliminate the noise in the lower-bit area. In BGV, digit extraction is used to eliminate the modulus garbage values in the lower-bit area generated by \textsf{ModRaise} from $\hat{q}\rightarrow q_L$. In addition, at each round of BGV's digit extraction, we explicitly multiply the coefficients of the ciphertext polynomials by $|p^{-1}|_{q^{\langle i \rangle}}$. In BFV, this explicit inverse-$p$ multiplication is skipped and we only conceptually re-interpret the scaling factor. 
 
 CKKS's bootstrapping does not involve digit extraction because it has no values to eliminate in the lower-bit area. Instead, regarding the modulus garbage value \textsf{ModRaise} from $q_0 \rightarrow q_L$, this is eliminated by \textsf{EvalExp}'s homomorphic evaluation of an approximate sine function. Although CKKS's bootstrapping resets its modulus to a large value, this operation does not decrease the noise-to-message ratio, and this ratio continuously increases over homomorphic operations. 
 

@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 1362 --><div class='crosslinks'><p class='noindent'>[<a href='SparselyPackingCiphertexts.html'>prev</a>][<a href='CKKSScheme.html#ModulusBootstrapping.html'>parent</a>]</p></div>
-   <h4 class='subsectionHead' id='modulus-bootstrapping'><span class='titlemark'>D-3.13   </span> <a id='x139-198000D-3.13'></a>Modulus Bootstrapping</h4>
+   <h4 class='subsectionHead' id='modulus-bootstrapping'><span class='titlemark'>D-3.13   </span> <a id='x139-197000D-3.13'></a>Modulus Bootstrapping</h4>
 <!-- l. 1366 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference: </span><a href='https://eprint.iacr.org/2018/153.pdf'>Bootstrapping for Approximate Homomorphic Encryption</a> <span class='cite'>[<a href='refname.html#Xckks'>18</a>]</span>
 </p><!-- l. 1371 --><p class='indent'>   During CKKS’s ciphertext-to-ciphertext multiplication, each ciphertext is associated with a particular
 multiplicative level and it decreases by 1 upon each ciphertext-to-ciphertext multiplication (by its internal
@@ -42,7 +42,7 @@ CKKS’s bootstrapping procedure is equivalent to <span class='rm-lmri-10x-x-109
 <!-- l. 1380 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>≫</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></mrow></math>).
    
 </p>
-   <h5 class='subsubsectionHead' id='highlevel-idea2'><span class='titlemark'>D-3.13.1   </span> <a id='x139-199000D-3.13.1'></a>High-level Idea</h5>
+   <h5 class='subsubsectionHead' id='highlevel-idea2'><span class='titlemark'>D-3.13.1   </span> <a id='x139-198000D-3.13.1'></a>High-level Idea</h5>
 <!-- l. 1387 --><p class='noindent'>As the first step of bootstrapping, we forcibly change the modulus of the ciphertext
 <!-- l. 1387 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> from
 <!-- l. 1387 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> to
@@ -77,13 +77,13 @@ in each coefficient and distill the pure plaintext coefficient
                                                                                          
                                                                                          
                                                                                          
-<!-- l. 1404 --><p class='noindent' id='sine-function-fx-def-genfrac-def-def-def-genfrac-def-genfrac-def-genfrac-def-genfrac-def-genfrac-q-left-def-genfrac-def-def-def-genfrac-def-genfrac-def-genfrac-def-genfrac-def-genfrac-xqright-such-that-fdelta-mi-ei-qki-delta-mi-ei-provided-delta-mi-ei-q-httpseprintiacrorgpdfsource'><img alt='PIC' src='figures/modulo-reduction-sine.png' /> <a id='x139-199001r16'></a></p>
+<!-- l. 1404 --><p class='noindent' id='sine-function-fx-def-genfrac-def-def-def-genfrac-def-genfrac-def-genfrac-def-genfrac-def-genfrac-q-left-def-genfrac-def-def-def-genfrac-def-genfrac-def-genfrac-def-genfrac-def-genfrac-xqright-such-that-fdelta-mi-ei-qki-delta-mi-ei-provided-delta-mi-ei-q-httpseprintiacrorgpdfsource'><img alt='PIC' src='figures/modulo-reduction-sine.png' /> <a id='x139-198001r16'></a></p>
 <figcaption class='caption'><span class='id'>Figure 16: </span><span class='content'>Sine function <!-- l. 1405 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub>
 </mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>sin</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑥</mi>
  </mrow><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub>  </mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow></math>
 such that <!-- l. 1405 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>≈</mo><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></mrow></math>
 (provided <!-- l. 1405 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>≪</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></mrow></math>)
-<a href='https://eprint.iacr.org/2018/153.pdf'>(Source)</a>                                                                                  </span></figcaption><!-- tex4ht:label?: x139-199001r16  -->
+<a href='https://eprint.iacr.org/2018/153.pdf'>(Source)</a>                                                                                  </span></figcaption><!-- tex4ht:label?: x139-198001r16  -->
                                                                                          
                                                                                          
    </figure>
@@ -134,7 +134,7 @@ Considering all these, CKKS’s overall bootstrapping procedure is described in 
    <div class='table'>
                                                                                          
                                                                                          
-<!-- l. 1429 --><p class='indent'>   </p><figure class='float' id='x139-199004r6'><span id='highlevel-description-of-ckkss-bootstrapping-procedure'></span>
+<!-- l. 1429 --><p class='indent'>   </p><figure class='float' id='x139-198004r6'><span id='highlevel-description-of-ckkss-bootstrapping-procedure'></span>
                                                                                          
                                                                                          
 <div class='tabular'> <table class='tabular' id='TBL-110' rules='groups'><colgroup id='TBL-110-1g'><col id='TBL-110-1' /><col id='TBL-110-2' /></colgroup><tr class='hline'><td></td><td></td></tr><tr id='TBL-110-1-'><td class='td11' id='TBL-110-1-1' style='text-align:left; white-space:nowrap;'> 1  </td><td class='td11' id='TBL-110-1-2' style='text-align:left; white-space:nowrap;'> <span class='underline'><span class='rm-lmssbx-10x-x-109'>ModRaise:</span></span> Given ciphertext <!-- l. 1431 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></mrow></math>, we forcibly modify its modulus from <!-- l. 1431 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math> to <!-- l. 1431 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math>.  </td>
@@ -156,13 +156,13 @@ Considering all these, CKKS’s overall bootstrapping procedure is described in 
 </tr><tr class='hline'><td></td><td></td></tr></table>                                                                                                                                                                                                                                                                                                                                                   </div>
 
 <figcaption class='caption'><span class='id'>Table 6: </span><span class='content'>High-level Description of CKKS’s Bootstrapping Procedure
-</span></figcaption><!-- tex4ht:label?: x139-199004r6  -->
+</span></figcaption><!-- tex4ht:label?: x139-198004r6  -->
                                                                                          
                                                                                          
    </figure>
    </div>
    
-   <h5 class='subsubsectionHead' id='mathematical-expansion-of-the-highlevel-idea'><span class='titlemark'>D-3.13.2   </span> <a id='x139-200000D-3.13.2'></a>Mathematical Expansion of the High-level Idea</h5>
+   <h5 class='subsubsectionHead' id='mathematical-expansion-of-the-highlevel-idea'><span class='titlemark'>D-3.13.2   </span> <a id='x139-199000D-3.13.2'></a>Mathematical Expansion of the High-level Idea</h5>
 <!-- l. 1457 --><p class='noindent'>We will mathematically walk through how the bootstrapping procedure (<a href='#highlevel-description-of-ckkss-bootstrapping-procedure'>Table 6<!-- tex4ht:ref: subsec:ckks-sparse-packing  --></a>) correctly updates the modulus of the
 input ciphertext from <!-- l. 1457 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>
 to <!-- l. 1457 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub></math>.
@@ -406,7 +406,7 @@ noise). In the following subsections, we will explain the algebraic details of <
 <span class='rm-lmss-10x-x-109'>SlotToCoeff </span>steps.
    
 </p>
-   <h5 class='subsubsectionHead' id='details-coefftoslot'><span class='titlemark'>D-3.13.3   </span> <a id='x139-201000D-3.13.3'></a>Details: <span class='rm-lmss-10x-x-109'>CoeffToSlot</span></h5>
+   <h5 class='subsubsectionHead' id='details-coefftoslot'><span class='titlemark'>D-3.13.3   </span> <a id='x139-200000D-3.13.3'></a>Details: <span class='rm-lmss-10x-x-109'>CoeffToSlot</span></h5>
 <!-- l. 1585 --><p class='noindent'>Homomorphically moving the coefficients of <!-- l. 1585 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>M</mi></mrow><mrow><mi>c</mi></mrow></msub></math>
 (i.e., <!-- l. 1585 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub><msub><mrow><mi>k</mi></mrow><mrow><mi>i</mi></mrow></msub></mrow></math>
 for <!-- l. 1585 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>0</mn> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>i</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>) to
@@ -499,7 +499,7 @@ done in an efficient manner that reduces the number of homomorphic rotations (<a
 computed by applying homomorphic conjugation to <span class='rm-lmss-10x-x-109'>ct</span><sub><span class='rm-lmss-10x-x-109'>c</span></sub> (<a href='HomomorphicConjugation.html#homomorphic-conjugation'><span class='ts1-lmr10-x-x-109'>§</span>D-3.11<!-- tex4ht:ref: subsec:ckks-rotation  --></a>).
    
 </p>
-   <h5 class='subsubsectionHead' id='details-evalexp'><span class='titlemark'>D-3.13.4   </span> <a id='x139-202000D-3.13.4'></a>Details: <span class='rm-lmss-10x-x-109'>EvalExp</span></h5>
+   <h5 class='subsubsectionHead' id='details-evalexp'><span class='titlemark'>D-3.13.4   </span> <a id='x139-201000D-3.13.4'></a>Details: <span class='rm-lmss-10x-x-109'>EvalExp</span></h5>
 <!-- l. 1633 --><p class='noindent'>We will use the sine function <!-- l. 1633 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
 </mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>sin</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --> <mrow><mo fence='true' form='prefix'>(</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mn>2</mn><mi mathvariant='italic'>𝜋𝑥</mi>
  </mrow><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub>  </mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow></math>
@@ -715,7 +715,7 @@ slots of <span class='rm-lmss-10x-x-109'>ct</span><sub><span class='rm-lmss-10x-
 <mrow><mn>2</mn></mrow></mfrac> </mrow><mrow><mi>n</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='details-slottocoeff'><span class='titlemark'>D-3.13.5   </span> <a id='x139-203000D-3.13.5'></a>Details: <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></h5>
+   <h5 class='subsubsectionHead' id='details-slottocoeff'><span class='titlemark'>D-3.13.5   </span> <a id='x139-202000D-3.13.5'></a>Details: <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></h5>
 <!-- l. 1717 --><p class='noindent'>This step is an exact inverse of the <span class='rm-lmss-10x-x-109'>CoeffToSlot </span>step, which is moving the bootstrapped (i.e. modulo-reduced
 <!-- l. 1717 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub></math>) coefficients
 of <!-- l. 1717 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>M</mi></mrow><mrow><mi>v</mi></mrow></msub></math>
@@ -786,7 +786,7 @@ conjugate slots get automatically filled with the conjugates of the first
 values.
    
 </p>
-   <h5 class='subsubsectionHead' id='reducing-the-bootstrapping-overhead-by-sparsely-packing-ciphertext'><span class='titlemark'>D-3.13.6   </span> <a id='x139-204000D-3.13.6'></a>Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext</h5>
+   <h5 class='subsubsectionHead' id='reducing-the-bootstrapping-overhead-by-sparsely-packing-ciphertext'><span class='titlemark'>D-3.13.6   </span> <a id='x139-203000D-3.13.6'></a>Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext</h5>
 <!-- l. 1747 --><p class='noindent'>In many cases, the application of CKKS may use only a small number of input vector slots (e.g.,
 <!-- l. 1747 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>n</mi></mrow><mrow><mi>′</mi></mrow></msup>
 </mrow><mrow><mn>2</mn> </mrow></mfrac></mstyle></math>) out of
@@ -916,7 +916,7 @@ zero, anyway.
                                                                                          
                                                                                          
 </p>
-   <h5 class='subsubsectionHead' id='summary5'><span class='titlemark'>D-3.13.7   </span> <a id='x139-205000D-3.13.7'></a>Summary</h5>
+   <h5 class='subsubsectionHead' id='summary5'><span class='titlemark'>D-3.13.7   </span> <a id='x139-204000D-3.13.7'></a>Summary</h5>
 <!-- l. 1774 --><p class='noindent'>We summarize the CKKS bootstrapping procedure as follows.
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-104'>     
@@ -1015,7 +1015,7 @@ digit extraction algorithm. Therefore, homomorphic decryption is required to cha
 ciphertext modulus (<!-- l. 1836 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>).
    
 </p>
-   <h5 class='subsubsectionHead' id='reducing-the-bootstrapping-noise'><span class='titlemark'>D-3.13.8   </span> <a id='x139-206000D-3.13.8'></a>Reducing the Bootstrapping Noise</h5>
+   <h5 class='subsubsectionHead' id='reducing-the-bootstrapping-noise'><span class='titlemark'>D-3.13.8   </span> <a id='x139-205000D-3.13.8'></a>Reducing the Bootstrapping Noise</h5>
 <!-- l. 1845 --><p class='noindent'>As explained in <a href='#details-evalexp'><span class='ts1-lmr10-x-x-109'>§</span>D-3.13.4<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>, the bootstrapping procedure generates three types of noises:
 </p>
    <ul class='itemize1'>
@@ -1041,8 +1041,8 @@ techniques.
                                                                                          
                                                                                          
                                                                                          
-<!-- l. 1862 --><p class='noindent' id='arcsine-graph-for-smaller-approximation-error-httpswwwgooglecomsearchscaesvccbdebesxsrfadlywikkaffcafvjcehjsoeqftaowqarcsinsinxsourcelnmsfbsaeqnmdmkhoysbchazhzscwualwleusitemypftxsfzgzcfxnmxytvjvqrehpyicpzjthxkelijctcpfbyuloafvqmwkvjfntzsbnwccjlnswfnwwijckabjsdpgkprhqvkhpyoywxmhtccvrdbcrranmjzczrttkwfwtmiesaxvedahukewjzyqtejaxxbhlybhxdiveqpqjegqidxabcshidbiwbihdprsource'><img alt='PIC' src='figures/arc-sine.png' /> <a id='x139-206001r17'></a></p>
-<figcaption class='caption'><span class='id'>Figure 17: </span><span class='content'>Arc-sine graph for smaller approximation error <a href='https://www.google.com/search?sca_esv=c744cb070de47b7e&amp;sxsrf=ADLYWIKKaF93fcAFvJC4ehJso1E5qFTaow:1732546684173&amp;q=arcsin(sin(x))&amp;source=lnms&amp;fbs=AEQNm0DmKhoYsBCHazhZSCWuALW8l8eUs1i3TeMYPF4tXSfZ95GzcfXnm5XYTvJV_9Qreh2py964ICpZJthXkELijctC8pFBYULoa3-fvQmwK0VJF0ntzsbN_W2CCJL9N57SWFNwWI58jCKaBJSdPgkprHQVK8H1PYOYWXMHTCCV-rDbC44rR6ANM870jZCZRtTKwFWtMIe2&amp;sa=X&amp;ved=2ahUKEwjZy6qt3_eJAxXbhlYBHXD2IvEQ0pQJegQIDxAB&amp;cshid=1732546705369143&amp;biw=1280&amp;bih=635&amp;dpr=1.5'>(Source)</a>                            </span></figcaption><!-- tex4ht:label?: x139-206001r17  -->
+<!-- l. 1862 --><p class='noindent' id='arcsine-graph-for-smaller-approximation-error-httpswwwgooglecomsearchscaesvccbdebesxsrfadlywikkaffcafvjcehjsoeqftaowqarcsinsinxsourcelnmsfbsaeqnmdmkhoysbchazhzscwualwleusitemypftxsfzgzcfxnmxytvjvqrehpyicpzjthxkelijctcpfbyuloafvqmwkvjfntzsbnwccjlnswfnwwijckabjsdpgkprhqvkhpyoywxmhtccvrdbcrranmjzczrttkwfwtmiesaxvedahukewjzyqtejaxxbhlybhxdiveqpqjegqidxabcshidbiwbihdprsource'><img alt='PIC' src='figures/arc-sine.png' /> <a id='x139-205001r17'></a></p>
+<figcaption class='caption'><span class='id'>Figure 17: </span><span class='content'>Arc-sine graph for smaller approximation error <a href='https://www.google.com/search?sca_esv=c744cb070de47b7e&amp;sxsrf=ADLYWIKKaF93fcAFvJC4ehJso1E5qFTaow:1732546684173&amp;q=arcsin(sin(x))&amp;source=lnms&amp;fbs=AEQNm0DmKhoYsBCHazhZSCWuALW8l8eUs1i3TeMYPF4tXSfZ95GzcfXnm5XYTvJV_9Qreh2py964ICpZJthXkELijctC8pFBYULoa3-fvQmwK0VJF0ntzsbN_W2CCJL9N57SWFNwWI58jCKaBJSdPgkprHQVK8H1PYOYWXMHTCCV-rDbC44rR6ANM870jZCZRtTKwFWtMIe2&amp;sa=X&amp;ved=2ahUKEwjZy6qt3_eJAxXbhlYBHXD2IvEQ0pQJegQIDxAB&amp;cshid=1732546705369143&amp;biw=1280&amp;bih=635&amp;dpr=1.5'>(Source)</a>                            </span></figcaption><!-- tex4ht:label?: x139-205001r17  -->
                                                                                          
                                                                                          
    </figure>

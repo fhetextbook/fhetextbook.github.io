@@ -377,15 +377,14 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &\text{ } \text{ } $B + A\cdot \textsf{RLWE}_{S, \sigma}(\Delta' S) = \textsf{RLWE}_{S, \sigma}(\Delta' \cdot(p^{\varepsilon-1}M + E + Kp^\varepsilon)) \bmod q$, where $\Delta' = \left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor$\\
 &3. \underline{\textsf{CoeffToSlot}}: Multiply to the ciphertext by $n^{-1}\cdot I_n^R \cdot \hathat W$ to move\\
 & \text{ } \text{ } the plaintext coefficients of $p^{\varepsilon-1} M + E + Kp^\varepsilon$ to the input slots.\\
-&4. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{\varepsilon, v}(x)$,\\
+&4. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{\varepsilon}(x)$,\\
 &\text{ } \text{ }  homomorphically compute:\\
-&\text{ } \text{ } $G_{\varepsilon, 1} \circ G_{\varepsilon, 2}\circ \cdots \circ G_{\varepsilon, w-1} (p^{\varepsilon-1} M + E + Kp^\varepsilon)$\\
-&\text{ } \text{ }, and then the output $p^{\varepsilon-1}M + K'p^\varepsilon$ gets stored in the plaintext slots.\\
-&5. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $p^{\varepsilon-1}M + K'p^\varepsilon$ to the \\
-&\text{ } \text{ } polynomial coefficient positions and get $\textsf{RLWE}_{S, \sigma}(\Delta'\cdot(p^{\varepsilon-1}M + K'p^\varepsilon)) \bmod q$.\\
-&6. \underline{Scaling Factor Re-interpretation}: View $\textsf{RLWE}_{S, \sigma}(\Delta'\cdot(p^{\varepsilon-1}M + K'p^\varepsilon)) \bmod q$ as\\
-&\text{ } \text{ } $\textsf{RLWE}_{S, \sigma}\left(\left\lfloor\dfrac{q}{p^\varepsilon}\right\rfloor\cdot(p^{\varepsilon-1}M + K'p^\varepsilon)\right) \approx \textsf{RLWE}_{S, \sigma}\left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot(M) + K'q\right)$\\
-&\text{ } \text{ }$ = \textsf{RLWE}_{S, \sigma}(\Delta M) \bmod q$, an encryption of $M$ with the scaling factor $\Delta = \left\lfloor\dfrac{q}{p}\right\rfloor$\\
+&\text{ } \text{ } $G_{2} \circ G_{3}\circ \cdots \circ G_{\varepsilon-1} (p^{\varepsilon-1} M + E + Kp^\varepsilon)$\\
+&\text{ } \text{ }, and then the output $M + K^{\langle \varepsilon - 1 \rangle}p$ is stored in the plaintext slots.\\
+&\text{ } \text{ } Use scaling factor re-interpretation to handle inverse-$p$ multiplications.\\
+&5. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K^{\langle \varepsilon - 1 \rangle}p$ to the \\
+&\text{ } \text{ } polynomial coefficient positions and get $\textsf{RLWE}_{S, \sigma}(\Delta'\cdot(M + K^{\langle \varepsilon - 1 \rangle}p)) \bmod q$\\
+&\text{ } \text{ } $  = \textsf{RLWE}_{S, \sigma}(\Delta M) \bmod q$\\
 \hline
 \end{tabular}
 \caption{\textbf{Bootstrapping Details: TFHE, BFV}}
@@ -415,19 +414,17 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 & \text{ } \text{ } , which is the ciphertext $\textsf{RLWE}_{S, \sigma}(p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}) \bmod q_L$.\\
 &4. \underline{\textsf{CoeffToSlot}}: Multiply to the ciphertext by $n^{-1}\cdot I_n^R \cdot \hathat W$ to move\\
 & \text{ } \text{ } the plaintext coefficients of $p^{\varepsilon-1}M + p^\varepsilon E + K'\hat{q}$ to the input slots.\\
-&5. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{w, v}(x)$, \\
+&5. \underline{Digit Extraction}: Given the digit extraction polynomial $G_{\varepsilon}(x)$, \\
 &\text{ } \text{ }  homomorphically compute:\\
-&\text{ } \text{ } $\bm(\text{ } G_{w, 1} \circ G_{w, 2}\circ \cdots \circ G_{w, w-1} (p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q})\text{ } \bm) \cdot p^{\varepsilon-1}$\\
-&\text{ } \text{ } , and then the output $Mp^{\varepsilon - 1} + K''p^\varepsilon$ is stored in the plaintext slots.\\
-&6. \underline{Ciphertext Coefficient Multiplication by $|p^{-(\varepsilon-1)}|_{q_{\hat{l}}}$}: Multiply $|p^{-(\varepsilon-1)}|_{q_{\hat{l}}}$ to all \\
+&\text{ } \text{ } $\bm(\text{ } G_{2} \circ G_{3}\circ \cdots \circ G_{\varepsilon} (p^{\varepsilon-1} M + p^\varepsilon E + K'\hat{q})\text{ } \bm)$\\
+&\text{ } \text{ } , and then the output $M + K''p$ is stored in the plaintext slots.\\
+&\text{ } \text{ } To handle inverse-$p$ multiplication in each $i$-th round, multiply $|p^{-1}|_{q_{\hat{l}}}$ to all\\
 &\text{ } \text{ }  ciphertext polynomial coefficients to update their plaintext portion from\\
-&\text{ } \text{ }  $Mp^{\varepsilon - 1} + K'''p^\varepsilon \pmod{q_{\hat{l}}}$ to $M + K'''p \pmod{q_{\hat{l}}}$\\
-&\text{ } \text{ }   \textcolor{red}{ $\rhd$ where $q_{\hat{l}}$ is the ciphertext modulus at the end of step 5}\\
-&7. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K''p$ to the \\
-&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(Mp^{\varepsilon - 1} + K'''p^{\varepsilon}) \bmod q_{l'}$.\\
-&8. \underline{Noise Term Re-interpretation}: View $\textsf{RLWE}_{S, \sigma}(M + K'''p) \bmod q_{l'}$ as\\
-&\text{ } \text{ }  $\textsf{RLWE}_{S, \sigma}(M) \bmod q_L$, an encryption of $M$ with the new noise $E = K'''$\\
-& \text{ } \text{ }  having the noise scaling factor (i.e., plaintext modulus) $\Delta = p$.\\\hline
+&\text{ } \text{ }  $Mp^{\varepsilon - i} + K'''p^{\varepsilon - i + 1} \pmod{q_{\hat{l}}}$ to $M^{\varepsilon - i - 1} + K^{\langle i \rangle}p^{\varepsilon - i} \pmod{q_{\hat{l}}}$\\
+&\text{ } \text{ }   \textcolor{red}{ $\rhd$ where $q_{\hat{l}}$ is the ciphertext modulus at each specific round}\\
+&6. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K^{\langle \varepsilon - 1 \rangle}p$ to the \\
+&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K^{\langle \text{last} \rangle}p)$\\
+&\text{ } \text{ } $ = \textsf{RLWE}_{S, \sigma}(M) \bmod q_{l'}$ \textcolor{red}{ $\rhd$ where $\Delta = p$, and the final noise is $K^{\langle \text{last} \rangle}$}\\\hline
 \end{tabular}
 \caption{\textbf{Bootstrapping Details: CKKS, BGV}}
 \end{table}

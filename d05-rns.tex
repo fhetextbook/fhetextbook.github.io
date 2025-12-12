@@ -1116,6 +1116,7 @@ $ $
 
 \item Perform \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff}. These operations can be performed by only regular RNS-based additions and multiplications. The final digit-extracted ciphertext is $\textsf{RLWE}_{S, \sigma}\bm(\hat\Delta\cdot(p^{\varepsilon - r}\cdot M +  Kp^\varepsilon +  Up^\varepsilon)\bm)$, where all noise values smaller than the (base-$p$) $(\varepsilon-r)$-th digits are eliminated. 
 
+\begin{comment}
 $ $
 
 \item \textbf{\underline{Scaling Factor Re-interpretation:}} 
@@ -1127,9 +1128,11 @@ $\textsf{RLWE}_{S, \sigma}\bm(\hat\Delta\cdot(p^{\varepsilon - r}\cdot M +  Kp^\
 $= \textsf{RLWE}_{S, \sigma}\bm(\Delta M + (K + U)\cdot q\bm) $ \textcolor{red}{ $\rhd$ since $\Delta = \dfrac{q}{p^r}$, and $\hat\Delta = \dfrac{a}{p^\varepsilon}$}
 
 $= \textsf{RLWE}_{S, \sigma}\bm(\Delta M\bm) \bmod q$.
+\end{comment}
 
 
 \end{enumerate}
+
 
 
 

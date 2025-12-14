@@ -141,10 +141,10 @@ BGV's encryption decryption process is described as follows:
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Decryption Input}:} $C = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$
 
 \begin{enumerate}
-\item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B + A \cdot S  = M + \Delta E \pmod q$
+\item $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B + A \cdot S  = M + \Delta E \pmod q$
 
 \item $M = M + \Delta E \bmod t$ \textcolor{red}{ $\rhd$ modulo reduction of $M + \Delta E$ by $t$}
 
@@ -163,7 +163,8 @@ Each coefficient $\Delta e_i + m_i$ that contains the scaled noise and the plain
 
 \end{tcolorbox}
 
-When restoring the plaintext at the end of the decryption process, while BFV shifts down the plaintext and the noise to the lower bit area (which effectively rounds off the noise), BGV computes $\text{ mod } p$, which effectively modulo-reduces the accumulated noise because every coefficient of $E$ is a multiple of $t$ (i.e., $\Delta$). Finally, only the plaintext polynomial's each coefficient $m_i$ remains in the low-digit area without any noise $e_i$. 
+When restoring the plaintext at the end of the decryption process, while BFV shifts down the plaintext and the noise to the lower bit area (which effectively rounds off the noise), BGV computes $\text{ mod } p$, which effectively modulo-reduces the accumulated noise because every coefficient of $E$ is a multiple of $t$ (i.e., $\Delta$). Finally, only each coefficient of the plaintext polynomial $m_i$ remains in the low-digit area without any noise $e_i$. 
+
 
 
 \subsection{Ciphertext-to-Ciphertext Addition}
@@ -257,7 +258,7 @@ CKKS's \textsf{ModDrop} is summarized as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-plain}} BGV's \textsf{ModDrop}}}]
 
-Given a BGV ciphertext with the $l$-th multiplicative level $\textsf{RLWE}_{S, \sigma}(\Delta M) = (A, B) \bmod q_l$, a \textsf{ModDrop} operation is as follows: 
+Given a BGV ciphertext with the $l$-th multiplicative level $\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B) \bmod q_l$, a \textsf{ModDrop} operation is as follows: 
 
 $(A', B') \bmod q_{l-1} = (A \bmod q_{l-1}, B \bmod q_{l-1})$
 
@@ -627,7 +628,7 @@ The technical details of BGV's bootstrapping are as follows.
 
 $ $
 
-Suppose that we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}(M) \bmod q_l$, where $A\cdot S + B = M + \Delta E$, \text{ } $\Delta = t = p$ (a prime), and $q_l$ is the ciphertext modulus of the current multiplicative level. 
+Suppose that we have an RLWE ciphertext $(A, B)  = \textsf{RLWE}_{S, \sigma}(M + \Delta E) \bmod q_l$, where $A\cdot S + B = M + \Delta E$, \text{ } $\Delta = t = p$ (a prime), and $q_l$ is the ciphertext modulus of the current multiplicative level. 
 
 $ $
 

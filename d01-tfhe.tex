@@ -56,7 +56,7 @@ $ $
 \item Scale up $m \longrightarrow \Delta \cdot m \text{ } \in \mathbb{Z}_q$
 
 \item Compute $b = \vec{a} \cdot \vec{s} + \Delta  m + e \text{ } \bmod q$
-\item $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m) = (\vec{a}, b) \text{ } \in \mathbb{Z}_q^{k + 1}$ 
+\item $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m + e) = (\vec{a}, b) \text{ } \in \mathbb{Z}_q^{k + 1}$ 
 \end{enumerate}
 
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -77,6 +77,8 @@ $ $
 
 \end{tcolorbox}
 
+In this section, we will often write $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m + e)$ as $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m)$ for simplicity, because $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m + e) \approx \textsf{LWE}_{\vec{s},\sigma}(\Delta  m)$ (i.e., they decrypt to the same message). Even in the case that we write $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m)$ instead of $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m + e)$, you should assume this as an encryption of $\Delta m + e$ (i.e., the noise is included inside the scaled message).
+
 \subsection{Homomorphic Ciphertext-to-Ciphertext Addition}
 \label{subsec:tfhe-add-cipher}
 
@@ -84,13 +86,13 @@ TFHE's ciphertext-to-ciphertext addition uses LWE's ciphertext-to-ciphertext add
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-add-cipher}} TFHE Ciphertext-to-Ciphertext Addition}}]
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 1 \rangle} ) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 2 \rangle} ) $
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle} ) + \textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle}) $
 
 $ = ( \vec{a}^{\langle 1 \rangle}, \text{ } b^{\langle 1 \rangle}) + (\vec{a}^{\langle 2 \rangle}, \text{ } b^{\langle 2 \rangle}) $
 
 $ = ( \vec{a}^{\langle 1 \rangle} + \vec{a}^{\langle 2 \rangle}, \text{ } b^{\langle 1 \rangle} + b^{\langle 2 \rangle} ) $
 
-$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta(m^{\langle 1 \rangle} + m^{\langle 2 \rangle}) )$
+$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta(m^{\langle 1 \rangle} + m^{\langle 2 \rangle}) + e^{\langle 1 + 2 \rangle} )$
 \label{Here}
 \end{tcolorbox}
 
@@ -101,13 +103,13 @@ $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta(m^{\langle 1 \rangle} + m^{\langle 2 \r
 TFHE's ciphertext-to-plaintext addition (where $\lambda$ is a constant to add) uses LWE's ciphertext-to-plaintext addition scheme, which is equivalent to GLWE's ciphertext-to-plaintext addition scheme (\autoref{sec:glwe-add-plain}) with $n = 1$.  
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-add-plain}} TFHE Ciphertext-to-Plaintext Addition}}]
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m) + \Delta \lambda $
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e) + \Delta \lambda $
 
 $=  (\vec{a}, \text{ } b) + \Delta \lambda$
 
 $=  (\vec{a}, \text{ } b + \Delta\lambda)$
 
-$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m + \lambda) )$
+$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m + \lambda) + e )$
 \end{tcolorbox}
 
 
@@ -117,13 +119,13 @@ $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m + \lambda) )$
 TFHE's ciphertext-to-plaintext multiplication uses LWE's ciphertext-to-plaintext multiplication scheme, which is equivalent to GLWE's ciphertext-to-plaintext multiplication scheme (\autoref{sec:glwe-mult-plain}) with $n = 1$.  
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-mult-plain}} TFHE Ciphertext-to-Plaintext Multiplication}}]
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m) \cdot \lambda$
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m + e) \cdot \lambda$
 
 $= (\vec{a}, \text{ } b) \cdot \lambda$
 
 $= (\lambda\cdot \vec{a}, \text{ } \lambda \cdot b)$
 
-$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m \cdot \lambda) )$
+$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m \cdot \lambda) + \lambda \cdot e )$
 \end{tcolorbox}
 
 
@@ -136,7 +138,10 @@ $= \textsf{LWE}_{\vec{s}, \sigma}(\Delta (m \cdot \lambda) )$
 TFHE's key switching scheme changes an LWE ciphertext's secret key from $\vec{s}$ to $\vec{s}_{'}$, where the two key vectors may or may not have the same dimensions. This scheme is essentially LWE's key switching scheme. Specifically, this is equivalent to the alternative GLWE version's (\autoref{subsec:glwe-alternative}) key switching scheme (\autoref{sec:glwe-key-switching}) with $n = 1$ as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-key-switching}} TFHE Key Switching}}]
-$\textsf{LWE}_{\vec{s}_{'},\sigma}(\Delta m) = (0, b) - \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{a}), \text{ } \textsf{Lev}_{\vec{s}_{'}, \sigma}^{\beta, l}(\vec{s}) \bm{\rangle}$
+
+Given $\textsf{LWE}_{\vec{s},\sigma}(\Delta m + e) = (\vec{a}, b)$,
+
+$\textsf{LWE}_{\vec{s}_{'},\sigma}(\Delta m + e') = (0, b) - \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{a}), \text{ } \textsf{Lev}_{\vec{s}_{'}, \sigma}^{\beta, l}(\vec{s}) \bm{\rangle}$
 \end{tcolorbox}
 
 
@@ -152,7 +157,7 @@ TFHE supports multiplication of two ciphertexts in the form: $\textsf{LWE}_{\vec
 
 $ $
 
-\noindent The 1st term $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1)$ comes from one of the following: 
+\noindent The 1st term $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 + e_1)$ comes from one of the following: 
 \begin{itemize}
 \item A fresh LWE encryption (\autoref{subsec:glwe-enc}) of plaintext $m_1$. 
 \item A homomorphically added result of two LWE ciphertexts (\autoref{sec:glwe-add-cipher}). 
@@ -164,14 +169,14 @@ $ $
 \noindent The 2nd term $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ comes from one of the following:
 \begin{itemize}
 \item A fresh GSW encryption (\autoref{subsec:ggsw-enc}) of plaintext $m_2$.
-\item Converted from $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2)$ into $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ by \textit{circuit bootstrapping} (this will be covered in the future).
+\item Converted from $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_2 + e_2)$ into $\textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2)$ by \textit{circuit bootstrapping} (this will be covered in the future).
 \end{itemize}
 
 $ $
 
 \noindent Remember the following: 
 
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (\vec{a}, b) \in \mathbb{Z}_{q}^{k + 1}$, where $b = \vec{a} \cdot \vec{s} + \Delta m_1 + e$ 
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 + e_1) = (\vec{a}, b) \in \mathbb{Z}_{q}^{k + 1}$, where $b = \vec{a} \cdot \vec{s} + \Delta m_1 + e_1$ 
 
 $ $
 
@@ -187,7 +192,7 @@ $\bar{\textsf{ct}}_i = \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_i \cdot m_2)
 
 $\bar{\textsf{ct}}_k = \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2)$
 
-$\textsf{ct} = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (\vec{a}, b) = (a_0, a_1, \gap{$\cdots$}, a_{k-1}, b) = (\textsf{ct}_0, \textsf{ct}_1, \cdots, \textsf{ct}_k)$
+$\textsf{ct} = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 + e_1) = (\vec{a}, b) = (a_0, a_1, \gap{$\cdots$}, a_{k-1}, b) = (\textsf{ct}_0, \textsf{ct}_1, \cdots, \textsf{ct}_k)$
 
 $ $
 
@@ -200,11 +205,15 @@ $ $
 \noindent Then, the following is true:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:tfhe-mult-cipher}} TFHE Ciphertext-to-Ciphertext Multiplication}}]
-$\textsf{ct} = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) = (a_0, a_1, \cdots, a_{k-1}, b)$
+$\textsf{ct} = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 + e_1) = (a_0, a_1, \cdots, a_{k-1}, b)$
 
 $\bar{\textsf{ct}} = \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \bm( \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_0\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_1\cdot m_2), \cdots, \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_{k-1}\cdot m_2), \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2)  \bm)$
 
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) \cdot \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(\textsf{ct}_i), \bar{\textsf{ct}}_i \rangle = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 m_2)$
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 + e_1) \cdot \textsf{GSW}_{\vec{s}, \sigma}^{\beta, l}(m_2) $
+
+$= \sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(\textsf{ct}_i), \bar{\textsf{ct}}_i \rangle $
+
+$\approx \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1 m_2)$
 \end{tcolorbox}
 
 This means that multiplying two TFHE ciphertexts (one is in LWE and another in GSW) and decrypting the resulting LWE ciphertext gives the same result as multiplying their two original plaintexts. 
@@ -217,57 +226,52 @@ This means that multiplying two TFHE ciphertexts (one is in LWE and another in G
 $= \langle \textsf{Decomp}^{\beta, l}(a_0), \bar{\textsf{ct}}_0 \rangle + \langle \textsf{Decomp}^{\beta, l}(a_1), \bar{\textsf{ct}}_1 \rangle + \gap{$\cdots$} + \langle \textsf{Decomp}^{\beta, l}(a_{k-1}), \bar{\textsf{ct}}_{k-1} \rangle + \langle \textsf{Decomp}^{\beta, l}(b), \bar{\textsf{ct}}_k \rangle$ \\
 \textcolor{red}{ $\rhd$ expanding the dot product of two vectors}
 \item For $i = k$: \\
-$\textsf{Decomp}^{\beta, l}(b) = (b_1, b_2, \gap{$\cdots$}, b_l)$, where $b = b_1\dfrac{q}{\beta^1} + b_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + b_l\dfrac{q}{\beta^l}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:poly-decomp}}\\
-$\bar{\textsf{ct}}_k = \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \left(\textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^1}\right), \textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^2}\right), \gap{$\cdots$}, \textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^l}\right) \right)$ \\
+$\textsf{Decomp}^{\beta, l}(b) = (b_1, b_2, \ldots , b_l)$, where $b = b_1\dfrac{q}{\beta^1} + b_2\dfrac{q}{\beta^2} + \cdots + b_l\dfrac{q}{\beta^l}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:poly-decomp}}\\
+$\bar{\textsf{ct}}_k = \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(m_2) = \left(\textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^1} + e_{2, 1}\right), \textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^2} + e_{2, 2}\right), \ldots, \textsf{LWE}_{\vec{s}, \sigma}\left(m_{2}\dfrac{q}{\beta^l} + e_{2, l}\right) \right)$ \\
 $ $
 
 Therefore: \\
 $\langle \textsf{Decomp}^{\beta, l}(b), \bar{\textsf{ct}}_k \rangle$\\
-$= b_1 \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^1} \right ) + b_2 \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^2} \right ) + \gap{$\cdots$} + b_l \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^l}\right)$ \\
-$= \textsf{LWE}_{\vec{s}, \sigma} \left (b_1m_{2}\dfrac{q}{\beta^1} \right ) + \textsf{LWE}_{\vec{s}, \sigma} \left (b_2m_{2}\dfrac{q}{\beta^2} \right ) + \gap{$\cdots$} + \textsf{LWE}_{\vec{s}, \sigma} \left (b_lm_{2}\dfrac{q}{\beta^l}\right)$ \textcolor{red}{ $\rhd$ from \autoref{sec:glwe-mult-plain}} \\
-$= \textsf{LWE}_{\vec{s}, \sigma} \left (b_1m_{2}\dfrac{q}{\beta^1} + b_2m_{2}\dfrac{q}{\beta^2} + \gap{$\cdots$} + b_lm_{2}\dfrac{q}{\beta^l}\right)$ \textcolor{red}{ $\rhd$ from \autoref{sec:glwe-add-cipher}}\\
-$= \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2} \cdot \left ( b_1\dfrac{q}{\beta^1} + b_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + b_l\dfrac{q}{\beta^l} \right)\right)$ \\
-$= \textsf{LWE}_{\vec{s}, \sigma} (m_{2}b)$ \textcolor{red}{ $\rhd$ from \autoref{subsec:poly-decomp}}
+$= b_1 \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^1}  + e_{2, 1}\right ) + b_2 \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^2}  + e_{2, 2}\right ) + \gap{$\cdots$} + b_l \cdot \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2}\dfrac{q}{\beta^l}  + e_{2, l}\right)$ \\
+$= \textsf{LWE}_{\vec{s}, \sigma} \left (b_1m_{2}\dfrac{q}{\beta^1}  + b_1e_{2, 1}\right ) + \textsf{LWE}_{\vec{s}, \sigma} \left (b_2m_{2}\dfrac{q}{\beta^2}  + b_2e_{2,2}\right ) + \gap{$\cdots$} + \textsf{LWE}_{\vec{s}, \sigma} \left (b_lm_{2}\dfrac{q}{\beta^l} + b_le_{2, l}\right)$ \textcolor{red}{ $\rhd$ from \autoref{sec:glwe-mult-plain}} \\
+$= \textsf{LWE}_{\vec{s}, \sigma} \left (b_1m_{2}\dfrac{q}{\beta^1} + b_2m_{2}\dfrac{q}{\beta^2} + \gap{$\cdots$} + b_lm_{2}\dfrac{q}{\beta^l} + b_1e_{2,1} + \cdots + b_le_{2,l}\right)$ \textcolor{red}{ $\rhd$ from \autoref{sec:glwe-add-cipher}}\\
+$= \textsf{LWE}_{\vec{s}, \sigma} \left (m_{2} \cdot \left ( b_1\dfrac{q}{\beta^1} + b_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + b_l\dfrac{q}{\beta^l} + e^{\langle k \rangle} \right)\right)$ \textcolor{red}{ $\rhd$ where $e^{\langle k \rangle} = \sum\limits_{i=1}^{l}b_ie_{2, i}$}\\
+$= \textsf{LWE}_{\vec{s}, \sigma} (m_{2}b + e^{\langle k \rangle})$ \textcolor{red}{ $\rhd$ from \autoref{subsec:poly-decomp}}
 
 \item For $0 \leq i \leq (k - 1)$: \\
 $\textsf{Decomp}^{\beta, l}(a_i) = (a_{\langle i, 1 \rangle}, a_{\langle i, 2 \rangle}, \gap{$\cdots$}, a_{\langle i, l \rangle})$, where $a_i = a_{\langle i, 1 \rangle}\dfrac{q}{\beta^1} + a_{\langle i, 2 \rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + a_{\langle i, l \rangle}\dfrac{q}{\beta^l}$ \\
-$\bar{\textsf{ct}}_i =  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_im_2) = \left(\textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^1}\right), \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^2}\right), \gap{$\cdots$}, \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^l}\right) \right)$ \\
+$\bar{\textsf{ct}}_i =  \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(-s_im_2) $
+
+$= \left(\textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^1} + e_{i, 1}\right), \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^2} + e_{i, 2}\right), \gap{$\cdots$}, \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^l} + e_{i, l}\right) \right)$ \\
 
 $ $
 Therefore: \\
 $\langle \textsf{Decomp}^{\beta, l}(a_0), \bar{\textsf{ct}}_0 \rangle + \langle \textsf{Decomp}^{\beta, l}(a_1), \bar{\textsf{ct}}_1 \rangle + \gap{$\cdots$} + \langle \textsf{Decomp}^{\beta, l}(a_{k-1}), \bar{\textsf{ct}}_{k-1} \rangle$ \\
 $= \sum\limits_{i=0}^{k-1}\langle \textsf{Decomp}^{\beta, l}(a_i), \bar{\textsf{ct}}_i \rangle$ \\
-$= \sum\limits_{i=0}^{k-1}\left(a_{\langle i, 1\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^1}\right) + a_{\langle i, 2\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^2}\right) + \gap{$\cdots$} + a_{\langle i, l\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^l}\right)\right)$ \\
-$= \sum\limits_{i=0}^{k-1}\left(\textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 1\rangle}s_im_2\dfrac{q}{\beta^1}\right) + \textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 2\rangle}s_im_2\dfrac{q}{\beta^2}\right) + \gap{$\cdots$} + \textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, l\rangle}s_im_2\dfrac{q}{\beta^l}\right)\right)$ \\
-$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 1\rangle}s_im_2\dfrac{q}{\beta^1} + -a_{\langle i, 2\rangle}s_im_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + -a_{\langle i, l\rangle}s_im_2\dfrac{q}{\beta^l}\right)$ \\
-$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2 \cdot \left(a_{\langle i, 1\rangle}\dfrac{q}{\beta^1} + a_{\langle i, 2\rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + a_{\langle i, l\rangle}\dfrac{q}{\beta^l}\right)\right)$ \\
-$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}(-s_im_2a_i)$
+$= \sum\limits_{i=0}^{k-1}\Bigg(a_{\langle i, 1\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^1} + e_{i,1}\right) + a_{\langle i, 2\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^2} + e_{i,2}\right) + $
+
+$ \cdots +  a_{\langle i, l\rangle} \cdot \textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2\dfrac{q}{\beta^l} + e_{i,l}\right)\Bigg)$ \\
+$= \sum\limits_{i=0}^{k-1}\Bigg(\textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 1\rangle}s_im_2\dfrac{q}{\beta^1} + a_{\langle i, 1 \rangle}e_{i,1}\right) + \textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 2\rangle}s_im_2\dfrac{q}{\beta^2} + a_{\langle i, 2 \rangle}e_{i,2}\right) + $
+
+$\gap{$\cdots$} + \textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, l\rangle}s_im_2\dfrac{q}{\beta^l} + a_{\langle i, l \rangle}e_{i,l}\right)\Bigg)$ \\
+$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}\left(-a_{\langle i, 1\rangle}s_im_2\dfrac{q}{\beta^1} -a_{\langle i, 2\rangle}s_im_2\dfrac{q}{\beta^2} + \gap{$\cdots$} -a_{\langle i, l\rangle}s_im_2\dfrac{q}{\beta^l} + a_{\langle i, 1 \rangle}e_{i,1} + \cdots + a_{\langle i, l \rangle}e_{i,l}\right)$ \\
+$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}\left(-s_im_2 \cdot \left(a_{\langle i, 1\rangle}\dfrac{q}{\beta^1} + a_{\langle i, 2\rangle}\dfrac{q}{\beta^2} + \gap{$\cdots$} + a_{\langle i, l\rangle}\dfrac{q}{\beta^l}\right) + a_{\langle i, 1 \rangle}e_{i,1} + \cdots + a_{\langle i, l \rangle}e_{i,l}\right)$ \\
+$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}(-s_im_2a_i + e^{\langle i \rangle})$ \textcolor{red}{ $\rhd$ where $e^{\langle i \rangle} = a_{\langle i, 1 \rangle}e_{i,1} + \cdots + a_{\langle i, l \rangle}e_{i,l}$}
 \item According to step 2 and 3, \\
 $\sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(\textsf{ct}_i), \bar{\textsf{ct}}_i \rangle$ \\
-$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}(-s_im_2a_i) + \textsf{LWE}_{\vec{s}, \sigma} (m_{2}b)$ \\ 
-$= \textsf{LWE}_{\vec{s}, \sigma}\Big(\sum\limits_{i=0}^{k-1}(-s_im_2a_i) + m_{2}b\Big)$ \textcolor{red}{ $\rhd$ addition of two GLWE ciphertexts} \\ 
-$= \textsf{LWE}_{\vec{s}, \sigma}\Big(m_2b - \sum\limits_{i=0}^{k-1}m_2a_is_i\Big)$  \\ 
-$= \textsf{LWE}_{\vec{s}, \sigma}\Big(m_2(b - \sum\limits_{i=0}^{k-1}a_is_i)\Big)$\\
-$= \textsf{LWE}_{\vec{s}, \sigma}(m_2(\Delta m_1 + e))$ \\
-$= \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2 + m_2e)$ \\
-$\approx \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2)$ \textcolor{red}{ $\rhd$ given $e$ is small and thus $m_2e$ is also small}
+$= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}(-s_im_2a_i + e^{\langle i \rangle}) + \textsf{LWE}_{\vec{s}, \sigma} (m_{2}b + e^{\langle k \rangle})$ \\ 
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(\sum\limits_{i=0}^{k-1}(-s_im_2a_i) + m_{2}b + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \textcolor{red}{ $\rhd$ addition of two LWE ciphertexts} \\ 
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2b - \sum\limits_{i=0}^{k-1}m_2a_is_i + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$  \\ 
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2(b - \sum\limits_{i=0}^{k-1}a_is_i + \sum\limits_{i=0}^ke^{\langle i \rangle})\right)$\\
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2(\Delta m_1 + e_1) + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \\
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(\Delta m_1m_2 + m_2e_1 + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \\
+$\approx \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2)$ \textcolor{red}{ $\rhd$ given $m_2e_1 + \sum\limits_{i=0}^ke^{\langle i \rangle}$ is small and thus $m_2e_1$ is also small}
 \end{enumerate}
 
 \end{myproof}
 
-\subsubsection{Discussion on the Noise Growth}
-
-Note that after ciphertext-to-ciphertext multiplication, the noise grows to: 
-
-$ $
-
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1) \cdot \textsf{GSW}_{S, \sigma}^{\beta, l}(m_2) = \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2 + m_2e) \text{ } (\approx \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2))$
-
-$ $
-
-\noindent 
 %This issue of noise growth is similar to that in ciphertext-to-plaintext multiplication (\autoref{subsubsec:glwe-mult-plain-discussion}). 
-To reduce the noise, noise bootstrapping is needed (will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}).
+To reduce the noise growth, noise bootstrapping is needed (will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}).
 
 \subsubsection{Generalization to GLWE-to-GGSW Multiplication}
 \label{subsubsec:tfhe-glwe-to-ggsw-multiplication}
@@ -333,7 +337,7 @@ $ = \bm(\textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(-S_0\cdot M_2), \textsf{GLev}
 
 $ $
 
-$\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1) \cdot \textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(C_i), \bar{C_i} \rangle = \textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1 M_2)$
+$\textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1) \cdot \textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(C_i), \bar{C_i} \rangle \approx \textsf{GLWE}_{\vec{S}, \sigma}(\Delta M_1 M_2)$
 \end{tcolorbox}
 
 This means that multiplying two TFHE ciphertexts (one is in GLWE and another in GGSW) and decrypting the resulting GLWE ciphertext gives the same result as multiplying their two original plaintexts. 

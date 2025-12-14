@@ -480,7 +480,7 @@ $\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } 
 
 \item Compute $B = -A \cdot S + \Delta M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
-\item $\textsf{RLWE}_{S,\sigma}(\Delta M) = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$ 
+\item $\textsf{RLWE}_{S,\sigma}(\Delta M + E) = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$ 
 
 \end{enumerate}
 
@@ -505,7 +505,7 @@ $ $
 
 \end{tcolorbox}
 
-
+In this section, we will often write $\textsf{RLWE}_{S,\sigma}(\Delta  M + E)$ as $\textsf{RLWE}_{S,\sigma}(\Delta  M)$ for simplicity, because $\textsf{RLWE}_{S,\sigma}(\Delta M + E) \approx \textsf{RLWE}_{S,\sigma}(\Delta M)$ (i.e., they decrypt to approximately the same message). Even in the case that we write $\textsf{RLWE}_{S,\sigma}(\Delta  M)$ instead of $\textsf{RLWE}_{S,\sigma}(\Delta  M + E)$, you should assume this as an encryption of $\Delta  M + E$ (i.e., the noise is included inside the scaled message).
 
 \subsection{Ciphertext-to-Ciphertext Addition}
 \label{subsec:ckks-add-cipher}

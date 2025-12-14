@@ -244,7 +244,7 @@ We summarize and compare TFHE, BFV, CKKS, and BGV as follows:
 &\textcolor{white}{1. } - Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_1) = (A_1, B_1)  \bmod Q$\\
 &\textcolor{white}{1. } - Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_2) = (A_2, B_2)  \bmod Q$\\
 &2. \underline{Polynomial Multiplication}: \\
-& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_0, D_1, D_2) \pmod Q$\\
+& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_2, D_1, D_0) \pmod Q$\\
 &3. \underline{Relinearization}: $\textsf{ct}_\alpha = (D
 _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$\\
 &\textcolor{white}{3. Relinearization: } $\textsf{ct}_\alpha + \textsf{ct}_\beta = \textsf{ct}_{\alpha + \beta} = \textsf{RLWE}_{S, \sigma}(\Delta^2 M_1 M_2) \bmod Q$\\
@@ -252,7 +252,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 \textbf{CKKS}&- Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_1) = (A_1, B_1)  \bmod q_l$\\
 &- Ciphertext $\textsf{RLWE}_{S, \sigma}(\Delta M_2) = (A_2, B_2)  \bmod q_l$\\
 &1. \underline{Polynomial Multiplication}: \\
-& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_0, D_1, D_2) \pmod{q_l}$\\
+& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_2, D_1, D_0) \pmod{q_l}$\\
 &2. \underline{Relinearization}: $\textsf{ct}_\alpha = (D
 _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$\\
 &\textcolor{white}{3. Relinearization: } $\textsf{ct}_\alpha + \textsf{ct}_\beta = \textsf{ct}_{\alpha + \beta} = \textsf{RLWE}_{S, \sigma}(\Delta^2 M_1 M_2) \bmod q_l$\\
@@ -260,7 +260,7 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 \textbf{BGV}&- Ciphertext $\textsf{RLWE}_{S, \sigma}(M_1) = (A_1, B_1)  \bmod q_l$\\
 &- Ciphertext $\textsf{RLWE}_{S, \sigma}( M_2) = (A_2, B_2)  \bmod q_l$\\
 &1. \underline{Polynomial Multiplication}: \\
-& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_0, D_1, D_2) \pmod{q_l}$\\
+& \textcolor{white}{1. } $(A_1A_2, \text{ } A_1B_2 + A_2B_1, \text{ } B_1B_2) \equiv (D_2, D_1, D_0) \pmod{q_l}$\\
 &2. \underline{Relinearization}: $\textsf{ct}_\alpha = (D
 _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$\\
 &\textcolor{white}{3. Relinearization: } $\textsf{ct}_\alpha + \textsf{ct}_\beta = \textsf{ct}_{\alpha + \beta} = \textsf{RLWE}_{S, \sigma}( M_1 M_2) \bmod q_l$\\
@@ -423,8 +423,8 @@ _1, D_0),$\text{ } $\textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(
 &\text{ } \text{ }  $Mp^{\varepsilon - i} + K'''p^{\varepsilon - i + 1} \pmod{q^{\langle i \rangle}}$ to $M^{\varepsilon - i - 1} + K^{\langle i \rangle}p^{\varepsilon - i} \pmod{q^{\langle i \rangle}}$\\
 &\text{ } \text{ }   \textcolor{red}{ $\rhd$ where $q^{\langle i \rangle}$ is the ciphertext modulus at each specific round}\\
 &6. \underline{\textsf{SlotToCoeff}}: Multiply to the ciphertext by $\hathat W^*$ to move $M + K^{\langle \varepsilon - 1 \rangle}p$ to the \\
-&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K^{\langle \text{last} \rangle}p)$\\
-&\text{ } \text{ } $ = \textsf{RLWE}_{S, \sigma}(M) \bmod q_{l'}$ \textcolor{red}{ $\rhd$ where $\Delta = p$, and the final noise is $K^{\langle \text{last} \rangle}$}\\\hline
+&\text{ } \text{ } polynomial coefficient positions to get $\textsf{RLWE}_{S, \sigma}(M + K^{\langle \textit{last} \rangle}p)$\\
+&\text{ } \text{ } $ = \textsf{RLWE}_{S, \sigma}(M + \Delta K^{\langle \textit{last} \rangle}) \bmod q_{l'}$ \textcolor{red}{ $\rhd$ where $\Delta = p$, and the final noise is $K^{\langle \textit{last} \rangle}$}\\\hline
 \end{tabular}
 \caption{\textbf{Bootstrapping Details: CKKS, BGV}}
 \end{table}

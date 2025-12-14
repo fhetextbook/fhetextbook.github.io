@@ -46,7 +46,7 @@ $ $
 
 \item Compute $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
-\item $\textsf{GLWE}_{S,\sigma}(\Delta M) = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$ 
+\item $\textsf{GLWE}_{S,\sigma}(\Delta M + E) = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$ 
 
 
 
@@ -70,10 +70,10 @@ In summary, the GLWE decryption formula is summarized as follows:
 $ $
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:glwe-dec}} GLWE Decryption}}]
-\textbf{\underline{Decryption Input}:} $C = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 \begin{enumerate}
-\item $\textsf{GLWE}^{-1}_{S,\sigma}(C) = B - \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
+\item $\textsf{GLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B - \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
 \item Scale down 
 $\Bigl\lceil \dfrac{ \Delta  M + E }{\Delta}\Bigr\rfloor \bmod t = M \text{ } \in \mathcal{R}_{\langle n, t \rangle}$
@@ -119,17 +119,17 @@ $ $
 
 \item Compute $B = \textcolor{red}{-\sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)}} + \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
-\item $\textsf{GLWE}_{S,\sigma}(\Delta M) = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$ 
+\item $\textsf{GLWE}_{S,\sigma}(\Delta M + E) = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$ 
 
 \end{enumerate}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 
-\textbf{\underline{Decryption Input}:} $C = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (\{A_i\}_{i=0}^{k-1}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 \begin{enumerate}
-\item $\textsf{GLWE}^{-1}_{S,\sigma}(C) = B \text{ } \textcolor{red}{ + \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)}} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
+\item $\textsf{GLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B \text{ } \textcolor{red}{ + \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)}} = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
 \item Scale down 
 $\Bigl\lceil \dfrac{ \Delta  M + E }{\Delta}\Bigr\rfloor = M  \text{ } \in \mathcal{R}_{\langle n, t \rangle}$
@@ -182,9 +182,9 @@ $ $
 
 $B = \mathit{PK}_1\cdot U + \Delta  M + E_1 \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
-$\vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2 \in \mathcal{R}_{\langle n,q \rangle}^{k}$ \textcolor{red}{\text{ } \# $\vv{\mathit{PK}}_2 \cdot U$ multiplies each element of $\vv{\mathit{PK}}_2$ by $U$}
+$\vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2 \in \mathcal{R}_{\langle n,q \rangle}^{k}$ \textcolor{red}{ $\rhd$ $\vv{\mathit{PK}}_2 \cdot U$ multiplies each element of $\vv{\mathit{PK}}_2$ by $U$}
 
-\item $\textsf{GLWE}_{S,\sigma}(\Delta M) = (\vec{D}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k+1}$ 
+\item $\textsf{GLWE}_{S,\sigma}(\Delta M + E_{\mathit{all}}) = (\vec{D}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k+1}$  \textcolor{red}{ $\rhd$ where $E_{\mathit{all}} = E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$}
 
 
 
@@ -193,10 +193,10 @@ $\vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2 \in \mathcal{R}_{\langle n,q
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{\underline{Decryption Input}:} $C = (\vec{D}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (\vec{D}, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 \begin{enumerate}
-\item $\textsf{GLWE}^{-1}_{S,\sigma}(C) = B - \vec{D} \cdot \vec{S} = \Delta  M + E_{\mathit{all}} \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
+\item $\textsf{GLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B - \vec{D} \cdot \vec{S} = \Delta  M + E_{\mathit{all}} \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
 \item Scale down 
 $\Bigl\lceil \dfrac{ \Delta  M + E_{\mathit{all}} }{\Delta}\Bigr\rfloor = M  \text{ } \in \mathcal{R}_{\langle n, t \rangle}$
@@ -210,7 +210,7 @@ For correct decryption, every noise coefficient $e_i$ of polynomial $E_{\mathit{
 
 The equation in the 1st step of the decryption process is derived as follows:
 
-$\textsf{GLWE}^{-1}_{S,\sigma}\bm{(}\text{ } C = (B, \vec{D}) \text{ }\bm{)} = B - \vec{D}\cdot\vec{S}$
+$\textsf{GLWE}^{-1}_{S,\sigma}\bm{(}\text{ } \textsf{ct} = (B, \vec{D}) \text{ }\bm{)} = B - \vec{D}\cdot\vec{S}$
 
 $ = (\mathit{PK}_1\cdot U + \Delta  M + E_1) - (\vv{\mathit{PK}}_2 \cdot U + \vec{E}_2)\cdot \vec{S} $
 
@@ -220,20 +220,20 @@ $=  (U\cdot\vec{A}) \cdot \vec{S} + E \cdot U + \Delta M + E_1 - (U\cdot \vec{A}
 
 $= \Delta M + E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$
 
-$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{\text{ } \# where $E_{\mathit{all}} = E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$} 
+$= \Delta M + E_{\mathit{all}}$ \textcolor{red}{ $\rhd$ where $E_{\mathit{all}} = E \cdot U + E_1 - \vec{E}_2\cdot\vec{S}$} 
 
 
 $ $
 
 \para{Security:} The GLWE encryption scheme's encryption formula (Summary~\ref{subsec:glwe-enc} in \autoref{subsec:glwe-enc}) is as follows: 
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M) = \bm{(} \text{ } \vec{A}, \text{ } B = \vec{A}\cdot\vec{S} + \Delta M + E \text{ }\bm{)}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M + E) = \bm{(} \text{ } \vec{A}, \text{ } B = \vec{A}\cdot\vec{S} + \Delta M + E \text{ }\bm{)}$
 
 $ $
 
 , where the hardness of the LWE and RLWE problems guarantees that guessing $\vec{S}$ is difficult given $\vec{A}$ and $E$ are randomly picked at each encryption. On the other hand, the public key encryption scheme is as follows: 
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M) = \bm{(} \text{ } \vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2, \text{ } B = \mathit{PK}_1\cdot U + \Delta  M + E_1 \text{ } \bm{)}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M  + E_{\textit{all}}) = \bm{(} \text{ } \vec{D} = \vv{{\mathit{PK}}}_2 \cdot U + \vec{E}_2, \text{ } B = \mathit{PK}_1\cdot U + \Delta  M + E_1 \text{ } \bm{)}$
 
 $ $
 

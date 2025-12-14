@@ -297,7 +297,8 @@ $ $
 
 %$ $
 
-This book is available both as an \href{https://arxiv.org/abs/2503.05136}{\textbf{arXiv PDF}} and on an \href{https://fhetextbook.github.io} {\textbf{auto-generated website}} (powered by \href{https://www.kodymirus.cz/overleaf-html-sample/main.html}{make4ht}). This book is an evolving, open project; please report any errors or suggestions regarding the draft on the \href{https://github.com/fhetextbook/fhe-textbook/issues}{\textbf{Issues Board}}.
+This book is available both as an \href{https://arxiv.org/abs/2503.05136}{\textbf{arXiv PDF}} and on an \href{https://fhetextbook.github.io} {\textbf{auto-generated website}} (powered by \href{https://www.kodymirus.cz/overleaf-html-sample/main.html}{make4ht}). Our Python demo FHE library is available at \href{https://github.com/fhetextbook/fhe-textbook}{\texttt{https://github.com/fhetextbook/fhe-textbook}}.
+Please report any errors regarding the draft on the \href{https://github.com/fhetextbook/fhe-textbook/issues}{\textbf{Issues Board}}.
 
 
 
@@ -549,7 +550,7 @@ $ $
 
 This chapter explains the generic techniques of homomorphic computation adopted by various FHE schemes such as TFHE, CKKS, BGV, and BFV,
 
-As we learned from \autoref{sec:glwe}, $\textsf{GLWE}_{S,\sigma}(\Delta M) = (A_0, A_1, \gap{$\cdots$} , A_{k-1}, B) \in \mathcal{R}_{\langle n, q \rangle }^{k + 1}$, where $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$, and $B$ is computed as $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$. Each $A_i$ is an $(n-1)$-degree polynomial as a public key, whose each coefficient is uniformly randomly sampled from $\mathcal{R}_{\langle n, q \rangle }$. $E$ is an $(n-1)$-degree polynomial as a noise, whose each coefficient is sampled from $\mathcal{R}_{\langle n, q \rangle }$ based on the Gaussian distribution $\chi_\sigma$. $S$ is a list of $k$ $(n-1)$-degree polynomials as a secret key, such that $S = (S_0, S_1, \gap{$\cdots$} S_{k-1} ) \in \mathcal{R}_{\langle n, q \rangle }^k$, and each polynomial $S_i$'s each coefficient is a randomly sampled binary number in $\mathbb{Z}_2$ (i.e., $\{0, 1\}$). 
+As we learned from \autoref{sec:glwe}, $\textsf{GLWE}_{S,\sigma}(\Delta M + E) = (A_0, A_1, \gap{$\cdots$} , A_{k-1}, B) \in \mathcal{R}_{\langle n, q \rangle }^{k + 1}$, where $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$, and $B$ is computed as $B = \sum\limits_{i=0}^{k-1}{(A_i \cdot S_i)} + \Delta \cdot M + E$. Each $A_i$ is an $(n-1)$-degree polynomial as a public key, whose each coefficient is uniformly randomly sampled from $\mathcal{R}_{\langle n, q \rangle }$. $E$ is an $(n-1)$-degree polynomial as a noise, whose each coefficient is sampled from $\mathcal{R}_{\langle n, q \rangle }$ based on the Gaussian distribution $\chi_\sigma$. $S$ is a list of $k$ $(n-1)$-degree polynomials as a secret key, such that $S = (S_0, S_1, \gap{$\cdots$} S_{k-1} ) \in \mathcal{R}_{\langle n, q \rangle }^k$, and each polynomial $S_i$'s each coefficient is a randomly sampled binary number in $\mathbb{Z}_2$ (i.e., $\{0, 1\}$). 
 
 Based on this GLWE setup, this section will explain the following 5 homomorphic operations: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication, and key switching. 
 
@@ -645,6 +646,10 @@ This chapter explains the four most well-known FHE schemes: TFHE, CKKS, BGV, and
 
 
 \clearpage
+
+\section{Python-based Demo FHE Library}
+\input{d07-python-demo-library}
+
 %\input{scratch}
 
 

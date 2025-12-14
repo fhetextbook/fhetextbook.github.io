@@ -40,7 +40,7 @@ $ $
 \begin{enumerate}
 \item Scale up $M \longrightarrow \Delta  M \text{ } \in \mathcal{R}_{\langle n, q \rangle}$
 \item Compute $B = A \cdot S + \Delta  M + E  \text{ } \bmod \mathcal{R}_{\langle n,q \rangle}$
-\item $\textsf{RLWE}_{S,\sigma}(\Delta  M) = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$
+\item $\textsf{RLWE}_{S,\sigma}(\Delta  M + E) = (A, B) \text{ } \in \mathcal{R}_{\langle n,q \rangle}^2$
 \end{enumerate}
 
 \end{tcolorbox}
@@ -61,13 +61,13 @@ In summary, the RLWE decryption formula is summarized as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rlwe-dec}} RLWE Decryption}}]
 
-\textbf{\underline{Decryption Input}:} $C = (A, B) \text{ } \in \mathcal{R}_{\langle n, r \rangle}^{2}$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (A, B) \text{ } \in \mathcal{R}_{\langle n, r \rangle}^{2}$
 
 $ $
 
 \begin{enumerate}
 
-\item $\textsf{RLWE}^{-1}_{S,\sigma}(C) = B - A \cdot S = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$ 
+\item $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B - A \cdot S = \Delta  M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$ 
 \item Scale down $\Bigg\lceil\dfrac{ \Delta M + E}{\Delta}\Bigg\rfloor \bmod t = M \text{ } \in \mathcal{R}_{\langle n,t \rangle}$
 
 \end{enumerate}

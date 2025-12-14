@@ -6,9 +6,9 @@ $ $
 
 Suppose we have two GLWE ciphertexts encrypting two different plaintexts $M^{\langle 1 \rangle}, M^{\langle 2 \rangle}$:
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) = \textsf{ct}^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}) = \textsf{ct}^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) = \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle}) = \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $ $
 
@@ -21,13 +21,13 @@ $ $
 \noindent Then, the following is true:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{sec:glwe-add-cipher}} GLWE Homomorphic Addition}}]
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} ) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} ) $
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle} ) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle}) $
 
 $ = ( \{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle}) + (\{A_i^{\langle 2 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 2 \rangle}) $
 
 $ = ( \{A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}\}_{i=0}^{k-1}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} ) $
 
-$= \textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) )$
+$= \textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$ \textcolor{red}{ $\rhd$ where $E^{\langle 3 \rangle} = E^{\langle 1  \rangle} + E^{\langle 2 \rangle}$}
 \end{tcolorbox}
 
 
@@ -52,13 +52,13 @@ $= \sum\limits_{i=0}^{k-1}{((A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}) 
 $= \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$ \\
 \item Since $B^{\langle 3 \rangle} = \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$, 
 
-this means that $(A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$. \\
+this means that $(A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$. \\
 \item Thus, \\
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle}) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle})$ \\
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle})$ \\
 $ = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
 $ = ( A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
 $ = ( \{A_i^{\langle 3 \rangle}\}_{i=0}^{k-1}, B^{\langle 3 \rangle})$ \\
-$= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$
+$= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$
 
 %\begin{flushright}
 %\qedsymbol{} 
@@ -70,7 +70,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangl
 \subsection{Discussion}
 \label{subsubsec:glwe-add-cipher-discuss} 
 
-\para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}))$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ get eliminated by rounding after decryption, regardless of whatever their randomly sampled values were during encryption.
+\para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ get eliminated by rounding after decryption, regardless of whatever their randomly sampled values were during encryption.
 
 $ $
 

@@ -43,4 +43,4 @@ options:
 | Rotate | `python3 bfv_example.py --rotate` |
 | Random 1000 'Encrypt' Tests | `python3 bfv_example.py --random --encrypt` |
 | Random 1000 'Rotate' Tests | `python3 bfv_example.py --random --rotate` |
-| Random 1000 Tests | `python3 bfv_example.py --all` |
+| Random 1000 Any Tests | `python3 bfv_example.py --all` |

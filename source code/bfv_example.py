@@ -18,7 +18,7 @@ import argparse
 
 N = 4
 P = 17
-Q = 2**8
+Q = 2**30
 
 bfv_vector1 = np.array([10, 3, 5, 13], dtype=object)
 bfv_vector2 = np.array([2, 4, 3, 6], dtype=object)
@@ -51,7 +51,6 @@ def InitParam(bfv_vector1, bfv_vector2, is_random_param):
 	global Q
 	global scale
 	M = N*2
-	Q = 2**30
 	global N_inverse
 	global primitive_root_of_unity
 	#global scale_inverse
@@ -89,9 +88,6 @@ def InitParam(bfv_vector1, bfv_vector2, is_random_param):
 
 	N_inverse = ModInv(N, P) # If P is a prime, the multiplicative inverse of N (< P) is guaranteed to exist (by Fermit's Little theorem)
 	scale = math.floor(Q / P)
-	
-	#print(Q)
-	#print(scale)
 	root_values = []
 
 	# [OPTION 1]: A brute-force way of finding the primitiev (M=2N)-th root of unity (i.e., the solution for X^N + 1 = 0 mod P)
@@ -219,9 +215,9 @@ def main(is_encrypt, run_choice, is_random_param):
 	if args.encrypt:
 		s = key_generate(N)
 		a1, b1 = fhe_encrypt(p1, N, P, Q, s, encoder.scale)
-		dec_p1 = fhe_decrypt(a1, b1, N, P, Q, s, scale)
+		dec_p1, e_bits = fhe_decrypt(a1, b1, N, P, Q, s, scale, p1)
 		a2, b2 = fhe_encrypt(p2, N, P, Q, s, encoder.scale)
-		dec_p2 = fhe_decrypt(a2, b2, N, P, Q, s, encoder.scale)
+		dec_p2, e_bits = fhe_decrypt(a2, b2, N, P, Q, s, encoder.scale, p2)
 		print('<Encrypted ciphertexts>')
 		print('A1: ', a1)
 		print('B1: ', a2)
@@ -254,7 +250,7 @@ def main(is_encrypt, run_choice, is_random_param):
 		print()
 		z3 = centered_mod_arr(z1 * z2, P)
 		p3 = poly_mult(p1, p2, N, P)
-		a3, b3 = fhe_mult_cipher_plain(a1, b1, p2, N, Q, encoder.scale)
+		a3, b3 = fhe_mult_cipher_plain(a1, b1, p2, N, Q)
 
 
 	if run_choice == "rotate":
@@ -305,21 +301,25 @@ def main(is_encrypt, run_choice, is_random_param):
 	# =========== Decryption Stage ===============
 	if args.encrypt:
 		print('<Decrypted Polynomials>')
-		dec_p1 = fhe_decrypt(a1, b1, N, P, Q, s, encoder.scale)
-		dec_p2 = fhe_decrypt(a2, b2, N, P, Q, s, encoder.scale)
+		scaling_bits = math.floor(math.log2(scale))
+		dec_p1, e1_bits = fhe_decrypt(a1, b1, N, P, Q, s, encoder.scale, p1)
+		dec_p2, e2_bits = fhe_decrypt(a2, b2, N, P, Q, s, encoder.scale, p2)
 		print('- p1:           ', p1)
 		print('- decrypted_p1: ', dec_p1)
+		print(f'- scaling_factor_bit / noise_bit ratio = {scaling_bits} : {e1_bits}')
 		print()
 		print('- p2:           ', p2)
 		print('- decrypted_p2: ', dec_p2)
+		print(f'- scaling_factor_bit / noise_bit ratio = {scaling_bits} : {e2_bits}')
 		print()
 		if run_choice != '':
 			if run_choice == 'keyswitch':
-				dec_p3 = fhe_decrypt(a3, b3, N, P, Q, s_new, encoder.scale)
+				dec_p3, e3_bits = fhe_decrypt(a3, b3, N, P, Q, s_new, encoder.scale, p3)
 			else:
-				dec_p3 = fhe_decrypt(a3, b3, N, P, Q, s, encoder.scale)
+				dec_p3, e3_bits = fhe_decrypt(a3, b3, N, P, Q, s, encoder.scale, p3)
 			print('- p3:           ', p3)
 			print('- decrypted_p3: ', dec_p3)
+			print(f'- scaling_factor_bit / noise_bit ratio = {scaling_bits} : {e3_bits}')
 			print()
 	else:
 		dec_p1 = p1

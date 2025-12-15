@@ -405,7 +405,7 @@ def fhe_encrypt(m: Polynomial, N, P, Q, s, scale):
 	b = poly_mod(b, N, Q)
 	return (a, b)
 
-def fhe_decrypt(a: Polynomial, b: Polynomial, N, P, Q, s, scale) -> Polynomial:
+def fhe_decrypt(a: Polynomial, b: Polynomial, N, P, Q, s, scale, expected_a: Polynomial = None) -> Polynomial:
 	"""
 	Decrypt:
 	  v = b - a*s  (mod x^n+1, q)  ~= scale*m + e
@@ -418,7 +418,13 @@ def fhe_decrypt(a: Polynomial, b: Polynomial, N, P, Q, s, scale) -> Polynomial:
 	temp = poly_mult(a, s, N, Q)
 	m_hat = [centered_mod(c, P) for c in m_hat]
 
-	return Polynomial(np.array(m_hat, dtype=object))
+	if expected_a is not None:
+		e = poly_sub(v, poly_scalar_mult(expected_a, scale, N, Q), N, Q)
+		max_abs = float(np.max(np.abs(e.coef))) if len(e.coef) else 0.0
+		max_abs = max(max_abs, np.finfo(float).tiny) 
+		e_bits = 1 if max_abs == 0 else math.floor(math.log2(abs(max_abs))) + 1
+
+	return Polynomial(np.array(m_hat, dtype=object)), e_bits
 
 def fhe_add_cipher_cipher(a1, b1, a2, b2, N, Q):
 	a3 = poly_add(a1, a2, N, Q)
@@ -429,9 +435,9 @@ def fhe_add_cipher_plain(a1, b1, p2, N, Q, scale):
 	b3 = poly_add(b1, poly_scalar_mult(p2, scale, N, Q), N, Q)
 	return (a1, b3) 
 
-def fhe_mult_cipher_plain(a1, b1, p2, q, n):
-	a3 = poly_mult(a1, p2)
-	b3 = poly_mult(b1, p2) 
+def fhe_mult_cipher_plain(a1, b1, p2, N, Q):
+	a3 = poly_mult(a1, p2, N, Q)
+	b3 = poly_mult(b1, p2, N, Q) 
 	return (a3, b3)
 
 def fhe_rotate(a1, b1, N, Q, rotation_offset, galois_rotation_key):

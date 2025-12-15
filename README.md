@@ -44,3 +44,6 @@ options:
 | Random 1000 'Encrypt' Tests | `python3 bfv_example.py --random --encrypt` |
 | Random 1000 'Rotate' Tests | `python3 bfv_example.py --random --rotate` |
 | Random 1000 Any Tests | `python3 bfv_example.py --all` |
+
+## Community Implementations
+- A BFV-RNS implementation in SystemVerilog is available at [https://github.com/alibillalhammoud/FHEforEEs](https://github.com/alibillalhammoud/FHEforEEs).

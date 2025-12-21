@@ -446,7 +446,7 @@ Extract the first $\dfrac{n}{2} = 2$ elements in the Hermitian vector $\vec{v}_{
 
 $(1.0997+4.3007i, \text{ } 3.5000-1.4003i)$
 
-$\approx (1.1 + 4.3i, \text{ } 3.5 - 1.4i) = \vec{v}$ \textcolor{red}{\text{ } \# The original input vector}
+$\approx (1.1 + 4.3i, \text{ } 3.5 - 1.4i) = \vec{v}$ \textcolor{red}{  $\rhd$ The original input vector}
 
 $ $
 
@@ -546,7 +546,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta (M + \Lambda) )$
 
 
 
-\subsection{Homomorphic Ciphertext-to-Ciphertext Multiplication}
+\subsection{Ciphertext-to-Ciphertext Multiplication}
 \label{subsec:ckks-mult-cipher}
 
 CKKS's ciphertext-to-ciphertext multiplication is partially different from that of BFV. In the case of BFV, its ciphertext modulus remains the same after each multiplication. On the other hand, CKKS reduces its ciphertext modulus size by 1 after each multiplication (which is equivalent to reducing its multiplicative level by 1). When the level reaches 0, no further multiplication can be performed (unless we bootstrap the modulus). This difference arises because the two schemes use different strategies in handling their plaintext scaling factors-- BFV's $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$, whereas CKKS's $\Delta$ can be any value such that $\Delta \ll q_0$, where $q_0$ is the lowest multiplicative level's ciphertext modulus. However, both schemes use a similar relinearization technique. 
@@ -654,7 +654,7 @@ In the final step above, we converted $D_0 + D_1\cdot S$ into $\textsf{RLWE}_{S,
 \subsubsection{Relinearization  Method 1 -- Ciphertext Decomposition}
 \label{subsubsec:relinearization-gadget-decomposition}
 
-As explained in BFV's ciphertext-to-ciphertext multiplication (\autoref{subsubsec:bfv-mult-cipher-relinearization}), relinearization is a process of converting the polynomial triplet $(D_0, D_1, D_2) \in \mathcal{R}_{\langle n, q \rangle}^{3}$, which can be decrypted into $\Delta M$ using $S$ and $S^2$ as keys, into the polynomial pairs $(C_\alpha, C_\beta)\in \mathcal{R}_{\langle n, q \rangle}^{2}$, which can be decrypted into the same $\Delta M$ by using $S$ as key. In the previous subsection, we explained that we can convert $D_0$ and $D_1$ into $C_\alpha$ simply by viewing $D_0$ and $D_1$ as  $C_\alpha = (D_1, D_0)$. The process of converting $D_2$ into $C_\beta$ is exactly the same as the technique explained in \autoref{subsubsec:bfv-mult-cipher-relinearization}, which applies the gadget decomposition (\autoref{subsec:gadget-decomposition}) on $D_2$ and computes an inner product with the RLev encryption (\autoref{sec:glev}) of $S^2$. Specifically, we compute the following:
+As explained in BFV's ciphertext-to-ciphertext multiplication (\autoref{subsubsec:bfv-mult-cipher-relinearization}), relinearization is a process of converting the polynomial triplet $(D_0, D_1, D_2) \in \mathcal{R}_{\langle n, q \rangle}^{3}$, which can be decrypted into $\Delta M$ using $S$ and $S^2$ as keys, into the polynomial pairs $(C_\alpha, C_\beta)\in \mathcal{R}_{\langle n, q \rangle}^{2}$, which can be decrypted into the same $\Delta M$ by using $S$ as key. In the previous subsection, we learned that we can convert $D_0$ and $D_1$ into $C_\alpha$ simply by viewing $D_0$ and $D_1$ as  $C_\alpha = (D_1, D_0)$. The process of converting $D_2$ into $C_\beta$ is exactly the same as the technique explained in \autoref{subsubsec:bfv-mult-cipher-relinearization}, which applies the gadget decomposition (\autoref{subsec:gadget-decomposition}) on $D_2$ and computes an inner product with the RLev encryption (\autoref{sec:glev}) of $S^2$. Specifically, we compute the following:
 
 $\textsf{RLWE}_{S, \sigma}^{-1}(C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \bm{)}$ \textcolor{red}{ $\rhd$ the scaling factors of $\textsf{RLev}_{S, \sigma}^{\beta, l}( S^2)$ are all 1}
 
@@ -710,7 +710,7 @@ $A'  \xleftarrow{\$} \mathcal{R}_{\langle n,q\rangle }^{k}$
 
 $E' \xleftarrow{\sigma} \mathcal{R}_{\langle n,q\rangle }$
 
-$g \xleftarrow{\$} \mathbb{Z}_{q_L^2}$ \textcolor{red}{\text{ } \# where $g$ is some large integer power of 2, $q_L$ is the largest modulo before any relinearization}
+$g \xleftarrow{\$} \mathbb{Z}_{q_L^2}$ \textcolor{red}{  $\rhd$ where $g$ is some large integer power of 2, $q_L$ is the largest modulo before any relinearization}
 
 $\mathit{evk_g} = (A', -A'\cdot S + E' + g S^2) \in \mathcal{R}_{\langle n, gq\rangle}^2$
 
@@ -777,7 +777,7 @@ $= C_\beta \in \mathcal{R}_{n, q}^2$
 
 Now, we finally got $C_\beta$ which is in the form of RLWE ciphertext modulo $q$. Remember that our goal is to express $D_2\cdot S^2$ as a decryption of RLWE ciphertext. If we treat $C_\beta$ as a synthetic RLWE ciphertext and decrypt it, we get the following:
 
-\noindent $\textsf{RLWE}^{-1}_{S, \sigma}(C_\beta)$ \textcolor{red}{\text{ } \# where $C_\beta$ is treated as a synthetic RLWE ciphertext}
+\noindent $\textsf{RLWE}^{-1}_{S, \sigma}(C_\beta)$ \textcolor{red}{  $\rhd$ where $C_\beta$ is treated as a synthetic RLWE ciphertext}
 
 \noindent $=  \textsf{RLWE}^{-1}_{S, \sigma}\Bigg( \Bigg(-\Bigg\lceil\dfrac{D_2A'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{D_2E'}{g}\Bigg\rfloor + D_2\cdot S^2
 -\Bigg\lceil\dfrac{k_3qA'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{k_3qE'}{g}\Bigg\rfloor, \text{ } \Bigg\lceil\dfrac{D_2A'}{g}\Bigg\rfloor +\Bigg\lceil\dfrac{k_3qA'}{g}\Bigg\rfloor\Bigg)\Bigg)$
@@ -790,11 +790,11 @@ $ $
 $ $
 
 \noindent $\approx \Bigg\lceil\dfrac{D_2E'}{g}\Bigg\rfloor + D_2\cdot S^2
- + \Bigg\lceil\dfrac{k_3qE'}{g}\Bigg\rfloor$ \textcolor{red}{\text{ } \# $-\Bigg\lceil\dfrac{D_2A'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{D_2A'}{g}\Bigg\rfloor\cdot S = -\Bigg\lceil\dfrac{k_3qA'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{k_3qA'}{g}\Bigg\rfloor\cdot S \approx 0$}
+ + \Bigg\lceil\dfrac{k_3qE'}{g}\Bigg\rfloor$ \textcolor{red}{  $\rhd$ $-\Bigg\lceil\dfrac{D_2A'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{D_2A'}{g}\Bigg\rfloor\cdot S = -\Bigg\lceil\dfrac{k_3qA'\cdot S}{g}\Bigg\rfloor + \Bigg\lceil\dfrac{k_3qA'}{g}\Bigg\rfloor\cdot S \approx 0$}
 
 $ $
 
-\noindent $\approx D_2\cdot S^2$ \textcolor{red}{\text{ } \# 
+\noindent $\approx D_2\cdot S^2$ \textcolor{red}{  $\rhd$ 
   $\Bigg\lceil\dfrac{D_2E'}{g}\Bigg\rfloor \approx 0$, \text{ } $\Bigg\lceil\dfrac{k_3qE'}{g}\Bigg\rfloor \approx 0$}
 
 
@@ -1239,7 +1239,7 @@ Extract the first $\dfrac{n}{2} = 2$ elements in the above Hermitian vector to r
 $(3.500 - 1.4003i, \text{ } 1.0997 + 4.3007i)$
 
 $ \approx (3.5 - 1.4i, \text{ } 1.1 + 4.3i)$
-$ = \vec{v}^{\langle h=1 \rangle}$ \textcolor{red}{\text{ } \# The original input vector $\vec{v}$ rotated by 1 position to the left}
+$ = \vec{v}^{\langle h=1 \rangle}$ \textcolor{red}{  $\rhd$ The original input vector $\vec{v}$ rotated by 1 position to the left}
 
 
 
@@ -1428,7 +1428,7 @@ $ $
 \begin{table}
 \begin{tabular}{|ll|}
 \hline
-1& \textsf{\textbf{\underline{ModRaise:}}} Given ciphertext $(A, B) \bmod q_0$, we forcibly modify its modulus from $q_0$ to $q_L$. \\
+1& \textsf{\textbf{\underline{ModRaise:}}} Given ciphertext $(A, B) \bmod q_0$, we forcibly raise its modulus from $q_0$ to $q_L$. \\
 & Then, it ends up encrypting $\Delta M + E + q_0k$ instead of $\Delta M + E$.\\
 2& \textsf{\textbf{\underline{CoeffToSlot:}}} Based on step 1's ciphertext $(A, B) \bmod q_L$, we generate a new ciphertext\\
 & that encrypts an input vector whose its each $i$-th slot stores $\Delta m_i + e_i + q_0k_i$.\\

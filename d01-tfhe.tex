@@ -549,7 +549,7 @@ Continuing homomorphic additions of TFHE ciphertexts does not necessarily increa
 
 As explained in the beginning of this section, TFHE uses LWE (which is GLWE with polynomial degree 0) to encrypt \& decrypt a plaintext. That is, each plaintext is $m$ (a single number), encoded as a zero-degree polynomial. Further, the secret key S that encrypts each $m$ is a vector $ \{s_0, s_1, \text{ } \cdots \text{ }, s_{k-1} \}$ instead of a polynomial. On the other hand, TFHE's noise bootstrapping uses homomorphic addition between GLWE ciphertexts and homomorphic multiplication between GLWE and GGSW ciphertexts.  
 
-%Nonetheless, the reason why we explained TFHE ciphertext addition (\autoref{subsec:glwe-add} and \autoref{subsec:glwe-add-plain}), multiplication (\autoref{subsec:tfhe-mult-cipher} and \autoref{subsec:glwe-mult-plain}), and polynomial rotation (\autoref{subsec:coeff-rotation}) in terms of GLWE is because the bootstrapping procedure we will explain in this subsection requires homomorphic addition and multiplication of GLWE ciphertexts.
+%Nonetheless, the reason why we learned TFHE ciphertext addition (\autoref{subsec:glwe-add} and \autoref{subsec:glwe-add-plain}), multiplication (\autoref{subsec:tfhe-mult-cipher} and \autoref{subsec:glwe-mult-plain}), and polynomial rotation (\autoref{subsec:coeff-rotation}) in terms of GLWE is because the bootstrapping procedure we will explain in this subsection requires homomorphic addition and multiplication of GLWE ciphertexts.
 
 Suppose we have a TFHE ciphertext as follows: 
 
@@ -1204,7 +1204,7 @@ Torus $\mathbb{T}$ is a continuous real number domain between 0 and 1 that wraps
 A discrete torus $\mathbb{T}_t$ is a finite real number set: $\Big(0, \dfrac{1}{t}, \dfrac{2}{t}, \gap{$\cdots$}, \dfrac{t - 1}{t}\Big)$
 
 
-In the previous subsections, we explained the TFHE scheme based on the following setup:
+In the previous subsections, we learned the TFHE scheme based on the following setup:
 
 $ $
 

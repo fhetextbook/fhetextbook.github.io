@@ -8,8 +8,8 @@
 <meta content='index.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!-- l. 273 --><div class='crosslinks'><p class='noindent'>[<a href='textsfModDrop1.html'>prev</a>][<a href='BGVScheme.html#ModulusSwitch.html'>parent</a>][<a href='CiphertexttoCiphertextMultiplication1.html'>next</a>]</p></div>
-   <h4 class='subsectionHead' id='modulus-switch1'><span class='titlemark'>D-4.7   </span> <a id='x147-212000D-4.7'></a>Modulus Switch</h4>
+   <!-- l. 273 --><div class='crosslinks'><p class='noindent'>[<a href='textsfModDrop1.html'>prev</a>][<a href='BGVScheme.html#ModulusSwitch.html'>parent</a>][<a href='CiphertexttoCiphertextMultiplication2.html'>next</a>]</p></div>
+   <h4 class='subsectionHead' id='modulus-switch1'><span class='titlemark'>D-4.7   </span> <a id='x147-213000D-4.7'></a>Modulus Switch</h4>
 <!-- l. 276 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 1: </span><a href='https://eprint.iacr.org/2020/1481'>Design and implementation of HElib: a homomorphic encryption library</a> <span class='cite'>[<a href='refname.html#Xbgv-modswitch1'>21</a>]</span>
 </p><!-- l. 280 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 2: </span><a href='https://eprint.iacr.org/2011/277.pdf'>Fully Homomorphic Encryption without Bootstrapping</a> <span class='cite'>[<a href='refname.html#Xbgv-modswitch2'>22</a>]</span>
 </p><!-- l. 284 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference 3: </span><a href='https://eprint.iacr.org/2012/099.pdf'>Homomorphic Evaluation of the AES Circuit</a> <span class='cite'>[<a href='refname.html#Xbgv-modswitch3'>23</a>]</span>
@@ -246,7 +246,7 @@ BGV’s modulus switch procedure is as follows:
 <!-- l. 442 --><p class='indent'>   <!-- l. 442 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
 </p><!-- l. 444 --><p class='indent'>   We summarize BGV’s modulus switch as follows:
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-112'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-113'>     
 <div class='tcolorbox-title'>
 <!-- l. 480 --><p class='indent'>   <!-- l. 480 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-4.7</span><!-- l. 480 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
@@ -302,8 +302,8 @@ but this does not decrease the noise-to-ciphertext modulus ratio.
    
                                                                                          
                                                                                          
-   <h5 class='subsubsectionHead' id='difference-between-modulus-switch-and-moddrop1'><span class='titlemark'>D-4.7.1   </span> <a id='x147-213000D-4.7.1'></a>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></h5>
-<!-- l. 487 --><p class='noindent'>In the case of CKKS (<a href='HomomorphicCiphertexttoCiphertextMultiplication1.html#rescaling1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.4<!-- tex4ht:ref: subsec:bgv-modulus-switch  --></a>), the difference between modulus switch and
+   <h5 class='subsubsectionHead' id='difference-between-modulus-switch-and-moddrop1'><span class='titlemark'>D-4.7.1   </span> <a id='x147-214000D-4.7.1'></a>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></h5>
+<!-- l. 487 --><p class='noindent'>In the case of CKKS (<a href='CiphertexttoCiphertextMultiplication1.html#rescaling1'><span class='ts1-lmr10-x-x-109'>§</span>D-3.5.4<!-- tex4ht:ref: subsec:bgv-modulus-switch  --></a>), the difference between modulus switch and
 <span class='rm-lmss-10x-x-109'>ModDrop </span>is that the former scales down the plaintext’s scaling factor by
 <!-- l. 487 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle displaystyle='true'><mfrac><mrow> <msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub>
 </mrow><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msub></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≈</mo><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
@@ -317,7 +317,7 @@ However, the key difference is that rescaling also decreases the noise’s scali
 </mrow><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msub></mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>≈</mo><mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
 </mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></mfrac></mstyle></mrow></math>,
 whereas <span class='rm-lmss-10x-x-109'>ModDrop </span>keeps the noise’s scaling factor the same as it is. Therefore, rescaling
-is used only during ciphertext-to-ciphertext multiplication (to be explained in <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.8<!-- tex4ht:ref: subsec:bgv-modulus-switch  --></a>)
+is used only during ciphertext-to-ciphertext multiplication (to be explained in <a href='CiphertexttoCiphertextMultiplication2.html#ciphertexttociphertext-multiplication2'><span class='ts1-lmr10-x-x-109'>§</span>D-4.8<!-- tex4ht:ref: subsec:bgv-modulus-switch  --></a>)
 when scaling down the plaintext’s scaling factor in the intermediate ciphertext from
 <!-- l. 489 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>→</mo><mi mathvariant='normal'>Δ</mi></mrow></math>.
 Meanwhile, <span class='rm-lmss-10x-x-109'>ModDrop </span>is used to reduce the modulo computation time during an application’s routine when
@@ -333,7 +333,7 @@ whereas the latter decreases the noise’s scaling factor by approximately
                                                                                          
                                                                                          
 </p>
-   <!-- l. 496 --><div class='crosslinks'><p class='noindent'>[<a href='textsfModDrop1.html'>prev</a>][<a href='BGVScheme.html#ModulusSwitch.html'>parent</a>][<a href='CiphertexttoCiphertextMultiplication1.html'>next</a>]</p></div>
+   <!-- l. 496 --><div class='crosslinks'><p class='noindent'>[<a href='textsfModDrop1.html'>prev</a>][<a href='BGVScheme.html#ModulusSwitch.html'>parent</a>][<a href='CiphertexttoCiphertextMultiplication2.html'>next</a>]</p></div>
     
 </body> 
 </html>

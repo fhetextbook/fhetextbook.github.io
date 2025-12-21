@@ -7,7 +7,7 @@
 ## Python Demo FHE Library Quickstart
 
 
-This library is provided for an educational purpose.
+This library is provided for educational purposes.
 
 
 
@@ -91,7 +91,7 @@ options:
 ```
 usage: ckks_example.py [-h] [--encode] [--encrypt] [--add-cipher-cipher] 
                     [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
-                    [--rotate] [--conjugate] [--keyswitch] [--bootstrapping] [--random] [--all]
+                    [--rotate] [--conjugate] [--keyswitch] [--random] [--all]
 
 options:
   -h, --help            show this help message and exit
@@ -128,7 +128,7 @@ options:
 ```
 usage: ckks_example.py [-h] [--encode] [--encrypt] [--add-cipher-cipher] 
                     [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
-                    [--rotate] [--keyswitch] [--bootstrapping] [--random] [--all]
+                    [--rotate] [--keyswitch] [--random] [--all]
 
 options:
   -h, --help            show this help message and exit

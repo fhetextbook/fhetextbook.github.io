@@ -81,7 +81,6 @@ options:
 | Multiply Cipher-Cipher | `python3 bfv_example.py --mult-cipher-cipher` |
 | Key Switching | `python3 bfv_example.py --keyswitch` |
 | Rotate | `python3 bfv_example.py --rotate` |
-| Conjugate | `python3 bfv_example.py --conjugate` |
 | Random 1000 'Encrypt' Tests | `python3 bfv_example.py --random --encrypt` |
 | Random 1000 'Rotate' Tests | `python3 bfv_example.py --random --rotate` |
 | Random 1000 Any Tests | `python3 bfv_example.py --all` |

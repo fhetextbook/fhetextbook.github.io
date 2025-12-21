@@ -362,7 +362,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle
 \subsubsection{Noise Bound Analysis}
 \label{subsubsec:bfv-noise-analysis}
 
-In the last part of Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we explained the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking bacthrough BFV's ciphertext-to-ciphertext addition. 
+In the last part of Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we learned the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking bacthrough BFV's ciphertext-to-ciphertext addition. 
 
 Let's denote the homomorphically added ciphertext as follows: 
 
@@ -524,7 +524,7 @@ For better understanding, we will explain BFV's ciphertext-to-ciphertext multipl
 \subsubsection{\textsf{ModRaise}}
 \label{subsubsec:bfv-mult-cipher-modraise}
 
-We learned from Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}) that a BFV ciphertext whose ciphertext modulus is $q$ has the (decryption) relation: $\Delta M + E = A\cdot S + B - K \cdot q$, where $K \cdot q$ stands for modulo reduction by $q$. \textsf{ModRaise} is a process of forcibly modifying the modulus of a ciphertext from $q \rightarrow Q$, where $q \ll Q$. Suppose we modify the modulus of ciphertext $(A, B)$ from $q$ to $Q$, where $Q = q \cdot \Delta$ (remember $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$). Then, the decryption of the \textit{mod-raised} ciphertext will output $A\cdot S + B \bmod Q$. However, since each polynomial coefficient of $A$ and $B$ is less than $q$ and each polynomial coefficient of $S$ is either $\{-1, 0, 1\}$, the resulting polynomial of $A\cdot S + B$ is guaranteed to have each coefficient strictly less than $Q$ even without modulo reduction by $Q$-- this is because $(q-1)\cdot n + (q-1) < Q$, where $(q-1)\cdot n$ is the maximum possible coefficient of $A \cdot S$ and $(q-1)$ is the maximum possible coefficient of $B$. And as mentioned before, we know the relation: $A\cdot S + B = \Delta M + E + Kq$. Therefore, the decryption of the \textit{mod-raised} ciphertext $(A, B) \bmod Q$ is as follows:
+We learned from Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}) that a BFV ciphertext whose ciphertext modulus is $q$ has the (decryption) relation: $\Delta M + E = A\cdot S + B - K \cdot q$, where $K \cdot q$ stands for modulo reduction by $q$. \textsf{ModRaise} is a process of forcibly raiseing the modulus of a ciphertext from $q \rightarrow Q$, where $q \ll Q$. Suppose we modify the modulus of ciphertext $(A, B)$ from $q$ to $Q$, where $Q = q \cdot \Delta$ (remember $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$). Then, the decryption of the \textit{mod-raised} ciphertext will output $A\cdot S + B \bmod Q$. However, since each polynomial coefficient of $A$ and $B$ is less than $q$ and each polynomial coefficient of $S$ is either $\{-1, 0, 1\}$, the resulting polynomial of $A\cdot S + B$ is guaranteed to have each coefficient strictly less than $Q$ even without modulo reduction by $Q$-- this is because $(q-1)\cdot n + (q-1) < Q$, where $(q-1)\cdot n$ is the maximum possible coefficient of $A \cdot S$ and $(q-1)$ is the maximum possible coefficient of $B$. And as mentioned before, we know the relation: $A\cdot S + B = \Delta M + E + Kq$. Therefore, the decryption of the \textit{mod-raised} ciphertext $(A, B) \bmod Q$ is as follows:
 
 $\Delta M + E + Kq \bmod Q = \Delta M + E + Kq$ \textcolor{red}{ $\rhd$  since $\Delta M + E + Kq < Q$} 
 
@@ -622,7 +622,7 @@ To avoid this noise issue, an improved solution is to express the RLWE ciphertex
 
 $\textsf{ct}_\beta = \textsf{RLWE}_{S, \sigma}(S^2 \cdot D_2)$
 
-$= \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \left(D_{2,1}\dfrac{Q}{\beta} + D_{2,2}\dfrac{Q}{\beta^2} + \cdots D_{2,l}\dfrac{Q}{\beta^l}\right)\right)$ \textcolor{red}{\text{ } \# by decomposing $D_2$}
+$= \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \left(D_{2,1}\dfrac{Q}{\beta} + D_{2,2}\dfrac{Q}{\beta^2} + \cdots D_{2,l}\dfrac{Q}{\beta^l}\right)\right)$ \textcolor{red}{  $\rhd$ by decomposing $D_2$}
 
 $= \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,1} \cdot \dfrac{Q}{\beta}\right) + \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,2} \cdot \dfrac{Q}{\beta^2}\right) + \cdots + \textsf{RLWE}_{S, \sigma}\left( S^2 \cdot D_{2,l} \cdot \dfrac{Q}{\beta^l}\right)$ 
 
@@ -631,7 +631,7 @@ $= D_{2,1}\cdot\textsf{RLWE}_{S, \sigma}\left( S^2 \cdot \dfrac{Q}{\beta}\right)
 
 $ $
 
-$= \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$ \textcolor{red}{\text{ } \# inner product of \textsf{Decomp} and \textsf{RLev} treating them as vectors}
+$= \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle}$ \textcolor{red}{  $\rhd$ inner product of \textsf{Decomp} and \textsf{RLev} treating them as vectors}
 
 $ $
 
@@ -857,7 +857,7 @@ $ $
 
 \item \textbf{\underline{\textsf{ModRaise}}}
 
-Forcibly modify the modulus of the ciphertexts $(A^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \bmod q$ and $(A^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \bmod q$ to $Q$ (where $Q = q \cdot \Delta$) as follows:
+Forcibly raise the modulus of the ciphertexts $(A^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \bmod q$ and $(A^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \bmod q$ to $Q$ (where $Q = q \cdot \Delta$) as follows:
 
 $(A^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \bmod Q$
 
@@ -893,7 +893,9 @@ $ \textsf{ct}_{\alpha + \beta} = \textsf{ct}_{\alpha} + \textsf{ct}_{\beta}$
 
 $ $
 
-Then, this property holds: $\textsf{RLWE}^{-1}_{S, \sigma}\bm(\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})\bm) \approx \textsf{RLWE}^{-1}_{S, \sigma}\bm{(}\textsf{ct}_{\alpha + \beta}\bm)$
+Then, the following property holds: 
+
+$\textsf{RLWE}^{-1}_{S, \sigma}\bm(\textsf{RLWE}_{S, \sigma}(\Delta^2 \cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle})\bm) \approx \textsf{RLWE}^{-1}_{S, \sigma}\bm{(}\textsf{ct}_{\alpha + \beta}\bm)$
 
 $ $
 
@@ -913,7 +915,7 @@ $ $
 
 \end{enumerate}
 
-Note that after the ciphertext-to-ciphertext multiplication, the plaintext scaling factor $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$, the ciphertext modulus $q$, the plaintext $M$, and the private key $S$ stay the same as before.
+Note that after the ciphertext-to-ciphertext multiplication, the plaintext scaling factor $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$, the ciphertext modulus $q$, and the private key $S$ stay the same as before.
 
 
 
@@ -925,6 +927,125 @@ Note that after the ciphertext-to-ciphertext multiplication, the plaintext scali
 $ $
 
 \para{Swapping the Order of \textsf{Relinearization} and \textsf{Rescaling}: } The order of relinearization and rescaling is interchangeable. Running rescaling before relinearization reduces the size of the ciphertext modulus, and therefore the subsequent relinearization can be executed faster. 
+
+
+
+\subsubsection{Application to TFHE's Ciphertext-to-Ciphertext Multiplication}
+\label{subsubsec:bfv-mult-cipher-tfhe}
+
+
+In \autoref{subsec:tfhe-mult-cipher}, we learned how TFHE performs ciphertext-to-ciphertext multiplication between LWE and GSW ciphertexts. However, this method is computationally expensive because it requires circuit bootstrapping to convert an LWE ciphertext into a GSW ciphertext. Such an overhead can be avoided if we directly apply BFV's ciphertext-to-ciphertext multiplication strategy to TFHE's LWE ciphertexts. Given two LWE ciphertexts to multiply, they hold the following relations:
+
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle}) = (\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle }) \Rightarrow \,\,\, \vec{a}^{\langle 1 \rangle} \cdot \vec{s} + b^{\langle 1 \rangle} = \Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle} + k_1q$
+
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle})  = (\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle}) \Rightarrow \,\,\, \vec{a}^{\langle 2 \rangle} \cdot \vec{s} + b^{\langle 2 \rangle} = \Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle} + k_2q$
+
+$ $
+
+Multiplying these two equations yields the following relation: 
+
+
+$(\Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle} + k_1q) \cdot (\Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle} + k_2q)$ \textcolor{red}{ $\rhd \approx \Delta^2 m^{\langle 1 \rangle} m^{\langle 2 \rangle} \bmod q$ }
+
+$ = (\vec{a}^{\langle 1 \rangle} \cdot \vec{s} + b^{\langle 1 \rangle}) \cdot (\vec{a}^{\langle 2 \rangle} \cdot \vec{s} + b^{\langle 2 \rangle})$ 
+
+$ = b^{\langle 1 \rangle}b^{\langle 2 \rangle}  + (b^{\langle 2 \rangle}\vec{a}^{\langle 1 \rangle} + b^{\langle 1 \rangle}\vec{a}^{\langle 2 \rangle}) \cdot \vec{s} + (\vec{a}^{\langle 1 \rangle} \cdot \vec{s}) \cdot (\vec{a}^{\langle 2 \rangle} \cdot \vec{s}) $
+
+
+
+$ = \underbrace{b^{\langle 1 \rangle}b^{\langle 2 \rangle}}_{d_0}  + \underbrace{(b^{\langle 2 \rangle}\vec{a}^{\langle 1 \rangle} + b^{\langle 1 \rangle}\vec{a}^{\langle 2 \rangle})}_{d_1} \cdot \vec{s} + \underbrace{(\vec{a}^{\langle 1 \rangle} \otimes \vec{a}^{\langle 2 \rangle})}_{\vec{d}_2} \cdot (\vec{s} \otimes \vec{s}) $  
+
+
+$= d_0 + d_1\cdot \vec{s} + \vec{d}_2\cdot \vec{s}^{\otimes}$ \textcolor{red}{ $\rhd$ where $\vec{s}^{\otimes} = \vec{s} \otimes \vec{s}$}
+
+$ $
+
+, where $\otimes$ denotes an outer product of two vectors. For example, given two $n$-length vectors $\vec{v}$ and $\vec{u}$, $\vec{v} \otimes \vec{u}$ is equivalent to an $n^2$-length vector that concatenates the following $n$ distinct $n$-length vectors: $v_0\cdot\vec{u}, \,\, v_1\cdot\vec{u}, \,\, \cdots v_{n-1}\cdot\vec{u}$. Notice that the above relation is similar to that we derived in BFV's ciphertext-to-ciphertext multiplication. Therefore, similar to the remaining steps in BFV, we can relinearize and rescale this LWE term as follows:
+
+
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsubsec:bfv-mult-cipher-summary}} TFHE's Ciphertext-to-Ciphertext Multiplication - Method 2}}]
+
+
+Suppose we have the following two LWE ciphertexts:
+
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta M^{\langle 1 \rangle}) = (\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle}) \bmod q$, \text{ } where $b^{\langle 1 \rangle} = -\vec{a}^{\langle 1 \rangle} \cdot \vec{s} + \Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle} \bmod q$
+
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta M^{\langle 2 \rangle}) = (\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle}) \bmod q$, \text{ } where $b^{\langle 2 \rangle} = -\vec{a}^{\langle 2 \rangle} \cdot \vec{s} + \Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle} \bmod q$
+
+$ $
+
+Multiplication between these two LWE ciphertexts is performed as follows:
+
+$ $
+
+\begin{enumerate}
+
+\item \textbf{\underline{\textsf{ModRaise}}}
+
+Forcibly raise the modulus of the ciphertexts $(\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle}) \bmod q$ and $(\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle}) \bmod q$ to $Q$ (where $Q = q \cdot \Delta$) as follows:
+
+$(\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle}) \bmod Q$
+
+$(\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle}) \bmod Q$
+
+
+$ $
+
+\item \textbf{\underline{Multiplication}}
+
+Compute the following polynomial multiplications in modulo $Q$: 
+
+$d_0 = b^{\langle 1 \rangle}b^{\langle 2 \rangle} \bmod Q$
+
+$d_1 = b^{\langle 2 \rangle}\vec{a}^{\langle 1 \rangle} +  b^{\langle 1 \rangle}\vec{a}^{\langle 2 \rangle} \bmod Q$
+
+$\vec{d}_2 = \vec{a}^{\langle 1 \rangle} \otimes \vec{a}^{\langle 2 \rangle} \bmod Q$
+
+
+$ $
+
+\item \textbf{\underline{Relinearization}} 
+
+
+Compute the following:
+
+$ \textsf{ct}_\alpha = (d
+_1, d_0)$
+
+$ \textsf{ct}_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(\vec{d}_2), \text{ } \textsf{Lev}_{\vec{s}, \sigma}^{\beta, l}(\vec{s}^{\otimes}) \bm{\rangle}$.
+
+$ \textsf{ct}_{\alpha + \beta} = \textsf{ct}_{\alpha} + \textsf{ct}_{\beta}$
+
+$ $
+
+Then, the following property holds:
+
+$\textsf{LWE}^{-1}_{\vec{s}, \sigma}\bm(\textsf{LWE}_{\vec{s}, \sigma}(\Delta^2 \cdot m^{\langle 1 \rangle} \cdot m^{\langle 2 \rangle})\bm) \approx \textsf{LWE}^{-1}_{\vec{s}, \sigma}\bm{(}\textsf{ct}_{\alpha + \beta}\bm)$
+
+$ $
+
+
+
+
+\item \textbf{\underline{Rescaling}}
+
+Update $\textsf{ct}_{\alpha + \beta} = (\vec{a}_{\alpha + \beta}, b_{\alpha + \beta}) \bmod Q$ to $\textsf{ct'}_{\alpha + \beta} = \left(\left\lceil\dfrac{\vec{a}_{\alpha + \beta}}{\Delta}\right\rfloor, \left\lceil\dfrac{b_{\alpha + \beta}}{\Delta}\right\rfloor\right) \bmod q$. 
+
+$ $
+
+This plaintext rescaling process can be also viewed as a modulus switch of the ciphertext $\textsf{ct}_{\alpha + \beta}$ from $Q \rightarrow q$. 
+
+
+$ $
+
+\end{enumerate}
+
+Note that after the ciphertext-to-ciphertext multiplication, the plaintext scaling factor $\Delta=\dfrac{q}{t}$, the ciphertext modulus $q$, and the private key $\vec{s}$ stay the same as before.
+
+
+
+\end{tcolorbox}
+
 
 
 \subsection{Homomorphic Key Switching}
@@ -971,7 +1092,7 @@ $ $
 
 Remember from \autoref{subsec:bfv-batch-encoding} that the BFV encoding scheme's components are as follows:
 
-$\vec{v} = (v_0, v_1, v_2, \cdots, v_{n-1})$ \textcolor{red}{\text{ } \# $n$-dimensional input vector}
+$\vec{v} = (v_0, v_1, v_2, \cdots, v_{n-1})$ \textcolor{red}{  $\rhd$ $n$-dimensional input vector}
 
 $ $
 
@@ -1001,7 +1122,7 @@ $ $
 
 $\Delta\vec{m}  = n^{-1}\cdot\Delta W\cdot I_n^R\cdot\vec{v}$  
 
-\textcolor{red}{\text{ } \# A vector containing the  scaled $n$ integer coefficients of the plaintext polynomial}
+\textcolor{red}{  $\rhd$ A vector containing the  scaled $n$ integer coefficients of the plaintext polynomial}
 
 $ $
 
@@ -1022,7 +1143,7 @@ $= \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots
 $= \bm{(} \text{ } M(\omega), \text{ } M(\omega^3), \text{ } M(\omega^5), \cdots, M(\omega^{n-3}), \text{ } M(\omega^{n-1}), \text{ } M(\omega^{-(n-1)}), \text{ } M(\omega^{-(n-3)}), \cdots, M(\omega^{-3}), \text{ } M(\omega{-1}) \text{ } \bm{)}$ 
 
 
-%%$\textsf{LWE}_{S, \sigma}(\Delta M) = (A, B) \in \mathcal{R}_{\langle n, q \rangle }^{2}$ \textcolor{red}{\text{ } \# An LWE ciphertext that encrypts $\Delta M$}
+%%$\textsf{LWE}_{S, \sigma}(\Delta M) = (A, B) \in \mathcal{R}_{\langle n, q \rangle }^{2}$ \textcolor{red}{  $\rhd$ An LWE ciphertext that encrypts $\Delta M$}
 
 %$A\cdot S + B = \Delta M + E$
 
@@ -1436,7 +1557,7 @@ $\hathat{W} = \begin{bmatrix}
 \omega^{J(1)} & \omega^{J(0)} & \omega^{J_*(1)} & \omega^{J_*(0)}\\
 (\omega^{J(1)})^2 & (\omega^{J(0)})^2 & (\omega^{J_*(1)})^2 & (\omega^{J_*(0)})^2\\
 (\omega^{J(1)})^3 & (\omega^{J(0)})^3 & (\omega^{J_*(1)})^3 & (\omega^{J_*(0)})^3\\
-\end{bmatrix}$ \textcolor{red}{\text{ } \# where $J(h) = 5^h \bmod 8$}
+\end{bmatrix}$ \textcolor{red}{  $\rhd$ where $J(h) = 5^h \bmod 8$}
 
 $ = \begin{bmatrix}
 1 & 1 & 1 & 1\\
@@ -1541,7 +1662,7 @@ $ $
 
 $ $
 
-$\Delta M_1(X) = 15\cdot(12 + 11X + 12X^2 + 1X^3) = 180 + 165X + 180X^2 + 15X^3 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 256$}
+$\Delta M_1(X) = 15\cdot(12 + 11X + 12X^2 + 1X^3) = 180 + 165X + 180X^2 + 15X^3 \pmod{q}$ \textcolor{red}{  $\rhd$ where $q = 256$}
 
 $\Delta M_2(X) = 15\cdot(8 + 5X + 14X^2 + 6X^3) = 120 + 75X + 210X^2 + 90X^3 \pmod{q}$
 
@@ -1742,7 +1863,7 @@ $ $
 $\Delta M(X) = 15\cdot(13 + 16X + 10X^2 + 5X^3 + 9X^4 + 12X^5 + 7X^6 + X^7)$
 
 
-$ = 195 + 180X - 150X^2 - 15X^3 + 135^X⁴ - 240X^5 - 105X^6 + 75X^7 \pmod{q}$ \textcolor{red}{\text{ } \# where $q = 256$}
+$ = 195 + 180X - 150X^2 - 15X^3 + 135^X⁴ - 240X^5 - 105X^6 + 75X^7 \pmod{q}$ \textcolor{red}{  $\rhd$ where $q = 256$}
 
 $ $
 

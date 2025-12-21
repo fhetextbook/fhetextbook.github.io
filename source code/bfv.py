@@ -325,13 +325,6 @@ class BFVEncoder:
 					insert = insert * x % P
 				row.append(insert)
 			matrix.append(row)
-		#for x in power_array:
-			# For each row we select a different root
-			#row = []
-			# Then we store its powers
-			#for degree in range(N):
-			#	row.append(x ** degree)
-			#power_matrix.append(row)
 		return matrix
 
 	def create_sigma_R_basis(self):
@@ -382,93 +375,18 @@ def __init__(self):
 @patch_to(BFVEncoder)
 def encode(self, input_vector: np.array) -> Polynomial:
 	anti_diagonal_matrix = MatrixDataSizeToInfinite(np.eye(N)[::-1])
-	#print(self.sigma_R_basis)
-	#print(anti_diagonal_matrix)
-	#print(scaled_input_vector)
 	basis_coordinates = np.matmul(N_inverse *  self.sigma_R_basis, anti_diagonal_matrix).dot(input_vector) % P
 	p = Polynomial(basis_coordinates)
-	#print("Inverse: " + str(N_inverse))
-	#print("Input Vector: " + str(input_vector))
-	#print("Poly: " + str(p.coef))
 	scaled_p = p * self.scale
-	#print("Scale: " + str(self.scale))
-	#print("Check")
-	#for element in self.sigma_R_basis:
-	#	for element2 in element:
-	#		print(f"Element: {element2}, Type: {type(element2)}")
-	#for element in self.sigma_R_basis.T:
-	#	for element2 in element:
-	#		print(f"Element: {element2}, Type: {type(element2)}")
-	#print(self.sigma_R_basis)
-	#print(self.sigma_R_basis.T)
-	#print(np.matmul(self.sigma_R_basis.T, self.sigma_R_basis) % P)
-	#print(self.sigma_R_basis.T % P)
-	#print(self.sigma_R_basis % P)
-	#print()
-	#print(self.sigma_R_basis.T[2])
-	#print(self.sigma_R_basis.T[N - 3])
-	#print()
-	#print(self.sigma_R_basis.T[0] % P)
-	#print(self.sigma_R_basis.T[N - 1] % P)
-	#print()
-	#arr1 = self.sigma_R_basis.T[0]
-	#arr2 = self.sigma_R_basis.T[N - 1]
-	#for element in arr1:
-	#	print(f"Element: {element}, Type: {type(element)}")
-	#print(np.dot(arr1, arr2))
-	#total = 0
-	#for i in range(N):
-	#	total += arr1[i] * arr2[i]
-	#print(total)
-	#print()
-	#print(self.sigma_R_basis.T[0].dot(self.sigma_R_basis.T[N - 1]) % P)
-	#print((self.sigma_R_basis.T[0] % P).dot(self.sigma_R_basis.T[N - 1] % P) % P)
-	#print()
-	#print(np.matmul(self.sigma_R_basis.T, self.sigma_R_basis) % P)
-	#print(np.matmul(self.sigma_R_basis.T % P, self.sigma_R_basis % P) % P)
-	#print()
-	#print(np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))
-	#print(anti_diagonal_matrix)
-	#a = np.matmul(anti_diagonal_matrix, np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))
-	#print(a)
-	#print(a % P)
-	#print(np.matmul(self.sigma_R_basis.T, self.sigma_R_basis) % P)
-	#print(np.matmul(anti_diagonal_matrix, np.matmul(self.sigma_R_basis.T, self.sigma_R_basis) % P))
-	#print(np.matmul(anti_diagonal_matrix, np.matmul(self.sigma_R_basis.T, self.sigma_R_basis)) % P)
-	#print()
-	#print(np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis)).dot(scaled_input_vector))
-	#print(np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis)).dot(scaled_input_vector) % P)
-	#print((np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))) % P)
-	#print((N_inverse * np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))) % P)
-	#print()
-	#print(scaled_input_vector)
-	#print((np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis)) % P).dot(scaled_input_vector))
-	#print(((np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))).dot(scaled_input_vector)) % P)
-	#print((np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis)) % P).dot(scaled_input_vector) % P)
-	#print(N_inverse * (np.matmul(np.eye(N)[::-1], np.matmul(self.sigma_R_basis.T, self.sigma_R_basis))).dot(scaled_input_vector) % P)
-	#print(np.matmul(self.sigma_R_basis.T, np.matmul(N_inverse *  self.sigma_R_basis, np.eye(N)[::-1])).dot(scaled_input_vector) % P)
-	#print(np.matmul(self.sigma_R_basis.T, (np.matmul(N_inverse *  self.sigma_R_basis, np.eye(N)[::-1])).dot(scaled_input_vector)) % P)
-	#print()
-
 	return scaled_p
 
 @patch_to(BFVEncoder)
 def decode(self, p: Polynomial) -> np.array:
 	rescaled_p = round_polynomial((p / scale))
-	#print(self.sigma_R_basis)
-	#print(rescaled_p.coef)
 	coef = rescaled_p.coef
 	coef_preserved_zeros = np.pad(coef, (0, N - len(coef)), 'constant')
 	coef_preserved_zeros = VectorDataSizeToInfinite(coef_preserved_zeros)
 	z = np.matmul(self.sigma_R_basis_counter, coef_preserved_zeros) % P
-	#print("R Basis")
-	#print(self.sigma_R_basis.T)
-	#print("Coefficiet Mult")
-	#print(coef_preserved_zeros)
-	#print("Multiply")
-	#print(z)
-	#print()
-
 	return z
 
 

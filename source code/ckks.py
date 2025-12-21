@@ -9,8 +9,9 @@ import copy
 
 # First we set the parameters
 
-#is_random_param = True
-is_random_param = False
+is_random_param = True
+#is_random_param = False
+error_tolerance_ratio = 0.01
 
 #############################
 # Test Option 1: Targeted Test Params
@@ -22,35 +23,31 @@ ckks_vector2 = [-5 - 6j, 7 + 8j]
 rotation_offset = 1
 
 # Testcase 2
-#N = 8
-#ckks_vector = [1 + 2j, -3 + 4j, 5 - 6j, -7 -8j]
-#ckks_vector2 = [0, 0, 0, 0]
-#rotation_offset = 3
+N = 8
+ckks_vector = [1 + 2j, -3 + 4j, 5 - 6j, -7 -8j]
+ckks_vector2 = [0, 0, 0, 0]
+rotation_offset = 3
 
-scale = 1024
+scale = 2**20
 Q = scale*scale
 
 is_homogeneous_rotation = True
 
-def EvaluateTargetedCyclotomicPolynomial(x):
-	return (x ** N) + 1
 
 #############################
 # Test Option 2: Random Test Params
 
 test_count = 1000
 
-N_LOWER = 8
-N_UPPER = 8
+N_LOWER = 4
+N_UPPER = 4
 
 P_LOWER = 35
 P_UPPER = 10000
 
-scale_LOWER = 1
-scale_UPPER = 64
+scale_LOWER = 2**20
+scale_UPPER = 2**20
 
-def EvaluateRandomCyclotomicPolynomial(x):
-	return (x ** N) + 1
 
 ##############################################
 
@@ -129,8 +126,6 @@ def GenerateParam():
 	for i in range(N):
 		root_values.append(next_root)
 		next_root = next_root * (primitive_root_of_unity ** 2) 
-		if next_root == primitive_root_of_unity:
-			break
 #	'''
 
 	print("==================== PARAMETERS ====================")
@@ -174,25 +169,6 @@ def JFunction(h, is_plus: bool):
 	else:
 		return (-(5 ** h)) % (2*N)
 
-def isprime(n):
-	'''check if integer n is a prime'''
-	# make sure n is a positive integer
-	n = abs(int(n))
-	# 0 and 1 are not primes
-	if n < 2:
-		return False
-	# 2 is the only even prime number
-	if n == 2: 
-		return True	
-	# all other even numbers are not primes
-	if not n & 1: 
-		return False
-	# range starts with 3 and only needs to go up the squareroot of n
-	# for all odd numbers
-	for x in range(3, int(n**0.5)+1, 2):
-		if n % x == 0:
-			return False
-	return True
 
 
 def VectorDataSizeToInfinite(vector):
@@ -217,40 +193,42 @@ def MatrixDataSizeToInfinite(matrix):
 class CKKSEncoder:
 	"""Basic CKKS encoder to encode complex vectors into polynomials."""
 	
-	def __init__(self):
+	def __init__(self, N, scale):
 		"""Initialization of the encoder for M a power of 2. 
 		
 		xi, which is an M-th root of unity will, be used as a basis for our computations.
 		"""
 		self.M = M
+		self.N = N
+		self.N_inverse = 1 / N
 		self.create_sigma_R_basis()
+		self.scale = scale
 		
 
-	@staticmethod
-	def vandermonde(M: int) -> np.array:
+	def vandermonde(self) -> np.array:
 		"""Computes the Vandermonde matrix from a m-th root of unity."""
-		global P	 
-		global N_inverse
-		global N
 		matrix = []
 		# We will generate each row of the matrix
 
 		cyclic_x_values_ordered = []
 		power_array = []
 		power_matrix = []
-		for h in range(int(N/2)):
-			print(JFunction(h, True))
+
+		primitive_root_of_unity = np.exp(2 * np.pi * 1j / M) 
+		print(primitive_root_of_unity)
+
+		for h in range(int(self.N/2)):
 			new_root = (primitive_root_of_unity ** JFunction(h, True))  
 			if new_root in cyclic_x_values_ordered:
 				 print("Error 1: root " + str(new_root) + " is already in " + str(cyclic_x_values_ordered))
 				 sys.exit(0)
 			cyclic_x_values_ordered.append(new_root)
 			power_array.append(JFunction(h, True))
-		for h in reversed(range(int(N/2))):
+		for h in reversed(range(int(self.N/2))):
 			new_root = (primitive_root_of_unity ** JFunction(h, False))  
 			if new_root in cyclic_x_values_ordered:
 				 print("Error 2: root " + str(new_root) + " is already in " + str(cyclic_x_values_ordered))
-				 print("N: " + str(N))
+				 print("N: " + str(self.N))
 				 sys.exit(0)
 			cyclic_x_values_ordered.append(new_root)
 			power_array.append(JFunction(h, False))
@@ -259,7 +237,7 @@ class CKKSEncoder:
 			# For each row we select a different root
 			row = []
 			# Then we store its powers
-			for degree in range(N):
+			for degree in range(self.N):
 				insert = 1
 				for count in range(degree):
 					insert = insert * x 
@@ -269,7 +247,7 @@ class CKKSEncoder:
 
 	def create_sigma_R_basis(self):
 		"""Creates the basis (sigma(1), sigma(X), ..., sigma(X** N-1))."""
-		self.sigma_R_basis = np.array(np.array(self.vandermonde(self.M)).T, dtype = object)
+		self.sigma_R_basis = np.array(np.array(self.vandermonde()).T, dtype = object)
 
 		# Convert each element to Python's built-in int type, otherwise the computation will overflow!
 		#self.sigma_R_basis = MatrixDataSizeToInfinite(self.sigma_R_basis)
@@ -306,47 +284,40 @@ class CKKSEncoder:
 		print(np.matmul(self.sigma_R_basis_counter, self.sigma_R_basis) )
 		print()
 					
-@patch_to(CKKSEncoder)
-def __init__(self):
-	self.M = M
-	self.create_sigma_R_basis()
-	self.scale = scale
 	
-@patch_to(CKKSEncoder)
-def encode(self, input_vector: np.array) -> Polynomial:
-	anti_diagonal_matrix = MatrixDataSizeToInfinite(np.eye(N)[::-1])
-	print(input_vector)
-	for i in range(N // 2):
-		lista = [input_vector[i].conjugate()]
-		input_vector = np.append(input_vector, lista)
-		#print("Appended")
-	#print(input_vector)
-	basis_coordinates = np.matmul(N_inverse *  self.sigma_R_basis, anti_diagonal_matrix).dot(input_vector) 
-	#temp_matrix = np.matmul(self.sigma_R_basis, anti_diagonal_matrix)
-	#for i in range(N):
-	#	for j in range(N):
-	#		print(f'{i}, {j} : {temp_matrix[i][j] * input_vector[j]}')
-	#print("Before Scaling")
-	#print(basis_coordinates)
-	p = Polynomial(basis_coordinates)
-	scaled_p = p * self.scale
-	scaled_p.coef = [round(c.real) for c in scaled_p.coef]
+	def encode(self, input_vector: np.array) -> Polynomial:
+		anti_diagonal_matrix = MatrixDataSizeToInfinite(np.eye(N)[::-1])
+		print(input_vector)
+		for i in range(N // 2):
+			lista = [input_vector[i].conjugate()]
+			input_vector = np.append(input_vector, lista)
+			#print("Appended")
+		#print(input_vector)
+		basis_coordinates = np.matmul(self.N_inverse *  self.sigma_R_basis, anti_diagonal_matrix).dot(input_vector) 
+		#temp_matrix = np.matmul(self.sigma_R_basis, anti_diagonal_matrix)
+		#for i in range(N):
+		#	for j in range(N):
+		#		print(f'{i}, {j} : {temp_matrix[i][j] * input_vector[j]}')
+		#print("Before Scaling")
+		#print(basis_coordinates)
+		p = Polynomial(basis_coordinates)
+		scaled_p = p * self.scale
+		scaled_p.coef = [round(c.real) for c in scaled_p.coef]
 
-	#print("After Scaling")
-	#print(scaled_p)
+		#print("After Scaling")
+		#print(scaled_p)
 
-	return scaled_p
+		return scaled_p
 
-@patch_to(CKKSEncoder)
-def decode(self, p: Polynomial) -> np.array:
-	rescaled_p = p / scale
-	#print(self.sigma_R_basis)
-	#print(rescaled_p.coef)
-	coef = rescaled_p.coef
-	coef_preserved_zeros = np.pad(coef, (0, N - len(coef)), 'constant')
-	#coef_preserved_zeros = VectorDataSizeToInfinite(coef_preserved_zeros)
-	z = np.matmul(self.sigma_R_basis_counter, coef_preserved_zeros) 
-	return z
+	def decode(self, p: Polynomial) -> np.array:
+		rescaled_p = p / scale
+		#print(self.sigma_R_basis)
+		#print(rescaled_p.coef)
+		coef = rescaled_p.coef
+		coef_preserved_zeros = np.pad(coef, (0, N - len(coef)), 'constant')
+		#coef_preserved_zeros = VectorDataSizeToInfinite(coef_preserved_zeros)
+		z = np.matmul(self.sigma_R_basis_counter, coef_preserved_zeros) 
+		return z
 
 def reduce_polynomial(poly, n, q):
 	degree = 0
@@ -385,7 +356,7 @@ def main():
 	global primitive_root_of_unity
 
 	GenerateParam()
-	encoder = CKKSEncoder()
+	encoder = CKKSEncoder(N, scale)
 
 	print("<The CKKS plaintext vector to encode>")
 	z = np.array(ckks_vector)
@@ -437,10 +408,12 @@ def main():
 	print()
 
 	for i in range(N//2):
-		if abs((z3[i] - decoded_z3[i]).real) > 0.001 or abs((z3[i] - decoded_z3[i]).imag) > 0.01:
+		if abs((z3[i] - decoded_z3[i]).real) > error_tolerance_ratio or abs((z3[i] - decoded_z3[i]).imag) > error_tolerance_ratio:
 			print("vector 1 + 2 is decoded WRONG!")
 			print(z3)
 			print(decoded_z3)
+			print()
+			print(z3[i], decoded_z3[i])
 			sys.exit(0)
 	else:
 		print("[FINAL DECODED RESULT " + str(test_index) + "] : " + str(z3) + " == " + str(decoded_z3) + " <---- ALMOST CORRECT")
@@ -449,7 +422,7 @@ def main():
 		#print(f'Compare {i} vs {i + rotation_offset % (len(z3)//2)}');
 		original_index = i
 		rotated_index = (i - rotation_offset) % (len(z3))
-		if abs((z3[original_index] - decoded_z3_rotated[rotated_index]).real) > 0.001 or abs((z3[original_index] - decoded_z3_rotated[rotated_index]).imag) > 0.001:
+		if abs((z3[original_index] - decoded_z3_rotated[rotated_index]).real) > error_tolerance_ratio or abs((z3[original_index] - decoded_z3_rotated[rotated_index]).imag) > error_tolerance_ratio:
 			print("Rotation Wrong!")
 			print(original_index)
 			print(rotated_index)

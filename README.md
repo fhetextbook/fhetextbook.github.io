@@ -6,20 +6,61 @@
 
 ## Python Demo FHE Library Quickstart
 
-#### Installation
+
+This library is provided for an educational purpose.
+
+
+
+### Installation
+
+
+
+
 ```
+cd 'source code'
 pip3 install numpy fastcore sympy
 ```
 
-### BFV Demo Library
+
+### TFHE Library
 ```
-usage: bfv_example.py [-h] [--encoding] [--encrypt] [--add-cipher-cipher] 
+usage: tfhe_example.py [-h] [--encrypt] [--add-cipher-cipher] 
                     [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
-                    [--rotate] [--keyswitch] [--bootstrapping] [--random] [--all]
+                    [--keyswitch] [--random] [--all]
 
 options:
   -h, --help            show this help message and exit
-  --encoding            Encoding test
+  --random              A bulk of random tests
+  --encrypt             Encrytion/decryption test
+  --add-cipher-cipher   Cipher-cipher addition test
+  --add-cipher-plain    Cipher-plain addition test
+  --mult-cipher-cipher  Cipher-cipher multiplication test
+  --mult-cipher-plain   Cipher-plain multiplication test
+  --keyswitch           Key switch test
+  --all                 All test
+```
+| Test Operations | Command |
+|---|---|
+| Encrypt | `python3 tfhe_example.py --encryption` |
+| Add Cipher-Cipher | `python3 tfhe_example.py --add-cipher-cipher` |
+| Add Cipher-Plain | `python3 tfhe_example.py --add-cipher-plain` |
+| Multiply Cipher-Plain | `python3 tfhe_example.py --mult-cipher-plain` |
+| Multiply Cipher-Cipher | `python3 tfhe_example.py --mult-cipher-cipher` |
+| Key Switching | `python3 tfhe_example.py --keyswitch` |
+| Random 1000 'Encrypt' Tests | `python3 tfhe_example.py --random --encrypt` |
+| Random 1000 'Rotate' Tests | `python3 tfhe_example.py --random --rotate` |
+| Random 1000 Any Tests | `python3 tfhe_example.py --all` |
+
+
+### BFV Library
+```
+usage: bfv_example.py [-h] [--encode] [--encrypt] [--add-cipher-cipher] 
+                    [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
+                    [--rotate] [--keyswitch] [--random] [--all]
+
+options:
+  -h, --help            show this help message and exit
+  --encode              Encoding test
   --random              A bulk of random tests
   --encrypt             Encrytion/decryption test
   --add-cipher-cipher   Cipher-cipher addition test
@@ -28,12 +69,11 @@ options:
   --mult-cipher-plain   Cipher-plain multiplication test
   --rotate              Rotation test
   --keyswitch           Key switch test
-  --bootstrapping       Bootstrapping test
   --all                 All test
 ```
 | Test Operations | Command |
 |---|---|
-| Encode | `python3 bfv_example.py --encoding` |
+| Encode | `python3 bfv_example.py --encode` |
 | Encrypt | `python3 bfv_example.py --encryption` |
 | Add Cipher-Cipher | `python3 bfv_example.py --add-cipher-cipher` |
 | Add Cipher-Plain | `python3 bfv_example.py --add-cipher-plain` |
@@ -41,9 +81,81 @@ options:
 | Multiply Cipher-Cipher | `python3 bfv_example.py --mult-cipher-cipher` |
 | Key Switching | `python3 bfv_example.py --keyswitch` |
 | Rotate | `python3 bfv_example.py --rotate` |
+| Conjugate | `python3 bfv_example.py --conjugate` |
 | Random 1000 'Encrypt' Tests | `python3 bfv_example.py --random --encrypt` |
 | Random 1000 'Rotate' Tests | `python3 bfv_example.py --random --rotate` |
 | Random 1000 Any Tests | `python3 bfv_example.py --all` |
 
+
+### CKKS Library
+```
+usage: ckks_example.py [-h] [--encode] [--encrypt] [--add-cipher-cipher] 
+                    [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
+                    [--rotate] [--conjugate] [--keyswitch] [--bootstrapping] [--random] [--all]
+
+options:
+  -h, --help            show this help message and exit
+  --encode              Encoding test
+  --random              A bulk of random tests
+  --encrypt             Encrytion/decryption test
+  --add-cipher-cipher   Cipher-cipher addition test
+  --add-cipher-plain    Cipher-plain addition test
+  --mult-cipher-cipher  Cipher-cipher multiplication test
+  --mult-cipher-plain   Cipher-plain multiplication test
+  --rotate              Rotation test
+  --conjugate           Conjugation test
+  --keyswitch           Key switch test
+  --all                 All test
+```
+| Test Operations | Command |
+|---|---|
+| Encode | `python3 ckks_example.py --encode` |
+| Encrypt | `python3 ckks_example.py --encryption` |
+| Add Cipher-Cipher | `python3 ckks_example.py --add-cipher-cipher` |
+| Add Cipher-Plain | `python3 ckks_example.py --add-cipher-plain` |
+| Multiply Cipher-Plain | `python3 ckks_example.py --mult-cipher-plain` |
+| Multiply Cipher-Cipher | `python3 ckks_example.py --mult-cipher-cipher` |
+| Key Switching | `python3 ckks_example.py --keyswitch` |
+| Rotate | `python3 ckks_example.py --rotate` |
+| Conjugate | `python3 ckks_example.py --conjugate` |
+| Random 1000 'Encrypt' Tests | `python3 ckks_example.py --random --encrypt` |
+| Random 1000 'Rotate' Tests | `python3 ckks_example.py --random --rotate` |
+| Random 1000 Any Tests | `python3 ckks_example.py --all` |
+
+
+
+### BGV Library
+```
+usage: ckks_example.py [-h] [--encode] [--encrypt] [--add-cipher-cipher] 
+                    [--add-cipher-plain] [--mult-cipher-cipher] [--mult-cipher-plain] \
+                    [--rotate] [--keyswitch] [--bootstrapping] [--random] [--all]
+
+options:
+  -h, --help            show this help message and exit
+  --encode              Encoding test
+  --random              A bulk of random tests
+  --encrypt             Encrytion/decryption test
+  --add-cipher-cipher   Cipher-cipher addition test
+  --add-cipher-plain    Cipher-plain addition test
+  --mult-cipher-cipher  Cipher-cipher multiplication test
+  --mult-cipher-plain   Cipher-plain multiplication test
+  --rotate              Rotation test
+  --keyswitch           Key switch test
+  --all                 All test
+```
+| Test Operations | Command |
+|---|---|
+| Encode | `python3 bgv_example.py --encoding` |
+| Encrypt | `python3 bgv_example.py --encryption` |
+| Add Cipher-Cipher | `python3 bgv_example.py --add-cipher-cipher` |
+| Add Cipher-Plain | `python3 bgv_example.py --add-cipher-plain` |
+| Multiply Cipher-Plain | `python3 bgv_example.py --mult-cipher-plain` |
+| Multiply Cipher-Cipher | `python3 bgv_example.py --mult-cipher-cipher` |
+| Key Switching | `python3 bgv_example.py --keyswitch` |
+| Rotate | `python3 bgv_example.py --rotate` |
+| Random 1000 'Encrypt' Tests | `python3 bgv_example.py --random --encrypt` |
+| Random 1000 'Rotate' Tests | `python3 bgv_example.py --random --rotate` |
+| Random 1000 Any Tests | `python3 bgv_example.py --all` |
+
 ## Community Implementations
-- A BFV-RNS implementation in SystemVerilog is available at [https://github.com/alibillalhammoud/FHEforEEs](https://github.com/alibillalhammoud/FHEforEEs).
+- For interested readers, a BFV-RNS implementation in SystemVerilog is available at [https://github.com/alibillalhammoud/FHEforEEs](https://github.com/alibillalhammoud/FHEforEEs).

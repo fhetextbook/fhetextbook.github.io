@@ -47,7 +47,7 @@ BGV internally uses almost the same strategy as BFV for plaintext encoding, ciph
 \subsection{Encoding and Decoding}
 \label{subsec:bgv-encoding-decoding}
 
-BGV uses almost the same plaintext encoding scheme as BFV as described in Summary~\ref{subsubsec:bfv-encoding-summary} in \autoref{subsubsec:bfv-encoding-summary}, with the only difference that the scaling factor $\Delta = \dfrac{q_0}{t}$ is not applied to the plaintext polynomial $M(X)$ like BFV does. Instead, BGV applies its own scaling factor $\Delta = t$ to the noise polynomial $E(X)$ whenever it encrypts a new ciphertext (will be explained in \autoref{subsec:bgv-enc-dec}). 
+BGV uses almost the same plaintext encoding scheme as BFV as described in Summary~\ref{subsubsec:bfv-encoding-summary} in \autoref{subsubsec:bfv-encoding-summary}, with the only difference that the scaling factor $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ is not applied to the plaintext polynomial $M(X)$ like BFV does. Instead, BGV applies its own scaling factor $\Delta = t$ to the noise polynomial $E(X)$ whenever it encrypts a new ciphertext (will be explained in \autoref{subsec:bgv-enc-dec}). 
 
 The following is BGV's encoding and decoding scheme. 
 

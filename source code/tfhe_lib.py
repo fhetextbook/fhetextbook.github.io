@@ -39,14 +39,8 @@ def tfhe_decrypt(a, b, P, Q, s, scale, expected_dec = None):
 		e = (v - expected_dec*scale) % Q
 		if e > Q // 2:
 			e -= Q
-		print("0", e)
 		max_abs = abs(e)
-		print("1", max_abs)
 		e_bits = 1 if max_abs == 0 else math.floor(math.log2(abs(max_abs))) + 1
-		if e_bits < 0:
-			print("2", e)
-			print("3", e_bits)
-			asdf
 	return m_hat, e_bits
 
 

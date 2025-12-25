@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.polynomial import Polynomial
 from fastcore.foundation import patch_to
 from os import sys
 import random
@@ -155,7 +154,7 @@ def main(test_index, is_encrypt, run_choice, is_random_param):
 		sys.exit()
 
 	# =========== Decryption Stage ===============
-	print('<Decrypted Polynomials>')
+	print('<Decrypted Values>')
 	scaling_bits = math.floor(math.log2(scale))
 	dec_m1, e1_bits = tfhe_decrypt(a1, b1, P, Q, s, scale, m1)
 	dec_m2, e2_bits = tfhe_decrypt(a2, b2, P, Q, s, scale, m2)

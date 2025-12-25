@@ -249,7 +249,7 @@ if __name__ == "__main__":
 	if args.all:
 		args.random = True
 	is_random_param = args.random
-	if args.all or args.random and not (args.encode or args.encrypt or args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.bootstrapping or args.rotate): 
+	if args.all or args.random and not (args.encode or args.encrypt or args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.rotate): 
 		args.encrypt = True
 		args.add_cipher_cipher = True
 		args.add_cipher_plain = True
@@ -257,7 +257,6 @@ if __name__ == "__main__":
 		args.mult_cipher_plain = True
 		args.rotate = True
 		args.keyswitch = True
-		args.bootstrapping = True
 	if args.encrypt:
 		args.encode = True
 	if args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.bootstrapping or args.rotate:

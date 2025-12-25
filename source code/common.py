@@ -148,12 +148,12 @@ def pick_ntt_primes(bits: int = 30, num: int = 5, N: int = 4, p_mod: int = None,
         
         # 1. Bit-length safety check
         if candidate < (1 << (bits - 1)):
-            raise ValueError(f"Could not find {k} NTT primes in this bit range satisfying requirements.")
+            raise ValueError(f"Could not find {num} NTT primes in this bit range satisfying requirements.")
             
         # 2. Max-Span check
         # Since we search downwards, primes[0] is the largest.
         if len(primes) > 0 and (primes[0] - candidate > max_span):
-            raise ValueError(f"Could not find {k} primes within max_span {max_span}")
+            raise ValueError(f"Could not find {num} primes within max_span {max_span}")
             
         # 3. Fast Primality Check (Miller-Rabin)
         if is_prime(candidate):

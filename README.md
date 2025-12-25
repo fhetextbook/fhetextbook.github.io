@@ -6,9 +6,11 @@
 
 ## Python Demo FHE Library Quickstart
 
+We implemented this library for educational purposes. Because it is written in pure Python and does not use an RNS-optimized backend, computations are relatively slow. For this reason, the default parameters are intentionally small—for example, the ring dimension / polynomial modulus degree ($N$) and ciphertext modulus ($Q$) are set to small values (e.g., $N=4$, $Q = 2^{30}$).
 
-This library is provided for educational purposes.
+In the source code, the global variable `N` denotes the polynomial modulus degree (i.e., computations are performed modulo $x^N + 1$. The variable `Q` denotes the ciphertext modulus (or modulus chain, depending on the scheme configuration) for BFV and TFHE. For CKKS and BGV (when using a modulus chain), `Q_BIT` and `Q_LEVEL` control the per-prime bit-size and the number of levels in the modulus chain.
 
+You may adjust these globals to experiment with larger parameters. However, when increasing `N`, you should also increase the ciphertext modulus (`Q` or `Q_BIT`, and potentially `Q_LEVEL`) and, when selecting NTT-friendly primes, increase the `max_span` used in `pick_ntt_primes`. Otherwise, ciphertext noise may overflow the available modulus and decryption results can become incorrect.
 
 
 ### Installation

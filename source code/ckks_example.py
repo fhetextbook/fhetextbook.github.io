@@ -22,13 +22,12 @@ error_tolerance_ratio = 0.01
 # Test Option 1: Targeted Tests
 
 # Testcase 1
-N = 4
 ckks_vector1 = np.array([1.1 + 4.3j, 3.5 - 1.4j], dtype=object)
 ckks_vector2 = np.array([-5 - 6j, 7 + 8j], dtype=object)
 rotation_offset = 1
 
 # Testcase 2
-#N = 8
+#N = 4
 #ckks_vector1 = np.array([1 + 2j, -3 + 4j, 5 - 6j, -7 -8j], dtype=object)
 #ckks_vector2 = np.array([0, 0, 0, 0], dtype=object)
 #rotation_offset = 3
@@ -282,7 +281,7 @@ if __name__ == "__main__":
 	if args.all:
 		args.random = True
 	is_random_param = args.random
-	if args.all or args.random and not (args.encode or args.encrypt or args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.bootstrapping or args.rotate): 
+	if args.all or args.random and not (args.encode or args.encrypt or args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.rotate): 
 		args.encrypt = True
 		args.add_cipher_cipher = True
 		args.add_cipher_plain = True
@@ -290,10 +289,9 @@ if __name__ == "__main__":
 		args.mult_cipher_plain = True
 		args.rotate = True
 		args.keyswitch = True
-		args.bootstrapping = True
 	if args.encrypt:
 		args.encode = True
-	if args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.bootstrapping or args.rotate:
+	if args.add_cipher_cipher or args.add_cipher_plain or args.mult_cipher_cipher or args.mult_cipher_plain or args.keyswitch or args.rotate:
 		args.encrypt = True
 	run_slot = []
 	if args.add_cipher_cipher:

@@ -130,10 +130,11 @@ Dividing <!-- l. 95 --><math display='inline' xmlns='http://www.w3.org/1998/Math
 <br />   <span class='sectionToc'>C-2 <a href='GLWECiphertexttoPlaintextAddition.html#glwe-ciphertexttoplaintext-addition'>GLWE Ciphertext-to-Plaintext Addition</a></span>
 <br />   <span class='sectionToc'>C-3 <a href='GLWECiphertexttoPlaintextMultiplication.html#glwe-ciphertexttoplaintext-multiplication'>GLWE Ciphertext-to-Plaintext Multiplication</a></span>
 <br />   <span class='subsectionToc'>C-3.1 <a href='GadgetDecompositionforNoiseSuppression.html#gadget-decomposition-for-noise-suppression'>Gadget Decomposition for Noise Suppression</a></span>
+<br />   <span class='subsubsectionToc'>C-3.1.1 <a href='GadgetDecompositionforNoiseSuppression.html#discussion4' id='QQ2-95-123'>Discussion</a></span>
 <br />   <span class='sectionToc'>C-4 <a href='GLWEModulusSwitching.html#glwe-modulus-switching'>GLWE Modulus Switching</a></span>
 <br />   <span class='subsectionToc'>C-4.1 <a href='LWEModulusSwitching.html#lwe-modulus-switching'>LWE Modulus Switching</a></span>
 <br />   <span class='subsectionToc'>C-4.2 <a href='Example.html#example5'>Example</a></span>
-<br />   <span class='subsectionToc'>C-4.3 <a href='Discussion1.html#discussion4'>Discussion</a></span>
+<br />   <span class='subsectionToc'>C-4.3 <a href='Discussion1.html#discussion5'>Discussion</a></span>
 <br />   <span class='subsectionToc'>C-4.4 <a href='RLWEModulusSwitching.html#rlwe-modulus-switching'>RLWE Modulus Switching</a></span>
 <br />   <span class='subsectionToc'>C-4.5 <a href='GLWEModulusSwitching1.html#glwe-modulus-switching1'>GLWE Modulus Switching</a></span>
 <br />   <span class='sectionToc'>C-5 <a href='GLWEKeySwitching.html#glwe-key-switching'>GLWE Key Switching</a></span>
@@ -141,144 +142,144 @@ Dividing <!-- l. 95 --><math display='inline' xmlns='http://www.w3.org/1998/Math
 <br />   <span class='sectionToc'>D-1 <a href='TFHEScheme.html#tfhe-scheme'>TFHE Scheme</a></span>
 <br />   <span class='subsectionToc'>D-1.1 <a href='EncryptionandDecryption.html#encryption-and-decryption'>Encryption and Decryption</a></span>
 <br />   <span class='subsectionToc'>D-1.2 <a href='HomomorphicCiphertexttoCiphertextAddition.html#homomorphic-ciphertexttociphertext-addition'>Homomorphic Ciphertext-to-Ciphertext Addition</a></span>
+                                                                                         
+                                                                                         
 <br />   <span class='subsectionToc'>D-1.3 <a href='HomomorphicCiphertexttoPlaintextAddition.html#homomorphic-ciphertexttoplaintext-addition'>Homomorphic Ciphertext-to-Plaintext Addition</a></span>
-                                                                                         
-                                                                                         
 <br />   <span class='subsectionToc'>D-1.4 <a href='HomomorphicCiphertexttoPlaintextMultiplication.html#homomorphic-ciphertexttoplaintext-multiplication'>Homomorphic Ciphertext-to-Plaintext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-1.5 <a href='HomomorphicKeySwitching.html#homomorphic-key-switching'>Homomorphic Key Switching</a></span>
 <br />   <span class='subsectionToc'>D-1.6 <a href='HomomorphicCiphertexttoCiphertextMultiplication.html#homomorphic-ciphertexttociphertext-multiplication'>Homomorphic Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-1.6.1 <a href='HomomorphicCiphertexttoCiphertextMultiplication.html#generalization-to-glwetoggsw-multiplication' id='QQ2-110-139'>Generalization to GLWE-to-GGSW Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-1.6.1 <a href='HomomorphicCiphertexttoCiphertextMultiplication.html#generalization-to-glwetoggsw-multiplication' id='QQ2-110-140'>Generalization to GLWE-to-GGSW Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-1.7 <a href='CoefficientExtraction.html#coefficient-extraction'>Coefficient Extraction</a></span>
 <br />   <span class='subsectionToc'>D-1.8 <a href='NoiseBootstrapping.html#noise-bootstrapping'>Noise Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.1 <a href='NoiseBootstrapping.html#overview3' id='QQ2-112-142'>Overview</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.2 <a href='NoiseBootstrapping.html#modulus-switch-for-noise-bootstrapping' id='QQ2-112-143'>Modulus Switch for Noise Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.3 <a href='NoiseBootstrapping.html#halving-the-plaintext-space-to-be-used' id='QQ2-112-144'>Halving the Plaintext Space To be Used</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.4 <a href='NoiseBootstrapping.html#blind-rotation' id='QQ2-112-145'>Blind Rotation</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.5 <a href='NoiseBootstrapping.html#coefficient-extraction1' id='QQ2-112-147'>Coefficient Extraction</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.6 <a href='NoiseBootstrapping.html#key-switching' id='QQ2-112-148'>Key Switching</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.7 <a href='NoiseBootstrapping.html#noise-bootstrapping-summary' id='QQ2-112-149'>Noise Bootstrapping Summary</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.8 <a href='NoiseBootstrapping.html#example-noise-bootstrapping' id='QQ2-112-150'>Example: Noise Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.9 <a href='NoiseBootstrapping.html#discussion5' id='QQ2-112-152'>Discussion</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.10 <a href='NoiseBootstrapping.html#application-gate-bootstrapping' id='QQ2-112-153'>Application: Gate Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-1.8.11 <a href='NoiseBootstrapping.html#application-neural-networks-bootstrapping' id='QQ2-112-155'>Application: Neural Networks Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.1 <a href='NoiseBootstrapping.html#overview3' id='QQ2-112-143'>Overview</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.2 <a href='NoiseBootstrapping.html#modulus-switch-for-noise-bootstrapping' id='QQ2-112-144'>Modulus Switch for Noise Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.3 <a href='NoiseBootstrapping.html#halving-the-plaintext-space-to-be-used' id='QQ2-112-145'>Halving the Plaintext Space To be Used</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.4 <a href='NoiseBootstrapping.html#blind-rotation' id='QQ2-112-146'>Blind Rotation</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.5 <a href='NoiseBootstrapping.html#coefficient-extraction1' id='QQ2-112-148'>Coefficient Extraction</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.6 <a href='NoiseBootstrapping.html#key-switching' id='QQ2-112-149'>Key Switching</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.7 <a href='NoiseBootstrapping.html#noise-bootstrapping-summary' id='QQ2-112-150'>Noise Bootstrapping Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.8 <a href='NoiseBootstrapping.html#example-noise-bootstrapping' id='QQ2-112-151'>Example: Noise Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.9 <a href='NoiseBootstrapping.html#discussion6' id='QQ2-112-153'>Discussion</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.10 <a href='NoiseBootstrapping.html#application-gate-bootstrapping' id='QQ2-112-154'>Application: Gate Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-1.8.11 <a href='NoiseBootstrapping.html#application-neural-networks-bootstrapping' id='QQ2-112-156'>Application: Neural Networks Bootstrapping</a></span>
 <br />   <span class='subsectionToc'>D-1.9 <a href='TFHEonaDiscreteTorus.html#tfhe-on-a-discrete-torus'>TFHE on a Discrete Torus</a></span>
 <br />   <span class='sectionToc'>D-2 <a href='BFVScheme.html#bfv-scheme'>BFV Scheme</a></span>
 <br />   <span class='subsectionToc'>D-2.1 <a href='SingleValueEncoding.html#single-value-encoding'>Single Value Encoding</a></span>
 <br />   <span class='subsectionToc'>D-2.2 <a href='BatchEncoding.html#batch-encoding'>Batch Encoding</a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.1 <a href='BatchEncoding.html#encoding-' id='QQ2-116-162'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.2 <a href='BatchEncoding.html#encoding-1' id='QQ2-116-163'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.3 <a href='BatchEncoding.html#decoding-' id='QQ2-116-164'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.4 <a href='BatchEncoding.html#decoding-1' id='QQ2-116-165'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.5 <a href='BatchEncoding.html#summary' id='QQ2-116-166'>Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.1 <a href='BatchEncoding.html#encoding-' id='QQ2-116-163'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.2 <a href='BatchEncoding.html#encoding-1' id='QQ2-116-164'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.3 <a href='BatchEncoding.html#decoding-' id='QQ2-116-165'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.4 <a href='BatchEncoding.html#decoding-1' id='QQ2-116-166'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.5 <a href='BatchEncoding.html#summary' id='QQ2-116-167'>Summary</a></span>
 <br />   <span class='subsectionToc'>D-2.3 <a href='EncryptionandDecryption1.html#encryption-and-decryption1'>Encryption and Decryption</a></span>
 <br />   <span class='subsectionToc'>D-2.4 <a href='CiphertexttoCiphertextAddition.html#ciphertexttociphertext-addition'>Ciphertext-to-Ciphertext Addition</a></span>
-<br />   <span class='subsubsectionToc'>D-2.4.1 <a href='CiphertexttoCiphertextAddition.html#noise-bound-analysis' id='QQ2-118-169'>Noise Bound Analysis</a></span>
+<br />   <span class='subsubsectionToc'>D-2.4.1 <a href='CiphertexttoCiphertextAddition.html#noise-bound-analysis' id='QQ2-118-170'>Noise Bound Analysis</a></span>
 <br />   <span class='subsectionToc'>D-2.5 <a href='CiphertexttoPlaintextAddition.html#ciphertexttoplaintext-addition'>Ciphertext-to-Plaintext Addition</a></span>
 <br />   <span class='subsectionToc'>D-2.6 <a href='CiphertexttoPlaintextMultiplication.html#ciphertexttoplaintext-multiplication'>Ciphertext-to-Plaintext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-2.7 <a href='CiphertexttoCiphertextMultiplication.html#ciphertexttociphertext-multiplication'>Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.1 <a href='CiphertexttoCiphertextMultiplication.html#modraise' id='QQ2-121-173'><span class='rm-lmss-10x-x-109'>ModRaise</span></a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.2 <a href='CiphertexttoCiphertextMultiplication.html#polynomial-multiplication' id='QQ2-121-174'>Polynomial Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.3 <a href='CiphertexttoCiphertextMultiplication.html#relinearization' id='QQ2-121-175'>Relinearization</a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.4 <a href='CiphertexttoCiphertextMultiplication.html#rescaling' id='QQ2-121-176'>Rescaling</a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.5 <a href='CiphertexttoCiphertextMultiplication.html#summary1' id='QQ2-121-177'>Summary</a></span>
-<br />   <span class='subsubsectionToc'>D-2.7.6 <a href='CiphertexttoCiphertextMultiplication.html#application-to-tfhes-ciphertexttociphertext-multiplication' id='QQ2-121-178'>Application to TFHE’s Ciphertext-to-Ciphertext Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.1 <a href='CiphertexttoCiphertextMultiplication.html#modraise' id='QQ2-121-174'><span class='rm-lmss-10x-x-109'>ModRaise</span></a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.2 <a href='CiphertexttoCiphertextMultiplication.html#polynomial-multiplication' id='QQ2-121-175'>Polynomial Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.3 <a href='CiphertexttoCiphertextMultiplication.html#relinearization' id='QQ2-121-176'>Relinearization</a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.4 <a href='CiphertexttoCiphertextMultiplication.html#rescaling' id='QQ2-121-177'>Rescaling</a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.5 <a href='CiphertexttoCiphertextMultiplication.html#summary1' id='QQ2-121-178'>Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-2.7.6 <a href='CiphertexttoCiphertextMultiplication.html#application-to-tfhes-ciphertexttociphertext-multiplication' id='QQ2-121-179'>Application to TFHE’s Ciphertext-to-Ciphertext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-2.8 <a href='HomomorphicKeySwitching1.html#homomorphic-key-switching1'>Homomorphic Key Switching</a></span>
 <br />   <span class='subsectionToc'>D-2.9 <a href='HomomorphicRotationofInputVectorSlots.html#homomorphic-rotation-of-input-vector-slots'>Homomorphic Rotation of Input Vector Slots</a></span>
-<br />   <span class='subsubsectionToc'>D-2.9.1 <a href='HomomorphicRotationofInputVectorSlots.html#rotating-input-vector-slots-by-updating-the-plaintext-polynomial' id='QQ2-123-181'>Rotating Input Vector Slots by Updating the Plaintext Polynomial</a></span>
-<br />   <span class='subsubsectionToc'>D-2.9.2 <a href='HomomorphicRotationofInputVectorSlots.html#updating-the-plaintext-polynomial-by-updating-the-ciphertext-polynomials' id='QQ2-123-182'>Updating the Plaintext Polynomial by Updating the Ciphertext
+<br />   <span class='subsubsectionToc'>D-2.9.1 <a href='HomomorphicRotationofInputVectorSlots.html#rotating-input-vector-slots-by-updating-the-plaintext-polynomial' id='QQ2-123-182'>Rotating Input Vector Slots by Updating the Plaintext Polynomial</a></span>
+<br />   <span class='subsubsectionToc'>D-2.9.2 <a href='HomomorphicRotationofInputVectorSlots.html#updating-the-plaintext-polynomial-by-updating-the-ciphertext-polynomials' id='QQ2-123-183'>Updating the Plaintext Polynomial by Updating the Ciphertext
 Polynomials</a></span>
-<br />   <span class='subsubsectionToc'>D-2.9.3 <a href='HomomorphicRotationofInputVectorSlots.html#summary2' id='QQ2-123-183'>Summary</a></span>
-<br />   <span class='subsubsectionToc'>D-2.9.4 <a href='HomomorphicRotationofInputVectorSlots.html#encoding-example' id='QQ2-123-184'>Encoding Example</a></span>
+<br />   <span class='subsubsectionToc'>D-2.9.3 <a href='HomomorphicRotationofInputVectorSlots.html#summary2' id='QQ2-123-184'>Summary</a></span>
                                                                                          
                                                                                          
-<br />   <span class='subsubsectionToc'>D-2.9.5 <a href='HomomorphicRotationofInputVectorSlots.html#rotation-example' id='QQ2-123-185'>Rotation Example</a></span>
+<br />   <span class='subsubsectionToc'>D-2.9.4 <a href='HomomorphicRotationofInputVectorSlots.html#encoding-example' id='QQ2-123-185'>Encoding Example</a></span>
+<br />   <span class='subsubsectionToc'>D-2.9.5 <a href='HomomorphicRotationofInputVectorSlots.html#rotation-example' id='QQ2-123-186'>Rotation Example</a></span>
 <br />   <span class='subsectionToc'>D-2.10 <a href='ApplicationMatrixMultiplication.html#application-matrix-multiplication'>Application: Matrix Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-2.11 <a href='NoiseBootstrapping1.html#noise-bootstrapping1'>Noise Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.1 <a href='NoiseBootstrapping1.html#highlevel-idea1' id='QQ2-125-188'>High-level Idea</a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.2 <a href='NoiseBootstrapping1.html#modulus-switch' id='QQ2-125-189'>Modulus Switch</a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.3 <a href='NoiseBootstrapping1.html#homomorphic-decryption' id='QQ2-125-190'>Homomorphic Decryption</a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.4 <a href='NoiseBootstrapping1.html#coefftoslot-and-slottocoeff' id='QQ2-125-191'><span class='rm-lmss-10x-x-109'>CoeffToSlot </span>and <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.5 <a href='NoiseBootstrapping1.html#digit-extraction' id='QQ2-125-192'>Digit Extraction</a></span>
-<br />   <span class='subsubsectionToc'>D-2.11.6 <a href='NoiseBootstrapping1.html#summary3' id='QQ2-125-193'>Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.1 <a href='NoiseBootstrapping1.html#highlevel-idea1' id='QQ2-125-189'>High-level Idea</a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.2 <a href='NoiseBootstrapping1.html#modulus-switch' id='QQ2-125-190'>Modulus Switch</a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.3 <a href='NoiseBootstrapping1.html#homomorphic-decryption' id='QQ2-125-191'>Homomorphic Decryption</a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.4 <a href='NoiseBootstrapping1.html#coefftoslot-and-slottocoeff' id='QQ2-125-192'><span class='rm-lmss-10x-x-109'>CoeffToSlot </span>and <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.5 <a href='NoiseBootstrapping1.html#digit-extraction' id='QQ2-125-193'>Digit Extraction</a></span>
+<br />   <span class='subsubsectionToc'>D-2.11.6 <a href='NoiseBootstrapping1.html#summary3' id='QQ2-125-194'>Summary</a></span>
 <br />   <span class='sectionToc'>D-3 <a href='CKKSScheme.html#ckks-scheme'>CKKS Scheme</a></span>
 <br />   <span class='subsectionToc'>D-3.1 <a href='EncodingandDecoding.html#encoding-and-decoding'>Encoding and Decoding</a></span>
-<br />   <span class='subsubsectionToc'>D-3.1.1 <a href='EncodingandDecoding.html#example6' id='QQ2-127-196'>Example</a></span>
+<br />   <span class='subsubsectionToc'>D-3.1.1 <a href='EncodingandDecoding.html#example6' id='QQ2-127-197'>Example</a></span>
 <br />   <span class='subsectionToc'>D-3.2 <a href='EncryptionandDecryption2.html#encryption-and-decryption2'>Encryption and Decryption</a></span>
 <br />   <span class='subsectionToc'>D-3.3 <a href='CiphertexttoCiphertextAddition1.html#ciphertexttociphertext-addition1'>Ciphertext-to-Ciphertext Addition</a></span>
 <br />   <span class='subsectionToc'>D-3.4 <a href='CiphertexttoPlaintextAddition1.html#ciphertexttoplaintext-addition1'>Ciphertext-to-Plaintext Addition</a></span>
 <br />   <span class='subsectionToc'>D-3.5 <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'>Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.1 <a href='CiphertexttoCiphertextMultiplication1.html#synthetic-ciphertext-derivation' id='QQ2-131-201'>Synthetic Ciphertext Derivation</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.2 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-decomposition' id='QQ2-131-202'>Relinearization Method 1 – Ciphertext Decomposition</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.3 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-modulus-switch' id='QQ2-131-203'>Relinearization Method 2 – Ciphertext Modulus Switch</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.4 <a href='CiphertexttoCiphertextMultiplication1.html#rescaling1' id='QQ2-131-204'>Rescaling</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.5 <a href='CiphertexttoCiphertextMultiplication1.html#comparing-bfv-and-ckks-bootstrapping' id='QQ2-131-205'>Comparing BFV and CKKS Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.6 <a href='CiphertexttoCiphertextMultiplication1.html#summary4' id='QQ2-131-206'>Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.1 <a href='CiphertexttoCiphertextMultiplication1.html#synthetic-ciphertext-derivation' id='QQ2-131-202'>Synthetic Ciphertext Derivation</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.2 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-decomposition' id='QQ2-131-203'>Relinearization Method 1 – Ciphertext Decomposition</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.3 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-modulus-switch' id='QQ2-131-204'>Relinearization Method 2 – Ciphertext Modulus Switch</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.4 <a href='CiphertexttoCiphertextMultiplication1.html#rescaling1' id='QQ2-131-205'>Rescaling</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.5 <a href='CiphertexttoCiphertextMultiplication1.html#comparing-bfv-and-ckks-bootstrapping' id='QQ2-131-206'>Comparing BFV and CKKS Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.6 <a href='CiphertexttoCiphertextMultiplication1.html#summary4' id='QQ2-131-207'>Summary</a></span>
 <br />   <span class='subsectionToc'>D-3.6 <a href='CiphertexttoPlaintextMultiplication1.html#ciphertexttoplaintext-multiplication1'>Ciphertext-to-Plaintext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-3.7 <a href='textsfModDrop.html#moddrop'><span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
-<br />   <span class='subsubsectionToc'>D-3.7.1 <a href='textsfModDrop.html#difference-between-modulus-switch-and-moddrop' id='QQ2-133-209'>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
+<br />   <span class='subsubsectionToc'>D-3.7.1 <a href='textsfModDrop.html#difference-between-modulus-switch-and-moddrop' id='QQ2-133-210'>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
 <br />   <span class='subsectionToc'>D-3.8 <a href='HomomorphicKeySwitching2.html#homomorphic-key-switching2'>Homomorphic Key Switching</a></span>
 <br />   <span class='subsectionToc'>D-3.9 <a href='HomomorphicRotationofInputVectorSlots1.html#homomorphic-rotation-of-input-vector-slots1'>Homomorphic Rotation of Input Vector Slots</a></span>
-<br />   <span class='subsubsectionToc'>D-3.9.1 <a href='HomomorphicRotationofInputVectorSlots1.html#example7' id='QQ2-135-212'>Example</a></span>
+<br />   <span class='subsubsectionToc'>D-3.9.1 <a href='HomomorphicRotationofInputVectorSlots1.html#example7' id='QQ2-135-213'>Example</a></span>
 <br />   <span class='subsectionToc'>D-3.10 <a href='ContemplationonCKKSEncoding.html#contemplation-on-ckks-encoding'>Contemplation on CKKS Encoding</a></span>
 <br />   <span class='subsectionToc'>D-3.11 <a href='HomomorphicConjugation.html#homomorphic-conjugation'>Homomorphic Conjugation</a></span>
 <br />   <span class='subsectionToc'>D-3.12 <a href='SparselyPackingCiphertexts.html#sparsely-packing-ciphertexts'>Sparsely Packing Ciphertexts</a></span>
-<br />   <span class='subsubsectionToc'>D-3.12.1 <a href='SparselyPackingCiphertexts.html#forward-proof-decoding-of-sparsely-packed-ciphertext' id='QQ2-138-216'>Forward Proof: Decoding of Sparsely Packed Ciphertext</a></span>
+<br />   <span class='subsubsectionToc'>D-3.12.1 <a href='SparselyPackingCiphertexts.html#forward-proof-decoding-of-sparsely-packed-ciphertext' id='QQ2-138-217'>Forward Proof: Decoding of Sparsely Packed Ciphertext</a></span>
 <br />   <span class='subsectionToc'>D-3.13 <a href='ModulusBootstrapping.html#modulus-bootstrapping'>Modulus Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.1 <a href='ModulusBootstrapping.html#highlevel-idea2' id='QQ2-139-218'>High-level Idea</a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.2 <a href='ModulusBootstrapping.html#mathematical-expansion-of-the-highlevel-idea' id='QQ2-139-221'>Mathematical Expansion of the High-level Idea</a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.3 <a href='ModulusBootstrapping.html#details-coefftoslot' id='QQ2-139-222'>Details: <span class='rm-lmss-10x-x-109'>CoeffToSlot</span></a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.4 <a href='ModulusBootstrapping.html#details-evalexp' id='QQ2-139-223'>Details: <span class='rm-lmss-10x-x-109'>EvalExp</span></a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.5 <a href='ModulusBootstrapping.html#details-slottocoeff' id='QQ2-139-224'>Details: <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.6 <a href='ModulusBootstrapping.html#reducing-the-bootstrapping-overhead-by-sparsely-packing-ciphertext' id='QQ2-139-225'>Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext</a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.7 <a href='ModulusBootstrapping.html#summary5' id='QQ2-139-226'>Summary</a></span>
-<br />   <span class='subsubsectionToc'>D-3.13.8 <a href='ModulusBootstrapping.html#reducing-the-bootstrapping-noise' id='QQ2-139-227'>Reducing the Bootstrapping Noise</a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.1 <a href='ModulusBootstrapping.html#highlevel-idea2' id='QQ2-139-219'>High-level Idea</a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.2 <a href='ModulusBootstrapping.html#mathematical-expansion-of-the-highlevel-idea' id='QQ2-139-222'>Mathematical Expansion of the High-level Idea</a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.3 <a href='ModulusBootstrapping.html#details-coefftoslot' id='QQ2-139-223'>Details: <span class='rm-lmss-10x-x-109'>CoeffToSlot</span></a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.4 <a href='ModulusBootstrapping.html#details-evalexp' id='QQ2-139-224'>Details: <span class='rm-lmss-10x-x-109'>EvalExp</span></a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.5 <a href='ModulusBootstrapping.html#details-slottocoeff' id='QQ2-139-225'>Details: <span class='rm-lmss-10x-x-109'>SlotToCoeff</span></a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.6 <a href='ModulusBootstrapping.html#reducing-the-bootstrapping-overhead-by-sparsely-packing-ciphertext' id='QQ2-139-226'>Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext</a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.7 <a href='ModulusBootstrapping.html#summary5' id='QQ2-139-227'>Summary</a></span>
+<br />   <span class='subsubsectionToc'>D-3.13.8 <a href='ModulusBootstrapping.html#reducing-the-bootstrapping-noise' id='QQ2-139-228'>Reducing the Bootstrapping Noise</a></span>
 <br />   <span class='sectionToc'>D-4 <a href='BGVScheme.html#bgv-scheme'>BGV Scheme</a></span>
 <br />   <span class='subsectionToc'>D-4.1 <a href='EncodingandDecoding1.html#encoding-and-decoding1'>Encoding and Decoding</a></span>
 <br />   <span class='subsectionToc'>D-4.2 <a href='EncryptionandDecryption3.html#encryption-and-decryption3'>Encryption and Decryption</a></span>
+                                                                                         
+                                                                                         
 <br />   <span class='subsectionToc'>D-4.3 <a href='CiphertexttoCiphertextAddition2.html#ciphertexttociphertext-addition2'>Ciphertext-to-Ciphertext Addition</a></span>
-                                                                                         
-                                                                                         
 <br />   <span class='subsectionToc'>D-4.4 <a href='CiphertexttoPlaintextAddition2.html#ciphertexttoplaintext-addition2'>Ciphertext-to-Plaintext Addition</a></span>
 <br />   <span class='subsectionToc'>D-4.5 <a href='CiphertexttoPlaintextMultiplication2.html#ciphertexttoplaintext-multiplication2'>Ciphertext-to-Plaintext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-4.6 <a href='textsfModDrop1.html#moddrop1'><span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
 <br />   <span class='subsectionToc'>D-4.7 <a href='ModulusSwitch.html#modulus-switch1'>Modulus Switch</a></span>
-<br />   <span class='subsubsectionToc'>D-4.7.1 <a href='ModulusSwitch.html#difference-between-modulus-switch-and-moddrop1' id='QQ2-147-237'>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
+<br />   <span class='subsubsectionToc'>D-4.7.1 <a href='ModulusSwitch.html#difference-between-modulus-switch-and-moddrop1' id='QQ2-147-238'>Difference between Modulus Switch and <span class='rm-lmss-10x-x-109'>ModDrop</span></a></span>
 <br />   <span class='subsectionToc'>D-4.8 <a href='CiphertexttoCiphertextMultiplication2.html#ciphertexttociphertext-multiplication2'>Ciphertext-to-Ciphertext Multiplication</a></span>
 <br />   <span class='subsectionToc'>D-4.9 <a href='HomomorphicKeySwitching3.html#homomorphic-key-switching3'>Homomorphic Key Switching</a></span>
 <br />   <span class='subsectionToc'>D-4.10 <a href='HomomorphicRotationofInputVectorSlots2.html#homomorphic-rotation-of-input-vector-slots2'>Homomorphic Rotation of Input Vector Slots</a></span>
 <br />   <span class='subsectionToc'>D-4.11 <a href='ModulusBootstrapping1.html#modulus-bootstrapping1'>Modulus Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-4.11.1 <a href='ModulusBootstrapping1.html#discussion6' id='QQ2-151-242'>Discussion</a></span>
-<br />   <span class='subsubsectionToc'>D-4.11.2 <a href='ModulusBootstrapping1.html#comparing-the-bootstrapping-in-bfv-bgv-and-ckks' id='QQ2-151-243'>Comparing the Bootstrapping in BFV, BGV, and CKKS</a></span>
+<br />   <span class='subsubsectionToc'>D-4.11.1 <a href='ModulusBootstrapping1.html#discussion7' id='QQ2-151-243'>Discussion</a></span>
+<br />   <span class='subsubsectionToc'>D-4.11.2 <a href='ModulusBootstrapping1.html#comparing-the-bootstrapping-in-bfv-bgv-and-ckks' id='QQ2-151-244'>Comparing the Bootstrapping in BFV, BGV, and CKKS</a></span>
 <br />   <span class='sectionToc'>D-5 <a href='RNSvariantFHESchemes.html#rnsvariant-fhe-schemes'>RNS-variant FHE Schemes</a></span>
 <br />   <span class='subsectionToc'>D-5.1 <a href='FastBaseConversiontextsfFastBConv.html#fast-base-conversion-fastbconv'>Fast Base Conversion: <span class='rm-lmss-10x-x-109'>FastBConv</span></a></span>
 <br />   <span class='subsectionToc'>D-5.2 <a href='SmallMontgomeryReductionAlgorithmtextsfSmallMont.html#small-montgomery-reduction-algorithm-smallmont'>Small Montgomery Reduction Algorithm: <span class='rm-lmss-10x-x-109'>SmallMont</span></a></span>
-<br />   <span class='subsubsectionToc'>D-5.2.1 <a href='SmallMontgomeryReductionAlgorithmtextsfSmallMont.html#improving-fastbconv-by-using-smallmont' id='QQ2-154-247'>Improving <span class='rm-lmss-10x-x-109'>FastBConv </span>by Using <span class='rm-lmss-10x-x-109'>SmallMont</span></a></span>
+<br />   <span class='subsubsectionToc'>D-5.2.1 <a href='SmallMontgomeryReductionAlgorithmtextsfSmallMont.html#improving-fastbconv-by-using-smallmont' id='QQ2-154-248'>Improving <span class='rm-lmss-10x-x-109'>FastBConv </span>by Using <span class='rm-lmss-10x-x-109'>SmallMont</span></a></span>
 <br />   <span class='subsectionToc'>D-5.3 <a href='RNSbasedModRaisetextsfModRaisetextsubscriptRNS.html#rnsbased-modraise-modraise-rns'>RNS-based ModRaise: <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.4 <a href='RNSbasedModDroptextsfModDroptextsubscriptRNS.html#rnsbased-moddrop-moddrop-rns'>RNS-based ModDrop: <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.5 <a href='RNSbasedModulusSwitchtextsfModSwitchtextsubscriptRNS.html#rnsbased-modulus-switch-modswitch-rns'>RNS-based Modulus Switch: <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-5.5.1 <a href='RNSbasedModulusSwitchtextsfModSwitchtextsubscriptRNS.html#comparing-modswitch-rns-modraise-rns-and-moddrop-rns' id='QQ2-157-251'>Comparing <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, and <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-5.5.1 <a href='RNSbasedModulusSwitchtextsfModSwitchtextsubscriptRNS.html#comparing-modswitch-rns-modraise-rns-and-moddrop-rns' id='QQ2-157-252'>Comparing <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, and <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.6 <a href='RNSbasedDecryption.html#rnsbased-decryption'>RNS-based Decryption</a></span>
-<br />   <span class='subsubsectionToc'>D-5.6.1                           <a href='RNSbasedDecryption.html#bfv-decryption-dec-rns-bfv' id='QQ2-158-253'>BFV                           Decryption:
-<!-- l. 254 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼</mtext></mstyle></mrow><mrow>
+<br />   <span class='subsubsectionToc'>D-5.6.1                           <a href='RNSbasedDecryption.html#bfv-decryption-dec-rns-bfv' id='QQ2-158-254'>BFV                           Decryption:
+<!-- l. 255 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼</mtext></mstyle></mrow><mrow>
 <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖥𝖵</mtext></mstyle></mrow></msubsup></math></a></span>
-<br />   <span class='subsubsectionToc'>D-5.6.2 <a href='RNSbasedDecryption.html#ckks-and-bgv-decryption' id='QQ2-158-254'>CKKS and BGV Decryption</a></span>
+<br />   <span class='subsubsectionToc'>D-5.6.2 <a href='RNSbasedDecryption.html#ckks-and-bgv-decryption' id='QQ2-158-255'>CKKS and BGV Decryption</a></span>
 <br />   <span class='subsectionToc'>D-5.7        <a href='BGVsRNSbasedModulusSwitchtextsfModSwitchtextsfRNStextsfBGV.html#bgvs-rnsbased-modulus-switch-modswitch-rns-bgv'>BGV’s        RNS-based        Modulus        Switch:
-<!-- l. 256 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖬𝗈𝖽𝖲𝗐𝗂𝗍𝖼𝗁</mtext></mstyle></mrow><mrow>
+<!-- l. 257 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖬𝗈𝖽𝖲𝗐𝗂𝗍𝖼𝗁</mtext></mstyle></mrow><mrow>
 <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖦𝖵</mtext></mstyle></mrow></msubsup></math></a></span>
 <br />   <span class='subsectionToc'>D-5.8 <a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'>Exact Fast Base Conversion: <span class='rm-lmss-10x-x-109'>FastBConvEx</span></a></span>
 <br />   <span class='subsectionToc'>D-5.9 <a href='DecomposingMultiplicationtextsfDecompMulttextsubscriptRNS.html#decomposing-multiplication-decompmult-rns'>Decomposing Multiplication: <span class='rm-lmss-10x-x-109'>DecompMult</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.10 <a href='ApplyingRNSTechniquestoFHEOperations.html#applying-rns-techniques-to-fhe-operations'>Applying RNS Techniques to FHE Operations</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.1 <a href='ApplyingRNSTechniquestoFHEOperations.html#addition-and-multiplication-of-polynomials' id='QQ2-162-259'>Addition and Multiplication of Polynomials</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.2 <a href='ApplyingRNSTechniquestoFHEOperations.html#key-switching1' id='QQ2-162-260'>Key Switching</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.3 <a href='ApplyingRNSTechniquestoFHEOperations.html#input-slot-rotation' id='QQ2-162-261'>Input Slot Rotation</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.4 <a href='ApplyingRNSTechniquestoFHEOperations.html#bfvs-ciphertexttociphertext-multiplication' id='QQ2-162-262'>BFV’s Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.5 <a href='ApplyingRNSTechniquestoFHEOperations.html#ckkss-ciphertexttociphertext-multiplication' id='QQ2-162-263'>CKKS’s Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.6 <a href='ApplyingRNSTechniquestoFHEOperations.html#bgvs-ciphertexttociphertext-multiplication' id='QQ2-162-264'>BGV’s Ciphertext-to-Ciphertext Multiplication</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.7 <a href='ApplyingRNSTechniquestoFHEOperations.html#bfvs-bootstrapping' id='QQ2-162-265'>BFV’s Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.8 <a href='ApplyingRNSTechniquestoFHEOperations.html#ckkss-bootstrapping' id='QQ2-162-266'>CKKS’s Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.9 <a href='ApplyingRNSTechniquestoFHEOperations.html#bgvs-bootstrapping' id='QQ2-162-267'>BGV’s Bootstrapping</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.10 <a href='ApplyingRNSTechniquestoFHEOperations.html#noise-impact-of-rns-operations' id='QQ2-162-268'>Noise Impact of RNS Operations</a></span>
-<br />   <span class='subsubsectionToc'>D-5.10.11 <a href='ApplyingRNSTechniquestoFHEOperations.html#python-source-code-of-rns-primitives' id='QQ2-162-269'>Python Source Code of RNS Primitives</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.1 <a href='ApplyingRNSTechniquestoFHEOperations.html#addition-and-multiplication-of-polynomials' id='QQ2-162-260'>Addition and Multiplication of Polynomials</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.2 <a href='ApplyingRNSTechniquestoFHEOperations.html#key-switching1' id='QQ2-162-261'>Key Switching</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.3 <a href='ApplyingRNSTechniquestoFHEOperations.html#input-slot-rotation' id='QQ2-162-262'>Input Slot Rotation</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.4 <a href='ApplyingRNSTechniquestoFHEOperations.html#bfvs-ciphertexttociphertext-multiplication' id='QQ2-162-263'>BFV’s Ciphertext-to-Ciphertext Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.5 <a href='ApplyingRNSTechniquestoFHEOperations.html#ckkss-ciphertexttociphertext-multiplication' id='QQ2-162-264'>CKKS’s Ciphertext-to-Ciphertext Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.6 <a href='ApplyingRNSTechniquestoFHEOperations.html#bgvs-ciphertexttociphertext-multiplication' id='QQ2-162-265'>BGV’s Ciphertext-to-Ciphertext Multiplication</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.7 <a href='ApplyingRNSTechniquestoFHEOperations.html#bfvs-bootstrapping' id='QQ2-162-266'>BFV’s Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.8 <a href='ApplyingRNSTechniquestoFHEOperations.html#ckkss-bootstrapping' id='QQ2-162-267'>CKKS’s Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.9 <a href='ApplyingRNSTechniquestoFHEOperations.html#bgvs-bootstrapping' id='QQ2-162-268'>BGV’s Bootstrapping</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.10 <a href='ApplyingRNSTechniquestoFHEOperations.html#noise-impact-of-rns-operations' id='QQ2-162-269'>Noise Impact of RNS Operations</a></span>
+<br />   <span class='subsubsectionToc'>D-5.10.11 <a href='ApplyingRNSTechniquestoFHEOperations.html#python-source-code-of-rns-primitives' id='QQ2-162-270'>Python Source Code of RNS Primitives</a></span>
 <br />   <span class='sectionToc'>D-6 <a href='FHESchemeComparisonandSummary.html#fhe-scheme-comparison-and-summary'>FHE Scheme Comparison and Summary</a></span>
 <br />   <span class='sectionToc'>D-7 <a href='PythonDemoFHELibrary.html#python-demo-fhe-library'>Python Demo FHE Library</a></span>
    </div>

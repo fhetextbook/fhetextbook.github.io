@@ -275,7 +275,10 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline + .vspace:last-child{display:none;}
 .hline:first-child{border-bottom:1px solid black;border-top:none;}
 div.algorithm table.caption { border-bottom: 1px solid black; margin-bottom:1pt; }
-div.algorithmic span.algorithmic{white-space:pre}
+div.algorithmic span.algorithmic{white-space:pre-wrap}
+.algorithmic span.line {display: inline-block; padding-left: 4rem;}
+.algorithmic span.empty {display: none;}
+.algorithmic span.empty + br {display: none;}
 div.subfigure {text-align:center;display:inline-block; max-width:45%; margin-right: 2rem;}
 dl.enumerate-enumitem{display:grid; grid-template-columns: min-content 1fr; align-items: top; row-gap:0ch;}
 dt.enumerate-enumitem{text-align: right;}

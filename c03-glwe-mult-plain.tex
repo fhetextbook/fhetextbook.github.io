@@ -117,6 +117,11 @@ $\|\Lambda_i\|_\infty \le \beta/2$, whereas $\|\Lambda\|_\infty$ can be as large
   \label{fig:decomp2}
 \end{figure}
 
+\subsubsection{Discussion}
+\label{subsubsec:glwe-mult-plain-discuss}
+
+Although the gadget decomposition technique above substantially reduces noise growth, it is essentially a one-shot technique: we start from the structured ciphertext representation $\textsf{GLev}^{\beta,l}_{S,\sigma}(\Delta M)$, but after computing $\textsf{Decomp}^{\beta,l}(\Lambda)\cdot \textsf{GLev}^{\beta,l}_{S,\sigma}(\Delta M)$, the result collapses back to an ordinary ciphertext $\textsf{GLWE}_{S,\sigma}(\Delta\cdot \Lambda M + E_{\mathrm{all}})$. Re-applying the same idea would therefore require turning this output into a fresh GLev ciphertext without decryption, which entails multiplying the GLWE ciphertext by $\dfrac{q}{\beta}, \dfrac{q}{\beta^2}, \cdots, \dfrac{q}{\beta^l}$, thereby amplifying the accumulated noise by these factors and defeating the purpose.
+
 
 
 

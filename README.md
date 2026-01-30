@@ -1,10 +1,12 @@
+# The Beginner's Textbook for Fully Homomorphic Encryption
+
 #### ArXiv's PDF Link: [https://arxiv.org/abs/2503.05136](https://arxiv.org/abs/2503.05136)
 
 #### Dynamic Website Version: [https://fhetextbook.github.io](https://fhetextbook.github.io)
 
 -  Please post any bugs or errors regarding the draft to the Issues board or create a pull request.
 
-## Python Demo FHE Library Quickstart
+## Python FHE Demo Library Quickstart
 
 We implemented this library for educational purposes. Because it is written in pure Python and does not use an RNS-optimized backend, computations are relatively slow. For this reason, the default parameters are intentionally small—for example, the ring dimension / polynomial modulus degree ($N$) and ciphertext modulus ($Q$) are set to small values (e.g., $N=4$, $Q = 2^{30}$).
 

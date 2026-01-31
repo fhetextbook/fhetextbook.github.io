@@ -16,33 +16,33 @@ Recall that the LWE cryptosystem (\autoref{subsec:lwe-enc}) comprises the follow
 \begin{itemize}
 \item \textbf{\underline{Setup}:} $\Delta = \dfrac{q}{t}$, \text{ } $S = (s_0, s_1, \ldots, s_{k-1}) \xleftarrow{\$} \mathbb{Z}_2^{k}$
 
-\item \textbf{\underline{Encryption Input}:} $m \in \mathbb{Z}_t$, \text{ } $\vec{a} = (a_0, a_1, \ldots, a_{k-1}) \xleftarrow{\$} \mathbb{Z}_q^{k}$, \text{ } $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$
+\item \textbf{\underline{Encryption Input}:} $m \in \mathbb{Z}_t$, \text{ } $\vv{a} = (a_0, a_1, \ldots, a_{k-1}) \xleftarrow{\$} \mathbb{Z}_q^{k}$, \text{ } $e \xleftarrow{\chi_\sigma} \mathbb{Z}_q$
 
 $ $
 
-\item \textbf{\underline{Encryption}:} $\textsf{LWE}_{\vec{s},\sigma}(\Delta  m + e) = (\vec{a}, b) \in \mathbb{Z}_q^{k + 1}$ \text{ } (where $b = \vec{a} \cdot \vec{s} + \Delta  m + e \in \mathbb{Z}_q$)
+\item \textbf{\underline{Encryption}:} $\textsf{LWE}_{\vv{s},\sigma}(\Delta  m + e) = (\vv{a}, b) \in \mathbb{Z}_q^{k + 1}$ \text{ } (where $b = \vv{a} \cdot \vv{s} + \Delta  m + e \in \mathbb{Z}_q$)
 
 $ $
 
-\item \textbf{\underline{Decryption}:} $\textsf{LWE}^{-1}_{S,\sigma}(\textsf{ct}) = b - \vec{a}\cdot \vec{s} = \Delta  m + e \text{ } \text{ } \in \mathbb{Z}_q$
+\item \textbf{\underline{Decryption}:} $\textsf{LWE}^{-1}_{S,\sigma}(\textsf{ct}) = b - \vv{a}\cdot \vv{s} = \Delta  m + e \text{ } \text{ } \in \mathbb{Z}_q$
 
 \end{itemize}
 
 $ $
 
 
-In the LWE cryptosystem, modulus switching is a process of converting an original LWE ciphertext's modulo domain to a smaller modulo domain. This can be seen as scaling down all components, except for the plaintext $m$ and the secret key $S$, in the original LWE ciphertext to a smaller domain. This operation preserves the size and integrity of the original plaintext $m$, while the scaling factor $\Delta$ gets reduced to a smaller value $\hat{\Delta}$ and the noise $e$ to a smaller (reduced) noise $\hat{e}$ (note that noise alteration does not affect the original plaintext $m$, because the noise gets rounded away after decryption, anyway), and $\vec{a}$ also gets scaled down to a smaller $\vec{\hat{a}}$. Modulus switching is used for computational efficiency during TFHE's bootstrapping (which will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}). Modulus switching is also used for implementing the ciphertext-to-ciphertext multiplication algorithm in BGV (\autoref{subsec:bfv-mult-cipher}) and CKKS (\autoref{subsec:ckks-mult-cipher}). 
+In the LWE cryptosystem, modulus switching is a process of converting an original LWE ciphertext's modulo domain to a smaller modulo domain. This can be seen as scaling down all components, except for the plaintext $m$ and the secret key $S$, in the original LWE ciphertext to a smaller domain. This operation preserves the size and integrity of the original plaintext $m$, while the scaling factor $\Delta$ gets reduced to a smaller value $\hat{\Delta}$ and the noise $e$ to a smaller (reduced) noise $\hat{e}$ (note that noise alteration does not affect the original plaintext $m$, because the noise gets rounded away after decryption, anyway), and $\vv{a}$ also gets scaled down to a smaller $\vv{\hat{a}}$. Modulus switching is used for computational efficiency during TFHE's bootstrapping (which will be discussed in \autoref{subsec:tfhe-noise-bootstrapping}). Modulus switching is also used for implementing the ciphertext-to-ciphertext multiplication algorithm in BGV (\autoref{subsec:bfv-mult-cipher}) and CKKS (\autoref{subsec:ckks-mult-cipher}). 
 
-The high-level idea of LWE modulus switch is to rescale the congruence relationship of the LWE scheme. LWE's homomorphic computation algorithms include the following: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication. However, all congruence relationships used in these algorithms are essentially rewritten versions of the following single fundamental congruence relationship: $b = \vec{a}\cdot \vec{s} + \Delta m + e \bmod q$. Thus, modulus switch of an LWE ciphertext from $q \rightarrow q'$ is equivalent to rescaling the modulo of the above congruence relationship from $q \rightarrow q'$.
+The high-level idea of LWE modulus switch is to rescale the congruence relationship of the LWE scheme. LWE's homomorphic computation algorithms include the following: ciphertext-to-ciphertext addition, ciphertext-to-plaintext addition, ciphertext-to-plaintext multiplication, ciphertext-to-ciphertext multiplication. However, all congruence relationships used in these algorithms are essentially rewritten versions of the following single fundamental congruence relationship: $b = \vv{a}\cdot \vv{s} + \Delta m + e \bmod q$. Thus, modulus switch of an LWE ciphertext from $q \rightarrow q'$ is equivalent to rescaling the modulo of the above congruence relationship from $q \rightarrow q'$.
 
 Based on this insight, the LWE cryptosystem's modulus switching from $q \rightarrow \hat{q}$ (where $q > \hat{q}$) is a process of converting the original LWE ciphertext $\textsf{LWE}_{S, \sigma}(\Delta m + e)$ as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:modulus-switch-lwe}} LWE Modulus Switching}}]
 
-Given an LWE ciphertext $(\vec{a}, b)$ where $b = \vec{a}\cdot \vec{s} + \Delta m + e \bmod q$ and $m \in \mathbb{Z}_t$, modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(A, b)$ to $(\vec{\hat{a}}, \hat b)$ as follows:
+Given an LWE ciphertext $(\vv{a}, b)$ where $b = \vv{a}\cdot \vv{s} + \Delta m + e \bmod q$ and $m \in \mathbb{Z}_t$, modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(A, b)$ to $(\vv{\hat{a}}, \hat b)$ as follows:
 
 
-$\vec{\hat{a}} = (\hat{a}_0, \hat{a}_1, \ldots, \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$ $\lceil \rfloor$ means rounding to the nearest integer}
+$\vv{\hat{a}} = (\hat{a}_0, \hat{a}_1, \ldots, \hat{a}_{k-1})$, where each $\hat{a}_i = \Big\lceil a\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ \textcolor{red}{ $\rhd$ $\lceil \rfloor$ means rounding to the nearest integer}
 
  $\hat{b} = \Big\lceil b \dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
@@ -84,7 +84,7 @@ $\hat{a_i} = \Big\lceil a_i \dfrac{\hat{q}}{q} \Big\rfloor = a_i\dfrac{\hat{q}}{
 $\hat{e} = \Big\lceil e \dfrac{\hat{q}}{q} \Big\rfloor = e\dfrac{\hat{q}}{q} + \epsilon_e$ (where $-0.5 < \epsilon_e < 0.5$)
 \item Note the following: 
 
-$b = \vec{a} \cdot \vec{s} + \Delta  m + e = \sum\limits_{i=0}^{k-1}(a_is_i) + \Delta m + e  \in \mathbb{Z}_q$
+$b = \vv{a} \cdot \vv{s} + \Delta  m + e = \sum\limits_{i=0}^{k-1}(a_is_i) + \Delta m + e  \in \mathbb{Z}_q$
 
 $b = \sum\limits_{i=0}^{k-1}(a_is_i) + \Delta m + e + H \cdot q$ (where modulo $q$ is replaced by adding $H \cdot q$, some multiple of $q$)
 
@@ -190,11 +190,11 @@ $ $
 
 If we solve the LWE decryption formula:
 
-$\hat b - (\hat{a}_0s_0 + \hat{a}_1s_1 + \hat{a}_2s_2 + \hat{a}_3s_3) = 0(-12) + 1(6) + 1(-1) + 0(4) = 6 - 1 = 5 = \hat m + \hat e \in \mathbb{Z}_{32}$
+$\hat b - (\hat{a}_0s_0 + \hat{a}_1s_1 + \hat{a}_2s_2 + \hat{a}_3s_3) = 13 - (0(-12) + 1(6) + 1(-1) + 0(4)) = 13 - (6 - 1) = 8 = \hat m + \hat e \in \mathbb{Z}_{32}$
 
 $ $
 
-$m = \left \lceil \dfrac{9}{\hat \Delta} \right \rfloor = \left \lceil \dfrac{9}{8} \right \rfloor = 1$, which is correct.
+$m = \left \lceil \dfrac{8}{\hat \Delta} \right \rfloor = \left \lceil \dfrac{8}{8} \right \rfloor = 1$, which is correct.
 
 
 \subsection{Discussion}
@@ -310,7 +310,7 @@ $ + \left(b_1 - \left( \sum\limits_{i=0}^{1}(a_{1-i}s_{i}) - \sum\limits_{i=2}^{
 $ + \left(b_2 - \left( \sum\limits_{i=0}^{2}(a_{2-i}s_{i}) - \sum\limits_{i=3}^{n-1}(a_{n+2-i}s_{i})   \right) \right)\cdot X^2$ 
 
 
-$\gap{$\vdots$}$ 
+$\vdots$ 
 
 
 $ + \left(b_{n-1} - \left(  \sum\limits_{i=0}^{n-1}(a_{n-1-i}s_{i}) -  \sum\limits_{i=n}^{n-1}(a_{n+n-1-i}s_{i})  \right) \right)\cdot X^{n-1}$ \textcolor{red}{ $\rhd$ Grouping the terms by same exponents}
@@ -444,7 +444,7 @@ GLWE modulus switching is done as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:modulus-switch-glwe}} GLWE Modulus Switching}}]
 
-Given a GLWE ciphertext $(\{A\}_{i=0}^{k-1}, B)$ where $B = \vec A\cdot \vec S + \Delta M + E \bmod q$ and $M \in \mathcal{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\{A\}_{i=0}^{k-1}, B)$ to $(\{\hat{A}\}_{i=0}^{k-1}, \hat B)$ as follows:
+Given a GLWE ciphertext $(\{A_i\}_{i=0}^{k-1}, B)$ where $B = \vv A\cdot \vv S + \Delta M + E \bmod q$ and $M \in \mathcal{R}_{\langle n, q \rangle}$, the modulus switch of the ciphertext from $q$ to $\hat q$ is equivalent to updating $(\{A\}_{i=0}^{k-1}, B)$ to $(\{\hat{A}_i\}_{i=0}^{k-1}, \hat B)$ as follows:
 
 
 $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a}_{i, {n-1}}X^{n-1}$, where each $\hat{a}_{i,j} = \Big\lceil a_{i,j}\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$ 
@@ -452,7 +452,7 @@ $\hat{A_i} = \hat{a}_{i,0} + \hat{a}_{i,1}X + \hat{a}_{i,2}X^2 + \cdots + \hat{a
 
 $\hat{B} = \hat{b}_0 + \hat{b}_1X + \hat{b}_2X^2 + \cdots + \hat{b}_{n-1}X^{n-1}$, where each $\hat{b}_j = \Big\lceil b_j\dfrac{\hat{q}}{q} \Big\rfloor \in \mathbb{Z}_{\hat{q}}$
 
-$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M + \hat{E} + E^{\langle \epsilon_{\textit{all}} \rangle}) = (\{\hat{A}\}_{i=0}^{k-1}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{k+1}$ 
+$\textsf{GLWE}_{{S},\sigma}(\hat{\Delta}  M + \hat{E} + E^{\langle \epsilon_{\textit{all}} \rangle}) = (\{\hat{A}_i\}_{i=0}^{k-1}, \hat{B}) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^{k+1}$ 
 
 $ $
 
@@ -466,7 +466,7 @@ $\hat{\Delta} = \Delta\dfrac{\hat{q}}{q}$ \textcolor{red}{ $\rhd$ which should b
 $ $
 
 
-Meanwhile, $\vec{S}$ and $M$ stay the same as before.
+Meanwhile, $\vv{S}$ and $M$ stay the same as before.
 
 
 

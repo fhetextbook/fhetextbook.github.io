@@ -43,7 +43,7 @@ $\vec{s} \cdot \vec{a}^{\langle 2 \rangle} = s_0\cdot a_{0}^{\langle 2 \rangle} 
 
 $ $
 
-Then, even if the attacker has a sufficient number of $(\vec{a}^{\langle i \rangle}, b^{\langle i \rangle})$ tuples, it is not feasible to derive $s_0, s_1, \cdots, s_{k-1}$, because even a small amount of noise added to each equation prevents the linear-algebra-based direct derivation of the unknown variables. For each of the above equations, the attacker has to consider as many possibilities as there are possible values of $e^{\langle i \rangle}$. For example, if there are $r$ possible values for each noise $e^{\langle i \rangle}$, the attacker's brute-force search space for applying linear algebra to those $n$ equations is: $\overbrace{r \times r \times r \times \cdots \times r}^{\text{n times}} = r^n$. Thus, the number of noisy equations grows, and the aggregate possibilities of $e^{\langle i \rangle}$s grow exponentially, which means that the attacker's cost of attack grows exponentially. 
+Then, even if the attacker has a sufficient number of $(\vec{a}^{\langle i \rangle}, b^{\langle i \rangle})$ tuples, it is not feasible to derive $s_0, s_1, \cdots, s_{k-1}$, because even a small amount of noise added to each equation prevents the linear-algebra-based direct derivation of the unknown variables. For each of the above equations, the attacker has to consider as many possibilities as there are possible values of $e^{\langle i \rangle}$. For example, if there are $r$ possible values for each noise $e^{\langle i \rangle}$, the attacker's brute-force search space for applying linear algebra to those $k$ equations is: $\overbrace{r \times r \times r \times \cdots \times r}^{\text{k times}} = r^k$. Thus, the number of noisy equations grows, and the aggregate possibilities of $e^{\langle i \rangle}$s grow exponentially, which means that the attacker's cost of attack grows exponentially. 
 
 Based on this intuition, the mathematical hard problem that constitutes lattice-based cryptography is as follows:
 
@@ -52,15 +52,15 @@ $ $
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:lattice-overview}} The LWE (Learning with Errors) and RLWE Problems}}]
 \textbf{\underline{LWE Problem}}
 
-Suppose we have a plaintext number $m$ to encrypt. The encryption formula is: $b = \vec{s} \cdot\vec{a} + \Delta \cdot m + e$. In this formula, $e$ is a small noise, and $\Delta$ is a scaling factor to bit-wise separate the plaintext $m$ from the noise $e$ with enough gap when they are added up (this is needed for successful decryption, which will be explained later). 
+Consider samples of the form: $b = \vec{s} \cdot\vec{a} + e$ (where $e$ is a small noise to be explained later). 
 
-For each encryption, a random $k$-dimensional vector $\vec{a} \in \mathbb{Z}_q^k$ and a small noise value $e \in \mathbb{Z}_q$ are newly sampled from $\{0, 1, \cdots, q - 1\}$, where $q$ is the ciphertext domain size. On the other hand, the $k$-dimensional secret vector $\vec{s}$ is the same for all encryptions. Suppose we have an enough number of ciphertext tuples: 
+For each encryption, a random $k$-dimensional vector $\vec{a} \in \mathbb{Z}_q^k$ and a small noise value $e \in \mathbb{Z}_q$ are newly sampled from $\{0, 1, \cdots, q - 1\}$, where $q$ is the ciphertext domain size. On the other hand, the $k$-dimensional secret vector $\vec{s}$ is the same for all encryptions. Suppose we have a sufficient number of ciphertext tuples: 
 
-$(\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle})$, where $b^{\langle 1 \rangle} = \vec{s} \cdot \vec{a}^{\langle 1 \rangle} + \Delta m^{\langle 1 \rangle} + e^{\langle 1 \rangle}$ 
+$(\vec{a}^{\langle 1 \rangle}, b^{\langle 1 \rangle})$, where $b^{\langle 1 \rangle} = \vec{s} \cdot \vec{a}^{\langle 1 \rangle} + e^{\langle 1 \rangle}$ 
 
-$(\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle})$, where $b^{\langle 2 \rangle} = \vec{s} \cdot \vec{a}^{\langle 2 \rangle} + \Delta m^{\langle 2 \rangle} + e^{\langle 2 \rangle}$ 
+$(\vec{a}^{\langle 2 \rangle}, b^{\langle 2 \rangle})$, where $b^{\langle 2 \rangle} = \vec{s} \cdot \vec{a}^{\langle 2 \rangle} + e^{\langle 2 \rangle}$ 
 
-$(\vec{a}^{\langle 3 \rangle}, b^{\langle 3 \rangle})$, where $b^{\langle 3 \rangle} = \vec{s} \cdot \vec{a}^{\langle 3 \rangle} + \Delta m^{\langle 3 \rangle} + e^{\langle 3 \rangle}$ 
+$(\vec{a}^{\langle 3 \rangle}, b^{\langle 3 \rangle})$, where $b^{\langle 3 \rangle} = \vec{s} \cdot \vec{a}^{\langle 3 \rangle} + e^{\langle 3 \rangle}$ 
 
 \text{ } $\vdots$
 
@@ -70,7 +70,7 @@ $ $
 
 \begin{itemize}
 \item \textbf{Search-Hard Problem:} There is no efficient algorithm for the attacker to find out the secret key vector $\vec{s}$.
-\item \textbf{Decision-Hard Problem:} We create a black box system which can be configured to one of the following two modes: (1) all $b^{\langle i\rangle}$ values are purely randomly generated; (2) all $b^{\langle i\rangle}$ values are computed as the results of $\vec{s} \cdot \vec{a}^{\langle i\rangle} + e^{\langle i\rangle}$ based on the randomly picked known public (symmetric) keys $\vec{a}^{\langle i \rangle}$, randomly picked unknown noises $e^{\langle i\rangle}$, and a constant unknown secret vector $\vec{s}$. Given an enough number of $(\vec{a}^{\langle i \rangle}, b^{\langle i \rangle})$ tuples generated by this black box system, the attacker has no efficient algorithm to determine which mode this black box system is configured to.
+\item \textbf{Decision-Hard Problem:} We create a black box system which can be configured to one of the following two modes: (1) all $b^{\langle i\rangle}$ values are purely randomly generated; (2) all $b^{\langle i\rangle}$ values are computed as the results of $\vec{s} \cdot \vec{a}^{\langle i\rangle} + e^{\langle i\rangle}$ based on the randomly picked known public (symmetric) keys $\vec{a}^{\langle i \rangle}$, randomly picked unknown noises $e^{\langle i\rangle}$, and a constant unknown secret vector $\vec{s}$. Given a sufficient number of $(\vec{a}^{\langle i \rangle}, b^{\langle i \rangle})$ tuples generated by this black box system, the attacker has no efficient algorithm to determine which mode this black box system is configured to.
 \end{itemize}
 
 $ $
@@ -81,7 +81,7 @@ $ $
 
 \textbf{\underline{RLWE Problem}}
 
-In the case of the RLWE (Ring Learning with Errors) problem, the only difference is that $\vec{a}$, $b$, $\vec{s}$, $m$, and $e$ are replaced by polynomials $(n-1)$-degree polynomials $A$, $B$, $S$, $M$, and $E$ in $\mathbb{Z}_q[X] / (x^n + 1)$, and its search-hard problem is finding the unknown $n$ coefficients of the secret polynomial $S$. 
+In the case of the RLWE (Ring Learning with Errors) problem, the only difference is that $\vec{a}$, $b$, $\vec{s}$, and $e$ are replaced by polynomials $(n-1)$-degree polynomials $A$, $B$, $S$, and $E$ in $\mathbb{Z}_q[X] / (x^n + 1)$, and its search-hard problem is finding the unknown $n$ coefficients of the secret polynomial $S$. 
 
 \end{tcolorbox}
 
@@ -91,7 +91,7 @@ In the case of the RLWE (Ring Learning with Errors) problem, the only difference
 \subsection{LWE Cryptosystem}
 \label{subsec:lattice-scheme}
 
-The LWE cryptosystem uses the following encryption formula: $b = \vec{s} \cdot \vec{a} + \Delta \cdot m + e$ (where $\vec{s}$ is a secret key, $\vec{a}$ is a public key randomly picked per encryption, $m$ is a plaintext, $e$ is small noise randomly picked per encryption from a normal distribution, and $b$ is a ciphertext). $\Delta$ is a scaling factor of the plaintext $M$ (shifting $m$ by $\text{log}_2\Delta$ bits to the left). Before encrypting the plaintext, we left-shift the plaintext several bits (i.e., $\text{log}_2\Delta$ bits) to secure sufficient space to store the error in the lower bits.
+The LWE cryptosystem uses the following encryption formula: $b = \vec{s} \cdot \vec{a} + \Delta \cdot m + e$ (where $\vec{s}$ is a secret key, $\vec{a}$ is a publicly known random vector picked per encryption, $m$ is a plaintext, $e$ is small noise randomly picked per encryption from a normal distribution, and $b$ is a ciphertext). $\Delta$ is a scaling factor of the plaintext $M$ (shifting $m$ by $\text{log}_2\Delta$ bits to the left). Before encrypting the plaintext, we left-shift the plaintext several bits (i.e., $\text{log}_2\Delta$ bits) to secure sufficient space to store the error in the lower bits.
 
 \begin{figure}[h!]
     \centering
@@ -108,7 +108,7 @@ The LWE cryptosystem uses the following encryption formula: $b = \vec{s} \cdot \
 
     $ $
     
-    \item \textbf{\underline{Decryption}: } $ \dfrac{\lceil b^{\langle i \rangle} - \vec{s} \cdot \vec{a}^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = \dfrac{\lceil \Delta m^{\langle i \rangle} + e^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = m^{\langle i \rangle}$ $\Big($ provided $e^{\langle i \rangle} < \dfrac{\Delta}{2}\Big )$   
+    \item \textbf{\underline{Decryption}: } $ \dfrac{\lceil b^{\langle i \rangle} - \vec{s} \cdot \vec{a}^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = \dfrac{\lceil \Delta m^{\langle i \rangle} + e^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = m^{\langle i \rangle}$ $\Big($ provided $|e^{\langle i \rangle}| < \dfrac{\Delta}{2}\Big)$   
 \end{itemize}
 \end{tcolorbox}
 
@@ -117,7 +117,7 @@ $\lfloor \rceil_\Delta$ means rounding the number to the nearest multiple of $\D
 
 $ $
 
-\noindent \textbf{Correctness: } In the decryption scheme, computing $b^{\langle i \rangle} - \vec{s} \cdot \vec{a}^{\langle i \rangle}$ gives $\Delta \cdot m^{\langle i \rangle}+ e^{\langle i \rangle}$, which is \autoref{fig:scaling}. Then, $\lceil \Delta \cdot m^{\langle i \rangle} + e^{\langle i \rangle} \rfloor_{\Delta}$ (i.e., rounding the value to the nearest multiple of $\Delta$) gives $\Delta \cdot m^{\langle i \rangle}$, provided the added noise $e^{\langle i \rangle} < \frac{\Delta}{2}$. That is, if the noise is less than $\frac{\Delta}{2}$, it will disappear during the rounding. Finally, right-shifting $\Delta \cdot m^{\langle i \rangle}$ by $\text{log}_2 \Delta$ bits gives $m^{\langle i \rangle}$. To summarize, if we ensure $e^{\langle i \rangle} < \frac{\Delta}{2}$ (which is why the noise $e^{\langle i \rangle}$ should be smaller than this threshold), then we can eliminate $e^{\langle i \rangle}$ during the decryption's rounding process and retrieve the original $\Delta \cdot m^{\langle i \rangle}$. The reason we scaled $m^{\langle i \rangle}$ by $\Delta$ is to: (i) create space for storing $e^{\langle i \rangle}$ in the lower bits during encryption such that the noise bits do not interfere with the plaintext bits (to avoid corrupting the plaintext bits); and (ii) blow away the noise $e^{\langle i \rangle}$ stored in the lower bits during decryption without corrupting the plaintext $m^{\langle i \rangle}$. 
+\noindent \textbf{Correctness: } In the decryption scheme, computing $b^{\langle i \rangle} - \vec{s} \cdot \vec{a}^{\langle i \rangle}$ gives $\Delta \cdot m^{\langle i \rangle}+ e^{\langle i \rangle}$, which is \autoref{fig:scaling}. Then, $\lceil \Delta \cdot m^{\langle i \rangle} + e^{\langle i \rangle} \rfloor_{\Delta}$ (i.e., rounding the value to the nearest multiple of $\Delta$) gives $\Delta \cdot m^{\langle i \rangle}$, provided the added noise $|e^{\langle i \rangle}| < \frac{\Delta}{2}$. That is, if the noise is less than $\frac{\Delta}{2}$, it will disappear during the rounding. Finally, right-shifting $\Delta \cdot m^{\langle i \rangle}$ by $\text{log}_2 \Delta$ bits gives $m^{\langle i \rangle}$. To summarize, if we ensure $|e^{\langle i \rangle}| < \frac{\Delta}{2}$ (which is why the noise $e^{\langle i \rangle}$ should be smaller than this threshold), then we can eliminate $e^{\langle i \rangle}$ during the decryption's rounding process and retrieve the original $\Delta \cdot m^{\langle i \rangle}$. The reason we scaled $m^{\langle i \rangle}$ by $\Delta$ is to: (i) create space for storing $e^{\langle i \rangle}$ in the lower bits during encryption such that the noise bits do not interfere with the plaintext bits (to avoid corrupting the plaintext bits); and (ii) blow away the noise $e^{\langle i \rangle}$ stored in the lower bits during decryption without corrupting the plaintext $m^{\langle i \rangle}$. 
 
 $ $
 
@@ -125,7 +125,7 @@ $ $
 
 %$Y = S \cdot X$
 
-Even in the case that the attacker has a large list of $(\vec{a}^{(j)}, b^{(j)})$ generated for the same ciphertext $m^{\langle i \rangle}$ (where each ciphertext used different $\vec{a}^{(j)}$ and $e^{(j)}$ to encrypt the same $m^{\langle i \rangle}$), he still cannot derive $m^{\langle i \rangle}$, because a randomly picked different noise $e^{(j)}$ is used for every $(\vec{a}^{(j)}, b^{(j)})$ and is accumulated over ciphertexts, which exponentially complicates the difficulty of the linear algebra involved in solving $\vec{s}$. Also, in the actual cryptosystem (\autoref{sec:lwe}), the public key $\vec{a}^{\langle i \rangle}$ and the secret key $\vec{s}$ are not a single number but a long vector comprising many random numbers. Thus, adding $A^{\langle i \rangle }\cdot \vec{s}$ to $\Delta m^{\langle i \rangle} + e^{\langle i \rangle}$ increases the entropy of randomness against the attack. 
+Even in the case that the attacker has a large list of $(\vec{a}^{(j)}, b^{(j)})$ generated for the same ciphertext $m^{\langle i \rangle}$ (where each ciphertext used different $\vec{a}^{(j)}$ and $e^{(j)}$ to encrypt the same $m^{\langle i \rangle}$), he still cannot derive $m^{\langle i \rangle}$, because a randomly picked different noise $e^{(j)}$ is used for every $(\vec{a}^{(j)}, b^{(j)})$ and is accumulated over ciphertexts, which exponentially complicates the difficulty of the linear algebra involved in solving $\vec{s}$. Also, in the actual cryptosystem (\autoref{sec:lwe}), the publicly known random vector $\vec{a}^{\langle i \rangle}$ and the secret key $\vec{s}$ are not a single number but a long vector comprising many random numbers. Thus, adding $\vec{a}^{\langle i \rangle }\cdot \vec{s}$ to $\Delta m^{\langle i \rangle} + e^{\langle i \rangle}$ increases the entropy of randomness against the attack. 
 
 $ $
 
@@ -138,11 +138,11 @@ In the RLWE cryptosystem, the formula in \tboxlabel{\ref*{subsec:lattice-scheme}
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:lattice-scheme2}} Lattice-based RLWE Cryptosystem}}]
 \begin{itemize}
-    \item \textbf{\underline{Encryption}: } $B^{\langle i \rangle} = S \cdot A^{\langle i \rangle} + \Delta \cdot M^{\langle i \rangle} + E^{\langle i \rangle}$, where $B^{\langle i \rangle}$ and $A^{\langle i \rangle}$ are publicly known also to the attacker, while $S, m^{\langle i \rangle}, E$ are unknown (only known by the secret key owner). 
+    \item \textbf{\underline{Encryption}: } $B^{\langle i \rangle} = S \cdot A^{\langle i \rangle} + \Delta \cdot M^{\langle i \rangle} + E^{\langle i \rangle}$, where $B^{\langle i \rangle}$ and $A^{\langle i \rangle}$ are publicly known also to the attacker, while $S, M^{\langle i \rangle}, E^{\langle i \rangle}$ are unknown (only known by the secret key owner). 
 
     $ $
     
-    \item \textbf{\underline{Decryption}: } $ \dfrac{\lceil B^{\langle i \rangle} - S \cdot A^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = \dfrac{\lceil \Delta M^{\langle i \rangle} + E^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = M^{\langle i \rangle}$ $\Big($ provided $E^{\langle i \rangle} < \dfrac{\Delta}{2}\Big )$   
+    \item \textbf{\underline{Decryption}: } $ \dfrac{\lceil B^{\langle i \rangle} - S \cdot A^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = \dfrac{\lceil \Delta M^{\langle i \rangle} + E^{\langle i \rangle} \rfloor_{\Delta}}{\Delta} = M^{\langle i \rangle}$ \\$\Big($provided $||E^{\langle i \rangle}||_{\infty} < \dfrac{\Delta}{2}$, meaning each coefficient of $E^{\langle i \rangle}$ has a magnitude less than $\dfrac{\Delta}{2}\Big)$    
 
     $ $
 

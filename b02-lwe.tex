@@ -96,17 +96,17 @@ Then, provided $q \gg t$, the decryption works correctly even if $m$ is a large 
 
 In this subsection's analysis, we choose $t$ to be an odd (prime) number, which is the general FHE practice for computational efficiency reasons (see \autoref{subsubsec:poly-vector-transformation-modulus}). 
 We assume the use of the centered residue system, where the plaintext domain is $\left[-\dfrac{t-1}{2}, \dfrac{t-1}{2}\right]$ and the ciphertext domain is $\left[-\dfrac{q}{2}, \dfrac{q}{2} - 1\right]$.
-We denote plaintext $m \bmod t$ as $m = m' + kt$, where $m' \in \mathbb{Z}_t$, and $k$ is an integer that represents the $t$-overflow portions of $m$. We set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added and $\Delta$-scaled plaintext can be expressed as follows:
+We denote plaintext $m \bmod t$ as $m = m' + vt$, where $m' \in \mathbb{Z}_t$, and $v$ is an integer that represents the $t$-overflow portions of $m$. We set the plaintext scaling factor as $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$. Then, the noise-added and $\Delta$-scaled plaintext can be expressed as follows:
 
 $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m + e $
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e$   \textcolor{red}{ $\rhd$ applying $m = m' + kt$}
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot vt + e$   \textcolor{red}{ $\rhd$ applying $m = m' + vt$}
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot kt - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot kt + e$  
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + \dfrac{q}{t}\cdot vt - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot vt + e$  
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot kt + e$
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qv - \left(\dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor\right)\cdot vt + e$
 
-$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qk - \epsilon \cdot kt + e$ \textcolor{red}{ $\rhd$ where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$, a decimal value between $[0, 1)$}
+$= \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m' + qv - \epsilon \cdot vt + e$ \textcolor{red}{ $\rhd$ where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$, a fractional value between $[0, 1)$}
 
 $ $
 
@@ -118,36 +118,36 @@ $\left\lceil\dfrac{1}{\Delta} \cdot \left(b - \vec{a}\cdot\vec{s} \bmod q\right)
 
 $= \left\lceil\dfrac{1}{\Delta} \cdot \left(\Delta m + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot (m' + kt) + e \bmod q\right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot (m' + vt) + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot kt + e \bmod q\right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left\lfloor\dfrac{q}{t}\right\rfloor\cdot vt + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left(\dfrac{q}{t} - \epsilon \right)\cdot kt + e \bmod q\right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + \left(\dfrac{q}{t} - \epsilon \right)\cdot vt + e \bmod q\right)\right\rfloor \bmod t$
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + kq - \epsilon kt + e \bmod q\right)\right\rfloor \bmod t$
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor \cdot m' + vq - \epsilon vt + e \bmod q\right)\right\rfloor \bmod t$
 
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q \right)\right\rfloor \bmod t$ 
-
-$ $
-
-In order for the decryption to work, we ideally want to eliminate the inner modulo $q$ reduction. That is, assuming the centered residue system $\left[-\dfrac{q}{2}, \dfrac{q}{2}-1\right]$, we want $-\dfrac{q}{2} \leq \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e < \dfrac{q}{2}$, or more strictly, $\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e\right| < \dfrac{q}{2}$.
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e \bmod q \right)\right\rfloor \bmod t$ 
 
 $ $
 
-To ensure these conditions hold, we will make a special assumption: $|-\epsilon k t + e| < \dfrac{\Delta}{2}$. Applying this assumption to the expression above, we can derive the following relation:
+In order for the decryption to work, we ideally want to eliminate the inner modulo $q$ reduction. That is, assuming the centered residue system $\left[-\dfrac{q}{2}, \dfrac{q}{2}-1\right]$, we want $-\dfrac{q}{2} \leq \left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e < \dfrac{q}{2}$, or more strictly, $\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e\right| < \dfrac{q}{2}$.
 
-$\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e\right| $
+$ $
 
-$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'\right| + \left|- \epsilon kt + e\right|$
+To ensure these conditions hold, we will make a special assumption: $|-\epsilon vt + e| < \dfrac{\Delta}{2}$. Applying this assumption to the expression above, we can derive the following relation:
 
-$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon kt + e\right|$ \textcolor{red}{ $\rhd$ we assume $t$ is an odd prime, as that's the general FHE practice}
+$\left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e\right| $
 
-$ \leq \left|\dfrac{q}{t}\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon kt + e\right|$
+$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'\right| + \left|- \epsilon vt + e\right|$
 
-$ = \dfrac{q}{2} - \dfrac{q}{2t} + \left|- \epsilon kt + e\right|$
+$ \leq \left|\left\lfloor\dfrac{q}{t}\right\rfloor\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon vt + e\right|$ \textcolor{red}{ $\rhd$ we assume $t$ is an odd prime, as that's the general FHE practice}
 
-$ < \dfrac{q}{2} - \dfrac{q}{2t} + \dfrac{\Delta}{2}$ \textcolor{red}{ $\rhd$ applying our special assumption $|-\epsilon k t + e| < \dfrac{\Delta}{2}$}
+$ \leq \left|\dfrac{q}{t}\cdot \dfrac{t-1}{2}\right| + \left|- \epsilon vt + e\right|$
+
+$ = \dfrac{q}{2} - \dfrac{q}{2t} + \left|- \epsilon vt + e\right|$
+
+$ < \dfrac{q}{2} - \dfrac{q}{2t} + \dfrac{\Delta}{2}$ \textcolor{red}{ $\rhd$ applying our special assumption $|-\epsilon vt + e| < \dfrac{\Delta}{2}$}
 
 $ = \dfrac{q}{2} + \dfrac{1}{2}\cdot \left(\Delta - \dfrac{q}{t}\right)$
 
@@ -156,22 +156,22 @@ $< \dfrac{q}{2}$ \textcolor{red}{ $\rhd$ since $\Delta < \dfrac{q}{t}$}
 
 $ $
 
-Therefore, if we assume $|-\epsilon k t + e| < \dfrac{\Delta}{2}$, then $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q$ can be simplified to $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e$. We continue with the following derivation: 
+Therefore, if we assume $|-\epsilon vt + e| < \dfrac{\Delta}{2}$, then $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e \bmod q$ can be simplified to $\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e$. We continue with the following derivation: 
 
 
-$\left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \bmod q \right)\right\rfloor \bmod t$ 
+$\left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e \bmod q \right)\right\rfloor \bmod t$ 
 
-$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon kt + e \right)\right\rfloor \bmod t$ 
+$= \left\lceil\dfrac{1}{\left\lfloor\frac{q}{t}\right\rfloor} \cdot \left(\left\lfloor\dfrac{q}{t}\right\rfloor\cdot m'  - \epsilon vt + e \right)\right\rfloor \bmod t$ 
 
 
 
-$= \left\lceil m' + \dfrac{-\epsilon  kt + e  }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ 
+$= \left\lceil m' + \dfrac{-\epsilon  vt + e  }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ 
 
-$= m' + \left\lceil \dfrac{-\epsilon kt + e }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $\lceil m' \rfloor = m'$}
+$= m' + \left\lceil \dfrac{-\epsilon vt + e }{\lfloor\frac{q}{t}\rfloor} \right\rfloor \bmod t$ \textcolor{red}{ $\rhd$ since $\lceil m' \rfloor = m'$}
 
-$= m' \bmod t$  \textcolor{red}{ $\rhd$ applying special assumption $|-\epsilon k t + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$}
+$= m' \bmod t$  \textcolor{red}{ $\rhd$ applying special assumption $|-\epsilon vt + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$}
 
-To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ and $t$ is an odd (prime) number, the decryption works correctly as long as the following  error-bounding condition holds: $|-\epsilon k t + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$. This condition (i.e.,  decryption) breaks if: (1) the noise $e$ is too large relative to $q$; (2) the plaintext modulus $t$ is too large relative to $q$; or (3) the plaintext value wraps around $t$ too many times (i.e., $k$ is too large). A general solution to ensure all these error bound conditions is to set the ciphertext modulus $q$ to be sufficiently large. To put it differently, if $q \gg t$ and $q \gg e$, then the error bound holds. 
+To summarize, if we set the plaintext's scaling factor as $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ and $t$ is an odd (prime) number, the decryption works correctly as long as the following  error-bounding condition holds: $|-\epsilon vt + e| < \dfrac{\Delta}{2} = \dfrac{\lfloor\frac{q}{t}\rfloor}{2}$. This condition (i.e.,  decryption) breaks if: (1) the noise $e$ is too large relative to $q$; (2) the plaintext modulus $t$ is too large relative to $q$; or (3) the plaintext value wraps around $t$ too many times (i.e., $v$ is too large). A general solution to ensure all these error bound conditions is to set the ciphertext modulus $q$ to be sufficiently large. To put it differently, if $q \gg t$ and $q \gg e$, then the error bound holds. 
 
 We can generalize the formula for the plaintext's scaling factor in Summary~\ref*{subsec:lwe-enc} (in \autoref{subsec:lwe-enc}) as $\left\lfloor\dfrac{q}{t}\right\rfloor$, where $t$ is an odd (prime) number. 
 
@@ -181,11 +181,11 @@ We can generalize the formula for the plaintext's scaling factor in Summary~\ref
 
 Given the plaintext's scaling factor $\Delta=\left\lfloor\dfrac{q}{t}\right\rfloor$ and $t$ is an odd (prime) number, the LWE decryption works correctly as long as the error-bounding condition holds: 
 
-$|-\epsilon k t + e| < \dfrac{\Delta}{2}$
+$|-\epsilon vt + e| < \dfrac{\Delta}{2}$
 
 $ $
 
-, where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$ is a decimal value between $[0, 1)$, and $k$ accounts for the $t$-overflows of the plaintext $m$.
+, where $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor$ is a fractional value between $[0, 1)$, and $v$ accounts for the $t$-overflows of the plaintext $m$.
 
 \end{tcolorbox}
 

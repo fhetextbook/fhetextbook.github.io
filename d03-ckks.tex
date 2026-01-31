@@ -144,11 +144,11 @@ M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \text{ } M(\omega^{J(2)}), \cdots, 
 $\textcolor{white}{\vec{v}_{'}} =  \bm{(} \text{ } 
 M(\omega^{J(0)}), \text{ } M(\omega^{J(1)}), \text{ } M(\omega^{J(2)}), \cdots,  M(\omega^{J(\frac{n}{2}-1)}), \text{ } M(\overline\omega^{J(0)}), \text{ } M(\overline\omega^{J(1)}), \cdots,  M(\overline\omega^{J(\frac{n}{2}-1)}) \text{ } \bm{)}$ 
 
-\textcolor{red}{ $\rhd$ because $\omega^{-1} = (e^{\frac{i\pi}{n}})^{-1} = e^{\frac{-i\pi}{n}} = \overline\omega$}
+\textcolor{red}{ $\rhd$ because $\omega^{-1} = (e^{\frac{i\pi}{n}})^{-1} = e^{\frac{-i\pi}{n}} = \overline\omega$, given  $J(h) = 5^h \bmod 2n$, and $J_*(h) = -5^h \bmod 2n$}
 
 , which decodes to a \textit{forward-ordered} (not reverse-ordered) Hermitian vector as follows:
 
-$\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2} - 1}, \overline v_0, \overline v_1, \cdots, \overline v_{\frac{n}{2} - 1}, )$
+$\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2} - 1}, \overline v_0, \overline v_1, \cdots, \overline v_{\frac{n}{2} - 1})$
 
 , whose second-half elements are conjugates of the first-half elements with the same order. Upon homomorphic rotation (which will be explained in \autoref{subsec:ckks-rotation}), just like in BFV's homomorphic rotation, the first-half elements and the second-half elements of $\vec{v}_{'}$ rotate within their own group in a wrapping manner. 
 
@@ -185,7 +185,7 @@ $ $
 (\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$}}
 
-\textcolor{red}{ $\rhd$ where $\omega = e^{i\pi/n} = \cos \left(\dfrac{\pi}{n}\right) + i\sin \left(\dfrac{\pi}{n}\right)$}
+\textcolor{red}{ $\rhd$ where $\omega = e^{i\pi/n} = \cos \left(\dfrac{\pi}{n}\right) + i\sin \left(\dfrac{\pi}{n}\right)$,  $J(h) = 5^h \bmod 2n$,  and  $J_*(h) = -5^h \bmod 2n$}
 
 \small{\noindent $ = \begin{bmatrix}
 1 & 1 & \cdots & 1 & 1 & 1 & \cdots & 1\\
@@ -263,7 +263,7 @@ $ $
 \para{CKKS's Encoding Range:} \autoref{tab:polynomial-encoding-capacity-complex} depicts the range of input values that can be encoded by the polynomials $M(X) \in \mathcal{R}_{\langle n \rangle}$ over $X \in \mathbb{C}$. As illustrated in \autoref{tab:polynomial-encoding-capacity-complex}, the encoding range of complex number inputs is determined by the size of the $n$ and $q$ parameters. Therefore, these two parameters should be chosen sufficiently large to encode all values that can be used by an application. 
 \end{comment}
 
-\para{CKKS's Approximation Property:} In the encoding process, when we convert $\vec{v}_{'} \rightarrow \vec{m} \rightarrow \Delta\vec{m}$, we multiply $\vec{v}_{'}$ by $\hathat{W}$ which contains real numbers with infinite decimals (e.g., $\sqrt{2}$) coming from Euler's formula, which we should round to the nearest integer by computing $\lceil \Delta m \rfloor$ (which we will denote as $\Delta m$ throughout this section for simplicity) and thus we lose some precision. This implies that if we later decode $\Delta\vec{m}$ into $\vec{v}_{'d}$, this value would be slightly different from the original input vector $\vec{v}_{'}$. As CKKS's encoding scheme is subject to such a small rounding error, the decryption does not perfectly match the original input vector. Such errors also propagate across homomorphic computations, because those computations are done based on approximately encoded plaintext $\lceil \Delta \vec{m} \rfloor$. As these errors are caused by throwing away the infinitely long decimal digits, they can be corrected during the decoding process only if we use an infinitely big scaling factor $\Delta$, which is impossible because $\Delta m_i$ should not overflow the ciphertext modulus $q_0$ of the lowest multiplicative level. Due to this limitation, CKKS is considered an \textit{approximate} homomorphic encryption. 
+\para{CKKS's Approximation Property:} In the encoding process, when we convert $\vec{v}_{'} \rightarrow \vec{m} \rightarrow \Delta\vec{m}$, we multiply $\vec{v}_{'}$ by $\hathat{W}$ which contains complex numbers with infinite decimals (e.g., $\sqrt{2}$) coming from Euler's formula, which we should round to the nearest integer by computing $\lceil \Delta m \rfloor$ (which we will denote as $\Delta m$ throughout this section for simplicity) and thus we lose some precision. This implies that if we later decode $\Delta\vec{m}$ into $\vec{v}_{'d}$, this value would be slightly different from the original input vector $\vec{v}_{'}$. As CKKS's encoding scheme is subject to such a small rounding error, the decryption does not perfectly match the original input vector. Such errors also propagate across homomorphic computations, because those computations are done based on approximately encoded plaintext $\lceil \Delta \vec{m} \rfloor$. As these errors are caused by throwing away the infinitely long decimal digits, they can be corrected during the decoding process only if we use an infinitely big scaling factor $\Delta$, which is impossible because $\Delta m_i$ should not overflow the ciphertext modulus $q_0$ of the lowest multiplicative level. Due to this limitation, CKKS is considered an \textit{approximate} homomorphic encryption. 
 
 
 \subsubsection{Example}
@@ -468,7 +468,7 @@ CKKS's encryption and decryption schemes are similar to BFV's encryption and dec
 
 \textbf{\underline{Initial Setup}:} 
 
-$\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of the polynomial $S$ are (i.e., $\{-1, 0, 1\}$).
+$\Delta \text{ is a plaintext scaling factor for polynomial encoding}, \text{ } S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of the polynomial $S$ are ternary (i.e., $\{-1, 0, 1\}$).
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -606,7 +606,7 @@ $ $
 
 $ = \textsf{RLWE}^{-1}_{S, \sigma}(\text{ }  \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 1 \rangle}) \text{ } ) \cdot \textsf{RLWE}^{-1}_{S, \sigma}(\text{ } \textsf{RLWE}_{S, \sigma}(\Delta \cdot M^{\langle 2 \rangle})  \text{ } )$
 
-\textcolor{red}{ $\rhd$ where $(\Delta \cdot M^{\langle 1 \rangle} + E^{\langle 1 \rangle} ) \cdot ( \Delta \cdot M^{\langle 2 \rangle} + E^{\langle 2 \rangle} ) = \Delta^2\cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle} + \Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle} + \Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle} + E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$, where $E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ is small enough to be eliminated upon decryption, and $\Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $\Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ will be scaled down to $M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ upon modulus switch later, becoming small enough to be enough to be eliminated during decryption}
+\textcolor{red}{ $\rhd$ where $(\Delta \cdot M^{\langle 1 \rangle} + E^{\langle 1 \rangle} ) \cdot ( \Delta \cdot M^{\langle 2 \rangle} + E^{\langle 2 \rangle} ) = \Delta^2\cdot M^{\langle 1 \rangle} \cdot M^{\langle 2 \rangle} + \Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle} + \Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle} + E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$, where $E^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ is small enough to be eliminated upon decryption, and $\Delta \cdot M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $\Delta \cdot M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ will be scaled down to $M^{\langle 1 \rangle} \cdot E^{\langle 2 \rangle}$ and $M^{\langle 2 \rangle} \cdot E^{\langle 1 \rangle}$ upon modulus switch later, becoming sufficiently small to be eliminated during decryption}
 
 $ $
 
@@ -661,6 +661,14 @@ $\textsf{RLWE}_{S, \sigma}^{-1}(C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l
 $= D_{2,1}(E_1' +  S^2\dfrac{q}{\beta}) + D_{2,2}(E_2' +  S^2\dfrac{q}{\beta^2}) + \cdots + D_{2,l}(E_l' +  S^2\dfrac{q}{\beta^l})$
 
 $= \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) +  S^2\cdot(D_{2,1}\dfrac{q}{\beta} + D_{2,2}\dfrac{q}{\beta^2} + \cdots + D_{2, l}\dfrac{q}{\beta^l})$
+
+=============
+
+$= D_{2,1}(E_1' +  S^2 \beta^0) + D_{2,2}(E_2' +  S^2 \beta^1) + \cdots + D_{2,l}(E_l' +  S^2 \beta^{l-1})$
+
+$= \sum\limits_{i=1}^{l} (E_i'\cdot D_{2,i}) +  S^2\cdot(D_{2,1}\beta^0 + D_{2,2}\beta^1 + \cdots + D_{2, l}\beta^{l-1})$
+
+=============
 
 $= \sum\limits_{i=1}^{l} \epsilon_{i} + D_2\cdot S^2$ \textcolor{red}{ \text{ } \# where $\epsilon_i = E_i'\cdot D_{2,i}$}
 
@@ -886,7 +894,8 @@ The benefit of this design of the CRT (Chinese remainder problem)-based cipherte
 
 \para{Initial Scaling Factor $\bm\Delta$ Upon Encryption:} To support multi-level multiplicative levels (using CRT), we need to modify the generic scaling factor setup presented in Summary~\ref*{subsec:glwe-enc} (\autoref{subsec:glwe-enc}) from $\Delta = \dfrac{q}{t}$ to $\Delta = w_L$. 
 
-\para{Noise Growth:} Upon each step of rescaling during ciphertext-ciphertext multiplication, the noise also gets scaled down by $\dfrac{1}{\Delta}$ (or by $\dfrac{1}{w_l}$ at multiplicative level $l$ in the case of using CRT). \textcolor{purple}{Therefore, if the accumulated noise is smaller than $\Delta$ ($w_l$ in the case of using CRT), running a single ciphertext-ciphertext multiplication operation effectively reduces the noise against growing.} However, during each ciphertext-to-ciphertext multiplication, the encrypted (noisy) plaintext is $(\Delta M_1 + E_1)\cdot(\Delta M_2 + E_2) = \Delta^2 M_1 M_2 + \Delta\cdot (M_1E_2 + M_2E_1) + E_1E_2$, and rescaling roughly has the effect of dividing this by $\Delta$, which approximately gives us $\Delta M_1 M_2 + M_1E_2 + M_2E_1 + \dfrac{E_1E_2}{\Delta}$. Because of the $(M_1E_2 + M_2E_1)$ term, the noise actually grows compared to before ciphertext-to-ciphertext multiplication. Therefore, ciphertext-to-ciphertext multiplication inevitably increases the noise. 
+\para{Noise Growth:} Upon each step of rescaling during ciphertext-ciphertext multiplication, the noise also gets scaled down by $\dfrac{1}{\Delta}$ (or by $\dfrac{1}{w_l}$ at multiplicative level $l$ in the case of using CRT). 
+Therefore, rescaling reduces the absolute magnitude of the noise by a factor of $\Delta$ (or $w_l$). However, during each ciphertext-to-ciphertext multiplication, the encrypted (noisy) plaintext is $(\Delta M_1 + E_1)\cdot(\Delta M_2 + E_2) = \Delta^2 M_1 M_2 + \Delta\cdot (M_1E_2 + M_2E_1) + E_1E_2$, and rescaling roughly has the effect of dividing this by $\Delta$, which approximately gives us $\Delta M_1 M_2 + M_1E_2 + M_2E_1 + \dfrac{E_1E_2}{\Delta}$. Because of the $(M_1E_2 + M_2E_1)$ term, the noise actually grows compared to before ciphertext-to-ciphertext multiplication. Therefore, ciphertext-to-ciphertext multiplication inevitably increases the noise. 
 
 \subsubsection{Comparing BFV and CKKS Bootstrapping}
 \label{subsubsec:bfv-bootstrapping-ckks-comparison}
@@ -897,7 +906,7 @@ Both BFV and CKKS use the same strategy for their \textsf{CoeffToSlot}, \textsf{
 
 \para{Multiplicative Level:} A critical difference between BFV and CKKS is that in BFV, the ciphertext modulus $q$ stays the same after ciphertext-ciphertext multiplication, and there is no restriction on the number of ciphertext-ciphertext multiplications. On the other hand, in CKKS, the ciphertext modulus changes from $q_l \rightarrow q_{l-1}$ after each multiplication, and when it reaches $q_0$, no more multiplication can be done, unless we reset the ciphertext modulus to $q_L$ by using the modulus bootstrapping technique (\autoref{subsec:ckks-bootstrapping}). 
 
-\para{Limitation of Noise Handling:} Although CKKS's rescaling during ciphertext-to-ciphertext multiplication reduces the magnitude of noise $E$ by $\Delta$, it also reduces the ciphertext modulus by the same amount, and thus the relative noise-to-ciphertext-modulus ratio does not get decreased by rescaling. In order to reduce (or reset) the noise-to-modulus ratio, we need to do bootstrapping (\autoref{subsec:ckks-bootstrapping}), which will be explained at the end of this section. % While BFV's bootstrapping technique reduces the noise by digit extraction, CKKS's bootstrapping cannot reduce the noise with evaluation based on sine approximation, because the sine function is used for homomorphic modulo reduction by $q_0$, not for noise elimination. Therefore, unlike BFV, CKKS cannot perform an indefinite number of homomorphic operations due to its ever-increasing noise. 
+\para{Limitation of Noise Handling:} Although CKKS's rescaling during ciphertext-to-ciphertext multiplication reduces the magnitude of noise $E$ by $\Delta$, it also reduces the ciphertext modulus by the same amount, and thus the relative noise-to-ciphertext-modulus ratio does not get decreased by rescaling. In order to reduce (or reset) the noise-to-modulus ratio, we need to do bootstrapping (\autoref{subsec:ckks-bootstrapping}), which will be explained at the end of this section.
 
 
 \subsubsection{Summary}
@@ -954,7 +963,7 @@ _1, D_0),$
 
 \text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ } $C_\beta = \bm{\langle} \textsf{Decomp}^{\beta, l}(D_2), \text{ } \textsf{RLev}_{S, \sigma}^{\beta, l}( S^2) \bm{\rangle} \text{ or }   \Bigg\lceil\dfrac{D_2 \cdot \mathit{evk_g}}{g}\Bigg\rfloor$,
 
-\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }  $\mathit{evk_g} = (-A'\cdot S + E' + g S^2, A') \in \mathcal{R}_{\langle n, gq\rangle}^2, \text{ } \text{ } g  = q_L^2, \text{ } L: \text{ the maximum level}$
+\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }\text{ }  $\mathit{evk_g} = (A', -A'\cdot S + E' + g S^2) \in \mathcal{R}_{\langle n, gq\rangle}^2, \text{ } \text{ } g  = q_L^2, \text{ } L: \text{ the maximum level}$
 
 $ $
 
@@ -1086,7 +1095,7 @@ CKKS's \textsf{ModDrop} is summarized as follows:
 
 
 
-\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-mult-plain}} CKKS's \textsf{ModDrop}}}]
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-moddrop}} CKKS's \textsf{ModDrop}}}]
 
 Given a CKKS ciphertext with the $l$-th multiplicative level $\textsf{RLWE}_{S, \sigma}(\Delta M) = (A, B) \bmod q_l$, a \textsf{ModDrop} operation is as follows: 
 
@@ -1208,12 +1217,28 @@ The rotated \textit{forward-ordered} Hermitian input vector is computed as follo
 
 $\dfrac{\hathat W^* \cdot \Delta \vec{m}}{\Delta} = \begin{bmatrix}
 1,\omega,\omega^2, \omega^3\\
-1,\omega^3, \omega^6,\omega\\
+1,\omega^5, \omega^{10},\omega^{15}\\
 1,\overline{\omega}, \overline{\omega^2}, \overline{\omega^3}\\
-1,\overline{\omega^3}, \overline{\omega^6}, \overline{\omega}
-\end{bmatrix}$
+1,\overline{\omega^5}, \overline{\omega^{10}}, \overline{\omega^{15}}
+\end{bmatrix} \cdot \begin{bmatrix}
+2355\\- 1195\\1485\\-2933
+\end{bmatrix}\cdot \dfrac{1}{1024}$
 
-$\cdot \begin{bmatrix}
+$= \dfrac{\hathat W^* \cdot \Delta \vec{m}}{\Delta} = \begin{bmatrix}
+1,\omega,\omega^2, \omega^3\\
+1,\omega^5, \omega^{2},\omega^{7}\\
+1,\overline{\omega}, \overline{\omega^2}, \overline{\omega^3}\\
+1,\overline{\omega^5}, \overline{\omega^{2}}, \overline{\omega^{7}}
+\end{bmatrix} \cdot \begin{bmatrix}
+2355\\- 1195\\1485\\-2933
+\end{bmatrix}\cdot \dfrac{1}{1024}$
+
+$= \dfrac{\hathat W^* \cdot \Delta \vec{m}}{\Delta} = \begin{bmatrix}
+1,\omega,\omega^2, \omega^3\\
+1,\omega^5, \omega^{2},\omega^{7}\\
+1,\omega^7, \omega^6, \omega^5\\
+1,\omega^3, \omega^{6}, \omega
+\end{bmatrix} \cdot \begin{bmatrix}
 2355\\- 1195\\1485\\-2933
 \end{bmatrix}\cdot \dfrac{1}{1024}$
 
@@ -1221,8 +1246,8 @@ $=
 \begin{bmatrix}
 1,\dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2},i, -\dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2}\\
 1,-\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}, i,\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}\\
-1,-\dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2}, -i, \dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2}\\
-1,\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}, -i, -\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}
+1,\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}, -i, -\dfrac{\sqrt{2}}{2} - \dfrac{i\sqrt{2}}{2}\\
+1,-\dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2}, -i, \dfrac{\sqrt{2}}{2} + \dfrac{i\sqrt{2}}{2}
 \end{bmatrix}$
 $\cdot \begin{bmatrix}
 2.2998046875\\-1.1669921875\\1.4501953125\\-2.8642578125
@@ -1261,31 +1286,34 @@ $ $
 
 \para{Why CKKS's Encoding Uses the $\bm{(\mu=2n)}$-th Cyclotomic Polynomial:} At this point, it becomes clear why the CKKS encoding and decoding scheme uses the (power-of-2)-th cyclotomic polynomial (i.e., $X^n + 1$) over $X \in \mathbb{C}$ (complex numbers) (\autoref{subsec:ckks-encoding-decoding}). The first reason is that CKKS's first requirement for designing a valid encoding and decoding formula for an input complex vector is to isomorphically convert it into a unique real number vector (and we scale this real number vector as an integer vector and use it as a list of coefficients for polynomial encoding, because CKKS's homomorphic encryption and decryption are supported only based on polynomials with integer coefficients). As for the decoding formula of an input complex vector, our high-level idea was to treat the encoded real number vector as coefficients of an $(n-1)$-degree polynomial and evaluate this polynomial at $n$ distinct $X$ coordinates, whose resulting set of $n$ distinct $Y$ values is guaranteed to be unique within the $n$-th degree polynomial ring. Based on this insight, we designed a decoding matrix (\autoref{subsec:ckks-encoding-decoding}) in the form of a Vandermonde matrix (\autoref{subsec:vandermonde}). Then, the encoding formula is equivalent to multiplying the input complex vector by the inverse of this decoding matrix. However, in linear algebra, not all matrices are guaranteed to have a counterpart inverse matrix. Therefore, for the guarantee of the existence of a valid encoding matrix (i.e., an inverse of the decoding matrix), we leveraged the following arithmetic property: if a Vandermonde matrix $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$ is made of $n$ distinct primitive $(\mu=2n)$-th roots of unity (where $n$ is a power of 2), then such a Vandermonde matrix is guaranteed to have an inverse (\autoref{subsec:vandermonde-euler}) counterpart. In fact, the $(\mu=2n)$-th roots of unity are $n$ distinct roots of the $(\mu=2n)$-th cyclotomic polynomial: $X^n + 1$ (\autoref{subsec:cyclotomic-def}). Therefore, CKKS uses $X^n + 1$ as the polynomial ring of its subsequent encryption and decryption scheme (\autoref{subsec:ckks-enc-dec}) as well. 
 
-The CKKS encoding's second reason for using the $(\mu=2n)$-th cyclotomic polynomial is to design a valid input vector slot rotation scheme (\autoref{subsec:ckks-rotation}). In this rotation scheme, updating the encoded polynomial $M(X)$ to $M(X^{J(h)})$ (where $J(h) = 5^h \bmod 2n$) is equivalent to updating the CKKS decoding process's each evaluation coordinate of $M(X)$ from $x_i$ to $x_i^{J(h)}$ (where each $x_i$ is the primitive $(\mu=2n)$-th roots of unity), which gives the same effect as vertically rotating the encoding matrix (i.e., the inverse of the Vandermonde matrix whose roots are the primitive $(\mu=2n)$-th roots of unity) upward by $h$ positions. And this vertical rotation of the encoding matrix (while the input vector is fixed) gives the same effect of rotating the input vector $\vec{v}$ by $h$ positions to the left (without modifying the encoding matrix). Therefore, the $(\mu=2n)$-th cyclotomic polynomial $X^2 + 1$ is an ideal tool to design input vector slot rotation. 
+The CKKS encoding's second reason for using the $(\mu=2n)$-th cyclotomic polynomial is to design a valid input vector slot rotation scheme (\autoref{subsec:ckks-rotation}). In this rotation scheme, updating the encoded polynomial $M(X)$ to $M(X^{J(h)})$ (where $J(h) = 5^h \bmod 2n$) is equivalent to updating the CKKS decoding process's each evaluation coordinate of $M(X)$ from $x_i$ to $x_i^{J(h)}$ (where each $x_i$ is the primitive $(\mu=2n)$-th roots of unity), which gives the same effect as vertically rotating the encoding matrix (i.e., the inverse of the Vandermonde matrix whose roots are the primitive $(\mu=2n)$-th roots of unity) upward by $h$ positions. And this vertical rotation of the encoding matrix (while the input vector is fixed) gives the same effect of rotating the input vector $\vec{v}$ by $h$ positions to the left (without modifying the encoding matrix). Therefore, the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ is an ideal tool to design input vector slot rotation. 
 
 
 \subsection{Homomorphic Conjugation}
 \label{subsec:ckks-conjugation}
 
 
-As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-dimensional input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-dimensional Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-2}, \cdots, \overline{v}_1, \overline{v}_0)$. To compute the conjugation of $\vec{v}$, which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
+As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-dimensional input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-dimensional Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1})$. To compute the conjugation of $\vec{v}$, which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
 
-$\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1}, {v}_{\frac{n}{2}-1}, \cdots, {v}_1, {v}_0)$
+$\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1}, v_0, v_1, \cdots, v_{\frac{n}{2}-1})$
 
-$= \bm{(}M(\overline{\omega})), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega^{n-1}), \cdots, M(\omega^{3}), M(\omega)\bm{)}$ \textcolor{red}{ $\rhd$ where $\omega = e^{\frac{i\pi}{n}}$}
+$= \bm{(}M(\overline{\omega}), M(\overline{\omega^{3}}), \cdots, M(\overline{\omega^{n-1}}), M(\omega), M(\omega^{3}), \cdots, M(\omega^{n-1})\bm{)}$ \textcolor{red}{ $\rhd$ where $\omega = e^{\frac{i\pi}{n}}$}
 
 
-$= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M((\overline{\omega^{n-1}})^{-1}), \cdots, M((\overline{\omega^{3}})^{-1}), M((\overline{\omega})^{-1})\bm{)}$ 
+$= \bm{(}M((\omega)^{-1}), M((\omega^{3})^{-1}), \cdots, M((\omega^{n-1})^{-1}), M(\omega), M(\omega^{3}), \cdots, M(\omega^{n-1})\bm{)}$ 
 
 \textcolor{red}{ $\rhd$ since $\overline{\omega^k} = e^{\overline{\frac{ki\pi}{n}}} = e^{-\frac{ki\pi}{n}} = \omega^{-k}$ and $\omega^{k} = (\overline{\omega^k})^{-1}$ for $k = \{1, 3, \cdots, n-1\}$}
 
 $ $
 
-$=\{M(X^{-1})\}$ \textcolor{red}{ $\rhd$ where $X = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \overline{\omega^{n - 1}}, \cdots, \overline{\omega^3}, \overline{\omega} \} = \{\omega^{1}, \omega^{3}, \cdots, \omega^{2n - 1}\}$}
+$=\{M(X^{-1})\}$ 
+
+\textcolor{red}{ $\rhd$ where $X = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \omega^{-1}, \omega^{-3}, \cdots, \omega^{-(n-1)}\}  = \{\omega, \omega^{3}, \cdots, \omega^{n - 1}, \omega^{2n-1}, \omega^{2n-3}, \cdots, \omega^{n+1} \}$}
+
 
 $ $
 
-Therefore, homomorphic conjugation of the input vector is equivalent to updating the ciphertext $\bm{(}A(X)), B(X)\bm{)}$ to $\bm{(}A(X^{-1}), B(X^{-1})\bm{)}$ and then key-switching it from $S(X^{-1}) \rightarrow S(X)$. 
+Therefore, homomorphic conjugation of the input vector is equivalent to updating the ciphertext $\bm{(}A(X), B(X)\bm{)}$ to $\bm{(}A(X^{-1}), B(X^{-1})\bm{)}$ and then key-switching it from $S(X^{-1}) \rightarrow S(X)$. 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-conjugation}} CKKS's Homomorphic Conjugation}}]
@@ -1293,7 +1321,7 @@ Therefore, homomorphic conjugation of the input vector is equivalent to updating
 Homomorphic conjugation of the input vector of a ciphertext is equivalent to the following:
 
 \begin{enumerate}
-\item Update the ciphertext $\bm{(}A(X)), B(X)\bm{)}$ to $\bm{(}A(X^{-1}), B(X^{-1})\bm{)}$.
+\item Update the ciphertext $\bm{(}A(X), B(X)\bm{)}$ to $\bm{(}A(X^{-1}), B(X^{-1})\bm{)}$.
 \item Key-switch $\bm{(}A(X^{-1}), B(X^{-1})\bm{)}$ from $S(X^{-1})$ to $S(X)$.
 
 \end{enumerate}
@@ -1325,7 +1353,7 @@ We could show both directions of proof: (1) the forward (decoding-direction) pro
 
 \subsubsection{Forward Proof: Decoding of Sparsely Packed Ciphertext}
 
-We will prove that for each $M_Y(Y) \in \mathbb{Z}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has non-zero constants only at those terms with a power that is a multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial is decoded into some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
+We will prove that for each $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has non-zero constants only at those terms with a power that is a multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial is decoded into some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
 
 To decode $M(X)$ into an input vector, we need to evaluate $M(X)$ at $\frac{n}{2}$ distinct roots of $X^n + 1$ (i.e., $n$ distinct primitive $(\mu=2n)$-th roots of unity), which are: 
 
@@ -1438,7 +1466,7 @@ $ $
 & the Taylor series, as well as other optimizations such as\\ 
 & Euler's formula ($e^{i\theta} = \cos(\theta) + i\cdot\sin(\theta)$). Then, we generate a CKKS plaintext that encodes \\
 & this approximated sine function, and then use this to homomorphically evaluate \\
-& step 2's encrypted vector elements (to homomorphically remove every $q_0k_i$.\\
+& step 2's encrypted vector elements (to homomorphically remove every coefficient's $q_0k_i$).\\
 4& \textsf{\textbf{\underline{SlotToCoeff:}}} Based on the resulting ciphertext from step 3, we generate a new ciphertext \\
 & whose encrypted polynomial's each $i$-th coefficient is (approximately) $\Delta m_i + e_i$. \\
 & This is equivalent to moving the $q_0k_i$-eliminated values stored in the input vector slots in \\
@@ -1483,7 +1511,7 @@ $ $
 
 $\textsf{RLWE}^{-1}\textbf{(}\textsf{ct} = (A, B)\textbf{)} = B + A\cdot S = \Delta M + E + q_0 K \bmod q_L$
 
-Notice that the ciphertext's decrypted plaintext polynomial's each $i$-th coefficient gets corrupted to $m_i + e_i + q_0\cdot k_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$. 
+Notice that the ciphertext's decrypted plaintext polynomial's each $i$-th coefficient gets corrupted to $\Delta m_i + e_i + q_0\cdot k_i \bmod q_L$. So, we now need to eliminate the garbage term $q_0k_i \bmod q_L$ in each coefficient and distill the pure plaintext coefficient $\Delta m_i + e_i$. 
 
 $ $
 
@@ -1582,7 +1610,7 @@ Note that the result of homomorphic bootstrapping is equal to the explicit boots
 \subsubsection{Details: \textsf{CoeffToSlot}}
 \label{subsubsec:ckks-bootstrapping-coefftoslot-details}
 
-Homomorphically moving the coefficients of $M_c$ (i.e., $\Delta m_i + e_i + q_0k_i$ for $0 \leq i \leq n - 1$) to a new ciphertext's input vector slots is mathematically equivalent to homomorphically computing $\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)$, which is equivalent to applying the encoding formula to the input vector slot values of $\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)$. 
+Homomorphically moving the coefficients of $M_c$ (i.e., $\Delta m_i + e_i + q_0k_i$ for $0 \leq i \leq n - 1$) to a new ciphertext's input vector slots is mathematically equivalent to homomorphically computing $\sigma^{-1}_{\sigma^{-1}} \circ (\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm))$, which is equivalent to applying the encoding formula to the input vector slot values of $\textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm)$. 
 
 
 
@@ -1606,31 +1634,41 @@ $ $
 
 Therefore, given the input ciphertext $\textsf{ct}_{\textsf{c}} = \textsf{RLWE}_{S, \sigma}\bm{(}\textsf{ct} = (A, B)\bm) \bmod q_L$ whose plaintext polynomial $M_c$ contains corrupted coefficients, computing $\sigma^{-1}_{\sigma^{-1}} \text{ } \circ \text{ } \textsf{ct}_{\textsf{c}}$ is equivalent to computing $\dfrac{\hathat W \cdot I_n^R \cdot \textsf{ct\textsubscript{c}}}{n}$. However, one problem here is that each CKKS ciphertext encodes only $\dfrac{n}{2}$ input vector slots, whereas our goal is to move $n$ (corrupted) coefficients of the plaintext polynomial $M_c$ encrypted in $\textsf{ct\textsubscript{c}}$. Therefore, we will instead generate 2 ciphertexts, $\textsf{ct}_{\textsf{s1}}$ and $\textsf{ct}_{\textsf{s2}}$, such that each $\textsf{ct}_{\textsf{s1}}$'s input vector slots store $(\Delta m_i + e_i + q_0k_i)_{0 \leq i < \frac{n}{2}}$ and $\textsf{ct}_{\textsf{s2}}$'s input vector slots store $(\Delta m_i + e_i + q_0k_i)_{\frac{n}{2} \leq i < n}$. 
 
-We split the $n \times n$ matrix $\hathat W \cdot I_n^R$ into four $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices as follows:
+We will leverage the following matrix split technique. When we split an $n \times n$ matrix $\hathat{W}$ into four $\frac{n}{2} \times \frac{n}{2}$ blocks to multiply it by the vector $\vec{v}'$, the standard matrix multiplication is as follows:
+
+$$\begin{bmatrix} \hathat{W}_{11} & \hathat{W}_{12} \\ \hathat{W}_{21} & \hathat{W}_{22} \end{bmatrix} \begin{bmatrix} \vec{a} \\ \vec{b} \end{bmatrix} = \begin{bmatrix} \hathat{W}_{11}\vec{a} + \hathat{W}_{12}\vec{b} \\ \hathat{W}_{21}\vec{a} + \hathat{W}_{22}\vec{b} \end{bmatrix}$$
+
+In our case, $\vec{a} = (v_0, \dots, v_{\frac{n}{2}-1})$ (the first half of $\vec{v}'$), and $\vec{b} = (\overline{v}_0, \dots, \overline{v}_{\frac{n}{2}-1})$ (the second half of $\vec{v}'$).
+
+$ $
+
+Therefore, We split the $n \times n$ matrix $\hathat W$ into four $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices as follows:
 
 \begin{itemize}
-\item $[\hathat WI_n^R]_{11}$: a matrix comprising the upper left-half section of $\hathat W\cdot I_n^R$
-\item $[\hathat WI_n^R]_{12}$: a matrix comprising the upper right-half section of $\hathat W\cdot I_n^R$
-\item $[\hathat WI_n^R]_{21}$: a matrix comprising the lower left-half section of $\hathat W\cdot I_n^R$
-\item $[\hathat WI_n^R]_{22}$: a matrix comprising the lower right-half section of $\hathat W\cdot I_n^R$
+\item $[\hathat W]_{11}$: a matrix comprising the upper left-half section of $\hathat W$
+\item $[\hathat W]_{12}$: a matrix comprising the upper right-half section of $\hathat W$
+\item $[\hathat W]_{21}$: a matrix comprising the lower left-half section of $\hathat W$
+\item $[\hathat W]_{22}$: a matrix comprising the lower right-half section of $\hathat W$
 \end{itemize}
 
 $ $
 
 Then, we can compute $\textsf{ct}_{\textsf{s1}}$ and $\textsf{ct}_{\textsf{s2}}$ as follows:
 
-$\textsf{ct}_{\textsf{s1}} = \dfrac{[\hathat WI_n^R]_{11} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{12} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}}{n}$
+$\textsf{ct}_{\textsf{s1}} = \dfrac{[\hathat W]_{11} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}} + [\hathat W]_{12} \cdot I_{\frac{n}{2}}^R \cdot \textsf{ct\textsubscript{c}}}{n}$
 
-$\textsf{ct}_{\textsf{s2}} = \dfrac{[\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}} + [\hathat WI_n^R]_{22} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}}}{n}$
+$\textsf{ct}_{\textsf{s2}} = \dfrac{[\hathat W]_{21} \cdot I_{\frac{n}{2}}^R \cdot \mathit{\overline{\textsf{ct\textsubscript{c}}}} + [\hathat W]_{22} \cdot I_{\frac{n}{2}}^R \cdot \textsf{ct\textsubscript{c}}}{n}$
 
-Each homomorphic matrix-vector multiplication (e.g., $[\hathat WI_n^R]_{21} \cdot \textsf{ct\textsubscript{c}}$) can be done in an efficient manner that reduces the number of homomorphic rotations (\autoref{subsec:bfv-matrix-multiplication}). $\mathit{\overline{\textsf{ct\textsubscript{c}}}}$ can be computed by applying homomorphic conjugation to \textsf{ct\textsubscript{c}} (\autoref{subsec:ckks-conjugation}).
+
+
+, where $\mathit{\overline{\textsf{ct\textsubscript{c}}}}$ can be computed by applying homomorphic conjugation to \textsf{ct\textsubscript{c}} (\autoref{subsec:ckks-conjugation}). Each homomorphic matrix-vector multiplication (e.g., $[\hathat W]_{21} \cdot I^R_{\frac{n}{2}}\overline{\textsf{ct\textsubscript{c}}}$) can be done in an efficient manner that reduces the number of homomorphic rotations (\autoref{subsec:bfv-matrix-multiplication}). 
 
 
 
 \subsubsection{Details: \textsf{EvalExp}}
 \label{subsubsec:ckks-bootstrapping-evalexp-details}
 
-We will use the sine function $f(x) = \dfrac{q}{2\pi}\cdot \sin\left(\dfrac{2\pi x}{q_0}\right)$ to approximately eliminate $q_0k_i$ from $\Delta m_i + e_i + q_0k_i$ by computing $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$. This approximation works if $\Delta m_i + e_i$ is very close to $x=0$ relative to $q_0$ (i.e., $\Delta m_i + e_i \ll q_0$). Still, the elimination of $q_0k_i$ is approximate (i.e., $\approx \Delta m_i + e_i$), because $f(x)$ is $y \approx x$ nearby $x=0$, not exactly $y = x$. 
+We will use the sine function $f(x) = \dfrac{q_0}{2\pi}\cdot \sin\left(\dfrac{2\pi x}{q_0}\right)$ to approximately eliminate $q_0k_i$ from $\Delta m_i + e_i + q_0k_i$ by computing $f(\Delta m_i + e_i + q_0k_i) \approx \Delta m_i + e_i$. This approximation works if $\Delta m_i + e_i$ is very close to $x=0$ relative to $q_0$ (i.e., $\Delta m_i + e_i \ll q_0$). Still, the elimination of $q_0k_i$ is approximate (i.e., $\approx \Delta m_i + e_i$), because $f(x)$ is $y \approx x$ nearby $x=0$, not exactly $y = x$. 
 
 One issue is that we need to evaluate $f(x)$ homomorphically based on \textsf{ct\textsubscript{s1}} and \textsf{ct\textsubscript{s2}} as inputs (i.e., $f(\textsf{ct\textsubscript{s1}})$ and $f(\textsf{ct\textsubscript{s2}})$), but FHE supports only $(+, \cdot)$ operations, whereas the sine graph cannot be formulated by only $(+, \cdot)$. Therefore, we will approximate the sine function $f(x)$ by using the Taylor series (\autoref{sec:taylor-series}): 
 
@@ -1714,7 +1752,7 @@ Note that since the output of the \textsf{CoeffToSlot} step was split into 2 cip
 \subsubsection{Details: \textsf{SlotToCoeff}}
 \label{subsubsec:ckks-bootstrapping-slottocoeff-details}
 
-This step is an exact inverse of the \textsf{CoeffToSlot} step, which is moving the bootstrapped (i.e. modulo-reduced $q_0$) coefficients of $M_v$ stored in the input vector slots back to the final plaintext polynomial $M_f$. Remember that the decoding formula from a polynomial to an input vector (\autoref{subsec:ckks-encoding-decoding}) is $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$, where:
+This step is the exact inverse of the \textsf{CoeffToSlot} step, which is moving the bootstrapped (i.e. modulo-reduced $q_0$) coefficients of $M_v$ stored in the input vector slots back to the final plaintext polynomial $M_f$. Remember that the decoding formula from a polynomial to an input vector (\autoref{subsec:ckks-encoding-decoding}) is $\vec{v}_{'} = \hathat W^* \cdot \vec{m}$, where:
 
 
 
@@ -1735,11 +1773,25 @@ $ $
 
 $ $
 
-We denote $[\hathat W^*]_{11}$, $[\hathat W^*]_{12}$, $[\hathat W^*]_{21}$, and $[\hathat W^*]_{22}$ as $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices corresponding to the upper-left, upper-right, lower-left, and lower-right sections of $\hathat W^*$. Then, homomorphically applying the decoding formula results in the final bootstrapped ciphertext \textsf{ct\textsubscript{final}} modulo $q_L$ whose plaintext polynomial is garbage-eliminated from $\Delta M + E + q_0K \bmod q_L$ to $\Delta M + E + E_b \bmod q_l$ (where $E_b$ is the bootstrapping error polynomial). Note that the ciphertext modulus changed from $q_L \rightarrow q_l$ because we consumed some multiplicative levels for computing ciphertext-to-ciphertext multiplications during polynomial evaluation (i.e., $X^k$).  We can derive  \textsf{ct\textsubscript{final}} by homomorphically applying the decoding transformation $\hathat W_T$ to the results of the \textsf{EvalExp} step (\textsf{ct\textsubscript{b1}} and \textsf{ct\textsubscript{b2}}) as follows:
+We denote $[\hathat W^*]_{11}$, $[\hathat W^*]_{12}$, $[\hathat W^*]_{21}$, and $[\hathat W^*]_{22}$ as $\dfrac{n}{2} \times \dfrac{n}{2}$ matrices corresponding to the upper-left, upper-right, lower-left, and lower-right sections of $\hathat W^*$. Then, homomorphically applying the decoding formula results in the final bootstrapped ciphertext \textsf{ct\textsubscript{final}} modulo $q_L$ whose plaintext polynomial is garbage-eliminated from $\Delta M + E + q_0K \bmod q_L$ to $\Delta M + E + E_b \bmod q_l$ (where $E_b$ is the bootstrapping error polynomial). Note that the ciphertext modulus changed from $q_L \rightarrow q_l$ (for some $l < L$) because we consumed some multiplicative levels for computing ciphertext-to-ciphertext multiplications during polynomial evaluation (i.e., $X^k$).  
+
+$$\begin{bmatrix} \hathat{W}^*_{11} & \hathat{W}^*_{12} \\ \hathat{W}^*_{21} & \hathat{W}^*_{22} \end{bmatrix} \begin{bmatrix} \vec{m}_1 \\ \vec{m}_2 \end{bmatrix} = \begin{bmatrix} \hathat{W}^*_{11}\vec{m}_1 + \hathat{W}^*_{12}\vec{m}_2 \\ \hathat{W}^*_{21}\vec{m}_1 + \hathat{W}^*_{22}\vec{m}_2 \end{bmatrix}$$
+
+$ $
+
+In our case, $\vec{m}_1 = \textsf{ct\textsubscript{b1}}$, and $\vec{m}_2 = \textsf{ct\textsubscript{b2}}$. We can derive  \textsf{ct\textsubscript{final}} by homomorphically applying the decoding transformation $\hathat{W}^*$ to the results of the \textsf{EvalExp} step (\textsf{ct\textsubscript{b1}} and \textsf{ct\textsubscript{b2}}) as follows:
+
 
 $\textsf{ct\textsubscript{final}} = \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + E_{b}\bm) = [\hathat W^*]_{11} \cdot \textsf{ct\textsubscript{b1}} + [\hathat W^*]_{12} \cdot \textsf{ct\textsubscript{b2}}$
 
-Note that we do not use $[\hathat W^*]_{21}$ and $[\hathat W^*]_{22}$, because we only need to derive the $\dfrac{n}{2}$ input vector slots whose decoding would result in the $n$ coefficients $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$ of the final $(n-1)$-degree polynomial. Once we generate a new ciphertext \textsf{ct\textsubscript{final}} whose $\dfrac{n}{2}$ input vector slots store $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$, then its latter $\dfrac{n}{2}$ conjugate slots get automatically filled with the conjugates of the first $\dfrac{n}{2}$ slot values.
+$\overline{\textsf{ct\textsubscript{final}}} = \textsf{RLWE}_{S, \sigma}\bm(\Delta M + E + E_{b}\bm) = [\hathat W^*]_{21} \cdot \textsf{ct\textsubscript{b1}} + [\hathat W^*]_{22} \cdot \textsf{ct\textsubscript{b2}}$
+
+$ $
+
+Note that we do not need to compute $\overline{\textsf{ct\textsubscript{final}}}$ (i.e., a homomorphic conjugation of $\textsf{ct\textsubscript{final}}$), because we only need to derive the $\dfrac{n}{2}$ input vector slots whose decoding would result in the $n$ coefficients $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$ of the final $(n-1)$-degree polynomial. Once we generate a new ciphertext \textsf{ct\textsubscript{final}} whose $\dfrac{n}{2}$ input vector slots store $(\Delta m_i + e_i + e_{bi})_{i=0}^{n-1}$, then its latter $\dfrac{n}{2}$ conjugate slots get automatically filled with the conjugates of the first $\dfrac{n}{2}$ slot values.
+
+$\textsf{ct\textsubscript{final}} = \textsf{RLWE}_{S, \sigma}(\Delta M + E + E_b)$ 
+$= \textsf{SlotToCoeff}(\textsf{ct\textsubscript{b1}}, \textsf{ct\textsubscript{b2}})$
 
 \subsubsection{Reducing the Bootstrapping Overhead by Sparsely Packing Ciphertext}
 \label{subsubsec:ckks-bootstrapping-time-reduction}
@@ -1881,6 +1933,6 @@ $ $
 
 $ $
 
-\para{Limitation in Noise Handling:} The above bootstrapping techniques can reduce the Type-3 noise, because the bootstrapping error is smaller than the plaintext message and a smaller input $x$ value to the approximating sine function outputs a value closer to $y=x$. Running this algorithm multiple times, the Type-3 noise becomes exponentially smaller, because the size of the target plaintext (i.e., the extracted bootstrapping error as the output of step 3 above) is much smaller than before. Meanwhile, Type-1 and Type-2 noises do not decrease over multiple bootstrapping rounds, relatively keeping  their same level, because each round generates new Type-1 and Type-2 noises. 
+\para{Limitation in Noise Handling:} The above bootstrapping techniques can reduce the Type-3 noise, because the bootstrapping error is smaller than the plaintext message and a smaller input value $x$ to the approximating sine function outputs a value closer to $y=x$. Running this algorithm multiple times, the Type-3 noise becomes exponentially smaller, because the size of the target plaintext (i.e., the extracted bootstrapping error as the output of step 3 above) is much smaller than before. Meanwhile, Type-1 and Type-2 noises do not decrease over multiple bootstrapping rounds, relatively keeping  their same level, because each round generates new Type-1 and Type-2 noises. 
 
 

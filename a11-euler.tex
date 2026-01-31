@@ -163,13 +163,13 @@ $ $
 
 $\sum\limits_{k=0}^{n-1} \omega^{2nk} = \sum\limits_{k=0}^{n-1} (e^{i\pi/n})^{2nk} = \sum\limits_{k=0}^{n-1}e^{2\pi k i} = \sum\limits_{k=0}^{n-1}(\cos(2\pi k) + i\sin(2\pi k)) = \sum\limits_{k=0}^{n-1} (1 + 0) = n$
 
-This means that the The $V \cdot V^T$ matrix's anti-diagonal elements are $n$. 
+This means that The $V \cdot V^T$ matrix's anti-diagonal elements are $n$. 
 
 $ $
 
 \item Next, we will prove that the $V \cdot V^T$ matrix has 0 for all positions except for the anti-diagonal ones. In other words, we will prove the following: 
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
+$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
 
 For this proof, we will leverage the Geometric Sum formula $\sum\limits_{i=0}^{n-1}x^i = \dfrac{x^n - 1}{x - 1}$:
 
@@ -193,7 +193,7 @@ $\sum\limits_{k=0}^{n-1} \omega^{2mk} = \dfrac{(\omega^{2m})^n - 1}{\omega^{2m} 
 
 Therefore,
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
+$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
 
 $ $
 
@@ -227,7 +227,7 @@ $ $
 
 \para{Condition for $\bm \mu$:} It's worthwhile to note that the property $V\cdot V^T = n\cdot I_n^R$ does not hold if $\mu$ (denoting the $\mu$-th cyclotomic polynomial) is not a power of 2. In particular, step 3 of the proof does not hold anymore if $\mu$ is not a power of 2:
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \gap{$\cdots$} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \gap{$\cdots$} \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$
+$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$
 
 
 
@@ -304,13 +304,23 @@ $ $
 
 \item Next, we will prove that the $V \cdot V^T$ matrix has $0$ for all other positions than the anti-diagonal ones. In other words, we will prove the following: 
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \gap{$\cdots$} = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
+$\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
 
 $ $
 
-The above is true, because in the particular case of the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ (where $n$ is a power of 2), $\omega^{i} + \omega^{i+\frac{n}{2}} \equiv 0 \bmod p$ for each integer $i$ where $0 \leq i \leq n - 1$. Therefore, in the element $\sum\limits_{k=0}^{n-1} \omega^{2k}$, its one-half terms add with its other-half terms and their final summation becomes $0$. This is the same for all other following elements: 
+The above is true by the Geometric Sum formula (Theorem~\ref*{subsec:vandermonde-euler}.1). As shown in the proof step 3 of Theorem~\ref*{subsec:vandermonde-euler}, each element is of the form $\sum_{k=0}^{n-1} (\omega^{2m})^k$ for some integer $m$ (where $2m$ is not a multiple of $2n$). Let $r = \omega^{2m}$. Then:
 
-$\sum\limits_{k=0}^{n-1} \omega^{4k}, \text{ } \sum\limits_{k=0}^{n-1} \omega^{6k}, \text{ } \gap{$\cdots$}, \text{ } \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k}, \text{ } \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k}, \text{ } \gap{$\cdots$}, \text{ } \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k}$
+$\sum\limits_{k=0}^{n-1} r^k = \dfrac{r^n - 1}{r - 1} = \dfrac{(\omega^{2m})^n - 1}{\omega^{2m} - 1} = \dfrac{(\omega^n)^{2m} - 1}{\omega^{2m} - 1}$
+
+$ $
+
+Since $\omega$ is a root of $X^n + 1$, we know $\omega^n \equiv -1 \bmod p$. Thus:
+
+$\dfrac{(-1)^{2m} - 1}{\omega^{2m} - 1} = \dfrac{1 - 1}{\omega^{2m} - 1} = 0$
+
+$ $
+
+Therefore, the sum is 0 for all off-anti-diagonal positions.
 
 $ $
 
@@ -345,4 +355,4 @@ $ $
 
 \para{Condition for $\bm \mu$:} Like in CKKS, it's worthwhile to note that the property $V\cdot V^T = n\cdot I_n^R$ does not hold if $\mu$ (denoting the $\mu$-th cyclotomic polynomial) is not a power of 2. In particular, step 3 of the proof does not hold anymore if $\mu$ is not a power of 2:
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \gap{$\cdots$} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \gap{$\cdots$} \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$
+$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$

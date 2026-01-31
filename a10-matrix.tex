@@ -11,25 +11,25 @@ This section explains the basic arithmetic of vector and matrix computations, as
 \begin{itemize}
 \item \textbf{Addition:} Given two $n \times 1$ vectors (i.e., $n$-dimensional vectors) composed of $n$ numbers each:
 
-$\vec{a} = (a_0, a_1, \gap{$\cdots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\cdots$}, b_{n-1})$
+$\vec{a} = (a_0, a_1,\cdots, a_{n-1})$, $\vec{b} = (b_0, b_1,\cdots, b_{n-1})$
 
 $ $
 
 Vector addition is defined as: 
 
-$ \vec{a} + \vec{b} = (a_0 + b_0, \text{ } a_1  +  b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1}  +  b_{n-1})$
+$ \vec{a} + \vec{b} = (a_0 + b_0, \text{ } a_1  +  b_1, \text{ }\cdots, \text{ } a_{n-1}  +  b_{n-1})$
 
 $ $
 
 \item \textbf{Dot Product:} Given two $n$-dimensional vectors:
 
-$\vec{a} = (a_0, a_1, \gap{$\ldots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\ldots$}, b_{n-1})$
+$\vec{a} = (a_0, a_1,\ldots, a_{n-1})$, $\vec{b} = (b_0, b_1,\ldots, b_{n-1})$
 
 $ $
 
 Dot product is defined as: 
 
-$\langle \vec{a}, \vec{b} \rangle =  \vec{a} \cdot \vec{b} = a_0 b_0 + a_1 b_1 + \gap{$\cdots$} + a_{n-1} b_{n-1}$.
+$\langle \vec{a}, \vec{b} \rangle =  \vec{a} \cdot \vec{b} = a_0 b_0 + a_1 b_1 +\cdots + a_{n-1} b_{n-1}$.
 
 $\vec{a} \cdot \vec{b}$ can also be expressed as $\|\vec{a}\|\,\|\vec{b}\|\cos\theta$, where $\theta$ is the angle between $\vec{a}$ and $\vec{b}$. If $\vec{a}$ and $\vec{b}$ point in the same direction, $\vec{a}\cdot\vec{b}$ attains its maximum value ($\|\vec{a}\|\,\|\vec{b}\|$). If $\vec{a}$ and $\vec{b}$ are orthogonal, then $\vec{a}\cdot\vec{b} = 0$.
 
@@ -38,21 +38,21 @@ $ $
 
 \item \textbf{Hadamard Product:} Given two $n$-dimensional vectors:
 
-$\vec{a} = (a_0, a_1, \gap{$\ldots$}, a_{n-1})$, $\vec{b} = (b_0, b_1, \gap{$\ldots$}, b_{n-1})$
+$\vec{a} = (a_0, a_1,\ldots, a_{n-1})$, $\vec{b} = (b_0, b_1,\ldots, b_{n-1})$
 
 $ $
 
 Hadamard product is defined as: 
 
-$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1} b_{n-1})$
+$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ }\cdots, \text{ } a_{n-1} b_{n-1})$
 
 $ $
 
 \item \textbf{Hermitian Product:} Given two $n$-dimensional complex vectors:
 
-$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\ldots$},\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
+$\vec{a} = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ }\ldots,\text{ }  a_{n-1}+ i\cdot a'_{n-1})$ 
 
-$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ } \gap{$\ldots$}, \text{ } b_{n-1} + i\cdot b'_{n-1})$
+$\vec{b} = (b_0 + i\cdot b'_0, \text{ } b_1 + i\cdot b'_1, \text{ }\ldots, \text{ } b_{n-1} + i\cdot b'_{n-1})$
 
 $ $
 
@@ -60,7 +60,7 @@ Hermitian product is a dot product with the 2nd operand as a conjugate (\autoref
 
 $\langle\langle \vec{a}, \vec{b} \rangle\rangle =  \vec{a} \cdot \overline{\vec{b}} $
 
-$ = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ } \gap{$\cdots$},\text{ } a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{ } b_1 - i\cdot b'_1, \text{ } \gap{$\cdots$}, \text{ } b_{n-1} - i\cdot b'_{n-1})$
+$ = (a_0 + i \cdot a'_0, \text{ } a_1+ i\cdot a'_1, \text{ }\cdots,\text{ } a_{n-1}+ i\cdot a'_{n-1})  \cdot (b_0 - i\cdot b'_0, \text{ } b_1 - i\cdot b'_1, \text{ }\cdots, \text{ } b_{n-1} - i\cdot b'_{n-1})$
 
 
 
@@ -153,7 +153,7 @@ Matrix-to-vector multiplication and matrix-to-matrix multiplication are defined 
 \begin{tcolorbox}[title={\textbf{\tboxdef{\ref*{subsec:matrix-arithmetic}} Matrix Arithmetic}}]
 
 \begin{itemize}
-\item \textbf{Matrix-to-Vector Multipication:} Given a $m \times n$ matrix $A$ and a $n$-dimensional vector $x$: 
+\item \textbf{Matrix-to-Vector Multiplication:} Given a $m \times n$ matrix $A$ and a $n$-dimensional vector $x$: 
 
 
 $A = \begin{bmatrix}
@@ -175,7 +175,7 @@ $ $
 
 The result of $A \cdot \vec{x}$ is an $m$-dimensional vector computed as:
 
-$A \cdot \vec{x} = \Big(\vec{a}_{1, * } \cdot \vec{x}, \text{ } \vec{a}_{2, * } \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{m, * } \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{ } \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i, \gap{$\cdots$}, \text{ } \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
+$A \cdot \vec{x} = \Big(\vec{a}_{1, * } \cdot \vec{x}, \text{ } \vec{a}_{2, * } \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{m, * } \cdot \vec{x} \Big) = \left(\sum\limits_{i=1}^{n} a_{1, i} \cdot  x_i, \text{ } \sum\limits_{i=1}^{n}  a_{2, i} \cdot x_i,\cdots, \text{ } \sum\limits_{i=1}^{n} a_{m, i} \cdot x_i \right)$
 
 
 $ $
@@ -522,12 +522,12 @@ To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/X^n + 1$ into an $n$
 
 We start with two constraints: (1) choose $t$ to be a prime number; (2) ensure $t-1$ is a multiple of $2n$.
 
-We learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}) the following: $a^{t - 1} \equiv 1 \bmod t$ if and only if $a$ and $t$ are co-prime. This means that if $t$ is a prime, then $a^{t - 1} \equiv 1 \bmod t$ for all $a \in \mathbb{Z}_t^{\times}$ (i.e., $\mathbb{Z}_t$ without $\{0\}$). Suppose $g$ is the generator of $\mathbb{Z}_t^{\times}$ whose powered values generate all elements of $\mathbb{Z}_t^{\times}$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$ and $g^{t - 1} \equiv 1 \bmod t$. Since $t - 1 = k \cdot 2n$ for some $k$, $g^{k\cdot2n} \equiv (g^{k})^{2n} \equiv 1 \bmod t$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) \leq 2n$. However, since $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, for all $a$ such that $a < t – 1 = k \cdot 2n$, $g^a \not\equiv 1 \bmod t$. In other words, for all $b$ such that $b < 2n$, $(g^k)^b \not\equiv 1 \bmod t$. Thus, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) = 2n$. 
+We learned from Fermat's Little Theorem in Theorem~\ref*{subsec:order-theorem}.4 (\autoref{subsec:order-theorem}) the following: $a^{t - 1} \equiv 1 \bmod t$ if and only if $a$ and $t$ are co-prime. This means that if $t$ is a prime, then $a^{t - 1} \equiv 1 \bmod t$ for all $a \in \mathbb{Z}_t^{\times}$ (i.e., $\mathbb{Z}_t$ without $\{0\}$). Suppose $g$ is the generator of $\mathbb{Z}_t^{\times}$ whose powered values generate all elements of $\mathbb{Z}_t^{\times}$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$ and $g^{t - 1} \equiv 1 \bmod t$. Since $t - 1 = k \cdot 2n$ for some $k$, $g^{k\cdot2n} \equiv (g^{k})^{2n} \equiv 1 \bmod t$. Then, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) \leq 2n$. However, since $\textsf{Ord}_{\mathbb{Z}_t}(g) = t - 1$, for all $a$ such that $a < t - 1 = k \cdot 2n$, $g^a \not\equiv 1 \bmod t$. In other words, for all $b$ such that $b < 2n$, $(g^k)^b \not\equiv 1 \bmod t$. Thus, $\textsf{Ord}_{\mathbb{Z}_t}(g^{k}) = 2n$. 
 
 Let $c = g^k$. Since $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$, $c^{2n} \equiv 1 \bmod t$. In other words, $(c^n)^2 \equiv 1 \bmod t$. 
-Now, $c^n$ can be only 1 or -1. The reason is that in the relation $X^2 \equiv 1 \bmod t$, $X$ can be mathematically only $1$ or $-1 \equiv t – 1 \bmod t$. If we substitute $X = c^n$, then $c^n$ can be only $1$ or $-1 \equiv t - 1 \bmod t$. But $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$, thus $c^n$ cannot be 1 (because $1^1 = 1$ and 1 is smaller than the order of $c$: $2n > 1$). Thus, $c^n$ can be only $-1 \equiv t – 1 \bmod t$. If $c^n = -1 \equiv t - 1 \bmod t$, then $c$ is the root of $X^n + 1 \bmod t$, because $X^n + 1 = c^n + 1 \equiv (t - 1) + 1 \equiv 0 \bmod t$. 
+Now, $c^n$ can be only 1 or -1. The reason is that in the relation $X^2 \equiv 1 \bmod t$, $X$ can be mathematically only $1$ or $-1 \equiv t - 1 \bmod t$. If we substitute $X = c^n$, then $c^n$ can be only $1$ or $-1 \equiv t - 1 \bmod t$. But $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$, thus $c^n$ cannot be 1 (because $1^1 = 1$ and 1 is smaller than the order of $c$: $2n > 1$). Thus, $c^n$ can be only $-1 \equiv t - 1 \bmod t$. If $c^n = -1 \equiv t - 1 \bmod t$, then $c$ is the root of $X^n + 1 \bmod t$, because $X^n + 1 = c^n + 1 \equiv (t - 1) + 1 \equiv 0 \bmod t$. 
 
-In conclusion, given a cyclotomic polynomial $X^n + 1$, if we choose a prime $t$ such that $t – 1 = k \cdot 2n$ for some integer $k$, then one root of $X^n + 1 \bmod t$ is: $X = c = g^k$. 
+In conclusion, given a cyclotomic polynomial $X^n + 1$, if we choose a prime $t$ such that $t - 1 = k \cdot 2n$ for some integer $k$, then one root of $X^n + 1 \bmod t$ is: $X = c = g^k$. 
 
 Once we have found one root of $X^n + 1$, then we can derive all $n$ distinct roots of $X^n + 1$. Suppose $\omega$ is one root of $X^n + 1 \bmod t$. Then we derive the following:
 
@@ -535,7 +535,7 @@ $\omega^n + 1 \equiv 0 \bmod t$
 
 $\omega^n \equiv t - 1 \bmod t$
 
-$\omega^{2n} \equiv (t - 1)\cdot(t - 1) \equiv  t^2 – 2t + 1 \equiv   1 \bmod t$
+$\omega^{2n} \equiv (t - 1)\cdot(t - 1) \equiv  t^2 - 2t + 1 \equiv   1 \bmod t$
 
 While $\omega^{2n} \equiv 1 \bmod t$, $\omega^{n} \not\equiv 1 \bmod t$, because if so, $X^n + 1 = \omega^n + 1 = 1 + 1 = 2 \neq 0$, which contradicts the fact that $\omega$ is a root of $X^n + 1$. Therefore, $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$. 
 
@@ -547,7 +547,9 @@ $(\omega^5)^n + 1 \equiv (\omega^{4n})\cdot \omega^n + 1 \equiv \omega^n + 1 \eq
 
 $\vdots$
 
-$(\omega^{2n - 1})^n + 1 \equiv (\omega^{2n - 2})\cdot \omega^n + 1 \equiv \omega^n + 1 \equiv t - 1 + 1 \equiv 0 \bmod t$
+$(\omega^{2n - 1})^n + 1 \equiv 0 \bmod t$ \\ \textcolor{red}{ $\rhd$ for any odd $k = 2j+1$, $(\omega^{2j+1})^n = (\omega^{2n})^j \cdot \omega^n = 1^j \cdot (-1) = -1$, so $(\omega^k)^n + 1 = 0$}
+
+$ $
 
 Note that $\omega, \omega^3, \omega^5, \cdots, \omega^{2n - 1}$ are all distinct values in $\mathbb{Z}_t^{\times}$, because $\textsf{Ord}_{\mathbb{Z}_t}(c) = 2n$. Thus, $\{\omega^{2i + 1}\}_{i=0}^{n-1}$ are $n$ distinct roots of $X^n + 1$. At the same time, since these are the roots of the cyclotomic polynomial $X^n + 1$, these are $n$ distinct primitive $(\mu=2n)$-th roots of unity. 
 
@@ -557,7 +559,7 @@ $ $
 
 We summarize our findings as follows:
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:polynomial-ring-basis}} Isomorphism between Polynomials and Vectors over Integer (Ring)}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsubsec:poly-vector-transformation-modulus}} Isomorphism between Polynomials and Vectors over Integer (Ring)}}]
 
 \begin{itemize}
 \item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and an $n$-dimensional vector space $\mathbb{Z}_t^n$ (integers mod $t$) with vector $\vec{v}$.

@@ -10,18 +10,18 @@
 \textbf{A polynomial ring} is a set of polynomials where polynomial computations over the $(+, \cdot)$ operators (e.g., $f_1 + f_2$, $f_1 \cdot (f_2 - f_3)$, $f_1 + f_2 + f_4$) are closed, associative, commutative, and distributive. 
 
 
-A polynomial ring ${\mathbb{Z}_q[x] / (x^n + 1)}$ is the set of all polynomials $f_i$ that have the following properties:
+A polynomial ring ${\mathbb{Z}_p[x] / (x^n + 1)}$ is the set of all polynomials $f_i$ that have the following properties:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:poly-ring-overview}} Ring}}]
 
-For a polynomial $f \in \mathbb{Z}_q[x] / (x^n + 1)$ where $f = c_0 + c_1x^1 + \gap{$\cdots$} + c_{n-1}x^{n-1}$:
+For a polynomial $f \in \mathbb{Z}_p[x] / (x^n + 1)$ where $f = c_0 + c_1x^1 + \cdots + c_{n-1}x^{n-1}$:
 
 \begin{itemize}
-\item \textbf{Coefficient Ring:} each coefficient $c_j \in \mathbb{Z}_q$.
+\item \textbf{Coefficient Ring:} each coefficient $c_j \in \mathbb{Z}_p$.
 
 $ $
 
-\item \textbf{Degree Bound:} Any $f' \in \mathbb{Z}_q[x]$ can be written as:
+\item \textbf{Degree Bound:} Any $f' \in \mathbb{Z}_p[x]$ can be written as:
 
 $ $
 
@@ -29,7 +29,7 @@ $f'=(x^n+1)f_q+f_r,\qquad \deg f_r < n,$
 
 $ $
 
-so in the quotient ring $\mathbb{Z}_q[x]/(x^n+1)$ we have $f' \equiv f_r \pmod{x^n+1}$. $f_q$ is called a quotient polynomial and $f_r$ is called a remainder polynomial resulting from the polynomial division of $f'$ divided by $x^n + 1$.
+so in the quotient ring $\mathbb{Z}_p[x]/(x^n+1)$ we have $f' \equiv f_r \pmod{x^n+1}$. $f_q$ is called a quotient polynomial and $f_r$ is called a remainder polynomial resulting from the polynomial division of $f'$ divided by $x^n + 1$.
 
 $ $
 
@@ -37,27 +37,27 @@ $ $
 
 $ $
 
-$f' \equiv f_{r1} \in \mathbb{Z}_q[x] / (x^n + 1)$
+$f' \equiv f_{r1} \in \mathbb{Z}_p[x] / (x^n + 1)$
 
-$f{''} \equiv f_{r2} \in \mathbb{Z}_q[x] / (x^n + 1)$
+$f{''} \equiv f_{r2} \in \mathbb{Z}_p[x] / (x^n + 1)$
 
-$f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
+$f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_p[x] / (x^n + 1)$
 
 $ $
 
 Then the polynomial operation result of $f' + f''$ is in the same equivalence class as: 
 
-$f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_q[x] / (x^n + 1)$
+$f' + f'' \equiv f_{r1} + f_{r2} \equiv f_{r3} \in \mathbb{Z}_p[x] / (x^n + 1)$
 
 
 \end{itemize}
 
-To make the notation simple, we denote the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, q \rangle}$
+To make the notation simple, we denote the polynomial ring $\mathbb{Z}_p[x] / (x^n + 1)$ as $\mathcal{R}_{\langle n, p \rangle}$
 \end{tcolorbox}
 
-Recall that in $\mathbb{Z}_p$, any $b$ writes $b = mp + r$ with $0\le r<p$, hence $b \equiv r \pmod{p}$ (the quotient $m$ disappears). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, q \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which yields:
+Recall that in $\mathbb{Z}_p$, any $b$ writes $b = mp + r$ with $0\le r<p$, hence $b \equiv r \pmod{p}$ (the quotient $m$ disappears). Similarly, in a polynomial ring $\mathcal{R}_{\langle n, p \rangle}$, a high-degree polynomial $f_{big}$ can be divided by the polynomial modulo $x^n + 1$, which yields:
 
-$f_{big} = (x^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, q \rangle}$
+$f_{big} = (x^n + 1)\cdot(f_q) + f_r \equiv f_r \in \mathcal{R}_{\langle n, p \rangle}$
 
 \noindent, whereas $f_q$ is a quotient polynomial, and $f_r$ is a remainder polynomial. In this case, $f_{big}$ is congruent to (i.e., it is in the same equivalence class as) $f_r$. Thus, $f_q$ can be eliminated, and $f_r$ (i.e., the simplified version of $f_{big}$) can be used interchangeably for polynomial operations $(+, \cdot)$ in the polynomial ring. 
 Polynomial simplification (i.e., reduction) in a polynomial ring is done by substituting $x^n \equiv -1$ into $f_{big}$ because $x^n + 1 \equiv 0$ in the polynomial ring (this is the same as the case of a number ring modulo $p$, where we reduce a number by substituting $0$ for $p$). This way, a high-degree polynomial $f_{big}$ can be recursively simplified to a polynomial of degree less than $n$ by recursively substituting $x^n \equiv -1$ into $f_{big}$.
@@ -118,12 +118,12 @@ $ $
 \textbf{{Commutative}}  & $ a + b = b + a$ & $f_a + f_b = f_b + f_a$\\
 \textbf{{Associative}} & $(a + b) + c = a + (b + c)$ & $(f_a + f_b) + f_c = f_a + (f_b + f_c)$\\
 \textbf{{Distributive}} & $a \cdot (b + c) = a\cdot b + a\cdot c$ & $f_a \cdot (f_b + f_c) = f_a\cdot f_b + f_a\cdot f_c$\\
-\textbf{{Closed}}& $a + b \equiv c \in \mathbb{Z}_p$, $a \cdot b \equiv d \in \mathbb{Z}_p$ & $f_a + f_b \equiv f_c \in \mathcal{R}_{\langle n, q \rangle}$, \\
-&&$f_a \cdot f_b \equiv f_d \in \mathcal{R}_{\langle n, q \rangle}$\\
+\textbf{{Closed}}& $a + b \equiv c \in \mathbb{Z}_p$, $a \cdot b \equiv d \in \mathbb{Z}_p$ & $f_a + f_b \equiv f_c \in \mathcal{R}_{\langle n, p \rangle}$, \\
+&&$f_a \cdot f_b \equiv f_d \in \mathcal{R}_{\langle n, p \rangle}$\\
 \hline
 \textbf{{Congruency ($\equiv$)}} & Two numbers $a \equiv b$ in modulo $p$ if: & Two polynomials $f_a \equiv f_b$ in $\mathbb{Z}_p[x] / (x^n + 1)$ if:    \\
- & $(a \gap{\text{mod}} p) = (b \gap{\text{mod}} p)$   & $f'_a = f_a \gap{\text{mod}} (x^n + 1) = \sum\limits_{i=0}^{d_a} a_ix^i$ \\
- & & $f'_b = f_b \gap{\text{mod}} (x^n + 1) = \sum\limits_{i=0}^{d_b} b_ix^i$, \\
+ & $(a \bmod p) = (b \bmod p)$   & $f'_a = f_a \bmod (x^n + 1) = \sum\limits_{i=0}^{d_a} a_ix^i$ \\
+ & & $f'_b = f_b \bmod (x^n + 1) = \sum\limits_{i=0}^{d_b} b_ix^i$, \\
 && $d_a = d_b$ and $a_i \equiv b_i$ in modulo $p$\\
 &&for all $0 \leq i \leq d_a$\\ 
 \hline
@@ -156,7 +156,7 @@ For example, suppose we have a polynomial as follows:
 
 $ $
 
-$f(x) = c_0 + c_1x^1 + c_2x^2 + \gap{$\cdots$} + c_hx^h + \gap{$\cdots$} + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+$f(x) = c_0 + c_1x^1 + c_2x^2 + \cdots + c_hx^h + \cdots + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, p \rangle}$
 
 $ $
 
@@ -170,7 +170,7 @@ Given the $(n-1)$-degree polynomial:
 
 $ $
 
-$f(x) = c_0 + c_1x^1 + c_2x^2 + \gap{$\cdots$} + c_hx^h + \gap{$\cdots$} + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+$f(x) = c_0 + c_1x^1 + c_2x^2 + \cdots + c_hx^h + \cdots + c_{n-1}x^{n-1} \in \mathcal{R}_{\langle n, p \rangle}$
 
 $ $
 
@@ -178,15 +178,15 @@ The coefficients of $f(x)$ can be rotated to the left by $h$ positions by multip
 
 $ $
 
-$f(x) \cdot x^{-h} = c_0\cdot x^{-h} + c_1x^1 \cdot x^{-h} + c_2x^2 \cdot x^{-h} + \gap{$\cdots$} + c_hx^h \cdot x^{-h} + \gap{$\cdots$} + c_{n-1}x^{n-1} \cdot x^{-h}$
-$\equiv c_h + c_{h+1}x + c_{h+2}x^2 + \gap{$\cdots$} + c_{n-1}x^{n-1-h} - c_0x^{n - h} - \gap{$\cdots$} - c_{h-1}x^{n-1} \in \mathcal{R}_{\langle n, q \rangle}$
+$f(x) \cdot x^{-h} = c_0\cdot x^{-h} + c_1x^1 \cdot x^{-h} + c_2x^2 \cdot x^{-h} + \cdots + c_hx^h \cdot x^{-h} + \cdots + c_{n-1}x^{n-1} \cdot x^{-h}$
+$\equiv c_h + c_{h+1}x + c_{h+2}x^2 + \cdots + c_{n-1}x^{n-1-h} - c_0x^{n - h} - \cdots - c_{h-1}x^{n-1} \in \mathcal{R}_{\langle n, p \rangle}$
 \end{tcolorbox}
 
 $ $
 
-Note that multiplying the two polynomials $f$ and $x^{-h}$ will yield a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. Therefore, the rotated polynomial, which is the result of $f \cdot x^{-h}$, will also have a congruent polynomial in $\mathcal{R}_{\langle n, q \rangle}$. 
+Note that multiplying the two polynomials $f$ and $x^{-h}$ will yield a congruent polynomial in $\mathcal{R}_{\langle n, p \rangle}$. Therefore, the rotated polynomial, which is the result of $f \cdot x^{-h}$, will also have a congruent polynomial in $\mathcal{R}_{\langle n, p \rangle}$. 
 
-Note that the coefficient signs change when they rotate around the boundary of $x^n (= -1)$, as the computation is conducted in the polynomial ring $Z_q[x] / (x^n + 1)$.
+Note that the coefficient signs change when they rotate around the boundary of $x^n (= -1)$, as the computation is conducted in the polynomial ring $\mathbb{Z}_p[x] / (x^n + 1)$.
 
 
 

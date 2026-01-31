@@ -262,7 +262,7 @@ $\sum\limits_{i=0}^{k}\langle \textsf{Decomp}^{\beta, l}(\textsf{ct}_i), \bar{\t
 $= \sum\limits_{i=0}^{k-1}\textsf{LWE}_{\vec{s}, \sigma}(-s_im_2a_i + e^{\langle i \rangle}) + \textsf{LWE}_{\vec{s}, \sigma} (m_{2}b + e^{\langle k \rangle})$ \\ 
 $= \textsf{LWE}_{\vec{s}, \sigma}\left(\sum\limits_{i=0}^{k-1}(-s_im_2a_i) + m_{2}b + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \textcolor{red}{ $\rhd$ addition of two LWE ciphertexts} \\ 
 $= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2b - \sum\limits_{i=0}^{k-1}m_2a_is_i + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$  \\ 
-$= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2(b - \sum\limits_{i=0}^{k-1}a_is_i + \sum\limits_{i=0}^ke^{\langle i \rangle})\right)$\\
+$= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2(b - \sum\limits_{i=0}^{k-1}a_is_i) + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$\\
 $= \textsf{LWE}_{\vec{s}, \sigma}\left(m_2(\Delta m_1 + e_1) + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \\
 $= \textsf{LWE}_{\vec{s}, \sigma}\left(\Delta m_1m_2 + m_2e_1 + \sum\limits_{i=0}^ke^{\langle i \rangle}\right)$ \\
 $\approx \textsf{LWE}_{\vec{s}, \sigma}(\Delta m_1m_2)$ \textcolor{red}{ $\rhd$ given $m_2e_1 + \sum\limits_{i=0}^ke^{\langle i \rangle}$ is small and thus $m_2e_1$ is also small}
@@ -351,7 +351,9 @@ $= \langle \textsf{Decomp}^{\beta, l}(A_0), \bar{C_0} \rangle + \langle \textsf{
 \textcolor{red}{ $\rhd$ expanding the dot product of two vectors}
 \item For $i = k$: \\
 $\textsf{Decomp}^{\beta, l}(B) = (B_1, B_2, \gap{$\cdots$}, B_l)$, where $B = B_1\dfrac{q}{\beta^1} + B_2\dfrac{q}{\beta^2} + \gap{$\cdots$} + B_l\dfrac{q}{\beta^l}$ \textcolor{red}{ $\rhd$ from \autoref{subsec:poly-decomp}}\\
-$\bar{C}_k = \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \left(\textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^1}\right), \textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^2}\right), \gap{$\cdots$}, \textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^l}\right) \right)$ \\
+$\bar{C}_k = \textsf{GLev}_{\vec{S}, \sigma}^{\beta, l}(M_2) = \left(\textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^1}\right), \textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^2}\right), \gap{$\cdots$}, \textsf{GLWE}_{\vec{S}, \sigma}\left(M_{2}\dfrac{q}{\beta^l}\right) \right)$ 
+
+\textcolor{red}{ $\rhd$ we omit the noise terms $E_{2,1}, \ldots, E_{2,l}$ in each GLWE ciphertext for simplicity} \\
 $ $
 
 Therefore: \\
@@ -967,7 +969,7 @@ $ $
 \hline
 \hline
 \textbf{\boldmath$i = \hat{\Delta}m + \hat{e}$} & $-8$ & $-7$ & $-6$ & $-5$ & $-4$ & $-3$ & $-2$ & $-1$ \\
-(in $V \cdot X^{-i}$) & ($\textcolor{cyan}{}\textcolor{orange}{110}\textcolor{green}{00}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{110}\textcolor{green}{01}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{110}\textcolor{green}{10}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{110}\textcolor{green}{11}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{111}\textcolor{green}{00}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{111}\textcolor{green}{01}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{111}\textcolor{green}{10}_2$) & ($\textcolor{cyan}{}\textcolor{orange}{111}\textcolor{green}{11}_2$)\\
+(in $V \cdot X^{-i}$) & ($\textcolor{orange}{110}\textcolor{green}{00}_2$) & ($\textcolor{orange}{110}\textcolor{green}{01}_2$) & ($\textcolor{orange}{110}\textcolor{green}{10}_2$) & ($\textcolor{orange}{110}\textcolor{green}{11}_2$) & ($\textcolor{orange}{111}\textcolor{green}{00}_2$) & ($\textcolor{orange}{111}\textcolor{green}{01}_2$) & ($\textcolor{orange}{111}\textcolor{green}{10}_2$) & ($\textcolor{orange}{111}\textcolor{green}{11}_2$)\\
 \hline
 \textbf{constant term's} & $-2$ & $-2$ & $-2$ & $-2$ & $-1$ & $-1$ & $-1$ & $-1$ \\
  \textbf{coeff. of $V\cdot X^{-i}$}& $\textcolor{orange}{110}_2$ & $\textcolor{orange}{110}_2$ & $\textcolor{orange}{110}_2$ & $\textcolor{orange}{110}_2$ & $\textcolor{orange}{111}_2$ & $\textcolor{orange}{111}_2$ & $\textcolor{orange}{111}_2$ & $\textcolor{orange}{111}\textcolor{green}{00}_2$ \\
@@ -976,7 +978,7 @@ $ $
 \hline
 \hline
 \textbf{\boldmath$i = \hat{\Delta}m + \hat{e}$} & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ \\
-(in $V \cdot X^{-i}$) & ($\textcolor{cyan}{}\textcolor{orange}{000}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{000}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{000}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{000}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{001}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{001}_2$)& ($\textcolor{cyan}{}\textcolor{orange}{001}_2$)&($\textcolor{cyan}{}\textcolor{orange}{001}_2$)\\
+(in $V \cdot X^{-i}$) & ($\textcolor{orange}{000}_2$)& ($\textcolor{orange}{000}_2$)& ($\textcolor{orange}{000}_2$)& ($\textcolor{orange}{000}_2$)& ($\textcolor{orange}{001}_2$)& ($\textcolor{orange}{001}_2$)& ($\textcolor{orange}{001}_2$)&($\textcolor{orange}{001}_2$)\\
 \hline
 \textbf{constant term's} & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ \\
 \textbf{coeff. of $V\cdot X^{-i}$}& $\textcolor{orange}{000}\textcolor{green}{00}_2$ & $\textcolor{orange}{000}\textcolor{green}{00}_2$ & $\textcolor{orange}{000}\textcolor{green}{00}_2$ & $\textcolor{orange}{000}\textcolor{green}{00}_2$ & $\textcolor{orange}{001}\textcolor{green}{00}_2$ & $\textcolor{orange}{001}\textcolor{green}{00}_2$ & $\textcolor{orange}{001}\textcolor{green}{00}_2$ & $\textcolor{orange}{001}\textcolor{green}{00}_2$ \\
@@ -1036,7 +1038,7 @@ $ $
 
 Each step of the actual blind rotation above is computed as the following TFHE ciphertext-to-ciphertext multiplication:
 
-$\textsf{GLWE}_{\vec{S}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(s_i) \cdot (\textsf{GLWE}_{\vec{S}, \sigma}(V_i) \cdot X^{a_0} - \textsf{GLWE}_{\vec{S}, \sigma}(V_i)) + \textsf{GLWE}_{\vec{S}, \sigma}(V_i)$
+$\textsf{GLWE}_{\vec{S}, \sigma}(V_{i+1}) = \textsf{GGSW}_{\vec{S}, \sigma}^{\beta, l}(s_i) \cdot (\textsf{GLWE}_{\vec{S}, \sigma}(V_i) \cdot X^{\hat{a}_i} - \textsf{GLWE}_{\vec{S}, \sigma}(V_i)) + \textsf{GLWE}_{\vec{S}, \sigma}(V_i)$
 
 $ $
 
@@ -1056,7 +1058,7 @@ $ = \left(A_0 = \sum\limits_{j=0}^{15}(a_{0,0} + a_{0,1}X + \cdots), A_1 = \cdot
 
 Now, we extract the constant term's coefficient of the encrypted polynomial $\textsf{GLWE}_{\vec{S}, \sigma}(\hat{\Delta} \cdot (1 + 1X + 1X^2 + \cdots))$ by using the coefficient extraction formula (Summary~\ref{subsec:tfhe-extraction}). Specifically, we will extract the constant term's coefficient, which corresponds to $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$. We extract $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0)$ by computing the following:
 
-$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k', b_h)$
+$\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_{nk-1}', b_h)$ \textcolor{red}{ $\rhd$ where $h = 0$}
 
 \[
     \text{, where } a'_{n \cdot i + j} =   
@@ -1076,7 +1078,7 @@ $\textsf{LWE}_{\vec{s}, \sigma}(\Delta m_0) = (a_0', a_1', \gap{$\cdots$} , a_k'
 
 \begin{itemize}
 \item \textbf{Programmable Bootstrapping}: While the bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping}) uses a simple Lookup Table $V(X)$ which maps $\Delta m + e$ to $\Delta m$, we can edit the coefficients of $V(X)$ to make $\Delta m + e$ map to different values. For example, an altered mappings between the inputs and outputs to LUT can implement logic gates such as AND, OR, XOR, CMUX, etc, which will be explained in \autoref{subsec:tfhe-noise-bootstrapping-gate}. Such edited mappings between the exponents and coefficients in $V(X)$ are called programmable bootstrapping. If we encrypt $V(X)$ as a GLWE ciphertext, we can hide the mappings as well as each input instance, which effectively implements \textit{functional encryption}. Note that both the vanilla bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping}) and programmable bootstrapping (\autoref{subsec:tfhe-noise-bootstrapping-gate}) generate the same amount of noise. 
-\item \textbf{Bootstrapping Noise}: During the bootstrapping's LUT polynomial $V(X)$ rotation, we perform many TFHE multiplications in the homomorphic MUX gates to derive $V_0 \cdots V_k$, which inevitably creates additional noises before the the noise gets re-initialized at the end. However, a careful parameter choice can limit the growth of this additional noise during modulus switch and blind rotation. 
+\item \textbf{Bootstrapping Noise}: During the bootstrapping's LUT polynomial $V(X)$ rotation, we perform many TFHE multiplications in the homomorphic MUX gates to derive $V_0 \cdots V_k$, which inevitably creates additional noises before the noise gets re-initialized at the end. However, a careful parameter choice can limit the growth of this additional noise during modulus switch and blind rotation. 
 \end{itemize}
 
 
@@ -1235,6 +1237,6 @@ $\textsf{LWE}_{\vec{s}, \sigma}^{-1}(\textsf{ct}) =  \Big\lceil b - \sum\limits_
 
 $ $
 
-The original TFHE's difference is that all values (either polynomial coefficients or vector elements) are computed in a floating point modulo 1 (i.e., $[0, 1)$) instead of a big integer (i.e., $[0, q)$). This means the plaintext also has to be encoded as values within $[0, 1)$ instead of integers within $[0, q)$. Note that in the original TFHE scheme, there is no need for the scaling factor $\Delta$, because the continuous domain of torus $[0, 1)$ provides a floating-point precision up to $q$ discrete decimal values, and its decryption process can successfully blow away the noise $E$ as far as each coefficient (or vector element) $e_i$ in $E$ is smaller than $\dfrac{1}{2t}$. 
+The original TFHE's difference is that all values (either polynomial coefficients or vector elements) are computed in a floating point modulo 1 (i.e., $[0, 1)$) instead of a big integer (i.e., $[0, q)$). This means the plaintext also has to be encoded as values within $[0, 1)$ instead of integers within $[0, q)$. Note that in the original TFHE scheme, there is no need for the scaling factor $\Delta$, because the continuous domain of torus $[0, 1)$ provides a floating-point precision up to $q$ discrete fractional values, and its decryption process can successfully blow away the noise $E$ as far as each coefficient (or vector element) $e_i$ in $E$ is smaller than $\dfrac{1}{2t}$. 
 
 Both the torus-based and integer-ring-based TFHE schemes are built based on the same fundamental principles.

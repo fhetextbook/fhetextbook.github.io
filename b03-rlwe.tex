@@ -1,10 +1,10 @@
-The RLWE cryptosystem's ciphertext is a tuple $(A, B)$, where $B = S \cdot A + \Delta \cdot M + E$. The random public mask $A$ and the secret key $S$ are $(n-1)$-degree polynomials. The message $M$ and the noise $E$ are $(n-1)$-degree polynomials. Like in LWE, a new random public mask $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(A, b)$ instead of $(A^{\langle i \rangle}, b^{\langle i \rangle})$ for simplicity.
+The RLWE cryptosystem's ciphertext is a tuple $(A, B)$, where $B = S \cdot A + \Delta \cdot M + E$. The random public mask $A$ and the secret key $S$ are $(n-1)$-degree polynomials. The message $M$ and the noise $E$ are $(n-1)$-degree polynomials. Like in LWE, a new random public mask $A$ is created for each ciphertext, whereas the same secret key $S$ is used for all ciphertexts. In this section, we denote each ciphertext instance as $(A, B)$ instead of $(A^{\langle i \rangle}, b^{\langle i \rangle})$ for simplicity.
 
-In RLWE, all polynomials are computed in the polynomial ring $\mathbb{Z}_q[x] / x^n + 1$, where $x^n + 1$ is a cyclotomic polynomial with $n = 2^f$ for some integer $f$ and the polynomial coefficients are in $\mathbb{Z}_q$. Thus, all polynomials in RLWE have the coefficient range $\mathbb{Z}_q$ and the maximum polynomial degree of $n -1$. For simplicity, we denote $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$.
+In RLWE, all polynomials are computed in the polynomial ring $\mathbb{Z}_q[x] / (x^n + 1)$, where $x^n + 1$ is a cyclotomic polynomial with $n = 2^f$ for some integer $f$ and the polynomial coefficients are in $\mathbb{Z}_q$. Thus, all polynomials in RLWE have the coefficient range $\mathbb{Z}_q$ and the maximum polynomial degree of $n -1$. For simplicity, we denote $\mathcal{R}_{\langle n,q \rangle} = \mathbb{Z}_q[x] / (x^n + 1)$.
 
 \subsection{Setup}
 
-Let $t$ the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, q \rangle}$ whose coefficients are either ${-1, 0, 1}$ as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ the scaling factor of plaintext.
+Let $t$ be the size of plaintext, and $q$ the size of ciphertext, where $t < q$ ($t$ is much smaller than $q$) and $t | q$ (i.e., $t$ divides $q$). Randomly pick a $(n-1)$-degree polynomial $S \in \mathcal{R}_{\langle n, q \rangle}$ whose coefficients are either $\{-1, 0, 1\}$ as a secret key. Let $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$ be the scaling factor of plaintext.
 
 Notice that RLWE's setup parameters are similar to that of LWE. One difference is that $S$ is not a vector of length $k$ sampled from $\{-1, 0, 1\}$, but an $(n-1)$-degree polynomial encoding $n$ secret coefficients, where each coefficient is a randomly picked ternary number from $\{-1, 0, 1\}$ (denoted as $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$).
 
@@ -50,7 +50,7 @@ $ $
 
 \begin{enumerate}
 \item Given the ciphertext $(A, B)$ where $B = A \cdot S + \Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$, compute $B - A \cdot S = \Delta \cdot M + E$. 
-\item Round each coefficient of the polynomial $\Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$ to the nearest multiple of $\Delta$ (i.e., round it as a base $\Delta$ number), which is denoted as $\lceil \Delta \cdot M + E \rfloor_{\Delta}$.  This rounding operation successfully eliminates $E$ and gives $\Delta \cdot M$. One caveat is that the noise $E$'s each coefficient $e_i$ should be small enough to be $e_i < \dfrac{\Delta}{2}$ in order to be eliminated during the rounding. Otherwise, some of $e_i$'s higher bits will overlap and corrupt the plaintext $m_i$ coefficient's lower bits and won't be blown away.
+\item Round each coefficient of the polynomial $\Delta \cdot M + E \in \mathcal{R}_{\langle n,q \rangle}$ to the nearest multiple of $\Delta$ (i.e., round it as a base $\Delta$ number), which is denoted as $\lceil \Delta \cdot M + E \rfloor_{\Delta}$.  This rounding operation successfully eliminates $E$ and gives $\Delta \cdot M$. One caveat is that the noise $E$'s each coefficient $e_i$ should be small enough to be $|e_i| < \dfrac{\Delta}{2}$ in order to be eliminated during the rounding. Otherwise, some of $e_i$'s higher bits will overlap and corrupt the plaintext $m_i$ coefficient's lower bits and won't be blown away.
 \item Compute $\dfrac{\Delta \cdot M}{\Delta}$, which is equivalent to scaling down each polynomial coefficient in $\Delta \cdot M$ by $\Delta$ (or right-shifting each coefficient by $\text{log}_2 \Delta$ bits if $\Delta$ is a power of 2).
 \end{enumerate}
 
@@ -61,7 +61,7 @@ In summary, the RLWE decryption formula is summarized as follows:
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:rlwe-dec}} RLWE Decryption}}]
 
-\textbf{\underline{Decryption Input}:} $\textsf{ct} = (A, B) \text{ } \in \mathcal{R}_{\langle n, r \rangle}^{2}$
+\textbf{\underline{Decryption Input}:} $\textsf{ct} = (A, B) \text{ } \in \mathcal{R}_{\langle n, q \rangle}^{2}$
 
 $ $
 
@@ -72,6 +72,6 @@ $ $
 
 \end{enumerate}
 
-For correct decryption, every noise coefficient $e_i$ of polynomial $E$ should be: $e_i < \dfrac{\Delta}{2}$. And in case $t$ does not divide $q$, $q$ should be sufficiently larger than $t$.
+For correct decryption, every noise coefficient $e_i$ of polynomial $E$ should be: $|e_i| < \dfrac{\Delta}{2}$. And in case $t$ does not divide $q$, $q$ should be sufficiently larger than $t$.
 
 \end{tcolorbox}

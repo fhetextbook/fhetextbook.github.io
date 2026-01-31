@@ -5,7 +5,7 @@ $ $
 
 Suppose we have a GLWE ciphertext \textsf{ct}:
 
-$\textsf{ct} = \textsf{GLWE}_{S, \sigma}(\Delta M + E) = ( A_0, A_1, ... \text{ } A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{ct} = \textsf{GLWE}_{S, \sigma}(\Delta M + E) = ( A_0, A_1, \ldots, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $ $
 
@@ -17,7 +17,7 @@ $ $
 
 \noindent Let's define the following ciphertext-to-plaintext multiplication operation:
 
-$\Lambda \cdot \textsf{ct} = (\Lambda \cdot A_0, \Lambda \cdot A_1, ... \text{ } \Lambda \cdot A_{k-1}, \Lambda \cdot B)$
+$\Lambda \cdot \textsf{ct} = (\Lambda \cdot A_0, \Lambda \cdot A_1, \ldots, \Lambda \cdot A_{k-1}, \Lambda \cdot B)$
 
 $ $
 
@@ -43,7 +43,7 @@ $ $
 \item Define the following notations: \\
 $A_0' = \Lambda \cdot A_0$ \\
 $A_1' = \Lambda \cdot A_1$ \\
-$...$ \\
+$\vdots$ \\
 $A_{k-1}' = \Lambda \cdot A_{k-1}$ \\
 $E' = \Lambda \cdot E$ \\
 $B' = \Lambda \cdot B$ \\
@@ -55,11 +55,11 @@ $= \sum\limits_{i=0}^{k-1}{((\Lambda \cdot A_i) \cdot S_i)} + \Delta \cdot (\Lam
 $= \sum\limits_{i=0}^{k-1}{(A_i' \cdot S_i)} + \Delta \cdot (\Lambda \cdot M) + (E')$ \\
 \item Since $B' = \sum\limits_{i=0}^{k-1}{(A_i' \cdot S_i)} + \Delta \cdot (\Lambda \cdot M) + (E')$, 
 
-$(A_0', A_1', ... \text{ } A_{k-1}'
+$(A_0', A_1', \ldots, A_{k-1}'
 , B')$ form the ciphertext $\textsf{GLWE}_{S, \sigma}(\Delta \cdot \Lambda \cdot M)$.
 \item Thus, \\
 $\Lambda \cdot \textsf{GLWE}_{S, \sigma}(\Delta M + E)$ \\
-$ = (\Lambda \cdot A_0, \text { } \Lambda \cdot A_0, A_1, ... \text{ } \Lambda \cdot A_{k-1}, \text { } \Lambda \cdot B)$ \\
+$ = (\Lambda \cdot A_0, \text { } \Lambda \cdot A_1, \ldots, \Lambda \cdot A_{k-1}, \text { } \Lambda \cdot B)$ \\
 $ = ( \{A'_{i}\}_{i=0}^{k-1}, \text { } \Lambda \cdot B)$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M \cdot \Lambda) + \Lambda \cdot E)$
 
@@ -69,7 +69,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M \cdot \Lambda) + \Lambda \cdot E)$
 \end{enumerate}
 \end{myproof}
 
-If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta \cdot \Lambda \cdot M + \Lambda \cdot E)$ by using $S$, then we get the plaintext $\Lambda \cdot M$. Meanwhile, $A_0', A_1', ... \text{ } A_{k-1}', E'$ get eliminated by rounding during decryption, regardless of whatever their values were randomly sampled during encryption. 
+If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta \cdot \Lambda \cdot M + \Lambda \cdot E)$ by using $S$, then we get the plaintext $\Lambda \cdot M$. Meanwhile, $A_0', A_1', \ldots, A_{k-1}', E'$ get eliminated by rounding during decryption, regardless of whatever their values were randomly sampled during encryption. 
 
 The noise is a bigger problem now, because after decryption, the original ciphertext \textsf{ct}'s noise has increased from $E$ to $E' = \Lambda \cdot E$. This means that if we continue multiplication computations without decrypting the ciphertext to eliminate the noise $E'$, it will continue growing more and eventually the noise in the lower bit area in $B$ will overflow to the scaled plaintext bit area. If this happens, the noise $E'$ won't be eliminated during decryption, ending up corrupting the plaintext $M$. Therefore, if the constant $\Lambda$ is big, it is recommended to use gadget decomposition (\autoref{subsec:gadget-decomposition}), which we will explain in the next subsection. 
 

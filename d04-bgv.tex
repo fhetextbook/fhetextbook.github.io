@@ -73,9 +73,9 @@ $ $
 (\omega^{J(\frac{n}{2} - 1)})^{n-1} & (\omega^{J(\frac{n}{2} - 2)})^{n-1} & \cdots & (\omega^{J(0)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 1)})^{n-1} & (\omega^{J_*(\frac{n}{2} - 2)})^{n-1} & \vdots  & (\omega^{J_*(0)})^{n-1}
 \end{bmatrix}$}}
 
-\textcolor{red}{ $\rhd$ where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)}
+$ $
 
-The final output is $M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_t[X] / (X^n + 1)$, 
+, where $\omega$ is a primitive $2n$-th root of unity modulo $t$ (which implies $t \equiv 1 \bmod 2n$). This implies that $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$ (see \autoref{subsubsec:poly-vector-transformation-modulus}). The final output is $M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_t[X] / (X^n + 1)$, 
 which we can also treat as 
 
 $M = \sum\limits_{i=0}^{n-1} m_iX^i \text{ } \in \mathbb{Z}_q[X] / (X^n + 1)$ during encryption/decryption later, because the initial fresh coefficients $m_i$ are guaranteed to be smaller than any $q$ where $q = \{q_0, q_1, \cdots, q_L\}$.
@@ -121,7 +121,7 @@ BGV's encryption decryption process is described as follows:
 \item The ciphertext modulus $q$ is leveled like in CKKS: $q \in \{q_0, q_1, \cdots, q_L\}$, where each $q_l = \prod\limits_{i=0}^l w_i$ (each $w_i$ is a CRT modulus), and each $q_l \equiv 1 \bmod t$ (will be explained in \autoref{subsec:bgv-modulus-switch})
 
 \item The noise scaling factor $\Delta=t$ 
-\item The secret key $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of polynomial $S$ ternary (i.e., $\{-1, 0, 1\}$).
+\item The secret key $S \xleftarrow{\$} \mathcal{R}_{\langle n, \textit{tern} \rangle}$. The coefficients of the polynomial $S$ ternary (i.e., $\{-1, 0, 1\}$).
 
 \end{itemize}
 
@@ -146,11 +146,13 @@ BGV's encryption decryption process is described as follows:
 \begin{enumerate}
 \item $\textsf{RLWE}^{-1}_{S,\sigma}(\textsf{ct}) = B + A \cdot S  = M + \Delta E \pmod q$
 
-\item $M = M + \Delta E \bmod t$ \textcolor{red}{ $\rhd$ modulo reduction of $M + \Delta E$ by $t$}
+\item Compute $M + \Delta E \bmod t$ to get $M$. \textcolor{red}{ $\rhd$ modulo reduction of $M + \Delta E$ by $t$}
 
 \end{enumerate}
 
-The final output is $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$
+$ $
+
+The final output is $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$.
 
 $ $
 
@@ -158,7 +160,8 @@ $ $
 
 %\begin{enumerate}
 %\item 
-Each coefficient $\Delta e_i + m_i$ that contains the scaled noise and the plaintext should not overflow or underflow its ciphertext's any current moment's multiplicative level $l$'s ciphertext modulus $q_l$ (i.e., $\Delta e_i + m_i < q_l$)
+Each coefficient $\Delta e_i + m_i$ that contains the scaled noise and the plaintext should not overflow or underflow its ciphertext's any current moment's multiplicative level $l$'s ciphertext modulus $q_l$ (i.e., $\Delta e_i + m_i < q_l$, or $|\Delta e_i + m_i| < \frac{q_l}{2}$ in the signed modulo representation). 
+
 %\end{enumerate}
 
 \end{tcolorbox}
@@ -174,7 +177,7 @@ BGV's ciphertext-to-ciphertext addition scheme is exactly the same as BFV's sche
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-add-cipher}} BGV Ciphertext-to-Ciphertext Addition}}]
-$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle} ) + \textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 1 \rangle}) $
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle} ) + \textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}) $
 
 $ = ( A^{\langle 1 \rangle}, \text{ } B^{\langle 1 \rangle}) + (A^{\langle 2 \rangle}, \text{ } B^{\langle 2 \rangle}) $
 
@@ -237,14 +240,14 @@ $= (A \bmod q_{l-1}) \cdot S + (B \bmod q_{l-1}) - K\cdot q_l$
 
 $= (A - K_A\cdot q_{l-1}) \cdot S + (B - K_B\cdot q_{l-1}) - K\cdot q_l$ 
 
-$= A\cdot S + B - (K_A + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
-\textcolor{red}{ $\rhd$ where $\dfrac{q}{q_{l-1}}$ is an integer (the $l$-th prime element of $q_L$)}
+$= A\cdot S + B - (K_A \cdot S + K_B + K\dfrac{q}{q_{l-1}})\cdot q_{l-1}$
+\textcolor{red}{ $\rhd$ where $\dfrac{q}{q_{l-1}} = w_l$ (i.e., the $l$-th prime element of $q_L$)}
 
-$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ $\rhd$ where $K' = K_A + K_B + K\dfrac{q}{q_{l-1}}$ is an integer}
+$= A\cdot S + B - K'\cdot q_{l-1}$ \textcolor{red}{ $\rhd$ where $K' = K_A\cdot S + K_B + K\dfrac{q}{q_{l-1}}$, $\dfrac{q}{q_{l-1}} = w_l$ }
 
 $= A\cdot S + B \bmod q_{l-1}$
 
-$= M + \Delta E$ \textcolor{red}{ $\rhd$ since $\Delta M + E < q_0 < q_{l-1}$}
+$= M + \Delta E$ \textcolor{red}{ $\rhd$ since $M + \Delta E < q_0 < q_{l-1}$}
 
 $ $
 
@@ -252,11 +255,11 @@ As shown above, $(A', B') \bmod q_{l-1}$ decrypts to the same $M + \Delta E$, a 
 
 $ $
 
-CKKS's \textsf{ModDrop} is summarized as follows:
+BGV's \textsf{ModDrop} is summarized as follows:
 
 
 
-\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-plain}} BGV's \textsf{ModDrop}}}]
+\begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-moddrop}} BGV's \textsf{ModDrop}}}]
 
 Given a BGV ciphertext with the $l$-th multiplicative level $\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B) \bmod q_l$, a \textsf{ModDrop} operation is as follows: 
 
@@ -322,19 +325,21 @@ $H_B = q_l^{-1}\cdot\epsilon'_B \bmod t$
 
 $ $
 
-\item We compute the final mod-switched ciphertext $\hat{\textsf{ct}}$ as follows:
+\item We propose the final mod-switched ciphertext $\hat{\textsf{ct}}$ as follows:
 
 $\hat{\textsf{ct}} = (\hat{A}, \hat{B}) = (A' + H_A, \text{ } B' + H_B) \bmod \hat{q}$
 
 $ $
 
-Note that the computation result of $A' + H_A$ and $B' + H_B$ alone can exceed the range $\mathbb{Z}_{\hat{q}}$, because $A', B' \in \mathbb{Z}_{\hat{q}}$ and $H_A, H_B \in \mathbb{Z}_t$. Therefore, we need to reduce $A' + H_A$ and $B' + H_B$ modulo $\hat{q}$  to derive $\hat{A} \in \mathbb{Z}_{\hat{q}}$ and $\hat{B} \in \mathbb{Z}_{\hat{q}}$. 
+Note that the computation result of $A' + H_A$ and $B' + H_B$ alone can exceed the range $\mathbb{Z}_{\hat{q}}$, because $A', B' \in \mathbb{Z}_{\hat{q}}$ and $H_A, H_B \in \mathbb{Z}_t$. Therefore, our goal is reduce $A' + H_A$ and $B' + H_B$ modulo $\hat{q}$  to derive $\hat{A} \in \mathbb{Z}_{\hat{q}}$ and $\hat{B} \in \mathbb{Z}_{\hat{q}}$. 
 
 $ $
 
 \item From now on, we will verify that $\hat{\textsf{ct}}$ is a valid ciphertext satisfying BGV's required decryption relation. First, we can derive the relationship among $\textsf{ct} = (A, B)$, $A' + H_A$, and $B' + H_B$ as follows:
 
-$\hat{q}\cdot \textsf{ct} \bmod t = (\hat{q}A, \hat{q}B) \bmod t$
+$\hat{q}\cdot \textsf{ct} \bmod t $
+
+$= (\hat{q}A, \hat{q}B) \bmod t$
 
 $= (q_{l} A' + \epsilon'_A, \text{ } q_{l} B' + \epsilon'_B) \bmod t$ \textcolor{red}{ $\rhd$ applying step 1's result: $\hat{q} A = q_{l}A' + \epsilon'_A$, \text{ }  $\hat{q} B = q_{l}B' + \epsilon'_B$}
 
@@ -349,13 +354,14 @@ $ = q_l\cdot(A' + H_A, \text{ } B' + H_B) \bmod t$
 
 $ $
 
-So, $\hat{q}\cdot\textsf{ct} = q_l\cdot(A' + H_A, \text{ } B' + H_B) \bmod t$. But in BGV, $q_l \equiv q_2 \equiv \cdots q_L \equiv 1 \bmod t$. Thus, the following holds:
+So, $\hat{q}\cdot\textsf{ct} = q_l\cdot(A' + H_A, \text{ } B' + H_B) \bmod t$. But in BGV, $q_l \equiv q_2 \equiv \cdots \equiv \hat{q} \equiv \cdots q_L \equiv 1 \bmod t$. Thus, the following holds:
 
-$\textsf{ct} = (A, B) = (A' + H_A, \text{ } B' + H_B) \pmod{t}$
+$A \equiv A' + H_A \bmod t$
 
-\begin{comment}
-In other words, $\textsf{ct} = \dfrac{q_l}{\hat{q}}\hat{\textsf{ct}} \pmod{t}$. Let's denote $\kappa = \dfrac{\hat{q}}{q_l} \bmod t$. In BGV, we denote the variable kappa $\kappa$ as a \textit{message correction factor}, which is associated with a BGV ciphertext $\textsf{ct}$ and its inverse $\kappa^{-1}$ is to be multiplied when performing modulo-$t$ reduction at the end of the decryption process. The role of $\kappa$ is to adjust the message coefficients upon decryption to make it decrypt to the expected correct value. For regular BGV ciphertexts, the message correction factor $\kappa = 1$ unless otherwise explicitly stated. 
-\end{comment}
+$B \equiv B' + H_B \bmod t$
+
+
+
 
 $ $
 
@@ -367,14 +373,20 @@ $= (A\cdot S + B - K\cdot q_l) \bmod t$ \textcolor{red}{ $\rhd$ where $K\cdot q_
 
 $= ((A' + H_A)\cdot S + B' + H_B - K\cdot q_{l}) \bmod t$ \textcolor{red}{ $\rhd$ applying step 4's result: $A \equiv A' + H_A \bmod t$, \text{ } $B \equiv B' + H_B \bmod t$}
 
-$= ((A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}) \bmod t$ \textcolor{red}{ $\rhd$ since in BGV, $q_1\equiv q_2\equiv \cdots q_L \equiv 1 \bmod t$, and we chose $\hat{q}$ such that $\hat{q} \equiv 1 \bmod t$}
+$= ((A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}) \bmod t$ \textcolor{red}{ $\rhd$ since in BGV, $q_0\equiv q_1\equiv \cdots q_L \equiv 1 \bmod t$, and we chose $\hat{q}$ such that $\hat{q} \equiv 1 \bmod t$}
 
 $ $
 
-Now, if we can prove that $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q} = (A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$ (i.e., $K\cdot\hat{q}$ reduces $(A' + H_A)\cdot S + B' + H_B$ modulo-$\hat{q}$), then this sufficiently leads to the conclusion that $((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}) \bmod t = M$. 
+\item Now, if we can prove that $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q} = (A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$ (i.e., $K\cdot\hat{q}$ reduces $(A' + H_A)\cdot S + B' + H_B$ modulo $\hat{q}$), then this sufficiently leads to the following conclusion: 
+
+$(\hat{A}\cdot S + \hat{B} \bmod \hat{q}) \bmod t$
+
+$= ((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}) \bmod t$
+
+$= M$ \textcolor{red}{ $\rhd$ i.e., $(\hat{A}, \hat{B}) = (A' + H_A, B' + H_B) \bmod \hat{q}$ is a valid ciphertext that decrypts to $M$}
 
 $ $
-
+\begin{comment}
 \item The following is also true: 
 
 $(A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$
@@ -392,6 +404,7 @@ $ $
 Therefore, proving $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q} = (A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$ is equivalent to proving $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q} = \hat{A}\cdot S + \hat{B} \bmod \hat{q}$. 
 
 $ $
+\end{comment}
 
 
 \item We will prove that $(A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q} = (A' + H_A)\cdot S + B' + H_B \bmod \hat{q}$ as follows: 
@@ -415,7 +428,7 @@ $ = \dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B \bmod q_l) + H_A\cdot S + H_B - \df
 
 $ $
 
-For successful decryption, every coefficient of the resulting polynomial of the above expression has to be within the range $\mathbb{Z}_{\hat{q}}$ (which means that $K\cdot\hat{q}$ has successfully reduced $(A' + H_A)\cdot S + B' + H_B$ modulo $\hat{q}$). The first term $\dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B \bmod q_l)$ can be viewed as the original ciphertext \textsf{ct}'s noise (with the plaintext message) scaled down by $\dfrac{\hat{q}}{q_l}$. The coefficients of the second term $H_A \cdot S$ are also small, because $H_A \in \mathbb{Z}_t$ and $S \in \mathbb{Z}_3$. The coefficients of the third term $H_B$ are also small, because $H_B \in \mathbb{Z}_t$. The coefficients of the last term $- \dfrac{\epsilon'_A\cdot S + \epsilon'_B}{q_{l}}$ are also small, because $\dfrac{\epsilon'_A}{q_l}$ and $\dfrac{\epsilon'_B}{q_l}$ are $\in \mathbb{Z}_{\frac{q_l}{\hat{q}}}$. 
+For successful decryption, every coefficient of the resulting polynomial of the above expression has to be within the range $\mathbb{Z}_{\hat{q}}$ (which means that $K\cdot\hat{q}$ has successfully reduced $(A' + H_A)\cdot S + B' + H_B$ modulo $\hat{q}$). The first term $\dfrac{\hat{q}}{q_{l}}\cdot(A\cdot S + B \bmod q_l)$ can be viewed as the original ciphertext \textsf{ct}'s noise (with the plaintext message) scaled down by $\dfrac{\hat{q}}{q_l}$, which is guaranteed to be within the $\mathbb{Z}_{\hat{q}}$ range. The coefficients of the second term $H_A \cdot S$ are also small, because $H_A \in \mathbb{Z}_t^n$ and $S \in \{-1, 0, 1\}^n$. The coefficients of the third term $H_B$ are also small, because $H_B \in \mathbb{Z}_t^n$. The coefficients of the last term $- \dfrac{\epsilon'_A\cdot S + \epsilon'_B}{q_{l}}$ are also small, because $\dfrac{\epsilon'_A}{q_l}$ and $\dfrac{\epsilon'_B}{q_l}$ are $\in \mathbb{Z}_{\frac{q_l}{\hat{q}}}$. 
 
 $ $
 
@@ -425,17 +438,17 @@ $ $
 
 \item Finally, we combine the results of step 6 and 7 as follows: 
 
-$(\hat{A}\cdot S + \hat{B}) \bmod \hat{q} \bmod t$
+$\bm((\hat{A}\cdot S + \hat{B}) \bmod \hat{q} \bm) \bmod t$
 
-$= \bm((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}\bm) \bmod t$ \textcolor{red}{ $\rhd$ by applying step 6}
+$= \bm((A' + H_A)\cdot S + B' + H_B \bmod \hat{q}\bm) \bmod t$ \textcolor{red}{ $\rhd$ since $\hat{A} \equiv A' + H_A \bmod \hat{q}$, and $\hat{B} \equiv B' + H_B \bmod \hat{q}$}
 
-$ = (A\cdot S + B \bmod q_l) \bmod t$ \textcolor{red}{ $\rhd$ by applying step 7}
+$ = ((A' + H_A)\cdot S + B' + H_B - K\cdot \hat{q}) \bmod t$ \textcolor{red}{ $\rhd$ by applying step 7}
 
-$ = M$
+$ = M$ \textcolor{red}{ $\rhd$ by applying step 5}
 
 $ $
 
-This means that decrypting $(\hat{A}, \hat{B}) \bmod \hat{q}$ outputs the message $M$.
+Hence, decrypting $(\hat{A}, \hat{B}) \bmod \hat{q}$ outputs the message $M$.
 
 \end{enumerate}
 
@@ -475,7 +488,7 @@ $\hat{\textsf{ct}} = (\hat{A}, \hat{B}) = (A' + H_A, B' + H_B) \bmod \hat{q}$
 
 $ $
 
-After the modulus switch (i.e., the noise scaling factor), $\Delta = t$ stays the same as before. The secret key $S$ also stays the same as before. The noise gets scaled down roughly by $\dfrac{\hat{q}}{q_l}$, but this does not decrease the noise-to-ciphertext modulus ratio. 
+BGV's modulus switch is used for ciphertext-to-ciphertext multiplication (will be covered in \autoref{subsec:bgv-mult-cipher}). Meanwhile, After BGV's modulus switch (i.e., the noise scaling factor), $\Delta = t$ stays the same as before. The secret key $S$ also stays the same as before. The noise gets scaled down roughly by $\dfrac{\hat{q}}{q_l}$, but this does not decrease the noise-to-ciphertext modulus ratio. The noise-to-ciphertext modulus ratio can be reduced by modulus bootstrapping (will be covered in \autoref{subsec:bgv-bootstrapping}). 
 
 \end{tcolorbox}
 
@@ -486,7 +499,7 @@ After the modulus switch (i.e., the noise scaling factor), $\Delta = t$ stays th
 
 In the case of CKKS (\autoref{subsubsec:ckks-mult-cipher-rescale}), the difference between modulus switch and \textsf{ModDrop} is that the former scales down the plaintext's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} does not affect the plaintext's scaling factor. 
 
-Similarly, in the case of BGV, modulus switch (rescaling) and \textsf{ModDrop} from $q_l \rightarrow q_{l-1}$ both lower a BGV ciphertext's modulus from $q_l \rightarrow q_{l-1}$. However, the key difference is that rescaling also decreases the noise's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} keeps the noise's scaling factor the same as it is. Therefore, rescaling is used only during ciphertext-to-ciphertext multiplication (to be explained in \autoref{subsec:bgv-mult-cipher}) when scaling down the plaintext's scaling factor in the intermediate ciphertext from $\Delta^2 \rightarrow \Delta$. Meanwhile, \textsf{ModDrop} is used to reduce the modulo computation time during an application's routine when it becomes certain that the ciphertext will not undergo any additional ciphertext-to-ciphertext multiplication (i.e., no need to further decrease the ciphertext's modulus). 
+Similarly, in the case of BGV, modulus switch (rescaling) and \textsf{ModDrop} from $q_l \rightarrow q_{l-1}$ both lower a BGV ciphertext's modulus from $q_l \rightarrow q_{l-1}$. However, the key difference is that rescaling also decreases the noise's scaling factor by $\dfrac{q_l}{q_{l-1}} \approx \dfrac{1}{\Delta}$, whereas \textsf{ModDrop} keeps the noise's scaling factor the same as it is. Therefore, rescaling is used only during ciphertext-to-ciphertext multiplication (to be explained in \autoref{subsec:bgv-mult-cipher}) when scaling down the noise's scaling factor in the intermediate ciphertext from $\Delta^2 \rightarrow \Delta$. Meanwhile, \textsf{ModDrop} is used to reduce the modulo computation time during an application's routine when it becomes certain that the ciphertext will not undergo any additional ciphertext-to-ciphertext multiplication (i.e., no need to further decrease the ciphertext's modulus). 
 
 The main difference in modulus switch between CKKS and BGV is that the former decreases the plaintext's scaling factor by approximately $\dfrac{1}{\Delta}$, whereas the latter decreases the noise's scaling factor by approximately $\dfrac{1}{\Delta}$. 
 
@@ -499,15 +512,15 @@ The main difference in modulus switch between CKKS and BGV is that the former de
 \noindent \textbf{- Reference:} 
 \href{https://www.inferati.com/blog/fhe-schemes-bgv}{Introduction to the BGV encryption scheme}
 
-Since BGV uses a leveled ciphertext modulus chain like CKKS, BGV's ciphertext-to-ciphertext multiplication scheme is exactly the same as CKKS's scheme (Summary~\ref*{subsec:bfv-mult-cipher} in \autoref{subsec:bfv-mult-cipher}), except for the rescaling step which uses BGV's modulus switch (\autoref{subsec:bgv-modulus-switch}). 
+Since BGV uses a leveled ciphertext modulus chain like CKKS, BGV's ciphertext-to-ciphertext multiplication scheme is exactly the same as CKKS's scheme (Summary~\ref*{subsec:ckks-mult-cipher} in \autoref{subsec:ckks-mult-cipher}), except for the rescaling step which uses BGV's modulus switch (\autoref{subsec:bgv-modulus-switch}). 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bgv-mult-cipher}} BGV Ciphertext-to-Ciphertext Multiplication}}]
 
 Suppose we have the following two RLWE ciphertexts:
 
-$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$, \text{ } where $B^{\langle 1 \rangle} = -A \cdot S +  M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}$
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}) = (A^{\langle 1 \rangle}, B^{\langle 1 \rangle})$, \text{ } where $B^{\langle 1 \rangle} = -A^{\langle 1 \rangle} \cdot S +  M^{\langle 1 \rangle} + \Delta E^{\langle 1 \rangle}$
 
-$\textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}) = (A^{\langle 2 \rangle}, B^{\langle 2 \rangle})$, \text{ } where $B^{\langle 2 \rangle} = -A \cdot S +  M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}$
+$\textsf{RLWE}_{S, \sigma}(M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}) = (A^{\langle 2 \rangle}, B^{\langle 2 \rangle})$, \text{ } where $B^{\langle 2 \rangle} = -A^{\langle 2 \rangle} \cdot S +  M^{\langle 2 \rangle} + \Delta E^{\langle 2 \rangle}$
 
 $ $
 
@@ -530,7 +543,7 @@ $D_2 = A^{\langle 1 \rangle} \cdot A^{\langle 2 \rangle}$
 
 $ $
 
-, where $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle}$
+The decryption relation satisfies: $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle}$
 
 $ = \underbrace{B^{\langle 1 \rangle}\cdot B^{\langle 2 \rangle}}_{D_0}  + \underbrace{(B^{\langle 2 \rangle}\cdot A^{\langle 1 \rangle} + B^{\langle 1 \rangle}\cdot A^{\langle 2 \rangle})}_{D_1} \cdot S + \underbrace{(A^{\langle 1 \rangle} \cdot A^{\langle 2 \rangle})}_{D_2} \cdot \underbrace{S \cdot S}_{S^2}$
 
@@ -550,11 +563,11 @@ $ $
 
 \item \textbf{\underline{(Optional) Rescaling}}
 
-To suppress the noise's growing scaling factor from $\Delta^2$ to $\Delta$, switch the ciphertext's modulo from $q \rightarrow \hat q$ by updating $(A, B)$ to $(\hat A, \hat B)$ according to BGV's modulus switch explained in Summary~\ref*{subsec:bgv-modulus-switch} (\autoref{subsec:bgv-modulus-switch}).
+To suppress the noise component scaled by $\Delta^2$ and return it to a factor of $\Delta$, switch the ciphertext's modulo from $q \rightarrow \hat q$ by updating $(A, B)$ to $(\hat A, \hat B)$ according to BGV's modulus switch explained in Summary~\ref*{subsec:bgv-modulus-switch} (\autoref{subsec:bgv-modulus-switch}).
 
 $ $
 
-After the above update of $(A, B)$ to $(\hat A, \hat B)$, the noise scaling factor $\Delta = t$ and the plaintext $M$ stay the same, as we proved in \autoref{subsec:bgv-modulus-switch} that $((\hat A \cdot S + B) \bmod \hat q) \bmod t = M$.
+After the above update of $(A, B)$ to $(\hat A, \hat B)$, the noise scaling factor $\Delta = t$ and the plaintext $M$ stay the same, as we proved in \autoref{subsec:bgv-modulus-switch} that $((\hat A \cdot S + \hat B) \bmod \hat q) \bmod t = M$.
 
 $ $
 
@@ -566,7 +579,7 @@ $ $
 
 \end{tcolorbox}
 
-\para{Details of the Optional Rescaling:} Before rescaling, the contents of the ciphertext are $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle} + \epsilon$, where $\epsilon$ is a relinearization error. Therefore, after each ciphertext-to-ciphertext multiplication, the noise's scaling factor will become squared as $\Delta^2, \Delta^4, \Delta^8, \cdots$. To reduce such exponential noise growth rate, we can optionally rescale down the ciphertext by $w_l = \dfrac{q_l}{q_{l-1}} > \Delta$ at the end of each relinearization at multiplicative level $l$, which is the noise's growth rate (effectively keeping the noise scaling factor as $\Delta$). After rescaling, the ciphertext gets scaled down by $w_l$ and then added by a new noise $\epsilon_2$, which generates a new noise $\epsilon_2$. Before the rescaling, the noise grew roughly by the factor of $\Delta = t$ (as the largest noise term is $\Delta^2 E^{\langle 1 \rangle} E^{\langle 2 \rangle}$), but the rescaling process reduces this growth rate by the factor of $w_l$ and then introduces a new constant noise $\epsilon_2$. Therefore, if $w_l$ is sufficiently bigger than $\Delta = t$, the resulting noise will decrease compared to both $\Delta E^{\langle 1 \rangle}$ and $\Delta E^{\langle 2 \rangle}$. Due to this reason, when we design the modulus chain of BGV, we require each $w_l$ to be sufficiently bigger than $\Delta = t$ to effectively reduce the noise growth rate upon each ciphertext-to-ciphertext multiplication (while ensuring the property that its reduction modulo $t$ gives the plaintext $M$ as explained in \autoref{subsec:bgv-modulus-switch}). Meanwhile, the constant noise term $\epsilon_2$ gets newly added upon each rescaling, but this term becomes part of the rescaled ciphertext, which will be later reduced by the factor of $w_{l-1}$ in the future rescaling. Therefore, BGV's rescaling upon ciphertext-to-ciphertext multiplication effectively suppresses the noise growth. 
+\para{Details of the Optional Rescaling:} Before rescaling, the contents of the ciphertext are $M^{\langle 1 \rangle}M^{\langle 2 \rangle} + \Delta\cdot (M^{\langle 1 \rangle}E^{\langle 2 \rangle} + M^{\langle 2 \rangle}E^{\langle 1 \rangle}) + \Delta^2E^{\langle 1 \rangle}E^{\langle 2 \rangle} + \epsilon$, where $\epsilon$ is a relinearization error. Therefore, after each ciphertext-to-ciphertext multiplication, the noise's scaling factor will become squared as $\Delta^2, \Delta^4, \Delta^8, \cdots$. To reduce such exponential noise growth rate, we can optionally rescale down the ciphertext by $w_l = \dfrac{q_l}{q_{l-1}} > \Delta$ at the end of each relinearization at multiplicative level $l$, which is the noise's growth rate (effectively keeping the noise scaling factor as $\Delta$). After rescaling, the ciphertext gets scaled down by $w_l$ and then added by a new noise $\epsilon_2$. Before the rescaling, the noise grew roughly by the factor of $\Delta = t$ (as the largest noise term is $\Delta^2 E^{\langle 1 \rangle} E^{\langle 2 \rangle}$), but the rescaling process reduces this growth rate by the factor of $w_l$ and then introduces a new constant noise $\epsilon_2$. Therefore, if $w_l$ is sufficiently bigger than $\Delta = t$, the resulting noise will decrease compared to both $\Delta E^{\langle 1 \rangle}$ and $\Delta E^{\langle 2 \rangle}$. Due to this reason, when we design the modulus chain of BGV, we require each $w_l$ to be sufficiently bigger than $\Delta = t$ to effectively reduce the noise growth rate upon each ciphertext-to-ciphertext multiplication (while ensuring the property that its reduction modulo $t$ gives the plaintext $M$ as explained in \autoref{subsec:bgv-modulus-switch}). Meanwhile, the constant noise term $\epsilon_2$ gets newly added upon each rescaling, but this term becomes part of the rescaled ciphertext, which will be later reduced by the factor of $w_{l-1}$ in the future rescaling. Therefore, BGV's rescaling upon ciphertext-to-ciphertext multiplication effectively suppresses the noise growth. 
 
 On the other hand, the above design strategy of noise reduction is inapplicable to CKKS, because in CKKS, we use the scaling factor $\Delta$ to scale the message $M$ (not the noise $E$), and thus CKKS requires each $w_l \approx \Delta$ in order to preserve the plaintext's scaling factor $\Delta$ as the same value across ciphertext-to-ciphertext multiplications. Because of this difference in design, CKKS inevitably increases the noise after each ciphertext-to-ciphertext multiplication. 
 
@@ -595,14 +608,14 @@ BGV's homomorphic rotation scheme of input vector slots is exactly the same as B
 Suppose we have a BGV ciphertext and a key-switching key as follows:
 
 \[
-\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B), \quad \textsf{RLev}_{S, \sigma}^{\beta, l}(S^{J(h)})
+\textsf{RLWE}_{S, \sigma}(M + \Delta E) = (A, B), \quad \textsf{RLev}_{S, \sigma}^{\beta, l}(S(X^{J(h)}))
 \]
 
 Then, the procedure of rotating the first-half elements of the ciphertext's original input vector $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) and the second-half elements of $\vec{v}$ by $h$ positions to the left (in a wrapping manner among them) is as follows: 
 
 \begin{enumerate}
 \item Update $A(X)$, $B(X)$ to $A(X^{J(h)})$, $B(X^{J(h)})$. 
-\item Perform the following key switching (\autoref{subsec:ckks-key-switching}) from $S(X^{J(h)})$ to $S(X)$:
+\item Perform the following key switching (refer to \autoref{subsec:bfv-key-switching}) from $S(X^{J(h)})$ to $S(X)$:
 
 $\textsf{RLWE}_{S(X),\sigma}\bm{(} M(X^{J(h)}) + \Delta E(X^{J(h)})\bm{)} $
 
@@ -653,7 +666,7 @@ Note that $K'\hat{q}$ is the $\hat{q}$-multiple overflow and does not get reduce
 
 $ $
 
-\item \textbf{\textsf{\underline{CoeffToSlot}}:} This step works the same way as CKKS and BFV's \textsf{CoeffToSlot} step: move the coefficients of polynomial $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$ to the input vector slots of a new ciphertext. We denote polynomial $Z = p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$, and each $i$-th coefficient of $Z$ as $z_i$. For the \textsf{CoeffToSlot} step, we homomorphically compute $Z \cdot n^{-1} \cdot \hathat W \cdot I_n^R$. Then, each input vector slot of the resulting ciphertext ends up storing each $z_i$ of the polynomial $Z$. 
+\item \textbf{\textsf{\underline{CoeffToSlot}}:} This step works the same way as CKKS and BFV's \textsf{CoeffToSlot} step: move the coefficients of the polynomial $p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$ to the input vector slots of a new ciphertext. We denote polynomial $Z = p^{\varepsilon-1} M + p^\varepsilon E + \hat{q}K'$, and each $i$-th coefficient of $Z$ as $z_i$. For the \textsf{CoeffToSlot} step, we homomorphically compute $Z \cdot n^{-1} \cdot \hathat W \cdot I_n^R$. Then, each input vector slot of the resulting ciphertext ends up storing each $z_i$ of the polynomial $Z$. 
 
 $ $
 
@@ -665,9 +678,9 @@ $ = p^{\varepsilon-1} m_i + p^\varepsilon e_i + k'_i\cdot(k^{\langle \hat{q} \ra
 
 $ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon  \cdot (e_i + k'_i\cdot k^{\langle \hat{q} \rangle }) $ \textcolor{red}{ $\rhd$ rearranging the terms}
 
-$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ $\rhd$ where $ k^{\langle \hat{q} + \varepsilon \rangle } = e_i + k'_i\cdot k^{\langle \hat{q} \rangle } $}
+$ = p^{\varepsilon-1} m_i + k'_i + p^\varepsilon \cdot k_i^{\langle \hat{q} + \varepsilon \rangle } $ \textcolor{red}{ $\rhd$ where $ k_i^{\langle \hat{q} + \varepsilon \rangle } = e_i + k'_i\cdot k^{\langle \hat{q} \rangle } $}
 
-$ = p^{\varepsilon-1} m_i + k'_i \bmod p^\varepsilon$
+$ \equiv p^{\varepsilon-1} m_i + k'_i \pmod{p^\varepsilon}$
 
 $ $
 
@@ -714,7 +727,7 @@ $= p^{\varepsilon - 2}M + \left\lfloor\dfrac{K'}{p}\right\rfloor + K''p^{\vareps
 
 $ $
 
-Verbally speaking, the above inverse-$p$ multiplication to all polynomial coefficients of $(A^{\langle g_1 \rangle}, B^{\langle g_2 \rangle})$ has the following two effects: (2) scales down the plaintext and the noise by $p$; and (2) reduces the modulus garbage term $K'$ to $\left\lfloor\dfrac{K'}{p}\right\rfloor$ (i.e., right-shift by 1 base-$p$ digit). 
+Verbally speaking, the above inverse-$p$ multiplication to all polynomial coefficients of $(A^{\langle g_1 \rangle}, B^{\langle g_2 \rangle})$ has the following two effects: (1) scales down the plaintext and the noise by $p$; and (2) reduces the modulus garbage term $K'$ to $\left\lfloor\dfrac{K'}{p}\right\rfloor$ (i.e., right-shift by 1 base-$p$ digit). 
 
 $ $
 
@@ -734,7 +747,7 @@ $\vdots$
 
 $ $
 
-As shown above, the entire digit extraction procedure results in two effects on the values stored in the plaintext slots: (1) scales down the message $p^{\varepsilon - 1}M$ to $M$; and (2) zeros out the modulus garbage $K'$ (i.e., $\left\lfloor\dfrac{K'}{p^{\varepsilon - 1}}\right\rfloor = 0$); and. The reason why $K''$ gets updated to $K''^{\langle 1 \rangle}, K''^{\langle 2 \rangle}, \cdots, K''^{\langle \varepsilon -1 \rangle}$ across rounds is that each $i$-th round's evaluation of function $F_{\epsilon'}$ and $G_{\epsilon}$ is done modulo $p^{\varepsilon - i}$, which produces new $p^{\varepsilon - i}$-multiple overflow garbage values each time. 
+As shown above, the entire digit extraction procedure results in two effects on the values stored in the plaintext slots: (1) scales down the message $p^{\varepsilon - 1}M$ to $M$; and (2) zeros out the modulus garbage $K'$ (i.e., $\left\lfloor\dfrac{K'}{p^{\varepsilon - 1}}\right\rfloor = 0$). The reason why $K''$ gets updated to $K''^{\langle 1 \rangle}, K''^{\langle 2 \rangle}, \cdots, K''^{\langle \varepsilon -1 \rangle}$ across rounds is that each $i$-th round's evaluation of function $F_{\epsilon'}$ and $G_{\epsilon}$ is done modulo $p^{\varepsilon - i}$, which produces new $p^{\varepsilon - i}$-multiple overflow garbage values each time. 
 
 $ $
 
@@ -749,23 +762,13 @@ $ $
 
 
 
-Beneficially, the $\varepsilon - 1$ rounds of inverse-$p$ multiplications yields the effect of scaling down the plaintext $p^{\varepsilon-1}m_i \rightarrow m_i$, and the noise $k''p^{\varepsilon} \rightarrow k''p$, which has the desired noise scaling factor $p$ for standard BGV ciphertexts. 
-
-%To properly scale down the plaintext coefficients from $p^{\varepsilon-1}m_i \rightarrow m_i$ and the noise coefficients from $k'''p^{\varepsilon} \rightarrow k'''p$, we multiply the ciphertext's polynomial coefficients by $|p^{-(\varepsilon-1)}|_{q_{l'}}$. Note that the inverse of $p^{(\varepsilon-1)} \bmod q_{l'}$ exists because \textsf{gcd}$(p^{(\varepsilon-1)}, q_{l'}) = 1$. This operation results in $p^{-(\varepsilon-1)} \cdot (p^{\varepsilon-1}m_i + k'''_ip^{\varepsilon}) = m_i + k'''_{i}p \bmod q_{l'}$, successfully scaling down the coefficients of the plaintext and the noise polynomials. The output ciphertext is $\textsf{RLWE}_{S, \sigma}(M + K'''p) \bmod q_{l'}$.
-
-%the scaling factor must be computed as the inverse modulo $q^{\langle i \rangle}$, where $q^{\langle i \rangle}$ denotes the specific ciphertext modulus at the end of the digit extraction step (rather than the final modulus $q_{l'}$). Furthermore, although we are conceptually scaling the values stored in the slots, we do not need to encode the inverse into a plaintext vector. Due to the linearity of the scheme, simply multiplying the ciphertext's polynomial coefficients by the scalar integer $|p^{-(\varepsilon-1)}|_{q^{\langle i \rangle}}$ effectively scales the underlying slot values efficiently.
+Beneficially, the $\varepsilon - 1$ rounds of inverse-$p$ multiplications yields the effect of scaling down the plaintext $p^{\varepsilon-1}m_i \rightarrow m_i$ and the noise $k''p^{\varepsilon} \rightarrow k''p$, which has the desired noise scaling factor $p$ for standard BGV ciphertexts. 
 
 $ $
 
 \item \textbf{\textsf{\underline{SlotToCoeff}}:} This step works the same way as BFV's \textsf{SlotToCoeff} step: move $m_i + k''_ip$ stored in the input vector slots back to the polynomial coefficient positions by homomorphically multiplying with $\hathat W^*$. Upon completing this step, the ciphertext modulus is some value $q_{l'}$ smaller than $q_L$, because the homomorphic operation of step $4\sim6$ has consumed a few multiplicative levels. The resulting plaintext coefficients are $m_i + k'''_ip$, where $k''' > k''$ due to the additional noise generated by homomorphically running the \textsf{SlotToCoeff} step. The plaintext modulus (i.e., the noise scaling factor) and the noise scaling factor are $p$ at this point, the standard one for BGV ciphertexts. We let these polynomials be $M$ and $K'''$ each, and the output ciphertext is $\textsf{RLWE}_{S, \sigma}(M + K'''p) \bmod q_{l'}$.
 
-\begin{comment}
-$ $
 
-
-
-\item \textbf{\textsf{\underline{Noise Term Re-interpretation}}:} We can view the $K'''p$ term in $\textsf{RLWE}_{S, \sigma}(M + K'''p) \bmod q_{l'}$ as the total noise of the ciphertext. In other words, we can view $\textsf{RLWE}_{S, \sigma}(M + K'''p)$ with some noise term $K'''p$ as a BGV ciphertext $\textsf{RLWE}_{S, \sigma}(M)$. This step does not require any additional computation. The size of the coefficients of $K'''$ is upper-bounded because the operations of the \textsf{CoeffToSlot}, digit extraction, and \textsf{SlotToCoeff} steps are fixed. With a proper setup of the cryptographic parameters of BGV, we can guarantee that the noise-to-ciphertext modulus ratio always decreases after BGV's bootstrapping. In other words, $\dfrac{||E + K'||_{\infty}}{q_L} < \dfrac{||K'''||_{\infty}}{q_{l'}} < \dfrac{||E||_{\infty}}{\hat{q}}$, where $\hat{q} < q_l < q_{l'} < q_L$, and $||P||_\infty$ denotes the maximum absolute coefficient value of polynomial $P$.
-\end{comment}
 
 \end{enumerate}
 

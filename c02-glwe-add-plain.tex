@@ -1,7 +1,7 @@
 Suppose we have a GLWE ciphertext \textsf{ct} and a new plaintext polynomial $\Lambda$ as follows: 
 
 
-$\textsf{ct} = \textsf{GLWE}_{S, \sigma}(\Delta M + E) = ( A_0, A_1, \gap{$\cdots$}, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{ct} = \textsf{GLWE}_{S, \sigma}(\Delta M + E) = ( A_0, A_1, \ldots, A_{k-1}, B) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $\Lambda$: a new plaintext polynomial
 
@@ -11,7 +11,7 @@ $ $
 
 \noindent Let's define the following ciphertext-to-plaintext addition operation: 
 
-$\textsf{ct} + \Delta\Lambda = ( A_0, \text{ } A_1, \gap{$\cdots$}, A_{k-1}, \text{ } B + \Delta \Lambda)$
+$\textsf{ct} + \Delta\Lambda = ( A_0, \text{ } A_1, \ldots, A_{k-1}, \text{ } B + \Delta \Lambda)$
 
 $ $
 
@@ -45,7 +45,7 @@ This means that $(A_0, A_1, ... \text{ } A_{k-1}
 \item Thus, \\
 $\textsf{GLWE}_{S, \sigma}(\Delta M + E) + \Delta\Lambda$ \\
 $ = (A_0, \text { } A_1, ... \text{ } A_{k-1}, \text { } B + \Delta \Lambda)$ \\
-$ = (\{A_i^{\langle 1 \rangle}\}_{i=0}^{k-1}, \text { } B + \Delta \Lambda)$ \\
+$ = (\{A_i\}_{i=0}^{k-1}, \text { } B + \Delta \Lambda)$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M + \Lambda) + E)$
 
 %\begin{flushright}

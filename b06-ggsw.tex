@@ -1,4 +1,4 @@
-The GGSW cryptosystem is a list of GLev ciphertexts. In the GGSW cryptosystem, the secret key $S$ is a list of $k$ polynomials (i.e., $S_0, S_1, ... \text{ } S_{k-1}$), and each $i$-th GLev ciphertext in the GGSW ciphertext encrypts the plaintext $S_0 \cdot M, S_1 \cdot M, ... \text{ } S_{k-1} \cdot M$, and $M$. This is visually depicted in \autoref{fig:ggsw}.
+The GGSW cryptosystem is a list of GLev ciphertexts. In the GGSW cryptosystem, the secret key $S$ is a list of $k$ polynomials (i.e., $S_0, S_1, ... \text{ } S_{k-1}$), and each $i$-th GLev ciphertext in the GGSW ciphertext encrypts the plaintext $-S_0 \cdot M, -S_1 \cdot M, \ldots, -S_{k-1} \cdot M$, and $M$. This is visually depicted in \autoref{fig:ggsw}.
 
 
 \subsection{Encryption}
@@ -18,7 +18,7 @@ $\textsf{GGSW}_{S, \sigma}^{\beta, l}(M) = \Bigl \{ \{ \textsf{GLev}_{S, \sigma}
 
 \subsection{Decryption}
 
-It is sufficient to decrypt the GGSW ciphertext's any one GLev ciphertext's any one GLWE ciphertext, by using the secret $S$.
+To recover the message $M$, it is sufficient to decrypt the last GLev ciphertext (the one encrypting $M$) using the secret $S$. Decrypting the other rows yields $-S_i \cdot M$, but recovering $M$ from these rows is only possible if $S_i$ is invertible (i.e., $S_i \neq 0$).
 
 
 

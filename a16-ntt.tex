@@ -30,14 +30,16 @@ However, we cannot derive polynomial $C(X)$ based on these $n$ coordinates becau
 
 However, the time complexity of this new method is still $O(n^2)$. The Hadamard product between two polynomials' point-value representations takes $O(n)$, but evaluating a polynomial at $n$ distinct $x$ values takes $O(n^2)$ (because each polynomial has $n$ terms, and we have to compute each term for $n$ distinct $x$ values). The polynomial interpolation for deriving $C(X)$ also takes $O(n^2)$. 
 
-To solve this efficiency problem, this section will introduce an efficient technique for polynomial evaluation, which can evaluate a polynomial at $n$ distinct roots of unity in $O(n \log n)$. This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic Transform(NTT). These two types are technically almost the same, with the only difference being that the FFT assumes a polynomial ring over complex numbers (\autoref{sec:roots}), whereas the NTT assumes a polynomial ring over a finite field (e.g., integers modulo a prime) (\autoref{sec:cyclotomic-polynomial-integer-ring}). Polynomial multiplication based on FFT (or NTT) comprises 3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT (or NTT). 
+To solve this efficiency problem, this section will explain an efficient technique for polynomial evaluation, which can evaluate a polynomial at $n$ distinct roots of unity in $O(n \log n)$. This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic Transform (NTT). These two types are technically almost the same, with the only difference that the FFT assumes a polynomial ring over complex numbers (\autoref{sec:roots}), whereas the NTT assumes a polynomial ring over a finite field (e.g., integers modulo a prime) (\autoref{sec:cyclotomic-polynomial-integer-ring}). Polynomial multiplication based on FFT (or NTT) comprises 3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT (or NTT). 
 
 \subsection{Forward FFT (or NTT)}
 \label{subsec:ntt-forward}
 
 We assume a polynomial ring of $\mathbb{R}[X]/ (X^n + 1)$ for FFT, and $\mathbb{Z}_p[X]/ (X^n + 1)$ for NTT (where $X^n + 1$ is a cyclotomic polynomial). The $x$ coordinates to evaluate the target polynomial are the $n$ distinct roots of $X^n + 1$, which are $\omega^1$, $\omega^3, \ldots, \omega^{2n-1}$, where $\omega$ is the primitive $2n$-th root of unity. Then, the point-value representation of the polynomial $A(X)$ is $\bm ( ({x}_0, {y}_0^{\langle a \rangle}), ({x}_1, {y}_1^{\langle a \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle a \rangle}) \bm )$, where: 
 
-${y}_i^{\langle a \rangle} = A(\omega^{2i + 1}) = \sum\limits_{j=0}^{n-1}a_{j}\cdot (\omega^{2i + 1})^j = \sum\limits_{j=0}^{n-1}a_{j}\cdot \omega^{(2i + 1)\cdot j}$. 
+${y}_i^{\langle a \rangle} = A(\omega^{2i + 1}) = \sum\limits_{j=0}^{n-1}a_{j}\cdot (\omega^{2i + 1})^j = \sum\limits_{j=0}^{n-1}a_{j}\cdot \omega^{(2i + 1)\cdot j}$
+
+$ $
 
 We call the vector $\vec{y}^{\langle a \rangle} = (y_0^{\langle a \rangle}, y_1^{\langle a \rangle}, \cdots, y_{n-1}^{\langle a \rangle})$ the Discrete Fourier Transform (DFT) of the coefficient vector $\vec{a} = (a_0, a_1, \cdots, a_{n-1})$. We write this as $\vec{y}^{\langle a \rangle} = \textsf{DFT}(\vec{a})$. As explained in \autoref{subsec:ntt-motivation}, the computation of the DFT takes $O(n^2)$, because we have to evaluate $n$ distinct $X$ values for a polynomial that has $n$ terms.
 
@@ -62,12 +64,8 @@ We recursively split $A_0(X)$ and $A_1(X)$ into half-degree polynomials and eval
 \label{subsec:ntt-forward-details}
 
 Suppose we have a polynomial ring that is either $\mathbb{Z}_{p}[X] / (X^8 + 1)$ (i.e., over a finite field with prime $p$) or $\mathbb{R}[X] / (X^8 + 1)$ (over complex numbers). 
-%$g = 3$ is the generator of $\mathbb{Z}_{17}^* = \{1, 2, \cdots, 16\}$. 
 We denote by $\omega$ a primitive $(2n=16)$-th root of unity, and 
-%which is $\omega = e^{\frac{i 2\pi}{n}}$ and %$ = g^{\frac{p - 1}{n}}$.
-%= 3^{\frac{17 - 1}{8}} = 9$. 
 the 8 distinct roots of $X^8 + 1$ are: $\{\omega^1, \omega^3, \omega^5, \omega^7, \omega^9, \omega^{11}, \omega^{13}, \omega^{15}\}$.
-%$ \bmod 17 \equiv \{1, 9, 13, 15, 16, 8, 4, 2\} \bmod 17$. 
 
 $ $
 
@@ -112,12 +110,12 @@ To evaluate $A(X)$ at the $n$ distinct roots $X = \{\omega^1, \omega^3, \ldots, 
 
 $ $
 
-\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^4$ results in only 2 distinct values: $\omega^0$ and $\omega^8$. This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4$. Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 0}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
+\para{FFT Level $\bm{l = 1}$:} We evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^4$ results in only 2 distinct values: $\omega^4$ and $\omega^{12}$ (which correspond to roots of $X^2+1$). This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^4 = (\omega^5)^4 = (\omega^9)^4 = (\omega^{13})^4 = \omega^4$, and $(\omega^3)^4 = (\omega^7)^4 = (\omega^{11})^4 = (\omega^{15})^4 = \omega^{12}$.
+Therefore, we only need to evaluate $A_{0,0}(X^4)$, $A_{0,1}(X^4)$, $A_{1,0}(X^4)$, and $A_{1,1}(X^4)$ at 2 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition. As there are a total of 4 polynomials to evaluate (i.e., $A_{0, 0}(X^4), A_{0, 1}(X^4), A_{1, 0}(X^4), A_{1, 1}(X^4)$), we compute the FFT a total of $4 \cdot 2 = 8$ times. 
 
 $ $
 
-\para{FFT Level $\bm{l = 2}$:} Based on the evaluation results from FFT Level 1 as building blocks, we evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^2$ results in only 4 distinct values: $\omega^1$, $\omega^5$, $\omega^9$, and $\omega^{13}$.
-This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^2 = (\omega^9)^2$, $(\omega^3)^2 = (\omega^{11})^2$, $(\omega^5)^2 = (\omega^{13})^2$, and $(\omega^7)^2 = (\omega^{15})^2$. Therefore, we only need to evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at 4 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition (where we use the results from FFT Level 1 as building blocks, and the computational structure of FFT Level 2 is the same as that of FFT Level 1). There are a total of 2 polynomials to evaluate (i.e., $A_{0}(X^2), A_{1}(X^2)$); thus, we compute the FFT a total of $2 \cdot 4 = 8$ times. 
+\para{FFT Level $\bm{l = 2}$:} Based on the evaluation results from FFT Level 1 as building blocks, we evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$. However, notice that plugging in $X = \{\omega^1, \omega^3, \cdots, \omega^{15}\}$ to $X^2$ results in only 4 distinct values: $\omega^2$, $\omega^6$, $\omega^{10}$, and $\omega^{14}$ (which correspond to roots of $X^4+1$). This is because the order of $\omega$ is $2n$ (i.e., $\omega^{2n} = 1$), and thus $(\omega^1)^2 = (\omega^9)^2$, $(\omega^3)^2 = (\omega^{11})^2$, $(\omega^5)^2 = (\omega^{13})^2$, and $(\omega^7)^2 = (\omega^{15})^2$. Therefore, we only need to evaluate $A_{0}(X^2)$ and $A_{1}(X^2)$ at 4 distinct $x$ values instead of 8, where each evaluation requires a constant number of arithmetic operations: computing 1 multiplication and 1 addition (where we use the results from FFT Level 1 as building blocks, and the computational structure of FFT Level 2 is the same as that of FFT Level 1). There are a total of 2 polynomials to evaluate (i.e., $A_{0}(X^2), A_{1}(X^2)$); thus, we compute the FFT a total of $2 \cdot 4 = 8$ times. 
 
 $ $
 
@@ -142,37 +140,44 @@ Once we have applied the forward FFT operation (\autoref{subsec:ntt-forward}) to
 \subsection{Inverse FFT (or NTT)}
 \label{subsec:ntt-backward}
 
-Once we have computed:
+So far, we have computed:
 
 $C(X)$ : $\bm ( ({x}_0, {y}_0^{\langle c \rangle}), ({x}_1, {y}_1^{\langle c \rangle}), \cdots ({x}_{n-1}, {y}_{n-1}^{\langle c \rangle}) \bm )$, where ${y}_i^{\langle c \rangle} = {y}_i^{\langle a \rangle} \cdot {y}_i^{\langle b \rangle}$
 
-, our final step is to convert ${y}_i^{\langle c \rangle}$ back to $\vec{c}$, the polynomial coefficients of $C(X)$. We call this reversing operation the inverse FFT. 
+$ $
+
+Our final step is to convert ${y}_i^{\langle c \rangle}$ back to $\vec{c}$, the polynomial coefficients of $C(X)$. We call this reversing operation the inverse FFT. 
 
 Given an $(n-1)$-degree polynomial 
-$A(X) = \sum\limits_{i=0}^{n-1}a_iX^i$, the forward FFT process is computationally equivalent to evaluating the polynomial at $n$ distinct $n$-th roots of unity as follows:
+$C(X) = \sum\limits_{i=0}^{n-1}c_iX^i$, the forward FFT process is computationally equivalent to evaluating the polynomial at $n$ distinct $n$-th roots of $X^n + 1$ as follows:
 
-${y}_i^{\langle a \rangle} = A(\omega^i) = \sum\limits_{j=0}^{n-1}a_{j}\cdot (\omega^i)^j = \sum\limits_{j=0}^{n-1}a_{j}\cdot \omega^{ij}$
+${y}_i^{\langle c \rangle} = C(\omega^{2i+1}) = \sum\limits_{j=0}^{n-1}c_{j}\cdot (\omega^{2i + 1})^j = \sum\limits_{j=0}^{n-1}c_{j}\cdot \omega^{(2i+1)j}$
 
 The above evaluation is equivalent to computing the following matrix-vector multiplication: 
 
 $ $
 
-${y}_i^{\langle a \rangle} = W \cdot \vec{a}$, \text{ } where $W = \begin{bmatrix}
-(\omega^0)^0 & (\omega^0)^1 & \cdots & (\omega^0)^{n-1}\\
-(\omega^1)^0 & (\omega^1)^1 & \cdots & (\omega^1)^{n-1}\\
-\vdots & \vdots & \ddots & \vdots \\
-(\omega^{n-1})^0 & (\omega^{n-1})^1 & \cdots & (\omega^{n-1})^{n-1}\\
-\end{bmatrix} $
-, \text{ } $\vec{a} = (a_0, a_1, \cdots, a_{n-1})$
 
+
+${y}_i^{\langle c \rangle} = W \cdot \vec{c}$, \text{ } where $W = \begin{bmatrix}
+(\omega^1)^0 & (\omega^1)^1 & \cdots & (\omega^1)^{n-1}\\
+(\omega^3)^0 & (\omega^3)^1 & \cdots & (\omega^3)^{n-1}\\
+\vdots & \vdots & \ddots & \vdots \\
+(\omega^{2n-1})^0 & (\omega^{2n-1})^1 & \cdots & (\omega^{2n-1})^{n-1}\\
+\end{bmatrix} $, \text{ } $\vec{c} = (c_0, c_1, \cdots, c_{n-1})$
 
 $ $
 
-We denote each element of $W$ as: $(W)_{i,j} = \omega^{ij}$. The inverse FFT is a process of reversing the above computation. For this inversion, our goal is to find an inverse matrix $W^{-1}$ such that $W^{-1} \cdot {y}_i^{\langle a \rangle} = W^{-1} \cdot (W \cdot \vec{a}) = (W^{-1} \cdot W) \cdot \vec{a} = I_n \cdot \vec{a} =  \vec{a}$. As a solution, we propose the inverse matrix $W^{-1}$ as follows: $(W^{-1})_{j,k} = n^{-1}\cdot \omega^{-jk}$. Now, we will show why $W^{-1} \cdot W = I_n$. 
+We denote each element of $W$ as: $(W)_{i,j} = \omega^{(2i+1)j}$. The inverse FFT is a process of reversing the above computation. For this inversion, our goal is to find an inverse matrix $W^{-1}$ such that $W^{-1} \cdot {y}_i^{\langle c \rangle} = W^{-1} \cdot (W \cdot \vec{c}) = (W^{-1} \cdot W) \cdot \vec{c} = I_n \cdot \vec{c} =  \vec{c}$. 
+As a solution, we propose the inverse matrix $W^{-1}$ as follows: 
 
-Each element of $W^{-1} \cdot W$ is computed as: 
+$(W^{-1})_{j,k} = n^{-1}\cdot \omega^{-(2k+1)j}$
 
-$(W^{-1} \cdot W)_{j, i} = \sum\limits_{k=0}^{n-1}(n^{-1}\cdot \omega^{-jk} \cdot \omega^{ki}) = n^{-1}\cdot\sum\limits_{k=0}^{n-1}\omega^{-jk} \cdot \omega^{ki} = n^{-1}\cdot\sum\limits_{k=0}^{n-1}\omega^{(i-j)\cdot k}$
+$ $
+
+Now, we will show why $W^{-1} \cdot W = I_n$. Each element of $W^{-1} \cdot W$ is computed as: 
+
+$(W^{-1} \cdot W)_{j, i} = \sum\limits_{k=0}^{n-1}(n^{-1}\cdot \omega^{-(2k+1)j} \cdot \omega^{(2k+1)i}) = n^{-1}\cdot\sum\limits_{k=0}^{n-1}\omega^{(2k+1)(i-j)}$
 
 In order for $W^{-1} \cdot W$ to be $I_n$, the following should hold:
 
@@ -183,10 +188,13 @@ In order for $W^{-1} \cdot W$ to be $I_n$, the following should hold:
 \end{cases}
 \]
 
-If $j = i$, the above condition holds, because $(W^{-1} \cdot W)_{j, i} = n^{-1}\cdot\sum\limits_{k=0}^{n-1}\omega^{(0)\cdot k} =  n^{-1}\cdot\sum\limits_{k=0}^{n-1}1 = n^{-1} \cdot n = 1$. 
+If $j = i$ holds, the above condition is satisfied because: 
+
+$(W^{-1} \cdot W)_{j, i} = n^{-1}\cdot\sum\limits_{k=0}^{n-1}\omega^{(2k+1)(0)} =  n^{-1}\cdot\sum\limits_{k=0}^{n-1}1 = n^{-1} \cdot n = 1$
+
+$ $
 
 In the case of $j \neq i$, we will leverage the Geometric Sum formula $\sum\limits_{i=0}^{n-1}x^i = \dfrac{x^n - 1}{x - 1}$ (the proof is provided below):
-
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:ntt-backward}} Geometric Sum Formula}}]
 
@@ -202,24 +210,37 @@ $S_n = \dfrac{x^n - 1}{x - 1}$ \textcolor{red}{ $\rhd$ with the constraint that 
 
 \end{tcolorbox}
 
-Our goal is to compute $\sum\limits_{k=0}^{n-1}\omega^{(i-j)\cdot k}$. Leveraging the Geometric Sum formula $\sum\limits_{i=0}^{n-1}x^i = \dfrac{x^n - 1}{x - 1}$, 
+Our goal is to compute $\sum\limits_{k=0}^{n-1}\omega^{(2k+1)(i-j)} = \omega^{i-j} \sum\limits_{k=0}^{n-1}(\omega^{2(i-j)})^k$. Leveraging the Geometric Sum formula with $x = \omega^{2(i-j)}$:
 
-$\sum\limits_{k=0}^{n-1}\omega^{(i-j)\cdot k} = \dfrac{(\omega^{i - j})^n - 1}{\omega^{i - j} - 1}$ 
+$\omega^{i-j} \sum\limits_{k=0}^{n-1}(\omega^{2(i-j)})^k = \omega^{i-j} \dfrac{(\omega^{2(i-j)})^n - 1}{\omega^{2(i-j)} - 1}$ 
 
-$= \dfrac{(\omega^n)^{i - j} - 1}{\omega^{i - j} - 1}$
+$= \omega^{i-j} \dfrac{(\omega^{2n})^{i - j} - 1}{\omega^{2(i-j)} - 1}$
 
-$= \dfrac{(1)^{i - j} - 1}{\omega^{i - j} - 1}$ \textcolor{red}{ $\rhd$ since the order of $\omega$ is $n$}
+$= \omega^{i-j} \dfrac{(1)^{i - j} - 1}{\omega^{2(i-j)} - 1}$ \textcolor{red}{ $\rhd$ since the order of $\omega$ is $2n$, $\omega^{2n}=1$}
 
-\textcolor{red}{ $\rhd$ Here, the denominator can't be 0, since $i \neq j$ and $-n < i - j < n$ (as $0 \leq i < n$ and $0 \leq j < n$)}
+\textcolor{red}{ $\rhd$ Here, the denominator can't be 0. Since $i \neq j$ and $|i-j| < n$, the exponent $2(i-j)$ is not a multiple of $2n$.}
 
 $= 0$
 
-Thus, $(W^{-1} \cdot W)_{j, i}$ is 1 if $j = i$, and 0 if $j \neq i$. Therefore, the inverse FFT can be computed as follows:
+$ $
+
+Thus, $(W^{-1} \cdot W)_{j, i}$ is 1 if $j = i$, and 0 if $j \neq i$. Therefore, the inverse FFT can be computed as $\vec{c} = W^{-1} \cdot y^{\langle c \rangle}$, where: 
+
+$c_i = \sum_{j=0}^{n-1} (W^{-1})_{i,j} \cdot y_j^{\langle c \rangle}$
+
+$ \sum\limits_{j=0}^{n-1} \left( n^{-1} \cdot \omega^{-(2j+1)i} \right) \cdot y_j^{\langle c \rangle}$ \textcolor{red}{ $\rhd$ since $(W^{-1})_{j,k} = n^{-1} \cdot \omega^{-(2k+1)j}$, and $(W^{-1})_{i,j} = n^{-1} \cdot \omega^{-(2j+1)i}$}
+
+$ = n^{-1}\cdot \sum\limits_{j=0}^{n-1}{y}_j^{\langle c \rangle} \cdot \omega^{-(2j+1)i}$
+
+$ = n^{-1} \sum\limits_{j=0}^{n-1} y_j^{\langle c \rangle} \cdot (\omega^{-2ji} \cdot \omega^{-i}) $ \textcolor{red}{ $\rhd$ since $\omega^{-(2j+1)i} = \omega^{-2ji - i} = \omega^{-2ji} \cdot \omega^{-i}$}
+
+$= n^{-1} \omega^{-i} \sum\limits_{j=0}^{n-1} {y}_j^{\langle c \rangle} (\omega^{-2})^{ji}$
+
+$ $
 
 
-$\vec{c} = W^{-1} \cdot y_i^{\langle c \rangle}$, \text{ } where $c_i = n^{-1}\cdot \sum\limits_{j=0}^{n-1}{y}_i^{\langle c \rangle} \cdot \omega^{-ij}$
+By reusing the recursive splitting technique explained in the forward process (\autoref{subsec:ntt-forward-details}), this inverse operation also achieves a time complexity of $O(n \log n)$.
 
-The above inverse FFT computation is equivalent to evaluating the polynomial $\hat{C}(X) = \sum\limits_{i=0}^{n-1} y_i^{\langle c \rangle} \cdot X^i$ at $X = \{\omega^{0}, \omega^{-1}, \omega^{-2}, \cdots,  \omega^{-(n-1)}\}$, which is equivalent to evaluating $\hat{C}(X)$ at $X = \{\omega^{0}, \omega^{n-1}, \omega^{n-2}, \cdots, \omega^1\}$. For this evaluation, we can use the same optimization technique explained in the forward FFT process (\autoref{subsec:ntt-forward-details}) whose time complexity is $O(n \log n)$.
 
 \begin{comment}
 \begin{algorithm}[t]

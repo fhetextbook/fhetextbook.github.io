@@ -278,7 +278,7 @@ $\chi \equiv x \bmod q$
 
 In \autoref{subsec:rns-fastbconv}, we proved that $x' = \sum\limits_{i=1}^{k} |x_i \cdot z_i|_{q_i} \cdot y_i = x + u\cdot q$ (where integer $|u| \leq \dfrac{k}{2}+1$). Therefore, the following holds:
 
-$x' \equiv x_i \bmod q_i$ for $i \in [1, k]$ \textcolor{red}{ $\rhd$ since $x' = x + u\cdot q \equiv x_i \bmod q_i$ (as $q_i$ divides $q$, so $x \equiv x_i \bmod q_i$)}
+$x' \equiv x_i \bmod q_i$ for $i \in [1, k]$ \textcolor{red}{ $\rhd$ since $x' = x + u\cdot q \equiv x_i \bmod q_i$ (as $q_i$ divides $q$, thus $u \cdot q \equiv 0 \pmod{q_i}$, and $x \equiv x_i \bmod q_i$)}
 
 $x' \equiv c_j \bmod b_j$ for $j \in [1, l]$ \textcolor{red}{ $\rhd$ where each $c_j = x + uq \bmod b_j$}
 
@@ -518,7 +518,7 @@ $ = \Big||\gamma t \cdot \textsf{ct}(s)|_q + uq\Big|_{\gamma t} \cdot |-q^{-1}|_
 
 $ =  \Big||\gamma t \cdot \textsf{ct}(s)|_q \cdot |-q^{-1}|_{\gamma t}  - u\Big|_{\gamma t}$
 
-$= |\gamma \cdot m|_{\gamma t}  - e'_s - e'_r - e'_d - u$ \textcolor{red}{ $\rhd$ as we previously showed that $|\gamma \cdot m|_{\gamma t} = \Big||\gamma\cdot t\cdot \textsf{ct}(s)|_q\Big|_{\gamma t} \cdot |-q^{-1}|_{\gamma t} +  + e'_s + e'_r + e'_d$}
+$= |\gamma \cdot m|_{\gamma t}  - e'_s - e'_r - e'_d - u$ \textcolor{red}{ $\rhd$ as we previously showed that $|\gamma \cdot m|_{\gamma t} = \Big||\gamma\cdot t\cdot \textsf{ct}(s)|_q\Big|_{\gamma t} \cdot |-q^{-1}|_{\gamma t} +  e'_s + e'_r + e'_d$}
 
 $= y$ \textcolor{red}{ $\rhd$ let's denote the above expression as $y$}
 
@@ -584,7 +584,7 @@ CKKS and BGV ciphertexts can be decrypted efficiently by performing the \textsf{
 \subsection{BGV's RNS-based Modulus Switch: $\textsf{ModSwitch}_{\textsf{RNS}}^{\textsf{BGV}}$}
 \label{subsec:rns-modswitch-bgv}
 
-BGV's RNS-based modulus switch is not computed by \textsf{ModSwitch\textsubscript{RNS}}, because BGV's original non-RNS modulus switch (Summary~\ref*{subsec:bgv-modulus-switch} in \autoref{subsec:bgv-modulus-switch}) is performed in a different manner than BFV or CKKS's non-RNS modulus switch (Summary~\ref*{subsec:modulus-switch-rlwe} in \autoref{subsec:modulus-switch-rlwe}). BGV's non-RNS modulus switch is computed as follows: 
+BGV's RNS-based modulus switch is not computed by using the standard  \textsf{ModSwitch\textsubscript{RNS}}, because BGV's original non-RNS modulus switch (Summary~\ref*{subsec:bgv-modulus-switch} in \autoref{subsec:bgv-modulus-switch}) is performed in a different manner than BFV or CKKS's non-RNS modulus switch (Summary~\ref*{subsec:modulus-switch-rlwe} in \autoref{subsec:modulus-switch-rlwe}). BGV's non-RNS modulus switch is computed as follows: 
 
 $(A', B') = \left(\left\lceil\dfrac{\hat{q}}{q_l} A\right\rfloor, \left\lceil\dfrac{\hat{q}}{q_l}\cdot B\right\rfloor\right) \in \mathcal{R}_{\langle n, \hat{q} \rangle}^2$
 
@@ -714,7 +714,7 @@ $\textsf{RLWE}_{S', \sigma}(D_2\cdot S^2) = \bm{\langle} \textsf{Decomp}^{\beta,
 
 $ $
 
-However, if we convert a value (e.g., $x$) into an RNS vector, then it cannot be directly expressed in a gadget-decomposed form based on the $\beta$ and $l$ parameters. Instead, given the relationship between the value $x$ and its RNS residues is $x = \sum\limits_{i=1}^k x \cdot \dfrac{q}{q_i} \cdot \left|\left(\dfrac{q}{q_i}^{-1}\right)\right|_{q_i} \bmod q$, we can treat each RNS residue as a gadget-decomposed element. For example, suppose our goal is to decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$, where the RNS vector of $A = (A_1, A_2, \cdots, A_k)$ has base moduli $(q_1, q_2, \cdots, q_k)$. We can decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$ as follows:
+However, if we convert a value (e.g., $x$) into an RNS vector, then it cannot be directly expressed in a gadget-decomposed form based on the $\beta$ and $l$ parameters. Instead, given the relationship between the value $x$ and its RNS residues is $x = \sum\limits_{i=1}^k x \cdot \dfrac{q}{q_i} \cdot \left|\left(\dfrac{q}{q_i}^{-1}\right)\right|_{q_i} \bmod q$, we can treat each RNS residue as a gadget-decomposed element. For example, suppose our goal is to decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$, where the RNS vector of $A = (A_1, A_2, \cdots, A_k)$ has base moduli $(q_1, q_2, \cdots, q_k)$. In other wods, the RNS representation of the polynomial $A$ is the set of polynomials $\{A_i\}_{i=1}^k$ such that $A_i = A \bmod q_i$. We can decompose $\textsf{RLWE}_{S', \sigma}( A \cdot S)$ as follows:
 
 $\textsf{RLWE}_{S', \sigma}(A\cdot S) \bmod q$
 
@@ -1082,7 +1082,7 @@ $ $
 
 \item \textbf{\underline{Coefficient Multiplication} by $p^\varepsilon$: } 
 
-Multiply the coefficients of $(A, B) \bmod q$ by $p^\varepsilon$ to update the ciphertext to  $(p^\varepsilon A,p^\varepsilon B) \bmod{ pbb_\alpha}$, which would decrypt to: 
+Multiply the coefficients of $(A, B) \bmod q$ by $p^\varepsilon$ to update the ciphertext to  $(p^\varepsilon A,p^\varepsilon B) \bmod{ qbb_\alpha}$, which would decrypt to: 
 
 $p^\varepsilon A\cdot S + p^\varepsilon B = \Delta p^\varepsilon M + p^\varepsilon E + p^\varepsilon Kq + p^\varepsilon Uq \pmod{qbb_\alpha}$
 
@@ -1141,7 +1141,7 @@ $= \textsf{RLWE}_{S, \sigma}\bm(\Delta M\bm) \bmod q$.
 \label{subsubsec:rns-ckks-bootstrapping}
 
 CKKS's original bootstrapping procedure (Summary~\ref*{subsubsec:ckks-bootstrapping-summary} in \autoref{subsubsec:ckks-bootstrapping-summary}) is as follows:
-(1) \textsf{Modraise}; (2) homomorphic decryption; (3) \textsf{CoeffToSlot}; (4) \textsf{EvalExp}; (5) \textsf{CoeffToSlot}; (6) Re-interpretation. In the RNS-based CKKS bootstrapping, we perform \textsf{ModRaise\textsubscript{RNS}} at step 1, and all other steps are computed using regular RNS-based addition and multiplication operations. Step 1's \textsf{ModRaise\textsubscript{RNS}} operation generates a 
+(1) \textsf{Modraise}; (2) homomorphic decryption; (3) \textsf{CoeffToSlot}; (4) \textsf{EvalExp}; (5) \textsf{SlotToCoeff}; (6) Re-interpretation. In the RNS-based CKKS bootstrapping, we perform \textsf{ModRaise\textsubscript{RNS}} at step 1, and all other steps are computed using regular RNS-based addition and multiplication operations. Step 1's \textsf{ModRaise\textsubscript{RNS}} operation generates a 
 $u\cdot q_0$ noise (where $u \in \{-1, 0, 1\}$ using \textsf{SmallMont}) for each polynomial coefficient during \textsf{FastBConv}. Therefore, step 2's homomorphic decryption outputs $\Delta M + E + W\cdot q_0 + K\cdot q_0$, where $W\cdot q_0$ represents the aggregation of all coefficient noise terms that are multiplied by the $q_0$-overflow noises generated by \textsf{FastBConv} and \textsf{SmallMont}. The $W\cdot q_0 + K\cdot q_0$ term is eliminated by step 4's \textsf{EvalExp}, which performs approximated modulo reduction based on a sine-graph evaluation whose period is $q_0$. 
 
 

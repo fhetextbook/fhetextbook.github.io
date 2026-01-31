@@ -6,15 +6,15 @@ $ $
 
 Suppose we have two GLWE ciphertexts encrypting two different plaintexts $M^{\langle 1 \rangle}, M^{\langle 2 \rangle}$:
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}) = \textsf{ct}^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, ... \text{ } A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}) = \textsf{ct}^{\langle 1 \rangle} = ( A_0^{\langle 1 \rangle}, A_1^{\langle 1 \rangle}, \ldots, A_{k-1}^{\langle 1 \rangle}, B^{\langle 1 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
-$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle}) = \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, ... \text{ } A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
+$\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle}) = \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 2 \rangle}, A_1^{\langle 2 \rangle}, \ldots, A_{k-1}^{\langle 2 \rangle}, B^{\langle 2 \rangle}) \in \mathcal{R}_{\langle n,q \rangle}^{k + 1}$
 
 $ $
 
 \noindent Let's define the following ciphertext addition operation: 
 
-$\textsf{ct}^{\langle 1 \rangle} + \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
+$\textsf{ct}^{\langle 1 \rangle} + \textsf{ct}^{\langle 2 \rangle} = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \ldots, A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$
 
 $ $
 
@@ -41,7 +41,7 @@ $ $
 \item Define the following notations: \\
 $A_0^{\langle 3 \rangle} = A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}$ \\
 $A_1^{\langle 3 \rangle} = A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}$ \\
-... \\
+$\vdots$ \\
 $A_{k-1}^{\langle 3 \rangle} = A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}$ \\
 $E^{\langle 3 \rangle} = E^{\langle 1 \rangle} + E^{\langle 2 \rangle}$ \\
 $B^{\langle 3 \rangle} = B^{\langle 1 \rangle} + B^{\langle 2 \rangle}$
@@ -52,11 +52,11 @@ $= \sum\limits_{i=0}^{k-1}{((A_i^{\langle 1 \rangle} + A_i^{\langle 2 \rangle}) 
 $= \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$ \\
 \item Since $B^{\langle 3 \rangle} = \sum\limits_{i=0}^{k-1}{(A_i^{\langle 3 \rangle} \cdot S_i)} + \Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle}$, 
 
-this means that $(A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$. \\
+this means that $(A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, \ldots, A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ form the ciphertext: $\textsf{GLWE}_{S, \sigma}(\Delta \cdot (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$. \\
 \item Thus, \\
 $\textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 1 \rangle} + E^{\langle 1 \rangle}) + \textsf{GLWE}_{S, \sigma}(\Delta M^{\langle 2 \rangle} + E^{\langle 2 \rangle})$ \\
-$ = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle}, \text{ } ... \text{ } A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
-$ = ( A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
+$ = ( A_0^{\langle 1 \rangle} + A_0^{\langle 2 \rangle}, \text{ } A_1^{\langle 1 \rangle} + A_1^{\langle 2 \rangle},\ldots, A_{k-1}^{\langle 1 \rangle} + A_{k-1}^{\langle 2 \rangle}, \text{ } B^{\langle 1 \rangle} + B^{\langle 2 \rangle} )$ \\
+$ = ( A_0^{\langle 3 \rangle}, A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, \ldots,  A_{k-1}^{\langle 3 \rangle}, B^{\langle 3 \rangle})$ \\
 $ = ( \{A_i^{\langle 3 \rangle}\}_{i=0}^{k-1}, B^{\langle 3 \rangle})$ \\
 $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$
 
@@ -70,7 +70,7 @@ $= \textsf{GLWE}_{S, \sigma}(\Delta (M^{\langle 1 \rangle} + M^{\langle 2 \rangl
 \subsection{Discussion}
 \label{subsubsec:glwe-add-cipher-discuss} 
 
-\para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, ... \text{ } A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ get eliminated by rounding after decryption, regardless of whatever their randomly sampled values were during encryption.
+\para{Noise Elimination:} If we decrypt $\textsf{GLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle}) + E^{\langle 3 \rangle})$ by using the secret key $S$, then we get the plaintext $M^{\langle 1 \rangle} + M^{\langle 2 \rangle}$. Meanwhile, $A_1^{\langle 3 \rangle}, A_2^{\langle 3 \rangle}, \ldots,  A_{k-1}^{\langle 3 \rangle}, E^{\langle 3 \rangle}$ gets eliminated by decryption (with rounding), regardless of whatever their randomly sampled values were during encryption.
 
 $ $
 
@@ -78,6 +78,6 @@ $ $
 
 $ $
 
-\para{Hard Threshold on the Plaintext's Value Without Modulo Reduction $t$:} During homomorphic operations (e.g., addition or multiplication) and decryption, the $AS$ and $B$ terms in the $B = AS + \Delta M + E + kq$ relation are allowed to wrap around modulo $q$ indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always subtract $B$ by $AS$, outputting $\Delta M + E + k'q = \Delta M + E \pmod q$, and the $k'q$ term is always exactly eliminated by modulo reduction by $q$. After that, we can correctly recover $M$ by computing $\left\lceil \dfrac{\Delta M + E \bmod q}{\Delta}\right\rfloor$, eliminating the noise $E$. However, as we learned in Summary~\ref*{subsubsec:lwe-noise-bound} (in \autoref{subsubsec:lwe-noise-bound}), if the error bound $|-\epsilon k t + e| < \dfrac{\Delta}{2}$ breaks (where $e$ can be any coefficient of $E$), then modulo reduction by $q$ starts to contaminate the scaled plaintext bits. This violation of the error bound occurs when the noise $e$ grows too much over homomorphic operations, or the ciphertext modulus $q$ is not sufficiently larger than the plaintext modulus $t$. If $q \gg t$, the scheme can take on a big $kt$ value (i.e., the plaintext value can wrap around the plaintext modulus $t$ many times across its homomorphic operations). The error bound constraint  $\dfrac{kt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is used in the BFV scheme.  %This requirement on the valid range of the plaintext term is needed also to accomplish correct modulus switch of FHE ciphertexts to be later explained in \autoref{sec:modulus-rescaling}.  
+\para{Hard Threshold on the Plaintext's Value Without Modulo Reduction $t$:} During homomorphic operations (e.g., addition or multiplication) and decryption, the $AS$ and $B$ terms in the $B = AS + \Delta M + E + vq$ relation are allowed to wrap around modulo $q$ indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always subtract $B$ by $AS$, outputting $\Delta M + E + v'q = \Delta M + E \pmod q$, and the $v'q$ term is always exactly eliminated by modulo reduction by $q$. After that, we can correctly recover $M$ by computing $\left\lceil \dfrac{\Delta M + E \bmod q}{\Delta}\right\rfloor$, eliminating the noise $E$. However, as we learned in Summary~\ref*{subsubsec:lwe-noise-bound} (in \autoref{subsubsec:lwe-noise-bound}), if the error bound $|-\epsilon v t + e| < \dfrac{\Delta}{2}$ breaks (where $e$ can be any coefficient of $E$), then modulo reduction by $q$ starts to contaminate the scaled plaintext bits. This violation of the error bound occurs when the noise $e$ grows too much over homomorphic operations, or the ciphertext modulus $q$ is not sufficiently larger than the plaintext modulus $t$. If $q \gg t$, the scheme can take on a big $vt$ value (i.e., the plaintext value can wrap around the plaintext modulus $t$ many times across its homomorphic operations). The error bound constraint  $\dfrac{vt + e}{\lfloor\frac{q}{t}\rfloor} < \dfrac{1}{2}$ is used in the BFV scheme.  %This requirement on the valid range of the plaintext term is needed also to accomplish correct modulus switch of FHE ciphertexts to be later explained in \autoref{sec:modulus-rescaling}.  
 
  

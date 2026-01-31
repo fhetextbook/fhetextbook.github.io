@@ -51,17 +51,14 @@ BFV supports two encoding schemes: single value encoding and batch encoding. In 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:bfv-single-encoding}} BFV Encoding}}]
 
-\textbf{\underline{Input Integer}:} Decompose the input integer $m$ as follows:
+\textbf{\underline{Input Integer}:} Decompose the input integer $m \in \mathbb{Z}_{\geq 0}$ (i.e., 0 or any positive integer) as follows:
 
-$m = b_{n-1}\cdot 2^{n-1} + b_{n-2}\cdot 2^{n-2} + \cdots + b_1\cdot 2^1 + b_0\cdot 2^0$  \text { } , where each $b_i \in \mathbb{Z}_q$
-
-$ $
-
-(Note that there is more than 1 way to decompose the same $m$)
+$m = b_{n-1}\cdot 2^{n-1} + b_{n-2}\cdot 2^{n-2} + \cdots + b_1\cdot 2^1 + b_0\cdot 2^0$  \text { } , where each $b_i \in \{0, 1\}$
 
 $ $
 
-\textbf{\underline{Encoded Polynomial}:} $M(X) = b_0 + b_1X + b_2X^2 + \cdots + b_{n-1}X^{n-1} \in \mathcal{R}_{\langle n, q\rangle}$
+
+\textbf{\underline{Encoded Polynomial}:} $M(X) = b_0 + b_1X + b_2X^2 + \cdots + b_{n-1}X^{n-1} \in \mathcal{R}_{\langle n, t\rangle}$
 
 $ $
 
@@ -70,74 +67,46 @@ $ $
 \end{tcolorbox}
 
 
-Let's analyze whether the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} preserves isomorphism: homomorphic and bijective. 
+Let's analyze whether the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} ensures correct decoding after addition and multiplication. This is equivalent to showing that:
+
+$\text{Decode}(\sigma(m_1) + \sigma(m_2)) = m_1 + m_2$ \textcolor{red}{$\rhd$ where $\sigma$ is the encoding function}
+
+$\text{Decode}(\sigma(m_1) \cdot \sigma(m_2)) = m_1 \cdot m_2$
+
+Let $\sigma(m_1) = M_1(X)$ and $\sigma(m_2) = M_2(X)$. Then, 
+
+$\text{Decode}(\sigma(m_1) + \sigma(m_2)) = \text{Decode}(M_1(X) + M_2(X))$
 
 
-\para{Homomorphism:} Let's denote the above encoding scheme as the mapping $\sigma$. Suppose we have two integers $m_1, m_2$ as follows:
+$= \text{Decode}(M_{1+2}(X))$ \textcolor{red}{$\rhd$ where $M_{1+2}(X) = M_1(X) + M_2(X)$}
 
-$m_1 = \sum\limits_{i=0}^{n-1}(b_{1, i} \cdot 2^i)$, \text{ } $m_2 = \sum\limits_{i=0}^{n-1}(b_{2, i} \cdot 2^i)$
+$= M_{1+2}(2)$ \textcolor{red}{$\rhd$ since decoding is evaluating the polynomial at $X = 2$}
 
-Then,
-
-$ $
-
-$\sigma (m_1 + m_2) = \sigma\left(\sum\limits_{i=0}^{n-1}(b_{1, i} \cdot 2^i) + \sum\limits_{i=0}^{n-1}(b_{2,i} \cdot 2^i)\right)$
-
-$= \sigma\left(\sum\limits_{i=0}^{n-1}(b_{1,i} + b_{2,i})\cdot 2^i\right)$
-
-$= \sum\limits_{i=0}^{n-1} (b_{1,i} + b_{2,i})\cdot X^i$
-
-$= \sum\limits_{i=0}^{n-1} b_{1,i}\cdot X^i + \sum\limits_{i=0}^{n-1} b_{2,i}\cdot X^i$
-
-$= \sigma\left( \sum\limits_{i=0}^{n-1} (b_{1,i} \cdot 2^i)\right) + \sigma\left( \sum\limits_{i=0}^{n-1} (b_{2,i} \cdot 2^i) \right)$
-
-$= \sigma(m_1) + \sigma(m_2)$
+$= M_{1}(2) + M_{2}(2)$ \textcolor{red}{$\rhd$ since evaluating $M_{1+2}(X)$ at $X=2$ is computationally the same as splitting $M_{1+2}(X)$ into $M_{1}(X)$ and $M_{2}(X)$, evaluating $M_1(2)$ and $M_2(2)$ and summing them}
 
 $ $
 
-$\sigma (m_1 \cdot m_2) = \sigma\left(\sum\limits_{i=0}^{n-1}(b_{1, i} \cdot 2^i) \cdot \sum\limits_{i=0}^{n-1}(b_{2,i} \cdot 2^i)\right)$
+Similarly, the decoding preserves correctness over multiplication as well:
 
-$= \sigma\left(\sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-j})\cdot 2^i\right)$
+$\text{Decode}(\sigma(m_1) \cdot \sigma(m_2)) = \text{Decode}(M_1(X) \cdot M_2(X))$
 
-$= \sum\limits_{i=0}^{2\cdot(n-1)}\sum\limits_{j=0}^{i}(b_{1,j} \cdot b_{2,i-j})\cdot X^i$
+$= \text{Decode}(M_{1\cdot2}(X))$ \textcolor{red}{$\rhd$ where $M_{1\cdot2}(X) = M_1(X) \cdot M_2(X)$}
 
-$ = \sum\limits_{i=0}^{n-1} b_{1,i}\cdot X^i \cdot \sum\limits_{i=0}^{n-1} b_{2,i}\cdot X^i$
+$= M_{1\cdot2}(2)$ \textcolor{red}{$\rhd$ since decoding is evaluating the polynomial at $X = 2$}
 
-$= \sigma\left( \sum\limits_{i=0}^{n-1} (b_{1,i} \cdot 2^i)\right) \cdot \sigma\left( \sum\limits_{i=0}^{n-1} (b_{2,i} \cdot 2^i) \right)$
+$= M_{1}(2) \cdot M_{2}(2)$ \textcolor{red}{$\rhd$ since evaluating $M_{1\cdot2}(X)$ at $X=2$ is computationally the same as splitting $M_{1\cdot2}(X)$ into $M_{1}(X)$ and $M_{2}(X)$, evaluating $M_1(2)$ and $M_2(2)$ and multiplying them}
 
-$= \sigma(m_1) \cdot \sigma(m_2)$
 
-$ $
-
-Since $\sigma (m_1 + m_2) = \sigma(m_1) + \sigma(m_2)$ and $\sigma (m_1 \cdot m_2) = \sigma(m_1) \cdot \sigma(m_2)$, the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} is homomorphic.
 
 
 $ $
 
-\textbf{One-to-Many Mappings:} This encoding scheme preserves one-to-many mappings between the input integers and the encoded polynomials, because there is more than 1 way to encode the same input integer $m$, which can be encoded as different polynomials. For example, suppose that we have the following two input integers and their summation: $m_1 = 0111$, $m_2 = 0010$, $m_{1+2} = m_1 + m_2 = 1001$. Then, their encoded polynomials are as follows: 
-
-$M_1(X) = 0X^3 + 1X^2 + 1X + 1$
-
-$M_2(X) = 0X^3 + 0X^2 + 1X + 0$
-
-$M_{1+2}(X) = 0X^3 + 1X^2 + 2X + 1$
-
-$ $
-However, the following polynomial is also mapped to $m_{1+2} = 1001$:
-
-$M_{3}(X) = 1X^3 + 0X^2 + 0X^1 + 1$
+Therefore, the single value encoding scheme preserves the correctness of decoding after addition and multiplication. 
 
 $ $
 
-That being said, both polynomials are mapped to the same $m_{1+2}$ (i.e., $1001$) as follows:
-
-$M_{1+2}(2) = 4 + 4 + 1 = 9$
-
-$M_{3}(2) = 8 + 1 = 9$
-
-$ $
-
-Although the encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} is not bijective but only one-to-many mappings, it preserves homomorphism and the decoded number decomposition sums to the same original integer. Therefore, this encoding scheme can be validly used for fully homomorphic encryption.
+The encoding scheme in Summary~\ref*{subsec:bfv-single-encoding} can be validly used for fully homomorphic encryption only if the multiplication of the encoded polynomials do not exceed the polynomial ring's degree $n$, because once the degree gets reduced due to an overflow, the evaluated values of polynomials lose consistency. Also, the coefficients of polynomials should not wrap modulo $t$ after additions or multiplications. 
+Due to these constraints, the single value encoding is not a good choice for fully homomorphic encryption. Also, the single value encoding is computationally inefficient, because each polynomial can encode only a single value even if it holds $n$ coefficients. 
 
 
 \subsection{Batch Encoding}
@@ -206,7 +175,11 @@ $= \begin{bmatrix}
 (\omega)^{n-1} & (\omega^3)^{n-1} & \cdots & (\omega^{\frac{n}{2} - 1})^{n-1} & (\omega^{-(\frac{n}{2} - 1)})^{n-1} & \cdots & (\omega^{-3})^{n-1} & (\omega^{-1})^{n-1}\\
 \end{bmatrix}$
 
-, where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$). In \autoref{subsec:poly-vector-transformation}, we learned that $W$ is a valid basis of the $n$-dimensional vector space. Therefore, $\dfrac{W \cdot \vec{v}}{n} = \vec{m}$ is guaranteed to be a unique vector corresponding to each $\vec{v}$ in the $n$-dimensional vector space $\mathbb{Z}_t^{n}$ (refer to Theorem~\ref*{subsec:projection} in \autoref{subsec:projection}), and thereby the polynomial $M(X)$ comprising the $n$ elements of $\vec{m}$ as coefficients is a unique polynomial bi-jective to $\vec{v}$. 
+$ $
+
+, where $\omega$ is a primitive $2n$-th root of unity modulo $t$ (which implies $t \equiv 1 \bmod 2n$). This implies that $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$ (see \autoref{subsubsec:poly-vector-transformation-modulus}).
+
+In \autoref{subsec:poly-vector-transformation}, we learned that $W$ is a valid basis of the $n$-dimensional vector space. Therefore, $\dfrac{W \cdot \vec{v}}{n} = \vec{m}$ is guaranteed to be a unique vector corresponding to each $\vec{v}$ in the $n$-dimensional vector space $\mathbb{Z}_t^{n}$ (refer to Theorem~\ref*{subsec:projection} in \autoref{subsec:projection}), and thereby the polynomial $M(X)$ comprising the $n$ elements of $\vec{m}$ as coefficients is a unique polynomial bi-jective to $\vec{v}$. 
 
 Note that by computing $\dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$
 , we transform the input slot vector $\vec{v}$ into another vector $\vec{m}$ in the same vector space $\mathbb{Z}_t^{n}$, while preserving isomorphism between these two vectors (i.e., bi-jective one-to-one mappings and homomorphism on the $(+, \cdot)$ operations). 
@@ -220,7 +193,7 @@ The $n$ integers in $\Delta\vec{m}$ will be used as $n$ coefficients of the plai
 \subsubsection{\textsf{Decoding\textsubscript{1}}}  
 \label{subsubsec:bfv-enc-dec-decoding1} 
 
-Once an RLWE ciphertext is decrypted to $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$, we compute $\dfrac{\Delta\vec{m}}{\Delta} = \vec{m}$.
+Once an RLWE ciphertext is (first-half) decrypted to $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$, we compute $\dfrac{\Delta\vec{m}}{\Delta} = \vec{m}$.
 
 
 
@@ -267,10 +240,13 @@ $= \begin{bmatrix}
 (\omega)^{n-1} & (\omega^3)^{n-1} & \cdots & (\omega^{\frac{n}{2} - 1})^{n-1} & (\omega^{-(\frac{n}{2} - 1)})^{n-1} & \cdots & (\omega^{-3})^{n-1} & (\omega^{-1})^{n-1}\\
 \end{bmatrix}$
 
-, where $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$)
+$ $
 
+, where $\omega$ is a primitive $2n$-th root of unity modulo $t$. This implies that $\omega = g^{\frac{t - 1}{2n}} \bmod t$ ($g$ is a generator of $\mathbb{Z}_t^{\times}$ (see \autoref{subsubsec:poly-vector-transformation-modulus}).
 
-\item Convert $\vec{m}$ into a scaled integer vector $\Delta\vec{m}$, where $1 \leq \Delta \leq \lfloor \dfrac{q}{t}\rfloor$ is a scaling factor. If $\Delta$ is too close to 1, the noise budget will become too small. If $\Delta$ is too close to $\lfloor\dfrac{q}{t}\rfloor$, the plaintext budget will become too small (i.e., cannot wrap around $t$ much). The finally encoded plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}  \Delta m_i X^i \text{ } \in \mathbb{Z}_q[X] / (X^n + 1)$. %The rounding of $\lceil \Delta \vec{m} \rfloor$ during the encoding process makes CKKS an approximate FHE scheme. 
+$ $
+
+\item Convert $\vec{m}$ into a scaled integer vector $\Delta\vec{m}$, where $1 \leq \Delta \leq \lfloor \dfrac{q}{t}\rfloor$ is a scaling factor. If $\Delta$ is too close to 1 (i.e., $t$ is too big), the \textbf{noise budget} will become too small (making decryption fail easily). If $\Delta$ is too close to $q$ (i.e., $t$ is too small), the \textbf{message capacity} will become too small (i.e., the plaintext modulus $t$ limits the range of values that can be encoded). The finally encoded plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1} \Delta m_i X^i \text{ } \in \mathbb{Z}_q[X] / (X^n + 1)$. %The rounding of $\lceil \Delta \vec{m} \rfloor$ during the encoding process makes CKKS an approximate FHE scheme. 
 
 \end{enumerate}
 
@@ -308,7 +284,7 @@ BFV encrypts and decrypts ciphertexts based on the RLWE cryptosystem (\autoref{s
 $ $
 
 \begin{enumerate}
-%\item Scale up $M \rightarrow \Delta M \text { } \in \mathcal{R}_{\langle n, q\rangle}$
+
 
 \item Compute $B = -A \cdot S + \Delta M + E \text{ } \in \mathcal{R}_{\langle n,q \rangle}$
 
@@ -362,7 +338,7 @@ $= \textsf{RLWE}_{S, \sigma}(\Delta(M^{\langle 1 \rangle} + M^{\langle 2 \rangle
 \subsubsection{Noise Bound Analysis}
 \label{subsubsec:bfv-noise-analysis}
 
-In the last part of Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we learned the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking bacthrough BFV's ciphertext-to-ciphertext addition. 
+In the last part of Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}), we learned the noise bound conditions for BFV's correct decryption. In this subsection, we will explain how this condition holds in more detail by walking through BFV's ciphertext-to-ciphertext addition. 
 
 Let's denote the homomorphically added ciphertext as follows: 
 
@@ -390,7 +366,7 @@ $\left\lceil\dfrac{\Delta (M^{\langle 1\rangle} + M^{\langle 2\rangle}) + E^{\la
 
 $ $
 
-Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final polynomial. Let's define $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \Delta$. Given $q \gg t$, $\epsilon$ is a decimal value between $[0, 1)$. Now, we can re-write the above decryption term as follows:
+Correct decryption requires the above result to match the value $M^{\langle 1 + 2 \rangle} = M^{\langle 1 \rangle} + M^{\langle 2 \rangle} \bmod t$, where $M^{\langle 1 + 2 \rangle}$ is the modulo $t$-reduced final polynomial. Let's define $\epsilon = \dfrac{q}{t} - \left\lfloor\dfrac{q}{t}\right\rfloor = \dfrac{q}{t} - \Delta$. Given $q \gg t$, $\epsilon$ is a fractional value between $[0, 1)$. Now, we can re-write the above decryption term as follows:
 
 $ $
 
@@ -440,7 +416,7 @@ $ $
 
 $ = \left\lceil\dfrac{\left\lfloor\frac{q}{t}\right\rfloor \cdot M^{\langle 1 + 2\rangle} - \epsilon \cdot t\cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle}}{\Delta}\right\rfloor \bmod t$  
 
-\textcolor{red}{ $\rhd$ applying the special assumption $\epsilon \cdot t \cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle} < \dfrac{\Delta}{2}$ to all $n$ coefficients (see \autoref{subsubsec:lwe-noise-bound})}
+\textcolor{red}{ $\rhd$ applying the special assumption $|\epsilon \cdot t \cdot K + E^{\langle 1 \rangle} + E^{\langle 2 \rangle}| < \dfrac{\Delta}{2}$ to all $n$ coefficients (see \autoref{subsubsec:lwe-noise-bound})}
 
 $ $
 
@@ -524,7 +500,7 @@ For better understanding, we will explain BFV's ciphertext-to-ciphertext multipl
 \subsubsection{\textsf{ModRaise}}
 \label{subsubsec:bfv-mult-cipher-modraise}
 
-We learned from Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}) that a BFV ciphertext whose ciphertext modulus is $q$ has the (decryption) relation: $\Delta M + E = A\cdot S + B - K \cdot q$, where $K \cdot q$ stands for modulo reduction by $q$. \textsf{ModRaise} is a process of forcibly raiseing the modulus of a ciphertext from $q \rightarrow Q$, where $q \ll Q$. Suppose we modify the modulus of ciphertext $(A, B)$ from $q$ to $Q$, where $Q = q \cdot \Delta$ (remember $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$). Then, the decryption of the \textit{mod-raised} ciphertext will output $A\cdot S + B \bmod Q$. However, since each polynomial coefficient of $A$ and $B$ is less than $q$ and each polynomial coefficient of $S$ is either $\{-1, 0, 1\}$, the resulting polynomial of $A\cdot S + B$ is guaranteed to have each coefficient strictly less than $Q$ even without modulo reduction by $Q$-- this is because $(q-1)\cdot n + (q-1) < Q$, where $(q-1)\cdot n$ is the maximum possible coefficient of $A \cdot S$ and $(q-1)$ is the maximum possible coefficient of $B$. And as mentioned before, we know the relation: $A\cdot S + B = \Delta M + E + Kq$. Therefore, the decryption of the \textit{mod-raised} ciphertext $(A, B) \bmod Q$ is as follows:
+We learned from Summary~\ref*{subsec:bfv-enc-dec} (in \autoref{subsec:bfv-enc-dec}) that a BFV ciphertext whose ciphertext modulus is $q$ has the (decryption) relation: $\Delta M + E = A\cdot S + B - K \cdot q$, where $K \cdot q$ stands for modulo reduction by $q$. \textsf{ModRaise} is a process of forcibly raising the modulus of a ciphertext from $q \rightarrow Q$, where $q \ll Q$. Suppose we modify the modulus of ciphertext $(A, B)$ from $q$ to $Q$, where $Q = q \cdot \Delta$ (remember $\Delta = \left\lfloor\dfrac{q}{t}\right\rfloor$). Then, the decryption of the \textit{mod-raised} ciphertext will output $A\cdot S + B \bmod Q$. However, since each polynomial coefficient of $A$ and $B$ is less than $q$ and each polynomial coefficient of $S$ is either $\{-1, 0, 1\}$, the resulting polynomial of $A\cdot S + B$ is guaranteed to have each coefficient strictly less than $Q$ even without modulo reduction by $Q$-- this is because $(q-1)\cdot n + (q-1) < Q$, where $(q-1)\cdot n$ is the maximum possible coefficient of $A \cdot S$ and $(q-1)$ is the maximum possible coefficient of $B$. And as mentioned before, we know the relation: $A\cdot S + B = \Delta M + E + Kq$. Therefore, the decryption of the \textit{mod-raised} ciphertext $(A, B) \bmod Q$ is as follows:
 
 $\Delta M + E + Kq \bmod Q = \Delta M + E + Kq$ \textcolor{red}{ $\rhd$  since $\Delta M + E + Kq < Q$} 
 
@@ -1210,8 +1186,6 @@ $\sigma_J: M(X) \in \mathcal{R}_{\langle n, t \rangle} \longrightarrow  \bm{(}M(
 \textcolor{white}{$\sigma_J: M(X) \in \mathcal{R}_{\langle n, q \rangle} \longrightarrow  \bm{(}$} $M(\omega^{J_*(0)}), \text{ } M(\omega^{J_*(1)}), \text{ } M(\omega^{J_*(2)}), \cdots, M(\omega^{J_*(\frac{n}{2} - 1}) \text{ } \bm{)} \in \mathbb{Z}^{n}$
 
 
-%\textcolor{red}{ $\rhd$ $J(h) + J_*(h) = 0 \bmod 2n$, which implies that $\omega^{J_*(h)}$ is a conjugate of $\omega^{J(h)}$ (i.e., $\omega^{J_*(h)} = \overline\omega^{J(h)}$)}
-
 $ $
 
 The common aspect between $\sigma$ and $\sigma_J$ is that they both evaluate the polynomial $M(X)$ at $n$ distinct primitive $(\mu=2n)$-th roots of unity (i.e., $w^i$ for all odd $i$ between $[0,2n]$ ). In the case of the $\sigma_J$ mapping, note that $J(j) = 5^j \bmod 2n$ \text{ } and \text{ } $J_*(j) = -5^j \bmod 2n$ \text{ } for each $j$ in $0 \leq j < \dfrac{n}{2} $ \text{ }  cover all odd numbers between $[0, 2n]$. Therefore, $\omega^{J(j)}$ and $\omega^{J_*(j)}$ between $0 \leq j < \frac{n}{2}$ cover all $n$ distinct primitive $(\mu=2n)$-th roots of unity.
@@ -1485,8 +1459,12 @@ $ $
 
 $ $
 
+, where $J(h)$ is the \textit{rotation helper formula}: $J(h) = 5^h \bmod 2n$, 
+\text{ } $J_*(h) = -5^h \bmod 2n$. 
 
-, where $J(h)$ is the \textit{rotation helper formula}: $J(h) = 5^h \bmod 2n$, \text{ } $J_*(h) = -5^h \bmod 2n$
+$ $
+
+Using $\hathat{W}$, the encoding is perform as: $\vec{m} = n^{-1}\cdot \hathat{W} \cdot I_n^R \cdot \vec{v}$. Using $\hathat{W}^*$, the decoding is performed as $\vec{v} = \hathat{W}^* \cdot \vec{m}$
 
 $ $
 
@@ -1516,7 +1494,7 @@ $\textsf{RLWE}_{S(X),\sigma}\bm{(}\Delta M(X^{J(h)})\bm{)} = \bm{(} 0, B(X^{J(h)
 %bfv_vector2 = [2, 4, 8, 6]
 
 
-
+In the above example, we use the unsigned modulo representation (e.g., $[0, t-1], [0, q]$) when computing $\bmod t$ and $\bmod q$. However, the correctness of the result holds even if we use the centered modulo representation (e.g., $[-\dfrac{t}{2}, \dfrac{t}{2})$, $[-\dfrac{q}{2}, \dfrac{q}{2})$). In many actual FHE libraries, centered modulo arithmetic is often used to manage noise growth more effectively.
 
 Suppose we have the following setup: 
 
@@ -1610,11 +1588,11 @@ $ $
 
 Now suppose that we encode the following two input vectors (i.e., input vector slots) in $\mathbb{Z}_{17}$:
 
-$\vec{v}_1 = (10, 0, 5, 13)$
+$\vec{v}_1 = (10, 3, 5, 13)$
 
-$\vec{v}_2 = (2, 4, 8, 6)$
+$\vec{v}_2 = (2, 4, 3, 6)$
 
-$\vec{v}_1 + \vec{v}_2 = (10, 0, 5, 13) + (2, 4, 8, 6) \equiv (12, 4, 13, 2) \bmod 17$
+$\vec{v}_1 + \vec{v}_2 = (10, 3, 5, 13) + (2, 4, 3, 6) \equiv (12, 7, 8, 2) \bmod 17$
 
 $ $
 
@@ -1634,7 +1612,7 @@ $\vec{m}_1 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 1 & 0 & 0 & 0\\
 \end{bmatrix} \cdot \begin{bmatrix}
 10\\
-0\\
+3\\
 5\\
 13\\
 \end{bmatrix} \equiv (12, 11, 12, 1)  \bmod 17$
@@ -1654,7 +1632,7 @@ $\vec{m}_2 = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} = 13 \cdot \begin{bmatr
 \end{bmatrix} \cdot \begin{bmatrix}
 2\\
 4\\
-8\\
+3\\
 6\\
 \end{bmatrix} \equiv (8, 5, 14, 6) \bmod 17$
 
@@ -1672,23 +1650,19 @@ $M_{1+2}(X) =\left\lceil\dfrac{44 + 240X + 134X^2 + 105X^3}{15}\right\rfloor \bm
 
 $= \left\lceil2.933 + 16X + 8.933X^2 + 7X^3\right\rfloor \bmod 17$
 
-$3 + 16X + 9X + 7X^3 \bmod 17 $
+$3 + 16X + 9X^2 + 7X^3 \bmod 17 $
 
 $ $
 
-%Note that the coefficients of the scaled polynomials $\Delta M_1(X)$ and $\Delta M_2(X)$ are still within the range of the ciphertext domain $q=64$ (which must hold throughout all homomorphic computations to preserve correctness). 
 
 This polynomial matches the value of $\vec{m}_{1+2}$ as follows:
 
-$\vec{m}_1 + \vec{m}_2 = (12, 11, 12, 1) + (8, 5, 14, 6) = (20, 16, 30, 7) \equiv (3, 16, 9, 7) \bmod 17$
+$\vec{m}_1 + \vec{m}_2 = (12, 11, 12, 1) + (8, 5, 14, 6) = (20, 16, 26, 7) \equiv (3, 16, 9, 7) \bmod 17$
 
 $ $
 
-Finally, we decode $M_{1+2}(X)$ as follows: 
+Finally, we decode $\vec{m}_{1+2}$ as follows:
 
-$\vec{m}_{1+2} = \dfrac{\Delta \vec{m}_{1+2}}{\Delta} = \dfrac{(60, 48, 14, 21)}{3} \approx (20, 16, 5, 7)$
-
-$ $
 
 
 $\vec{v}_{1+2} = \hathat{W}^* \cdot \vec{m}_{1+2} = \begin{bmatrix}
@@ -1703,12 +1677,16 @@ $ $
 This result matches the expected vector sum $\vec{v}_1 + \vec{v}_2$.
 
 
+
+
 \subsubsection{Rotation Example}
 \label{subsubsec:bfv-rotation-ex}
 
+Also in the above example, we use the unsigned modulo representation (e.g., $[0, t-1], [0, q]$) when computing $\bmod t$ and $\bmod q$. However, the correctness of the result holds even if we use the centered modulo representation (e.g., $[-\dfrac{t}{2}, \dfrac{t}{2})$, $[-\dfrac{q}{2}, \dfrac{q}{2})$).
+
 Suppose we have the following setup: 
 
-$\mu = 16, n = \dfrac{\mu}{2} = 8, \text{ } t = 17, \text{ } q = 2^8 = 256, \text{ } n^{-1} = 13, \text{ } \Delta = 15$
+$\mu = 16, n = \dfrac{\mu}{2} = 8, \text{ } t = 17, \text{ } q = 2^8 = 256, \text{ } n^{-1} = 15, \text{ } \Delta = 15$
 
 $ $
 
@@ -1826,7 +1804,7 @@ $ $
 
 $\vec{m} = n^{-1} \hathat{W} \cdot I_n^R \cdot \vec{v} $
 
-$= 13 \cdot  \begin{bmatrix}
+$= 15 \cdot  \begin{bmatrix}
 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 12&14&5&3&10&11&7&6\\
 8&9&8&9&15&2&15&2\\
@@ -1863,7 +1841,7 @@ $ $
 $\Delta M(X) = 15\cdot(13 + 16X + 10X^2 + 5X^3 + 9X^4 + 12X^5 + 7X^6 + X^7)$
 
 
-$ = 195 + 180X - 150X^2 - 15X^3 + 135^X⁴ - 240X^5 - 105X^6 + 75X^7 \pmod{q}$ \textcolor{red}{  $\rhd$ where $q = 256$}
+$ = 195 + 240X + 150X^2 + 75X^3 + 135X^4 + 180X^5 + 105X^6 + 15X^7 \pmod{q}$ \textcolor{red}{  $\rhd$ where $q = 256$}
 
 $ $
 
@@ -1899,11 +1877,11 @@ $\vec{v}_{J(3)} = \hathat{W}^* \cdot \vec{m}_{J(3)} = \begin{bmatrix}
 13\\
 12\\
 -10\\
--2\\
-18\\
--32\\
--14\\
-10\end{bmatrix}$
+-1\\
+9\\
+-16\\
+-7\\
+5\end{bmatrix}$
 
 $= (4, 1, 2, 3, 8, 5, 6, 7) \pmod{17}$
 
@@ -1923,7 +1901,7 @@ $ $
 
 
 
-\para{Source Code:} Examples of BFV's batch encoding and homomorphic input vector rotation can be executed by running \href{https://github.com/fhetextbook/fhe-textbook/blob/main/source%20code/bfv.py}{\underline{this Python script}} (BFV addition and rotation) and \href{https://github.com/fhetextbook/fhetextbook.github.io/blob/main/source%20code/bfv_rotation_only.py}{\underline{this one}} (BFV rotation only). 
+\para{Source Code:} Examples of BFV's batch encoding and homomorphic input vector rotation can be executed by running \href{https://github.com/fhetextbook/fhe-textbook/blob/main/source%20code/bfv.py}{\underline{this Python script}} (BFV addition) and \href{https://github.com/fhetextbook/fhetextbook.github.io/blob/main/source%20code/bfv_rotation_only.py}{\underline{this one}} (BFV rotation only). 
 
 
 
@@ -1950,19 +1928,19 @@ $ $
 
 The result of $A \cdot \vec{x}$ is an $m$-dimensional vector computed as:
 
-$A \cdot \vec{x} = \Big(\vec{a}_{\langle 0, * \rangle} \cdot \vec{x}, \text{ } \vec{a}_{\langle 1, * \rangle} \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{\langle m-1, * \rangle} \cdot \vec{x} \Big) = \left(\sum\limits_{i=0}^{n-1} a_{0, i} \cdot  x_i, \text{ } \sum\limits_{i=0}^{n-1}  a_{1, i} \cdot x_i, \gap{$\cdots$}, \text{ } \sum\limits_{i=0}^{n-1} a_{m-1, i} \cdot x_i \right)$
+$A \cdot \vec{x} = \Big(\vec{a}_{\langle 0, * \rangle} \cdot \vec{x}, \text{ } \vec{a}_{\langle 1, * \rangle} \cdot \vec{x}, \text{ }\cdots,\text{ } \vec{a}_{\langle m-1, * \rangle} \cdot \vec{x} \Big) = \left(\sum\limits_{i=0}^{n-1} a_{0, i} \cdot  x_i, \text{ } \sum\limits_{i=0}^{n-1}  a_{1, i} \cdot x_i, \cdots, \text{ } \sum\limits_{i=0}^{n-1} a_{m-1, i} \cdot x_i \right)$
 
 $ $
 
 Let's define $\rho(\vec{v}, h)$ as the rotation of $\vec{v}$ by $h$ positions to the left. And remember that the Hadamard dot product (Definition~\ref*{subsec:vector-arithmetic} in \autoref{subsec:vector-arithmetic}) is defined as slot-wise multiplication of two vectors: 
 
-$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \gap{$\cdots$}, \text{ } a_{n-1} b_{n-1})$
+$\vec{a} \odot \vec{b} = (a_0 b_0, \text{ } a_1 b_1, \text{ } \cdots, \text{ } a_{n-1} b_{n-1})$
 
 $ $
 
 Let's define $n$ distinct diagonal vector $\vec{u}_i$ extracted from matrix $A$ as follows: 
 
-$\vec{u}_i = \{a_{\langle j \bmod m, \text{ } i + j\bmod n \rangle}\}_{j = 0}^{n-1}$
+$\vec{u}_i = \{a_{\langle j \bmod m, \text{ } (i + j)\bmod n \rangle}\}_{j = 0}^{n-1}$
 
 $ $
 
@@ -1971,7 +1949,7 @@ Then, the original matrix-to-vector multiplication formula can be equivalently c
 $A \cdot \vec{x} = \vec{u}_0 \odot \rho(\vec{x}, 0) \text{ } + \text{ } \vec{u}_1 \odot \rho(\vec{x}, 1) \text{ } + \text{ } \cdots \text{ } + \text{ } \vec{u}_{n-1} \odot \rho(\vec{x}, n-1)$
 
 , whose computation result is equivalent to $A \cdot \vec{x}$. 
-The above formula is compatible with homomorphic computation, because BFV supports Hadamard dot product between input vectors as a ciphertext-to-plaintext multiplication between their polynomial-encoded forms (\autoref{subsec:ckks-mult-plain}), and BFV also supports $\rho(\vec{v}, h)$ as homomorphic input vector slot rotation (\autoref{subsec:ckks-rotation}). After homomorphically computing the above formula, we can consider only the first $m$ (out of $n$) resulting input vector slots to store the result of $A \cdot \vec{x}$. 
+The above formula is compatible with homomorphic computation, because BFV supports Hadamard dot product between input vectors as a ciphertext-to-plaintext multiplication between their polynomial-encoded forms (\autoref{subsec:bfv-mult-plain}), and BFV also supports $\rho(\vec{v}, h)$ as homomorphic input vector slot rotation (\autoref{subsec:bfv-rotation}). After homomorphically computing the above formula, we can consider only the first $m$ (out of $n$) resulting input vector slots to store the result of $A \cdot \vec{x}$. 
 
 
 
@@ -2443,7 +2421,7 @@ $ $
 
 $ $
 
-$A'S + B' = p^{\varepsilon-r}M + E' \bmod p^\varepsilon$ \textcolor{red}{ $\rhd$ where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-r}\right)\cdot M$, which is a modulus switch noise plus the rounding noise caused by treating $\Delta=\left\lfloor\dfrac{q}{p^r}\right\rfloor \approx \dfrac{q}{p^r}$.}
+$A'S + B' = p^{\varepsilon-r}M + E' \bmod p^\varepsilon$ \textcolor{red}{ $\rhd$ where $E' \approx \dfrac{p^\varepsilon}{q}\cdot E  + \left(\left\lfloor\dfrac{q}{p^r}\right\rfloor\cdot\dfrac{p^\varepsilon}{q} - p^{\varepsilon-r}\right)\cdot M$, which is a modulus switch noise plus the rounding noise caused by treating $\Delta=\left\lfloor\dfrac{q}{p^r}\right\rfloor \approx \dfrac{q}{p^r}$.}
 
 $ $
 
@@ -2469,19 +2447,19 @@ $ $
 
 \item \textbf{\underline{Digit Extraction}:} We design a polynomial $G_{\varepsilon}(z_i)$ (a digit extraction polynomial) as follows:
 
-$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-r} d_* p^j\right)$ \textcolor{red}{ $\rhd$ where $d_0 \in \mathbb{Z}_{p^r}$, and $\varepsilon'$ is $z_i$'s least significant base-$p$ digit index whose value is non-zero after digit index after digit index $r-1$}
+$z_i = d_0 + \left(\sum\limits_{j=\varepsilon'}^{\varepsilon-r} d_* p^j\right)$ \textcolor{red}{ $\rhd$ where $d_0 \in \mathbb{Z}_{p}$, and $\varepsilon'$ is $z_i$'s first least significant base-$p$ digit index whose value is non-zero (after digit index 0) currently being processed by the $F_{\varepsilon'}(Z_i)$ function}
 
 $F_{\varepsilon'}(z_i) \equiv d_0 \bmod p^{\varepsilon'+1}$ \textcolor{red}{ $\rhd$ a $(p-1)$-degree polynomial recursively used to finally extract the value $d_0 \bmod p^{\varepsilon}$}
 
-$G_{\varepsilon}(z_i) \equiv (z_i - \underbrace{F_{\varepsilon-1} \circ F_{\varepsilon-2} \circ F_{\varepsilon-3} \cdots F_{1}}_{\varepsilon - 1 \text{ times}} (z_i)) \cdot |p^{-1}|_q \bmod p^\varepsilon$
+$G_{\varepsilon}(z_i) \equiv (z_i - \underbrace{F_{\varepsilon-1} \circ F_{\varepsilon-2} \circ F_{\varepsilon-3} \cdots F_{r}}_{\varepsilon - r \text{ times}} (z_i)) \cdot |p^{-1}|_q \bmod p^\varepsilon$
 
 $ $
 
 
 
-We homomorphically evaluate the digit extraction polynomial $G_{\varepsilon}$ recursively total $\varepsilon-1$ times at each coefficient $z_i$ of $Z$ stored at input vector slots, which zeros out and right-shifts the least significant (base-$p$) $\varepsilon-r-1$ digits of $z_i$ as follows:
+We homomorphically evaluate the digit extraction polynomial $G_{\varepsilon}$ recursively total $\varepsilon-r$ times at each coefficient $z_i$ of $Z$ stored at input vector slots, which zeros out and right-shifts the least significant (base-$p$) $\varepsilon-r$ digits of $z_i$ as follows:
 
-$G_{\varepsilon - r - 2} \circ G_{\varepsilon - r - 3} \circ \cdots \circ G_{\varepsilon-1} \circ G_{\varepsilon} (z_i)$
+$G_{r + 1} \circ G_{r + 2} \circ \cdots \circ G_{\varepsilon-1} \circ G_{\varepsilon} (z_i)$
 
 $= m_i + k_i'p$
 
@@ -2489,12 +2467,12 @@ $ $
 
 , provided $E'$'s each coefficient is smaller than $\left\|\dfrac{p^{\varepsilon-r}}{2}\right\|$. At this point, each input vector slot contains the noise-removed coefficient $m_i + k_i^{\langle \varepsilon - r - 1\rangle}p$. 
 
-\para{\underline{Scaling Factor Re-interpretation}:} At each $i$-th round of digit extraction, we do not explicitly multiply $|p^{-1}|_q$ to perform division by $p$, but instead conceptually borrow this term from the denominator of the plaintext scaling factor $\Delta'$, conceptually updating the scaling factor to $\left\lfloor\dfrac{q}{p^{\varepsilon-i+r-1}}\right\rfloor$. This implies that at $i$-th round of digit extraction, the plaintext operations used for ciphertext-to-plaintext homomorphic operations should encode their values by using the scaling factor $\left\lfloor\dfrac{q}{p^{\varepsilon-i+r-1}}\right\rfloor$. At the end of digit extraction, the plaintext scaling factor becomes $\Delta' = \Delta = \left\lfloor\dfrac{q}{p^r}\right\rfloor$. 
+\para{\underline{Scaling Factor Re-interpretation}:} At each $i$-th round of digit extraction, we do not explicitly multiply $|p^{-1}|_q$ to perform division by $p$, but instead conceptually borrow this term from the denominator of the plaintext scaling factor $\Delta'$, conceptually updating the scaling factor to $\left\lfloor\dfrac{q}{p^{\varepsilon-i}}\right\rfloor$. This implies that at $i$-th round of digit extraction, the plaintext operations used for ciphertext-to-plaintext homomorphic operations should encode their values by using the scaling factor $\left\lfloor\dfrac{q}{p^{\varepsilon-i}}\right\rfloor$. At the end of digit extraction, the plaintext scaling factor becomes $\Delta' = \Delta = \left\lfloor\dfrac{q}{p^r}\right\rfloor$. 
 
 
 $ $
 
-\item \textbf{\textsf{\underline{SlotToCoeff}}:} Homomorphically move each input vector slot's value $m_i + k_i^{\langle \varepsilon - r - 1\rangle}p^\varepsilon$ back to the (encrypted) polynomial coefficient positions. This is done by multiplying $\hathat{W}^*$ to the output ciphertext of the digit extraction step, where $\hathat{W}^*$ is the decoding matrix (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsubsec:bfv-rotation-summary}). The output of this computation is $\textsf{RLWE}_{S, \sigma}\bm(\Delta\cdot (M + K^{\langle \varepsilon - r - 1\rangle}p) + E^{\langle \text{b} \rangle}) \bm) = \textsf{RLWE}_{S, \sigma}\bm(\Delta\cdot (M + E^{\langle \text{new2} \rangle}) \bm) \bmod q$, where $E^{\langle \text{b} \rangle}$ is the new noise generated during bootstrapping (step $3\sim 5$). 
+\item \textbf{\textsf{\underline{SlotToCoeff}}:} Homomorphically move each input vector slot's value $m_i + k_i^{\langle \varepsilon - r - 1\rangle}p^\varepsilon$ back to the (encrypted) polynomial coefficient positions. This is done by multiplying $\hathat{W}^*$ to the output ciphertext of the digit extraction step, where $\hathat{W}^*$ is the decoding matrix (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsubsec:bfv-rotation-summary}). The output of this computation is $\textsf{RLWE}_{S, \sigma}\bm(\Delta\cdot (M + K^{\langle \varepsilon - r - 1\rangle}p) + E^{\langle \text{b} \rangle}) \bm) = \textsf{RLWE}_{S, \sigma}\bm(\Delta\cdot (M + E^{\langle \text{final} \rangle}) \bm) \bmod q$, where $E^{\langle \text{b} \rangle}$ is the new noise generated during bootstrapping (step $3\sim 5$). 
 
 
 

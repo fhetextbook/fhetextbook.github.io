@@ -8,17 +8,22 @@
 <meta content='index.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!-- l. 47 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption3.html'>prev</a>][<a href='GLev.html#Decryption3.html'>parent</a>][<a href='LevandRLev.html'>next</a>]</p></div>
+   <!-- l. 25 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption3.html'>prev</a>][<a href='GLev.html#Decryption3.html'>parent</a>][<a href='LevandRLev.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='decryption3'><span class='titlemark'>B-5.2   </span>   <a id='x84-97000B-5.2'></a>Decryption</h4>
-<!-- l. 49 --><p class='noindent'>It is sufficient to decrypt any <!-- l. 49 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>i</mi></math>-th
-GLWE ciphertext of the GLev ciphertext by using the secret
-<!-- l. 49 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>, with the
-scaling factor <!-- l. 49 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
-</mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></mfrac></mstyle></mrow></math>.
+<!-- l. 27 --><p class='noindent'>We decrypt the first GLWE ciphertext (<!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>i</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>)
+using the secret <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>, with the scaling
+factor <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>1</mn></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
+</mrow><mrow><mi>β</mi></mrow></mfrac></mstyle></mrow></math>. This is because while the
+ciphertext contains <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>l</mi></math> encryptions, the
+higher indices <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>i</mi> <mo class='MathClass-rel' stretchy='false'>&gt;</mo> <mn>1</mn></mrow></math> have progressively
+smaller scaling factors <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>q</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></math>.
+If <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
+becomes smaller than the noise threshold, those specific components cannot be decrypted
+correctly.
                                                                                          
                                                                                          
 </p>
-   <!-- l. 52 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption3.html'>prev</a>][<a href='GLev.html#Decryption3.html'>parent</a>][<a href='LevandRLev.html'>next</a>]</p></div>
+   <!-- l. 29 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption3.html'>prev</a>][<a href='GLev.html#Decryption3.html'>parent</a>][<a href='LevandRLev.html'>next</a>]</p></div>
     
 </body> 
 </html>

@@ -89,16 +89,16 @@ compute each term for <!-- l. 31 --><math display='inline' xmlns='http://www.w3.
 <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> values). The polynomial
 interpolation for deriving <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>C</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 also takes <!-- l. 31 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>O</mi><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>n</mi></mrow><mrow><mn>2</mn></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-</p><!-- l. 33 --><p class='indent'>   To solve this efficiency problem, this section will introduce an efficient
+</p><!-- l. 33 --><p class='indent'>   To solve this efficiency problem, this section will explain an efficient
 technique for polynomial evaluation, which can evaluate a polynomial at
 <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>n</mi></math> distinct roots
 of unity in <!-- l. 33 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>O</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi><mi class='loglike'>log</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mi>n</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic
-Transform(NTT). These two types are technically almost the same, with the only difference being that the
-FFT assumes a polynomial ring over complex numbers (<a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!-- tex4ht:ref: subsec:vector-arithmetic  --></a>), whereas the NTT assumes a polynomial
-ring over a finite field (e.g., integers modulo a prime) (<a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsec:vector-arithmetic  --></a>). Polynomial multiplication based on FFT (or
-NTT) comprises 3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT
-(or NTT).
+This technique is classified into 2 types: Fast Fourier Transform (FFT) and Number-theoretic Transform
+(NTT). These two types are technically almost the same, with the only difference that the FFT assumes a
+polynomial ring over complex numbers (<a href='RootsofUnity.html#roots-of-unity'><span class='ts1-lmr10-x-x-109'>§</span>A-7<!-- tex4ht:ref: subsec:vector-arithmetic  --></a>), whereas the NTT assumes a polynomial ring over a finite
+field (e.g., integers modulo a prime) (<a href='RootsofUnityandCyclotomicPolynomialoverFiniteField.html#roots-of-unity-and-cyclotomic-polynomial-over-finite-field'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsec:vector-arithmetic  --></a>). Polynomial multiplication based on FFT (or NTT) comprises
+3 steps: (1) forward FFT (or NTT); (2) point-value multiplication; and (3) inverse FFT (or
+NTT).
                                                                                          
                                                                                          
 </p>

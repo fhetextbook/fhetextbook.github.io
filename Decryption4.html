@@ -10,8 +10,14 @@
 </head><body>
    <!-- l. 19 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption4.html'>prev</a>][<a href='GGSW.html#Decryption4.html'>parent</a>][<a href='GSWandRGSW.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='decryption4'><span class='titlemark'>B-6.2   </span>   <a id='x88-101000B-6.2'></a>Decryption</h4>
-<!-- l. 21 --><p class='noindent'>It is sufficient to decrypt the GGSW ciphertext’s any one GLev ciphertext’s any one GLWE ciphertext, by using
-the secret <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>.
+<!-- l. 21 --><p class='noindent'>To recover the message <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>,
+it is sufficient to decrypt the last GLev ciphertext (the one encrypting
+<!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>) using the secret
+<!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>. Decrypting the other
+rows yields <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>S</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi></mrow></math>, but
+recovering <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math> from these
+rows is only possible if <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>S</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
+is invertible (i.e., <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>S</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>≠</mo><mn>0</mn></mrow></math>).
                                                                                          
                                                                                          
 </p>

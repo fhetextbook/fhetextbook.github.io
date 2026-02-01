@@ -372,7 +372,7 @@ Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that f
 
 
 
-Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
+Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x \in \mathbb{Z}$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
 
 $\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
@@ -597,13 +597,13 @@ $ $
 \label{subsec:poly-vector-transformation-complex}
 
 
-In Theorem~\ref*{subsec:polynomial-ring-basis} (\autoref{subsec:polynomial-ring-basis}), we learned the isomorphic mapping $\sigma: f(X) \in \mathbb{Z}_t[X]/(X^n + 1) \longrightarrow (f(x_0),f(x_1),f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$, where $x_0, x_1, x_2, \cdots, x_{n-1}$ are the ($(\mu=2n)$-th primitive) roots of the cyclotomic polynomial $X^n + 1$, which are $\omega, \omega^3, \omega^5, \cdots, \omega^{2n-1}$, where $\omega$ can be any root of $X^n + 1$ (i.e., since each $\omega$ is a generator of all roots). In this subsection, we will demonstrate the isomorphism between a vector space and a polynomial ring over complex numbers as follows: 
+In Theorem~\ref*{subsec:polynomial-ring-basis} (\autoref{subsec:polynomial-ring-basis}), we learned the isomorphic mapping $\sigma: f(X) \in \mathbb{Z}_t[X]/(X^n + 1) \longrightarrow (f(x_0),f(x_1),f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$, where $x_0, x_1, x_2, \cdots, x_{n-1} \in \mathbb{Z}$ are the ($(\mu=2n)$-th primitive) roots of the cyclotomic polynomial $X^n + 1$, which are $\omega, \omega^3, \omega^5, \cdots, \omega^{2n-1}$, where $\omega$ can be any root of $X^n + 1$ (i.e., since each $\omega$ is a generator of all roots). In this subsection, we will demonstrate the isomorphism between a vector space and a polynomial ring over complex numbers as follows: 
 
 $\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n}$
 
 $ $
 
-, where $\omega = e^{i\pi/n}$, the root (i.e., the primitive $(\mu=2n)$-th root) of the cyclotomic polynomial $X^n + 1$ over complex numbers (Theorem~\ref*{subsec:cyclotomic-theorem}.1 in \autoref{subsec:cyclotomic-theorem}). We define $\mathbb{\hat{C}}^{n}$ to be an $n$-dimensional \textit{special} vector space whose second-half elements of each vector are reverse-ordered conjugates of the first-half elements (e.g., $(v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \cdots, \overline{v}_1, \overline{v}_0 )$). 
+, where $X \in \mathbb{C}$, and $\omega = e^{i\pi/n}$, the root (i.e., the primitive $(\mu=2n)$-th root) of the cyclotomic polynomial $X^n + 1$ over complex numbers (Theorem~\ref*{subsec:cyclotomic-theorem}.1 in \autoref{subsec:cyclotomic-theorem}). We define $\mathbb{\hat{C}}^{n}$ to be an $n$-dimensional \textit{special} vector space whose second-half elements of each vector are reverse-ordered conjugates of the first-half elements (e.g., $(v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \cdots, \overline{v}_1, \overline{v}_0 )$). 
 
 \subsubsection{Isomorphism between $\mathbb{C}^{\frac{n}{2}}$ and $\mathbb{\hat C}^{n}$}
 \label{subsec:poly-vector-transformation-complex-isomorphism1}

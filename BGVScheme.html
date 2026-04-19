@@ -16,8 +16,8 @@ to BFV. However, the major difference between these two schemes is that BFV stor
 plaintext value in the MSBs (most significant bits) and the noise in the low-digit area (least
 significant bits), while BGV stores them the other way around: the plaintext value in the low-digit
 area and the noise in the MSBs. Technically, while BFV scales the plaintext polynomial by
-<!-- l. 2 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>, BGV scales the
-noise polynomial by <!-- l. 2 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>.
+<!-- l. 2 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>, BGV scales the
+noise polynomial by <!-- l. 2 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>.
 Therefore, these two schemes use slightly different strategies to store and manage the plaintext and noise
 within a ciphertext.
 </p><!-- l. 4 --><p class='indent'>   BGV internally uses almost the same strategy as BFV for plaintext encoding, ciphertext-to-plaintext
@@ -29,7 +29,7 @@ multiplication is leveled, switching the modulus to a lower level like CKKS, and
 limited. Furthermore, BGV’s modulus switch and bootstrapping are partially different from
 BFV’s.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-106'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-107'>     
 <div class='tcolorbox-title'>
                                                                                          
                                                                                          
@@ -51,7 +51,7 @@ BFV’s.
     </li>
     <li class='itemize'><a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>: <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'>Cyclotomic Polynomial<!-- tex4ht:ref: sec:cyclotomic  --></a>
     </li>
-    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'>Roots of Unity and Cyclotomic Polynomial over Rings<!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a>
+    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRing.html#roots-of-unity-and-cyclotomic-polynomial-over-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRing.html#roots-of-unity-and-cyclotomic-polynomial-over-ring'>Roots of Unity and Cyclotomic Polynomial over Ring<!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a>
     </li>
     <li class='itemize'><a href='VectorandMatrix.html#vector-and-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!-- tex4ht:ref: subsubsec:ckks-bootstrapping-summary  --></a>: <a href='VectorandMatrix.html#vector-and-matrix'>Vector and Matrix<!-- tex4ht:ref: sec:matrix  --></a>
     </li>

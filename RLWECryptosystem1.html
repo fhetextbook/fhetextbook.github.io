@@ -10,31 +10,31 @@
 </head><body>
    <!-- l. 520 --><div class='crosslinks'><p class='noindent'>[<a href='LWECryptosystem1.html'>prev</a>][<a href='PostquantumCryptography.html#RLWECryptosystem1.html'>parent</a>][<a href='GLWECryptosystem.html'>next</a>]</p></div>
    <h3 class='sectionHead' id='rlwe-cryptosystem1'><span class='titlemark'>B-3   </span>   <a id='x72-84000B-3'></a>RLWE Cryptosystem</h3>
-<!-- l. 1 --><p class='noindent'>The RLWE cryptosystem’s ciphertext is a tuple <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
-where <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>S</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi></mrow></math>. The random
-public mask <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>A</mi></math> and
-the secret key <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math> are
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree polynomials.
-The message <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math> and
-the noise <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math> are
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree polynomials. Like in
-LWE, a new random public mask <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>A</mi></math>
+<!-- l. 1 --><p class='noindent'>The RLWE cryptosystem’s ciphertext is a tuple <!-- l. 1 --><math display='inline'>(A,B)</math>,
+where <!-- l. 1 --><math display='inline'><mrow>B = S ⋅A + <mi mathvariant='normal'>Δ</mi> ⋅M + E</mrow></math>. The random
+public mask <!-- l. 1 --><math display='inline'>A</math> and
+the secret key <!-- l. 1 --><math display='inline'>S</math> are
+<!-- l. 1 --><math display='inline'>(n −1)</math>-degree polynomials.
+The message <!-- l. 1 --><math display='inline'>M</math> and
+the noise <!-- l. 1 --><math display='inline'>E</math> are
+<!-- l. 1 --><math display='inline'>(n −1)</math>-degree polynomials. Like in
+LWE, a new random public mask <!-- l. 1 --><math display='inline'>A</math>
 is created for each ciphertext, whereas the same secret key
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>
+<!-- l. 1 --><math display='inline'>S</math>
 is used for all ciphertexts. In this section, we denote each ciphertext instance as
-<!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> instead
-of <!-- l. 1 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>A</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>i</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>b</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>i</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> for
+<!-- l. 1 --><math display='inline'>(A,B)</math> instead
+of <!-- l. 1 --><math display='inline'><mrow>(<msup><mrow>A</mrow><mrow>⟨i⟩</mrow></msup>,<msup><mrow>b</mrow><mrow>⟨i⟩</mrow></msup>)</mrow></math> for
 simplicity.
 </p><!-- l. 3 --><p class='indent'>   In RLWE, all polynomials are computed in the polynomial ring
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, where
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math> is a cyclotomic polynomial
-with <!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mn>2</mn></mrow><mrow><mi>f</mi></mrow></msup></mrow></math> for some integer
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math> and the polynomial
-coefficients are in <!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></math>.
+<!-- l. 3 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>q</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>, where
+<!-- l. 3 --><math display='inline'><mrow><msup><mrow>x</mrow><mrow>n</mrow></msup> + 1</mrow></math> is a cyclotomic polynomial
+with <!-- l. 3 --><math display='inline'><mrow>n = <msup><mrow>2</mrow><mrow>f</mrow></msup></mrow></math> for some integer
+<!-- l. 3 --><math display='inline'>f</math> and the polynomial
+coefficients are in <!-- l. 3 --><math display='inline'><msub><mrow>ℤ</mrow><mrow>q</mrow></msub></math>.
 Thus, all polynomials in RLWE have the coefficient range
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></math> and the maximum
-polynomial degree of <!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math>. For
-simplicity, we denote <!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+<!-- l. 3 --><math display='inline'><msub><mrow>ℤ</mrow><mrow>q</mrow></msub></math> and the maximum
+polynomial degree of <!-- l. 3 --><math display='inline'>n −1</math>. For
+simplicity, we denote <!-- l. 3 --><math display='inline'><mrow><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub> = <msub><mrow>ℤ</mrow><mrow>q</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>.
    
 </p>
    <div class='subsectionTOCS hrr'>

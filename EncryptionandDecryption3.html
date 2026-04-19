@@ -12,91 +12,91 @@
    <h4 class='subsectionHead' id='encryption-and-decryption3'><span class='titlemark'>D-4.2   </span>   <a id='x142-209000D-4.2'></a>Encryption and Decryption</h4>
 <!-- l. 107 --><p class='noindent'>BGV’s encryption and decryption scheme is very similar to BFV’s scheme (Summary D-2.3
 in <a href='EncryptionandDecryption1.html#encryption-and-decryption1'><span class='ts1-lmr10-x-x-109'>§</span>D-2.3<!-- tex4ht:ref: subsec:bfv-enc-dec  --></a>) with a small difference: while BFV scales the plaintext polynomial
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> by
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>, BGV scales the
-noise polynomial <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>E</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> by
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>. In BFV, each encoded
-plaintext polynomial <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-is scaled by <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
-</mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>.
+<!-- l. 107 --><math display='inline'>M(X)</math> by
+<!-- l. 107 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>, BGV scales the
+noise polynomial <!-- l. 107 --><math display='inline'>E(X)</math> by
+<!-- l. 107 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>. In BFV, each encoded
+plaintext polynomial <!-- l. 107 --><math display='inline'>M(X)</math>
+is scaled by <!-- l. 107 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> = <mrow><mo fence='true' form='prefix'>⌊</mo><mrow><mstyle displaystyle='true'><mfrac><mrow>q
+</mrow><mrow>t</mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></mrow></math>.
 This strategy effectively shifts each plaintext coefficient value to the most significant bits while keeping
 the noise in the least significant bits. On the other hand, BGV does not scale the plaintext polynomial
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, but instead it scales
-each new noise <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>E</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-by <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>t</mi></mrow></math>, making the
-noise <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><mi>E</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, which is
+<!-- l. 107 --><math display='inline'>M(X)</math>, but instead it scales
+each new noise <!-- l. 107 --><math display='inline'>E(X)</math>
+by <!-- l. 107 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> = t</mrow></math>, making the
+noise <!-- l. 107 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>E(X)</mrow></math>, which is
 newly generated upon each new ciphertext creation. This different scaling strategy effectively shifts the noise (i.e.,
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math>) to the most significant bits
-by scaling it by <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>t</mi></mrow></math> while keeping
-the plaintext value (i.e., <!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math>)
-<!-- l. 107 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>’s each
+<!-- l. 107 --><math display='inline'><msub><mrow>e</mrow><mrow>i</mrow></msub></math>) to the most significant bits
+by scaling it by <!-- l. 107 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> = t</mrow></math> while keeping
+the plaintext value (i.e., <!-- l. 107 --><math display='inline'><msub><mrow>m</mrow><mrow>i</mrow></msub></math>)
+<!-- l. 107 --><math display='inline'>M(X)</math>’s each
 coefficient in the least significant bits.
-</p><!-- l. 109 --><p class='indent'>   Also, in BGV, the ciphertext modulus <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
-is leveled like CKKS’s one: <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>,
-where each <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∏</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>l</mi></mrow></munderover><msub><mrow><mi>w</mi></mrow><mrow><mi>i</mi></mrow></msub></mrow></math>
-(where each <!-- l. 109 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>w</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
+</p><!-- l. 109 --><p class='indent'>   Also, in BGV, the ciphertext modulus <!-- l. 109 --><math display='inline'>q</math>
+is leveled like CKKS’s one: <!-- l. 109 --><math display='inline'><mrow>q ∈{<msub><mrow>q</mrow><mrow>0</mrow></msub>,<msub><mrow>q</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>q</mrow><mrow>L</mrow></msub>}</mrow></math>,
+where each <!-- l. 109 --><math display='inline'><mrow><msub><mrow>q</mrow><mrow>l</mrow></msub> =<munderover accent='false' accentunder='false'><mrow> ∏
+  </mrow><mrow>i=0</mrow><mrow>l</mrow></munderover><msub><mrow>w</mrow><mrow>i</mrow></msub></mrow></math>
+(where each <!-- l. 109 --><math display='inline'><msub><mrow>w</mrow><mrow>i</mrow></msub></math>
 is a CRT modulus).
 </p><!-- l. 111 --><p class='indent'>   BGV’s encryption decryption process is described as follows:
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-108'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-109'>     
 <div class='tcolorbox-title'>
-<!-- l. 167 --><p class='indent'>   <!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-4.2</span><!-- l. 167 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!-- l. 167 --><p class='indent'>   <!-- l. 167 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-4.2</span><!-- l. 167 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>BGV Encryption and Decryption</span></p></div> 
 <div class='tcolorbox-content'><!-- l. 116 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Initial Setup</span></span><span class='rm-lmbx-10x-x-109'>:</span>
 </p>
    <ul class='itemize1'>
-   <li class='itemize'>The plaintext modulus <!-- l. 119 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>p</mi></mrow></math>
+   <li class='itemize'>The plaintext modulus <!-- l. 119 --><math display='inline'>t = p</math>
    (a prime)
     </li>
-    <li class='itemize'>The ciphertext modulus <!-- l. 121 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
-   is leveled like in CKKS: <!-- l. 121 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>q</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>q</mi></mrow><mrow><mi>L</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>,
-    where each <!-- l. 121 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∏</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>l</mi></mrow></munderover><msub><mrow><mi>w</mi></mrow><mrow><mi>i</mi></mrow></msub></mrow></math>
-    (each <!-- l. 121 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>w</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-    is a CRT modulus), and each <!-- l. 121 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>≡</mo><mn>1</mn><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
+    <li class='itemize'>The ciphertext modulus <!-- l. 121 --><math display='inline'>q</math>
+   is leveled like in CKKS: <!-- l. 121 --><math display='inline'><mrow>q ∈{<msub><mrow>q</mrow><mrow>0</mrow></msub>,<msub><mrow>q</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>q</mrow><mrow>L</mrow></msub>}</mrow></math>,
+    where each <!-- l. 121 --><math display='inline'><mrow><msub><mrow>q</mrow><mrow>l</mrow></msub> =<munderover accent='false' accentunder='false'><mrow> ∏
+  </mrow><mrow>i=0</mrow><mrow>l</mrow></munderover><msub><mrow>w</mrow><mrow>i</mrow></msub></mrow></math>
+    (each <!-- l. 121 --><math display='inline'><msub><mrow>w</mrow><mrow>i</mrow></msub></math>
+    is a CRT modulus), and each <!-- l. 121 --><math display='inline'><mrow><msub><mrow>q</mrow><mrow>l</mrow></msub> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
    (will be explained in <a href='ModulusSwitch.html#modulus-switch1'><span class='ts1-lmr10-x-x-109'>§</span>D-4.7<!-- tex4ht:ref: subsec:bgv-enc-dec  --></a>)
     </li>
-    <li class='itemize'>The noise scaling factor <!-- l. 123 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>t</mi></mrow></math>
+    <li class='itemize'>The noise scaling factor <!-- l. 123 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> = t</mrow></math>
    </li>
-   <li class='itemize'>The secret key <!-- l. 124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>S</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext class='textit' mathvariant='italic'>𝑡𝑒𝑟𝑛</mtext></mstyle><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>.
-    The coefficients of the polynomial <!-- l. 124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>
-   ternary (i.e., <!-- l. 124 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>{</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>).
+   <li class='itemize'>The secret key <!-- l. 124 --><math display='inline'><mrow>S<munderover> ←<mrow></mrow><mrow>$</mrow></munderover><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,<mstyle class='text'><mtext class='textit' mathvariant='italic'>𝑡𝑒𝑟𝑛</mtext></mstyle>⟩</mrow></msub></mrow></math>.
+    The coefficients of the polynomial <!-- l. 124 --><math display='inline'>S</math>
+   ternary (i.e., <!-- l. 124 --><math display='inline'>{−1,0,1}</math>).
 </li></ul>
 <!-- l. 128 --><p class='noindent'></p><hr />
-<!-- l. 130 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Encryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 130 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>,
-<!-- l. 130 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>A</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>,
-<!-- l. 130 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>E</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></mrow></munderover><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>
+<!-- l. 130 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Encryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 130 --><math display='inline'><mrow>M ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>,
+<!-- l. 130 --><math display='inline'><mrow>A<munderover> ←<mrow></mrow><mrow>$</mrow></munderover><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>,
+<!-- l. 130 --><math display='inline'><mrow>E<munderover> ←<mrow></mrow><mrow><msub><mrow>χ</mrow><mrow>σ</mrow></msub></mrow></munderover><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 136 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>E</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>
+1.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 136 --><math display='inline'><mrow>B = −A ⋅S + M + <mi mathvariant='normal'>Δ</mi>E<mstyle class='text'><mtext> </mtext></mstyle> ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>
    </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'><!-- l. 138 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>E</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msubsup><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow><mrow><mn>2</mn></mrow></msubsup></mrow></math>
+2.  </dt><dd class='enumerate-enumitem'><!-- l. 138 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow>S,σ</mrow></msub>(M + <mi mathvariant='normal'>Δ</mi>E) = (A,B)<mstyle class='text'><mtext> </mtext></mstyle> ∈<msubsup><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow><mrow>2</mrow></msubsup></mrow></math>
      </dd></dl>
 <!-- l. 142 --><p class='noindent'></p><hr />
-<!-- l. 144 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 144 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msubsup><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow><mrow><mn>2</mn></mrow></msubsup></mrow></math>
+<!-- l. 144 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 144 --><math display='inline'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> = (A,B)<mstyle class='text'><mtext> </mtext></mstyle> ∈<msubsup><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow><mrow>2</mrow></msubsup></mrow></math>
      </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'><!-- l. 147 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>E</mi><mspace width='0.3em'></mspace><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='italic'>𝑚𝑜𝑑</mi><mspace width='0.3em'></mspace><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+1.  </dt><dd class='enumerate-enumitem'><!-- l. 147 --><math display='inline'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow>S,σ</mrow><mrow>−1</mrow></msubsup>(<mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle>) = B + A ⋅S = M + <mi mathvariant='normal'>Δ</mi>E<mspace width='0.3em'></mspace>(mod<mspace width='0.3em'></mspace>q)</mrow></math>
     </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 149 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>E</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi></mrow></math>
-   to get <!-- l. 149 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>M</mi></math>.
-    <span style='color:#FF0000;'> <!-- l. 149 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mo class='MathClass-rel' stretchy='false'>▹</mo></math>
-  modulo reduction of <!-- l. 149 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>E</mi></mrow></math>
-   by <!-- l. 149 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math></span>
+2.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 149 --><math display='inline'><mrow>M + <mi mathvariant='normal'>Δ</mi>E<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+   to get <!-- l. 149 --><math display='inline'>M</math>.
+    <span style='color:#FF0000;'> <!-- l. 149 --><math display='inline'>▹</math>
+  modulo reduction of <!-- l. 149 --><math display='inline'><mrow>M + <mi mathvariant='normal'>Δ</mi>E</mrow></math>
+   by <!-- l. 149 --><math display='inline'>t</math></span>
    </dd></dl>
-<!-- l. 153 --><p class='noindent'><!-- l. 153 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 155 --><p class='noindent'>The final output is <!-- l. 155 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>M</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-</p><!-- l. 157 --><p class='noindent'><!-- l. 157 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<!-- l. 153 --><p class='noindent'><!-- l. 153 --><math display='inline'></math>
+</p><!-- l. 155 --><p class='noindent'>The final output is <!-- l. 155 --><math display='inline'><mrow>M(X) ∈ <msub><mrow>ℤ</mrow><mrow>t</mrow></msub>[X]∕(<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1)</mrow></math>.
+</p><!-- l. 157 --><p class='noindent'><!-- l. 157 --><math display='inline'></math>
 </p><!-- l. 159 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Conditions for Correct Decryption</span></span><span class='rm-lmbx-10x-x-109'>:</span>
-</p><!-- l. 163 --><p class='noindent'>Each coefficient <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></mrow></math>
+</p><!-- l. 163 --><p class='noindent'>Each coefficient <!-- l. 163 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow>e</mrow><mrow>i</mrow></msub> + <msub><mrow>m</mrow><mrow>i</mrow></msub></mrow></math>
 that contains the scaled noise and the plaintext should not overflow
 or underflow its ciphertext’s any current moment’s multiplicative level
-<!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>l</mi></math>’s ciphertext
-modulus <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub></math>
-(i.e., <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub></mrow></math>,
-or <!-- l. 163 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><mi mathvariant='normal'>Δ</mi><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mfrac><mrow><msub><mrow><mi>q</mi></mrow><mrow><mi>l</mi></mrow></msub></mrow> 
-<mrow><mn>2</mn></mrow></mfrac> </mrow></math> in
+<!-- l. 163 --><math display='inline'>l</math>’s ciphertext
+modulus <!-- l. 163 --><math display='inline'><msub><mrow>q</mrow><mrow>l</mrow></msub></math>
+(i.e., <!-- l. 163 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><msub><mrow>e</mrow><mrow>i</mrow></msub> + <msub><mrow>m</mrow><mrow>i</mrow></msub> &lt; <msub><mrow>q</mrow><mrow>l</mrow></msub></mrow></math>,
+or <!-- l. 163 --><math display='inline'><mrow>|<mi mathvariant='normal'>Δ</mi><msub><mrow>e</mrow><mrow>i</mrow></msub> + <msub><mrow>m</mrow><mrow>i</mrow></msub>|&lt; <mfrac><mrow><msub><mrow>q</mrow><mrow>l</mrow></msub></mrow> 
+<mrow>2</mrow></mfrac> </mrow></math> in
 the signed modulo representation).
 </p>
  
@@ -105,14 +105,14 @@ the signed modulo representation).
                                                                                          
 <!-- l. 169 --><p class='indent'>   When restoring the plaintext at the end of the decryption process, while BFV shifts down the
 plaintext and the noise to the lower bit area (which effectively rounds off the noise), BGV computes
-<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='text'><mtext> mod </mtext></mstyle><mi>p</mi></mrow></math>,
+<!-- l. 169 --><math display='inline'><mrow><mstyle class='text'><mtext> mod </mtext></mstyle>p</mrow></math>,
 which effectively modulo-reduces the accumulated noise because every coefficient of
-<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>E</mi></math> is a
-multiple of <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
-(i.e., <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>).
+<!-- l. 169 --><math display='inline'>E</math> is a
+multiple of <!-- l. 169 --><math display='inline'>t</math>
+(i.e., <!-- l. 169 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>).
 Finally, only each coefficient of the plaintext polynomial
-<!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math> remains in the low-digit
-area without any noise <!-- l. 169 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math>.
+<!-- l. 169 --><math display='inline'><msub><mrow>m</mrow><mrow>i</mrow></msub></math> remains in the low-digit
+area without any noise <!-- l. 169 --><math display='inline'><msub><mrow>e</mrow><mrow>i</mrow></msub></math>.
                                                                                          
                                                                                          
 </p>

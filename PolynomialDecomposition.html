@@ -10,49 +10,49 @@
 </head><body>
    <!-- l. 48 --><div class='crosslinks'><p class='noindent'>[<a href='NumberDecomposition.html'>prev</a>][<a href='Decomposition.html#PolynomialDecomposition.html'>parent</a>][<a href='ApproximateDecomposition.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='polynomial-decomposition'><span class='titlemark'>A-6.2   </span>   <a id='x27-30000A-6.2'></a>Polynomial Decomposition</h4>
-<!-- l. 51 --><p class='noindent'>This time, suppose we have a polynomial <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
-in the polynomial ring <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-Therefore, each coefficient <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>c</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-of <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math> is an integer modulo
-<!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>. Polynomial decomposition
-expresses <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math> as a sum of
-multiple polynomials in base <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math>
-and level <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ℓ</mi></math>
+<!-- l. 51 --><p class='noindent'>This time, suppose we have a polynomial <!-- l. 51 --><math display='inline'>f</math>
+in the polynomial ring <!-- l. 51 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>q</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>.
+Therefore, each coefficient <!-- l. 51 --><math display='inline'><msub><mrow>c</mrow><mrow>i</mrow></msub></math>
+of <!-- l. 51 --><math display='inline'>f</math> is an integer modulo
+<!-- l. 51 --><math display='inline'>q</math>. Polynomial decomposition
+expresses <!-- l. 51 --><math display='inline'>f</math> as a sum of
+multiple polynomials in base <!-- l. 51 --><math display='inline'>β</math>
+and level <!-- l. 51 --><math display='inline'>ℓ</math>
 as follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-16'>     
 <div class='tcolorbox-title'>
-<!-- l. 75 --><p class='indent'>   <!-- l. 75 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary A-6.2</span><!-- l. 75 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!-- l. 75 --><p class='indent'>   <!-- l. 75 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary A-6.2</span><!-- l. 75 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
 <span class='rm-lmbx-10x-x-109'>Polynomial Decomposition</span></p></div> 
-<div class='tcolorbox-content'><!-- l. 56 --><p class='noindent'>Given <!-- l. 56 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
-fix <!-- l. 56 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>β</mi> <mo class='MathClass-rel' stretchy='false'>≥</mo><mn>2</mn></mrow></math>
-and <!-- l. 56 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>ℓ</mi> <mo class='MathClass-rel' stretchy='false'>≥</mo><mn>1</mn></mrow></math>
-with <!-- l. 56 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>ℓ</mi></mrow></msup><mo class='MathClass-rel' stretchy='false'>∣</mo><mi>q</mi></mrow></math>.
+<div class='tcolorbox-content'><!-- l. 56 --><p class='noindent'>Given <!-- l. 56 --><math display='inline'><mrow>f ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>,
+fix <!-- l. 56 --><math display='inline'>β ≥2</math>
+and <!-- l. 56 --><math display='inline'>ℓ ≥1</math>
+with <!-- l. 56 --><math display='inline'><mrow><msup><mrow>β</mrow><mrow>ℓ</mrow></msup>∣q</mrow></math>.
 We write
-</p><!-- l. 58 --><p class='noindent'><!-- l. 58 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 60 --><p class='noindent'><!-- l. 60 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>ℓ</mi></mrow></munderover><msub><mrow><mi>f</mi></mrow><mrow><mi>i</mi></mrow></msub><mspace class='thinspace' width='0.17em'></mspace><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
-</mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></mfrac></mstyle><mo class='MathClass-punc' stretchy='false'>,</mo><mspace class='qquad' width='2em'></mspace><msub><mrow><mi>f</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-</p><!-- l. 64 --><p class='noindent'><!-- l. 64 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 66 --><p class='noindent'>where each <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>f</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-is obtained by decomposing every coefficient of <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
-in base <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math>.
-If <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi> <mo class='MathClass-rel' stretchy='false'>=</mo><munder class='msub'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  </mrow><mrow><mi>j</mi></mrow></munder><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi></mrow></msub><msup><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msup></mrow></math>
-with <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>,
-then <!-- l. 67 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>ℓ</mi></mrow></munderover><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>i</mi></mrow></msub><mspace class='thinspace' width='0.17em'></mspace><mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
-</mrow><mrow><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></mfrac></mstyle></mrow></math>
-with <!-- l. 67 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>∈</mo><mo class='MathClass-open' stretchy='false'>{</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo>…</mo><mo class='MathClass-punc' stretchy='false'>,</mo><mi>β</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>}</mo></mrow></math>,
-and <!-- l. 68 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>f</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo><msub><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
-  <!-- nolimits --></mrow><mrow><mi>j</mi></mrow></msub><msub><mrow><mi>c</mi></mrow><mrow><mi>j</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>i</mi></mrow></msub><msup><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msup></mrow></math>.
-We denote the decomposition of the polynomial <!-- l. 69 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
-into the base <!-- l. 69 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>β</mi></math>
-with the level <!-- l. 69 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>ℓ</mi></math>
+</p><!-- l. 58 --><p class='noindent'><!-- l. 58 --><math display='inline'></math>
+</p><!-- l. 60 --><p class='noindent'><!-- l. 60 --><math display='inline'><mrow>f =<munderover accent='false' accentunder='false'><mrow> ∑
+  </mrow><mrow>i=1</mrow><mrow>ℓ</mrow></munderover><msub><mrow>f</mrow><mrow>i</mrow></msub><mspace class='thinspace' width='0.17em'></mspace><mstyle displaystyle='true'><mfrac><mrow> q
+</mrow><mrow><msup><mrow>β</mrow><mrow>i</mrow></msup></mrow></mfrac></mstyle>,<mspace class='qquad' width='2em'></mspace><msub><mrow>f</mrow><mrow>i</mrow></msub> ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>
+</p><!-- l. 64 --><p class='noindent'><!-- l. 64 --><math display='inline'></math>
+</p><!-- l. 66 --><p class='noindent'>where each <!-- l. 66 --><math display='inline'><msub><mrow>f</mrow><mrow>i</mrow></msub></math>
+is obtained by decomposing every coefficient of <!-- l. 66 --><math display='inline'>f</math>
+in base <!-- l. 66 --><math display='inline'>β</math>.
+If <!-- l. 66 --><math display='inline'><mrow>f =<munder class='msub'><mrow> ∑
+  </mrow><mrow>j</mrow></munder><msub><mrow>c</mrow><mrow>j</mrow></msub><msup><mrow>x</mrow><mrow>j</mrow></msup></mrow></math>
+with <!-- l. 66 --><math display='inline'><mrow><msub><mrow>c</mrow><mrow>j</mrow></msub> ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>,
+then <!-- l. 67 --><math display='inline'><mrow><msub><mrow>c</mrow><mrow>j</mrow></msub> =<munderover accent='false' accentunder='false'><mrow> ∑
+  </mrow><mrow>i=1</mrow><mrow>ℓ</mrow></munderover><msub><mrow>c</mrow><mrow>j,i</mrow></msub><mspace class='thinspace' width='0.17em'></mspace><mstyle displaystyle='true'><mfrac><mrow> q
+</mrow><mrow><msup><mrow>β</mrow><mrow>i</mrow></msup></mrow></mfrac></mstyle></mrow></math>
+with <!-- l. 67 --><math display='inline'><mrow><msub><mrow>c</mrow><mrow>j,i</mrow></msub> ∈{0,…,β −1}</mrow></math>,
+and <!-- l. 68 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>i</mrow></msub> =<msub><mrow> ∑
+  <!-- nolimits --></mrow><mrow>j</mrow></msub><msub><mrow>c</mrow><mrow>j,i</mrow></msub><msup><mrow>x</mrow><mrow>j</mrow></msup></mrow></math>.
+We denote the decomposition of the polynomial <!-- l. 69 --><math display='inline'>f</math>
+into the base <!-- l. 69 --><math display='inline'>β</math>
+with the level <!-- l. 69 --><math display='inline'>ℓ</math>
 as follows:
-</p><!-- l. 71 --><p class='noindent'><!-- l. 71 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 73 --><p class='noindent'><!-- l. 73 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow><mi>β</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>ℓ</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>f</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>f</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>f</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><mo class='MathClass-rel' stretchy='false'>⋯</mo><mspace class='thinspace' width='0.17em'></mspace><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><msub><mrow><mi>f</mi></mrow><mrow><mi>ℓ</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-<!-- l. 74 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 71 --><p class='noindent'><!-- l. 71 --><math display='inline'></math>
+</p><!-- l. 73 --><p class='noindent'><!-- l. 73 --><math display='inline'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow>β,ℓ</mrow></msup>(f) = (<msub><mrow>f</mrow><mrow>1</mrow></msub>,<msub><mrow>f</mrow><mrow>2</mrow></msub>,<mstyle class='text'><mtext> </mtext></mstyle>⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><msub><mrow>f</mrow><mrow>ℓ</mrow></msub>)</mrow></math>
+<!-- l. 74 --><math display='inline'></math>
 </p> 
 </div> 
 </div>
@@ -61,39 +61,39 @@ as follows:
                                                                                          
    <h5 class='subsubsectionHead' id='example3'><span class='titlemark'>A-6.2.1   </span>   <a id='x27-31000A-6.2.1'></a>Example</h5>
 <!-- l. 82 --><p class='noindent'>Suppose we have the following polynomial in the polynomial ring
-<!-- l. 82 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi>ℤ</mi></mrow><mrow><mn>16</mn></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>4</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>:
-</p><!-- l. 84 --><p class='indent'>   <!-- l. 84 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 86 --><p class='indent'>   <!-- l. 86 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>6</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>14</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>7</mn> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mn>16</mn></mrow></msub><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>4</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-</p><!-- l. 88 --><p class='indent'>   <!-- l. 88 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<!-- l. 82 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>16</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>4</mrow></msup> + 1)</mrow></math>:
+</p><!-- l. 84 --><p class='indent'>   <!-- l. 84 --><math display='inline'></math>
+</p><!-- l. 86 --><p class='indent'>   <!-- l. 86 --><math display='inline'><mrow>f = 6<msup><mrow>x</mrow><mrow>3</mrow></msup> + 3<msup><mrow>x</mrow><mrow>2</mrow></msup> + 14x + 7 ∈ <msub><mrow>ℤ</mrow><mrow>16</mrow></msub>[x]∕(<msup><mrow>x</mrow><mrow>4</mrow></msup> + 1)</mrow></math>
+</p><!-- l. 88 --><p class='indent'>   <!-- l. 88 --><math display='inline'></math>
 </p><!-- l. 90 --><p class='indent'>   Suppose we want to decompose the above polynomial with base
-<!-- l. 90 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>β</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>4</mn></mrow></math> and level
-<!-- l. 90 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>ℓ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>2</mn></mrow></math>. Then, each degree’s
-coefficient of the polynomial <!-- l. 90 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>f</mi></math>
+<!-- l. 90 --><math display='inline'>β = 4</math> and level
+<!-- l. 90 --><math display='inline'>ℓ = 2</math>. Then, each degree’s
+coefficient of the polynomial <!-- l. 90 --><math display='inline'>f</math>
 is decomposed as follows:
-</p><!-- l. 92 --><p class='indent'>   <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 94 --><p class='indent'>   <!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mstyle mathvariant='bold'><mi>𝐱</mi></mstyle></mrow><mrow><mstyle mathvariant='bold'><mn>3</mn></mstyle></mrow></msup></math>:
-<!-- l. 94 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>6</mn> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>1</mn></mrow></msup> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>2</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>2</mn></mrow></msup> </mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 96 --><p class='indent'>   <!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mstyle mathvariant='bold'><mi>𝐱</mi></mstyle></mrow><mrow><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow></msup></math>:
-<!-- l. 96 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>3</mn> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>1</mn></mrow></msup> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>2</mn></mrow></msup> </mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 98 --><p class='indent'>   <!-- l. 98 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mstyle mathvariant='bold'><mi>𝐱</mi></mstyle></mrow><mrow><mstyle mathvariant='bold'><mn>1</mn></mstyle></mrow></msup></math>:
-<!-- l. 98 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>14</mn> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>3</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>1</mn></mrow></msup> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>2</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>2</mn></mrow></msup> </mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 100 --><p class='indent'>   <!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msup><mrow><mstyle mathvariant='bold'><mi>𝐱</mi></mstyle></mrow><mrow><mstyle mathvariant='bold'><mn>0</mn></mstyle></mrow></msup></math>:
-<!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mn>7</mn> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>1</mn></mrow></msup> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>2</mn></mrow></msup> </mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 102 --><p class='indent'>   <!-- l. 102 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 92 --><p class='indent'>   <!-- l. 92 --><math display='inline'></math>
+</p><!-- l. 94 --><p class='indent'>   <!-- l. 94 --><math display='inline'><msup><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝐱</mtext></mstyle></mrow><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>3</mtext></mstyle></mrow></msup></math>:
+<!-- l. 94 --><math display='inline'><mrow>6 = 1 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>1</mrow></msup> </mrow></mfrac></mstyle> + 2 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>2</mrow></msup> </mrow></mfrac></mstyle></mrow></math>
+</p><!-- l. 96 --><p class='indent'>   <!-- l. 96 --><math display='inline'><msup><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝐱</mtext></mstyle></mrow><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>2</mtext></mstyle></mrow></msup></math>:
+<!-- l. 96 --><math display='inline'><mrow>3 = 0 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>1</mrow></msup> </mrow></mfrac></mstyle> + 3 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>2</mrow></msup> </mrow></mfrac></mstyle></mrow></math>
+</p><!-- l. 98 --><p class='indent'>   <!-- l. 98 --><math display='inline'><msup><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝐱</mtext></mstyle></mrow><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>1</mtext></mstyle></mrow></msup></math>:
+<!-- l. 98 --><math display='inline'><mrow>14 = 3 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>1</mrow></msup> </mrow></mfrac></mstyle> + 2 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>2</mrow></msup> </mrow></mfrac></mstyle></mrow></math>
+</p><!-- l. 100 --><p class='indent'>   <!-- l. 100 --><math display='inline'><msup><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝐱</mtext></mstyle></mrow><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>0</mtext></mstyle></mrow></msup></math>:
+<!-- l. 100 --><math display='inline'><mrow>7 = 1 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>1</mrow></msup> </mrow></mfrac></mstyle> + 3 ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>2</mrow></msup> </mrow></mfrac></mstyle></mrow></math>
+</p><!-- l. 102 --><p class='indent'>   <!-- l. 102 --><math display='inline'></math>
 </p><!-- l. 104 --><p class='indent'>   The decomposed polynomial is as follows:
-</p><!-- l. 106 --><p class='indent'>   <!-- l. 106 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>f</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>6</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>14</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>7</mn> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mn>1</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>0</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>1</mn></mrow></msup> </mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>+</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>2</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mstyle displaystyle='true'><mfrac><mrow><mn>16</mn>
-</mrow><mrow><msup><mrow><mn>4</mn></mrow><mrow><mn>2</mn></mrow></msup> </mrow></mfrac></mstyle></mrow></math>
-</p><!-- l. 108 --><p class='indent'>   <!-- l. 108 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 110 --><p class='indent'>   <!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow><mn>4</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>2</mn></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mn>6</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>14</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>7</mn><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mn>1</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>0</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>2</mn><mi>x</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>3</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+</p><!-- l. 106 --><p class='indent'>   <!-- l. 106 --><math display='inline'><mrow>f = 6<msup><mrow>x</mrow><mrow>3</mrow></msup> + 3<msup><mrow>x</mrow><mrow>2</mrow></msup> + 14x + 7 = (1<msup><mrow>x</mrow><mrow>3</mrow></msup> + 0<msup><mrow>x</mrow><mrow>2</mrow></msup> + 3x + 1) ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>1</mrow></msup> </mrow></mfrac></mstyle> + (2<msup><mrow>x</mrow><mrow>3</mrow></msup> + 3<msup><mrow>x</mrow><mrow>2</mrow></msup> + 2x + 3) ⋅<mstyle displaystyle='true'><mfrac><mrow>16
+</mrow><mrow><msup><mrow>4</mrow><mrow>2</mrow></msup> </mrow></mfrac></mstyle></mrow></math>
+</p><!-- l. 108 --><p class='indent'>   <!-- l. 108 --><math display='inline'></math>
+</p><!-- l. 110 --><p class='indent'>   <!-- l. 110 --><math display='inline'><mrow><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow>4,2</mrow></msup>(6<msup><mrow>x</mrow><mrow>3</mrow></msup> + 3<msup><mrow>x</mrow><mrow>2</mrow></msup> + 14x + 7) = (1<msup><mrow>x</mrow><mrow>3</mrow></msup> + 0<msup><mrow>x</mrow><mrow>2</mrow></msup> + 3x + 1,2<msup><mrow>x</mrow><mrow>3</mrow></msup> + 3<msup><mrow>x</mrow><mrow>2</mrow></msup> + 2x + 3)</mrow></math>
    
 </p>
    <h5 class='subsubsectionHead' id='discussion1'><span class='titlemark'>A-6.2.2   </span>   <a id='x27-32000A-6.2.2'></a>Discussion</h5>

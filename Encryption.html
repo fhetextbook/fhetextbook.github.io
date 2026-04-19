@@ -12,51 +12,51 @@
    <h4 class='subsectionHead' id='encryption'><span class='titlemark'>B-2.2   </span>   <a id='x70-81000B-2.2'></a>Encryption</h4>
 <!-- l. 19 --><p class='noindent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1. </dt><dd class='enumerate-enumitem'>Suppose we have a plaintext <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math>
+1. </dt><dd class='enumerate-enumitem'>Suppose we have a plaintext <!-- l. 19 --><math display='inline'><mrow>m ∈ <msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></math>
    to encrypt.
    </dd><dt class='enumerate-enumitem'>
-2. </dt><dd class='enumerate-enumitem'>Randomly pick a vector <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi></mrow></msubsup></mrow></math>
-   (of length <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>k</mi></math>)
-   as a one-time random public mask (denoted as <!-- l. 19 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi></mrow></msubsup></mrow></math>).
+2. </dt><dd class='enumerate-enumitem'>Randomly pick a vector <!-- l. 19 --><math display='inline'><mrow><mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover> ∈ <msubsup><mrow>ℤ</mrow><mrow>q</mrow><mrow>k</mrow></msubsup></mrow></math>
+   (of length <!-- l. 19 --><math display='inline'>k</math>)
+   as a one-time random public mask (denoted as <!-- l. 19 --><math display='inline'><mrow><mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> ←<mrow></mrow><mrow>$</mrow></munderover><msubsup><mrow>ℤ</mrow><mrow>q</mrow><mrow>k</mrow></msubsup></mrow></math>).
    </dd><dt class='enumerate-enumitem'>
-3. </dt><dd class='enumerate-enumitem'>Randomly pick a small one-time noise <!-- l. 20 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
-   sampled from the Gaussian distribution <!-- l. 20 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></math>
-   (denoted as <!-- l. 20 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></mrow></munderover><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>).
+3. </dt><dd class='enumerate-enumitem'>Randomly pick a small one-time noise <!-- l. 20 --><math display='inline'><mrow>e ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>
+   sampled from the Gaussian distribution <!-- l. 20 --><math display='inline'><msub><mrow>χ</mrow><mrow>σ</mrow></msub></math>
+   (denoted as <!-- l. 20 --><math display='inline'><mrow>e<munderover> ←<mrow></mrow><mrow><msub><mrow>χ</mrow><mrow>σ</mrow></msub></mrow></munderover><msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>).
    </dd><dt class='enumerate-enumitem'>
-4. </dt><dd class='enumerate-enumitem'>Scale <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>m</mi></math>
-   by <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi mathvariant='normal'>Δ</mi></math>,
-   which is to compute <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi></mrow></math>.
-   This converts <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math>
-   into <!-- l. 21 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>.
+4. </dt><dd class='enumerate-enumitem'>Scale <!-- l. 21 --><math display='inline'>m</math>
+   by <!-- l. 21 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>,
+   which is to compute <!-- l. 21 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅m</mrow></math>.
+   This converts <!-- l. 21 --><math display='inline'><mrow>m ∈ <msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></math>
+   into <!-- l. 21 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅m ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>.
    </dd><dt class='enumerate-enumitem'>
-5. </dt><dd class='enumerate-enumitem'>Compute <!-- l. 22 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>.</dd></dl>
-<!-- l. 25 --><p class='noindent'><!-- l. 25 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+5. </dt><dd class='enumerate-enumitem'>Compute <!-- l. 22 --><math display='inline'><mrow>b = <mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover> ⋅<mover accent='true'><mrow>s</mrow><mo accent='true' stretchy='false'>→</mo></mover> + <mi mathvariant='normal'>Δ</mi> ⋅m + e ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>.</dd></dl>
+<!-- l. 25 --><p class='noindent'><!-- l. 25 --><math display='inline'></math>
 </p><!-- l. 27 --><p class='indent'>   The LWE encryption formula is summarized as follows:
-</p><!-- l. 29 --><p class='indent'>   <!-- l. 29 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 29 --><p class='indent'>   <!-- l. 29 --><math display='inline'></math>
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-52'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-53'>     
 <div class='tcolorbox-title'>
-<!-- l. 51 --><p class='indent'>   <!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-2.2</span><!-- l. 51 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<!-- l. 51 --><p class='indent'>   <!-- l. 51 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-2.2</span><!-- l. 51 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>LWE Encryption</span></p></div> 
-<div class='tcolorbox-content'><!-- l. 32 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Initial Setup</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 32 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
-</mrow><mrow><mi>t</mi></mrow></mfrac></mstyle></mrow></math>,
-<!-- l. 32 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>k</mi></mrow></msup></mrow></math>,
-where <!-- l. 32 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>t</mi></math>
-divides <!-- l. 32 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>q</mi></math>
-</p><!-- l. 34 --><p class='noindent'><!-- l. 34 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 36 --><p class='noindent'><!-- l. 36 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
-</p><!-- l. 38 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Encryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></mrow></math>,
-<!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><mi>$</mi></mrow></munderover><msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi></mrow></msubsup></mrow></math>,
-<!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>e</mi><munderover> <mo class='MathClass-rel' stretchy='false'>←</mo><mrow></mrow><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>σ</mi></mrow></msub></mrow></munderover><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
-</p><!-- l. 40 --><p class='noindent'><!-- l. 40 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<div class='tcolorbox-content'><!-- l. 32 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Initial Setup</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 32 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> = <mstyle displaystyle='true'><mfrac><mrow>q
+</mrow><mrow>t</mrow></mfrac></mstyle></mrow></math>,
+<!-- l. 32 --><math display='inline'><mrow><mover accent='true'><mrow>s</mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> ←<mrow></mrow><mrow>$</mrow></munderover><msup><mrow>{−1,0,1}</mrow><mrow>k</mrow></msup></mrow></math>,
+where <!-- l. 32 --><math display='inline'>t</math>
+divides <!-- l. 32 --><math display='inline'>q</math>
+</p><!-- l. 34 --><p class='noindent'><!-- l. 34 --><math display='inline'></math>
+</p><!-- l. 36 --><p class='noindent'><!-- l. 36 --><math display='inline'></math>
+</p><!-- l. 38 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Encryption Input</span></span><span class='rm-lmbx-10x-x-109'>: </span><!-- l. 38 --><math display='inline'><mrow>m ∈ <msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></math>,
+<!-- l. 38 --><math display='inline'><mrow><mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover><munderover> ←<mrow></mrow><mrow>$</mrow></munderover><msubsup><mrow>ℤ</mrow><mrow>q</mrow><mrow>k</mrow></msubsup></mrow></math>,
+<!-- l. 38 --><math display='inline'><mrow>e<munderover> ←<mrow></mrow><mrow><msub><mrow>χ</mrow><mrow>σ</mrow></msub></mrow></munderover><msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>
+</p><!-- l. 40 --><p class='noindent'><!-- l. 40 --><math display='inline'></math>
     </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'>Scale up <!-- l. 45 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>m</mi><mo class='MathClass-rel' stretchy='false'>→</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math>
+1.  </dt><dd class='enumerate-enumitem'>Scale up <!-- l. 45 --><math display='inline'><mrow>m→<mi mathvariant='normal'>Δ</mi> ⋅m<mstyle class='text'><mtext> </mtext></mstyle> ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math>
     </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 47 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>b</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mspace width='0.3em'></mspace><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='italic'>𝑚𝑜𝑑</mi><mspace width='0.3em'></mspace><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+2.  </dt><dd class='enumerate-enumitem'>Compute <!-- l. 47 --><math display='inline'><mrow>b = <mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover> ⋅<mover accent='true'><mrow>s</mrow><mo accent='true' stretchy='false'>→</mo></mover> + <mi mathvariant='normal'>Δ</mi>m + e<mspace width='0.3em'></mspace>(mod<mspace width='0.3em'></mspace>q)</mrow></math>
     </dd><dt class='enumerate-enumitem'>
-3.  </dt><dd class='enumerate-enumitem'><!-- l. 48 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow><mi>s</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mover accent='true'><mrow><mi>a</mi></mrow><mo accent='true' stretchy='false'>→</mo></mover><mo class='MathClass-punc' stretchy='false'>,</mo><mi>b</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msubsup><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>+</mo><mn>1</mn></mrow></msubsup></mrow></math></dd></dl>
+3.  </dt><dd class='enumerate-enumitem'><!-- l. 48 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mover accent='true'><mrow>s</mrow><mo accent='true' stretchy='false'>→</mo></mover>,σ</mrow></msub>(<mi mathvariant='normal'>Δ</mi>m + e) = (<mover accent='true'><mrow>a</mrow><mo accent='true' stretchy='false'>→</mo></mover>,b)<mstyle class='text'><mtext> </mtext></mstyle> ∈ <msubsup><mrow>ℤ</mrow><mrow>q</mrow><mrow>k+1</mrow></msubsup></mrow></math></dd></dl>
  
 </div> 
 </div>

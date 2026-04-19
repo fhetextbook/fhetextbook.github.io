@@ -16,13 +16,13 @@ over integers, CKKS can compute real-world floating point arithmetic, such as in
 learning.
 </p><!-- l. 4 --><p class='indent'>   The CKKS scheme’s goal is to homomorphically compute the addition and multiplication of complex
 numbers. However, while our targeted inputs are complex numbers, CKKS’s plaintext space is defined as a
-<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree
+<!-- l. 4 --><math display='inline'>(n −1)</math>-degree
 polynomial ring with real-number coefficients having limited precision; that is,
-<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>ℝ</mi><mo class='MathClass-open' stretchy='false'>[</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>]</mo><mo class='MathClass-bin' stretchy='false'>∕</mo><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+<!-- l. 4 --><math display='inline'><mrow><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n⟩</mrow></msub> = ℝ[x]∕(<msup><mrow>x</mrow><mrow>n</mrow></msup> + 1)</mrow></math>.
 Therefore, CKKS designs its unique encoding scheme, which converts the input
 complex numbers into integers that can be used as coefficients of a polynomial in
-<!-- l. 4 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></math>.
-</p><!-- l. 7 --><p class='indent'>   <!-- l. 7 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<!-- l. 4 --><math display='inline'><msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n⟩</mrow></msub></math>.
+</p><!-- l. 7 --><p class='indent'>   <!-- l. 7 --><math display='inline'></math>
 </p><!-- l. 9 --><p class='noindent'>Overall, CKKS’s encryption procedure is as follows:
 </p><!-- l. 12 --><p class='indent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
@@ -32,7 +32,7 @@ complex numbers into integers that can be used as coefficients of a polynomial i
    </dd><dt class='enumerate-enumitem'>
 3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Encryption</span>:</span> Encrypt the integer using RLWE</dd></dl>
 <!-- l. 16 --><p class='noindent'>The encrypted RLWE ciphertext supports homomorphic addition and multiplication.
-</p><!-- l. 18 --><p class='indent'>   <!-- l. 18 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+</p><!-- l. 18 --><p class='indent'>   <!-- l. 18 --><math display='inline'></math>
 </p><!-- l. 20 --><p class='noindent'>At the end of all homomorphic operations, CKKS’s decryption procedure is as follows:
 </p><!-- l. 23 --><p class='indent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
@@ -41,7 +41,7 @@ complex numbers into integers that can be used as coefficients of a polynomial i
 2. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub>:</span> Decode the integer to a real number
    </dd><dt class='enumerate-enumitem'>
 3. </dt><dd class='enumerate-enumitem'><span class='underline'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub>:</span> Decode the real number to a complex number</dd></dl>
-<!-- l. 28 --><p class='indent'>   <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'></math>
+<!-- l. 28 --><p class='indent'>   <!-- l. 28 --><math display='inline'></math>
 </p><!-- l. 31 --><p class='indent'>   Remember that BFV is an exact encryption scheme based on rings. On the other hand, CKKS
 introduces a drifting error while its encoding process of rounding square-root values (included in the
 Euler’s formula) to the nearest integer. Therefore, its decryption is not exactly the same as before
@@ -57,7 +57,7 @@ and bootstrapping. This difference comes from the fact that CKKS handles homomor
 operations over complex numbers as inputs, whereas BFV handles homomorphic operations over
 rings.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-93'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-94'>     
 <div class='tcolorbox-title'>
                                                                                          
                                                                                          
@@ -127,8 +127,8 @@ rings.
 <br />   <span class='subsectionToc'>D-3.4 <a href='CiphertexttoPlaintextAddition1.html#ciphertexttoplaintext-addition1'>Ciphertext-to-Plaintext Addition</a></span>
 <br />   <span class='subsectionToc'>D-3.5 <a href='CiphertexttoCiphertextMultiplication1.html#ciphertexttociphertext-multiplication1'>Ciphertext-to-Ciphertext Multiplication</a></span>
 <br />   <span class='subsubsectionToc'>D-3.5.1 <a href='CiphertexttoCiphertextMultiplication1.html#synthetic-ciphertext-derivation'>Synthetic Ciphertext Derivation</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.2 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-decomposition'>Relinearization Method 1 – Ciphertext Decomposition</a></span>
-<br />   <span class='subsubsectionToc'>D-3.5.3 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-ciphertext-modulus-switch'>Relinearization Method 2 – Ciphertext Modulus Switch</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.2 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-1-ciphertext-decomposition'>Relinearization Method 1 – Ciphertext Decomposition</a></span>
+<br />   <span class='subsubsectionToc'>D-3.5.3 <a href='CiphertexttoCiphertextMultiplication1.html#relinearization-method-2-ciphertext-modulus-switch'>Relinearization Method 2 – Ciphertext Modulus Switch</a></span>
 <br />   <span class='subsubsectionToc'>D-3.5.4 <a href='CiphertexttoCiphertextMultiplication1.html#rescaling1'>Rescaling</a></span>
 <br />   <span class='subsubsectionToc'>D-3.5.5 <a href='CiphertexttoCiphertextMultiplication1.html#comparing-bfv-and-ckks-bootstrapping'>Comparing BFV and CKKS Bootstrapping</a></span>
 <br />   <span class='subsubsectionToc'>D-3.5.6 <a href='CiphertexttoCiphertextMultiplication1.html#summary4'>Summary</a></span>

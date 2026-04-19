@@ -1,0 +1,417 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>Isomorphism between Polynomials and Vectors over Integers (and Ring)</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
+</head><body>
+   <!-- l. 370 --><div class='crosslinks'><p class='noindent'>[<a href='BasisofaPolynomialRing.html'>prev</a>][<a href='VectorandMatrix.html#IsomorphismbetweenPolynomialsandVectorsoverIntegersandRing.html'>parent</a>][<a href='IsomorphismbetweenPolynomialsandVectorsoverComplexNumbers.html'>next</a>]</p></div>
+   <h4 class='subsectionHead' id='isomorphism-between-polynomials-and-vectors-over-integers-and-ring'><span class='titlemark'>A-10.6   </span>   <a id='x43-48000A-10.6'></a>Isomorphism between Polynomials and Vectors over Integers (and Ring)</h4>
+<!-- l. 375 --><p class='noindent'>Now, let’s define a mapping <!-- l. 375 --><math display='inline'>σ</math> from
+the <!-- l. 375 --><math display='inline'>(n −1)</math>-degree polynomial ring to the
+<!-- l. 375 --><math display='inline'>n</math>-dimensional vector space, such
+that an input polynomial’s list of <!-- l. 375 --><math display='inline'>y</math>
+values evaluated at <!-- l. 375 --><math display='inline'>n</math>
+distinct <!-- l. 375 --><math display='inline'>x ∈ ℤ</math> coordinates (e.g.,
+<!-- l. 375 --><math display='inline'><mrow><msub><mrow>x</mrow><mrow>0</mrow></msub>,<msub><mrow>x</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>x</mrow><mrow>n−1</mrow></msub></mrow></math>) forms the mapping’s
+output vector. Technically, <!-- l. 375 --><math display='inline'>σ</math>
+is defined as:
+</p><!-- l. 377 --><p class='indent'>   <!-- l. 377 --><math display='inline'><mrow>σ : f(x) ∈ ℤ[X]∕(<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1)<mstyle class='text'><mtext> </mtext></mstyle>→<mstyle class='text'><mtext> </mtext></mstyle>(f(<msub><mrow>x</mrow><mrow>0</mrow></msub>),f(<msub><mrow>x</mrow><mrow>1</mrow></msub>),f(<msub><mrow>x</mrow><mrow>2</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,f(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)) ∈ <msup><mrow>ℤ</mrow><mrow>n</mrow></msup></mrow></math>
+</p><!-- l. 379 --><p class='indent'>   Now, we will explain why the mapping <!-- l. 379 --><math display='inline'>σ</math>
+is isomorphic, which means that <!-- l. 379 --><math display='inline'>σ</math> is a
+bijective one-to-one mapping from <!-- l. 379 --><math display='inline'><mrow>ℤ[X]∕(<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1)</mrow></math>
+to <!-- l. 379 --><math display='inline'><msup><mrow>ℤ</mrow><mrow>n</mrow></msup></math>, and it preserves the
+algebraic operations <!-- l. 379 --><math display='inline'>(+,⋅)</math>
+(i.e., <!-- l. 379 --><math display='inline'>σ</math> is
+a homomorphism for addition and multiplication).
+</p><!-- l. 381 --><p class='indent'>   <!-- l. 381 --><math display='inline'></math>
+</p><!-- l. 383 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Bijective: </span>In the <!-- l. 383 --><math display='inline'>(n −1)</math>-degree
+polynomial ring, a list of <!-- l. 383 --><math display='inline'>y</math> values
+evaluated at some statically chosen <!-- l. 383 --><math display='inline'>n</math>
+distinct <!-- l. 383 --><math display='inline'>x</math>
+coordinates defines a unique polynomial because, algebraically, there exists only one
+<!-- l. 383 --><math display='inline'>(n −1)</math>-degree
+(or a lesser degree) polynomial that passes through each given set of
+<!-- l. 383 --><math display='inline'>n</math> distinct
+<!-- l. 383 --><math display='inline'>(x,y)</math>
+coordinates. We proved this in Lagrange Polynomial Interpolation (Theorem A-15 in <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!-- tex4ht:ref: sec:polynomial-interpolation  --></a>).
+</p><!-- l. 385 --><p class='indent'>   <!-- l. 385 --><math display='inline'></math>
+</p><!-- l. 387 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Homomorphic: </span>The homomorphism of the mapping
+<!-- l. 387 --><math display='inline'>σ</math> on the
+<!-- l. 387 --><math display='inline'>(+,⋅)</math>
+operations means that the following two relationships hold:
+</p><!-- l. 389 --><p class='indent'>   <!-- l. 389 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) + <msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) + σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>
+</p><!-- l. 391 --><p class='indent'>   <!-- l. 391 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) ⊙σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math> <span style='color:#FF0000;'>  #
+<!-- l. 391 --><math display='inline'>⊙</math> is
+Hadamard vector multiplication (Summary A-10.1)</span>
+                                                                                         
+                                                                                         
+</p><!-- l. 393 --><p class='indent'>   <!-- l. 393 --><math display='inline'></math>
+</p><!-- l. 395 --><p class='indent'>   To prove our <!-- l. 395 --><math display='inline'>σ</math>
+mapping’s homomorphism, let’s denote the input polynomials
+<!-- l. 395 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X)</mrow></math>,
+<!-- l. 395 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math>, and their
+<!-- l. 395 --><math display='inline'>σ</math>-mapped
+output vectors as follows:
+</p><!-- l. 398 --><p class='indent'>   <!-- l. 398 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) = <msub><mrow>a</mrow><mrow>0</mrow></msub> + <msub><mrow>a</mrow><mrow>1</mrow></msub>X + <msub><mrow>a</mrow><mrow>2</mrow></msub><msup><mrow>X</mrow><mrow>2</mrow></msup> + ⋯ + <msub><mrow>a</mrow><mrow>n−1</mrow></msub><msup><mrow>X</mrow><mrow>n−1</mrow></msup></mrow></math>
+</p><!-- l. 400 --><p class='indent'>   <!-- l. 400 --><math display='inline'>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) = <mrow><mo fence='true' form='prefix'>(</mo><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>),<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>),<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>2</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mo fence='true' form='postfix'>)</mo></mrow> = <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>2</mrow></msub>)</mrow><mrow>i</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></math>
+</p><!-- l. 403 --><p class='indent'>   <!-- l. 403 --><math display='inline'></math>
+</p><!-- l. 405 --><p class='indent'>   <!-- l. 405 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>b</mrow></msub>(X) = <msub><mrow>b</mrow><mrow>0</mrow></msub> + <msub><mrow>b</mrow><mrow>1</mrow></msub>X + <msub><mrow>b</mrow><mrow>2</mrow></msub><msup><mrow>X</mrow><mrow>2</mrow></msup> + ⋯ + <msub><mrow>b</mrow><mrow>n−1</mrow></msub><msup><mrow>X</mrow><mrow>n−1</mrow></msup></mrow></math>
+</p><!-- l. 407 --><p class='indent'>   <!-- l. 407 --><math display='inline'>σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = <mrow><mo fence='true' form='prefix'>(</mo><mrow><msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>),<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>),<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>2</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mo fence='true' form='postfix'>)</mo></mrow> = <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>2</mrow></msub>)</mrow><mrow>i</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></math>
+</p><!-- l. 409 --><p class='indent'>   <!-- l. 409 --><math display='inline'></math>
+</p><!-- l. 411 --><p class='indent'>   Given the above setup, we can see that <!-- l. 411 --><math display='inline'>σ</math>
+preserves homomorphism on the <!-- l. 411 --><math display='inline'>(+)</math>
+operation as follows:
+</p><!-- l. 413 --><p class='indent'>   <!-- l. 413 --><math display='inline'><mrow><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔</mtext></mstyle><mstyle mathvariant='bold'><mtext mathvariant='bold'>(</mtext></mstyle><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) + <msub><mrow>f</mrow><mrow>b</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle> = <mstyle mathvariant='bold'>𝛔<mstyle mathsize='2.03em'><mrow><mo fence='true' form='prefix'>(</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mstyle>(<msub><mrow>a</mrow><mrow>0</mrow></msub> + <msub><mrow>b</mrow><mrow>0</mrow></msub>) + (<msub><mrow>a</mrow><mrow>1</mrow></msub> + <msub><mrow>b</mrow><mrow>1</mrow></msub>)X + (<msub><mrow>a</mrow><mrow>2</mrow></msub> + <msub><mrow>b</mrow><mrow>2</mrow></msub>)<msup><mrow>X</mrow><mrow>2</mrow></msup> + ⋯ + (<msub><mrow>a</mrow><mrow>n−1</mrow></msub> + <msub><mrow>b</mrow><mrow>n−1</mrow></msub>)<msup><mrow>X</mrow><mrow>n−1</mrow></msup><mstyle mathvariant='bold'><mstyle mathsize='2.03em'><mrow><mo fence='true' form='prefix'>)</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mstyle></mrow></math>
+</p><!-- l. 415 --><p class='indent'>   <!-- l. 415 --><math display='inline'> = <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover>(<msub><mrow>a</mrow><mrow>i</mrow></msub> + <msub><mrow>b</mrow><mrow>i</mrow></msub>)<msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover>(<msub><mrow>a</mrow><mrow>i</mrow></msub> + <msub><mrow>b</mrow><mrow>i</mrow></msub>)<msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover>(<msub><mrow>a</mrow><mrow>i</mrow></msub> + <msub><mrow>b</mrow><mrow>i</mrow></msub>)<msup><mrow>(<msub><mrow>x</mrow><mrow>2</mrow></msub>)</mrow><mrow>i</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover>(<msub><mrow>a</mrow><mrow>i</mrow></msub> + <msub><mrow>b</mrow><mrow>i</mrow></msub>)<msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></math>
+</p><!-- l. 417 --><p class='indent'>   <!-- l. 417 --><math display='inline'> = <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>2</mrow></msub>)</mrow><mrow>i</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></math>
+</p><!-- l. 419 --><p class='indent'>     <!-- l. 419 --><math display='inline'> + <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>2</mrow></msub>)</mrow><mrow>i</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></math>
+</p><!-- l. 421 --><p class='indent'>   <!-- l. 421 --><math display='inline'><mrow> = <mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔(</mtext></mstyle><msub><mrow>f</mrow><mrow>a</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle> + <mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔(</mtext></mstyle><msub><mrow>f</mrow><mrow>b</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle></mrow></math>
+</p><!-- l. 423 --><p class='indent'>   <!-- l. 423 --><math display='inline'></math>
+</p><!-- l. 425 --><p class='indent'>   Also, we can see that <!-- l. 425 --><math display='inline'>σ</math>
+preserves homomorphism on the <!-- l. 425 --><math display='inline'>(⋅)</math>
+operation as follows:
+</p><!-- l. 428 --><p class='indent'>   <!-- l. 428 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔(</mtext></mstyle><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle> = <mstyle mathvariant='bold'>𝛔<mstyle mathsize='2.03em'><mrow><mo fence='true' form='prefix'>(</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mstyle> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>X</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow> ⋅ <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>X</mrow><mrow>i</mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mstyle mathvariant='bold'><mstyle mathsize='2.03em'><mrow><mo fence='true' form='prefix'>)</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mstyle></math>
+</p><!-- l. 430 --><p class='indent'>   <!-- l. 430 --><math display='inline'></math>
+</p><!-- l. 432 --><p class='indent'>   <!-- l. 432 --><math display='inline'> = <mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>(</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>0</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>0</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> ,<mstyle class='text'><mtext> </mtext></mstyle> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>1</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>1</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> ,<mstyle class='text'><mtext> </mtext></mstyle> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>2</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>2</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> ,</math>
+</p><!-- l. 436 --><p class='indent'>   <!-- l. 436 --><math display='inline'><mrow><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle>⋯<mspace class='thinspace' width='0.17em'></mspace>, <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>n−1</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msubsup><mrow>x</mrow><mrow>n−1</mrow><mrow>i</mrow></msubsup></mrow><mo fence='true' form='postfix'>)</mo></mrow> <mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>)</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mrow></math>
+</p><!-- l. 441 --><p class='indent'>   <!-- l. 441 --><math display='inline'></math>
+</p><!-- l. 443 --><p class='indent'>   <!-- l. 443 --><math display='inline'><mrow> = <mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>(</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+</mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle>⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+</mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>a</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>)</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mrow></math>
+</p><!-- l. 445 --><p class='indent'>   <!-- l. 445 --><math display='inline'><mrow><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle><mstyle class='text'><mtext> </mtext></mstyle> ⊙<mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>(</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+  </mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>0</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+</mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>1</mrow></msub>)</mrow><mrow>i</mrow></msup>,<mstyle class='text'><mtext> </mtext></mstyle>⋯<mspace class='thinspace' width='0.17em'></mspace>,<mstyle class='text'><mtext> </mtext></mstyle><munderover accent='false' accentunder='false'><mrow>∑
+</mrow><mrow>i=0</mrow><mrow>n−1</mrow></munderover><msub><mrow>b</mrow><mrow>i</mrow></msub><msup><mrow>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)</mrow><mrow>i</mrow></msup><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>)</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle></mrow></math>
+</p><!-- l. 449 --><p class='indent'>   <!-- l. 449 --><math display='inline'></math>
+</p><!-- l. 451 --><p class='indent'>   <!-- l. 451 --><math display='inline'><mrow> = <mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔(</mtext></mstyle><msub><mrow>f</mrow><mrow>a</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle> ⊙<mstyle mathvariant='bold'><mtext mathvariant='bold'>𝛔(</mtext></mstyle><msub><mrow>f</mrow><mrow>b</mrow></msub>(X)<mstyle mathvariant='bold'><mtext mathvariant='bold'>)</mtext></mstyle></mrow></math>
+</p><!-- l. 453 --><p class='indent'>   <!-- l. 453 --><math display='inline'></math>
+</p><!-- l. 455 --><p class='indent'>   In summary, <!-- l. 455 --><math display='inline'>σ</math>
+preserves the following homomorphism:
+</p><!-- l. 457 --><p class='indent'>   <!-- l. 457 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) + <msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) + σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>
+</p><!-- l. 459 --><p class='indent'>   <!-- l. 459 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) ⊙σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>
+</p><!-- l. 461 --><p class='indent'>   <!-- l. 461 --><math display='inline'></math>
+</p><!-- l. 463 --><p class='indent'>   However, for <!-- l. 463 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) ⊙σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>,
+we need further reasoning to justify that this relation holds in polynomial rings, which is explained
+below.
+</p><!-- l. 466 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Polynomial Ring Reduction: </span>Suppose that we did not have the polynomial ring setup
+<!-- l. 466 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>. Then, if we
+                                                                                         
+                                                                                         
+multiply <!-- l. 466 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X)</mrow></math>
+and <!-- l. 466 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math>, then
+<!-- l. 466 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math> may become a new polynomial
+whose degree is higher than <!-- l. 466 --><math display='inline'>n −1</math>.
+This higher-degree polynomial would still decode into the expected correct vector. Suppose the
+following:
+</p><!-- l. 468 --><p class='indent'>   <!-- l. 468 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) = (<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>),<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)) = (<msub><mrow>v</mrow><mrow>0</mrow></msub>,<msub><mrow>v</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>v</mrow><mrow>n−1</mrow></msub>)</mrow></math>
+</p><!-- l. 470 --><p class='indent'>   <!-- l. 470 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = (<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>),<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)) = (<msub><mrow>u</mrow><mrow>0</mrow></msub>,<msub><mrow>u</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>u</mrow><mrow>n−1</mrow></msub>)</mrow></math>
+</p><!-- l. 472 --><p class='indent'>   <!-- l. 472 --><math display='inline'></math>
+</p><!-- l. 474 --><p class='indent'>   Then, the following is true:
+</p><!-- l. 476 --><p class='indent'>   <!-- l. 476 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = (<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>0</mrow></msub>),<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>1</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>f</mrow><mrow>a</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)) = (<msub><mrow>v</mrow><mrow>0</mrow></msub><msub><mrow>u</mrow><mrow>0</mrow></msub>,<msub><mrow>v</mrow><mrow>1</mrow></msub><msub><mrow>u</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>v</mrow><mrow>n−1</mrow></msub><msub><mrow>u</mrow><mrow>n−1</mrow></msub>)</mrow></math>
+</p><!-- l. 478 --><p class='indent'>   <!-- l. 478 --><math display='inline'><mrow> = (<msub><mrow>v</mrow><mrow>0</mrow></msub>,<msub><mrow>v</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>v</mrow><mrow>n−1</mrow></msub>) ⊙(<msub><mrow>u</mrow><mrow>0</mrow></msub>,<msub><mrow>u</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>u</mrow><mrow>n−1</mrow></msub>)</mrow></math>
+</p><!-- l. 480 --><p class='indent'>   <!-- l. 480 --><math display='inline'></math>
+</p><!-- l. 482 --><p class='indent'>   As shown above, even if <!-- l. 482 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math> results in a
+polynomial with a degree higher than <!-- l. 482 --><math display='inline'>n −1</math>,
+it can be decoded into the expected correct vector. However, the
+<!-- l. 482 --><math display='inline'>σ</math> mapping
+loses the property of isomorphism between a polynomial and a vector because if a polynomial’s degree is higher
+than <!-- l. 482 --><math display='inline'>n −1</math>,
+then there can be more than 1 polynomial that passes through the given
+<!-- l. 482 --><math display='inline'>n</math> distinct
+<!-- l. 482 --><math display='inline'>X</math> coordinates:
+<!-- l. 482 --><math display='inline'><mrow>{<msub><mrow>x</mrow><mrow>0</mrow></msub>,<msub><mrow>x</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>x</mrow><mrow>n−1</mrow></msub>}</mrow></math>. This is a problem
+because, if the <!-- l. 482 --><math display='inline'>σ</math>
+mapping supports only polynomial-to-vector mappings and not vector-to-polynomial mappings,
+then we cannot convert vectors into polynomials in the first place and do isomorphic
+computations. Another minor issue is that if the polynomial degree term is higher than
+<!-- l. 482 --><math display='inline'>n −1</math>, then
+the computational overhead of decoding (i.e., polynomial evaluation) becomes larger than
+before.
+</p><!-- l. 484 --><p class='indent'>   To resolve these two minor issues, we let the <!-- l. 484 --><math display='inline'>n</math>
+distinct <!-- l. 484 --><math display='inline'>X</math>
+coordinates of evaluation be the solutions of the polynomial ring modulo
+<!-- l. 484 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math> (where
+<!-- l. 484 --><math display='inline'>n</math> is some power of 2)
+and reduce <!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math> to a new
+polynomial modulo <!-- l. 484 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>
+whose degree is at most <!-- l. 484 --><math display='inline'>n −1</math>.
+Let <!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>ab</mrow></msub>(X) = <msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)</mrow></math>, and
+<!-- l. 484 --><math display='inline'><mrow><msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math> be the reduced polynomial
+such that <!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>ab</mrow></msub>(X) = Q(X) ⋅(<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1) + <msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math> for some quotient
+polynomial <!-- l. 484 --><math display='inline'>Q(X)</math>. Then, as illustrated
+in Summary A-5.1.2 (<a href='Overview1.html#discussion'><span class='ts1-lmr10-x-x-109'>§</span>A-5.1.2<!-- tex4ht:ref: subsubsec:polynomial-ring-discuss  --></a>), <!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>ab</mrow></msub>(X)</mrow></math>
+and <!-- l. 484 --><math display='inline'><mrow><msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math>
+evaluate to the same value if they are evaluated at the roots of
+                                                                                         
+                                                                                         
+<!-- l. 484 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math> (by zeroing out the
+<!-- l. 484 --><math display='inline'>Q(X)</math> term). Therefore, if we
+let the <!-- l. 484 --><math display='inline'>n</math> distinct evaluating
+points <!-- l. 484 --><math display='inline'><mrow>{<msub><mrow>x</mrow><mrow>0</mrow></msub>,<msub><mrow>x</mrow><mrow>1</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>x</mrow><mrow>n−1</mrow></msub>}</mrow></math>be the roots of
+<!-- l. 484 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>, then we can ensure that
+the decoded vector of <!-- l. 484 --><math display='inline'><mrow><msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math> is
+identical to that of <!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>ab</mrow></msub>(X)</mrow></math>,
+which we expect. Therefore, we can replace the higher-degree polynomial
+<!-- l. 484 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>ab</mrow></msub>(X)</mrow></math> with the reduced
+polynomial <!-- l. 484 --><math display='inline'><mrow><msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math>
+and continue with any further polynomial additions or multiplications using
+<!-- l. 484 --><math display='inline'><mrow><msubsup><mrow>f</mrow><mrow>ab</mrow><mrow>′</mrow></msubsup>(X)</mrow></math>.
+Also, by applying polynomial ring reduction, we can enhance the computational efficiency
+of polynomial addition and multiplication, as well as preserve the isomorphism of the
+<!-- l. 484 --><math display='inline'>σ</math>
+mapping. Therefore, we can freely convert between vectors &amp; polynomials and perform additions and
+multiplications.
+</p><!-- l. 486 --><p class='indent'>   For applying this polynomial ring reduction, the polynomial modulus can be any polynomial as long as it has at least
+<!-- l. 486 --><math display='inline'>n</math> distinct roots. In practice, we
+often choose <!-- l. 486 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math> as the polynomial
+ring modulus, which is the <!-- l. 486 --><math display='inline'>(μ = 2n)</math>-th
+cyclotomic polynomial (<a href='Definitions4.html#definitions4'><span class='ts1-lmr10-x-x-109'>§</span>A-8.1<!-- tex4ht:ref: subsubsec:polynomial-ring-discuss  --></a>). The reason we let the polynomial ring modulus be a cyclotomic polynomial (especially
+the <!-- l. 486 --><math display='inline'>(μ = 2n)</math>-th cyclotomic
+polynomial, <!-- l. 486 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>) is that
+its <!-- l. 486 --><math display='inline'>n</math> distinct roots are
+well-defined (i.e., primitive <!-- l. 486 --><math display='inline'>(μ = 2n)</math>-th
+roots of unity) and thus can be quickly identified even when
+<!-- l. 486 --><math display='inline'>n</math> is
+large.
+</p><!-- l. 488 --><p class='indent'>   <!-- l. 488 --><math display='inline'></math>
+</p><!-- l. 490 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Polynomial Coefficient Modulo Reduction: </span>In addition, we often reduce the polynomial coefficients based on
+some modulus <!-- l. 490 --><math display='inline'>t</math> to
+keep the size of the coefficients lower than a certain limit for the purpose of computational efficiency. Suppose two
+polynomials <!-- l. 490 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>c</mrow></msub>(X)</mrow></math> and
+<!-- l. 490 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>d</mrow></msub>(X)</mrow></math> have congruent
+coefficients modulo <!-- l. 490 --><math display='inline'>t</math>
+as follows:
+</p><!-- l. 492 --><p class='indent'>   <!-- l. 492 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>c</mrow></msub>(X) = <msub><mrow>w</mrow><mrow>0</mrow></msub> + <msub><mrow>w</mrow><mrow>1</mrow></msub> ⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + <msub><mrow>w</mrow><mrow>2</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + <msub><mrow>w</mrow><mrow>n−1</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup></mrow></math>
+</p><!-- l. 494 --><p class='indent'>   <!-- l. 494 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>d</mrow></msub>(X) = <msubsup><mrow>w</mrow><mrow>0</mrow><mrow>′</mrow></msubsup>+ <msubsup><mrow>w</mrow><mrow>1</mrow><mrow>′</mrow></msubsup>⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + <msubsup><mrow>w</mrow><mrow>2</mrow><mrow>′</mrow></msubsup>⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + <msubsup><mrow>w</mrow><mrow>n−1</mrow><mrow>′</mrow></msubsup>⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup></mrow></math>
+</p><!-- l. 496 --><p class='indent'>   <!-- l. 496 --><math display='inline'><mrow><msub><mrow>w</mrow><mrow>i</mrow></msub> ≡<msubsup><mrow>w</mrow><mrow>i</mrow><mrow>′</mrow></msubsup><mspace width='0.2em'></mspace>mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 498 --><p class='indent'>   <!-- l. 498 --><math display='inline'></math>
+</p><!-- l. 500 --><p class='indent'>   Then, their evaluated value <!-- l. 500 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>c</mrow></msub>(<msub><mrow>x</mrow><mrow>i</mrow></msub>)</mrow></math>
+and <!-- l. 500 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>d</mrow></msub>(<msub><mrow>x</mrow><mrow>i</mrow></msub>)</mrow></math> for any
+<!-- l. 500 --><math display='inline'><msub><mrow>x</mrow><mrow>i</mrow></msub></math> is guaranteed to be
+congruent modulo <!-- l. 500 --><math display='inline'>t</math>,
+                                                                                         
+                                                                                         
+as shown below:
+</p><!-- l. 502 --><p class='indent'>   <!-- l. 502 --><math display='inline'><mrow><msub><mrow>f</mrow><mrow>c</mrow></msub>(<msub><mrow>x</mrow><mrow>i</mrow></msub>) = <msub><mrow>w</mrow><mrow>0</mrow></msub> + <msub><mrow>w</mrow><mrow>1</mrow></msub> ⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + <msub><mrow>w</mrow><mrow>2</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + <msub><mrow>w</mrow><mrow>n−1</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup></mrow></math>
+</p><!-- l. 504 --><p class='indent'>   <!-- l. 504 --><math display='inline'><mrow> ≡(<msub><mrow>w</mrow><mrow>0</mrow></msub> + <msub><mrow>w</mrow><mrow>1</mrow></msub> ⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + <msub><mrow>w</mrow><mrow>2</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + <msub><mrow>w</mrow><mrow>n−1</mrow></msub> ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup>)<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 506 --><p class='indent'>   <!-- l. 506 --><math display='inline'><mrow> ≡(<msub><mrow>w</mrow><mrow>0</mrow></msub><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t) + (<msub><mrow>w</mrow><mrow>1</mrow></msub><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t) ⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + (<msub><mrow>w</mrow><mrow>2</mrow></msub><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t) ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + (<msub><mrow>w</mrow><mrow>n−1</mrow></msub><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t) ⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup>)</mrow></math>
+</p><!-- l. 508 --><p class='indent'>   <!-- l. 508 --><math display='inline'><mrow> ≡<msubsup><mrow>w</mrow><mrow>0</mrow><mrow>′</mrow></msubsup>+ <msubsup><mrow>w</mrow><mrow>1</mrow><mrow>′</mrow></msubsup>⋅<msub><mrow>x</mrow><mrow>i</mrow></msub> + <msubsup><mrow>w</mrow><mrow>2</mrow><mrow>′</mrow></msubsup>⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>2</mrow></msubsup> + ⋯ + <msubsup><mrow>w</mrow><mrow>n−1</mrow><mrow>′</mrow></msubsup>⋅<msubsup><mrow>x</mrow><mrow>i</mrow><mrow>n−1</mrow></msubsup></mrow></math>
+</p><!-- l. 510 --><p class='indent'>   <!-- l. 510 --><math display='inline'><mrow> = <msub><mrow>f</mrow><mrow>d</mrow></msub>(<msub><mrow>x</mrow><mrow>i</mrow></msub>)</mrow></math>
+</p><!-- l. 512 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Summary: </span>Since <!-- l. 512 --><math display='inline'>σ</math> is bijective and
+homomorphic, <!-- l. 512 --><math display='inline'>σ</math> is an isomorphic
+mapping between the <!-- l. 512 --><math display='inline'>(n −1)</math>-degree
+polynomial ring <!-- l. 512 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub>[X]∕<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math> and
+the <!-- l. 512 --><math display='inline'>n</math>-dimensional
+vector space <!-- l. 512 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>n</mrow></msubsup></math>.
+</p><!-- l. 515 --><p class='indent'>   <!-- l. 515 --><math display='inline'></math>
+   
+</p>
+   <h5 class='subsubsectionHead' id='finding-appropriate-modulus-t'><span class='titlemark'>A-10.6.1   </span>  <a id='x43-49000A-10.6.1'></a>Finding Appropriate Modulus <!-- l. 518 --><math display='inline'>t</math></h5>
+<!-- l. 521 --><p class='noindent'>To isomorphically evaluate a polynomial in <!-- l. 521 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub>[X]∕<msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>
+into an <!-- l. 521 --><math display='inline'>n</math>-dimensional vector, we
+need to evaluate the polynomial at <!-- l. 521 --><math display='inline'>n</math>
+distinct roots of <!-- l. 521 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>.
+However, <!-- l. 521 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math> does not have
+<!-- l. 521 --><math display='inline'>n</math> distinct roots for all combinations
+of (degree, modulus) <!-- l. 521 --><math display='inline'> = (n,t)</math>.
+For example, if <!-- l. 521 --><math display='inline'>n = 2</math>
+and <!-- l. 521 --><math display='inline'>t = 3</math>, then
+<!-- l. 521 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>2</mrow></msup> + 1≢0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> 3</mrow></math> for any possible values
+of <!-- l. 521 --><math display='inline'>X = {0,1,2}</math>. Therefore, our goal
+is to find a satisfactory <!-- l. 521 --><math display='inline'>t</math>
+given a fixed <!-- l. 521 --><math display='inline'>n</math> such
+that <!-- l. 521 --><math display='inline'>n</math> distinct roots
+of <!-- l. 521 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.3em'></mspace>(mod<mspace width='0.3em'></mspace>t)</mrow></math> exist in order to
+use the isomorphic <!-- l. 521 --><math display='inline'>σ</math>
+mapping.
+</p><!-- l. 523 --><p class='indent'>   We start with two constraints: (1) choose <!-- l. 523 --><math display='inline'>t</math>
+to be a prime number; (2) ensure <!-- l. 523 --><math display='inline'>t −1</math>
+is a multiple of <!-- l. 523 --><math display='inline'>2n</math>.
+</p><!-- l. 525 --><p class='indent'>   We learned from Fermat’s Little Theorem in Theorem A-4.2.4 (<a href='Theorems1.html#theorems1'><span class='ts1-lmr10-x-x-109'>§</span>A-4.2<!-- tex4ht:ref: subsec:order-theorem  --></a>) the following:
+<!-- l. 525 --><math display='inline'><mrow><msup><mrow>a</mrow><mrow>t−1</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math> if and only
+if <!-- l. 525 --><math display='inline'>a</math> and
+<!-- l. 525 --><math display='inline'>t</math> are co-prime. This
+means that if <!-- l. 525 --><math display='inline'>t</math> is
+a prime, then <!-- l. 525 --><math display='inline'><mrow><msup><mrow>a</mrow><mrow>t−1</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+for all <!-- l. 525 --><math display='inline'><mrow>a ∈ <msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>×</mrow></msubsup></mrow></math> (i.e.,
+                                                                                         
+                                                                                         
+<!-- l. 525 --><math display='inline'><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></math> without
+<!-- l. 525 --><math display='inline'>{0}</math>). Suppose
+<!-- l. 525 --><math display='inline'>g</math> is the generator of
+<!-- l. 525 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>×</mrow></msubsup></math> whose powered values
+generate all elements of <!-- l. 525 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>×</mrow></msubsup></math>.
+Then, <!-- l. 525 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(g) = t −1</mrow></math> and
+<!-- l. 525 --><math display='inline'><mrow><msup><mrow>g</mrow><mrow>t−1</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. Since
+<!-- l. 525 --><math display='inline'>t −1 = k ⋅2n</math> for
+some <!-- l. 525 --><math display='inline'>k</math>,
+<!-- l. 525 --><math display='inline'><mrow><msup><mrow>g</mrow><mrow>k⋅2n</mrow></msup> ≡<msup><mrow>(<msup><mrow>g</mrow><mrow>k</mrow></msup>)</mrow><mrow>2n</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. Then,
+<!-- l. 525 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(<msup><mrow>g</mrow><mrow>k</mrow></msup>) ≤2n</mrow></math>. However,
+since <!-- l. 525 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(g) = t −1</mrow></math>, for
+all <!-- l. 525 --><math display='inline'>a</math> such
+that <!-- l. 525 --><math display='inline'>a &lt; t −1 = k ⋅2n</math>,
+<!-- l. 525 --><math display='inline'><mrow><msup><mrow>g</mrow><mrow>a</mrow></msup>≢1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. In other
+words, for all <!-- l. 525 --><math display='inline'>b</math>
+such that <!-- l. 525 --><math display='inline'>b &lt; 2n</math>,
+<!-- l. 525 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>g</mrow><mrow>k</mrow></msup>)</mrow><mrow>b</mrow></msup>≢1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. Thus,
+<!-- l. 525 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(<msup><mrow>g</mrow><mrow>k</mrow></msup>) = 2n</mrow></math>.
+</p><!-- l. 527 --><p class='indent'>   Let <!-- l. 527 --><math display='inline'><mrow>c = <msup><mrow>g</mrow><mrow>k</mrow></msup></mrow></math>.
+Since <!-- l. 527 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(c) = 2n</mrow></math>,
+<!-- l. 527 --><math display='inline'><mrow><msup><mrow>c</mrow><mrow>2n</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. In other
+words, <!-- l. 527 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>c</mrow><mrow>n</mrow></msup>)</mrow><mrow>2</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. Now,
+<!-- l. 528 --><math display='inline'><msup><mrow>c</mrow><mrow>n</mrow></msup></math> can be only 1 or -1. The
+reason is that in the relation <!-- l. 528 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>2</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>,
+<!-- l. 528 --><math display='inline'>X</math> can be
+mathematically only <!-- l. 528 --><math display='inline'>1</math>
+or <!-- l. 528 --><math display='inline'><mrow> −1 ≡t −1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. If we
+substitute <!-- l. 528 --><math display='inline'><mrow>X = <msup><mrow>c</mrow><mrow>n</mrow></msup></mrow></math>,
+then <!-- l. 528 --><math display='inline'><msup><mrow>c</mrow><mrow>n</mrow></msup></math> can
+be only <!-- l. 528 --><math display='inline'>1</math>
+or <!-- l. 528 --><math display='inline'><mrow> −1 ≡t −1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. But
+<!-- l. 528 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(c) = 2n</mrow></math>, thus
+<!-- l. 528 --><math display='inline'><msup><mrow>c</mrow><mrow>n</mrow></msup></math> cannot be 1 (because
+<!-- l. 528 --><math display='inline'><mrow><msup><mrow>1</mrow><mrow>1</mrow></msup> = 1</mrow></math> and 1 is smaller
+than the order of <!-- l. 528 --><math display='inline'>c</math>:
+<!-- l. 528 --><math display='inline'>2n &gt; 1</math>). Thus,
+<!-- l. 528 --><math display='inline'><msup><mrow>c</mrow><mrow>n</mrow></msup></math> can be
+only <!-- l. 528 --><math display='inline'><mrow> −1 ≡t −1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>. If
+<!-- l. 528 --><math display='inline'><mrow><msup><mrow>c</mrow><mrow>n</mrow></msup> = −1 ≡t −1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>, then
+<!-- l. 528 --><math display='inline'>c</math> is the
+root of <!-- l. 528 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>,
+because <!-- l. 528 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1 = <msup><mrow>c</mrow><mrow>n</mrow></msup> + 1 ≡(t −1) + 1 ≡0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>.
+</p><!-- l. 530 --><p class='indent'>   In conclusion, given a cyclotomic polynomial
+<!-- l. 530 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>, if we choose
+                                                                                         
+                                                                                         
+a prime <!-- l. 530 --><math display='inline'>t</math> such
+that <!-- l. 530 --><math display='inline'>t −1 = k ⋅2n</math> for some
+integer <!-- l. 530 --><math display='inline'>k</math>, then
+one root of <!-- l. 530 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+is: <!-- l. 530 --><math display='inline'><mrow>X = c = <msup><mrow>g</mrow><mrow>k</mrow></msup></mrow></math>.
+</p><!-- l. 532 --><p class='indent'>   Once we have found one root of <!-- l. 532 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>,
+then we can derive all <!-- l. 532 --><math display='inline'>n</math>
+distinct roots of <!-- l. 532 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>.
+Suppose <!-- l. 532 --><math display='inline'>ω</math> is
+one root of <!-- l. 532 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>.
+Then we derive the following:
+</p><!-- l. 534 --><p class='indent'>   <!-- l. 534 --><math display='inline'><mrow><msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 ≡0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 536 --><p class='indent'>   <!-- l. 536 --><math display='inline'><mrow><msup><mrow>ω</mrow><mrow>n</mrow></msup> ≡t −1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 538 --><p class='indent'>   <!-- l. 538 --><math display='inline'><mrow><msup><mrow>ω</mrow><mrow>2n</mrow></msup> ≡(t −1) ⋅(t −1) ≡<msup><mrow>t</mrow><mrow>2</mrow></msup> −2t + 1 ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 540 --><p class='indent'>   While <!-- l. 540 --><math display='inline'><mrow><msup><mrow>ω</mrow><mrow>2n</mrow></msup> ≡1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>,
+<!-- l. 540 --><math display='inline'><mrow><msup><mrow>ω</mrow><mrow>n</mrow></msup>≢1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>, because if so,
+<!-- l. 540 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1 = <msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 = 1 + 1 = 2≠0</mrow></math>, which contradicts
+the fact that <!-- l. 540 --><math display='inline'>ω</math>
+is a root of <!-- l. 540 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>.
+Therefore, <!-- l. 540 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(c) = 2n</mrow></math>.
+</p><!-- l. 542 --><p class='indent'>   Now, we derive the remaining <!-- l. 542 --><math display='inline'>n −1</math>
+distinct roots of <!-- l. 542 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+as follows:
+</p><!-- l. 544 --><p class='indent'>   <!-- l. 544 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>ω</mrow><mrow>3</mrow></msup>)</mrow><mrow>n</mrow></msup> + 1 ≡(<msup><mrow>ω</mrow><mrow>2n</mrow></msup>) ⋅<msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 ≡<msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 ≡t −1 + 1 ≡0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 546 --><p class='indent'>   <!-- l. 546 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>ω</mrow><mrow>5</mrow></msup>)</mrow><mrow>n</mrow></msup> + 1 ≡(<msup><mrow>ω</mrow><mrow>4n</mrow></msup>) ⋅<msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 ≡<msup><mrow>ω</mrow><mrow>n</mrow></msup> + 1 ≡t −1 + 1 ≡0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+</p><!-- l. 548 --><p class='indent'>   <!-- l. 548 --><math display='inline'>⋮</math>
+</p><!-- l. 550 --><p class='indent'>   <!-- l. 550 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>ω</mrow><mrow>2n−1</mrow></msup>)</mrow><mrow>n</mrow></msup> + 1 ≡0<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+<br class='newline' /><span style='color:#FF0000;'> <!-- l. 550 --><math display='inline'>▹</math>for any
+odd <!-- l. 550 --><math display='inline'>k = 2j + 1</math>,
+<!-- l. 550 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>ω</mrow><mrow>2j+1</mrow></msup>)</mrow><mrow>n</mrow></msup> = <msup><mrow>(<msup><mrow>ω</mrow><mrow>2n</mrow></msup>)</mrow><mrow>j</mrow></msup> ⋅<msup><mrow>ω</mrow><mrow>n</mrow></msup> = <msup><mrow>1</mrow><mrow>j</mrow></msup> ⋅(−1) = −1</mrow></math>, so
+<!-- l. 550 --><math display='inline'><mrow><msup><mrow>(<msup><mrow>ω</mrow><mrow>k</mrow></msup>)</mrow><mrow>n</mrow></msup> + 1 = 0</mrow></math></span>
+</p><!-- l. 552 --><p class='indent'>   <!-- l. 552 --><math display='inline'></math>
+</p><!-- l. 554 --><p class='indent'>   Note that <!-- l. 554 --><math display='inline'><mrow>ω,<msup><mrow>ω</mrow><mrow>3</mrow></msup>,<msup><mrow>ω</mrow><mrow>5</mrow></msup>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msup><mrow>ω</mrow><mrow>2n−1</mrow></msup></mrow></math> are all
+distinct values in <!-- l. 554 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>×</mrow></msubsup></math>,
+because <!-- l. 554 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖮𝗋𝖽</mtext></mstyle></mrow><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub></mrow></msub>(c) = 2n</mrow></math>.
+Thus, <!-- l. 554 --><math display='inline'><msubsup><mrow>{<msup><mrow>ω</mrow><mrow>2i+1</mrow></msup>}</mrow><mrow>i=0</mrow><mrow>n−1</mrow></msubsup></math> are
+<!-- l. 554 --><math display='inline'>n</math> distinct
+roots of <!-- l. 554 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>.
+At the same time, since these are the roots of the cyclotomic polynomial
+<!-- l. 554 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>, these are
+<!-- l. 554 --><math display='inline'>n</math> distinct
+primitive <!-- l. 554 --><math display='inline'>(μ = 2n)</math>-th
+roots of unity.
+</p><!-- l. 557 --><p class='indent'>   <!-- l. 557 --><math display='inline'></math>
+                                                                                         
+                                                                                         
+</p><!-- l. 560 --><p class='indent'>   We summarize our findings as follows:
+</p>
+   <div class='tcolorbox tcolorbox' id='tcolobox-35'>     
+<div class='tcolorbox-title'>
+<!-- l. 590 --><p class='indent'>   <!-- l. 590 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Theorem A-10.6.1</span><!-- l. 590 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
+<span class='rm-lmbx-10x-x-109'>Isomorphism between Polynomials and Vectors over Integers
+(Ring)</span></p></div> 
+<div class='tcolorbox-content'>   <ul class='itemize1'>
+   <li class='itemize'>
+   <!-- l. 565 --><p class='noindent'>Suppose we have an <!-- l. 565 --><math display='inline'>(n −1)</math>-degree
+    polynomial ring <!-- l. 565 --><math display='inline'><mrow><msub><mrow>ℤ</mrow><mrow>t</mrow></msub>[X]∕F(X)</mrow></math>
+    where <!-- l. 565 --><math display='inline'>F(X)</math>
+    is an <!-- l. 565 --><math display='inline'>n</math>-degree
+    polynomial having <!-- l. 565 --><math display='inline'>n</math>
+   distinct roots <!-- l. 565 --><math display='inline'><mrow>{<msub><mrow>x</mrow><mrow>0</mrow></msub>,⋯<mspace class='thinspace' width='0.17em'></mspace>,<msub><mrow>x</mrow><mrow>n−1</mrow></msub>}</mrow></math>,
+    and an <!-- l. 565 --><math display='inline'>n</math>-dimensional
+    vector space <!-- l. 565 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>n</mrow></msubsup></math>
+    (integers mod <!-- l. 565 --><math display='inline'>t</math>)
+    with vector <!-- l. 565 --><math display='inline'><mover accent='true'><mrow>v</mrow><mo accent='true' stretchy='false'>→</mo></mover></math>.
+    </p><!-- l. 567 --><p class='noindent'><!-- l. 567 --><math display='inline'><mrow>σ : f(x) ∈ <msub><mrow>ℤ</mrow><mrow>t</mrow></msub>[X]∕F(X)<mstyle class='text'><mtext> </mtext></mstyle>→<mstyle class='text'><mtext> </mtext></mstyle>(f(<msub><mrow>x</mrow><mrow>0</mrow></msub>),f(<msub><mrow>x</mrow><mrow>1</mrow></msub>),f(<msub><mrow>x</mrow><mrow>2</mrow></msub>),⋯<mspace class='thinspace' width='0.17em'></mspace>,f(<msub><mrow>x</mrow><mrow>n−1</mrow></msub>)) ∈ <msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>n</mrow></msubsup></mrow></math>
+    </p><!-- l. 569 --><p class='noindent'><!-- l. 569 --><math display='inline'></math>
+    </p><!-- l. 571 --><p class='noindent'>Then, <!-- l. 571 --><math display='inline'>σ</math>
+   preserves isomorphism over the <!-- l. 571 --><math display='inline'>(+,⋅)</math>
+    operations:
+    </p><!-- l. 574 --><p class='noindent'><!-- l. 574 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) + <msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) + σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>
+    </p><!-- l. 576 --><p class='noindent'><!-- l. 576 --><math display='inline'><mrow>σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X) ⋅<msub><mrow>f</mrow><mrow>b</mrow></msub>(X)) = σ(<msub><mrow>f</mrow><mrow>a</mrow></msub>(X)) ⊙σ(<msub><mrow>f</mrow><mrow>b</mrow></msub>(X))</mrow></math>
+    </p><!-- l. 578 --><p class='noindent'><!-- l. 578 --><math display='inline'></math>
+    </p></li>
+    <li class='itemize'>Suppose we have the <!-- l. 586 --><math display='inline'>(μ = 2n)</math>-th
+    cyclotomic polynomial <!-- l. 586 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>
+   such that <!-- l. 586 --><math display='inline'>t</math>
+   is a prime and <!-- l. 586 --><math display='inline'>t −1</math>
+    is some multiple of <!-- l. 586 --><math display='inline'>2n</math>,
+    and <!-- l. 586 --><math display='inline'>g</math>
+   is a generator of <!-- l. 586 --><math display='inline'><msubsup><mrow>ℤ</mrow><mrow>t</mrow><mrow>×</mrow></msubsup></math>.
+    Then, <!-- l. 586 --><math display='inline'>n</math>
+   distinct roots of <!-- l. 586 --><math display='inline'><mrow><msup><mrow>X</mrow><mrow>n</mrow></msup> + 1</mrow></math>
+    (i.e., primitive <!-- l. 586 --><math display='inline'>(μ = 2n)</math>-th
+    roots of unity) can be efficiently computed as: <!-- l. 586 --><math display='inline'><msubsup><mrow>{<msup><mrow>ω</mrow><mrow>2i+1</mrow></msup>}</mrow><mrow>i=0</mrow><mrow>n−1</mrow></msubsup></math>
+     where <!-- l. 586 --><math display='inline'><mrow>ω = <msup><mrow>g</mrow><mrow><mfrac><mrow>t−1</mrow>
+ <mrow>2n</mrow></mfrac> </mrow></msup><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t</mrow></math>.
+</li></ul>
+ 
+</div> 
+</div>
+                                                                                         
+                                                                                         
+   <!-- l. 596 --><div class='crosslinks'><p class='noindent'>[<a href='BasisofaPolynomialRing.html'>prev</a>][<a href='VectorandMatrix.html#IsomorphismbetweenPolynomialsandVectorsoverIntegersandRing.html'>parent</a>][<a href='IsomorphismbetweenPolynomialsandVectorsoverComplexNumbers.html'>next</a>]</p></div>
+    
+</body> 
+</html>

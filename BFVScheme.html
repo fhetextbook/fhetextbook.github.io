@@ -19,11 +19,11 @@ learning).
 </p><!-- l. 3 --><p class='indent'>   In BFV, each plaintext is encrypted as an RLWE ciphertext. Therefore, BFV’s ciphertext-to-ciphertext
 addition, ciphertext-to-plaintext addition, and ciphertext-to-plaintext multiplication are
 implemented based on GLWE’s homomorphic addition and multiplication (as we learned in
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x90-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mi mathvariant='italic'>𝑃𝑎𝑟𝑡 𝐼𝐼𝐼</mi><!-- tex4ht:ref: subsec:tfhe-summary  --></mstyle><!-- endlabel --></mrow></math>), with
-<!-- l. 3 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> to
+<!-- l. 3 --><math display='inline'><mrow><mstyle class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x90-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'><mtext class='label' xlink:href='GenericFullyHomomorphicEncryption.html#x90-103000III' xlink:type='simple' xmlns:xlink='http://www.w3.org/1999/xlink'>Part III<!-- tex4ht:ref: subsec:tfhe-summary  --></mtext></mstyle><!-- endlabel --></mrow></math>), with
+<!-- l. 3 --><math display='inline'>k = 1</math> to
 make GLWE an RLWE.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-81'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-82'>     
 <div class='tcolorbox-title'>
                                                                                          
                                                                                          
@@ -45,7 +45,7 @@ make GLWE an RLWE.
     </li>
     <li class='itemize'><a href='CyclotomicPolynomial.html#cyclotomic-polynomial'><span class='ts1-lmr10-x-x-109'>§</span>A-8<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='CyclotomicPolynomial.html#cyclotomic-polynomial'>Cyclotomic Polynomial<!-- tex4ht:ref: sec:cyclotomic  --></a>
     </li>
-    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRings.html#roots-of-unity-and-cyclotomic-polynomial-over-rings'>Roots of Unity and Cyclotomic Polynomial over Rings<!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a>
+    <li class='itemize'><a href='RootsofUnityandCyclotomicPolynomialoverRing.html#roots-of-unity-and-cyclotomic-polynomial-over-ring'><span class='ts1-lmr10-x-x-109'>§</span>A-9<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='RootsofUnityandCyclotomicPolynomialoverRing.html#roots-of-unity-and-cyclotomic-polynomial-over-ring'>Roots of Unity and Cyclotomic Polynomial over Ring<!-- tex4ht:ref: sec:cyclotomic-polynomial-integer-ring  --></a>
     </li>
     <li class='itemize'><a href='VectorandMatrix.html#vector-and-matrix'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!-- tex4ht:ref: subsec:tfhe-summary  --></a>: <a href='VectorandMatrix.html#vector-and-matrix'>Vector and Matrix<!-- tex4ht:ref: sec:matrix  --></a>
     </li>
@@ -84,10 +84,10 @@ make GLWE an RLWE.
    <div class='subsectionTOCS hrr'>
 <br />   <span class='subsectionToc'>D-2.1 <a href='SingleValueEncoding.html#single-value-encoding'>Single Value Encoding</a></span>
 <br />   <span class='subsectionToc'>D-2.2 <a href='BatchEncoding.html#batch-encoding'>Batch Encoding</a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.1 <a href='BatchEncoding.html#encoding-'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.2 <a href='BatchEncoding.html#encoding-1'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.3 <a href='BatchEncoding.html#decoding-'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
-<br />   <span class='subsubsectionToc'>D-2.2.4 <a href='BatchEncoding.html#decoding-1'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.1 <a href='BatchEncoding.html#encoding-1'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.2 <a href='BatchEncoding.html#encoding-2'><span class='rm-lmss-10x-x-109'>Encoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.3 <a href='BatchEncoding.html#decoding-1'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>1</span></sub></a></span>
+<br />   <span class='subsubsectionToc'>D-2.2.4 <a href='BatchEncoding.html#decoding-2'><span class='rm-lmss-10x-x-109'>Decoding</span><sub><span class='rm-lmss-10x-x-109'>2</span></sub></a></span>
 <br />   <span class='subsubsectionToc'>D-2.2.5 <a href='BatchEncoding.html#summary'>Summary</a></span>
 <br />   <span class='subsectionToc'>D-2.3 <a href='EncryptionandDecryption1.html#encryption-and-decryption1'>Encryption and Decryption</a></span>
 <br />   <span class='subsectionToc'>D-2.4 <a href='CiphertexttoCiphertextAddition.html#ciphertexttociphertext-addition'>Ciphertext-to-Ciphertext Addition</a></span>

@@ -10,14 +10,14 @@
 </head><body>
    <!-- l. 25 --><div class='crosslinks'><p class='noindent'>[<a href='Encryption3.html'>prev</a>][<a href='GLev.html#Decryption3.html'>parent</a>][<a href='LevandRLev.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='decryption3'><span class='titlemark'>B-5.2   </span>   <a id='x84-97000B-5.2'></a>Decryption</h4>
-<!-- l. 27 --><p class='noindent'>We decrypt the first GLWE ciphertext (<!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>i</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math>)
-using the secret <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>S</mi></math>, with the scaling
-factor <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>1</mn></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mstyle displaystyle='true'><mfrac><mrow> <mi>q</mi>
-</mrow><mrow><mi>β</mi></mrow></mfrac></mstyle></mrow></math>. This is because while the
-ciphertext contains <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>l</mi></math> encryptions, the
-higher indices <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>i</mi> <mo class='MathClass-rel' stretchy='false'>&gt;</mo> <mn>1</mn></mrow></math> have progressively
-smaller scaling factors <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>q</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>β</mi></mrow><mrow><mi>i</mi></mrow></msup></mrow></math>.
-If <!-- l. 27 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
+<!-- l. 27 --><p class='noindent'>We decrypt the first GLWE ciphertext (<!-- l. 27 --><math display='inline'>i = 1</math>)
+using the secret <!-- l. 27 --><math display='inline'>S</math>, with the scaling
+factor <!-- l. 27 --><math display='inline'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow>1</mrow></msub> = <mstyle displaystyle='true'><mfrac><mrow> q
+</mrow><mrow>β</mrow></mfrac></mstyle></mrow></math>. This is because while the
+ciphertext contains <!-- l. 27 --><math display='inline'>l</math> encryptions, the
+higher indices <!-- l. 27 --><math display='inline'>i &gt; 1</math> have progressively
+smaller scaling factors <!-- l. 27 --><math display='inline'><mrow><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow>i</mrow></msub> = q∕<msup><mrow>β</mrow><mrow>i</mrow></msup></mrow></math>.
+If <!-- l. 27 --><math display='inline'><msub><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow>i</mrow></msub></math>
 becomes smaller than the noise threshold, those specific components cannot be decrypted
 correctly.
                                                                                          

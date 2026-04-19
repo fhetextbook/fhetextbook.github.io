@@ -367,7 +367,7 @@ Given an $(n-1)$-degree polynomial ring $\mathbb{Z}[X] / (X^n + 1)$, a basis of 
 Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that form a basis of the polynomial ring is exactly $n$.
 
 
-\subsection{Isomorphism between Polynomials and Vectors over Integers}
+\subsection{Isomorphism between Polynomials and Vectors over Integers (and Ring)}
 \label{subsec:poly-vector-transformation}
 
 
@@ -483,7 +483,7 @@ As shown above, even if $f_a(X) \cdot f_b(X)$ results in a polynomial with a deg
 
 To resolve these two minor issues, we let the $n$ distinct $X$ coordinates of evaluation be the solutions of the polynomial ring modulo $X^n + 1$ (where $n$ is some power of 2) and reduce $f_a(X) \cdot f_b(X)$ to a new polynomial modulo $X^n + 1$ whose degree is at most $n - 1$. Let $f_{ab}(X) = f_a(X) \cdot f_b(X)$, and $f'_{ab}(X)$ be the reduced polynomial such that $f_{ab}(X) = Q(X)\cdot (X^n + 1) + f'_{ab}(X)$ for some quotient polynomial $Q(X)$. Then, as illustrated in Summary \ref*{subsubsec:polynomial-ring-discuss} (\autoref{subsubsec:polynomial-ring-discuss}), $f_{ab}(X)$ and $f'_{ab}(X)$ evaluate to the same value if they are evaluated at the roots of $X^n + 1$ (by zeroing out the $Q(X)$ term). Therefore, if we let the $n$ distinct evaluating points $\{x_0, x_1, \cdots, x_{n-1}\}$ be the roots of $X^n + 1$, then we can ensure that the decoded vector of $f'_{ab}(X)$ is identical to that of $f_{ab}(X)$, which we expect. Therefore, we can replace the higher-degree polynomial $f_{ab}(X)$ with the reduced polynomial $f'_{ab}(X)$ and continue with any further polynomial additions or multiplications using $f'_{ab}(X)$. Also, by applying polynomial ring reduction, we can enhance the computational efficiency of polynomial addition and multiplication, as well as preserve the isomorphism of the $\sigma$ mapping. Therefore, we can freely convert between vectors \& polynomials and perform additions and multiplications. 
 
-For applying this polynomial ring reduction, the polynomial modulus can be any polynomial as long as it has at least $n$ distinct roots. In practice, we often choose $X^n + 1$ as the polynomial ring modulus, which is the $(\mu=2n)$-th cyclotomic polynomial (\autoref{subsec:cyclotomic-def}). The reason we let the polynomial ring modulus be a cyclotomic polynomial (especially the $(\mu=2n)$-th cyclotomic polynomial, $X^n + 1$) is that its $n$ distinct roots are well-defined (i.e., primitive $(\mu=2n)$-th roots of unity) and thus can be quickly computed even when $n$ is large.
+For applying this polynomial ring reduction, the polynomial modulus can be any polynomial as long as it has at least $n$ distinct roots. In practice, we often choose $X^n + 1$ as the polynomial ring modulus, which is the $(\mu=2n)$-th cyclotomic polynomial (\autoref{subsec:cyclotomic-def}). The reason we let the polynomial ring modulus be a cyclotomic polynomial (especially the $(\mu=2n)$-th cyclotomic polynomial, $X^n + 1$) is that its $n$ distinct roots are well-defined (i.e., primitive $(\mu=2n)$-th roots of unity) and thus can be quickly identified even when $n$ is large.
 
 $ $
 
@@ -559,7 +559,7 @@ $ $
 
 We summarize our findings as follows:
 
-\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsubsec:poly-vector-transformation-modulus}} Isomorphism between Polynomials and Vectors over Integer (Ring)}}]
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsubsec:poly-vector-transformation-modulus}} Isomorphism between Polynomials and Vectors over Integers (Ring)}}]
 
 \begin{itemize}
 \item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and an $n$-dimensional vector space $\mathbb{Z}_t^n$ (integers mod $t$) with vector $\vec{v}$.
@@ -605,109 +605,135 @@ $ $
 
 , where $X \in \mathbb{C}$, and $\omega = e^{i\pi/n}$, the root (i.e., the primitive $(\mu=2n)$-th root) of the cyclotomic polynomial $X^n + 1$ over complex numbers (Theorem~\ref*{subsec:cyclotomic-theorem}.1 in \autoref{subsec:cyclotomic-theorem}). We define $\mathbb{\hat{C}}^{n}$ to be an $n$-dimensional \textit{special} vector space whose second-half elements of each vector are reverse-ordered conjugates of the first-half elements (e.g., $(v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_{\frac{n}{2}-1}, \cdots, \overline{v}_1, \overline{v}_0 )$). 
 
-\subsubsection{Isomorphism between $\mathbb{C}^{\frac{n}{2}}$ and $\mathbb{\hat C}^{n}$}
+\subsubsection{Isomorphism between $\mathbb{C}^{\frac{n}{2}}$ and $\hat{\mathbb{C}}^{n}$}
 \label{subsec:poly-vector-transformation-complex-isomorphism1}
 
+In this section, we treat both $\mathbb{C}^{\frac{n}{2}}$ and $\hat{\mathbb{C}}^{n}$ as vector spaces of complex vectors, where the mapping between them is defined as $\phi: \mathbb{C}^{\frac{n}{2}} \rightarrow \hat{\mathbb{C}}^{n}$ as follows:
 
-\para{Bijective:} Technically, $\mathbb{\hat{C}}^{n}$ is bijective to $\mathbb{C}^{\frac{n}{2}}$, because the second-half $\frac{n}{2}$ elements of each vector in $\mathbb{{\hat C}}^{n}$ are passively (automatically) determined by the first-half $\frac{n}{2}$ elements. Therefore, each vector in $\mathbb{\hat{C}}^{n}$ has one-to-one correspondences with some unique vector in $\mathbb{{C}}^{\frac{n}{2}}$, and thus these two vector spaces are bijective. 
+$\phi(z_0, z_1, \dots, z_{\frac{n}{2}-1}) = (z_0, z_1, \dots, z_{\frac{n}{2}-1}, \overline{z_{\frac{n}{2}-1}}, \dots, \overline{z_1}, \overline{z_0})$
 
-\para{Homomorphic:} To demonstrate their homomorphism over the $(+, \odot)$ operations, we can apply the following reasoning: for all $\vec{\hat{v}} \in \mathbb{\hat{C}}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$, there exists an $\dfrac{n}{2} \times n$ linear transformation matrix $M$ that satisfies $M \cdot \vec{\hat{v}} = \vec{v}$. Such $M$ is an $\dfrac{n}{2} \times n$ matrix comprising horizontal concatenation of $I_{\frac{n}{2}}$ and $[0]_{\frac{n}{2}}$, where $I_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ identity matrix and $[0]_{\frac{n}{2}}$ is an $\dfrac{n}{2} \times \dfrac{n}{2}$ zero matrix. Also, there exists an $n \times \dfrac{n}{2}$ (non-linear) transformation matrix $N$ that satisfies $N \cdot \vec{{v}} = \vec{\hat v}$. Such $N$ is a vertical concatenation of $I_{\frac{n}{2}}$ and $\bm{\emptyset}_{\frac{n}{2}}^R$, where $\bm{\emptyset}_{\frac{n}{2}}^R$ is an $\frac{n}{2} \times \frac{n}{2}$ matrix whose reverse-diagonal elements are unary conjugate operators and all other elements are zero. For example, if $n = 8$, then $M$ and $N$ are structured as follows:
 
-$M = \begin{bmatrix}
-1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
-\end{bmatrix}
-$, \text{ } $N = 
-\begin{bmatrix}
-1 & 0 & 0 & 0\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1\\
-0 & 0 & 0 & \emptyset\\
-0 & 0 & \emptyset & 0\\
-0 & \emptyset & 0 & 0\\
-\emptyset & 0 & 0 & 0\\
-\end{bmatrix}$
+$ $
 
-$ $ 
+In other words, $\hat{\mathbb{C}}^{n}$ is a conjugate extension of $\mathbb{C}^{\frac{n}{2}}$ such that the first-half elements of $\hat{\mathbb{C}}^{n}$ are identical to those of $\mathbb{C}^{\frac{n}{2}}$, and the second-half elements of $\hat{\mathbb{C}}^{n}$ are reverse-ordered conjugates of $\mathbb{C}^{\frac{n}{2}}$. 
 
-The reason $N$ is not a linear transformation matrix is because it contains conjugate operators $\emptyset$. Yet, notice that the following homomorphism holds between $\vec{\hat v} \in \mathbb{\hat C}^{n}$ and $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$:
 
-$N\cdot (M\cdot\vec{\hat v}_1 + M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 + \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 + N\cdot\vec{v}_2) = \vec{v}_1 + \vec{v}_2$
+Now, we will demonstrate that the mapping $\phi$ between $\mathbb{C}^{\frac{n}{2}}$ and $\hat{\mathbb{C}}^{n}$ is an isomorphism.
 
-$N\cdot (M\cdot\vec{\hat v}_1 \odot M\cdot\vec{\hat v}_2) = \vec{\hat v}_1 \odot \vec{\hat v}_2$, \text{ } $M\cdot (N\cdot\vec{v}_1 \odot N\cdot\vec{v}_2) = \vec{v}_1 \odot \vec{v}_2$
 
-Thus, the $\mathbb{\hat C}^n$ and $\mathbb{C}^{\frac{n}{2}}$ vector spaces are bijective and homomorphic over the $(+, \odot)$ operations, and therefore they preserve isomorphism. 
+$ $
+
+\para{Bijective:} The mapping $\phi$ is trivially bijective. Every vector in $\mathbb{C}^{\frac{n}{2}}$ uniquely maps to a vector in $\hat{\mathbb{C}}^{n}$ by appending its reverse-ordered complex conjugates. Conversely, any vector in $\hat{\mathbb{C}}^{n}$ can uniquely map back to $\mathbb{C}^{\frac{n}{2}}$ by simply dropping the second half of its elements, establishing a perfect one-to-one correspondence.
+
+\para{Homomorphic:} We will demonstrate that $\phi$ preserves homomorphism over addition $(+)$ and element-wise vector multiplication $(\odot)$. Given two vectors $\vec{u}, \vec{v} \in \mathbb{C}^{\frac{n}{2}}$:
+\begin{itemize}
+    \item \textbf{Addition:} $\phi(\vec{u} + \vec{v}) = \phi(\vec{u}) + \phi(\vec{v})$ holds because complex conjugation distributes over addition (i.e., $\overline{u + v} = \overline{u} + \overline{v}$).
+    \item \textbf{Element-wise Multiplication:} $\phi(\vec{u} \odot \vec{v}) = \phi(\vec{u}) \odot \phi(\vec{v})$ holds because the conjugate of a product is the product of the conjugates (i.e., $\overline{u \cdot v} = \overline{u} \cdot \overline{v}$).
+\end{itemize}
+
+$ $
+
+Therefore, the mapping $\phi: \mathbb{C}^{\frac{n}{2}} \rightarrow \hat{\mathbb{C}}^{n}$ is an isomorphism.
+
+\begin{tcolorbox}[title={Vector Space of Complex Vectors with either Real or Complex Scalars}]
+
+By mathematical definition, a vector space must satisfy \textit{closure under scalar multiplication}: for any vector $\vec{v}$ in the space and any scalar $c$ from the scalar field, the product $c \cdot \vec{v}$ must also lie in the same vector space.  Under this requirement, $\mathbb{C}^{\frac{n}{2}}$ is naturally a vector space of complex vectors with complex scalars (though the same is true with real scalars, since complex includes real). On the other hand, $\hat{\mathbb{C}}^{n}$ is a vector space of complex vectors \textit{strictly with real scalars}.
+
+$ $
+
+To see why, recall that a vector $\vec{v} = (v_0, v_1, \dots, v_{n-1}) \in \hat{\mathbb{C}}^n$ must satisfy the Hermitian-symmetry constraint: $v_{n-1-k} = \overline{v_k}$ for all $k$. Consider an example with $n = 4$:
+
+$$\vec{v} = (1+i,\ 2+2i,\ 2-2i,\ 1-i) \in \hat{\mathbb{C}}^4$$
+
+Now, let us multiply $\vec{v}$ by the complex scalar $c = i$:
+
+$$i \cdot \vec{v} = (-1+i,\ -2+2i,\ 2+2i,\ 1+i)$$
+
+For this result to still lie in $\hat{\mathbb{C}}^4$, the third entry must be the conjugate of the second entry. But $\overline{-2+2i} = -2-2i$, which is not equal to $2+2i$. So $i \cdot \vec{v} \notin \hat{\mathbb{C}}^4$, and closure fails.
+
+$ $
+
+More generally, for any $\vec{v} \in \hat{\mathbb{C}}^n$ and any scalar $c$, the product $c \cdot \vec{v}$ preserves Hermitian symmetry if and only if $\overline{c} = c$; that is, if and only if $c$ is a real number. Therefore, $\hat{\mathbb{C}}^n$ is a valid vector space only when restricted to real scalars, and this is why $\hat{\mathbb{C}}^n$ is a vector space of complex vectors strictly with real scalars.
+
+$ $
+
+Throughout this book, we will regard both $\mathbb{C}^{\frac{n}{2}}$ and $\hat{\mathbb{C}}^{n}$ as vector spaces of complex vectors with real scalars.
+
+$ $
+
+\textbf{Isomorphism of Vector Spaces:} For a mapping between vector spaces to be an isomorphism, it has to be not only bijective and homomorphic over the $(+, \cdot)$ operations, but also homomorphic over scalar multiplication. Therefore, we need to prove that $\phi(c \cdot \vec{u}) = c \cdot \phi(\vec{u})$. This is always true in our case because the scalar $c$ is a real number, meaning it is unaffected by complex conjugation (i.e., $\overline{c} = c$, and thus $\overline{c \cdot u_k} = c \cdot \overline{u_k}$). 
+
+\textbf{Dimension of Vector Spaces:} The dimension of a vector space is defined by how many scalars it takes to fully describe it. Therefore, the dimension of $\mathbb{C}^{\frac{n}{2}}$ is $n$ because it has $\dfrac{n}{2}$ elements where each element requires 2 scalars to describe (one real and one imaginary part). The dimension of $\hat{\mathbb{C}}^{n}$ is also $n$ because the first $\dfrac{n}{2}$ elements requires $\dfrac{n}{2}\cdot 2$ scalars to describe, and the latter $\frac{n}{2}$ elements are simply reverse-ordered conjugates of the former $\frac{n}{2}$ elements.
+
+\end{tcolorbox}
+
 
 $ $
 
 
-\subsubsection{Isomorphism between $\mathbb{\hat C}^{n}$ and $\mathbb{R}[X] / X^n + 1$}
+
+\subsubsection{Isomorphism between $\hat{\mathbb{C}}^{n}$ and $\mathbb{R}[X] / (X^n + 1)$}
 \label{subsec:poly-vector-transformation-complex-isomorphism2}
 
-
-Now, we will demonstrate $\sigma_c$'s isomorphism (i.e., bijective and homomorphic) between $\mathbb{\hat C}^{n}$ and $\mathbb{R}[X] / X^n + 1$ by applying the same reasoning as described in the beginning of \autoref{subsec:poly-vector-transformation}. 
+Now, we will demonstrate that $\sigma_c$ is an isomorphism (i.e., bijective and homomorphic) between $\hat{\mathbb{C}}^{n}$ and $\mathbb{R}[X] / (X^n + 1)$ by applying the same reasoning as described in the beginning of \autoref{subsec:poly-vector-transformation}. 
 
 \begin{figure}[h!]
     \centering
   \includegraphics[width=0.3\linewidth]{figures/cyclotomic-polynomial.pdf}
-  \caption{An illustration of the four roots of the 8th cyclotomic polynomial $x^4 + 1$ 
-  %\href{https://blog.openmined.org/content/images/2020/08/roots.PNG}{(Source)}
-  }
+  \caption{An illustration of the four roots of the 8th cyclotomic polynomial $x^4 + 1$}
   \label{fig:cyclotomic-polynomial}
 \end{figure}
 
 $ $
 
-\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma$ mapping can be re-written as follows:
+\para{Bijective:} Based on Euler's formula $e^{i\theta} = \cos\theta + i\cdot\sin\theta$ (\autoref{subsec:euler}), we can derive the following arithmetic relations: $\omega = \overline{\omega^{2n-1}}, \text{ } \omega^3 = \overline{\omega^{2n-3}}, \cdots, \omega^{n-1} = \overline{\omega^{n+1}}$. In other words, the one-half roots are conjugates of the other-half roots. This can also be pictorially understood based on a complex plane in \autoref{fig:cyclotomic-polynomial}, where red arrows represent the roots of the 8th cyclotomic polynomial $X^4 + 1$, comprising imaginary number and real number components. As shown in this figure, one half of the red arrows (i.e., roots) are a reflection of the other half on the $x$-axis (i.e., real number axis). This means that we can express these roots as an $n$-dimensional vector whose elements are the roots of $X^n + 1$, such that its second-half elements are a reverse-ordered conjugate of the first-half elements. Based on this vector design, the $\sigma_c$ mapping can be re-written as follows:
 
-$\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
-
-$ $
-
-Since $f(\overline{X}) = \overline{f(X)}$, we can rewrite $\sigma$ as: 
-
-$\sigma(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-3}), f(\omega^{n-1}), \overline{f(\omega^{n-1})}, \overline{f(\omega^{n-3})}, \cdots, \overline{f(\omega^3)}, \overline{f(\omega))}$
+$\sigma_c(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-1}), f(\overline{\omega^{n-1}}), f(\overline{\omega^{n-3}}), \cdots, f(\overline{\omega^3}), f(\overline{\omega}))$
 
 $ $
 
-This structure of vector exactly aligns with the definition of $\hat{\mathbb{C}}^n$: the first half of the elements of the $n$-dimensional vector $\vec{\hat v}$ is a conjugate of the second half.
+Since $f(\overline{X}) = \overline{f(X)}$ (because $f(X)$ has strictly real coefficients), we can rewrite $\sigma_c$ as: 
 
-For bijectiveness, we also need to demonstrate that every $f(X) \in \mathbb{R}[X] /X^n + 1$ is mapped to some $\vec{\hat v} \in \hat{\mathbb{C}}^{\frac{n}{2}}$, and no two different $f_1(X), f_2(X) \in \mathbb{R}[X] / X^n + 1$ map to the same $\vec{\hat v} \in \hat{\mathbb{C}}^{n}$. The first requirement is satisfied because each polynomial $f(X) \in \mathbb{R}[X] /X^n + 1$ can be evaluated at the $n$ distinct roots of $X^n + 1$ to a valid number. The second requirement is also satisfied because in the $(n-1)$-degree polynomial ring, each list of $n$ distinct $(x, y)$ coordinates (where we fix the $X$ values as the $n$ distinct roots of $X^n + 1$ as $\{\omega, \omega^3, \cdots, \omega^{2n - 1}\}$) can be mapped only to a single polynomial within the $(n-1)$-degree polynomial ring, as proved by Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}).
-
-$ $
-
-%$\sigma_c$ is bijective, because regardless of whether $X$ is an integer, real or complex number, the a list of $n$ distinct coordinates of $(x, y)$ (where we fix $x$ to be $n$ distinct roots of $X^2 + 1$ over complex numbers) define a unique polynomial within the $(n-1)$-degree polynomial ring. 
-
-\para{Homomorphic:} $\sigma_c$ is homomorphic, because based on the reasoning shown in \autoref{subsec:poly-vector-transformation}, the relations $\sigma(f_a(X) + f_b(X)) = \sigma(f_a(X)) + \sigma(f_b(X))$ and $\sigma(f_a(X) \cdot f_b(X)) = \sigma(f_a(X)) \odot \sigma(f_b(X))$ mathematically hold regardless of whether the type of $X$ is modulo integer or complex number, 
+$\sigma_c(f(X)) = (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{n-3}), f(\omega^{n-1}), \overline{f(\omega^{n-1})}, \overline{f(\omega^{n-3})}, \cdots, \overline{f(\omega^3)}, \overline{f(\omega)})$
 
 $ $
 
-Since $\sigma_c$ is both bijective and homomorphic over the $(+, \cdot)$ operations, it is isomorphic. 
+This structure of vector exactly aligns with the definition of $\hat{\mathbb{C}}^n$: the second half of the elements of the $n$-dimensional vector $\vec{\hat v}$ is a reverse-ordered conjugate of the first half.
+
+For bijectiveness, we also need to demonstrate that every $f(X) \in \mathbb{R}[X] / (X^n + 1)$ is mapped to some $\vec{\hat v} \in \hat{\mathbb{C}}^{n}$, and no two different $f_1(X), f_2(X) \in \mathbb{R}[X] / (X^n + 1)$ map to the same $\vec{\hat v} \in \hat{\mathbb{C}}^{n}$. The first requirement is satisfied because each polynomial $f(X) \in \mathbb{R}[X] / (X^n + 1)$ can be evaluated at the $n$ distinct roots of $X^n + 1$ to a valid number. The second requirement is also satisfied because in the $(n-1)$-degree polynomial ring, each list of $n$ distinct $(x, y)$ coordinates (where we fix the $X$ values as the $n$ distinct roots of $X^n + 1$ as $\{\omega, \omega^3, \cdots, \omega^{2n - 1}\}$) can be mapped only to a single polynomial within the $(n-1)$-degree polynomial ring, as proved by Lagrange Polynomial Interpolation (Theorem~\ref*{sec:polynomial-interpolation} in \autoref{sec:polynomial-interpolation}).
+
+$ $
+
+\para{Homomorphic:} $\sigma_c$ is homomorphic, because based on the reasoning shown in \autoref{subsec:poly-vector-transformation}, the relations $\sigma_c(f_a(X) + f_b(X)) = \sigma_c(f_a(X)) + \sigma_c(f_b(X))$ and $\sigma_c(f_a(X) \cdot f_b(X)) = \sigma_c(f_a(X)) \odot \sigma_c(f_b(X))$ mathematically hold regardless of whether the type of $X$ is a modulo integer or a complex number. Additionally, for any real scalar $c \in \mathbb{R}$, $\sigma_c(c \cdot f(X)) = c \cdot \sigma_c(f(X))$ holds because scaling the polynomial and then evaluating it is the same as evaluating it and then scaling the result.
+
+$ $
+
+Since $\sigma_c$ is both bijective and homomorphic over the $(+, \cdot)$ operations, it is an isomorphism. 
 
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:poly-vector-transformation-complex}} Isomorphism between Polynomials and Vectors over Complex Numbers}}]
 
-The following mapping $\sigma_c$ between polynomials and vectors over complex numbers is isomorphic:
+The following mapping $\sigma_c$ between polynomials and vectors over complex numbers is an isomorphism:
 
-$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{ } (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
+$\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \hat{\mathbb{C}}^{n} \text{ } (\cong \mathbb{C}^{\frac{n}{2}})$
 
 $ $
 
-, where $\omega = e^{i\pi/n}$, the root (i.e., the primitive $(\mu=2n)$-th root) of the cyclotomic polynomial $X^n + 1$ over complex numbers, and $\mathbb{\hat{C}}^{n}$ is $n$-dimensional complex special vector space whose second-half elements are reverse-ordered conjugates of the first-half elements. 
+, where $\omega = e^{i\pi/n}$, the root (i.e., the primitive $(\mu=2n)$-th root) of the cyclotomic polynomial $X^n + 1$ over complex numbers, and $\hat{\mathbb{C}}^{n}$ is an $n$-dimensional vector space of complex vectors (with real scalars) whose second-half elements are reverse-ordered conjugates of the first-half elements. 
 
 \end{tcolorbox}
 
 
-\subsection{Transforming Basis between Polynomial Ring and Vector Space}
+
+
+
+\subsection{Transforming Basis between Polynomial Ring and Vector Space of Complex Vectors with Real Scalars}
 \label{subsec:poly-vector-basis-transfer}
 
 
-Suppose some polynomials $f_0(X), f_1(X), \cdots, f_{n-1}(X)$ form a basis of the $(n-1)$-degree polynomial ring and $\sigma$ is an isomorphic mapping from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space $\in \mathbb{Z}^n$. Then, $(\sigma(f_0(X)), \sigma(f_1(X)), \cdots, \sigma(f_{n-1}(X)))$ form a basis of the $n$-dimensional vector space. This is because the $\sigma$-mapped output vectors homomorphically preserve the same algebraic relationships on the $(+, \cdot)$ operations and the basis relationship between basis vectors and a subspace can be expressed as a linear algebraic formula consisting of the $(+, \cdot)$ operations (i.e., linear independence and spanning of the space). Therefore, if a set of polynomials satisfies a basis relationship, their $\sigma$-mapped vectors also preserve a basis relationship.
+Suppose some polynomials $f_0(X), f_1(X), \cdots, f_{n-1}(X)$ form a basis of the $(n-1)$-degree polynomial ring and $\sigma$ is an isomorphic mapping from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space. Then, $(\sigma(f_0(X)), \sigma(f_1(X)), \cdots, \sigma(f_{n-1}(X)))$ form a basis of the $n$-dimensional vector space. This is because the $\sigma$-mapped output vectors homomorphically preserve the same algebraic relationships on the $(+, \cdot)$ operations and the basis relationship between basis vectors and a subspace can be expressed as a linear algebraic formula consisting of the $(+, \cdot)$ operations (i.e., linear independence and spanning of the space). Therefore, if a set of polynomials satisfies a basis relationship, their $\sigma$-mapped vectors also preserve a basis relationship.
 
-The same principle holds between a polynomial ring and vector space over complex numbers. Given the polynomial ring $\mathbb{R}[X]/(x^n + 1)$, the most intuitive way to set up a basis of $\mathbb{R}[X]/(x^n + 1)$ is as follows:
+The same principle holds between a polynomial ring and vector space of complex numbers (with real scalars). Given the polynomial ring $\mathbb{R}[X]/(x^n + 1)$, the most intuitive way to set up a basis of $\mathbb{R}[X]/(x^n + 1)$ is as follows:
 
 $f_0(X) = 1$
 
@@ -764,6 +790,6 @@ $W$ is a valid basis of the $n$-dimensional special vector space $\hat{\mathbb C
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:poly-vector-transformation-complex}} Transforming Basis between Polynomial Ring and Vector Space}}]
 
-If $n$ polynomials form a basis of an $(n-1)$-degree polynomial ring and they are converted into $n$ distinct vectors via an isomorphic mapping $\sigma$ (or $\sigma_c$ in the case of the complex number domain) from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, then those converted $n$ vectors form a basis of the $n$-dimensional (or $\dfrac{n}{2}$ in the case of the complex number domain) vector space. 
+If $n$ polynomials form a basis of an $(n-1)$-degree polynomial ring and they are converted into $n$ distinct vectors via an isomorphic mapping $\sigma$ (or $\sigma_c$ in the case of the complex number domain) from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, then those converted $n$ vectors form a basis of the $n$-dimensional vector space. 
 
 \end{tcolorbox}

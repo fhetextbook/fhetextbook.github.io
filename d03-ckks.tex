@@ -78,7 +78,7 @@ CKKS internally uses the same schemes as BFV for encryption, decryption, ciphert
 \label{subsec:ckks-encoding-decoding}
 
 
-CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-dimensional vectors in a ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
+CKKS's encoding and decoding is fundamentally very similar to BFV's batch encoding scheme. BFV designs its batch encoding scheme (Summary~\ref*{subsec:bfv-enc-dec} in \autoref{subsec:bfv-enc-dec}) based on the updated $\hathat W$ and $\hathat W^*$ matrices (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsec:bfv-rotation}). That is, BFV decodes a polynomial into an input slot vector by evaluating the polynomial at each root of $X^n+1$, which is the primitive $(\mu=2n)$-th root of unity (i.e., $\vec{v} = \hathat W^* \cdot \vec{m}$), and encodes an input slot vector into a polynomial by inversing this operation (i.e., $\vec{m} = n^{-1} \cdot \hathat W \cdot I_n^R \cdot \vec{v}$). This encoding and decoding scheme is designed based on Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}) which designs the isomorphic mapping between $n$-slot vectors in a ring (finite field) and $(n-1)$-degree (or lesser degree) polynomials as follows: 
 
 $\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\omega^1), f(\omega^3)), \cdots, f(\omega^{2n-1})) \in \mathbb{Z}_t^n$
 
@@ -86,12 +86,12 @@ $\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(\o
 
 $ $
 
-CKKS's batch encoding scheme uses exactly the same formula for encoding and decoding (i.e., $\vec{v} = W^T \cdot \vec{m}$ and $\vec{m} = \dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$), but the $n$-dimensional input slot vector comprises not in a ring (i.e., $\mathbb{Z}^n_p$), but complex numbers (i.e., $\mathbb{\hat C}^n$). In Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}), we also designed the mapping $\sigma_c$ between polynomials and vectors over complex numbers as follows:
+CKKS's batch encoding scheme uses exactly the same formula for encoding and decoding (i.e., $\vec{v} = W^T \cdot \vec{m}$ and $\vec{m} = \dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$), but the $n$ input slot vector comprises not in a ring (i.e., $\mathbb{Z}^n_p$), but complex numbers (i.e., $\mathbb{\hat C}^n$). In Summary~\ref*{subsec:poly-vector-transformation-complex} (\autoref{subsec:poly-vector-transformation-complex}), we also designed the mapping $\sigma_c$ between polynomials and vectors over complex numbers as follows:
 
 $\sigma_c: f(X) \in \mathbb{R}[X]/(X^n + 1) \longrightarrow (f(\omega),f(\omega^3),f(\omega^5), \cdots, f(\omega^{2n-1})) \in \mathbb{\hat{C}}^{n} \text{ } (\longrightarrow \mathbb{C}^{\frac{n}{2}})$
 
 
-, where $\omega = e^{i\pi/n}$ is a root (i.e., the primitive $(\mu=2n)$-th root) of the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ defined over complex numbers, and $\mathbb{\hat{C}}^{n}$ is $n$-dimensional complex special vector space whose second-half elements are reverse-ordered conjugates of the first-half elements. And $\mathbb{\hat{C}}^{n}$ is isomorphic to $\mathbb{{C}}^{\frac{n}{2}}$, because the second-half elements of $\mathbb{\hat{C}}^{n}$ are automatically determined by its first-half elements. Therefore, the $\sigma_c$ mapping is essentially an isomorphism between $\dfrac{n}{2}$-dimensional complex vectors $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$ and $(n-1)$-degree (or lesser degree) real-number polynomials $\mathbb{R}[X] / (X^n + 1)$. Therefore, CKKS' batch encoding scheme encodes an $\dfrac{n}{2}$-dimensional complex input slot vector into an $(n-1)$-degree (or lesser degree) real-number polynomial, and the decoding process is a reverse of this. 
+, where $\omega = e^{i\pi/n}$ is a root (i.e., the primitive $(\mu=2n)$-th root) of the $(\mu=2n)$-th cyclotomic polynomial $X^n + 1$ defined over complex numbers, and $\mathbb{\hat{C}}^{n}$ is $n$-dimensional complex special vector space whose second-half elements are reverse-ordered conjugates of the first-half elements. And $\mathbb{\hat{C}}^{n}$ is isomorphic to $\mathbb{{C}}^{\frac{n}{2}}$, because the second-half elements of $\mathbb{\hat{C}}^{n}$ are automatically determined by its first-half elements. Therefore, the $\sigma_c$ mapping is essentially an isomorphism between $\dfrac{n}{2}$-slot complex vectors $\vec{v} \in \mathbb{C}^{\frac{n}{2}}$ and $(n-1)$-degree (or lesser degree) real-number polynomials $\mathbb{R}[X] / (X^n + 1)$. Therefore, CKKS' batch encoding scheme encodes an $\dfrac{n}{2}$-slot complex input vector into an $(n-1)$-degree (or lesser degree) real-number polynomial, and the decoding process is a reverse of this. 
 
 In addition, remember that in BFV, we updated $W$ and $W^T$ to $\hathat W$ and $\hathat W^*$ (Summary~\ref*{subsubsec:bfv-rotation-summary} in \autoref{subsubsec:bfv-rotation-summary}) to support homomorphic rotation of input vector slots. Likewise, the CKKS batch encoding scheme uses $\hathat W$ and $\hathat W^*$ instead of $W$ and $W^T$ in order to support homomorphic rotation. Therefore, the CKKS batch encoding scheme's isomorphic mapping is updated as follows:
 
@@ -108,7 +108,7 @@ $ $
 The encoding schemes of BFV and CKKS have the following differences: 
 
 \begin{itemize}
-\item \textbf{Type of Input Slot Values:} BFV's input slot values are ${n}$-dimensional integers modulo $t$, which are encoded into $n$-dimensional polynomial coefficients (i.e., modulo-$t$ integers). On the other hand, CKKS's input slot values are $\dfrac{n}{2}$-dimensional complex numbers, which are encoded into $n$-dimensional polynomial coefficients (i.e., real numbers). 
+\item \textbf{Type of Input Slot Values:} BFV's input slot values are ${n}$ integers modulo $t$, which are encoded into $n$ polynomial coefficients (i.e., modulo-$t$ integers). On the other hand, CKKS's input slot values are $\dfrac{n}{2}$ complex numbers, which are encoded into $n$ polynomial coefficients (i.e., real numbers). 
 
 \item \textbf{Type of Polynomial Coefficients:} BFV's encoded polynomial coefficients are integer moduli, whereas CKKS's encoded polynomial coefficients are real numbers. 
 
@@ -158,7 +158,7 @@ We summarize CKKS's encoding and decoding procedure as follows, which is similar
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-encoding-decoding}} CKKS's Encoding and Decoding}}]
 
-\textbf{\underline{Input}:} An $\dfrac{n}{2}$-dimensional complex vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}) \in \mathbb{C}^{\frac{n}{2}}$
+\textbf{\underline{Input}:} An $\dfrac{n}{2}$-slot complex vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}) \in \mathbb{C}^{\frac{n}{2}}$
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -167,7 +167,7 @@ We summarize CKKS's encoding and decoding procedure as follows, which is similar
 $ $
 
 \begin{enumerate}
-\item Convert (i.e., isomorphically transform) $\vec{v}$ into an $n$-dimensional \textit{forward-ordered} Hermitian vector $\vec{v}_{'}$ as follows:
+\item Convert (i.e., isomorphically transform) $\vec{v}$ into an $n$-slot \textit{forward-ordered} Hermitian vector $\vec{v}_{'}$ as follows:
 
 $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline v_0, \overline v_1, \cdots, \overline v_{\frac{n}{2}-1}) \in \mathbb{\hat C}^{n}$
 
@@ -1141,7 +1141,7 @@ Importantly, the $\hathat{W}$ and $\hathat{W}^*$ matrices in both the BFV and CK
     \item The encoded polynomial $M(X) = \sum\limits_{i=0}^{n-1}m_iX^i$
 \end{itemize}    
 
-, updating the polynomial $M(X)$ to $M(X^{J(h)})$ results in the effect of rotating the first half of the $n$-dimensional input vector slots ($\vec{v} \in \mathbb{Z}^n_p$ in the case of BFV, and the forward-ordered Hermitian vector $\vec{v}_{'} \in \mathbb{\hat C}^{n} \rightarrow \mathbb{C}^{\frac{n}{2}}$ in the case of CKKS) by $h$ positions to the left (in a wrapping manner among them) and the second half of the slots also by $h$ positions to the right (in a wrapping manner among them). 
+, updating the polynomial $M(X)$ to $M(X^{J(h)})$ results in the effect of rotating the first half of the $n$ input vector slots ($\vec{v} \in \mathbb{Z}^n_p$ in the case of BFV, and the forward-ordered Hermitian vector $\vec{v}_{'} \in \mathbb{\hat C}^{n} \rightarrow \mathbb{C}^{\frac{n}{2}}$ in the case of CKKS) by $h$ positions to the left (in a wrapping manner among them) and the second half of the slots also by $h$ positions to the right (in a wrapping manner among them). 
 
 BFV uses CKKS's same rotation scheme described in Summary~\ref*{subsubsec:bfv-rotation-summary} (in \autoref{subsubsec:bfv-rotation-summary}) as follows: 
 
@@ -1293,7 +1293,7 @@ The CKKS encoding's second reason for using the $(\mu=2n)$-th cyclotomic polynom
 \label{subsec:ckks-conjugation}
 
 
-As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-dimensional input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-dimensional Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1})$. To compute the conjugation of $\vec{v}$, which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
+As explained in Summary~\ref*{subsec:ckks-encoding-decoding} (\autoref{subsec:ckks-encoding-decoding}), given the $\dfrac{n}{2}$-slot input vector $\vec{v} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1})$, its corresponding $n$-slot Hermitian vector is $\vec{v}_{'} = (v_0, v_1, \cdots, v_{\frac{n}{2}-1}, \overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1})$. To compute the conjugation of $\vec{v}$, which is essentially conjugating $\vec{v}_{'}$, we can conjugate $M(X)$ as follows:
 
 $\overline{\vec{v}}_{'} = (\overline{v}_0, \overline{v}_1, \cdots, \overline{v}_{\frac{n}{2}-1}, v_0, v_1, \cdots, v_{\frac{n}{2}-1})$
 
@@ -1331,20 +1331,20 @@ Homomorphic conjugation of the input vector of a ciphertext is equivalent to the
 \subsection{Sparsely Packing Ciphertexts}
 \label{subsec:ckks-sparse-packing}
 
-In \autoref{subsec:ckks-encoding-decoding}, we learned the CKKS encoding scheme, which encodes an input vector with $\dfrac{n}{2}$ slots (i.e., $\dfrac{n}{2}$-dimensional input vector) into an $(n-1)$-degree polynomial. While the polynomial ring's degree $n$ is fixed at the setup stage of CKKS as a security parameter, some applications may only need to use fewer than $\dfrac{n}{2}$ input vector slots. Suppose we only need to use $\frac{n'}{2}$ slots out of $\frac{n}{2}$ slots, where $n'$ is some number that divides $n$. Then, the corresponding input vector and encoded polynomial acquire a special property as described below:
+In \autoref{subsec:ckks-encoding-decoding}, we learned the CKKS encoding scheme, which encodes an input vector with $\dfrac{n}{2}$ slots (i.e., $\dfrac{n}{2}$-slot input vector) into an $(n-1)$-degree polynomial. While the polynomial ring's degree $n$ is fixed at the setup stage of CKKS as a security parameter, some applications may only need to use fewer than $\dfrac{n}{2}$ input vector slots. Suppose we only need to use $\frac{n'}{2}$ slots out of $\frac{n}{2}$ slots, where $n'$ is some number that divides $n$. Then, the corresponding input vector and encoded polynomial acquire a special property as described below:
 
 
 \begin{tcolorbox}[title={\textbf{\tboxlabel{\ref*{subsec:ckks-sparse-packing}} CKKS's Sparsely Packing Polynomial and Ciphertext}}]
 
-Suppose that an $\frac{n}{2}$-dimensional input vector gets encoded into a polynomial in $\mathbb{R}[X] / (X^n + 1)$. And suppose that $n'$ is some number that divides $n$. We define polynomial $M(X) \in \mathbb{R}[X] / (X^n + 1)$ as the one which has non-zero constants at the terms whose power is a multiple of $\frac{n}{n'}$ and all other terms have zero constants (i.e., $M(X) = c_0 + c_{\frac{n}{n'}}X^{\frac{n}{n'}} + c_{\frac{2n}{n'}}X^{\frac{2n}{n'}} + \cdots + c_{n - \frac{n}{n'}}X^{n - \frac{n}{n'}}$). We can express $M(X)$ as some $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ where $Y = X^{\frac{n}{n'}}$ and thus $M(X) = M_Y(X^{\frac{n}{n'}})$. 
+Suppose that an $\frac{n}{2}$-slot input vector gets encoded into a polynomial in $\mathbb{R}[X] / (X^n + 1)$. And suppose that $n'$ is some number that divides $n$. We define polynomial $M(X) \in \mathbb{R}[X] / (X^n + 1)$ as the one which has non-zero constants at the terms whose power is a multiple of $\frac{n}{n'}$ and all other terms have zero constants (i.e., $M(X) = c_0 + c_{\frac{n}{n'}}X^{\frac{n}{n'}} + c_{\frac{2n}{n'}}X^{\frac{2n}{n'}} + \cdots + c_{n - \frac{n}{n'}}X^{n - \frac{n}{n'}}$). We can express $M(X)$ as some $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ where $Y = X^{\frac{n}{n'}}$ and thus $M(X) = M_Y(X^{\frac{n}{n'}})$. 
 
 $ $
 
 Then, the following are true:
 
 \begin{enumerate}
-    \item Every $M_Y(Y) \in \mathbb{R}[Y]/(Y^{n'} + 1)$ is isomorphically mapped to (i.e., decoded into) some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of $\dfrac{n'}{2}$ consecutive slot values.
-    \item Conversely, if an $\dfrac{n}{2}$-dimensional input vector comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values, then the vector gets encoded into some $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ (i.e., some polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has zero constants at the terms whose degree is not a multiple of $\dfrac{n}{n'}$). 
+    \item Every $M_Y(Y) \in \mathbb{R}[Y]/(Y^{n'} + 1)$ is isomorphically mapped to (i.e., decoded into) some $\dfrac{n}{2}$-slot input vector which comprises $\dfrac{n}{n'}$ repetitions of $\dfrac{n'}{2}$ consecutive slot values.
+    \item Conversely, if an $\dfrac{n}{2}$-slot input vector comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values, then the vector gets encoded into some $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ (i.e., some polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has zero constants at the terms whose degree is not a multiple of $\dfrac{n}{n'}$). 
 \end{enumerate}
 
 \end{tcolorbox}
@@ -1353,7 +1353,7 @@ We could show both directions of proof: (1) the forward (decoding-direction) pro
 
 \subsubsection{Forward Proof: Decoding of Sparsely Packed Ciphertext}
 
-We will prove that for each $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has non-zero constants only at those terms with a power that is a multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial is decoded into some $\dfrac{n}{2}$-dimensional input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
+We will prove that for each $M_Y(Y) \in \mathbb{R}[Y] / (Y^{n'} + 1)$ (i.e., a polynomial in $\mathbb{R}[X] / (X^n + 1)$ that has non-zero constants only at those terms with a power that is a multiple of $\dfrac{n}{n'}$ and zero constants in all other terms), the polynomial is decoded into some $\dfrac{n}{2}$-slot input vector which comprises $\dfrac{n}{n'}$ repetitions of the first $\dfrac{n'}{2}$ consecutive slot values. 
 
 To decode $M(X)$ into an input vector, we need to evaluate $M(X)$ at $\frac{n}{2}$ distinct roots of $X^n + 1$ (i.e., $n$ distinct primitive $(\mu=2n)$-th roots of unity), which are: 
 
@@ -1798,7 +1798,7 @@ $= \textsf{SlotToCoeff}(\textsf{ct\textsubscript{b1}}, \textsf{ct\textsubscript{
 
 In many cases, the application of CKKS may use only a small number of input vector slots (e.g., $\dfrac{n'}{2}$) out of $\dfrac{n}{2}$ slots. Suppose that such $n'$ is some number that divides $n$. Then, we can do a series of homomorphic rotations and multiplications to make the input vector slots store $\dfrac{n}{n'}$ repetitions of the $\dfrac{n'}{2}$-slot values. Specifically, we can do this in total $\dfrac{n}{n'}$ rounds of rotations and additions: initially, we zero-mask between the $\frac{n'}{2}$-th slot and the $\frac{n}{2} - 1$-th slots and save as \textsf{ct}, and then in each $i$-th round we compute $\textsf{ct} = \textsf{ct} +  \textsf{Rotate}\bm(\textsf{ct}, -n' \cdot 2^i\bm)$. 
 
-Then, we apply the optimization of sparsely packing ciphertext in Summary~\ref{subsec:ckks-sparse-packing} (\autoref{subsec:ckks-sparse-packing}): if an $\dfrac{n}{2}$-dimensional input vector is structured as $\dfrac{n}{n'}$ consecutive repetitions of the first $\dfrac{n'}{2}$ slot values, then its encoded polynomial $M(X) \in \mathbb{Z}[X] / (X^{n} + 1)$ has the structure such that all its coefficients whose degree term is not a multiple of $\dfrac{n}{n'}$ are zero as follows:
+Then, we apply the optimization of sparsely packing ciphertext in Summary~\ref{subsec:ckks-sparse-packing} (\autoref{subsec:ckks-sparse-packing}): if an $\dfrac{n}{2}$-slot input vector is structured as $\dfrac{n}{n'}$ consecutive repetitions of the first $\dfrac{n'}{2}$ slot values, then its encoded polynomial $M(X) \in \mathbb{Z}[X] / (X^{n} + 1)$ has the structure such that all its coefficients whose degree term is not a multiple of $\dfrac{n}{n'}$ are zero as follows:
 
 $M(X) = c_0 + c_{\frac{n}{n'}}X^{\frac{n}{n'}} + c_{\frac{2n}{n'}}X^{\frac{2n}{n'}} + \cdots + c_{n - \frac{n}{n'}}X^{n - \frac{n}{n'}}$. 
 

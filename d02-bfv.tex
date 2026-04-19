@@ -114,14 +114,14 @@ Due to these constraints, the single value encoding is not a good choice for ful
 
 While the single-value encoding scheme (\autoref{subsec:bfv-single-encoding}) encodes \& decodes each individual value one at a time, the batch encoding scheme does the same for a huge list of values simultaneously using a large dimensional vector. Therefore, batch encoding is more efficient than single-value encoding. Furthermore, batch-encoded values can be homomorphically added or multiplied simultaneously element-wise by vector-to-vector addition and Hadamard product. Therefore, the homomorphic operation of batch-encoded values can be processed more efficiently in a SIMD (single-instruction-multiple-data) manner than single-value encoded ones. 
 
-BFV's encoding converts an $n$-dimensional integer input slot vector $\vec{v} = (v_0, v_1, v_2, \cdots v_{n-1})$ modulo $t$ into another $n$-dimensional vector $\vec{m} = (m_0, m_1, m_2, \cdots m_{n-1})$ modulo $t$, which are the coefficients of the encoded $(n-1)$-degree (or lesser-degree) polynomial $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$. 
+BFV's encoding converts an $n$-slot integer input vector $\vec{v} = (v_0, v_1, v_2, \cdots v_{n-1})$ modulo $t$ into another $n$-slot vector $\vec{m} = (m_0, m_1, m_2, \cdots m_{n-1})$ modulo $t$, which are the coefficients of the encoded $(n-1)$-degree (or lesser-degree) polynomial $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$. 
 
 $ $
 
 \subsubsection{\textsf{Encoding\textsubscript{1}}}  
 \label{subsubsec:bfv-encoding-1} 
 
-In \autoref{subsec:poly-vector-transformation}, we learned that an $(n-1)$-degree (or lesser degree) polynomial can be isomorphically mapped to an $n$-dimensional vector based on the mapping $\sigma$ (we notate $\sigma_c$ in \autoref{subsec:poly-vector-transformation} as $\sigma$ for simplicity): 
+In \autoref{subsec:poly-vector-transformation}, we learned that an $(n-1)$-degree (or lesser degree) polynomial can be isomorphically mapped to an $n$-slot vector based on the mapping $\sigma$ (we notate $\sigma_c$ in \autoref{subsec:poly-vector-transformation} as $\sigma$ for simplicity): 
 
 $\sigma: M(X) \in \mathbb{Z}_t[X]/(X^n + 1) \longrightarrow  (M(\omega),M(\omega^3),M(\omega^5), \cdots, M(\omega^{2n-1})) \in \mathbb{Z}_t^n$
 
@@ -145,7 +145,7 @@ $W^T = \begin{bmatrix}
 
 $ $
 
-Note that the dot product between each row of $W^T$ and $\vec{m}$ computes the evaluation of $M(X)$ at each $X = \{w, w^3, w^5, \cdots, w^{2n-1}\}$. In the BFV encoding scheme, the \textsf{Encoding\textsubscript{1}} process encodes an $n$-dimensional input slot vector $\vec{v}$ $\in \mathbb{Z}_t$ into a plaintext polynomial $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$, and the \textsf{Decoding\textsubscript{2}} process decodes $M(X)$ back to $\vec{v}$. Since $W^T \cdot \vec{m}$ gives us $\vec{v}$ which is a decoding of $M(X)$, we call $W^T$ a decoding matrix. Meanwhile, the goal of \textsf{Encoding\textsubscript{1}} is to encode $\vec{v}$ into $M(X)$ so that we can do homomorphic computations based on $M(X)$. Given the relation $\vec{v} = W^T \cdot \vec{m}$, the encoding formula can be derived as follows:
+Note that the dot product between each row of $W^T$ and $\vec{m}$ computes the evaluation of $M(X)$ at each $X = \{w, w^3, w^5, \cdots, w^{2n-1}\}$. In the BFV encoding scheme, the \textsf{Encoding\textsubscript{1}} process encodes an $n$-slot input vector $\vec{v}$ $\in \mathbb{Z}_t$ into a plaintext polynomial $M(X) \in \mathbb{Z}_t[X] / (X^n + 1)$, and the \textsf{Decoding\textsubscript{2}} process decodes $M(X)$ back to $\vec{v}$. Since $W^T \cdot \vec{m}$ gives us $\vec{v}$ which is a decoding of $M(X)$, we call $W^T$ a decoding matrix. Meanwhile, the goal of \textsf{Encoding\textsubscript{1}} is to encode $\vec{v}$ into $M(X)$ so that we can do homomorphic computations based on $M(X)$. Given the relation $\vec{v} = W^T \cdot \vec{m}$, the encoding formula can be derived as follows:
 
 $(W^T)^{-1} \cdot \vec{v} = (W^T)^{-1} W^T \cdot \vec{m}$
 
@@ -186,7 +186,7 @@ Note that by computing $\dfrac{W \cdot I_n^R \cdot \vec{v}}{n}$
 
 \subsubsection{\textsf{Encoding\textsubscript{2}}}  
 
-Once we have the $n$-dimensional vector $\vec{m}$, we scale (i.e., multiply) it by some scaling factor $\Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$, where $q$ is the ciphertext modulus. We scale $\vec{m}$ by $\Delta$ and make it $\Delta \vec{m}$. 
+Once we have the $n$-slot vector $\vec{m}$, we scale (i.e., multiply) it by some scaling factor $\Delta = \left\lfloor \dfrac{q}{t} \right\rfloor$, where $q$ is the ciphertext modulus. We scale $\vec{m}$ by $\Delta$ and make it $\Delta \vec{m}$. 
 The $n$ integers in $\Delta\vec{m}$ will be used as $n$ coefficients of the plaintext polynomial for RLWE encryption. The finally encoded plaintext polynomial $\Delta M = \sum\limits_{i=0}^{n-1}\Delta m_iX^i$. 
 
 
@@ -201,7 +201,7 @@ Once an RLWE ciphertext is (first-half) decrypted to $\Delta M = \sum\limits_{i=
 \subsubsection{\textsf{Decoding\textsubscript{2}}}  
 
 
-In \autoref{subsubsec:bfv-encoding-1}, we already derived the decoding formula that transforms an $(n-1)$-degree polynomial having integer modulo $t$ coefficients into an $n$-dimensional input slot vector as follows: 
+In \autoref{subsubsec:bfv-encoding-1}, we already derived the decoding formula that transforms an $(n-1)$-degree polynomial having integer modulo $t$ coefficients into an $n$-slot input vector as follows: 
 
 $\vec{v} = W^T \cdot \vec{m}$
 
@@ -213,7 +213,7 @@ $\vec{v} = W^T \cdot \vec{m}$
 
 
 
-\textbf{\underline{Input}:} An $n$-dimensional integer modulo $t$ vector $\vec{v} = (v_0, v_1, \cdots, v_{n-1}) \in \mathbb{Z}_t^n$
+\textbf{\underline{Input}:} An $n$-slot integer modulo $t$ vector $\vec{v} = (v_0, v_1, \cdots, v_{n-1}) \in \mathbb{Z}_t^n$
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -1068,7 +1068,7 @@ $ $
 
 Remember from \autoref{subsec:bfv-batch-encoding} that the BFV encoding scheme's components are as follows:
 
-$\vec{v} = (v_0, v_1, v_2, \cdots, v_{n-1})$ \textcolor{red}{  $\rhd$ $n$-dimensional input vector}
+$\vec{v} = (v_0, v_1, v_2, \cdots, v_{n-1})$ \textcolor{red}{  $\rhd$ $n$-slot input vector}
 
 $ $
 
@@ -2134,7 +2134,7 @@ $ $
 
 $ $
 
-Therefore, given the input ciphertext $\textsf{ct} = \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm) \bmod q$, we can understand its input vector slots as storing some values such that multiplying $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to each of them turns them into a coefficient $z_i$ of polynomial $Z$. This implies that if we \textit{homomorphically} multiply $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to the input vector slots of $\textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$, then the resulting ciphertext's $n$-dimensional input vector slots will contain the $n$ coefficients of $Z$, which is equivalent to moving the coefficients of $Z$ to the input vector slots. Therefore, the \textsf{CoeffToSlot} step is equivalent to homomorphically computing $n^{-1}\cdot\hathat{W} \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$. We can homomorphically compute matrix-vector multiplication by using the technique explained in \autoref{subsec:bfv-matrix-multiplication}.
+Therefore, given the input ciphertext $\textsf{ct} = \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm) \bmod q$, we can understand its input vector slots as storing some values such that multiplying $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to each of them turns them into a coefficient $z_i$ of polynomial $Z$. This implies that if we \textit{homomorphically} multiply $n^{-1}\cdot\hathat{W} \cdot I_n^R$ to the input vector slots of $\textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$, then the resulting ciphertext's $n$-slot input vector slots will contain the $n$ coefficients of $Z$, which is equivalent to moving the coefficients of $Z$ to the input vector slots. Therefore, the \textsf{CoeffToSlot} step is equivalent to homomorphically computing $n^{-1}\cdot\hathat{W} \cdot I_n^R \cdot \textsf{RLWE}_{S, \sigma}\bm(\Delta' Z\bm)$. We can homomorphically compute matrix-vector multiplication by using the technique explained in \autoref{subsec:bfv-matrix-multiplication}.
 
 After the \textsf{CoeffToSlot} step, we can homomorphically eliminate the noise in the lower (base-$p$) $\varepsilon-1$ digits of each $z_i$ by homomorphically evaluating the noise-removing polynomial (to be explained in the next subsection).  
 

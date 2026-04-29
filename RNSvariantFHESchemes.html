@@ -16,7 +16,7 @@ computational resources for 64-bit CPU architectures. To make the computation ef
 we can alternatively represent the coefficients of ciphertext polynomials using the number
 residue system (RNS) <a href='ApplicationResidueNumberSystemRNS.html#application-residue-number-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>, which allows for modulo addition and multiplication of elements
 from a large ring (e.g., 1000 bits) by combining values computed in small rings (e.g.,
-32<!-- l. 1 --><math display='inline'> ∼</math>64
+32<!-- l. 1 --><math display='inline'><mrow> <mo class='MathClass-rel' stretchy='false'>∼</mo></mrow></math>64
 bits), each of which compactly fits in 64 bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt
 this RNS approach by default for the efficient computation of large values. These are called RNS-variant
 FHE schemes.
@@ -25,18 +25,18 @@ other operations such as <span class='rm-lmss-10x-x-109'>ModRaise </span>or modu
 section explains how we can design such corner-case operations based on RNS to accomplish a complete
 design of RNS-based FHE schemes. Besides BFV, BGV, and CKKS, TFHE can also theoretically use
 RNS for representing its ciphertext coefficients. However, TFHE’s practically used coefficient size is less
-than <!-- l. 3 --><math display='inline'><msup><mrow>2</mrow><mrow>32</mrow></msup></math>
-(or <!-- l. 3 --><math display='inline'><msup><mrow>2</mrow><mrow>64</mrow></msup></math>),
+than <!-- l. 3 --><math display='inline'><msup><mrow><mn>2</mn></mrow><mrow><mn>32</mn></mrow></msup></math>
+(or <!-- l. 3 --><math display='inline'><msup><mrow><mn>2</mn></mrow><mrow><mn>64</mn></mrow></msup></math>),
 which compactly fits within 32-bit (or 64-bit) modern CPU registers. Therefore, TFHE does
 not need RNS. Thus, this section will focus on RNS-based operations for BFV, BGV, and
 CKKS.
 </p><!-- l. 5 --><p class='indent'>   Particularly in this section, we assume that the modulo reduction
-<!-- l. 5 --><math display='inline'><mrow>a<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> q = |a<msub><mrow>|</mrow><mrow>q</mrow></msub></mrow></math> implicitly
+<!-- l. 5 --><math display='inline'><mrow><mi>a</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mi>a</mi><msub><mrow><mo class='MathClass-rel' stretchy='false'>|</mo></mrow><mrow><mi>q</mi></mrow></msub></mrow></math> implicitly
 uses a centered (i.e., signed) residue representation (<a href='CenteredResidueRepresentation.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.5<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>), whose modulo overflow &amp; underflow boundaries
-are <!-- l. 5 --><math display='inline'><mrow><mstyle displaystyle='true'><mfrac><mrow>q
-</mrow><mrow>2</mrow></mfrac></mstyle> −1</mrow></math> and
-<!-- l. 5 --><math display='inline'><mrow> −<mstyle displaystyle='true'><mfrac><mrow>q
-</mrow><mrow>2</mrow></mfrac></mstyle></mrow></math>,
+are <!-- l. 5 --><math display='inline'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></math> and
+<!-- l. 5 --><math display='inline'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo><mstyle displaystyle='true'><mfrac><mrow><mi>q</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>,
 respectively. This assumption is necessary to eliminate a certain modulo reduction operation when
 designing <span class='rm-lmss-10x-x-109'>FastBconvEx </span>(<a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>) by using the assumption of limiting the possible range of certain residue
 arithmetic, as discussed in <a href='CenteredResidueRepresentation.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.5<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>.

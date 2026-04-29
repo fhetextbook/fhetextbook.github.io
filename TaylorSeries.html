@@ -14,28 +14,28 @@
 (assuming the series converges to the function in that neighborhood). Truncating this series gives
 polynomial approximations of the function. Formally speaking, the Taylor series of a function is an
 infinite sum of the evaluations of the function’s derivatives at a single point. Given function
-<!-- l. 1 --><math display='inline'>f(X)</math>, its Taylor series
-centered at <!-- l. 1 --><math display='inline'>a</math>
+<!-- l. 1 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, its Taylor series
+centered at <!-- l. 1 --><math display='inline'><mi>a</mi></math>
 is expressed as follows:
-</p><!-- l. 3 --><p class='indent'>   <!-- l. 3 --><math display='inline'><mrow>f(a) + <mstyle displaystyle='true'><mfrac><mrow><msup><mrow>f</mrow><mrow>′</mrow></msup>(a)
-  </mrow><mrow>1!  </mrow></mfrac></mstyle>(X −a) + <mstyle displaystyle='true'><mfrac><mrow><msup><mrow>f</mrow><mrow><mi>″</mi></mrow></msup>(a)
-  </mrow><mrow>2!  </mrow></mfrac></mstyle><msup><mrow>(X −a)</mrow><mrow>2</mrow></msup> + <mstyle displaystyle='true'><mfrac><mrow><msup><mrow>f</mrow><mrow><mi>‴</mi></mrow></msup>(a)
-  </mrow><mrow>3!  </mrow></mfrac></mstyle><msup><mrow>(X −a)</mrow><mrow>3</mrow></msup> + ⋯ =<munderover accent='false' accentunder='false'><mrow> ∑
-  </mrow><mrow>d=0</mrow><mrow>∞</mrow></munderover><mstyle displaystyle='true'><mfrac><mrow><msup><mrow>f</mrow><mrow>(d)</mrow></msup>(a)
-   </mrow><mrow>d!    </mrow></mfrac></mstyle><msup><mrow>(X −a)</mrow><mrow>d</mrow></msup></mrow></math>
+</p><!-- l. 3 --><p class='indent'>   <!-- l. 3 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>f</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo>
+  </mrow><mrow><mn>1</mn><mo class='MathClass-punc' stretchy='false'>!</mo>  </mrow></mfrac></mstyle><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>f</mi></mrow><mrow><mi>″</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo>
+  </mrow><mrow><mn>2</mn><mo class='MathClass-punc' stretchy='false'>!</mo>  </mrow></mfrac></mstyle><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>f</mi></mrow><mrow><mi>‴</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo>
+  </mrow><mrow><mn>3</mn><mo class='MathClass-punc' stretchy='false'>!</mo>  </mrow></mfrac></mstyle><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mn>3</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>+</mo> <mo class='MathClass-rel' stretchy='false'>⋯</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>d</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>∞</mi></mrow></munderover><mstyle displaystyle='true'><mfrac><mrow><msup><mrow><mi>f</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>d</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo>
+   </mrow><mrow><mi>d</mi><mo class='MathClass-punc' stretchy='false'>!</mo>    </mrow></mfrac></mstyle><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>a</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mi>d</mi></mrow></msup></mrow></math>
 </p><!-- l. 7 --><p class='indent'>   For a given function, one can truncate the Taylor series to a finite number of terms (up to degree
-<!-- l. 7 --><math display='inline'>D</math> instead of an infinite number of
-terms). Such a <!-- l. 7 --><math display='inline'>D</math>-degree polynomial
-is also called the <!-- l. 7 --><math display='inline'>D</math>-th Taylor
-polynomial approximating <!-- l. 7 --><math display='inline'>f(X)</math>.
-Generally, the larger the degree <!-- l. 7 --><math display='inline'>D</math>
+<!-- l. 7 --><math display='inline'><mi>D</mi></math> instead of an infinite number of
+terms). Such a <!-- l. 7 --><math display='inline'><mi>D</mi></math>-degree polynomial
+is also called the <!-- l. 7 --><math display='inline'><mi>D</mi></math>-th Taylor
+polynomial approximating <!-- l. 7 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+Generally, the larger the degree <!-- l. 7 --><math display='inline'><mi>D</mi></math>
 (i.e. the more terms we include), the more accurate the approximation of
-<!-- l. 7 --><math display='inline'>f(X)</math>
+<!-- l. 7 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 becomes. The accuracy of the approximation is higher for those coordinates nearby
-<!-- l. 7 --><math display='inline'>X = a</math>, and lower for those
-coordinates away from <!-- l. 7 --><math display='inline'>X = a</math>.
+<!-- l. 7 --><math display='inline'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi></mrow></math>, and lower for those
+coordinates away from <!-- l. 7 --><math display='inline'><mrow><mi>X</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>a</mi></mrow></math>.
 To increase the accuracy for farther coordinates, we need to increase
-<!-- l. 7 --><math display='inline'>D</math>.
+<!-- l. 7 --><math display='inline'><mi>D</mi></math>.
                                                                                          
                                                                                          
                                                                                          

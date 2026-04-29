@@ -12,22 +12,22 @@
    <h3 class='sectionHead' id='glwe-cryptosystem'><span class='titlemark'>B-4   </span>   <a id='x76-88000B-4'></a>GLWE Cryptosystem</h3>
 <!-- l. 1 --><p class='noindent'>The GLWE cryptosystem is a generalized form to encompass both the LWE
 and RLWE cryptosystems. The GLWE cryptosystem’s ciphertext is a tuple
-<!-- l. 1 --><math display='inline'><mrow>(<msubsup><mrow>{<msub><mrow>A</mrow><mrow>i</mrow></msub>}</mrow><mrow>i=0</mrow><mrow>k−1</mrow></msubsup>,B)</mrow></math>, where
-<!-- l. 1 --><math display='inline'><mrow>B =<munderover accent='false' accentunder='false'><mrow> ∑
-  </mrow><mrow>i=0</mrow><mrow>k−1</mrow></munderover>(<msub><mrow>A</mrow><mrow>i</mrow></msub> ⋅<msub><mrow>S</mrow><mrow>i</mrow></msub>) + <mi mathvariant='normal'>Δ</mi> ⋅M + E</mrow></math>. The public
-key <!-- l. 1 --><math display='inline'><msubsup><mrow>{<msub><mrow>A</mrow><mrow>i</mrow></msub>}</mrow><mrow>i=0</mrow><mrow>k−1</mrow></msubsup></math> and the
-secret key <!-- l. 1 --><math display='inline'><msubsup><mrow>{<msub><mrow>S</mrow><mrow>i</mrow></msub>}</mrow><mrow>i=0</mrow><mrow>k−1</mrow></msubsup></math>
-are a list of <!-- l. 1 --><math display='inline'>k</math>
-<!-- l. 1 --><math display='inline'>(n −1)</math>-degree polynomials,
-each. The message <!-- l. 1 --><math display='inline'>M</math>
-and the noise <!-- l. 1 --><math display='inline'>E</math>
-are <!-- l. 1 --><math display='inline'>(n −1)</math>-degree
+<!-- l. 1 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msubsup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, where
+<!-- l. 1 --><math display='inline'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></munderover><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mi>S</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi></mrow></math>. The public
+key <!-- l. 1 --><math display='inline'><msubsup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup></math> and the
+secret key <!-- l. 1 --><math display='inline'><msubsup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>S</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup></math>
+are a list of <!-- l. 1 --><math display='inline'><mi>k</mi></math>
+<!-- l. 1 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree polynomials,
+each. The message <!-- l. 1 --><math display='inline'><mi>M</mi></math>
+and the noise <!-- l. 1 --><math display='inline'><mi>E</mi></math>
+are <!-- l. 1 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>-degree
 polynomials, each. Like in LWE and RLWE, a random public mask
-<!-- l. 1 --><math display='inline'>A</math> is created for each ciphertext,
-whereas the same secret key <!-- l. 1 --><math display='inline'>S</math>
+<!-- l. 1 --><math display='inline'><mi>A</mi></math> is created for each ciphertext,
+whereas the same secret key <!-- l. 1 --><math display='inline'><mi>S</mi></math>
 is used for all ciphertexts. In this section, we denote each ciphertext instance as
-<!-- l. 1 --><math display='inline'><mrow>(<msubsup><mrow>{<msub><mrow>A</mrow><mrow>i</mrow></msub>}</mrow><mrow>i=0</mrow><mrow>k−1</mrow></msubsup>,B)</mrow></math> instead
-of <!-- l. 1 --><math display='inline'><mrow>(<msubsup><mrow>{<msub><mrow>A</mrow><mrow>i</mrow></msub>}</mrow><mrow>i=0</mrow><mrow>k−1,⟨j⟩</mrow></msubsup>,<msup><mrow>B</mrow><mrow>⟨j⟩</mrow></msup>)</mrow></math> for
+<!-- l. 1 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msubsup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> instead
+of <!-- l. 1 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msubsup><mrow><mo class='MathClass-open' stretchy='false'>{</mo><msub><mrow><mi>A</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>}</mo></mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>j</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>B</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>j</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> for
 simplicity.
    
 </p>

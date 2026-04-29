@@ -10,64 +10,64 @@
 </head><body>
    <!-- l. 70 --><div class='crosslinks'><p class='noindent'>[<a href='GLWECiphertexttoCiphertextAddition.html#Discussion.html'>parent</a>]</p></div>
    <h4 class='subsectionHead' id='discussion3'><span class='titlemark'>C-1.1   </span>   <a id='x92-105000C-1.1'></a>Discussion</h4>
-<!-- l. 73 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Noise Elimination: </span>If we decrypt <!-- l. 73 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖦𝖫𝖶𝖤</mtext></mstyle></mrow><mrow>S,σ</mrow></msub>(<mi mathvariant='normal'>Δ</mi>(<msup><mrow>M</mrow><mrow>⟨1⟩</mrow></msup>+ <msup><mrow>M</mrow><mrow>⟨2⟩</mrow></msup>) + <msup><mrow>E</mrow><mrow>⟨3⟩</mrow></msup>)</mrow></math>
-by using the secret key <!-- l. 73 --><math display='inline'>S</math>,
-then we get the plaintext <!-- l. 73 --><math display='inline'><mrow><msup><mrow>M</mrow><mrow>⟨1⟩</mrow></msup>+ <msup><mrow>M</mrow><mrow>⟨2⟩</mrow></msup></mrow></math>.
-Meanwhile, <!-- l. 73 --><math display='inline'><mrow><msubsup><mrow>A</mrow><mrow>1</mrow><mrow>⟨3⟩</mrow></msubsup>,<msubsup><mrow>A</mrow><mrow>2</mrow><mrow>⟨3⟩</mrow></msubsup>,…,<msubsup><mrow>A</mrow><mrow>k−1</mrow><mrow>⟨3⟩</mrow></msubsup>,<msup><mrow>E</mrow><mrow>⟨3⟩</mrow></msup></mrow></math>
+<!-- l. 73 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Noise Elimination: </span>If we decrypt <!-- l. 73 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖦𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+by using the secret key <!-- l. 73 --><math display='inline'><mi>S</mi></math>,
+then we get the plaintext <!-- l. 73 --><math display='inline'><mrow><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>.
+Meanwhile, <!-- l. 73 --><math display='inline'><mrow><msubsup><mrow><mi>A</mi></mrow><mrow><mn>1</mn></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><msubsup><mrow><mi>A</mi></mrow><mrow><mn>2</mn></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><mo>…</mo><mo class='MathClass-punc' stretchy='false'>,</mo><msubsup><mrow><mi>A</mi></mrow><mrow><mi>k</mi><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msubsup><mo class='MathClass-punc' stretchy='false'>,</mo><msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>
 gets eliminated by decryption (with rounding), regardless of whatever their randomly sampled values were
 during encryption.
 </p><!-- l. 75 --><p class='indent'>   <!-- l. 75 --><math display='inline'></math>
 </p><!-- l. 77 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Noise Growth: </span>Note that after decryption, the original ciphertext
-<!-- l. 77 --><math display='inline'>C</math>’s noise has
-increased from <!-- l. 77 --><math display='inline'><msup><mrow>E</mrow><mrow>⟨1⟩</mrow></msup></math>
-and <!-- l. 77 --><math display='inline'><msup><mrow>E</mrow><mrow>⟨2⟩</mrow></msup></math> to
+<!-- l. 77 --><math display='inline'><mi>C</mi></math>’s noise has
+increased from <!-- l. 77 --><math display='inline'><msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></math>
+and <!-- l. 77 --><math display='inline'><msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></math> to
                                                                                          
                                                                                          
-<!-- l. 77 --><math display='inline'><mrow><msup><mrow>E</mrow><mrow>⟨3⟩</mrow></msup> = <msup><mrow>E</mrow><mrow>⟨1⟩</mrow></msup>+ <msup><mrow>E</mrow><mrow>⟨2⟩</mrow></msup></mrow></math>.
+<!-- l. 77 --><math display='inline'><mrow><msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>3</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>E</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup></mrow></math>.
 However, if the noise is sampled from a Gaussian distribution with the mean
-<!-- l. 77 --><math display='inline'>μ = 0</math>, then
+<!-- l. 77 --><math display='inline'><mrow><mi>μ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn></mrow></math>, then
 the noise variance grows linearly with the number of additions and eventually consumes the budget
-<!-- l. 77 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>∕2</mrow></math>.
+<!-- l. 77 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mn>2</mn></mrow></math>.
 However, this growth rate is significantly lower than that of homomorphic multiplication, where noise
 typically grows multiplicatively.
 </p><!-- l. 79 --><p class='indent'>   <!-- l. 79 --><math display='inline'></math>
 </p><!-- l. 81 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Hard Threshold on the Plaintext’s Value Without Modulo Reduction</span>
-<!-- l. 81 --><math display='inline'>t</math><span class='rm-lmbx-10x-x-109'>:</span>
+<!-- l. 81 --><math display='inline'><mi>t</mi></math><span class='rm-lmbx-10x-x-109'>:</span>
 During homomorphic operations (e.g., addition or multiplication) and decryption, the
-<!-- l. 81 --><math display='inline'>AS</math> and
-<!-- l. 81 --><math display='inline'>B</math> terms in the
-<!-- l. 81 --><math display='inline'><mrow>B = AS + <mi mathvariant='normal'>Δ</mi>M + E + vq</mrow></math> relation are allowed to
-wrap around modulo <!-- l. 81 --><math display='inline'>q</math>
+<!-- l. 81 --><math display='inline'><mrow><mi mathvariant='italic'>𝐴𝑆</mi></mrow></math> and
+<!-- l. 81 --><math display='inline'><mi>B</mi></math> terms in the
+<!-- l. 81 --><math display='inline'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝐴𝑆</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>𝑣𝑞</mi></mrow></math> relation are allowed to
+wrap around modulo <!-- l. 81 --><math display='inline'><mi>q</mi></math>
 indefinitely, because regardless of whatever their wrapping count is, the final decryption step will always
-subtract <!-- l. 81 --><math display='inline'>B</math> by
-<!-- l. 81 --><math display='inline'>AS</math>, outputting
-<!-- l. 81 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>M + E + <msup><mrow>v</mrow><mrow>′</mrow></msup>q = <mi mathvariant='normal'>Δ</mi>M + E<mspace width='0.3em'></mspace>(mod<mspace width='0.3em'></mspace>q)</mrow></math>, and the
-<!-- l. 81 --><math display='inline'><mrow><msup><mrow>v</mrow><mrow>′</mrow></msup>q</mrow></math> term is always exactly eliminated
-by modulo reduction by <!-- l. 81 --><math display='inline'>q</math>. After
-that, we can correctly recover <!-- l. 81 --><math display='inline'>M</math>
-by computing <!-- l. 81 --><math display='inline'> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>M + E<mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> q
+subtract <!-- l. 81 --><math display='inline'><mi>B</mi></math> by
+<!-- l. 81 --><math display='inline'><mrow><mi mathvariant='italic'>𝐴𝑆</mi></mrow></math>, outputting
+<!-- l. 81 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msup><mrow><mi>v</mi></mrow><mrow><mi>′</mi></mrow></msup><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi><mspace width='0.3em'></mspace><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='italic'>𝑚𝑜𝑑</mi><mspace width='0.3em'></mspace><mi>q</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, and the
+<!-- l. 81 --><math display='inline'><mrow><msup><mrow><mi>v</mi></mrow><mrow><mi>′</mi></mrow></msup><mi>q</mi></mrow></math> term is always exactly eliminated
+by modulo reduction by <!-- l. 81 --><math display='inline'><mi>q</mi></math>. After
+that, we can correctly recover <!-- l. 81 --><math display='inline'><mi>M</mi></math>
+by computing <!-- l. 81 --><math display='inline'> <mrow><mo fence='true' form='prefix'>⌈</mo><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>q</mi>
         </mrow><mrow><mi mathvariant='normal'>Δ</mi>        </mrow></mfrac></mstyle></mrow><mo fence='true' form='postfix'>⌋</mo></mrow></math>,
-eliminating the noise <!-- l. 81 --><math display='inline'>E</math>.
+eliminating the noise <!-- l. 81 --><math display='inline'><mi>E</mi></math>.
 However, as we learned in Summary B-2.3.1 (in <a href='Decryption.html#in-the-case-of-t-not-dividing-q'><span class='ts1-lmr10-x-x-109'>§</span>B-2.3.1<!-- tex4ht:ref: subsubsec:lwe-noise-bound  --></a>), if the error bound
-<!-- l. 81 --><math display='inline'><mrow>|−𝜖vt + e|&lt; <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
-</mrow><mrow>2</mrow></mfrac></mstyle></mrow></math> breaks (where
-<!-- l. 81 --><math display='inline'>e</math> can be any coefficient
-of <!-- l. 81 --><math display='inline'>E</math>), then modulo
-reduction by <!-- l. 81 --><math display='inline'>q</math>
+<!-- l. 81 --><math display='inline'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mi mathvariant='italic'>𝜖𝑣𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> breaks (where
+<!-- l. 81 --><math display='inline'><mi>e</mi></math> can be any coefficient
+of <!-- l. 81 --><math display='inline'><mi>E</mi></math>), then modulo
+reduction by <!-- l. 81 --><math display='inline'><mi>q</mi></math>
 starts to contaminate the scaled plaintext bits. This violation of the error bound occurs when the noise
-<!-- l. 81 --><math display='inline'>e</math>
+<!-- l. 81 --><math display='inline'><mi>e</mi></math>
 grows too much over homomorphic operations, or the ciphertext modulus
-<!-- l. 81 --><math display='inline'>q</math> is not sufficiently larger
-than the plaintext modulus <!-- l. 81 --><math display='inline'>t</math>.
-If <!-- l. 81 --><math display='inline'>q ≫t</math>, the scheme can
-take on a big <!-- l. 81 --><math display='inline'>vt</math>
+<!-- l. 81 --><math display='inline'><mi>q</mi></math> is not sufficiently larger
+than the plaintext modulus <!-- l. 81 --><math display='inline'><mi>t</mi></math>.
+If <!-- l. 81 --><math display='inline'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>≫</mo><mi>t</mi></mrow></math>, the scheme can
+take on a big <!-- l. 81 --><math display='inline'><mrow><mi mathvariant='italic'>𝑣𝑡</mi></mrow></math>
 value (i.e., the plaintext value can wrap around the plaintext modulus
-<!-- l. 81 --><math display='inline'>t</math>
+<!-- l. 81 --><math display='inline'><mi>t</mi></math>
 many times across its homomorphic operations). The error bound constraint
-<!-- l. 81 --><math display='inline'><mrow><mstyle displaystyle='true'><mfrac><mrow>vt + e
- </mrow><mrow>⌊<mfrac><mrow>q</mrow>
-<mrow>t</mrow></mfrac> ⌋ </mrow></mfrac></mstyle> &lt; <mstyle displaystyle='true'><mfrac><mrow>1
-</mrow><mrow>2</mrow></mfrac></mstyle></mrow></math> is used
+<!-- l. 81 --><math display='inline'><mrow><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='italic'>𝑣𝑡</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi>
+ </mrow><mrow><mo class='MathClass-open' stretchy='false'>⌊</mo><mfrac><mrow><mi>q</mi></mrow>
+<mrow><mi>t</mi></mrow></mfrac> <mo class='MathClass-close' stretchy='false'>⌋</mo> </mrow></mfrac></mstyle> <mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mn>1</mn>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math> is used
 in the BFV scheme.
                                                                                          
                                                                                          

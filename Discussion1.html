@@ -18,29 +18,29 @@
                                                                                          
 <!-- l. 205 --><p class='noindent' id='an-illustration-of-scaled-plaintext-with-a-noise-delta-m-e-zq'> <img alt='PIC' src='figures/modulus-switching-.png' /> <a id='x99-113001r12'></a></p>
 <figcaption class='caption'><span class='id'>Figure 12:        </span><span class='content'>An       illustration       of       scaled       plaintext       with       a       noise:
-<!-- l. 206 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅m + e ∈ <msub><mrow>ℤ</mrow><mrow>q</mrow></msub></mrow></math></span></figcaption><!-- tex4ht:label?: x99-113001r12  -->
+<!-- l. 206 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo> <msub><mrow><mi>ℤ</mi></mrow><mrow><mi>q</mi></mrow></msub></mrow></math></span></figcaption><!-- tex4ht:label?: x99-113001r12  -->
                                                                                          
                                                                                          
    </figure>
-<!-- l. 210 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Reduced Distance between </span><!-- l. 210 --><math display='inline'>m</math>
-<span class='rm-lmbx-10x-x-109'>and </span><!-- l. 210 --><math display='inline'>e</math><span class='rm-lmbx-10x-x-109'>: </span>After modulus switching of an
-LWE ciphertext from <!-- l. 210 --><math display='inline'><mrow>q →<mover accent='true'><mrow>q</mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>, the underlying
-plaintext (containing a noise) <!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>m + e</mrow></math>
-gets shrunk to <!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover>m + <mover accent='true'><mrow>e</mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>,
+<!-- l. 210 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>Reduced Distance between </span><!-- l. 210 --><math display='inline'><mi>m</mi></math>
+<span class='rm-lmbx-10x-x-109'>and </span><!-- l. 210 --><math display='inline'><mi>e</mi></math><span class='rm-lmbx-10x-x-109'>: </span>After modulus switching of an
+LWE ciphertext from <!-- l. 210 --><math display='inline'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>, the underlying
+plaintext (containing a noise) <!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi></mrow></math>
+gets shrunk to <!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mover accent='true'><mrow><mi>e</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>,
 as illustrated in <a href='#an-illustration-of-scaled-plaintext-with-a-noise-delta-m-e-zq'>Figure 12<!-- tex4ht:ref: subsec:modulus-switch-lwe  --></a>. Note that after the modulus switch from
-<!-- l. 210 --><math display='inline'><mrow>q →<mover accent='true'><mrow>q</mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>,
-<!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>m</mrow></math> is down-scaled to
-<!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover>m</mrow></math> without losing its bit data.
-Notably, the plaintext value <!-- l. 210 --><math display='inline'>m</math>
+<!-- l. 210 --><math display='inline'><mrow><mi>q</mi> <mo class='MathClass-rel' stretchy='false'>→</mo><mover accent='true'><mrow><mi>q</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></mrow></math>,
+<!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi></mrow></math> is down-scaled to
+<!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover><mi>m</mi></mrow></math> without losing its bit data.
+Notably, the plaintext value <!-- l. 210 --><math display='inline'><mi>m</mi></math>
 stays the same after the modulus switch, while its scaling factor
 <!-- l. 210 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math> gets reduced to
 <!-- l. 210 --><math display='inline'><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></math> and the noise
-<!-- l. 210 --><math display='inline'>e</math> gets reduced to
-<!-- l. 210 --><math display='inline'><mover accent='true'><mrow>e</mrow><mo accent='true' stretchy='false'>^</mo></mover></math>. However, after the modulus
-switch, the distance between <!-- l. 210 --><math display='inline'><mover accent='true'><mrow>e</mrow><mo accent='true' stretchy='false'>^</mo></mover></math>’s
-MSB and <!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover>m</mrow></math>’s LSB gets reduced
-compared to the distance between <!-- l. 210 --><math display='inline'>e</math>’s
-MSB and <!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi>m</mrow></math>’s
+<!-- l. 210 --><math display='inline'><mi>e</mi></math> gets reduced to
+<!-- l. 210 --><math display='inline'><mover accent='true'><mrow><mi>e</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></math>. However, after the modulus
+switch, the distance between <!-- l. 210 --><math display='inline'><mover accent='true'><mrow><mi>e</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></math>’s
+MSB and <!-- l. 210 --><math display='inline'><mrow><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover><mi>m</mi></mrow></math>’s LSB gets reduced
+compared to the distance between <!-- l. 210 --><math display='inline'><mi>e</mi></math>’s
+MSB and <!-- l. 210 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mi>m</mi></mrow></math>’s
 LSB.
                                                                                          
                                                                                          

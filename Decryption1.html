@@ -12,29 +12,29 @@
    <h4 class='subsectionHead' id='decryption1'><span class='titlemark'>B-3.3   </span>   <a id='x75-87000B-3.3'></a>Decryption</h4>
 <!-- l. 52 --><p class='noindent'>
    </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1. </dt><dd class='enumerate-enumitem'>Given the ciphertext <!-- l. 52 --><math display='inline'>(A,B)</math>
-   where <!-- l. 52 --><math display='inline'><mrow>B = A ⋅S + <mi mathvariant='normal'>Δ</mi> ⋅M + E ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>,
-   compute <!-- l. 52 --><math display='inline'><mrow>B −A ⋅S = <mi mathvariant='normal'>Δ</mi> ⋅M + E</mrow></math>.
+1. </dt><dd class='enumerate-enumitem'>Given the ciphertext <!-- l. 52 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   where <!-- l. 52 --><math display='inline'><mrow><mi>B</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>,
+   compute <!-- l. 52 --><math display='inline'><mrow><mi>B</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi></mrow></math>.
    </dd><dt class='enumerate-enumitem'>
-2. </dt><dd class='enumerate-enumitem'>Round each coefficient of the polynomial <!-- l. 53 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅M + E ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>
+2. </dt><dd class='enumerate-enumitem'>Round each coefficient of the polynomial <!-- l. 53 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>
    to the nearest multiple of <!-- l. 53 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>
    (i.e., round it as a base <!-- l. 53 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>
-   number), which is denoted as <!-- l. 53 --><math display='inline'><mrow>⌈<mi mathvariant='normal'>Δ</mi> ⋅M + E<msub><mrow>⌋</mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>.
-   This rounding operation successfully eliminates <!-- l. 53 --><math display='inline'>E</math>
-   and gives <!-- l. 53 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅M</mrow></math>.
-   One caveat is that the noise <!-- l. 53 --><math display='inline'>E</math>’s
-   each coefficient <!-- l. 53 --><math display='inline'><msub><mrow>e</mrow><mrow>i</mrow></msub></math>
-   should be small enough to be <!-- l. 53 --><math display='inline'><mrow>|<msub><mrow>e</mrow><mrow>i</mrow></msub>|&lt; <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
-</mrow><mrow>2</mrow></mfrac></mstyle></mrow></math>
-   in order to be eliminated during the rounding. Otherwise, some of <!-- l. 53 --><math display='inline'><msub><mrow>e</mrow><mrow>i</mrow></msub></math>’s
-   higher bits will overlap and corrupt the plaintext <!-- l. 53 --><math display='inline'><msub><mrow>m</mrow><mrow>i</mrow></msub></math>
+   number), which is denoted as <!-- l. 53 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>⌈</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi><msub><mrow><mo class='MathClass-close' stretchy='false'>⌋</mo></mrow><mrow><mi mathvariant='normal'>Δ</mi></mrow></msub></mrow></math>.
+   This rounding operation successfully eliminates <!-- l. 53 --><math display='inline'><mi>E</mi></math>
+   and gives <!-- l. 53 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi></mrow></math>.
+   One caveat is that the noise <!-- l. 53 --><math display='inline'><mi>E</mi></math>’s
+   each coefficient <!-- l. 53 --><math display='inline'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
+   should be small enough to be <!-- l. 53 --><math display='inline'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>
+   in order to be eliminated during the rounding. Otherwise, some of <!-- l. 53 --><math display='inline'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math>’s
+   higher bits will overlap and corrupt the plaintext <!-- l. 53 --><math display='inline'><msub><mrow><mi>m</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
    coefficient’s lower bits and won’t be blown away.
    </dd><dt class='enumerate-enumitem'>
-3. </dt><dd class='enumerate-enumitem'>Compute <!-- l. 54 --><math display='inline'><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi> ⋅M
+3. </dt><dd class='enumerate-enumitem'>Compute <!-- l. 54 --><math display='inline'><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi>
   </mrow><mrow><mi mathvariant='normal'>Δ</mi>   </mrow></mfrac></mstyle></math>,
-   which is equivalent to scaling down each polynomial coefficient in <!-- l. 54 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> ⋅M</mrow></math>
+   which is equivalent to scaling down each polynomial coefficient in <!-- l. 54 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>M</mi></mrow></math>
    by <!-- l. 54 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>
-   (or right-shifting each coefficient by <!-- l. 54 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow>2</mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math>
+   (or right-shifting each coefficient by <!-- l. 54 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext>log</mtext></mstyle></mrow><mrow><mn>2</mn></mrow></msub><mi mathvariant='normal'>Δ</mi></mrow></math>
    bits if <!-- l. 54 --><math display='inline'><mi mathvariant='normal'>Δ</mi></math>
    is a power of 2).</dd></dl>
 <!-- l. 57 --><p class='noindent'><!-- l. 57 --><math display='inline'></math>
@@ -42,28 +42,28 @@
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-57'>     
 <div class='tcolorbox-title'>
-<!-- l. 77 --><p class='indent'>   <!-- l. 77 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-3.3</span><!-- l. 77 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
+<!-- l. 77 --><p class='indent'>   <!-- l. 77 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary B-3.3</span><!-- l. 77 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
                                                                                          
 <span class='rm-lmbx-10x-x-109'>RLWE Decryption</span></p></div> 
 <div class='tcolorbox-content'><!-- l. 64 --><p class='noindent'><span class='underline'><span class='rm-lmbx-10x-x-109'>Decryption Input</span></span><span class='rm-lmbx-10x-x-109'>:</span>
-<!-- l. 64 --><math display='inline'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> = (A,B)<mstyle class='text'><mtext> </mtext></mstyle> ∈<msubsup><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow><mrow>2</mrow></msubsup></mrow></math>
+<!-- l. 64 --><math display='inline'><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msubsup><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow><mrow><mn>2</mn></mrow></msubsup></mrow></math>
 </p><!-- l. 66 --><p class='noindent'><!-- l. 66 --><math display='inline'></math>
      </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
-1.  </dt><dd class='enumerate-enumitem'><!-- l. 70 --><math display='inline'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow>S,σ</mrow><mrow>−1</mrow></msubsup>(<mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle>) = B −A ⋅S = <mi mathvariant='normal'>Δ</mi>M + E<mstyle class='text'><mtext> </mtext></mstyle> ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,q⟩</mrow></msub></mrow></math>
+1.  </dt><dd class='enumerate-enumitem'><!-- l. 70 --><math display='inline'><mrow><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖼𝗍</mtext></mstyle><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>B</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>
    </dd><dt class='enumerate-enumitem'>
-2.  </dt><dd class='enumerate-enumitem'>Scale down <!-- l. 71 --><math display='inline'><mrow><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>M + E
-    </mrow><mrow><mi mathvariant='normal'>Δ</mi>    </mrow></mfrac></mstyle><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌋</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mspace width='0.2em'></mspace> mod<mspace width='0.2em'></mspace> t = M<mstyle class='text'><mtext> </mtext></mstyle> ∈<msub><mrow><mstyle mathvariant='script'><mtext mathvariant='script'>R</mtext></mstyle></mrow><mrow>⟨n,t⟩</mrow></msub></mrow></math>
+2.  </dt><dd class='enumerate-enumitem'>Scale down <!-- l. 71 --><math display='inline'><mrow><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌈</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>E</mi>
+    </mrow><mrow><mi mathvariant='normal'>Δ</mi>    </mrow></mfrac></mstyle><mstyle mathsize='2.45em'><mrow><mo fence='true' form='prefix'>⌋</mo><mrow></mrow><mo fence='true' form='postfix'></mo></mrow></mstyle><mspace width='0.2em'></mspace><mo class='MathClass-bin' stretchy='false'> mod</mo><mspace width='0.2em'></mspace> <mi>t</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>M</mi><mstyle class='text'><mtext> </mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>∈</mo><msub><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>t</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msub></mrow></math>
    </dd></dl>
 <!-- l. 75 --><p class='noindent'>For correct decryption, every noise coefficient
-<!-- l. 75 --><math display='inline'><msub><mrow>e</mrow><mrow>i</mrow></msub></math> of polynomial
-<!-- l. 75 --><math display='inline'>E</math> should be:
-<!-- l. 75 --><math display='inline'><mrow>|<msub><mrow>e</mrow><mrow>i</mrow></msub>|&lt; <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
-</mrow><mrow>2</mrow></mfrac></mstyle></mrow></math>. And in
-case <!-- l. 75 --><math display='inline'>t</math> does
-not divide <!-- l. 75 --><math display='inline'>q</math>,
-<!-- l. 75 --><math display='inline'>q</math> should be sufficiently
-larger than <!-- l. 75 --><math display='inline'>t</math>.
+<!-- l. 75 --><math display='inline'><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub></math> of polynomial
+<!-- l. 75 --><math display='inline'><mi>E</mi></math> should be:
+<!-- l. 75 --><math display='inline'><mrow><mo class='MathClass-rel' stretchy='false'>|</mo><msub><mrow><mi>e</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>&lt;</mo> <mstyle displaystyle='true'><mfrac><mrow><mi mathvariant='normal'>Δ</mi>
+</mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>. And in
+case <!-- l. 75 --><math display='inline'><mi>t</mi></math> does
+not divide <!-- l. 75 --><math display='inline'><mi>q</mi></math>,
+<!-- l. 75 --><math display='inline'><mi>q</mi></math> should be sufficiently
+larger than <!-- l. 75 --><math display='inline'><mi>t</mi></math>.
 </p>
  
 </div> 

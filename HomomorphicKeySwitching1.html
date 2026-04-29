@@ -11,20 +11,20 @@
    <!-- l. 1027 --><div class='crosslinks'><p class='noindent'>[<a href='CiphertexttoCiphertextMultiplication.html'>prev</a>][<a href='BFVScheme.html#HomomorphicKeySwitching1.html'>parent</a>][<a href='HomomorphicRotationofInputVectorSlots.html'>next</a>]</p></div>
    <h4 class='subsectionHead' id='homomorphic-key-switching1'><span class='titlemark'>D-2.8   </span>   <a id='x122-160000D-2.8'></a>Homomorphic Key Switching</h4>
 <!-- l. 1030 --><p class='noindent'>BFV’s key switching scheme changes an RLWE ciphertext’s secret key from
-<!-- l. 1030 --><math display='inline'>S</math> to
-<!-- l. 1030 --><math display='inline'><msup><mrow>S</mrow><mrow>′</mrow></msup></math>.
+<!-- l. 1030 --><math display='inline'><mi>S</mi></math> to
+<!-- l. 1030 --><math display='inline'><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup></math>.
 This scheme is essentially RLWE’s key switching scheme with the sign of the
-<!-- l. 1030 --><math display='inline'>A ⋅S</math>
+<!-- l. 1030 --><math display='inline'><mrow><mi>A</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>S</mi></mrow></math>
 term flipped in the encryption and decryption formula. Specifically, this is equivalent
 to the alternative GLWE version’s (<a href='AnAlternativeVersionofGLWE.html#an-alternative-version-of-glwe'><span class='ts1-lmr10-x-x-109'>§</span>B-4.4<!-- tex4ht:ref: subsubsec:bfv-mult-cipher-summary  --></a>) key switching scheme (<a href='GLWEKeySwitching.html#glwe-key-switching'><span class='ts1-lmr10-x-x-109'>§</span>C-5<!-- tex4ht:ref: subsubsec:bfv-mult-cipher-summary  --></a>) with
-<!-- l. 1030 --><math display='inline'>k = 1</math> as
+<!-- l. 1030 --><math display='inline'><mrow><mi>k</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mrow></math> as
 follows:
 </p>
    <div class='tcolorbox tcolorbox' id='tcolobox-91'>     
 <div class='tcolorbox-title'>
-<!-- l. 1034 --><p class='indent'>   <!-- l. 1034 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-2.8</span><!-- l. 1034 --><math display='inline'><mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></math>
+<!-- l. 1034 --><p class='indent'>   <!-- l. 1034 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-2.8</span><!-- l. 1034 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
 <span class='rm-lmbx-10x-x-109'>BFV’s Key Switching</span></p></div> 
-<div class='tcolorbox-content'><!-- l. 1033 --><p class='noindent'><!-- l. 1033 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><msup><mrow>S</mrow><mrow>′</mrow></msup>,σ</mrow></msub>(<mi mathvariant='normal'>Δ</mi>M) = (0,B) + <mstyle mathvariant='bold'><mtext mathvariant='bold'>⟨</mtext></mstyle><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow>β,l</mrow></msup>(A),<mstyle class='text'><mtext> </mtext></mstyle><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖾𝗏</mtext></mstyle></mrow><mrow><msup><mrow>S</mrow><mrow>′</mrow></msup>,σ</mrow><mrow>β,l</mrow></msubsup>(S)<mstyle mathvariant='bold'><mtext mathvariant='bold'>⟩</mtext></mstyle></mrow></math>
+<div class='tcolorbox-content'><!-- l. 1033 --><p class='noindent'><!-- l. 1033 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><mi>M</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mi>B</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle><msup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼𝗈𝗆𝗉</mtext></mstyle></mrow><mrow><mi>β</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>l</mi></mrow></msup><mo class='MathClass-open' stretchy='false'>(</mo><mi>A</mi><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-punc' stretchy='false'>,</mo><mstyle class='text'><mtext> </mtext></mstyle><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖾𝗏</mtext></mstyle></mrow><mrow><msup><mrow><mi>S</mi></mrow><mrow><mi>′</mi></mrow></msup><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mi>β</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>l</mi></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><mi>S</mi><mo class='MathClass-close' stretchy='false'>)</mo><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></mrow></math>
 </p> 
 </div> 
 </div>

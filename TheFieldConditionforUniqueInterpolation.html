@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>The Field Condition for Unique Interpolation</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
+</head><body>
+   <!-- l. 40 --><div class='crosslinks'><p class='noindent'>[<a href='LagrangesPolynomialInterpolation.html#TheFieldConditionforUniqueInterpolation.html'>parent</a>]</p></div>
+   <h4 class='subsectionHead' id='the-field-condition-for-unique-interpolation'><span class='titlemark'>A-10.1   </span>   <a id='x38-43000A-10.1'></a>The Field Condition for Unique Interpolation</h4>
+   <div class='tcolorbox tcolorbox' id='tcolobox-30'>     
+<div class='tcolorbox-title'>
+<!-- l. 54 --><p class='indent'>   <!-- l. 54 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Theorem A-10.1</span><!-- l. 54 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
+<span class='rm-lmbx-10x-x-109'>The Field Condition for Unique Interpolation</span></p></div> 
+<div class='tcolorbox-content'><!-- l. 46 --><p class='noindent'>If a polynomial is defined over a field <!-- l. 46 --><math display='inline'><mi>𝔽</mi></math>
+(i.e., its <!-- l. 47 --><math display='inline'><mi>x</mi></math>
+and <!-- l. 47 --><math display='inline'><mi>y</mi></math>
+coordinates and its coefficients lie in <!-- l. 48 --><math display='inline'><mi>𝔽</mi></math>),
+then for any <!-- l. 48 --><math display='inline'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math>
+distinct <!-- l. 48 --><math display='inline'><mi>x</mi></math>
+values and any <!-- l. 48 --><math display='inline'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math>
+arbitrary (i.e., can be overlapped) <!-- l. 48 --><math display='inline'><mi>y</mi></math>
+values in <!-- l. 48 --><math display='inline'><mi>𝔽</mi></math>,
+there        exists        a        unique        polynomial        of        degree        at        most
+<!-- l. 48 --><math display='inline'><mi>n</mi></math>
+that interpolates them.
+</p><!-- l. 50 --><p class='noindent'><!-- l. 50 --><math display='inline'></math>
+</p><!-- l. 52 --><p class='noindent'>Examples                      of                      such                      fields                      are
+<!-- l. 52 --><math display='inline'><mi>ℝ</mi></math>
+(real                                              number                                              domain),
+<!-- l. 52 --><math display='inline'><mi>ℂ</mi></math>
+(complex           number           domain),           and           any           finite           field
+<!-- l. 52 --><math display='inline'><msub><mrow><mi>ℤ</mi></mrow><mrow><mi>t</mi></mrow></msub></math>
+(where
+<!-- l. 52 --><math display='inline'><mi>t</mi></math>
+is a prime).
+</p>
+ 
+</div> 
+</div>
+   <div class='proof'>
+<!-- l. 58 --><p class='indent'>   <span class='head'>
+<span class='rm-lmri-10x-x-109'>Proof.</span>
+</span><!-- l. 58 --><math display='inline'></math>
+</p><!-- l. 59 --><p class='indent'>
+   </p><dl class='enumerate-enumitem'><dt class='enumerate-enumitem'>
+1. </dt><dd class='enumerate-enumitem'>Remember from Theorem A-10 that Lagrange’s polynomial interpolation is defined as:
+   <!-- l. 62 --><p class='noindent'><!-- l. 62 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><munderover accent='false' accentunder='false'><mrow> <mi class='MathClass-op'>∑</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow><mi>j</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>0</mn></mrow><mrow><mi>n</mi></mrow></munderover> <mrow><mo fence='true' form='prefix'>(</mo><mrow><munder class='msub'><mrow><mo>∏</mo>
+  </mrow><mrow>
+<mtable class='subarray-c' columnalign='center' rowlines='' rowspacing='0' style=''><mtr><mtd><mn>0</mn><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>n</mi>
+</mtd></mtr><mtr><mtd><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≠</mo><mi>j</mi>
+</mtd></mtr>                                                                                                                                             </mtable></mrow></munder><mstyle displaystyle='true'><mfrac><mrow><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub>
+</mrow><mrow><msub><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub></mrow></mfrac></mstyle> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mi>y</mi></mrow><mrow><mi>j</mi></mrow></msub></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow></math>
+   </p><!-- l. 64 --><p class='noindent'><!-- l. 64 --><math display='inline'></math>
+   </p><!-- l. 66 --><p class='noindent'>If every <!-- l. 66 --><math display='inline'><mi>x</mi></math>,
+   <!-- l. 66 --><math display='inline'><mi>y</mi></math>
+                                                                                         
+                                                                                         
+   values and coefficients of the polynomial <!-- l. 66 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   lie in a field, then <!-- l. 66 --><math display='inline'><msup><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msup></math>
+   is guaranteed to exist within the same field, because every non-zero element of a field has an
+   inverse, and <!-- l. 66 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is not zero (since <!-- l. 66 --><math display='inline'><mrow><msub><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>≠</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub></mrow></math>).
+   This implies that <!-- l. 66 --><math display='inline'><mrow><munder class='msub'><mrow><mi class='MathClass-op'>∏</mi><mo> ⁡<!-- FUNCTION APPLICATION --></mo>
+  </mrow><mrow>
+<mtable class='subarray-c' columnalign='center' rowlines='' rowspacing='0' style=''><mtr><mtd><mn>0</mn><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≤</mo><mi>n</mi>
+</mtd></mtr><mtr><mtd><mi>k</mi><mo class='MathClass-rel' stretchy='false'>≠</mo><mi>j</mi>
+</mtd></mtr>                                                                                                                                             </mtable></mrow></munder><mstyle displaystyle='true'><mfrac><mrow><mi>X</mi> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub>
+</mrow><mrow><msub><mrow><mi>x</mi></mrow><mrow><mi>j</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>−</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>k</mi></mrow></msub></mrow></mfrac></mstyle><mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mi>y</mi></mrow><mrow><mi>j</mi></mrow></msub></mrow></math>
+   also lies in the same field. Hence, a well-defined <!-- l. 66 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is guaranteed to exist. And the degree of <!-- l. 66 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is at most <!-- l. 66 --><math display='inline'><mi>n</mi></math>,
+   because its highest possible degree term is <!-- l. 66 --><math display='inline'><msup><mrow><mi>X</mi></mrow><mrow><mi>n</mi></mrow></msup></math>.
+   </p></dd><dt class='enumerate-enumitem'>
+2. </dt><dd class='enumerate-enumitem'>For uniqueness of <!-- l. 68 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
+   suppose another polynomial <!-- l. 68 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   of degree at most <!-- l. 68 --><math display='inline'><mi>n</mi></math>
+   also passes through the same <!-- l. 68 --><math display='inline'><mrow><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math>
+   points. Let <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>g</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+   Then the degree of <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is at most <!-- l. 68 --><math display='inline'><mi>n</mi></math>,
+   and <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn></mrow></math>
+   for all <!-- l. 68 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   distinct nodes <!-- l. 68 --><math display='inline'><mrow><msub><mrow><mi>x</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><mi>…</mi><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>n</mi></mrow></msub></mrow></math>,
+   so <!-- l. 68 --><math display='inline'><mi>h</mi></math>
+   has <!-- l. 68 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   distinct roots. Over a field, a non-zero polynomial of degree <!-- l. 68 --><math display='inline'><mi>d</mi></math>
+   has at most <!-- l. 68 --><math display='inline'><mi>d</mi></math>
+   roots; a nonzero <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   of degree at most <!-- l. 68 --><math display='inline'><mi>n</mi></math>
+   could have at most <!-- l. 68 --><math display='inline'><mi>n</mi></math>
+   roots. Since <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   has <!-- l. 68 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><mi>n</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   roots, <!-- l. 68 --><math display='inline'><mrow><mi>h</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   must be the zero polynomial, i.e. <!-- l. 68 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>g</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
+   Therefore <!-- l. 68 --><math display='inline'><mrow><mi>f</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>X</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
+   is unique.
+   </dd></dl>
+                                                                                        □
+   </div>
+                                                                                         
+                                                                                         
+   <!-- l. 435 --><div class='crosslinks'><p class='noindent'>[<a href='LagrangesPolynomialInterpolation.html#TheFieldConditionforUniqueInterpolation.html'>parent</a>]</p></div>
+    
+</body> 
+</html>

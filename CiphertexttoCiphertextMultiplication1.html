@@ -9,7 +9,7 @@
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
    <!-- l. 549 --><div class='crosslinks'><p class='noindent'>[<a href='CiphertexttoPlaintextAddition1.html'>prev</a>][<a href='CKKSScheme.html#CiphertexttoCiphertextMultiplication1.html'>parent</a>][<a href='CiphertexttoPlaintextMultiplication1.html'>next</a>]</p></div>
-   <h4 class='subsectionHead' id='ciphertexttociphertext-multiplication1'><span class='titlemark'>D-3.5   </span>   <a id='x131-181000D-3.5'></a>Ciphertext-to-Ciphertext Multiplication</h4>
+   <h4 class='subsectionHead' id='ciphertexttociphertext-multiplication1'><span class='titlemark'>D-3.5   </span>   <a id='x132-182000D-3.5'></a>Ciphertext-to-Ciphertext Multiplication</h4>
 <!-- l. 552 --><p class='noindent'>CKKS’s ciphertext-to-ciphertext multiplication is partially different from that of BFV. In
 the case of BFV, its ciphertext modulus remains the same after each multiplication. On the
 other hand, CKKS reduces its ciphertext modulus size by 1 after each multiplication (which is
@@ -50,7 +50,7 @@ where <!-- l. 561 --><math display='inline'><mrow><msup><mrow><mi>B</mi></mrow><
                                                                                          
                                                                                          
 </p>
-   <h5 class='subsubsectionHead' id='synthetic-ciphertext-derivation'><span class='titlemark'>D-3.5.1   </span>   <a id='x131-182000D-3.5.1'></a>Synthetic Ciphertext Derivation</h5>
+   <h5 class='subsubsectionHead' id='synthetic-ciphertext-derivation'><span class='titlemark'>D-3.5.1   </span>   <a id='x132-183000D-3.5.1'></a>Synthetic Ciphertext Derivation</h5>
 <!-- l. 589 --><p class='noindent'>The 1st step of RLWE ciphertext-ciphertext multiplication is to find a way to express the following
 congruence relation:
 </p><!-- l. 591 --><p class='indent'>   <!-- l. 591 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo><msub><mrow> <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
@@ -117,7 +117,7 @@ the next subsection, we will explain how to derive the synthetic RLWE ciphertext
 that <!-- l. 652 --><math display='inline'><mrow><msub><mrow><mi>D</mi></mrow><mrow><mn>2</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>S</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-rel' stretchy='false'>=</mo><msubsup><mrow> <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow><mrow><mo class='MathClass-bin' stretchy='false'>−</mo><mn>1</mn></mrow></msubsup><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>C</mi></mrow><mrow><mi>β</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
    
 </p>
-   <h5 class='subsubsectionHead' id='relinearization-method-1-ciphertext-decomposition'><span class='titlemark'>D-3.5.2   </span>   <a id='x131-183000D-3.5.2'></a>Relinearization Method 1 – Ciphertext Decomposition</h5>
+   <h5 class='subsubsectionHead' id='relinearization-method-1-ciphertext-decomposition'><span class='titlemark'>D-3.5.2   </span>   <a id='x132-184000D-3.5.2'></a>Relinearization Method 1 – Ciphertext Decomposition</h5>
 <!-- l. 657 --><p class='noindent'>As explained in BFV’s ciphertext-to-ciphertext multiplication (<a href='CiphertexttoCiphertextMultiplication.html#relinearization'><span class='ts1-lmr10-x-x-109'>§</span>D-2.7.3<!-- tex4ht:ref: subsec:glwe-alternative  --></a>), relinearization is a process of converting the
 polynomial triplet <!-- l. 657 --><math display='inline'><mrow><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-punc' stretchy='false'>,</mo><msub><mrow><mi>D</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>∈</mo><msubsup><mrow><mstyle mathvariant='script'><mi>R</mi></mstyle></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mi>n</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>q</mi><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow><mrow><mn>3</mn></mrow></msubsup></mrow></math>, which
 can be decrypted into <!-- l. 657 --><math display='inline'><mrow><mi mathvariant='normal'>Δ</mi><mi>M</mi></mrow></math>
@@ -176,7 +176,7 @@ where   <!-- l. 681 --><math display='inline'><mrow><msub><mrow><mi>C</mi></mrow
 </p><!-- l. 685 --><p class='indent'>   In the next subsection, we introduce another (older) relinearization technique.
    
 </p>
-   <h5 class='subsubsectionHead' id='relinearization-method-2-ciphertext-modulus-switch'><span class='titlemark'>D-3.5.3   </span>   <a id='x131-184000D-3.5.3'></a>Relinearization Method 2 – Ciphertext Modulus Switch</h5>
+   <h5 class='subsubsectionHead' id='relinearization-method-2-ciphertext-modulus-switch'><span class='titlemark'>D-3.5.3   </span>   <a id='x132-185000D-3.5.3'></a>Relinearization Method 2 – Ciphertext Modulus Switch</h5>
 <!-- l. 691 --><p class='noindent'>At the setup stage of the RLWE scheme, we craft a special pair of polynomials modulo
 <!-- l. 691 --><math display='inline'><mi>q</mi></math> as
 follows:
@@ -345,7 +345,7 @@ for consistency purposes, the resulting RLWE ciphertext is supposed to be:
 </p><!-- l. 829 --><p class='indent'>   We will explain this process in the next subsection.
    
 </p>
-   <h5 class='subsubsectionHead' id='rescaling1'><span class='titlemark'>D-3.5.4   </span>   <a id='x131-185000D-3.5.4'></a>Rescaling</h5>
+   <h5 class='subsubsectionHead' id='rescaling1'><span class='titlemark'>D-3.5.4   </span>   <a id='x132-186000D-3.5.4'></a>Rescaling</h5>
 <!-- l. 835 --><p class='noindent'>To convert <!-- l. 835 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> into
 <!-- l. 835 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, we cannot simply
 divide the ciphertext <!-- l. 835 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
@@ -363,7 +363,7 @@ then the result can be a very huge value. Thus, multiplying the RLWE ciphertext 
 not help due to the unpredictable result of the noise term.
 </p><!-- l. 837 --><p class='indent'>   The safest way to convert <!-- l. 837 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mn>2</mn></mrow></msup> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 into <!-- l. 837 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>1</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi>M</mi></mrow><mrow><mo class='MathClass-open' stretchy='false'>⟨</mo><mn>2</mn><mo class='MathClass-close' stretchy='false'>⟩</mo></mrow></msup><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> is modulus
-switch (<a href='GLWEModulusSwitching1.html#glwe-modulus-switching1'><span class='ts1-lmr10-x-x-109'>§</span>C-4.5<!-- tex4ht:ref: subsec:glwe-alternative  --></a>), which is essentially modulo rescaling (<a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!-- tex4ht:ref: subsec:glwe-alternative  --></a>). For this to work, the RLWE setup stage should design the
+switch (<a href='GLWEModulusSwitching1.html#glwe-modulus-switching1'><span class='ts1-lmr10-x-x-109'>§</span>C-4.5<!-- tex4ht:ref: subsec:glwe-alternative  --></a>), which is essentially modulo rescaling (<a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsec:glwe-alternative  --></a>). For this to work, the RLWE setup stage should design the
 ciphertext domain <!-- l. 837 --><math display='inline'><mi>q</mi></math>
 as <!-- l. 837 --><math display='inline'><mrow><msub><mrow><mi>q</mi></mrow><mrow><mn>0</mn></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>L</mi></mrow></msup></mrow></math>, where
 <!-- l. 837 --><math display='inline'><mi>L</mi></math> is denoted as the level
@@ -387,7 +387,7 @@ we need a special process called bootstrapping to re-initialize the modulus leve
 <!-- l. 839 --><math display='inline'><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>L</mi></mrow></msup></math>
 will be a huge number. Performing homomorphic addition or multiplication over modulo
 <!-- l. 839 --><math display='inline'><msup><mrow><mi mathvariant='normal'>Δ</mi></mrow><mrow><mi>L</mi></mrow></msup></math> is computationally
-expensive. To reduce the overhead of ciphertext size, we use the Chinese remainder theorem (<a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsec:glwe-alternative  --></a>): given an
+expensive. To reduce the overhead of ciphertext size, we use the Chinese remainder theorem (<a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-14<!-- tex4ht:ref: subsec:glwe-alternative  --></a>): given an
 integer <!-- l. 839 --><math display='inline'><mrow><mi>x</mi><mstyle class='text'><mtext> mod </mtext></mstyle><mi>W</mi></mrow></math> where
 <!-- l. 839 --><math display='inline'><mi>W</mi></math> is a multiplication
 of <!-- l. 839 --><math display='inline'><mrow><mi>L</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>1</mn></mrow></math> co-primes
@@ -498,7 +498,7 @@ which becomes part of the noise term of the modulus-switched (i.e., rescaled) ne
 </p><!-- l. 893 --><p class='indent'>   The benefit of this design of the CRT (Chinese remainder problem)-based ciphertext modulus and rescaling is
 that we can isomorphically decompose the huge coefficients (bigger than 64 bits) of polynomials in ciphertexts into
 <!-- l. 893 --><math display='inline'><mi>l</mi></math>-dimensional
-Chinese remainder vectors (Theorem <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>A-13<!-- tex4ht:ref: sec:chinese-remainder  --></a>.2 in <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: sec:chinese-remainder  --></a>) and perform element-wise addition or
+Chinese remainder vectors (Theorem <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>A-14<!-- tex4ht:ref: sec:chinese-remainder  --></a>.2 in <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-14<!-- tex4ht:ref: sec:chinese-remainder  --></a>) and perform element-wise addition or
 multiplication for computing coefficients over the small vector elements. This promotes computational
 efficiency for homomorphic addition and multiplication over a large ciphertext modulus (although the
 number of addition/multiplication operations increases). This technique is called Residue Number System
@@ -531,7 +531,7 @@ ciphertext-to-ciphertext multiplication inevitably increases the noise.
 </p>
                                                                                          
                                                                                          
-   <h5 class='subsubsectionHead' id='comparing-bfv-and-ckks-bootstrapping'><span class='titlemark'>D-3.5.5   </span>   <a id='x131-186000D-3.5.5'></a>Comparing BFV and CKKS Bootstrapping</h5>
+   <h5 class='subsubsectionHead' id='comparing-bfv-and-ckks-bootstrapping'><span class='titlemark'>D-3.5.5   </span>   <a id='x132-187000D-3.5.5'></a>Comparing BFV and CKKS Bootstrapping</h5>
 <!-- l. 903 --><p class='noindent'>CKKS bootstrapping shares several common aspects with BFV bootstrapping. CKKS’s <span class='rm-lmss-10x-x-109'>ModRaise</span>
 and <span class='rm-lmss-10x-x-109'>Homomorphic Decryption </span>steps are equivalent to BFV’s <span class='rm-lmss-10x-x-109'>Homomorphic Decryption (without
 modulo-</span><!-- l. 903 --><math display='inline'><mi>q</mi></math>
@@ -582,11 +582,11 @@ ratio does not get decreased by rescaling. In order to reduce (or reset) the noi
 to do bootstrapping (<a href='ModulusBootstrapping.html#modulus-bootstrapping'><span class='ts1-lmr10-x-x-109'>§</span>D-3.13<!-- tex4ht:ref: subsec:glwe-enc  --></a>), which will be explained at the end of this section.
    
 </p>
-   <h5 class='subsubsectionHead' id='summary4'><span class='titlemark'>D-3.5.6   </span>   <a id='x131-187000D-3.5.6'></a>Summary</h5>
+   <h5 class='subsubsectionHead' id='summary4'><span class='titlemark'>D-3.5.6   </span>   <a id='x132-188000D-3.5.6'></a>Summary</h5>
 <!-- l. 915 --><p class='noindent'>To put all things together, CKKS’s ciphertext-to-ciphertext multiplication is summarized as
 follows:
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-99'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-100'>     
 <div class='tcolorbox-title'>
 <!-- l. 1009 --><p class='indent'>   <!-- l. 1009 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary D-3.5.6</span><!-- l. 1009 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
 <span class='rm-lmbx-10x-x-109'>CKKS’s  Ciphertext-to-Ciphertext

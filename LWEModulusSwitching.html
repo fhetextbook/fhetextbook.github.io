@@ -11,7 +11,7 @@
    <!-- l. 6 --><div class='crosslinks'><p class='noindent'>[<a href='GLWEModulusSwitching.html#LWEModulusSwitching.html'>parent</a>][<a href='Example.html'>next</a>]</p></div>
                                                                                          
                                                                                          
-   <h4 class='subsectionHead' id='lwe-modulus-switching'><span class='titlemark'>C-4.1   </span>   <a id='x97-111000C-4.1'></a>LWE Modulus Switching</h4>
+   <h4 class='subsectionHead' id='lwe-modulus-switching'><span class='titlemark'>C-4.1   </span>   <a id='x98-112000C-4.1'></a>LWE Modulus Switching</h4>
 <!-- l. 9 --><p class='noindent'><span class='rm-lmbx-10x-x-109'>- Reference: </span><a href='https://www.jeremykun.com/2022/07/16/modulus-switching-in-lwe/'>Modulus Switching in LWE</a>
 </p><!-- l. 12 --><p class='indent'>   <!-- l. 12 --><math display='inline'></math>
 </p><!-- l. 14 --><p class='indent'>   Recall that the LWE cryptosystem (<a href='Encryption.html#encryption'><span class='ts1-lmr10-x-x-109'>§</span>B-2.2<!-- tex4ht:ref: sec:glwe-mult-plain  --></a>) comprises the following components:
@@ -70,7 +70,7 @@ is equivalent to rescaling the modulo of the above congruence relationship from
 the original LWE ciphertext <!-- l. 38 --><math display='inline'><mrow><msub><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖫𝖶𝖤</mtext></mstyle></mrow><mrow><mi>S</mi><mo class='MathClass-punc' stretchy='false'>,</mo><mi>σ</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><mi mathvariant='normal'>Δ</mi><mi>m</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>e</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
 as follows:
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-67'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-68'>     
 <div class='tcolorbox-title'>
 <!-- l. 65 --><p class='indent'>   <!-- l. 65 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-open' stretchy='false'>⟨</mo></mstyle></math><span class='rm-lmbx-10x-x-109'>Summary C-4.1</span><!-- l. 65 --><math display='inline'><mstyle mathvariant='bold'><mo class='MathClass-close' stretchy='false'>⟩</mo></mstyle></math>
                                                                                          
@@ -194,7 +194,7 @@ we need to prove that the following relationship holds:
    </p><!-- l. 113 --><p class='noindent'><!-- l. 113 --><math display='inline'><mrow><msub><mrow><mi>𝜖</mi></mrow><mrow><mstyle class='text'><mtext class='textit' mathvariant='italic'>𝑎𝑙𝑙</mtext></mstyle></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mn>0.5</mn><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>+</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mn>0.5</mn><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>+</mo> <mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-bin' stretchy='false'>−</mo><mn>0.5</mn> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi>k</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>0.5</mn><mi>k</mi></mrow></math>
                                                                                          
                                                                                          
-   </p><!-- l. 115 --><p class='noindent'>So, LWE modulus switching results in an approximate congruence relationship (<a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!-- tex4ht:ref: subsec:modulus-switch-lwe  --></a>). However,
+   </p><!-- l. 115 --><p class='noindent'>So, LWE modulus switching results in an approximate congruence relationship (<a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsec:modulus-switch-lwe  --></a>). However,
    if <!-- l. 115 --><math display='inline'><mover accent='true'><mrow><mi mathvariant='normal'>Δ</mi></mrow><mo accent='true' stretchy='false'>^</mo></mover></math>
    is large enough, <!-- l. 115 --><math display='inline'><mrow><msub><mrow><mi>𝜖</mi></mrow><mrow><mstyle class='text'><mtext class='textit' mathvariant='italic'>𝑎𝑙𝑙</mtext></mstyle></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn> <mo class='MathClass-bin' stretchy='false'>+</mo> <mn>0.5</mn><mi>k</mi></mrow></math>
    will be shifted to the right upon LWE decryption and get eliminated, and finally we can recover

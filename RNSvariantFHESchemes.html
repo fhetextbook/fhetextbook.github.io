@@ -8,13 +8,13 @@
 <meta content='index.tex' name='src' /> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <!-- l. 638 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>parent</a>][<a href='FHESchemeComparisonandSummary.html'>next</a>]</p></div>
-   <h3 class='sectionHead' id='rnsvariant-fhe-schemes'><span class='titlemark'>D-5   </span>   <a id='x152-222000D-5'></a>RNS-variant FHE Schemes</h3>
+   <!-- l. 640 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>parent</a>][<a href='FHESchemeComparisonandSummary.html'>next</a>]</p></div>
+   <h3 class='sectionHead' id='rnsvariant-fhe-schemes'><span class='titlemark'>D-5   </span>   <a id='x153-223000D-5'></a>RNS-variant FHE Schemes</h3>
 <!-- l. 1 --><p class='noindent'>The FHE parameters of BFV, BGV, or CKKS schemes, which are secure enough, sometimes
 require the ring size of polynomial coefficients to be 1000 bits or more, consuming significant
 computational resources for 64-bit CPU architectures. To make the computation efficient,
 we can alternatively represent the coefficients of ciphertext polynomials using the number
-residue system (RNS) <a href='ApplicationResidueNumberSystemRNS.html#application-residue-number-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-13.1<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>, which allows for modulo addition and multiplication of elements
+residue system (RNS) <a href='ApplicationResidueNumberSystemRNS.html#application-residue-number-system-rns'><span class='ts1-lmr10-x-x-109'>§</span>A-14.1<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>, which allows for modulo addition and multiplication of elements
 from a large ring (e.g., 1000 bits) by combining values computed in small rings (e.g.,
 32<!-- l. 1 --><math display='inline'><mrow> <mo class='MathClass-rel' stretchy='false'>∼</mo></mrow></math>64
 bits), each of which compactly fits in 64 bit CPU registers. Modern BFV, BGV, and CKKS schemes adopt
@@ -41,7 +41,7 @@ respectively. This assumption is necessary to eliminate a certain modulo reducti
 designing <span class='rm-lmss-10x-x-109'>FastBconvEx </span>(<a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'><span class='ts1-lmr10-x-x-109'>§</span>D-5.8<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>) by using the assumption of limiting the possible range of certain residue
 arithmetic, as discussed in <a href='CenteredResidueRepresentation.html#centered-residue-representation'><span class='ts1-lmr10-x-x-109'>§</span>A-1.5<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>.
 </p>
-   <div class='tcolorbox tcolorbox' id='tcolobox-118'>     
+   <div class='tcolorbox tcolorbox' id='tcolobox-119'>     
 <div class='tcolorbox-title'>
                                                                                          
                                                                                          
@@ -57,11 +57,11 @@ arithmetic, as discussed in <a href='CenteredResidueRepresentation.html#centered
     </li>
     <li class='itemize'><a href='Decomposition.html#decomposition'><span class='ts1-lmr10-x-x-109'>§</span>A-6<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='Decomposition.html#decomposition'>Decomposition<!-- tex4ht:ref: sec:decomp  --></a>
     </li>
-    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-12<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!-- tex4ht:ref: sec:modulus-rescaling  --></a>
+    <li class='itemize'><a href='ModuloRescaling.html#modulo-rescaling'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='ModuloRescaling.html#modulo-rescaling'>Modulo Rescaling<!-- tex4ht:ref: sec:modulus-rescaling  --></a>
     </li>
-    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-13<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!-- tex4ht:ref: sec:chinese-remainder  --></a>
+    <li class='itemize'><a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'><span class='ts1-lmr10-x-x-109'>§</span>A-14<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='ChineseRemainderTheorem.html#chinese-remainder-theorem'>Chinese Remainder Theorem<!-- tex4ht:ref: sec:chinese-remainder  --></a>
     </li>
-    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-15<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!-- tex4ht:ref: sec:polynomial-interpolation  --></a>
+    <li class='itemize'><a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'><span class='ts1-lmr10-x-x-109'>§</span>A-10<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='LagrangesPolynomialInterpolation.html#lagranges-polynomial-interpolation'>Lagrange’s Polynomial Interpolation<!-- tex4ht:ref: sec:polynomial-interpolation  --></a>
     </li>
     <li class='itemize'><a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'><span class='ts1-lmr10-x-x-109'>§</span>A-16<!-- tex4ht:ref: subsubsec:bfv-bootstrapping-summary  --></a>: <a href='EfficientPolynomialMultiplicationbyFFTandNTT.html#efficient-polynomial-multiplication-by-fft-and-ntt'>Efficient Polynomial Multiplication by FFT and NTT<!-- tex4ht:ref: sec:ntt  --></a>
     </li>
@@ -103,11 +103,11 @@ arithmetic, as discussed in <a href='CenteredResidueRepresentation.html#centered
 <br />   <span class='subsubsectionToc'>D-5.5.1 <a href='RNSbasedModulusSwitchtextsfModSwitchtextsubscriptRNS.html#comparing-modswitch-rns-modraise-rns-and-moddrop-rns'>Comparing <span class='rm-lmss-10x-x-109'>ModSwitch</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, <span class='rm-lmss-10x-x-109'>ModRaise</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub>, and <span class='rm-lmss-10x-x-109'>ModDrop</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
 <br />   <span class='subsectionToc'>D-5.6 <a href='RNSbasedDecryption.html#rnsbased-decryption'>RNS-based Decryption</a></span>
 <br />   <span class='subsubsectionToc'>D-5.6.1                           <a href='RNSbasedDecryption.html#bfv-decryption-dec-rns-bfv'>BFV                           Decryption:
-<!-- l. 255 --><math display='inline'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼</mtext></mstyle></mrow><mrow>
+<!-- l. 256 --><math display='inline'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖣𝖾𝖼</mtext></mstyle></mrow><mrow>
 <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖥𝖵</mtext></mstyle></mrow></msubsup></math></a></span>
 <br />   <span class='subsubsectionToc'>D-5.6.2 <a href='RNSbasedDecryption.html#ckks-and-bgv-decryption'>CKKS and BGV Decryption</a></span>
 <br />   <span class='subsectionToc'>D-5.7        <a href='BGVsRNSbasedModulusSwitchtextsfModSwitchtextsfRNStextsfBGV.html#bgvs-rnsbased-modulus-switch-modswitch-rns-bgv'>BGV’s        RNS-based        Modulus        Switch:
-<!-- l. 257 --><math display='inline'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖬𝗈𝖽𝖲𝗐𝗂𝗍𝖼𝗁</mtext></mstyle></mrow><mrow>
+<!-- l. 258 --><math display='inline'><msubsup><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖬𝗈𝖽𝖲𝗐𝗂𝗍𝖼𝗁</mtext></mstyle></mrow><mrow>
 <mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖱𝖭𝖲</mtext></mstyle></mrow><mrow><mstyle class='text'><mtext class='textsf' mathvariant='sans-serif'>𝖡𝖦𝖵</mtext></mstyle></mrow></msubsup></math></a></span>
 <br />   <span class='subsectionToc'>D-5.8 <a href='ExactFastBaseConversiontextsfFastBConvEx.html#exact-fast-base-conversion-fastbconvex'>Exact Fast Base Conversion: <span class='rm-lmss-10x-x-109'>FastBConvEx</span></a></span>
 <br />   <span class='subsectionToc'>D-5.9 <a href='DecomposingMultiplicationtextsfDecompMulttextsubscriptRNS.html#decomposing-multiplication-decompmult-rns'>Decomposing Multiplication: <span class='rm-lmss-10x-x-109'>DecompMult</span><sub><span class='rm-lmss-10x-x-109'>RNS</span></sub></a></span>
@@ -137,7 +137,7 @@ arithmetic, as discussed in <a href='CenteredResidueRepresentation.html#centered
                                                                                          
                                                                                          
 </p>
-   <!-- l. 644 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>parent</a>][<a href='FHESchemeComparisonandSummary.html'>next</a>]</p></div>
+   <!-- l. 646 --><div class='crosslinks'><p class='noindent'>[<a href='BGVScheme.html'>prev</a>][<a href='FullyHomomorphicEncryptionSchemes.html#RNSvariantFHESchemes.html'>parent</a>][<a href='FHESchemeComparisonandSummary.html'>next</a>]</p></div>
     
 </body> 
 </html>

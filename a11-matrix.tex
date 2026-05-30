@@ -120,7 +120,7 @@ $ $
 
 \item A \textbf{Vandermonde matrix} is an $(m + 1) \times (n + 1)$ matrix defined as:
 
-$V(x_0, x_1, \cdots, x_{m}) = \begin{bmatrix}
+$\mathit{Vander}(x_0, x_1, \cdots, x_{m}) = \begin{bmatrix}
 1 & x_0 & x_0^2 & \cdots & x_0^n\\
 1 & x_1 & x_1^2 & \cdots & x_1^n \\
 1 & x_2 & x_2^2 & \cdots & x_2^n \\
@@ -372,11 +372,13 @@ Note that for a $(n-1)$-degree polynomial ring, the number of polynomials that f
 
 
 
-Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $x \in \mathbb{Z}$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector. Technically, $\sigma$ is defined as:
+Now, let's define a mapping $\sigma$ from the $(n-1)$-degree polynomial ring to the $n$-dimensional vector space, such that an input polynomial's list of $y$ values evaluated at $n$ distinct $X \in \mathbb{Z}_t$ coordinates (e.g., $x_0, x_1, \cdots, x_{n-1}$) forms the mapping's output vector, where $\mathbb{Z}_t$ is a field (i.e., $t$ is prime), so that the interpolated polynomial $f(X)$ over the $(n+1)$ distinct $X$ points is well-defined (as explained in \autoref{subsec:polynomial-interpolation-field-condition}). Technically, $\sigma$ is defined as:
 
-$\sigma: f(x) \in \mathbb{Z}[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+$\sigma: f(X) \in \mathbb{Z}_t[X] / (X^n + 1) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n_t$
 
-Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}[X] / (X^n + 1)$ to $\mathbb{Z}^n$, and it preserves the algebraic operations $(+, \cdot)$ (i.e., $\sigma$ is a homomorphism for addition and multiplication).
+$ $
+
+Now, we will explain why the mapping $\sigma$ is isomorphic, which means that $\sigma$ is a bijective one-to-one mapping from $\mathbb{Z}_t[X] / (X^n + 1)$ to $\mathbb{Z}^n_t$, and it preserves the algebraic operations $(+, \cdot)$ (i.e., $\sigma$ is a homomorphism for addition and multiplication).
 
 $ $
 
@@ -564,7 +566,7 @@ We summarize our findings as follows:
 \begin{itemize}
 \item Suppose we have an $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X] / F(X)$ where $F(X)$ is an $n$-degree polynomial having $n$ distinct roots $\{x_0, \cdots, x_{n-1}\}$, and an $n$-dimensional vector space $\mathbb{Z}_t^n$ (integers mod $t$) with vector $\vec{v}$.
 
-$\sigma: f(x) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
+$\sigma: f(X) \in \mathbb{Z}_t[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}_t^n$
 
 $ $
 
@@ -579,7 +581,7 @@ $ $
 
 %\item If the $n$-degree polynomial $F(x)$ has a fewer number of roots than $n$, then isomorphism between the vectors and polynomials over the $(+, \cdot)$ operations holds without modulo $t$ as follows:
 
-%$\sigma': f(x) \in \mathbb{Z}[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
+%$\sigma': f(X) \in \mathbb{Z}[X] / F(X) \text{ } \longrightarrow \text{ } (f(x_0), f(x_1), f(x_2), \cdots, f(x_{n-1})) \in \mathbb{Z}^n$
 
 %$ $
 
@@ -616,7 +618,6 @@ $\phi(z_0, z_1, \dots, z_{\frac{n}{2}-1}) = (z_0, z_1, \dots, z_{\frac{n}{2}-1},
 $ $
 
 In other words, $\hat{\mathbb{C}}^{n}$ is a conjugate extension of $\mathbb{C}^{\frac{n}{2}}$ such that the first-half elements of $\hat{\mathbb{C}}^{n}$ are identical to those of $\mathbb{C}^{\frac{n}{2}}$, and the second-half elements of $\hat{\mathbb{C}}^{n}$ are reverse-ordered conjugates of $\mathbb{C}^{\frac{n}{2}}$. 
-
 
 Now, we will demonstrate that the mapping $\phi$ between $\mathbb{C}^{\frac{n}{2}}$ and $\hat{\mathbb{C}}^{n}$ is an isomorphism.
 

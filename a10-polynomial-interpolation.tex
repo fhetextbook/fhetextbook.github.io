@@ -35,3 +35,38 @@ we can perform each division in the formula for $f(X) = \sum\limits_{j=0}^{n}\df
 \end{enumerate}
 \end{myproof}
 
+
+
+\subsection{The Field Condition for Unique Interpolation}
+\label{subsec:polynomial-interpolation-field-condition}
+
+
+\begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:polynomial-interpolation-field-condition}} The Field Condition for Unique Interpolation}}]
+
+If a polynomial is defined over a field $\mathbb{F}$
+ (i.e., its $x$ and $y$
+coordinates and its coefficients lie in $\mathbb{F}$), then for any $n+1$ distinct $x$ values and any $n+1$ arbitrary (i.e., can be overlapped) $y$ values in $\mathbb{F}$, there exists a unique polynomial of degree at most $n$ that interpolates them.
+
+$ $
+
+Examples of such fields are $\mathbb{R}$ (real number domain), $\mathbb{C}$ (complex number domain), and any finite field $\mathbb{Z}_t$ (where $t$ is a prime). 
+
+\end{tcolorbox}
+
+
+\begin{myproof}
+\begin{enumerate}
+
+\item Remember from Theorem~\ref*{sec:polynomial-interpolation} that Lagrange's polynomial interpolation is defined as: 
+
+$f(X) = \sum\limits_{j=0}^{n} \left( \prod\limits_{\substack{0 \le k \le n\\ k \ne j}} \dfrac{X - x_k}{x_j - x_k} \cdot y_j\right)$
+
+$ $
+
+If every $x$, $y$ values and coefficients of the polynomial $f(X)$ lie in a field, then $(x_j - x_k)^{-1}$ is guaranteed to exist within the same field, because every non-zero element of a field has an inverse, and $(x_j - x_k)$ is not zero (since $x_j \neq x_k$). This implies that $\prod\limits_{\substack{0 \le k \le n\\ k \ne j}} \dfrac{X - x_k}{x_j - x_k} \cdot y_j$ also lies in the same field. Hence, a well-defined $f(X)$ is guaranteed to exist. And the degree of $f(X)$ is at most $n$, because its highest possible degree term is $X^{n}$.
+
+\item For uniqueness of $f(X)$, suppose another polynomial $g(X)$ of degree at most $n$ also passes through the same $n+1$ points. Let $h(X) = f(X) - g(X)$. Then the degree of $h(X)$ is at most $n$, and $h(x_i) = 0$ for all $(n+1)$ distinct nodes $x_0,\dots,x_{n}$, so $h$ has $(n+1)$ distinct roots. Over a field, a non-zero polynomial of degree $d$ has at most $d$ roots; a nonzero $h(X)$ of degree at most $n$ could have at most $n$ roots. Since $h(X)$ has $(n+1)$ roots, $h(X)$ must be the zero polynomial, i.e. $f(X) = g(X)$. Therefore $f(X)$ is unique.
+
+
+\end{enumerate}
+\end{myproof}

@@ -191,6 +191,8 @@ Leveraging the Geometric Sum formula $\sum\limits_{i=0}^{n-1}x^i = \dfrac{x^n - 
 
 $\sum\limits_{k=0}^{n-1} \omega^{2mk} = \dfrac{(\omega^{2m})^n - 1}{\omega^{2m} - 1} = \dfrac{(\omega^{2n})^{m} - 1}{\omega^{2m} - 1} = \dfrac{1 - 1}{\omega^{2m} - 1} = 0$ for $1 \leq m \leq (2n - 1)$  \textcolor{red}{ $\rhd$ since $\textsf{Ord}(\omega) = 2n$}
 
+$ $
+
 Therefore,
 
 $\sum\limits_{k=0}^{n-1} \omega^{2k} = \sum\limits_{k=0}^{n-1} \omega^{4k} = \sum\limits_{k=0}^{n-1} \omega^{6k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} = \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} = \cdots = \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} = 0$
@@ -225,9 +227,27 @@ Later in the CKKS scheme (\autoref{sec:ckks}), we will use $V^{-1}$ to encode a 
 
 $ $
 
-\para{Condition for $\bm \mu$:} It's worthwhile to note that the property $V\cdot V^T = n\cdot I_n^R$ does not hold if $\mu$ (denoting the $\mu$-th cyclotomic polynomial) is not a power of 2. In particular, step 3 of the proof does not hold anymore if $\mu$ is not a power of 2:
+%\para{Condition for $\bm \mu$:} It's worthwhile to note that the property $V\cdot V^T = n\cdot I_n^R$ does not hold if $\mu$ (denoting the $\mu$-th cyclotomic polynomial) is not a power of 2. In particular, step 3 of the proof does not hold anymore if $\mu$ is not a power of 2:
 
-$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$
+%$\sum\limits_{k=0}^{n-1} \omega^{2k} \neq \sum\limits_{k=0}^{n-1} \omega^{4k} \neq \sum\limits_{k=0}^{n-1} \omega^{6k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(n-1)k} \neq \sum\limits_{k=0}^{n-1} \omega^{2(n+1)k} \neq \cdots \neq \sum\limits_{k=0}^{n-1} \omega^{2(2n-1)k} \neq 0$
+
+
+\para{Condition for $\bm \mu$:} The identity $V \cdot V^T = n \cdot I_n^R$ relies only on
+$\textsf{Ord}(\omega) = 2n$ (step 3), so it holds for any $\mu = 2n$ (i.e., any even number).
+The nodes $\omega, \omega^3, \ldots, \omega^{2n-1}$ are likewise the $n$ roots of $X^n + 1$
+for any $n$, since $(\omega^{2j-1})^n = \omega^{2nj}\cdot\omega^{-n} = 1\cdot(-1) = -1$.
+
+Nevertheless, the reason we take $\mu$ to be a power of 2 does not come from this theorem, but
+from the FHE schemes themselves. In practice, CKKS, BFV, and BGV are most commonly instantiated
+over the power-of-2 cyclotomic ring $\mathbb{Z}[X]/(X^n + 1)$ with $n$ a power of 2, because this choice makes $X^n + 1 = \Phi_{2n}(X)$ irreducible over rational numbers (which holds
+precisely when $n$ is a power of 2), and also enables efficient negacyclic-NTT multiplication
+and a clean Ring-LWE security reduction. Once
+$n$ (hence $\mu = 2n$) is fixed as a power of 2, the nodes are automatically the primitive
+$\mu$-th roots of unity: by Theorem~\ref*{subsec:roots-theorem}.4 (\autoref{subsec:roots-theorem}),
+$\omega^k$ is a primitive $\mu$-th root iff $\gcd(\mu, k) = 1$, and every odd exponent
+$1, 3, \ldots, 2n-1$ is coprime to $\mu = 2n$ iff $2n$ has no odd prime factor---i.e.\ iff $2n$
+is a power of 2. So $\{\omega, \omega^3, \ldots, \omega^{2n-1}\}$ being exactly the primitive
+$(\mu=2n)$-th roots is a consequence of the power-of-2 ring choice. Meanwhile, as far as $\mu$ is an even number, $V \cdot V^T = n \cdot I_n^R$ still holds.
 
 
 
@@ -239,7 +259,7 @@ Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}) 
 
 \begin{tcolorbox}[title={\textbf{\tboxtheorem{\ref*{subsec:vandermonde-euler-integer-ring}} Vandermonde Matrix with Roots of  \text{(power-of-2)}-th Cyclotomic Polynomial over Ring ($\mathbb{Z}_p$)}}]
 
-The proof takes the same format as that of Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}). Suppose we have an $n \times n$ (where $n$ is a power of 2) Vandermonde matrix comprised of $n$ distinct roots of the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (ring), where $\mu$ is a power of 2 and $n = \dfrac{\mu}{2}$. In other words, $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the root of $X^n + 1$ (i.e., the primitive $(\mu=2n)$-th roots of unity). Then, the following holds:
+The proof takes the same format as that of Theorem~\ref*{subsec:vandermonde-euler} (in \autoref{subsec:vandermonde-euler}). Suppose we have an $n \times n$ (where $n$ is a power of 2) Vandermonde matrix comprising $n$ distinct roots of the $\mu$-th cyclotomic polynomial over $X \in \mathbb{Z}_p$ (ring), where $\mu$ is a power of 2 and $n = \dfrac{\mu}{2}$. In other words, $V = \mathit{Vander}(x_0, x_1, \cdots, x_{n-1})$, where each $x_i$ is the root of $X^n + 1$ (i.e., the primitive $(\mu=2n)$-th roots of unity). Then, the following holds:
 
 $V \cdot V^T = \begin{bmatrix}
 0 & \cdots & 0 & 0 & n\\

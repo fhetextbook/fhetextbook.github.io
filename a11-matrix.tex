@@ -491,27 +491,27 @@ $ $
 
 \para{Polynomial Coefficient Modulo Reduction:} In addition, we often reduce the polynomial coefficients based on some modulus $t$ to keep the size of the coefficients lower than a certain limit for the purpose of computational efficiency. Suppose two polynomials $f_c(X)$ and $f_d(X)$ have congruent coefficients modulo $t$ as follows:
 
-$f_c(X) = w_0 + w_1\cdot x_i + w_2\cdot x_i^2 + \cdots + w_{n-1}\cdot x_i^{n-1}$
+$f_c(X) = w_0 + w_1\cdot X + w_2\cdot X^2 + \cdots + w_{n-1}\cdot X^{n-1}$
 
-$f_d(X) = w'_0 + w'_1\cdot x_i + w'_2\cdot x_i^2 + \cdots + w'_{n-1}\cdot x_i^{n-1} $
+$f_d(X) = w'_0 + w'_1\cdot X + w'_2\cdot X^2 + \cdots + w'_{n-1}\cdot X^{n-1} $
 
 $w_i \equiv w'_i \bmod t$
 
 $ $
 
-Then, their evaluated value $f_c(x_i)$ and $f_d(x_i)$ for any $x_i$ is guaranteed to be congruent modulo $t$, as shown below:
+Then, their evaluated value $f_c(x)$ and $f_d(x)$ for any $x \in \mathbb{Z}$ is guaranteed to be congruent modulo $t$, as shown below:
 
-$f_c(x_i) = w_0 + w_1\cdot x_i + w_2\cdot x_i^2 + \cdots + w_{n-1}\cdot x_i^{n-1}$
+$f_c(x) = w_0 + w_1\cdot x + w_2\cdot x^2 + \cdots + w_{n-1}\cdot x^{n-1}$
 
-$\equiv (w_0 + w_1\cdot x_i + w_2\cdot x_i^2 + \cdots + w_{n-1}\cdot x_i^{n-1}) \bmod t $
+$\equiv (w_0 + w_1\cdot x + w_2\cdot x^2 + \cdots + w_{n-1}\cdot x^{n-1}) \bmod t $
 
-$\equiv (w_0  \bmod t) + (w_1  \bmod t)\cdot x_i + (w_2  \bmod t)\cdot x_i^2 + \cdots + (w_{n-1} \bmod t)\cdot x_i^{n-1}) $
+$\equiv (w_0  \bmod t) + (w_1  \bmod t)\cdot x + (w_2  \bmod t)\cdot x^2 + \cdots + (w_{n-1} \bmod t)\cdot x^{n-1} $
 
-$\equiv w'_0 + w'_1\cdot x_i + w'_2\cdot x_i^2 + \cdots + w'_{n-1}\cdot x_i^{n-1} $
+$\equiv w'_0 + w'_1\cdot x + w'_2\cdot x^2 + \cdots + w'_{n-1}\cdot x^{n-1} $
 
-$= f_d(x_i)$
+$= f_d(x)$
 
-\para{Summary:} Since $\sigma$ is bijective and homomorphic, $\sigma$ is an isomorphic mapping between the $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X]/X^n + 1$ and the $n$-dimensional vector space $\mathbb{Z}_t^n$. 
+\para{Summary:} Since $\sigma$ is bijective and homomorphic, $\sigma$ is an isomorphic mapping between the $(n-1)$-degree polynomial ring $\mathbb{Z}_t[X]/(X^n + 1)$ and the $n$-dimensional vector space $\mathbb{Z}_t^n$. 
 
 
 $ $
@@ -520,7 +520,7 @@ $ $
 \subsubsection{Finding Appropriate Modulus $t$} 
 \label{subsubsec:poly-vector-transformation-modulus}
 
-To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/X^n + 1$ into an $n$-dimensional vector, we need to evaluate the polynomial at $n$ distinct roots of $X^n + 1 \bmod t$. However, $X^n + 1 \bmod t$ does not have $n$ distinct roots for all combinations of (degree, modulus) $ = (n, t)$. For example, if $n = 2$ and $t = 3$, then $X^2+ 1 \not\equiv 0 \bmod 3$ for any possible values of $X = \{0, 1, 2\}$. Therefore, our goal is to find a satisfactory $t$ given a fixed $n$ such that $n$ distinct roots of $X^n + 1 \pmod t$ exist in order to use the isomorphic $\sigma$ mapping. 
+To isomorphically evaluate a polynomial in $\mathbb{Z}_t[X]/(X^n + 1)$ into an $n$-dimensional vector, we need to evaluate the polynomial at $n$ distinct roots of $X^n + 1 \bmod t$. However, $X^n + 1 \bmod t$ does not have $n$ distinct roots for all combinations of (degree, modulus) $ = (n, t)$. For example, if $n = 2$ and $t = 3$, then $X^2+ 1 \not\equiv 0 \bmod 3$ for any possible values of $X = \{0, 1, 2\}$. Therefore, our goal is to find a satisfactory $t$ given a fixed $n$ such that $n$ distinct roots of $X^n + 1 \pmod t$ exist in order to use the isomorphic $\sigma$ mapping. 
 
 We start with two constraints: (1) choose $t$ to be a prime number; (2) ensure $t-1$ is a multiple of $2n$.
 
